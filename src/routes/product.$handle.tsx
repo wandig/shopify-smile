@@ -86,7 +86,6 @@ function ProductView({ product }: { product: ProductNode }) {
     });
   };
 
-  const images = product.images.edges;
   const hasOptions = product.options.some((o) => o.values.length > 1 || o.name !== "Title");
 
   return (

@@ -64,8 +64,7 @@ function ProductView({ product }: { product: ProductNode }) {
   }, [variants, selected]);
 
   const productImages = product.images.edges;
-  // Combine product images with any variant images that aren't already in the list
-  const images = useMemo(() => {
+  const allImages = useMemo(() => {
     const all = [...productImages];
     variants.forEach((v) => {
       if (v.image?.url && !all.some((img) => img.node.url === v.image!.url)) {
@@ -75,11 +74,30 @@ function ProductView({ product }: { product: ProductNode }) {
     return all;
   }, [productImages, variants]);
 
+  // Filter gallery to only show images that belong to variants matching the selected color
+  const colorKey = product.options.find((o) => /kleur|color/i.test(o.name))?.name;
+  const selectedColor = colorKey ? selected[colorKey] : undefined;
+
+  const images = useMemo(() => {
+    if (!selectedColor || !colorKey) return allImages;
+    const colorImageUrls = new Set(
+      variants
+        .filter((v) => v.selectedOptions.some((o) => o.name === colorKey && o.value === selectedColor))
+        .map((v) => v.image?.url)
+        .filter(Boolean) as string[],
+    );
+    const filtered = allImages.filter((img) => colorImageUrls.has(img.node.url));
+    return filtered.length > 0 ? filtered : allImages;
+  }, [allImages, variants, selectedColor, colorKey]);
+
   useEffect(() => {
     const vImg = activeVariant?.image?.url;
-    if (!vImg) return;
+    if (!vImg) {
+      setActiveImg(0);
+      return;
+    }
     const idx = images.findIndex((img) => img.node.url === vImg);
-    if (idx >= 0) setActiveImg(idx);
+    setActiveImg(idx >= 0 ? idx : 0);
   }, [activeVariant, images]);
 
   const handleAdd = async () => {

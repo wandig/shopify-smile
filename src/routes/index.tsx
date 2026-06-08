@@ -4,6 +4,7 @@ import { ArrowRight, Truck, Hammer, BadgeCheck, ShieldCheck } from "lucide-react
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({

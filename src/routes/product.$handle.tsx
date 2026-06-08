@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
@@ -45,7 +45,7 @@ function ProductPage() {
 }
 
 function ProductView({ product }: { product: ProductNode }) {
-  const variants = product.variants.edges.map((e) => e.node);
+  const variants = product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null });
   const [activeImg, setActiveImg] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
@@ -63,6 +63,17 @@ function ProductView({ product }: { product: ProductNode }) {
     ) || variants[0];
   }, [variants, selected]);
 
+  const images = product.images.edges;
+
+  useEffect(() => {
+    const vImg = activeVariant?.image?.url;
+    if (!vImg) return;
+    const idx = images.findIndex((img) => img.node.url === vImg);
+    if (idx >= 0) {
+      setActiveImg(idx);
+    }
+  }, [activeVariant, images]);
+
   const handleAdd = async () => {
     if (!activeVariant) return;
     await addItem({
@@ -75,7 +86,6 @@ function ProductView({ product }: { product: ProductNode }) {
     });
   };
 
-  const images = product.images.edges;
   const hasOptions = product.options.some((o) => o.values.length > 1 || o.name !== "Title");
 
   return (

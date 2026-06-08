@@ -48,7 +48,7 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-black/20" />
         <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-10 md:pb-12 flex flex-col justify-end text-background">
           <span className="text-xs md:text-sm tracking-[0.05em] mb-6 opacity-95">Voor elk interieur</span>
-          <h1 className="font-serif font-light text-6xl md:text-8xl lg:text-9xl leading-[0.95] tracking-tight">
+          <h1 className="font-serif font-extralight text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight opacity-90">
             Tijdloze<br />maatwerk<br />meubels
           </h1>
           <div className="mt-10 flex items-end justify-between gap-6 flex-wrap">

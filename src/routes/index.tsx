@@ -45,18 +45,44 @@ function Home() {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
-        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 flex flex-col items-center justify-end text-center pb-16 md:pb-24 text-background">
-          <span className="text-xs md:text-sm tracking-[0.25em] uppercase mb-5 opacity-90">Voor elk interieur</span>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95]">
-            Tijdloze maatwerk cinewalls
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-black/20" />
+        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-10 md:pb-12 flex flex-col justify-end text-background">
+          <span className="text-xs md:text-sm tracking-[0.05em] mb-6 opacity-95">Voor elk interieur</span>
+          <h1 className="font-serif font-light text-6xl md:text-8xl lg:text-9xl leading-[0.95] tracking-tight">
+            Tijdloze<br />maatwerk<br />meubels
           </h1>
-          <div className="mt-10">
-            <Button asChild size="lg" className="rounded-none bg-background text-foreground hover:bg-background/90 h-12 px-8 text-sm tracking-[0.18em] uppercase">
+          <div className="mt-10 flex items-end justify-between gap-6 flex-wrap">
+            <Button
+              asChild
+              className="rounded-full bg-background text-foreground hover:bg-background/90 h-12 px-8 text-sm font-normal"
+            >
               <Link to="/producten">Alle modellen</Link>
             </Button>
+            {hero && (
+              <Link
+                to="/product/$handle"
+                params={{ handle: hero.node.handle }}
+                className="group flex items-stretch bg-foreground/85 backdrop-blur-sm text-background hover:bg-foreground transition-colors overflow-hidden"
+              >
+                {heroImg && (
+                  <div className="w-16 md:w-20 bg-muted shrink-0">
+                    <img src={heroImg} alt={hero.node.title} className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <div className="flex items-center gap-8 md:gap-12 px-5 md:px-7 py-4">
+                  <div>
+                    <div className="text-base md:text-lg font-serif">{hero.node.title}</div>
+                    <div className="text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-80 mt-0.5">
+                      Bekijk onze collectie
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 opacity-90 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            )}
           </div>
         </div>
+
       </section>
 
       {/* USP bar */}

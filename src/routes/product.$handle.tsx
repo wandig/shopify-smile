@@ -63,15 +63,23 @@ function ProductView({ product }: { product: ProductNode }) {
     ) || variants[0];
   }, [variants, selected]);
 
-  const images = product.images.edges;
+  const productImages = product.images.edges;
+  // Combine product images with any variant images that aren't already in the list
+  const images = useMemo(() => {
+    const all = [...productImages];
+    variants.forEach((v) => {
+      if (v.image?.url && !all.some((img) => img.node.url === v.image!.url)) {
+        all.push({ node: { url: v.image.url, altText: v.image.altText } });
+      }
+    });
+    return all;
+  }, [productImages, variants]);
 
   useEffect(() => {
     const vImg = activeVariant?.image?.url;
     if (!vImg) return;
     const idx = images.findIndex((img) => img.node.url === vImg);
-    if (idx >= 0) {
-      setActiveImg(idx);
-    }
+    if (idx >= 0) setActiveImg(idx);
   }, [activeVariant, images]);
 
   const handleAdd = async () => {

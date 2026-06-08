@@ -9,38 +9,110 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProductenRouteImport } from './routes/producten'
+import { Route as KlantenserviceRouteImport } from './routes/klantenservice'
+import { Route as BezoekRouteImport } from './routes/bezoek'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
+const ProductenRoute = ProductenRouteImport.update({
+  id: '/producten',
+  path: '/producten',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KlantenserviceRoute = KlantenserviceRouteImport.update({
+  id: '/klantenservice',
+  path: '/klantenservice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BezoekRoute = BezoekRouteImport.update({
+  id: '/bezoek',
+  path: '/bezoek',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductHandleRoute = ProductHandleRouteImport.update({
+  id: '/product/$handle',
+  path: '/product/$handle',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bezoek': typeof BezoekRoute
+  '/klantenservice': typeof KlantenserviceRoute
+  '/producten': typeof ProductenRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bezoek': typeof BezoekRoute
+  '/klantenservice': typeof KlantenserviceRoute
+  '/producten': typeof ProductenRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bezoek': typeof BezoekRoute
+  '/klantenservice': typeof KlantenserviceRoute
+  '/producten': typeof ProductenRoute
+  '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bezoek'
+    | '/klantenservice'
+    | '/producten'
+    | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/bezoek' | '/klantenservice' | '/producten' | '/product/$handle'
+  id:
+    | '__root__'
+    | '/'
+    | '/bezoek'
+    | '/klantenservice'
+    | '/producten'
+    | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BezoekRoute: typeof BezoekRoute
+  KlantenserviceRoute: typeof KlantenserviceRoute
+  ProductenRoute: typeof ProductenRoute
+  ProductHandleRoute: typeof ProductHandleRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/producten': {
+      id: '/producten'
+      path: '/producten'
+      fullPath: '/producten'
+      preLoaderRoute: typeof ProductenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/klantenservice': {
+      id: '/klantenservice'
+      path: '/klantenservice'
+      fullPath: '/klantenservice'
+      preLoaderRoute: typeof KlantenserviceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bezoek': {
+      id: '/bezoek'
+      path: '/bezoek'
+      fullPath: '/bezoek'
+      preLoaderRoute: typeof BezoekRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +120,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$handle': {
+      id: '/product/$handle'
+      path: '/product/$handle'
+      fullPath: '/product/$handle'
+      preLoaderRoute: typeof ProductHandleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BezoekRoute: BezoekRoute,
+  KlantenserviceRoute: KlantenserviceRoute,
+  ProductenRoute: ProductenRoute,
+  ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

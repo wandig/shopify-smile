@@ -4,6 +4,7 @@ import { ArrowRight, Truck, Hammer, BadgeCheck, ShieldCheck } from "lucide-react
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,9 +35,16 @@ function Home() {
     <div>
       {/* Hero */}
       <section className="relative h-[88vh] min-h-[560px] w-full overflow-hidden">
-        {heroImg && (
-          <img src={heroImg} alt="Wandig cinewall" className="absolute inset-0 w-full h-full object-cover" />
-        )}
+        <video
+          src={heroVideo.url}
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={heroImg}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
         <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 flex flex-col items-center justify-end text-center pb-16 md:pb-24 text-background">
           <span className="text-xs md:text-sm tracking-[0.25em] uppercase mb-5 opacity-90">Voor elk interieur</span>

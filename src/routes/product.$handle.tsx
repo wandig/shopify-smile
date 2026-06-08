@@ -45,7 +45,7 @@ function ProductPage() {
 }
 
 function ProductView({ product }: { product: ProductNode }) {
-  const variants = product.variants.edges.map((e) => e.node);
+  const variants = product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null });
   const [activeImg, setActiveImg] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
@@ -62,6 +62,17 @@ function ProductView({ product }: { product: ProductNode }) {
       v.selectedOptions.every((o) => selected[o.name] === o.value),
     ) || variants[0];
   }, [variants, selected]);
+
+  const images = product.images.edges;
+
+  useEffect(() => {
+    const vImg = activeVariant?.image?.url;
+    if (!vImg) return;
+    const idx = images.findIndex((img) => img.node.url === vImg);
+    if (idx >= 0) {
+      setActiveImg(idx);
+    }
+  }, [activeVariant, images]);
 
   const handleAdd = async () => {
     if (!activeVariant) return;

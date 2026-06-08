@@ -38,10 +38,10 @@ function Home() {
           <img src={heroImg} alt="Wandig cinewall" className="absolute inset-0 w-full h-full object-cover" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
-        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 flex flex-col justify-end pb-16 md:pb-24 text-background">
+        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 flex flex-col items-center justify-end text-center pb-16 md:pb-24 text-background">
           <span className="text-xs md:text-sm tracking-[0.25em] uppercase mb-5 opacity-90">Voor elk interieur</span>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-[14ch]">
-            Tijdloze<br />maatwerk<br />cinewalls
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95]">
+            Tijdloze maatwerk cinewalls
           </h1>
           <div className="mt-10">
             <Button asChild size="lg" className="rounded-none bg-background text-foreground hover:bg-background/90 h-12 px-8 text-sm tracking-[0.18em] uppercase">
@@ -78,26 +78,29 @@ function Home() {
       </section>
 
       {/* Categories / Collection */}
-      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-20">
-        <div className="flex items-end justify-between mb-10">
+      <section className="mx-auto max-w-[1400px] px-5 md:px-10 pb-24">
+        <div className="flex flex-col items-center text-center mb-14">
+          <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-4">Collectie</span>
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
-          <Link to="/producten" className="hidden md:inline-flex items-center gap-2 text-sm tracking-[0.15em] uppercase hover:opacity-60">
-            Bekijk alles <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
         {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-[4/5] bg-muted animate-pulse" />
+              <div key={i} className="aspect-square bg-muted animate-pulse max-w-[380px] mx-auto w-full" />
             ))}
           </div>
         ) : products.length === 0 ? (
           <p className="text-muted-foreground py-20 text-center">No products found</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-x-10 md:gap-y-16">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-x-12 md:gap-y-16 justify-items-center">
             {products.map((p) => <ProductCard key={p.node.id} product={p} />)}
           </div>
         )}
+        <div className="flex justify-center mt-14">
+          <Link to="/producten" className="inline-flex items-center gap-2 text-sm tracking-[0.18em] uppercase hover:opacity-60">
+            Bekijk alles <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </section>
 
       {/* Featured story */}

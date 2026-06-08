@@ -9,8 +9,8 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
     : "Prijs op aanvraag";
 
   return (
-    <Link to="/product/$handle" params={{ handle: p.handle }} className="group block">
-      <div className="aspect-[4/5] bg-muted overflow-hidden mb-4">
+    <Link to="/product/$handle" params={{ handle: p.handle }} className="group block text-center">
+      <div className="aspect-square bg-muted overflow-hidden mb-5 max-w-[380px] mx-auto">
         {img && (
           <img
             src={img.url}
@@ -20,9 +20,9 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
           />
         )}
       </div>
-      <div className="flex items-baseline justify-between gap-4 px-1">
+      <div className="flex flex-col items-center gap-1.5 px-1">
         <h3 className="font-serif text-xl md:text-2xl">{p.title}</h3>
-        <span className="text-xs md:text-sm text-muted-foreground whitespace-nowrap">{price}</span>
+        <span className="text-xs md:text-sm text-muted-foreground">{price}</span>
       </div>
     </Link>
   );

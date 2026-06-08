@@ -38,10 +38,10 @@ function Home() {
           <img src={heroImg} alt="Wandig cinewall" className="absolute inset-0 w-full h-full object-cover" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
-        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 flex flex-col justify-end pb-16 md:pb-24 text-background">
+        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 flex flex-col items-center justify-end text-center pb-16 md:pb-24 text-background">
           <span className="text-xs md:text-sm tracking-[0.25em] uppercase mb-5 opacity-90">Voor elk interieur</span>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-[14ch]">
-            Tijdloze<br />maatwerk<br />cinewalls
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95]">
+            Tijdloze maatwerk cinewalls
           </h1>
           <div className="mt-10">
             <Button asChild size="lg" className="rounded-none bg-background text-foreground hover:bg-background/90 h-12 px-8 text-sm tracking-[0.18em] uppercase">

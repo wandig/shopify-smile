@@ -120,7 +120,7 @@ function Home() {
             { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
             { icon: ShieldCheck, label: "5 jaar garantie" },
           ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 justify-start">
+            <div key={label} className="flex items-center gap-3 justify-center">
               <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />
               <span className="text-foreground/80">{label}</span>
             </div>

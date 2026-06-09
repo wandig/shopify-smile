@@ -21,6 +21,29 @@ export function SiteHeader() {
         </Link>
         <div className="flex items-center gap-4 ml-auto">
           <CartDrawer />
+          <Sheet>
+            <SheetTrigger asChild>
+              <button
+                className="md:hidden flex items-center justify-center h-10 w-10 -mr-2"
+                aria-label="Menu openen"
+              >
+                <Menu className="h-5 w-5" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[280px] pt-14">
+              <nav className="flex flex-col gap-6 text-lg">
+                <Link to="/producten" className="hover:opacity-60 transition">
+                  Collectie
+                </Link>
+                <Link to="/klantenservice" className="hover:opacity-60 transition">
+                  Klantenservice
+                </Link>
+                <Link to="/klantenservice" className="hover:opacity-60 transition">
+                  Gratis kleurstalen ontvangen
+                </Link>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

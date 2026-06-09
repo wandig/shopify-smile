@@ -318,7 +318,7 @@ function Home() {
               </Link>
             </div>
           </div>
-          <div className="overflow-hidden bg-muted h-full order-1 md:order-2">
+          <div className="hidden md:block overflow-hidden bg-muted h-full order-1 md:order-2">
             <img
               src={kleurstalenImg}
               alt="Gratis kleurstalen van Wandig"

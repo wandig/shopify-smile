@@ -1,5 +1,11 @@
 import { Link } from "@tanstack/react-router";
+import { Menu } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function SiteHeader() {
   return (

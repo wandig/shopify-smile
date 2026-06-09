@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, ChevronRight, Truck, Hammer, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/product/$handle")({

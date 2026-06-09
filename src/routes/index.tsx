@@ -115,8 +115,9 @@ function Home() {
       </section>
 
       {/* USP bar */}
-      <section className="border-y border-border/60 bg-background">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+      <section className="border-y border-border/60 bg-background overflow-hidden">
+        {/* Desktop: grid */}
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-6 hidden md:grid grid-cols-4 gap-6 text-sm">
           {[
             { icon: Truck, label: "Gratis levering aan huis" },
             { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
@@ -128,6 +129,26 @@ function Home() {
               <span className="text-foreground/80">{label}</span>
             </div>
           ))}
+        </div>
+        {/* Mobile: infinite marquee, 1 at a time */}
+        <div className="md:hidden py-6 text-sm relative">
+          <div className="flex w-max animate-usp-marquee">
+            {[
+              { icon: Truck, label: "Gratis levering aan huis" },
+              { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
+              { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
+              { icon: ShieldCheck, label: "5 jaar garantie" },
+              { icon: Truck, label: "Gratis levering aan huis" },
+              { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
+              { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
+              { icon: ShieldCheck, label: "5 jaar garantie" },
+            ].map(({ icon: Icon, label }, i) => (
+              <div key={i} className="w-screen flex items-center gap-3 justify-center shrink-0">
+                <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />
+                <span className="text-foreground/80">{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

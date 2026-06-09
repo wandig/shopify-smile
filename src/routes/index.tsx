@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
-import werkplaatsImg from "@/assets/werkplaats.jpg";
+import werkplaatsImg from "@/assets/werkplaats.webp.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.jpg";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
@@ -250,7 +250,7 @@ function Home() {
         <div className="grid md:grid-cols-2 md:h-[500px]">
           <div className="hidden md:block overflow-hidden bg-muted h-full">
             <img
-              src={werkplaatsImg}
+              src={werkplaatsImg.url}
               alt="Maatwerk uit de Wandig werkplaats"
               loading="lazy"
               className="w-full h-full object-cover"

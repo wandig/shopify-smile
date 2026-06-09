@@ -122,12 +122,12 @@ function Home() {
       {/* Hero — desktop (split card with arched product image) */}
       <section className="hidden md:block w-full bg-background pt-6 pb-10">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <div className="relative bg-[#fbf1ea] overflow-hidden min-h-[640px]">
+          <div className="relative bg-[#fbf1ea] overflow-hidden min-h-[640px] rounded-3xl">
             <div className="grid grid-cols-2 min-h-[640px]">
               {/* Left: text */}
               <div className="flex items-center px-12 lg:px-20 py-16">
                 <div className="max-w-[480px] w-full">
-                  <h1 className="font-serif font-thin text-[#3d2424] text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+                  <h1 className="font-serif font-thin text-[#3d2424] text-4xl lg:text-5xl leading-[1.05] tracking-tight">
                     <em className="italic">Tijdloos</em>, op maat
                     <br />
                     voor jouw woonkamer.
@@ -146,13 +146,19 @@ function Home() {
                     </Button>
                   </div>
                   <div className="mt-8 flex items-center gap-3">
-                    <div className="flex gap-1">
-                      {Array.from({ length: 5 }).map((_, i) => (
+                    <div className="flex gap-1 items-center">
+                      {Array.from({ length: 4 }).map((_, i) => (
                         <Star key={i} className="h-4 w-4 fill-[#00b67a] text-[#00b67a]" />
                       ))}
+                      <div className="relative h-4 w-4">
+                        <Star className="h-4 w-4 text-[#00b67a]/30" />
+                        <div className="absolute inset-0 overflow-hidden" style={{ clipPath: 'inset(0 70% 0 0)' }}>
+                          <Star className="h-4 w-4 fill-[#00b67a] text-[#00b67a]" />
+                        </div>
+                      </div>
                     </div>
-                    <span className="text-sm text-foreground/80 underline underline-offset-4">
-                      1180 reviews op Trustpilot
+                    <span className="text-sm text-foreground/80">
+                      4.3 · 1.180 reviews
                     </span>
                   </div>
                 </div>

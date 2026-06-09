@@ -250,7 +250,7 @@ function Home() {
         <div className="grid md:grid-cols-2 md:h-[500px]">
           <div className="hidden md:block overflow-hidden bg-muted h-full">
             <img
-              src={werkplaatsImg}
+              src={werkplaatsImg.url}
               alt="Maatwerk uit de Wandig werkplaats"
               loading="lazy"
               className="w-full h-full object-cover"

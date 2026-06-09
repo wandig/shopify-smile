@@ -165,7 +165,7 @@ function Home() {
 
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
       <section className="w-full">
-        <div className="grid md:grid-cols-[1.4fr_1fr] min-h-[560px] md:min-h-[640px]">
+        <div className="grid md:grid-cols-[1.4fr_1fr] md:h-[420px]">
           <div className="overflow-hidden bg-muted h-full">
             <img
               src={werkplaatsImg}
@@ -226,7 +226,7 @@ function Home() {
 
       {/* Gratis kleurstalen — text left, image right (full-bleed) */}
       <section className="w-full">
-        <div className="grid md:grid-cols-[1fr_1.4fr] min-h-[560px] md:min-h-[640px]">
+        <div className="grid md:grid-cols-[1fr_1.4fr] md:h-[420px]">
           <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-20 py-16 md:py-24 order-2 md:order-1">
             <div className="max-w-md">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Gratis service</span>

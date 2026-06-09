@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsImg from "@/assets/werkplaats.jpg";
 import kleurstalenImg from "@/assets/kleurstalen.jpg";
+import detailDesignImg from "@/assets/detail-design.jpg";
+import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
+import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -156,6 +159,49 @@ function Home() {
           </div>
         )}
       </section>
+
+      {/* Details maken het verschil */}
+      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24 md:pb-32">
+        <h2 className="font-serif text-3xl md:text-5xl mb-12 md:mb-16">
+          Details maken<br />het verschil
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+          {[
+            {
+              img: detailDesignImg,
+              title: "Gepersonaliseerd design",
+              text: "Stel eenvoudig je eigen meubel samen. Ervaar het gemak van bestellen bij Wandig.",
+            },
+            {
+              img: detailMaatwerkImg,
+              title: "Betaalbaar maatwerk",
+              text: "De hoogste kwaliteit meubels voor een eerlijke prijs, rechtstreeks van de maker.",
+            },
+            {
+              img: detailGeleverdImg,
+              title: "Afgemonteerd geleverd",
+              text: "Onze meubels worden gebruiksklaar geleverd. Géén bouwpakketten.",
+            },
+          ].map((item) => (
+            <div key={item.title} className="flex flex-col">
+              <div className="aspect-[3/4] overflow-hidden bg-muted">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="font-serif text-lg md:text-xl mt-6">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-foreground/75 mt-3 max-w-[320px]">
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
 
 
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}

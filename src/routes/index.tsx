@@ -193,31 +193,57 @@ function Home() {
 
 
       {/* Reviews */}
-      <section className="border-y border-border/60 bg-background">
+      <section className="bg-[#fbf1ea]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
-          <div className="flex flex-col items-start text-left mb-14">
-            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-4">​</span>
-            <h2 className="font-serif text-3xl md:text-5xl font-thin">Wat klanten zeggen</h2>
+          <div className="flex items-start justify-between gap-8 mb-12">
+            <div>
+              <h2 className="font-serif text-5xl md:text-7xl font-thin text-[#3d2424] leading-[1.05]">
+                Wat klanten zeggen
+              </h2>
+              <div className="mt-8 flex items-center gap-8 flex-wrap">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-[#d4a574] text-[#d4a574]" />
+                    ))}
+                  </div>
+                  <span className="text-sm text-foreground/80">4.9 · 1180 beoordelingen</span>
+                </div>
+                <Link to="/" className="text-sm underline underline-offset-[6px] text-foreground/80 hover:opacity-70">
+                  Bekijk alle reviews
+                </Link>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center gap-3 shrink-0">
+              <button aria-label="Vorige" className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition">
+                <ArrowRight className="h-4 w-4 rotate-180" />
+              </button>
+              <button aria-label="Volgende" className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition">
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
-          <div className="grid md:grid-cols-3 gap-10 md:gap-16">
-            {REVIEWS.map((r) => (
-              <figure key={r.name} className="text-left">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {REVIEWS.map((r, idx) => (
+              <figure key={r.name} className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px]">
                 <div className="flex gap-1 mb-6" aria-label="5 sterren">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-foreground text-foreground" />
+                    <Star key={i} className="h-3.5 w-3.5 fill-[#d4a574] text-[#d4a574]" />
                   ))}
                 </div>
-                <blockquote className="font-serif text-xl md:text-2xl leading-relaxed text-foreground/90">
-                  “{r.quote}”
+                <blockquote className="text-[15px] leading-relaxed text-foreground/85 flex-1">
+                  {r.quote}
                 </blockquote>
-                <figcaption className="mt-6 text-xs tracking-[0.2em] uppercase text-muted-foreground">
-                  {r.name} — {r.location}
-                </figcaption>
+                <div className="border-t border-border/50 mt-8 pt-5">
+                  <div className="text-sm text-foreground/90">{r.name}</div>
+                  <div className="text-xs text-muted-foreground mt-1">0{4 + idx} jun 2026</div>
+                </div>
               </figure>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Gratis kleurstalen — text left, image right (full-bleed) */}
       <section className="w-full">

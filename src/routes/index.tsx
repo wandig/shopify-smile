@@ -200,11 +200,15 @@ function Home() {
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
           <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {products.map((p) => (
-              <div key={p.node.id} className="shrink-0 basis-[78%] md:basis-auto snap-start">
-                <ProductCard product={p} />
-              </div>
-            ))}
+            {products.map((p, idx) => {
+              const fronts = p.node.images.edges.filter((e) => /Camera_Front/i.test(e.node.url));
+              const override = fronts.length > 0 ? fronts[idx % fronts.length].node : undefined;
+              return (
+                <div key={p.node.id} className="shrink-0 basis-[78%] md:basis-auto snap-start">
+                  <ProductCard product={p} imageOverride={override} />
+                </div>
+              );
+            })}
           </div>
         )}
       </section>

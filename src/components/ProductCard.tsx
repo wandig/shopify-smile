@@ -1,16 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import type { ShopifyProduct } from "@/lib/shopify";
 
 export function ProductCard({ product }: { product: ShopifyProduct }) {
   const p = product.node;
   const img = p.images.edges[0]?.node;
-  const price = parseFloat(p.priceRange.minVariantPrice.amount) > 0
-    ? `vanaf ${formatPrice(p.priceRange.minVariantPrice.amount, p.priceRange.minVariantPrice.currencyCode)}`
-    : "Prijs op aanvraag";
 
   return (
-    <Link to="/product/$handle" params={{ handle: p.handle }} className="group block text-center">
-      <div className="aspect-square bg-muted overflow-hidden mb-5 max-w-[380px] mx-auto">
+    <Link
+      to="/product/$handle"
+      params={{ handle: p.handle }}
+      className="group block w-full max-w-[280px] mx-auto border border-border/70 bg-background overflow-hidden"
+    >
+      <div className="aspect-[4/3] bg-muted overflow-hidden">
         {img && (
           <img
             src={img.url}
@@ -20,9 +21,8 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
           />
         )}
       </div>
-      <div className="flex flex-col items-center gap-1.5 px-1">
-        <h3 className="font-serif text-xl md:text-2xl">{p.title}</h3>
-        <span className="text-xs md:text-sm text-muted-foreground">{price}</span>
+      <div className="border-t border-border/70 py-4 px-3 text-center">
+        <h3 className="font-serif text-base md:text-lg">{p.title}</h3>
       </div>
     </Link>
   );

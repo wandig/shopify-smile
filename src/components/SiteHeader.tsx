@@ -11,20 +11,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 bg-background/85 backdrop-blur border-b border-border/60">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
-        <nav className="hidden md:flex items-center gap-8 text-sm tracking-wide">
-          <Link to="/producten" className="hover:opacity-60 transition">Alle modellen</Link>
-          <Link to="/bezoek" className="hover:opacity-60 transition">Bezoek ons</Link>
-          <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>
-        </nav>
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl md:text-3xl tracking-[0.2em] uppercase">
-          wandig
-        </Link>
-        <div className="flex items-center gap-4 ml-auto">
-          <CartDrawer />
+        <div className="flex items-center gap-4">
           <Sheet>
             <SheetTrigger asChild>
               <button
-                className="md:hidden flex items-center justify-center h-10 w-10 -mr-2"
+                className="md:hidden flex items-center justify-center h-10 w-10 -ml-2"
                 aria-label="Menu openen"
               >
                 <Menu className="h-5 w-5" />
@@ -44,6 +35,17 @@ export function SiteHeader() {
               </nav>
             </SheetContent>
           </Sheet>
+          <nav className="hidden md:flex items-center gap-8 text-sm tracking-wide">
+            <Link to="/producten" className="hover:opacity-60 transition">Alle modellen</Link>
+            <Link to="/bezoek" className="hover:opacity-60 transition">Bezoek ons</Link>
+            <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>
+          </nav>
+        </div>
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl md:text-3xl tracking-[0.2em] uppercase">
+          wandig
+        </Link>
+        <div className="flex items-center gap-4">
+          <CartDrawer />
         </div>
       </div>
     </header>

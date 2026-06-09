@@ -49,6 +49,35 @@ const REVIEWS = [
   },
 ];
 
+const COLLECTION_META: {
+  title: string;
+  description: string;
+  korting: string;
+  tags: string[];
+  highlight?: boolean;
+}[] = [
+  {
+    title: "Wandig Solo",
+    description: "De compacte cinewall — strak en tijdloos voor elke woonkamer.",
+    korting: "€100,-",
+    tags: ["Compact", "Zwevend of staand", "Op maat"],
+  },
+  {
+    title: "Wandig Duo",
+    description: "Extra opbergruimte links én rechts van je TV, in perfecte symmetrie.",
+    korting: "€150,-",
+    tags: ["Populair", "Symmetrisch", "Veel opbergruimte"],
+    highlight: true,
+  },
+  {
+    title: "Wandig Full House",
+    description: "Een volledige wand op maat — van vloer tot plafond, helemaal jouw stijl.",
+    korting: "€250,-",
+    tags: ["Aanbevolen", "Vloer tot plafond", "Maximaal maatwerk"],
+    highlight: true,
+  },
+];
+
 function Home() {
   const USPS = [
     { icon: Truck, label: "Gratis levering aan huis" },

@@ -130,7 +130,7 @@ function Home() {
 
       {/* Intro */}
       <section className="mx-auto max-w-3xl px-5 md:px-10 py-24 md:py-32 text-left">
-        <p className="font-serif text-2xl md:text-3xl leading-relaxed text-foreground/85">
+        <p className="font-serif text-2xl leading-relaxed text-foreground/85 md:text-lg text-left">
           Maak je woonkamer persoonlijk met een unieke TV cinewall op maat. Ontdek onze collectie:
           bepaal je eigen maatvoering, indeling en kleur. Zwevend of staand. Precies zoals jij dat wilt.
           Voel je thuis met Wandig.

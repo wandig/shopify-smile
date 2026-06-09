@@ -156,7 +156,7 @@ function Home() {
             <div
               key={label}
               className={`absolute inset-0 flex items-center gap-3 justify-center transition-opacity duration-700 ease-in-out ${
-                i === uspIdx ? "opacity-100" : "opacity-0"
+                i === uspIdx && uspVisible ? "opacity-100" : "opacity-0"
               }`}
             >
               <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />

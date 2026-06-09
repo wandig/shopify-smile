@@ -245,14 +245,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Intro */}
-      <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-24 md:py-32 text-left md:pr-[400px]">
-        <p className="font-serif text-2xl leading-relaxed text-foreground/85 md:text-lg text-left">
-          Maak je woonkamer persoonlijk met een unieke TV cinewall op maat. Ontdek onze collectie: bepaal je eigen
-          maatvoering, indeling en kleur. Zwevend of staand. Precies zoals jij dat wilt. Voel je thuis met Wandig.
-        </p>
-      </section>
-
       {/* Categories / Collection */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24">
         <div className="flex items-end justify-between gap-6 mb-10">

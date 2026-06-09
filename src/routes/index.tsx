@@ -273,9 +273,9 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {REVIEWS.map((r, idx) => (
-              <figure key={r.name} className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px]">
+              <figure key={r.name} className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px] shrink-0 basis-[85%] md:basis-auto snap-start">
                 <div className="flex gap-1 mb-6" aria-label="5 sterren">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-[#d4a574] text-[#d4a574]" />

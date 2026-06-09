@@ -46,6 +46,18 @@ const REVIEWS = [
 ];
 
 function Home() {
+  const USPS = [
+    { icon: Truck, label: "Gratis levering aan huis" },
+    { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
+    { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
+    { icon: ShieldCheck, label: "5 jaar garantie" },
+  ];
+  const [uspIdx, setUspIdx] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setUspIdx((i) => (i + 1) % USPS.length), 3000);
+    return () => clearInterval(id);
+  }, []);
+
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { ArrowRight, Truck, Hammer, BadgeCheck, ShieldCheck, Star } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
@@ -45,6 +46,18 @@ const REVIEWS = [
 ];
 
 function Home() {
+  const USPS = [
+    { icon: Truck, label: "Gratis levering aan huis" },
+    { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
+    { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
+    { icon: ShieldCheck, label: "5 jaar garantie" },
+  ];
+  const [uspIdx, setUspIdx] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setUspIdx((i) => (i + 1) % USPS.length), 3000);
+    return () => clearInterval(id);
+  }, []);
+
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -130,25 +143,19 @@ function Home() {
             </div>
           ))}
         </div>
-        {/* Mobile: infinite marquee, 1 at a time */}
-        <div className="md:hidden py-6 text-sm relative">
-          <div className="flex w-max animate-usp-marquee">
-            {[
-              { icon: Truck, label: "Gratis levering aan huis" },
-              { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
-              { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
-              { icon: ShieldCheck, label: "5 jaar garantie" },
-              { icon: Truck, label: "Gratis levering aan huis" },
-              { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
-              { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
-              { icon: ShieldCheck, label: "5 jaar garantie" },
-            ].map(({ icon: Icon, label }, i) => (
-              <div key={i} className="w-screen flex items-center gap-3 justify-center shrink-0">
-                <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />
-                <span className="text-foreground/80">{label}</span>
-              </div>
-            ))}
-          </div>
+        {/* Mobile: fade between USPs */}
+        <div className="md:hidden py-6 text-sm relative h-12">
+          {USPS.map(({ icon: Icon, label }, i) => (
+            <div
+              key={label}
+              className={`absolute inset-0 flex items-center gap-3 justify-center transition-opacity duration-700 ease-in-out ${
+                i === uspIdx ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />
+              <span className="text-foreground/80">{label}</span>
+            </div>
+          ))}
         </div>
       </section>
 

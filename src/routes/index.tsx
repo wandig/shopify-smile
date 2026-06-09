@@ -73,7 +73,7 @@ const COLLECTION_META: {
     title: "Wandig Full House",
     description: "Een volledige wand op maat — van vloer tot plafond, helemaal jouw stijl.",
     korting: "€250,-",
-    tags: ["Aanbevolen", "Vloer tot plafond", "Maximaal maatwerk"],
+    tags: ["Aanbevolen", "Wand-vullend", "Maximaal maatwerk"],
     highlight: true,
   },
 ];
@@ -279,7 +279,16 @@ function Home() {
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
           <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {products.slice(0, 3).map((p, idx) => {
+            {(() => {
+              const ordered = products.slice(0, 3);
+              // Swap product images for index 1 (Duo) and 2 (Full House)
+              if (ordered.length === 3) {
+                const tmp = ordered[1];
+                ordered[1] = ordered[2];
+                ordered[2] = tmp;
+              }
+              return ordered;
+            })().map((p, idx) => {
               const fronts = p.node.images.edges.filter((e) => /Camera_Front/i.test(e.node.url));
               const main = fronts[idx % Math.max(fronts.length, 1)]?.node ?? p.node.images.edges[0]?.node;
               const meta = COLLECTION_META[idx] ?? COLLECTION_META[0];
@@ -290,42 +299,22 @@ function Home() {
                   params={{ handle: p.node.handle }}
                   className="group shrink-0 basis-[82%] md:basis-auto snap-start flex flex-col"
                 >
-                  <div className="relative rounded-2xl bg-[#f6f1ec] overflow-hidden aspect-[4/5]">
+                  <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
                     {/* Korting badge */}
-                    <div className="absolute top-5 right-5 z-10 flex flex-col items-center justify-center h-16 w-16 rounded-full bg-[#e9d5ff] text-[#3d2424] text-center leading-tight">
+                    <div className="absolute top-5 right-5 z-10 flex flex-col items-center justify-center h-16 w-16 rounded-full bg-[#d97706] text-white text-center leading-tight shadow-sm">
                       <span className="font-serif text-base">{meta.korting}</span>
                       <span className="text-[10px] tracking-wide">Korting</span>
-                    </div>
-                    {/* Variant thumbs */}
-                    <div className="absolute top-5 left-5 z-10 flex flex-col gap-3">
-                      <div className="relative h-14 w-14 rounded-full border border-[#3d2424]/30 bg-[#3d2424] flex items-center justify-center">
-                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-medium tracking-wider text-[#f5ece6] bg-[#1f7a6b] px-2 py-0.5 rounded-sm">
-                          GRATIS
-                        </span>
-                        <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#1f7a6b] text-white text-xs flex items-center justify-center">
-                          +
-                        </span>
-                      </div>
-                      <div className="relative h-14 w-14 rounded-full border border-border/60 bg-background/80">
-                        <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-muted text-foreground/70 text-xs flex items-center justify-center">
-                          +
-                        </span>
-                      </div>
-                      <div className="relative h-14 w-14 rounded-full border border-border/60 bg-background/80">
-                        <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-muted text-foreground/70 text-xs flex items-center justify-center">
-                          +
-                        </span>
-                      </div>
                     </div>
                     {main && (
                       <img
                         src={main.url}
                         alt={main.altText || p.node.title}
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full object-contain p-8 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                       />
                     )}
                   </div>
+
                   <div className="pt-6">
                     <h3 className="font-serif text-xl md:text-2xl text-[#0f3a32]">{meta.title}</h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-foreground/70 max-w-[360px]">

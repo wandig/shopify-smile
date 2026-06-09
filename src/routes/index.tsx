@@ -163,10 +163,10 @@ function Home() {
         </div>
       </section>
 
-      {/* Uit eigen werkplaats — image left, text right */}
-      <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
-          <div className="aspect-[4/5] overflow-hidden bg-muted">
+      {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
+      <section className="w-full">
+        <div className="grid md:grid-cols-[1.4fr_1fr] min-h-[560px] md:min-h-[640px]">
+          <div className="overflow-hidden bg-muted h-full">
             <img
               src={werkplaatsImg}
               alt="Maatwerk uit de Wandig werkplaats"
@@ -174,26 +174,28 @@ function Home() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="bg-secondary/40 p-8 md:p-14 text-left">
-            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Vakmanschap</span>
-            <h2 className="font-serif text-4xl md:text-6xl mt-4 leading-[1] font-thin">
-              Uit eigen<br />werkplaats
-            </h2>
-            <p className="mt-8 text-foreground/75 leading-relaxed max-w-md">
-              Elke cinewall wordt in onze eigen Nederlandse werkplaats met de hand gemaakt.
-              Geen massaproductie, maar paneel voor paneel afgewerkt op de millimeter — afgestemd
-              op jouw ruimte, jouw maatvoering en jouw kleur.
-            </p>
-            <p className="mt-4 text-foreground/75 leading-relaxed max-w-md">
-              Zo ben je verzekerd van een meubel dat blijft staan. Tijdloos in ontwerp, eerlijk in
-              materiaal en gemaakt om generaties mee te gaan.
-            </p>
-            <Button asChild className="mt-10 rounded-none h-12 px-8 text-sm tracking-[0.18em] uppercase">
-              <Link to="/bezoek">Bezoek de werkplaats</Link>
-            </Button>
+          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-20 py-16 md:py-24">
+            <div className="max-w-md">
+              <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Handgemaakt</span>
+              <h2 className="font-serif text-5xl md:text-6xl mt-8 leading-[1.05] font-thin">
+                Uit eigen<br />werkplaats
+              </h2>
+              <p className="mt-8 text-[15px] leading-relaxed opacity-85">
+                Bij Wandig maken wij alle meubels vanuit onze eigen werkplaats in Nederland.
+                In ons productieproces combineren wij slimme technieken met ambachtelijk vakwerk.
+                Zo kun jij profiteren van toegankelijk en betaalbare maatwerk meubels van hoge kwaliteit.
+              </p>
+              <Link
+                to="/bezoek"
+                className="inline-block mt-10 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
+              >
+                Meer over Wandig
+              </Link>
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* Reviews */}
       <section className="border-y border-border/60 bg-background">

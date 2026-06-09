@@ -158,26 +158,43 @@ function ProductView({ product }: { product: ProductNode }) {
 
           {hasOptions && product.options.map((opt) => {
             if (opt.name === "Title" && opt.values.length === 1) return null;
+            const isColor = /kleur|color/i.test(opt.name);
             return (
               <div key={opt.name} className="mt-8">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs tracking-[0.2em] uppercase text-muted-foreground">{opt.name}</span>
-                  <span className="text-sm">{selected[opt.name]}</span>
+                  {!isColor && <span className="text-sm">{selected[opt.name]}</span>}
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {opt.values.map((v) => {
-                    const active = selected[opt.name] === v;
-                    return (
-                      <button
-                        key={v}
-                        onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                        className={`px-4 py-2 text-sm border transition ${active ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"}`}
-                      >
-                        {v}
-                      </button>
-                    );
-                  })}
-                </div>
+                {isColor ? (
+                  <Select
+                    value={selected[opt.name]}
+                    onValueChange={(v) => setSelected((s) => ({ ...s, [opt.name]: v }))}
+                  >
+                    <SelectTrigger className="w-full rounded-none h-11">
+                      <SelectValue placeholder={`Kies ${opt.name.toLowerCase()}`} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {opt.values.map((v) => (
+                        <SelectItem key={v} value={v}>{v}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {opt.values.map((v) => {
+                      const active = selected[opt.name] === v;
+                      return (
+                        <button
+                          key={v}
+                          onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
+                          className={`px-4 py-2 text-sm border transition ${active ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"}`}
+                        >
+                          {v}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             );
           })}

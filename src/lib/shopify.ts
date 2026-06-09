@@ -58,7 +58,7 @@ export const PRODUCTS_QUERY = `
         node {
           id title description handle
           priceRange { minVariantPrice { amount currencyCode } }
-          images(first: 5) { edges { node { url altText } } }
+          images(first: 20) { edges { node { url altText } } }
           variants(first: 50) {
             edges { node {
               id title availableForSale

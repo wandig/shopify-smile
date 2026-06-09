@@ -87,8 +87,8 @@ function Home() {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative h-[88vh] min-h-[560px] w-full overflow-hidden">
+      {/* Hero — mobile (video) */}
+      <section className="relative h-[88vh] min-h-[560px] w-full overflow-hidden md:hidden">
         <video
           src={heroVideo.url}
           autoPlay
@@ -98,46 +98,82 @@ function Home() {
           poster={heroImg}
           className="absolute inset-0 w-full h-full object-cover"
         />
-
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-black/20" />
-        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-[30px] md:pb-12 flex flex-col justify-end items-center md:items-start text-center md:text-left text-background">
-          <span className="text-xs md:text-sm tracking-[0.05em] mb-6 opacity-95">Voor elk interieur</span>
-          <h1 className="text-5xl md:text-7xl leading-[1.05] tracking-tight opacity-90 font-thin font-serif lg:text-6xl">
+        <div className="relative h-full mx-auto max-w-[1600px] px-5 pb-[30px] flex flex-col justify-end items-center text-center text-background">
+          <span className="text-xs tracking-[0.05em] mb-6 opacity-95">Voor elk interieur</span>
+          <h1 className="text-5xl leading-[1.05] tracking-tight opacity-90 font-thin font-serif">
             Tijdloze
             <br />
             maatwerk
             <br />
             meubels
           </h1>
-          <div className="mt-10 flex items-end justify-center md:justify-between gap-6 flex-wrap w-full">
+          <div className="mt-10 flex items-end justify-center gap-6 flex-wrap w-full">
             <Button
               asChild
               className="rounded-full bg-background text-foreground hover:bg-background/90 h-12 px-8 text-sm font-normal"
             >
               <Link to="/producten">Alle modellen</Link>
             </Button>
-            {hero && (
-              <Link
-                to="/product/$handle"
-                params={{ handle: hero.node.handle }}
-                className="group hidden md:flex items-stretch bg-foreground/85 backdrop-blur-sm text-background hover:bg-foreground transition-colors overflow-hidden"
-              >
-                {heroImg && (
-                  <div className="w-16 md:w-20 bg-muted shrink-0">
-                    <img src={heroImg} alt={hero.node.title} className="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+
+      {/* Hero — desktop (split card with arched product image) */}
+      <section className="hidden md:block w-full bg-background pt-6 pb-10">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+          <div className="relative bg-[#fbf1ea] overflow-hidden min-h-[640px]">
+            <div className="grid grid-cols-2 min-h-[640px]">
+              {/* Left: text */}
+              <div className="flex items-center px-12 lg:px-20 py-16">
+                <div className="max-w-[480px] w-full">
+                  <h1 className="font-serif font-thin text-[#3d2424] text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+                    <em className="italic">Tijdloos</em>, op maat
+                    <br />
+                    voor jouw woonkamer.
+                  </h1>
+                  <p className="mt-8 text-[15px] leading-relaxed text-foreground/75 max-w-[440px]">
+                    Een TV cinewall die past in het interieur dat je al hebt. Bepaal je eigen maatvoering, indeling
+                    en kleur — zwevend of staand. Handgemaakt in onze eigen werkplaats, afgemonteerd bij je thuis
+                    geleverd.
+                  </p>
+                  <div className="mt-10">
+                    <Button
+                      asChild
+                      className="rounded-full bg-[#3d2424] text-[#f5ece6] hover:bg-[#2e1b1b] h-14 px-10 text-sm tracking-[0.18em] uppercase font-normal w-full max-w-[440px]"
+                    >
+                      <Link to="/producten">Bekijk onze collectie</Link>
+                    </Button>
                   </div>
-                )}
-                <div className="flex items-center gap-8 md:gap-12 px-5 md:px-7 py-4">
-                  <div>
-                    <div className="text-base md:text-lg font-serif">{hero.node.title}</div>
-                    <div className="text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-80 mt-0.5">
-                      Bekijk onze collectie
+                  <div className="mt-8 flex items-center gap-3">
+                    <div className="flex gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-[#00b67a] text-[#00b67a]" />
+                      ))}
                     </div>
+                    <span className="text-sm text-foreground/80 underline underline-offset-4">
+                      1180 reviews op Trustpilot
+                    </span>
                   </div>
-                  <ArrowRight className="h-4 w-4 opacity-90 transition-transform group-hover:translate-x-1" />
                 </div>
-              </Link>
-            )}
+              </div>
+
+              {/* Right: arched image */}
+              <div className="relative p-6">
+                <div
+                  className="absolute inset-6 overflow-hidden bg-muted"
+                  style={{ clipPath: "ellipse(78% 58% at 60% 50%)" }}
+                >
+                  {heroImg && (
+                    <img
+                      src={heroImg}
+                      alt={hero?.node.title ?? "Wandig TV cinewall"}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

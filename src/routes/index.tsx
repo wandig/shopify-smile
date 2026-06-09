@@ -184,7 +184,7 @@ function Home() {
             },
           ].map((item) => (
             <div key={item.title} className="flex flex-col">
-              <div className="aspect-[3/4] overflow-hidden bg-muted">
+              <div className="aspect-[4/5] overflow-hidden bg-muted max-h-[320px]">
                 <img
                   src={item.img}
                   alt={item.title}

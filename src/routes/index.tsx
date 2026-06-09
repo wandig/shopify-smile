@@ -224,26 +224,30 @@ function Home() {
         </div>
       </section>
 
-      {/* Gratis kleurstalen — text left, image right */}
-      <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
-          <div className="bg-secondary/40 p-8 md:p-14 text-left order-2 md:order-1">
-            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Gratis service</span>
-            <h2 className="font-serif text-4xl md:text-6xl mt-4 leading-[1] font-thin">
-              Gratis<br />kleurstalen
-            </h2>
-            <p className="mt-8 text-foreground/75 leading-relaxed max-w-md">
-              Twijfel je tussen warm eiken, donker walnoot of een strak mat zwart? Vraag kosteloos
-              onze kleurstalen aan en voel het materiaal in je eigen interieur, bij jouw licht.
-            </p>
-            <p className="mt-4 text-foreground/75 leading-relaxed max-w-md">
-              Zo kies je met vertrouwen de afwerking die past bij jouw woonkamer — vóór je bestelt.
-            </p>
-            <Button asChild className="mt-10 rounded-none h-12 px-8 text-sm tracking-[0.18em] uppercase">
-              <Link to="/klantenservice">Vraag stalen aan</Link>
-            </Button>
+      {/* Gratis kleurstalen — text left, image right (full-bleed) */}
+      <section className="w-full">
+        <div className="grid md:grid-cols-[1fr_1.4fr] min-h-[560px] md:min-h-[640px]">
+          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-20 py-16 md:py-24 order-2 md:order-1">
+            <div className="max-w-md">
+              <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Gratis service</span>
+              <h2 className="font-serif text-5xl md:text-6xl mt-8 leading-[1.05] font-thin">
+                Gratis<br />kleurstalen
+              </h2>
+              <p className="mt-8 text-[15px] leading-relaxed opacity-85">
+                Twijfel je tussen warm eiken, donker walnoot of een strak mat zwart?
+                Vraag kosteloos onze kleurstalen aan en voel het materiaal in je eigen
+                interieur, bij jouw licht. Zo kies je met vertrouwen de afwerking die
+                past bij jouw woonkamer — vóór je bestelt.
+              </p>
+              <Link
+                to="/klantenservice"
+                className="inline-block mt-10 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
+              >
+                Vraag stalen aan
+              </Link>
+            </div>
           </div>
-          <div className="aspect-[4/5] overflow-hidden bg-muted order-1 md:order-2">
+          <div className="overflow-hidden bg-muted h-full order-1 md:order-2">
             <img
               src={kleurstalenImg}
               alt="Gratis kleurstalen van Wandig"
@@ -253,6 +257,7 @@ function Home() {
           </div>
         </div>
       </section>
+
     </div>
   );
 }

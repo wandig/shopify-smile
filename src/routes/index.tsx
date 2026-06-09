@@ -76,12 +76,12 @@ function Home() {
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-black/20" />
-        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-10 md:pb-12 flex flex-col justify-end text-background">
+        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-10 md:pb-12 flex flex-col justify-center md:justify-end items-center md:items-start text-center md:text-left text-background">
           <span className="text-xs md:text-sm tracking-[0.05em] mb-6 opacity-95">Voor elk interieur</span>
           <h1 className="text-5xl md:text-7xl leading-[1.05] tracking-tight opacity-90 font-thin font-serif lg:text-6xl">
             Tijdloze<br />maatwerk<br />meubels
           </h1>
-          <div className="mt-10 flex items-end justify-between gap-6 flex-wrap">
+          <div className="mt-10 flex items-end justify-center md:justify-between gap-6 flex-wrap w-full">
             <Button
               asChild
               className="rounded-full bg-background text-foreground hover:bg-background/90 h-12 px-8 text-sm font-normal"
@@ -92,7 +92,7 @@ function Home() {
               <Link
                 to="/product/$handle"
                 params={{ handle: hero.node.handle }}
-                className="group flex items-stretch bg-foreground/85 backdrop-blur-sm text-background hover:bg-foreground transition-colors overflow-hidden"
+                className="group hidden md:flex items-stretch bg-foreground/85 backdrop-blur-sm text-background hover:bg-foreground transition-colors overflow-hidden"
               >
                 {heroImg && (
                   <div className="w-16 md:w-20 bg-muted shrink-0">
@@ -146,16 +146,20 @@ function Home() {
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>
         {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-[900px]">
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="aspect-[4/3] bg-muted animate-pulse w-full" />
+              <div key={i} className="aspect-[4/3] bg-muted animate-pulse shrink-0 basis-[78%] md:basis-auto snap-start" />
             ))}
           </div>
         ) : products.length === 0 ? (
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-[900px]">
-            {products.map((p) => <ProductCard key={p.node.id} product={p} />)}
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {products.map((p) => (
+              <div key={p.node.id} className="shrink-0 basis-[78%] md:basis-auto snap-start">
+                <ProductCard product={p} />
+              </div>
+            ))}
           </div>
         )}
       </section>
@@ -165,7 +169,7 @@ function Home() {
         <h2 className="font-serif text-3xl md:text-5xl mb-12 md:mb-16">
           Details maken<br />het verschil
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+        <div className="flex md:grid md:grid-cols-3 gap-8 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
             {
               img: detailDesignImg,
@@ -183,7 +187,7 @@ function Home() {
               text: "Onze meubels worden gebruiksklaar geleverd. Géén bouwpakketten.",
             },
           ].map((item) => (
-            <div key={item.title} className="flex flex-col">
+            <div key={item.title} className="flex flex-col shrink-0 basis-[80%] md:basis-auto snap-start">
               <div className="aspect-[4/5] overflow-hidden bg-muted max-h-[320px]">
                 <img
                   src={item.img}
@@ -207,7 +211,7 @@ function Home() {
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
       <section className="w-full">
         <div className="grid md:grid-cols-2 md:h-[500px]">
-          <div className="overflow-hidden bg-muted h-full">
+          <div className="hidden md:block overflow-hidden bg-muted h-full">
             <img
               src={werkplaatsImg}
               alt="Maatwerk uit de Wandig werkplaats"
@@ -269,9 +273,9 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {REVIEWS.map((r, idx) => (
-              <figure key={r.name} className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px]">
+              <figure key={r.name} className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px] shrink-0 basis-[85%] md:basis-auto snap-start">
                 <div className="flex gap-1 mb-6" aria-label="5 sterren">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-[#d4a574] text-[#d4a574]" />
@@ -314,7 +318,7 @@ function Home() {
               </Link>
             </div>
           </div>
-          <div className="overflow-hidden bg-muted h-full order-1 md:order-2">
+          <div className="hidden md:block overflow-hidden bg-muted h-full order-1 md:order-2">
             <img
               src={kleurstalenImg}
               alt="Gratis kleurstalen van Wandig"

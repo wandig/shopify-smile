@@ -138,7 +138,7 @@ function Home() {
       </section>
 
       {/* Categories / Collection */}
-      <section className="mx-auto max-w-[1400px] px-5 md:px-10 pb-24">
+      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24">
         <div className="flex flex-col items-start text-left mb-10">
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>

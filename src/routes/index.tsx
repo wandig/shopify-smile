@@ -7,7 +7,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsImg from "@/assets/werkplaats.webp.asset.json";
-import kleurstalenImg from "@/assets/kleurstalen.jpg";
+import kleurstalenImg from "@/assets/kleurstalen.webp.asset.json";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
@@ -365,7 +365,7 @@ function Home() {
           </div>
           <div className="hidden md:block overflow-hidden bg-muted h-full order-1 md:order-2">
             <img
-              src={kleurstalenImg}
+              src={kleurstalenImg.url}
               alt="Gratis kleurstalen van Wandig"
               loading="lazy"
               className="w-full h-full object-cover"

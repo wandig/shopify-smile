@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsImg from "@/assets/werkplaats.jpg";
 import kleurstalenImg from "@/assets/kleurstalen.jpg";
+import detailDesignImg from "@/assets/detail-design.jpg";
+import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
+import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({

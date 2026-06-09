@@ -299,7 +299,7 @@ function Home() {
                   params={{ handle: p.node.handle }}
                   className="group shrink-0 basis-[82%] md:basis-auto snap-start flex flex-col"
                 >
-                  <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
+                  <div className={`relative rounded-2xl overflow-hidden aspect-[4/5] ${idx === 2 ? "bg-[#f6f1ec] p-6" : ""}`}>
                     {/* Korting badge */}
                     <div className="absolute top-5 right-5 z-10 flex flex-col items-center justify-center h-16 w-16 rounded-full bg-[#d97706] text-white text-center leading-tight shadow-sm">
                       <span className="font-serif text-base">{meta.korting}</span>
@@ -310,7 +310,7 @@ function Home() {
                         src={main.url}
                         alt={main.altText || p.node.title}
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.03] ${idx === 2 ? "object-contain" : "object-cover"}`}
                       />
                     )}
                   </div>

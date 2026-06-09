@@ -364,6 +364,40 @@ function Home() {
         </div>
       </section>
 
+      {/* We helpen je graag */}
+      <section className="bg-background">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28 text-center">
+          <h2 className="font-serif text-4xl md:text-6xl font-thin text-foreground leading-[1.05]">
+            We helpen je graag
+          </h2>
+          <p className="mt-8 text-[15px] leading-relaxed text-foreground/75 max-w-xl mx-auto">
+            Een maatwerk meubel bestellen was nog nooit zo makkelijk. Maar soms is
+            het fijn om toch even contact te hebben. Bel of bezoek ons voor goed
+            advies of hulp bij bestellen.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-3 flex-wrap">
+            <a
+              href="tel:0387730076"
+              className="rounded-full bg-[#fbf1ea] text-foreground hover:bg-[#f3e3d6] transition-colors h-11 px-6 text-sm flex items-center"
+            >
+              Bel 038 773 0076
+            </a>
+            <a
+              href="mailto:info@wandig.nl"
+              className="rounded-full bg-[#fbf1ea] text-foreground hover:bg-[#f3e3d6] transition-colors h-11 px-6 text-sm flex items-center"
+            >
+              info@wandig.nl
+            </a>
+            <Link
+              to="/bezoek"
+              className="rounded-full bg-[#3d2424] text-[#f5ece6] hover:bg-[#2e1b1b] transition-colors h-11 px-6 text-sm flex items-center"
+            >
+              Bezoek ons
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

@@ -1,9 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import type { ShopifyProduct } from "@/lib/shopify";
 
-export function ProductCard({ product }: { product: ShopifyProduct }) {
+export function ProductCard({
+  product,
+  imageOverride,
+}: {
+  product: ShopifyProduct;
+  imageOverride?: { url: string; altText?: string | null };
+}) {
   const p = product.node;
-  const img = p.images.edges[0]?.node;
+  const img = imageOverride ?? p.images.edges[0]?.node;
 
   return (
     <Link

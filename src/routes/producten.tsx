@@ -24,6 +24,11 @@ function Producten() {
     },
   });
 
+  const filteredProducts = (data ?? []).filter((p) => {
+    const t = p.node.title.toLowerCase();
+    return t.includes("solo") || t.includes("duo") || t.includes("full house");
+  });
+
   return (
     <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 md:py-24">
       <div className="max-w-2xl mb-14">
@@ -38,11 +43,11 @@ function Producten() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
           {Array.from({ length: 6 }).map((_, i) => <div key={i} className="aspect-[4/5] bg-muted animate-pulse" />)}
         </div>
-      ) : !data?.length ? (
+      ) : filteredProducts.length === 0 ? (
         <p className="text-muted-foreground py-20 text-center">No products found</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-x-10 md:gap-y-16">
-          {data.map((p) => <ProductCard key={p.node.id} product={p} />)}
+          {filteredProducts.map((p) => <ProductCard key={p.node.id} product={p} />)}
         </div>
       )}
     </div>

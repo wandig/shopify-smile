@@ -196,7 +196,7 @@ function Home() {
       <section className="border-y border-border/60 bg-background">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
           <div className="flex flex-col items-start text-left mb-14">
-            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-4">Klanten</span>
+            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-4">​</span>
             <h2 className="font-serif text-3xl md:text-5xl font-thin">Wat klanten zeggen</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-10 md:gap-16">

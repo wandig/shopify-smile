@@ -76,12 +76,12 @@ function Home() {
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-black/20" />
-        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-10 md:pb-12 flex flex-col justify-end text-background">
+        <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-10 md:pb-12 flex flex-col justify-center md:justify-end items-center md:items-start text-center md:text-left text-background">
           <span className="text-xs md:text-sm tracking-[0.05em] mb-6 opacity-95">Voor elk interieur</span>
           <h1 className="text-5xl md:text-7xl leading-[1.05] tracking-tight opacity-90 font-thin font-serif lg:text-6xl">
             Tijdloze<br />maatwerk<br />meubels
           </h1>
-          <div className="mt-10 flex items-end justify-between gap-6 flex-wrap">
+          <div className="mt-10 flex items-end justify-center md:justify-between gap-6 flex-wrap w-full">
             <Button
               asChild
               className="rounded-full bg-background text-foreground hover:bg-background/90 h-12 px-8 text-sm font-normal"
@@ -92,7 +92,7 @@ function Home() {
               <Link
                 to="/product/$handle"
                 params={{ handle: hero.node.handle }}
-                className="group flex items-stretch bg-foreground/85 backdrop-blur-sm text-background hover:bg-foreground transition-colors overflow-hidden"
+                className="group hidden md:flex items-stretch bg-foreground/85 backdrop-blur-sm text-background hover:bg-foreground transition-colors overflow-hidden"
               >
                 {heroImg && (
                   <div className="w-16 md:w-20 bg-muted shrink-0">

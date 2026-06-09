@@ -165,7 +165,7 @@ function Home() {
 
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
       <section className="w-full">
-        <div className="grid md:grid-cols-[1.4fr_1fr] md:h-[420px]">
+        <div className="grid md:grid-cols-2 md:h-[500px]">
           <div className="overflow-hidden bg-muted h-full">
             <img
               src={werkplaatsImg}
@@ -174,20 +174,20 @@ function Home() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-20 py-16 md:py-24">
+          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-16">
             <div className="max-w-md">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Handgemaakt</span>
-              <h2 className="font-serif text-5xl md:text-6xl mt-8 leading-[1.05] font-thin">
+              <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
                 Uit eigen<br />werkplaats
               </h2>
-              <p className="mt-8 text-[15px] leading-relaxed opacity-85">
+              <p className="mt-6 text-[15px] leading-relaxed opacity-85">
                 Bij Wandig maken wij alle meubels vanuit onze eigen werkplaats in Nederland.
                 In ons productieproces combineren wij slimme technieken met ambachtelijk vakwerk.
                 Zo kun jij profiteren van toegankelijk en betaalbare maatwerk meubels van hoge kwaliteit.
               </p>
               <Link
                 to="/bezoek"
-                className="inline-block mt-10 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
+                className="inline-block mt-8 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
               >
                 Meer over Wandig
               </Link>
@@ -226,14 +226,14 @@ function Home() {
 
       {/* Gratis kleurstalen — text left, image right (full-bleed) */}
       <section className="w-full">
-        <div className="grid md:grid-cols-[1fr_1.4fr] md:h-[420px]">
-          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-20 py-16 md:py-24 order-2 md:order-1">
+        <div className="grid md:grid-cols-2 md:h-[500px]">
+          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-16 order-2 md:order-1">
             <div className="max-w-md">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Gratis service</span>
-              <h2 className="font-serif text-5xl md:text-6xl mt-8 leading-[1.05] font-thin">
+              <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
                 Gratis<br />kleurstalen
               </h2>
-              <p className="mt-8 text-[15px] leading-relaxed opacity-85">
+              <p className="mt-6 text-[15px] leading-relaxed opacity-85">
                 Twijfel je tussen warm eiken, donker walnoot of een strak mat zwart?
                 Vraag kosteloos onze kleurstalen aan en voel het materiaal in je eigen
                 interieur, bij jouw licht. Zo kies je met vertrouwen de afwerking die
@@ -241,7 +241,7 @@ function Home() {
               </p>
               <Link
                 to="/klantenservice"
-                className="inline-block mt-10 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
+                className="inline-block mt-8 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
               >
                 Vraag stalen aan
               </Link>

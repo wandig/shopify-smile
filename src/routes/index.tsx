@@ -139,28 +139,24 @@ function Home() {
 
       {/* Categories / Collection */}
       <section className="mx-auto max-w-[1400px] px-5 md:px-10 pb-24">
-        <div className="flex flex-col items-start text-left mb-14">
+        <div className="flex flex-col items-start text-left mb-10">
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>
         {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 justify-items-start">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-square bg-muted animate-pulse max-w-[380px] mx-auto w-full" />
+              <div key={i} className="aspect-[4/3] bg-muted animate-pulse w-full max-w-[280px]" />
             ))}
           </div>
         ) : products.length === 0 ? (
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-x-12 md:gap-y-16 justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 justify-items-start">
             {products.map((p) => <ProductCard key={p.node.id} product={p} />)}
           </div>
         )}
-        <div className="flex justify-start mt-14">
-          <Link to="/producten" className="inline-flex items-center gap-2 text-sm tracking-[0.18em] uppercase hover:opacity-60">
-            Bekijk alles <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
       </section>
+
 
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
       <section className="w-full">

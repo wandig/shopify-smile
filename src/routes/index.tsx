@@ -16,9 +16,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Wandig — Maatwerk TV cinewalls uit eigen werkplaats" },
-      { name: "description", content: "Tijdloze TV cinewalls op maat gemaakt. Bepaal je eigen maatvoering, indeling en kleur. Gratis levering en 5 jaar garantie." },
+      {
+        name: "description",
+        content:
+          "Tijdloze TV cinewalls op maat gemaakt. Bepaal je eigen maatvoering, indeling en kleur. Gratis levering en 5 jaar garantie.",
+      },
       { property: "og:title", content: "Wandig — Maatwerk TV cinewalls" },
-      { property: "og:description", content: "Tijdloze TV cinewalls op maat gemaakt. Bepaal je eigen maatvoering, indeling en kleur." },
+      {
+        property: "og:description",
+        content: "Tijdloze TV cinewalls op maat gemaakt. Bepaal je eigen maatvoering, indeling en kleur.",
+      },
     ],
   }),
   component: Home,
@@ -26,20 +33,17 @@ export const Route = createFileRoute("/")({
 
 const REVIEWS = [
   {
-    quote:
-      "De wand staat strak tot op de millimeter. Het ziet eruit alsof hij altijd in de woonkamer heeft gezeten.",
+    quote: "De wand staat strak tot op de millimeter. Het ziet eruit alsof hij altijd in de woonkamer heeft gezeten.",
     name: "Lotte M.",
     location: "Utrecht",
   },
   {
-    quote:
-      "Persoonlijk advies, snelle reactie en een afwerking die echt boven verwachting was. Aanrader.",
+    quote: "Persoonlijk advies, snelle reactie en een afwerking die echt boven verwachting was. Aanrader.",
     name: "Jeroen V.",
     location: "Amsterdam",
   },
   {
-    quote:
-      "Vanaf het kleurstaal tot de installatie: alles klopte. Een rustig, tijdloos eindresultaat.",
+    quote: "Vanaf het kleurstaal tot de installatie: alles klopte. Een rustig, tijdloos eindresultaat.",
     name: "Sanne D.",
     location: "Eindhoven",
   },
@@ -99,7 +103,11 @@ function Home() {
         <div className="relative h-full mx-auto max-w-[1600px] px-5 md:px-10 pb-[30px] md:pb-12 flex flex-col justify-end items-center md:items-start text-center md:text-left text-background">
           <span className="text-xs md:text-sm tracking-[0.05em] mb-6 opacity-95">Voor elk interieur</span>
           <h1 className="text-5xl md:text-7xl leading-[1.05] tracking-tight opacity-90 font-thin font-serif lg:text-6xl">
-            Tijdloze<br />maatwerk<br />meubels
+            Tijdloze
+            <br />
+            maatwerk
+            <br />
+            meubels
           </h1>
           <div className="mt-10 flex items-end justify-center md:justify-between gap-6 flex-wrap w-full">
             <Button
@@ -169,9 +177,8 @@ function Home() {
       {/* Intro */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-24 md:py-32 text-left md:pr-[400px]">
         <p className="font-serif text-2xl leading-relaxed text-foreground/85 md:text-lg text-left">
-          Maak je woonkamer persoonlijk met een unieke TV cinewall op maat. Ontdek onze collectie:
-          bepaal je eigen maatvoering, indeling en kleur. Zwevend of staand. Precies zoals jij dat wilt.
-          Voel je thuis met Wandig.
+          Maak je woonkamer persoonlijk met een unieke TV cinewall op maat. Ontdek onze collectie: bepaal je eigen
+          maatvoering, indeling en kleur. Zwevend of staand. Precies zoals jij dat wilt. Voel je thuis met Wandig.
         </p>
       </section>
 
@@ -183,7 +190,10 @@ function Home() {
         {isLoading ? (
           <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="aspect-[4/3] bg-muted animate-pulse shrink-0 basis-[78%] md:basis-auto snap-start" />
+              <div
+                key={i}
+                className="aspect-[4/3] bg-muted animate-pulse shrink-0 basis-[78%] md:basis-auto snap-start"
+              />
             ))}
           </div>
         ) : products.length === 0 ? (
@@ -202,7 +212,9 @@ function Home() {
       {/* Details maken het verschil */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24 md:pb-32">
         <h2 className="font-serif text-3xl md:text-5xl mb-12 md:mb-16">
-          Details maken<br />het verschil
+          Details maken
+          <br />
+          het verschil
         </h2>
         <div className="flex md:grid md:grid-cols-3 gap-8 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
@@ -224,24 +236,14 @@ function Home() {
           ].map((item) => (
             <div key={item.title} className="flex flex-col shrink-0 basis-[80%] md:basis-auto snap-start">
               <div className="aspect-[4/5] overflow-hidden bg-muted max-h-[320px]">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
+                <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
               </div>
               <h3 className="font-serif text-lg md:text-xl mt-6">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-foreground/75 mt-3 max-w-[320px]">
-                {item.text}
-              </p>
+              <p className="text-sm leading-relaxed text-foreground/75 mt-3 max-w-[320px]">{item.text}</p>
             </div>
           ))}
         </div>
       </section>
-
-
-
 
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
       <section className="w-full">
@@ -258,12 +260,14 @@ function Home() {
             <div className="max-w-md text-center md:text-left mx-auto md:mx-0">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Handgemaakt</span>
               <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
-                Uit eigen<br />werkplaats
+                Uit eigen
+                <br />
+                werkplaats
               </h2>
               <p className="mt-6 text-[15px] leading-relaxed opacity-85">
-                Bij Wandig maken wij alle meubels vanuit onze eigen werkplaats in Nederland.
-                In ons productieproces combineren wij slimme technieken met ambachtelijk vakwerk.
-                Zo kun jij profiteren van toegankelijk en betaalbare maatwerk meubels van hoge kwaliteit.
+                Bij Wandig maken wij alle meubels vanuit onze eigen werkplaats in Nederland. In ons productieproces
+                combineren wij slimme technieken met ambachtelijk vakwerk. Zo kun jij profiteren van toegankelijk en
+                betaalbare maatwerk meubels van hoge kwaliteit.
               </p>
               <Link
                 to="/bezoek"
@@ -275,7 +279,6 @@ function Home() {
           </div>
         </div>
       </section>
-
 
       {/* Reviews */}
       <section className="bg-[#fbf1ea]">
@@ -300,25 +303,32 @@ function Home() {
               </div>
             </div>
             <div className="hidden md:flex items-center gap-3 shrink-0">
-              <button aria-label="Vorige" className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition">
+              <button
+                aria-label="Vorige"
+                className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition"
+              >
                 <ArrowRight className="h-4 w-4 rotate-180" />
               </button>
-              <button aria-label="Volgende" className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition">
+              <button
+                aria-label="Volgende"
+                className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition"
+              >
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
           </div>
           <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {REVIEWS.map((r, idx) => (
-              <figure key={r.name} className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px] shrink-0 basis-[85%] md:basis-auto snap-start">
+              <figure
+                key={r.name}
+                className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px] shrink-0 basis-[85%] md:basis-auto snap-start"
+              >
                 <div className="flex gap-1 mb-6" aria-label="5 sterren">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-[#d4a574] text-[#d4a574]" />
                   ))}
                 </div>
-                <blockquote className="text-[15px] leading-relaxed text-foreground/85 flex-1">
-                  {r.quote}
-                </blockquote>
+                <blockquote className="text-[15px] leading-relaxed text-foreground/85 flex-1">{r.quote}</blockquote>
                 <div className="border-t border-border/50 mt-8 pt-5">
                   <div className="text-sm text-foreground/90">{r.name}</div>
                   <div className="text-xs text-muted-foreground mt-1">0{4 + idx} jun 2026</div>
@@ -329,7 +339,6 @@ function Home() {
         </div>
       </section>
 
-
       {/* Gratis kleurstalen — text left, image right (full-bleed) */}
       <section className="w-full">
         <div className="grid md:grid-cols-2 md:h-[500px]">
@@ -337,13 +346,14 @@ function Home() {
             <div className="max-w-md text-center md:text-left mx-auto md:mx-0">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Gratis service</span>
               <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
-                Gratis<br />kleurstalen
+                Gratis
+                <br />
+                kleurstalen
               </h2>
               <p className="mt-6 text-[15px] leading-relaxed opacity-85">
-                Twijfel je tussen warm eiken, donker walnoot of een strak mat zwart?
-                Vraag kosteloos onze kleurstalen aan en voel het materiaal in je eigen
-                interieur, bij jouw licht. Zo kies je met vertrouwen de afwerking die
-                past bij jouw woonkamer — vóór je bestelt.
+                Twijfel je tussen warm eiken, donker walnoot of een strak mat zwart? Vraag kosteloos onze kleurstalen
+                aan en voel het materiaal in je eigen interieur, bij jouw licht. Zo kies je met vertrouwen de afwerking
+                die past bij jouw woonkamer — vóór je bestelt.
               </p>
               <Link
                 to="/klantenservice"
@@ -371,16 +381,15 @@ function Home() {
             We helpen je graag
           </h2>
           <p className="mt-8 text-[15px] leading-relaxed text-foreground/75 max-w-xl mx-auto">
-            Een maatwerk meubel bestellen was nog nooit zo makkelijk. Maar soms is
-            het fijn om toch even contact te hebben. Bel of bezoek ons voor goed
-            advies of hulp bij bestellen.
+            Een maatwerk meubel bestellen was nog nooit zo makkelijk. Maar soms is het fijn om toch even contact te
+            hebben. Bel of bezoek ons voor goed advies of hulp bij bestellen.
           </p>
           <div className="mt-10 flex items-center justify-center gap-3 flex-wrap">
             <a
-              href="tel:0387730076"
+              href="tel:0123456789"
               className="rounded-full bg-[#fbf1ea] text-foreground hover:bg-[#f3e3d6] transition-colors h-11 px-6 text-sm flex items-center"
             >
-              Bel 038 773 0076
+              Bel 012 345 6789
             </a>
             <a
               href="mailto:info@wandig.nl"
@@ -397,7 +406,6 @@ function Home() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

@@ -165,7 +165,7 @@ function Home() {
 
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
       <section className="w-full">
-        <div className="grid md:grid-cols-[1.4fr_1fr] min-h-[560px] md:min-h-[640px]">
+        <div className="grid md:grid-cols-[1.4fr_1fr] md:h-[420px]">
           <div className="overflow-hidden bg-muted h-full">
             <img
               src={werkplaatsImg}

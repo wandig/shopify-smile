@@ -246,7 +246,7 @@ function Home() {
       </section>
 
       {/* Categories / Collection */}
-      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24">
+      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pt-20 pb-24">
         <div className="flex items-end justify-between gap-6 mb-10">
           <h2 className="font-serif text-3xl md:text-5xl">
             Onze <em className="italic">collectie</em>

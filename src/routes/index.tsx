@@ -211,7 +211,7 @@ function Home() {
       {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
       <section className="w-full">
         <div className="grid md:grid-cols-2 md:h-[500px]">
-          <div className="overflow-hidden bg-muted h-full">
+          <div className="hidden md:block overflow-hidden bg-muted h-full">
             <img
               src={werkplaatsImg}
               alt="Maatwerk uit de Wandig werkplaats"

@@ -9,7 +9,7 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
     <Link
       to="/product/$handle"
       params={{ handle: p.handle }}
-      className="group block w-full max-w-[280px] mx-auto border border-border/70 bg-background overflow-hidden"
+      className="group block w-full max-w-[280px] border border-border/70 bg-background overflow-hidden"
     >
       <div className="aspect-[4/3] bg-muted overflow-hidden">
         {img && (

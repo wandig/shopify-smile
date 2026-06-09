@@ -365,7 +365,7 @@ function Home() {
           </div>
           <div className="hidden md:block overflow-hidden bg-muted h-full order-1 md:order-2">
             <img
-              src={kleurstalenImg}
+              src={kleurstalenImg.url}
               alt="Gratis kleurstalen van Wandig"
               loading="lazy"
               className="w-full h-full object-cover"

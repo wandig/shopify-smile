@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
-import werkplaatsImg from "@/assets/werkplaats.webp.asset.json";
+import werkplaatsImg from "@/assets/werkplaats.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";

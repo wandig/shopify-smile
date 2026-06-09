@@ -143,15 +143,15 @@ function Home() {
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>
         {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 justify-items-start">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-[4/3] bg-muted animate-pulse w-full max-w-[280px]" />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-[900px]">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="aspect-[4/3] bg-muted animate-pulse w-full" />
             ))}
           </div>
         ) : products.length === 0 ? (
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 justify-items-start">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-[900px]">
             {products.map((p) => <ProductCard key={p.node.id} product={p} />)}
           </div>
         )}

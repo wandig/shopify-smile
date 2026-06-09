@@ -73,7 +73,7 @@ const COLLECTION_META: {
     title: "Wandig Full House",
     description: "Een volledige wand op maat — van vloer tot plafond, helemaal jouw stijl.",
     korting: "€250,-",
-    tags: ["Aanbevolen", "Vloer tot plafond", "Maximaal maatwerk"],
+    tags: ["Aanbevolen", "Wand-vullend", "Maximaal maatwerk"],
     highlight: true,
   },
 ];

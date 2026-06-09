@@ -61,7 +61,7 @@ function Home() {
         setUspIdx((i) => (i + 1) % USPS.length);
         setUspVisible(true);
       }, 700);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(id);
   }, []);
 

@@ -49,6 +49,35 @@ const REVIEWS = [
   },
 ];
 
+const COLLECTION_META: {
+  title: string;
+  description: string;
+  korting: string;
+  tags: string[];
+  highlight?: boolean;
+}[] = [
+  {
+    title: "Wandig Solo",
+    description: "De compacte cinewall — strak en tijdloos voor elke woonkamer.",
+    korting: "€100,-",
+    tags: ["Compact", "Zwevend of staand", "Op maat"],
+  },
+  {
+    title: "Wandig Duo",
+    description: "Extra opbergruimte links én rechts van je TV, in perfecte symmetrie.",
+    korting: "€150,-",
+    tags: ["Populair", "Symmetrisch", "Veel opbergruimte"],
+    highlight: true,
+  },
+  {
+    title: "Wandig Full House",
+    description: "Een volledige wand op maat — van vloer tot plafond, helemaal jouw stijl.",
+    korting: "€250,-",
+    tags: ["Aanbevolen", "Vloer tot plafond", "Maximaal maatwerk"],
+    highlight: true,
+  },
+];
+
 function Home() {
   const USPS = [
     { icon: Truck, label: "Gratis levering aan huis" },
@@ -226,29 +255,98 @@ function Home() {
 
       {/* Categories / Collection */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24">
-        <div className="flex flex-col items-start text-left mb-10">
-          <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
+        <div className="flex items-end justify-between gap-6 mb-10">
+          <h2 className="font-serif text-3xl md:text-5xl">
+            Onze <em className="italic">collectie</em>
+          </h2>
+          <Link
+            to="/producten"
+            className="hidden md:inline-flex items-center gap-2 rounded-full border border-border/70 bg-background px-6 h-12 text-sm hover:bg-muted/40 transition"
+          >
+            Bekijk alles <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
         {isLoading ? (
-          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory">
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory">
             {Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="aspect-[4/3] bg-muted animate-pulse shrink-0 basis-[78%] md:basis-auto snap-start"
+                className="aspect-[3/4] bg-muted animate-pulse rounded-2xl shrink-0 basis-[80%] md:basis-auto snap-start"
               />
             ))}
           </div>
         ) : products.length === 0 ? (
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
-          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {products.map((p, idx) => {
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {products.slice(0, 3).map((p, idx) => {
               const fronts = p.node.images.edges.filter((e) => /Camera_Front/i.test(e.node.url));
-              const override = fronts.length > 0 ? fronts[idx % fronts.length].node : undefined;
+              const main = fronts[idx % Math.max(fronts.length, 1)]?.node ?? p.node.images.edges[0]?.node;
+              const meta = COLLECTION_META[idx] ?? COLLECTION_META[0];
               return (
-                <div key={p.node.id} className="shrink-0 basis-[78%] md:basis-auto snap-start">
-                  <ProductCard product={p} imageOverride={override} />
-                </div>
+                <Link
+                  key={p.node.id}
+                  to="/product/$handle"
+                  params={{ handle: p.node.handle }}
+                  className="group shrink-0 basis-[82%] md:basis-auto snap-start flex flex-col"
+                >
+                  <div className="relative rounded-2xl bg-[#f6f1ec] overflow-hidden aspect-[4/5]">
+                    {/* Korting badge */}
+                    <div className="absolute top-5 right-5 z-10 flex flex-col items-center justify-center h-16 w-16 rounded-full bg-[#e9d5ff] text-[#3d2424] text-center leading-tight">
+                      <span className="font-serif text-base">{meta.korting}</span>
+                      <span className="text-[10px] tracking-wide">Korting</span>
+                    </div>
+                    {/* Variant thumbs */}
+                    <div className="absolute top-5 left-5 z-10 flex flex-col gap-3">
+                      <div className="relative h-14 w-14 rounded-full border border-[#3d2424]/30 bg-[#3d2424] flex items-center justify-center">
+                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-medium tracking-wider text-[#f5ece6] bg-[#1f7a6b] px-2 py-0.5 rounded-sm">
+                          GRATIS
+                        </span>
+                        <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#1f7a6b] text-white text-xs flex items-center justify-center">
+                          +
+                        </span>
+                      </div>
+                      <div className="relative h-14 w-14 rounded-full border border-border/60 bg-background/80">
+                        <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-muted text-foreground/70 text-xs flex items-center justify-center">
+                          +
+                        </span>
+                      </div>
+                      <div className="relative h-14 w-14 rounded-full border border-border/60 bg-background/80">
+                        <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-muted text-foreground/70 text-xs flex items-center justify-center">
+                          +
+                        </span>
+                      </div>
+                    </div>
+                    {main && (
+                      <img
+                        src={main.url}
+                        alt={main.altText || p.node.title}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-contain p-8 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      />
+                    )}
+                  </div>
+                  <div className="pt-6">
+                    <h3 className="font-serif text-xl md:text-2xl text-[#0f3a32]">{meta.title}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-foreground/70 max-w-[360px]">
+                      {meta.description}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {meta.tags.map((tag, i) => (
+                        <span
+                          key={tag}
+                          className={`rounded-full px-4 py-1.5 text-xs ${
+                            i === 0 && meta.highlight
+                              ? "bg-[#5fe3c7] text-[#0f3a32]"
+                              : "bg-muted text-foreground/70"
+                          }`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
               );
             })}
           </div>

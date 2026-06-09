@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Truck, Hammer, BadgeCheck, ShieldCheck } from "lucide-react";
+import { ArrowRight, Truck, Hammer, BadgeCheck, ShieldCheck, Star } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
+import werkplaatsImg from "@/assets/werkplaats.jpg";
+import kleurstalenImg from "@/assets/kleurstalen.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,6 +20,27 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const REVIEWS = [
+  {
+    quote:
+      "De wand staat strak tot op de millimeter. Het ziet eruit alsof hij altijd in de woonkamer heeft gezeten.",
+    name: "Lotte M.",
+    location: "Utrecht",
+  },
+  {
+    quote:
+      "Persoonlijk advies, snelle reactie en een afwerking die echt boven verwachting was. Aanrader.",
+    name: "Jeroen V.",
+    location: "Amsterdam",
+  },
+  {
+    quote:
+      "Vanaf het kleurstaal tot de installatie: alles klopte. Een rustig, tijdloos eindresultaat.",
+    name: "Sanne D.",
+    location: "Eindhoven",
+  },
+];
+
 function Home() {
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
@@ -27,7 +50,11 @@ function Home() {
     },
   });
 
-  const products = data ?? [];
+  const allProducts = data ?? [];
+  const products = allProducts.filter((p) => {
+    const t = p.node.title.toLowerCase();
+    return !t.includes("prestige") && !t.includes("trio");
+  });
   const hero = products[0];
   const heroImg = hero?.node.images.edges[0]?.node.url;
 
@@ -82,7 +109,6 @@ function Home() {
             )}
           </div>
         </div>
-
       </section>
 
       {/* USP bar */}
@@ -94,7 +120,7 @@ function Home() {
             { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
             { icon: ShieldCheck, label: "5 jaar garantie" },
           ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 justify-center md:justify-start">
+            <div key={label} className="flex items-center gap-3 justify-start">
               <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />
               <span className="text-foreground/80">{label}</span>
             </div>
@@ -103,7 +129,7 @@ function Home() {
       </section>
 
       {/* Intro */}
-      <section className="mx-auto max-w-3xl px-5 md:px-10 py-24 md:py-32 text-center">
+      <section className="mx-auto max-w-3xl px-5 md:px-10 py-24 md:py-32 text-left">
         <p className="font-serif text-2xl md:text-3xl leading-relaxed text-foreground/85">
           Maak je woonkamer persoonlijk met een unieke TV cinewall op maat. Ontdek onze collectie:
           bepaal je eigen maatvoering, indeling en kleur. Zwevend of staand. Precies zoals jij dat wilt.
@@ -113,7 +139,7 @@ function Home() {
 
       {/* Categories / Collection */}
       <section className="mx-auto max-w-[1400px] px-5 md:px-10 pb-24">
-        <div className="flex flex-col items-center text-center mb-14">
+        <div className="flex flex-col items-start text-left mb-14">
           <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-4">Collectie</span>
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>
@@ -124,40 +150,107 @@ function Home() {
             ))}
           </div>
         ) : products.length === 0 ? (
-          <p className="text-muted-foreground py-20 text-center">No products found</p>
+          <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-x-12 md:gap-y-16 justify-items-center">
             {products.map((p) => <ProductCard key={p.node.id} product={p} />)}
           </div>
         )}
-        <div className="flex justify-center mt-14">
+        <div className="flex justify-start mt-14">
           <Link to="/producten" className="inline-flex items-center gap-2 text-sm tracking-[0.18em] uppercase hover:opacity-60">
             Bekijk alles <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
 
-      {/* Featured story */}
-      {products[1] && (
-        <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-20">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
-            <div className="aspect-[4/5] overflow-hidden bg-muted">
-              <img src={products[1].node.images.edges[0]?.node.url} alt={products[1].node.title} className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Uitgelicht</span>
-              <h3 className="font-serif text-4xl md:text-6xl mt-4 leading-[1]">{products[1].node.title}</h3>
-              <p className="mt-6 text-foreground/75 leading-relaxed max-w-md">
-                Gemaakt om te blijven. Elk paneel met de hand afgewerkt in onze Nederlandse werkplaats,
-                samengesteld op de millimeter voor jouw ruimte.
-              </p>
-              <Button asChild className="mt-10 rounded-none h-12 px-8 text-sm tracking-[0.18em] uppercase">
-                <Link to="/product/$handle" params={{ handle: products[1].node.handle }}>Bekijk model</Link>
-              </Button>
-            </div>
+      {/* Uit eigen werkplaats — image left, text right */}
+      <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
+          <div className="aspect-[4/5] overflow-hidden bg-muted">
+            <img
+              src={werkplaatsImg}
+              alt="Maatwerk uit de Wandig werkplaats"
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
           </div>
-        </section>
-      )}
+          <div className="bg-secondary/40 p-8 md:p-14 text-left">
+            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Vakmanschap</span>
+            <h2 className="font-serif text-4xl md:text-6xl mt-4 leading-[1] font-thin">
+              Uit eigen<br />werkplaats
+            </h2>
+            <p className="mt-8 text-foreground/75 leading-relaxed max-w-md">
+              Elke cinewall wordt in onze eigen Nederlandse werkplaats met de hand gemaakt.
+              Geen massaproductie, maar paneel voor paneel afgewerkt op de millimeter — afgestemd
+              op jouw ruimte, jouw maatvoering en jouw kleur.
+            </p>
+            <p className="mt-4 text-foreground/75 leading-relaxed max-w-md">
+              Zo ben je verzekerd van een meubel dat blijft staan. Tijdloos in ontwerp, eerlijk in
+              materiaal en gemaakt om generaties mee te gaan.
+            </p>
+            <Button asChild className="mt-10 rounded-none h-12 px-8 text-sm tracking-[0.18em] uppercase">
+              <Link to="/bezoek">Bezoek de werkplaats</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="border-y border-border/60 bg-background">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
+          <div className="flex flex-col items-start text-left mb-14">
+            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-4">Klanten</span>
+            <h2 className="font-serif text-3xl md:text-5xl font-thin">Wat klanten zeggen</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-10 md:gap-16">
+            {REVIEWS.map((r) => (
+              <figure key={r.name} className="text-left">
+                <div className="flex gap-1 mb-6" aria-label="5 sterren">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-3.5 w-3.5 fill-foreground text-foreground" />
+                  ))}
+                </div>
+                <blockquote className="font-serif text-xl md:text-2xl leading-relaxed text-foreground/90">
+                  “{r.quote}”
+                </blockquote>
+                <figcaption className="mt-6 text-xs tracking-[0.2em] uppercase text-muted-foreground">
+                  {r.name} — {r.location}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gratis kleurstalen — text left, image right */}
+      <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
+          <div className="bg-secondary/40 p-8 md:p-14 text-left order-2 md:order-1">
+            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Gratis service</span>
+            <h2 className="font-serif text-4xl md:text-6xl mt-4 leading-[1] font-thin">
+              Gratis<br />kleurstalen
+            </h2>
+            <p className="mt-8 text-foreground/75 leading-relaxed max-w-md">
+              Twijfel je tussen warm eiken, donker walnoot of een strak mat zwart? Vraag kosteloos
+              onze kleurstalen aan en voel het materiaal in je eigen interieur, bij jouw licht.
+            </p>
+            <p className="mt-4 text-foreground/75 leading-relaxed max-w-md">
+              Zo kies je met vertrouwen de afwerking die past bij jouw woonkamer — vóór je bestelt.
+            </p>
+            <Button asChild className="mt-10 rounded-none h-12 px-8 text-sm tracking-[0.18em] uppercase">
+              <Link to="/klantenservice">Vraag stalen aan</Link>
+            </Button>
+          </div>
+          <div className="aspect-[4/5] overflow-hidden bg-muted order-1 md:order-2">
+            <img
+              src={kleurstalenImg}
+              alt="Gratis kleurstalen van Wandig"
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

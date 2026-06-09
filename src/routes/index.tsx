@@ -146,16 +146,20 @@ function Home() {
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>
         {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-[900px]">
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="aspect-[4/3] bg-muted animate-pulse w-full" />
+              <div key={i} className="aspect-[4/3] bg-muted animate-pulse shrink-0 basis-[78%] md:basis-auto snap-start" />
             ))}
           </div>
         ) : products.length === 0 ? (
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-[900px]">
-            {products.map((p) => <ProductCard key={p.node.id} product={p} />)}
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {products.map((p) => (
+              <div key={p.node.id} className="shrink-0 basis-[78%] md:basis-auto snap-start">
+                <ProductCard product={p} />
+              </div>
+            ))}
           </div>
         )}
       </section>

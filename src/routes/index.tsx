@@ -129,7 +129,7 @@ function Home() {
       </section>
 
       {/* Intro */}
-      <section className="mx-auto max-w-[1400px] px-5 py-24 md:py-32 text-left mr-[400px] md:px-[40px]">
+      <section className="mx-auto max-w-[1600px] px-5 md:px-10 py-24 md:py-32 text-left md:pr-[400px]">
         <p className="font-serif text-2xl leading-relaxed text-foreground/85 md:text-lg text-left">
           Maak je woonkamer persoonlijk met een unieke TV cinewall op maat. Ontdek onze collectie:
           bepaal je eigen maatvoering, indeling en kleur. Zwevend of staand. Precies zoals jij dat wilt.
@@ -138,7 +138,7 @@ function Home() {
       </section>
 
       {/* Categories / Collection */}
-      <section className="mx-auto max-w-[1400px] px-5 md:px-10 pb-24">
+      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24">
         <div className="flex flex-col items-start text-left mb-10">
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>

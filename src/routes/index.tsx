@@ -219,8 +219,8 @@ function Home() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-16">
-            <div className="max-w-md">
+          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-16 py-16 md:py-0">
+            <div className="max-w-md text-center md:text-left mx-auto md:mx-0">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Handgemaakt</span>
               <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
                 Uit eigen<br />werkplaats
@@ -298,8 +298,8 @@ function Home() {
       {/* Gratis kleurstalen — text left, image right (full-bleed) */}
       <section className="w-full">
         <div className="grid md:grid-cols-2 md:h-[500px]">
-          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-16 order-2 md:order-1">
-            <div className="max-w-md">
+          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-16 py-16 md:py-0 order-2 md:order-1">
+            <div className="max-w-md text-center md:text-left mx-auto md:mx-0">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Gratis service</span>
               <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
                 Gratis<br />kleurstalen

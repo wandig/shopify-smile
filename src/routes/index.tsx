@@ -146,7 +146,7 @@ function Home() {
           <h2 className="font-serif text-3xl md:text-5xl">Onze collectie</h2>
         </div>
         {isLoading ? (
-          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0">
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory">
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="aspect-[4/3] bg-muted animate-pulse shrink-0 basis-[78%] md:basis-auto snap-start" />
             ))}
@@ -154,7 +154,7 @@ function Home() {
         ) : products.length === 0 ? (
           <p className="text-muted-foreground py-20 text-left">No products found</p>
         ) : (
-          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 md:max-w-[900px] overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {products.map((p) => (
               <div key={p.node.id} className="shrink-0 basis-[78%] md:basis-auto snap-start">
                 <ProductCard product={p} />
@@ -169,7 +169,7 @@ function Home() {
         <h2 className="font-serif text-3xl md:text-5xl mb-12 md:mb-16">
           Details maken<br />het verschil
         </h2>
-        <div className="flex md:grid md:grid-cols-3 gap-8 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex md:grid md:grid-cols-3 gap-8 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
             {
               img: detailDesignImg,
@@ -273,7 +273,7 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {REVIEWS.map((r, idx) => (
               <figure key={r.name} className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px] shrink-0 basis-[85%] md:basis-auto snap-start">
                 <div className="flex gap-1 mb-6" aria-label="5 sterren">

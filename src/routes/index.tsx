@@ -53,8 +53,15 @@ function Home() {
     { icon: ShieldCheck, label: "5 jaar garantie" },
   ];
   const [uspIdx, setUspIdx] = useState(0);
+  const [uspVisible, setUspVisible] = useState(true);
   useEffect(() => {
-    const id = setInterval(() => setUspIdx((i) => (i + 1) % USPS.length), 3000);
+    const id = setInterval(() => {
+      setUspVisible(false);
+      setTimeout(() => {
+        setUspIdx((i) => (i + 1) % USPS.length);
+        setUspVisible(true);
+      }, 700);
+    }, 3000);
     return () => clearInterval(id);
   }, []);
 

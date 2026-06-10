@@ -181,7 +181,7 @@ function Home() {
                 key={c.handle}
                 to="/product/$handle"
                 params={{ handle: c.handle }}
-                className="group flex items-center gap-4 bg-[#fdf4ea] rounded-2xl pr-5 pl-2 py-2 hover:bg-[#fbeedf] transition"
+                className="group flex items-center gap-4 bg-[#f9ecdc] rounded-2xl pr-5 pl-2 py-2 hover:bg-[#f3dcc8] transition"
               >
                 <div className="h-16 w-16 md:h-[72px] md:w-[72px] rounded-xl overflow-hidden bg-[#f0d9c4] shrink-0">
                   <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />

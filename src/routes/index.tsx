@@ -314,9 +314,11 @@ function Home() {
               ))}
 
             </div>
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* Details maken het verschil */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24 md:pb-32">

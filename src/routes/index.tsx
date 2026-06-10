@@ -289,11 +289,12 @@ function Home() {
                   key={card.title}
                   to="/product/$handle"
                   params={{ handle: card.handle }}
-                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col aspect-[3/4] group"
+                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col group"
                 >
-                  <div className="m-2 rounded-xl overflow-hidden bg-[#f5b88d] h-[55%]">
+                  <div className="m-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3]">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />
                   </div>
+
                   <div className="px-5 pb-5 pt-2 flex-1 flex flex-col">
                     <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
                     <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>

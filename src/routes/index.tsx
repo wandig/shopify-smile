@@ -12,6 +12,30 @@ import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
 
+function RatingStars({ value, small, dark }: { value: number; small?: boolean; dark?: boolean }) {
+  const size = small ? "h-3 w-3" : "h-3.5 w-3.5";
+  const color = dark ? "fill-[#d97706] text-[#d97706]" : "fill-white text-white";
+  const empty = dark ? "text-[#d97706]/30" : "text-white/40";
+  return (
+    <span className="flex gap-0.5" aria-label={`${value} sterren`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} className={`${size} ${i < Math.round(value) ? color : empty}`} strokeWidth={1.5} />
+      ))}
+    </span>
+  );
+}
+
+function CartIconBtn() {
+  return (
+    <span className="h-9 w-9 rounded-full bg-[#f18972] text-white flex items-center justify-center shadow-sm">
+      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 7h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z" />
+        <path d="M9 7a3 3 0 0 1 6 0" />
+      </svg>
+    </span>
+  );
+}
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [

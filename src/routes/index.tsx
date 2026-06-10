@@ -185,12 +185,12 @@ function Home() {
                     key={c.handle}
                     to="/product/$handle"
                     params={{ handle: c.handle }}
-                    className="group flex items-center justify-between bg-[#f9ecdc] rounded-2xl px-5 py-3 hover:bg-[#f3dcc8] transition max-w-[420px] mx-auto"
+                    className="group flex items-center gap-4 bg-[#f9ecdc] rounded-2xl pr-5 pl-2 py-2 hover:bg-[#f3dcc8] transition"
                   >
                     <div className="h-16 w-16 md:h-[72px] md:w-[72px] rounded-xl overflow-hidden bg-[#f0d9c4] shrink-0">
                       <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />
                     </div>
-                    <span className="text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
+                    <span className="flex-1 text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
                     <ArrowRight className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
                   </Link>
                 ))}
@@ -300,7 +300,7 @@ function Home() {
                   key={card.title}
                   to="/product/$handle"
                   params={{ handle: card.handle }}
-                  className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[32%] rounded-2xl overflow-hidden bg-[#fffbf6] flex flex-col group md:h-[520px]"
+                  className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[32%] rounded-2xl overflow-hidden bg-white flex flex-col group md:h-[520px]"
                 >
                   <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] shrink-0">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />

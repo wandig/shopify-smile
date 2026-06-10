@@ -154,7 +154,7 @@ function Home() {
         />
         <div className="absolute inset-0 bg-black/35" />
         <div className="relative h-full w-full flex flex-col items-center justify-center text-center text-background px-5">
-          <h1 className="font-serif font-thin text-background text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight">
+          <h1 className="font-serif font-thin text-background text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
             Onze bestsellers
           </h1>
           <div className="mt-10">

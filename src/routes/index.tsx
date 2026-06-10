@@ -223,9 +223,9 @@ function Home() {
                   <Link
                     to="/product/$handle"
                     params={{ handle: card.handle }}
-                    className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[640px] group"
+                    className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] group"
                   >
-                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover scale-[1.2]" loading="lazy" />
+                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover scale-[1.1]" loading="lazy" />
                     <span className="absolute top-4 left-4 z-10 rounded-full bg-white/15 backdrop-blur-md text-white text-xs px-3 py-1.5">
                       {card.badge}
                     </span>
@@ -246,6 +246,7 @@ function Home() {
                   </Link>
                 );
               })()}
+
 
               {/* Smaller cards */}
               {[
@@ -284,15 +285,15 @@ function Home() {
                   key={card.title}
                   to="/product/$handle"
                   params={{ handle: card.handle }}
-                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col group"
+                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col aspect-[3/4] group"
                 >
-                  <div className="aspect-[4/3] overflow-hidden bg-[#f5b88d]">
-                    <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />
+                  <div className="m-2 rounded-xl overflow-hidden bg-[#f5b88d] h-[55%]">
+                    <img src={card.img} alt={card.title} className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
+                  <div className="px-5 pb-5 pt-2 flex-1 flex flex-col">
                     <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
                     <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>
-                    <div className="mt-auto pt-6 flex items-end justify-between">
+                    <div className="mt-auto pt-4 flex items-end justify-between">
                       <div>
                         <div className="flex items-center gap-1.5 text-[11px] text-[#0a2540]/70 mb-1.5">
                           <RatingStars value={card.rating} small dark />
@@ -307,6 +308,7 @@ function Home() {
                   </div>
                 </Link>
               ))}
+
             </div>
           </div>
         </div>

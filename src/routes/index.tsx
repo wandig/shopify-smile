@@ -223,9 +223,9 @@ function Home() {
                   <Link
                     to="/product/$handle"
                     params={{ handle: card.handle }}
-                    className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[640px] group"
+                    className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] group"
                   >
-                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover scale-[1.2]" loading="lazy" />
+                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover scale-[1.1]" loading="lazy" />
                     <span className="absolute top-4 left-4 z-10 rounded-full bg-white/15 backdrop-blur-md text-white text-xs px-3 py-1.5">
                       {card.badge}
                     </span>
@@ -246,6 +246,7 @@ function Home() {
                   </Link>
                 );
               })()}
+
 
               {/* Smaller cards */}
               {[

@@ -143,125 +143,148 @@ function Home() {
         </div>
       </section>
 
-      {/* USP bar */}
-      <section className="border-y border-border/60 bg-background overflow-hidden">
-        {/* Desktop: grid */}
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-6 hidden md:grid grid-cols-4 gap-6 text-sm">
-          {[
-            { icon: Truck, label: "Gratis levering aan huis" },
-            { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
-            { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
-            { icon: ShieldCheck, label: "5 jaar garantie" },
-          ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 justify-center">
-              <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />
-              <span className="text-foreground/80">{label}</span>
-            </div>
-          ))}
-        </div>
-        {/* Mobile: fade between USPs */}
-        <div className="md:hidden py-6 text-sm relative h-12">
-          {USPS.map(({ icon: Icon, label }, i) => (
-            <div
-              key={label}
-              className={`absolute inset-0 flex items-center gap-3 justify-center transition-opacity duration-700 ease-in-out ${
-                i === uspIdx && uspVisible ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Icon className="h-4 w-4 opacity-70" strokeWidth={1.5} />
-              <span className="text-foreground/80">{label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Categories / Collection */}
-      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pt-20 pb-24">
-        <div className="flex items-end justify-between gap-6 mb-10">
-          <h2 className="font-serif text-3xl md:text-5xl">
-            Onze <em className="italic">collectie</em>
-          </h2>
-          <Link
-            to="/producten"
-            className="hidden md:inline-flex items-center gap-2 rounded-full border border-border/70 bg-background px-6 h-12 text-sm hover:bg-muted/40 transition"
-          >
-            Bekijk alles <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        {isLoading ? (
-          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div
-                key={i}
-                className="aspect-[3/4] bg-muted animate-pulse rounded-2xl shrink-0 basis-[80%] md:basis-auto snap-start"
-              />
+      {/* Bestsellers — category tiles + product carousel */}
+      <section className="bg-[#fbecdd]">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 pt-12 md:pt-16 pb-16 md:pb-20">
+          {/* Category tiles */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-14">
+            {[
+              { title: "Wandig Solo", handle: "solo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488" },
+              { title: "Wandig Duo", handle: "duo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179" },
+              { title: "Wandig Full House", handle: "full-house", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267" },
+            ].map((c) => (
+              <Link
+                key={c.handle}
+                to="/product/$handle"
+                params={{ handle: c.handle }}
+                className="group flex items-center gap-4 bg-[#fdf4ea] rounded-2xl pr-5 pl-2 py-2 hover:bg-[#fbeedf] transition"
+              >
+                <div className="h-16 w-16 md:h-[72px] md:w-[72px] rounded-xl overflow-hidden bg-[#f0d9c4] shrink-0">
+                  <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <span className="flex-1 text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
+                <ArrowRight className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
+              </Link>
             ))}
           </div>
-        ) : products.length === 0 ? (
-          <p className="text-muted-foreground py-20 text-left">No products found</p>
-        ) : (
-          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {(() => {
-              const ordered = products.slice(0, 3);
-              // Swap product images for index 1 (Duo) and 2 (Full House)
-              if (ordered.length === 3) {
-                const tmp = ordered[1];
-                ordered[1] = ordered[2];
-                ordered[2] = tmp;
-              }
-              return ordered;
-            })().map((p, idx) => {
-              const fronts = p.node.images.edges.filter((e) => /Camera_Front/i.test(e.node.url));
-              const main = fronts[idx % Math.max(fronts.length, 1)]?.node ?? p.node.images.edges[0]?.node;
-              const meta = COLLECTION_META[idx] ?? COLLECTION_META[0];
-              return (
-                <Link
-                  key={p.node.id}
-                  to="/product/$handle"
-                  params={{ handle: p.node.handle }}
-                  className="group shrink-0 basis-[82%] md:basis-auto snap-start flex flex-col"
-                >
-                  <div className={`relative rounded-2xl overflow-hidden aspect-[4/5] ${idx === 2 ? "bg-[#f6f1ec] p-6" : ""}`}>
-                    {/* Korting badge */}
-                    <div className="absolute top-5 right-5 z-10 flex flex-col items-center justify-center h-16 w-16 rounded-full bg-[#d97706] text-white text-center leading-tight shadow-sm">
-                      <span className="font-serif text-base">{meta.korting}</span>
-                      <span className="text-[10px] tracking-wide">Korting</span>
-                    </div>
-                    {main && (
-                      <img
-                        src={main.url}
-                        alt={main.altText || p.node.title}
-                        loading="lazy"
-                        className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.03] ${idx === 2 ? "object-contain" : "object-cover"}`}
-                      />
-                    )}
-                  </div>
 
-                  <div className="pt-6">
-                    <h3 className="font-serif text-xl md:text-2xl text-[#0f3a32]">{meta.title}</h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-foreground/70 max-w-[360px]">
-                      {meta.description}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {meta.tags.map((tag, i) => (
-                        <span
-                          key={tag}
-                          className={`rounded-full px-4 py-1.5 text-xs ${
-                            i === 0 && meta.highlight
-                              ? "bg-[#5fe3c7] text-[#0f3a32]"
-                              : "bg-muted text-foreground/70"
-                          }`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
+          {/* Bestsellers carousel panel */}
+          <div className="relative rounded-3xl bg-[#f3d3b1] p-3 md:p-4">
+            <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {/* Vertical label */}
+              <div className="hidden md:flex shrink-0 w-12 items-center justify-center">
+                <span
+                  className="font-serif tracking-[0.35em] text-[#0a2540] text-sm"
+                  style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+                >
+                  BESTSELLERS
+                </span>
+              </div>
+
+              {/* Featured large card */}
+              {(() => {
+                const card = {
+                  handle: "full-house",
+                  badge: "Incl. Standaard hoofdbord",
+                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak_cce209b3-4e39-4361-8613-433de00bec9b.jpg?v=1750342787",
+                  title: "Venus",
+                  price: "1.699 €",
+                  rating: 4.5,
+                  reviews: 2524,
+                  size: "180x200",
+                  cat: "Boxspring",
+                };
+                return (
+                  <Link
+                    to="/product/$handle"
+                    params={{ handle: card.handle }}
+                    className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[640px] group"
+                  >
+                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                    <span className="absolute top-4 left-4 z-10 rounded-full bg-white/15 backdrop-blur-md text-white text-xs px-3 py-1.5">
+                      {card.badge}
+                    </span>
+                    <div className="absolute top-1/2 -translate-y-1/2 left-6 right-6 text-white">
+                      <h3 className="font-serif text-5xl md:text-6xl leading-tight">{card.title}</h3>
+                      <div className="font-serif text-3xl md:text-4xl mt-2">{card.price}</div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between text-white">
+                      <div>
+                        <div className="flex items-center gap-1.5 text-xs opacity-95 mb-2">
+                          <RatingStars value={card.rating} small />
+                          <span>({card.reviews})</span>
+                        </div>
+                        <div className="text-xs"><span className="opacity-90">{card.size}</span> &nbsp;·&nbsp; <span className="underline underline-offset-2">{card.cat}</span></div>
+                      </div>
+                      <CartIconBtn />
+                    </div>
+                  </Link>
+                );
+              })()}
+
+              {/* Smaller cards */}
+              {[
+                {
+                  handle: "duo",
+                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179",
+                  title: "Vivo",
+                  price: "749 €",
+                  rating: 3.5,
+                  reviews: 8,
+                  size: "90x200 cm.",
+                  cat: "Mini-meubels",
+                },
+                {
+                  handle: "full-house",
+                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_6_Cotton_Taupe_f43a3337-8a33-4212-9868-e524d0eff1f5.jpg?v=1750342787",
+                  title: "Mollis",
+                  price: "1.499 €",
+                  rating: 4.5,
+                  reviews: 56,
+                  size: "180x200",
+                  cat: "Bedframes",
+                },
+                {
+                  handle: "solo",
+                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744100488",
+                  title: "Moma",
+                  price: "1.499 €",
+                  rating: 4.5,
+                  reviews: 14,
+                  size: "140x200",
+                  cat: "Slaapbanken",
+                },
+              ].map((card) => (
+                <Link
+                  key={card.title}
+                  to="/product/$handle"
+                  params={{ handle: card.handle }}
+                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col group"
+                >
+                  <div className="aspect-[4/3] overflow-hidden bg-[#f5b88d]">
+                    <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
+                    <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>
+                    <div className="mt-auto pt-6 flex items-end justify-between">
+                      <div>
+                        <div className="flex items-center gap-1.5 text-[11px] text-[#0a2540]/70 mb-1.5">
+                          <RatingStars value={card.rating} small dark />
+                          <span>({card.reviews})</span>
+                        </div>
+                        <div className="text-[11px] text-[#0a2540]/80">
+                          {card.size} &nbsp;·&nbsp; <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
+                        </div>
+                      </div>
+                      <CartIconBtn />
                     </div>
                   </div>
                 </Link>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        )}
+        </div>
       </section>
 
       {/* Details maken het verschil */}

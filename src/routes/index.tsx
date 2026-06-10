@@ -289,26 +289,33 @@ function Home() {
                   key={card.title}
                   to="/product/$handle"
                   params={{ handle: card.handle }}
-                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col group md:h-[520px]"
+                  className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[32%] rounded-2xl overflow-hidden bg-white flex flex-col group md:h-[520px]"
                 >
                   <div className="m-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] shrink-0">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />
                   </div>
 
-                  <div className="px-5 pb-4 pt-1 flex flex-col">
+                  <div className="px-5 pb-4 pt-2 flex flex-col flex-1">
                     <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
                     <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>
-                    <div className="mt-3 flex items-end justify-between">
-                      <div>
+                    <div className="mt-auto pt-4 flex items-end justify-between gap-3">
+                      <div className="min-w-0">
                         <div className="flex items-center gap-1.5 text-[11px] text-[#0a2540]/70 mb-1.5">
                           <RatingStars value={card.rating} small dark />
                           <span>({card.reviews})</span>
                         </div>
-                        <div className="text-[11px] text-[#0a2540]/80">
+                        <div className="text-[11px] text-[#0a2540]/80 whitespace-nowrap">
                           {card.size} &nbsp;·&nbsp; <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
                         </div>
                       </div>
-                      <CartIconBtn />
+                      <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#0a2540] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                        <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
+                          Aanpassen
+                        </span>
+                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M13 5l7 7-7 7" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
                 </Link>

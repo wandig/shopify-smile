@@ -117,7 +117,7 @@ function Home() {
   return (
     <div>
       {/* Hero — full-bleed video */}
-      <section className="relative h-screen min-h-[600px] w-full overflow-hidden -mt-[var(--header-height,0px)]">
+      <section className="relative h-screen min-h-[600px] w-full overflow-hidden">
         <video
           src={heroVideo.url}
           autoPlay

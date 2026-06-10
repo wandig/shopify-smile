@@ -16,7 +16,7 @@ export function SiteHeader() {
       <header className="absolute top-0 left-0 right-0 z-40 text-white">
         {/* Top trust bar */}
         <div className="border-b border-white/20 bg-black/10 backdrop-blur-sm">
-          <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-10 flex items-center justify-between text-[12px] tracking-wide relative">
+          <div className="px-5 md:px-10 h-10 flex items-center justify-between text-[12px] tracking-wide relative">
             <div className="hidden md:flex items-center gap-8 opacity-95">
               <span>Proefperiode van 100 nachten</span>
               <span>Gratis levering &amp; retourneren</span>
@@ -39,7 +39,7 @@ export function SiteHeader() {
 
         {/* Main bar */}
         <div className="border-b border-white/20">
-          <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-20 flex items-center justify-between relative">
+          <div className="px-5 md:px-10 h-20 flex items-center justify-between relative">
             <Sheet>
               <SheetTrigger asChild>
                 <button

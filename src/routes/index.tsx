@@ -170,9 +170,10 @@ function Home() {
 
       {/* Bestsellers — category tiles + product carousel */}
       <section className="bg-[#fff7ee]">
-        <div className="pt-12 md:pt-16 pb-16 md:pb-20">
+        <div className="pb-16 md:pb-20">
           {/* Category tiles (kept inside max-width) */}
-          <div className="bg-[#fff3e4] py-8 md:py-10 mb-10 md:mb-14">
+          <div className="bg-[#fff3e4] py-8 md:py-10 font-sans">
+
             <div className="mx-auto max-w-[1600px] px-5 md:px-10">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
                 {[

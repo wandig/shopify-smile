@@ -170,31 +170,35 @@ function Home() {
 
       {/* Bestsellers — category tiles + product carousel */}
       <section className="bg-[#fbecdd]">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 pt-12 md:pt-16 pb-16 md:pb-20">
-          {/* Category tiles */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-14">
-            {[
-              { title: "Wandig Solo", handle: "solo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488" },
-              { title: "Wandig Duo", handle: "duo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179" },
-              { title: "Wandig Full House", handle: "full-house", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267" },
-            ].map((c) => (
-              <Link
-                key={c.handle}
-                to="/product/$handle"
-                params={{ handle: c.handle }}
-                className="group flex items-center gap-4 bg-[#f9ecdc] rounded-2xl pr-5 pl-2 py-2 hover:bg-[#f3dcc8] transition"
-              >
-                <div className="h-16 w-16 md:h-[72px] md:w-[72px] rounded-xl overflow-hidden bg-[#f0d9c4] shrink-0">
-                  <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />
-                </div>
-                <span className="flex-1 text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
-                <ArrowRight className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
-              </Link>
-            ))}
+        <div className="pt-12 md:pt-16 pb-16 md:pb-20">
+          {/* Category tiles (kept inside max-width) */}
+          <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-14">
+              {[
+                { title: "Wandig Solo", handle: "solo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488" },
+                { title: "Wandig Duo", handle: "duo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179" },
+                { title: "Wandig Full House", handle: "full-house", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267" },
+              ].map((c) => (
+                <Link
+                  key={c.handle}
+                  to="/product/$handle"
+                  params={{ handle: c.handle }}
+                  className="group flex items-center gap-4 bg-[#f9ecdc] rounded-2xl pr-5 pl-2 py-2 hover:bg-[#f3dcc8] transition"
+                >
+                  <div className="h-16 w-16 md:h-[72px] md:w-[72px] rounded-xl overflow-hidden bg-[#f0d9c4] shrink-0">
+                    <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                  <span className="flex-1 text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
+                  <ArrowRight className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* Bestsellers carousel panel */}
-          <div className="relative rounded-3xl bg-[#f3d3b1] p-3 md:p-4">
+          {/* Bestsellers carousel panel — bleeds to right edge */}
+          <div className="pl-5 md:pl-10 pr-0">
+            <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">
+
             <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {/* Vertical label */}
               <div className="hidden md:flex shrink-0 w-12 items-center justify-center">
@@ -285,11 +289,12 @@ function Home() {
                   key={card.title}
                   to="/product/$handle"
                   params={{ handle: card.handle }}
-                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col aspect-[3/4] group"
+                  className="shrink-0 snap-start basis-[80%] sm:basis-[42%] md:basis-[26%] rounded-2xl overflow-hidden bg-white flex flex-col group"
                 >
-                  <div className="m-2 rounded-xl overflow-hidden bg-[#f5b88d] h-[55%]">
+                  <div className="m-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3]">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />
                   </div>
+
                   <div className="px-5 pb-5 pt-2 flex-1 flex flex-col">
                     <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
                     <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>
@@ -310,9 +315,11 @@ function Home() {
               ))}
 
             </div>
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* Details maken het verschil */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24 md:pb-32">

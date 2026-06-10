@@ -174,7 +174,7 @@ function Home() {
           {/* Category tiles */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-14">
             {[
-              { title: "Wandig Solo", handle: "solo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488" },
+              { title: "Wandig Solo", handle: "solo", img: wandigSoloOrange.url },
               { title: "Wandig Duo", handle: "duo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179" },
               { title: "Wandig Full House", handle: "full-house", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267" },
             ].map((c) => (

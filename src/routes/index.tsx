@@ -225,12 +225,12 @@ function Home() {
                     params={{ handle: card.handle }}
                     className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[640px] group"
                   >
-                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover scale-[1.1]" loading="lazy" />
                     <span className="absolute top-4 left-4 z-10 rounded-full bg-white/15 backdrop-blur-md text-white text-xs px-3 py-1.5">
                       {card.badge}
                     </span>
                     <div className="absolute top-1/2 -translate-y-1/2 left-6 right-6 text-white">
-                      <h3 className="font-serif text-5xl md:text-6xl leading-tight">{card.title}</h3>
+                      <h3 className="font-serif text-3xl md:text-4xl leading-tight">{card.title}</h3>
                       <div className="font-serif text-3xl md:text-4xl mt-2">{card.price}</div>
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between text-white">

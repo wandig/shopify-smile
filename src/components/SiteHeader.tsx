@@ -16,13 +16,13 @@ export function SiteHeader() {
       <header className="absolute top-0 left-0 right-0 z-40 text-white">
         {/* Top trust bar */}
         <div className="border-b border-white/20 bg-black/10 backdrop-blur-sm">
-          <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-10 flex items-center justify-between text-[12px] tracking-wide">
+          <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-10 flex items-center justify-between text-[12px] tracking-wide relative">
             <div className="hidden md:flex items-center gap-8 opacity-95">
               <span>Proefperiode van 100 nachten</span>
               <span>Gratis levering &amp; retourneren</span>
               <span>Tot 25 jaar garantie</span>
             </div>
-            <div className="flex items-center gap-2 mx-auto md:mx-0">
+            <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-3 w-3 fill-[#f18972] text-[#f18972]" />
@@ -68,7 +68,7 @@ export function SiteHeader() {
             <div className="flex items-center gap-3">
               <Link
                 to="/producten"
-                className="hidden sm:inline-flex items-center h-11 px-6 rounded-full bg-[#f18972] hover:bg-[#e87a62] text-white text-sm font-medium transition"
+                className="hidden sm:inline-flex items-center h-9 px-5 rounded-full bg-[#f18972] hover:bg-[#e87a62] text-white text-sm font-medium transition"
               >
                 Favorieten
               </Link>

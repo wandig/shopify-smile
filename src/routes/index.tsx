@@ -135,7 +135,7 @@ function Home() {
           <div className="mt-10">
             <Button
               asChild
-              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] h-14 px-10 text-base font-medium"
+              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] h-10 px-8 text-sm font-medium"
             >
               <Link to="/producten">Bekijk bestsellers</Link>
             </Button>

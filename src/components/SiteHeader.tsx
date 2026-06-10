@@ -64,7 +64,7 @@ export function SiteHeader() {
               className="absolute left-1/2 -translate-x-1/2 flex items-center"
               aria-label="Wandig"
             >
-              <img src={wandigLogo.url} alt="Wandig" className="h-8 md:h-10 w-auto brightness-0 invert" />
+              <img src={wandigLogo.url} alt="Wandig" className="h-8 md:h-10 w-auto" />
             </Link>
 
             <div className="flex items-center gap-3">

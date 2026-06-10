@@ -11,6 +11,7 @@ import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
+import wandigSoloOrange from "@/assets/wandig-solo-orange.png.asset.json";
 
 function RatingStars({ value, small, dark }: { value: number; small?: boolean; dark?: boolean }) {
   const size = small ? "h-3 w-3" : "h-3.5 w-3.5";

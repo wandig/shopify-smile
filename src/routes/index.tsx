@@ -11,7 +11,6 @@ import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
-import wandigSoloOrange from "@/assets/wandig-solo-orange.png.asset.json";
 
 function RatingStars({ value, small, dark }: { value: number; small?: boolean; dark?: boolean }) {
   const size = small ? "h-3 w-3" : "h-3.5 w-3.5";
@@ -174,7 +173,7 @@ function Home() {
           {/* Category tiles */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-14">
             {[
-              { title: "Wandig Solo", handle: "solo", img: wandigSoloOrange.url },
+              { title: "Wandig Solo", handle: "solo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488" },
               { title: "Wandig Duo", handle: "duo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179" },
               { title: "Wandig Full House", handle: "full-house", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267" },
             ].map((c) => (

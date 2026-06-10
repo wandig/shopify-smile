@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { ArrowRight, Truck, Hammer, BadgeCheck, ShieldCheck, Star } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
@@ -210,8 +211,8 @@ function Home() {
                 const card = {
                   handle: "full-house",
                   badge: "Incl. Standaard hoofdbord",
-                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak_cce209b3-4e39-4361-8613-433de00bec9b.jpg?v=1750342787",
-                  title: "Venus",
+                  img: fullhouseOrange.url,
+                  title: "Full House",
                   price: "1.699 €",
                   rating: 4.5,
                   reviews: 2524,

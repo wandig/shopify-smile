@@ -29,7 +29,15 @@ function RatingStars({ value, small, dark }: { value: number; small?: boolean; d
 function CartIconBtn() {
   return (
     <span className="h-9 w-9 rounded-full bg-[#f18972] text-white flex items-center justify-center shadow-sm">
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M6 7h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z" />
         <path d="M9 7a3 3 0 0 1 6 0" />
       </svg>
@@ -173,13 +181,24 @@ function Home() {
         <div className="pb-16 md:pb-20">
           {/* Category tiles (kept inside max-width) */}
           <div className="bg-[#fff3e4] py-8 md:py-10 font-sans mb-[40px]">
-
             <div className="mx-auto max-w-[1600px] px-5 md:px-10">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
                 {[
-                  { title: "Wandig Solo", handle: "solo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488" },
-                  { title: "Wandig Duo", handle: "duo", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179" },
-                  { title: "Wandig Full House", handle: "full-house", img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267" },
+                  {
+                    title: "Wandig Solo",
+                    handle: "solo",
+                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488",
+                  },
+                  {
+                    title: "Wandig Duo",
+                    handle: "duo",
+                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179",
+                  },
+                  {
+                    title: "Wandig Full House",
+                    handle: "full-house",
+                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267",
+                  },
                 ].map((c) => (
                   <Link
                     key={c.handle}
@@ -191,153 +210,181 @@ function Home() {
                       <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />
                     </div>
                     <span className="flex-1 text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
-                    <ArrowRight className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
+                    <ArrowRight
+                      className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform"
+                      strokeWidth={1.5}
+                    />
                   </Link>
                 ))}
               </div>
             </div>
           </div>
 
-
           {/* Bestsellers carousel panel — bleeds to right edge */}
           <div className="pl-5 md:pl-10 pr-0">
             <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">
+              <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {/* Vertical label */}
+                <div className="hidden md:flex shrink-0 w-12 items-center justify-center">
+                  <span
+                    className="font-serif tracking-[0.35em] text-[#0a2540] text-sm"
+                    style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+                  >
+                    BESTSELLERS
+                  </span>
+                </div>
 
-            <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {/* Vertical label */}
-              <div className="hidden md:flex shrink-0 w-12 items-center justify-center">
-                <span
-                  className="font-serif tracking-[0.35em] text-[#0a2540] text-sm"
-                  style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-                >
-                  BESTSELLERS
-                </span>
-              </div>
+                {/* Featured large card */}
+                {(() => {
+                  const card = {
+                    handle: "full-house",
+                    badge: "Incl. Standaard hoofdbord",
+                    img: fullhouseOrange.url,
+                    title: "Full House",
+                    price: "1.699 €",
+                    rating: 4.5,
+                    reviews: 2524,
+                    size: "180x200",
+                    cat: "Boxspring",
+                  };
+                  return (
+                    <Link
+                      to="/product/$handle"
+                      params={{ handle: card.handle }}
+                      className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[520px] group"
+                    >
+                      <img
+                        src={card.img}
+                        alt={card.title}
+                        className="absolute inset-0 w-full h-full object-cover scale-[1.1]"
+                        loading="lazy"
+                      />
+                      <span className="absolute top-4 left-4 z-10 rounded-full bg-white/15 backdrop-blur-md text-white text-xs px-3 py-1.5">
+                        {card.badge}
+                      </span>
+                      <div className="absolute top-1/2 -translate-y-1/2 left-6 right-6 text-white">
+                        <h3 className="font-serif text-3xl md:text-4xl leading-tight">{card.title}</h3>
+                        <div className="font-serif text-3xl md:text-4xl mt-2">{card.price}</div>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between text-white">
+                        <div>
+                          <div className="flex items-center gap-1.5 text-xs opacity-95 mb-2">
+                            <RatingStars value={card.rating} small />
+                            <span>({card.reviews})</span>
+                          </div>
+                          <div className="text-xs">
+                            <span className="opacity-90">{card.size}</span> &nbsp;·&nbsp;{" "}
+                            <span className="underline underline-offset-2">{card.cat}</span>
+                          </div>
+                        </div>
+                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                          <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
+                            Aanpassen
+                          </span>
+                          <svg
+                            className="w-4 h-4 shrink-0"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12h14M13 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })()}
 
-              {/* Featured large card */}
-              {(() => {
-                const card = {
-                  handle: "full-house",
-                  badge: "Incl. Standaard hoofdbord",
-                  img: fullhouseOrange.url,
-                  title: "Full House",
-                  price: "1.699 €",
-                  rating: 4.5,
-                  reviews: 2524,
-                  size: "180x200",
-                  cat: "Boxspring",
-                };
-                return (
+                {/* Smaller cards */}
+                {[
+                  {
+                    handle: "duo",
+                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179",
+                    title: "Vivo",
+                    price: "749 €",
+                    rating: 3.5,
+                    reviews: 8,
+                    size: "90x200 cm.",
+                    cat: "Mini-meubels",
+                  },
+                  {
+                    handle: "full-house",
+                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_6_Cotton_Taupe_f43a3337-8a33-4212-9868-e524d0eff1f5.jpg?v=1750342787",
+                    title: "Duo",
+                    price: "1.499 €",
+                    rating: 4.5,
+                    reviews: 56,
+                    size: "180x200",
+                    cat: "Bedframes",
+                  },
+                  {
+                    handle: "solo",
+                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744100488",
+                    title: "Moma",
+                    price: "1.499 €",
+                    rating: 4.5,
+                    reviews: 14,
+                    size: "140x200",
+                    cat: "Slaapbanken",
+                  },
+                ].map((card) => (
                   <Link
+                    key={card.title}
                     to="/product/$handle"
                     params={{ handle: card.handle }}
-                    className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[42%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[520px] group"
+                    className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[32%] rounded-2xl overflow-hidden bg-white flex flex-col group md:h-[520px]"
                   >
-                    <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover scale-[1.1]" loading="lazy" />
-                    <span className="absolute top-4 left-4 z-10 rounded-full bg-white/15 backdrop-blur-md text-white text-xs px-3 py-1.5">
-                      {card.badge}
-                    </span>
-                    <div className="absolute top-1/2 -translate-y-1/2 left-6 right-6 text-white">
-                      <h3 className="font-serif text-3xl md:text-4xl leading-tight">{card.title}</h3>
-                      <div className="font-serif text-3xl md:text-4xl mt-2">{card.price}</div>
+                    <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] shrink-0">
+                      <img
+                        src={card.img}
+                        alt={card.title}
+                        className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+                        loading="lazy"
+                      />
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between text-white">
-                      <div>
-                        <div className="flex items-center gap-1.5 text-xs opacity-95 mb-2">
-                          <RatingStars value={card.rating} small />
-                          <span>({card.reviews})</span>
+
+                    <div className="px-5 pb-4 pt-2 flex flex-col flex-1">
+                      <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
+                      <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>
+                      <div className="mt-auto pt-4 flex items-end justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5 text-[11px] text-[#0a2540]/70 mb-1.5">
+                            <RatingStars value={card.rating} small dark />
+                            <span>({card.reviews})</span>
+                          </div>
+                          <div className="text-[11px] text-[#0a2540]/80 whitespace-nowrap">
+                            {card.size} &nbsp;·&nbsp;{" "}
+                            <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
+                          </div>
                         </div>
-                        <div className="text-xs"><span className="opacity-90">{card.size}</span> &nbsp;·&nbsp; <span className="underline underline-offset-2">{card.cat}</span></div>
-                      </div>
-                      <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
-                        <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
-                          Aanpassen
+                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                          <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
+                            Aanpassen
+                          </span>
+                          <svg
+                            className="w-4 h-4 shrink-0"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12h14M13 5l7 7-7 7" />
+                          </svg>
                         </span>
-                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M13 5l7 7-7 7" />
-                        </svg>
-                      </span>
+                      </div>
                     </div>
                   </Link>
-                );
-              })()}
-
-
-              {/* Smaller cards */}
-              {[
-                {
-                  handle: "duo",
-                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179",
-                  title: "Vivo",
-                  price: "749 €",
-                  rating: 3.5,
-                  reviews: 8,
-                  size: "90x200 cm.",
-                  cat: "Mini-meubels",
-                },
-                {
-                  handle: "full-house",
-                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_6_Cotton_Taupe_f43a3337-8a33-4212-9868-e524d0eff1f5.jpg?v=1750342787",
-                  title: "Mollis",
-                  price: "1.499 €",
-                  rating: 4.5,
-                  reviews: 56,
-                  size: "180x200",
-                  cat: "Bedframes",
-                },
-                {
-                  handle: "solo",
-                  img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744100488",
-                  title: "Moma",
-                  price: "1.499 €",
-                  rating: 4.5,
-                  reviews: 14,
-                  size: "140x200",
-                  cat: "Slaapbanken",
-                },
-              ].map((card) => (
-                <Link
-                  key={card.title}
-                  to="/product/$handle"
-                  params={{ handle: card.handle }}
-                  className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[32%] rounded-2xl overflow-hidden bg-white flex flex-col group md:h-[520px]"
-                >
-                  <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] shrink-0">
-                    <img src={card.img} alt={card.title} className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700" loading="lazy" />
-                  </div>
-
-                  <div className="px-5 pb-4 pt-2 flex flex-col flex-1">
-                    <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
-                    <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>
-                    <div className="mt-auto pt-4 flex items-end justify-between gap-3">
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 text-[11px] text-[#0a2540]/70 mb-1.5">
-                          <RatingStars value={card.rating} small dark />
-                          <span>({card.reviews})</span>
-                        </div>
-                        <div className="text-[11px] text-[#0a2540]/80 whitespace-nowrap">
-                          {card.size} &nbsp;·&nbsp; <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
-                        </div>
-                      </div>
-                      <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
-                        <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
-                          Aanpassen
-                        </span>
-                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M13 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-
-            </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
-
 
       {/* Details maken het verschil */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24 md:pb-32">

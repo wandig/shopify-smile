@@ -190,7 +190,7 @@ function Home() {
                     <div className="h-16 w-16 md:h-[72px] md:w-[72px] rounded-xl overflow-hidden bg-[#f0d9c4] shrink-0">
                       <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />
                     </div>
-                    <span className="flex-1 text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
+                    <span className="text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
                     <ArrowRight className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
                   </Link>
                 ))}

@@ -6,6 +6,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import wandigLogo from "@/assets/wandig-logo.png.asset.json";
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -60,9 +61,10 @@ export function SiteHeader() {
 
             <Link
               to="/"
-              className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl md:text-3xl tracking-[0.2em] uppercase text-white"
+              className="absolute left-1/2 -translate-x-1/2 flex items-center"
+              aria-label="Wandig"
             >
-              wandig
+              <img src={wandigLogo.url} alt="Wandig" className="h-8 md:h-10 w-auto" />
             </Link>
 
             <div className="flex items-center gap-3">
@@ -121,8 +123,8 @@ export function SiteHeader() {
             <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>
           </nav>
         </div>
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl md:text-3xl tracking-[0.2em] uppercase">
-          wandig
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Wandig">
+          <img src={wandigLogo.url} alt="Wandig" className="h-7 md:h-9 w-auto" />
         </Link>
         <div className="flex items-center gap-4">
           <CartDrawer />

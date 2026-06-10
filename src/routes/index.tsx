@@ -245,7 +245,14 @@ function Home() {
                         </div>
                         <div className="text-xs"><span className="opacity-90">{card.size}</span> &nbsp;·&nbsp; <span className="underline underline-offset-2">{card.cat}</span></div>
                       </div>
-                      <CartIconBtn />
+                      <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                        <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
+                          Aanpassen
+                        </span>
+                        <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M13 5l7 7-7 7" />
+                        </svg>
+                      </span>
                     </div>
                   </Link>
                 );
@@ -308,7 +315,7 @@ function Home() {
                           {card.size} &nbsp;·&nbsp; <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
                         </div>
                       </div>
-                      <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#0a2540] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                      <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
                         <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
                           Aanpassen
                         </span>

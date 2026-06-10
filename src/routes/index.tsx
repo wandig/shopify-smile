@@ -169,7 +169,7 @@ function Home() {
       </section>
 
       {/* Bestsellers — category tiles + product carousel */}
-      <section className="bg-[#fbecdd]">
+      <section className="bg-[#fff3e4]">
         <div className="pt-12 md:pt-16 pb-16 md:pb-20">
           {/* Category tiles (kept inside max-width) */}
           <div className="mx-auto max-w-[1600px] px-5 md:px-10">

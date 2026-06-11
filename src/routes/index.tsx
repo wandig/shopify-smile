@@ -176,7 +176,9 @@ function Home() {
         </div>
       </section>
 
-      {/* Bestsellers carousel panel — bleeds to right edge */}
+      <section className="bg-[#fff7ee]">
+        <div className="pb-16 md:pb-20">
+          {/* Bestsellers carousel panel — bleeds to right edge */}
           <div className="pl-5 md:pl-10 pr-0">
             <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">
               <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">

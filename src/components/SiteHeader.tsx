@@ -23,14 +23,6 @@ export function SiteHeader() {
               <span>Gratis levering &amp; retourneren</span>
               <span>Tot 25 jaar garantie</span>
             </div>
-            <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
-              <div className="flex items-center gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-3 w-3 fill-[#f18972] text-[#f18972]" />
-                ))}
-              </div>
-              <span className="opacity-95">23.000+ beoordelingen</span>
-            </div>
             <div className="hidden md:flex items-center gap-1 opacity-95">
               <span>NL | Dutch</span>
               <Globe className="h-3 w-3" />

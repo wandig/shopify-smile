@@ -84,10 +84,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Wandig — Maatwerk TV cinewalls" },
       { name: "description", content: "Tijdloze TV cinewalls op maat uit eigen werkplaats. Gratis levering, 5 jaar garantie." },
       { property: "og:title", content: "Wandig — Maatwerk TV cinewalls" },
-      { property: "og:description", content: "Tijdloze TV cinewalls op maat uit eigen werkplaats." },
+      { property: "og:description", content: "Tijdloze TV cinewalls op maat uit eigen werkplaats. Gratis levering, 5 jaar garantie." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "nl_NL" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Wandig — Maatwerk TV cinewalls" },
+      { name: "twitter:description", content: "Tijdloze TV cinewalls op maat uit eigen werkplaats. Gratis levering, 5 jaar garantie." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/76fe1d4d-2598-4e66-81fd-23d56c561874/id-preview-695654ae--06fa7a41-082f-4bbd-bb4c-ca3708eefbcf.lovable.app-1781174149121.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/76fe1d4d-2598-4e66-81fd-23d56c561874/id-preview-695654ae--06fa7a41-082f-4bbd-bb4c-ca3708eefbcf.lovable.app-1781174149121.png" },
     ],
     links: [
       {

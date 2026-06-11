@@ -389,7 +389,7 @@ function Home() {
       </section>
 
       {/* Details maken het verschil */}
-      <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
+      <section className="px-5 md:px-[calc(12%-40px)] pb-24 md:pb-32">
         <h2 className="font-serif text-[1.7rem] md:text-[2.7rem] mt-14 md:mt-20 mb-8 md:mb-12">
           Details maken het verschil
         </h2>

@@ -187,7 +187,7 @@ function Home() {
       <section className="bg-[#fff7ee] pt-12 md:pt-16">
         <div className="pb-16 md:pb-20">
           {/* Bestsellers carousel panel — bleeds to right edge */}
-          <div className="pl-5 md:pl-[18%] pr-0">
+          <div className="pl-5 md:pl-[calc(18%-80px)] pr-0">
             <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">
               <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {/* Vertical label */}

@@ -390,7 +390,7 @@ function Home() {
 
       {/* Details maken het verschil */}
       <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
-        <h2 className="font-serif text-3xl md:text-5xl mb-12 md:mb-16">
+        <h2 className="font-serif text-[1.7rem] md:text-[2.7rem] mb-10 md:mb-14">
           Details maken het verschil
         </h2>
         <div className="flex md:grid md:grid-cols-3 gap-8 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -403,7 +403,10 @@ function Home() {
               <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-muted max-h-[320px]">
                 <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
               </div>
-              <h3 className="font-serif text-lg md:text-xl mt-6">{item.title}</h3>
+              <h3 className="font-serif text-lg md:text-xl mt-6 flex items-center justify-between">
+                <span>{item.title}</span>
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 shrink-0 ml-2" />
+              </h3>
             </div>
           ))}
         </div>

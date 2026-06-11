@@ -350,6 +350,39 @@ function Home() {
               </div>
             </div>
           </div>
+
+          {/* USPs */}
+          <div className="px-5 md:px-[calc(18%-80px)] pt-16 md:pt-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
+              {[
+                {
+                  kicker: "GETEST EN BEWEZEN",
+                  title: "+150.000 verkochte cinewalls",
+                  body: "Unsere hohen Ansprüche an Qualität, Design und Funktion gelten für jedes einzelne Bett",
+                },
+                {
+                  kicker: "JOUW SLAAP IS BELANGRIJK VOOR ONS",
+                  title: "97% klanttevredenheid",
+                  body: "Slaap gerust — we hebben een score van 4,6 en meer dan 15.000 vijfsterrenbeoordelingen",
+                },
+                {
+                  kicker: "SLAAP MET VOLLEDIGE GEMOEDSRUST",
+                  title: "30 dagen bedenktijd",
+                  body: "Wat je ook koopt — je krijgt 100 nachten om het thuis uit te proberen",
+                },
+              ].map((u) => (
+                <div key={u.kicker} className="flex flex-col items-center max-w-sm mx-auto">
+                  <div className="text-[11px] tracking-[0.18em] text-[#d97706] uppercase mb-4">
+                    {u.kicker}
+                  </div>
+                  <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540] leading-tight mb-4">
+                    {u.title}
+                  </h3>
+                  <p className="text-sm text-[#0a2540]/70 leading-relaxed">{u.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

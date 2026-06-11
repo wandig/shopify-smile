@@ -389,36 +389,21 @@ function Home() {
       </section>
 
       {/* Details maken het verschil */}
-      <section className="mx-auto max-w-[1600px] px-5 md:px-10 pb-24 md:pb-32">
+      <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
         <h2 className="font-serif text-3xl md:text-5xl mb-12 md:mb-16">
-          Details maken
-          <br />
-          het verschil
+          Details maken het verschil
         </h2>
         <div className="flex md:grid md:grid-cols-3 gap-8 md:gap-10 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
-            {
-              img: detailDesignImg,
-              title: "Gepersonaliseerd design",
-              text: "Stel eenvoudig je eigen meubel samen. Ervaar het gemak van bestellen bij Wandig.",
-            },
-            {
-              img: detailMaatwerkImg,
-              title: "Betaalbaar maatwerk",
-              text: "De hoogste kwaliteit meubels voor een eerlijke prijs, rechtstreeks van de maker.",
-            },
-            {
-              img: detailGeleverdImg,
-              title: "Afgemonteerd geleverd",
-              text: "Onze meubels worden gebruiksklaar geleverd. Géén bouwpakketten.",
-            },
+            { img: detailDesignImg, title: "Gepersonaliseerd design" },
+            { img: detailMaatwerkImg, title: "Betaalbaar maatwerk" },
+            { img: detailGeleverdImg, title: "Afgemonteerd geleverd" },
           ].map((item) => (
             <div key={item.title} className="flex flex-col shrink-0 basis-[80%] md:basis-auto snap-start">
-              <div className="aspect-[4/5] overflow-hidden bg-muted max-h-[320px]">
+              <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-muted max-h-[320px]">
                 <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
               </div>
               <h3 className="font-serif text-lg md:text-xl mt-6">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-foreground/75 mt-3 max-w-[320px]">{item.text}</p>
             </div>
           ))}
         </div>

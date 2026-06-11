@@ -191,7 +191,7 @@ function Home() {
             <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">
               <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {/* Vertical label */}
-                <div className="hidden md:flex shrink-0 w-12 items-center justify-center">
+                <div className="hidden md:flex shrink-0 w-20 items-center justify-center">
                   <span
                     className="font-serif tracking-[0.35em] text-[#0a2540] text-sm"
                     style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}

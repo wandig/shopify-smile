@@ -176,50 +176,8 @@ function Home() {
         </div>
       </section>
 
-      {/* Bestsellers — category tiles + product carousel */}
       <section className="bg-[#fff7ee]">
         <div className="pb-16 md:pb-20">
-          {/* Category tiles (kept inside max-width) */}
-          <div className="bg-[#fff3e4] py-8 md:py-10 font-sans mb-[40px]">
-            <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
-                {[
-                  {
-                    title: "Wandig Solo",
-                    handle: "solo",
-                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_1_Authentic_Black_Oak.jpg?v=1744100488",
-                  },
-                  {
-                    title: "Wandig Duo",
-                    handle: "duo",
-                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179",
-                  },
-                  {
-                    title: "Wandig Full House",
-                    handle: "full-house",
-                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744181267",
-                  },
-                ].map((c) => (
-                  <Link
-                    key={c.handle}
-                    to="/product/$handle"
-                    params={{ handle: c.handle }}
-                    className="group flex items-center gap-4 bg-[#f9ecdc] rounded-2xl pr-5 pl-2 py-2 hover:bg-[#f3dcc8] transition"
-                  >
-                    <div className="h-16 w-16 md:h-[72px] md:w-[72px] rounded-xl overflow-hidden bg-[#f0d9c4] shrink-0">
-                      <img src={c.img} alt={c.title} className="w-full h-full object-cover" loading="lazy" />
-                    </div>
-                    <span className="flex-1 text-[15px] md:text-base text-[#0a2540]">{c.title}</span>
-                    <ArrowRight
-                      className="h-4 w-4 text-[#0a2540]/60 group-hover:translate-x-0.5 transition-transform"
-                      strokeWidth={1.5}
-                    />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-
           {/* Bestsellers carousel panel — bleeds to right edge */}
           <div className="pl-5 md:pl-10 pr-0">
             <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">

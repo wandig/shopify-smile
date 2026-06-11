@@ -173,10 +173,18 @@ function Home() {
               <Link to="/producten">Bekijk bestsellers</Link>
             </Button>
           </div>
+          <div className="mt-6 flex items-center gap-2 text-white text-[12px] tracking-wide">
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-3.5 w-3.5 fill-[#f18972] text-[#f18972]" />
+              ))}
+            </div>
+            <span className="opacity-95">23.000+ beoordelingen</span>
+          </div>
         </div>
       </section>
 
-      <section className="bg-[#fff7ee]">
+      <section className="bg-[#fff7ee] pt-12 md:pt-16">
         <div className="pb-16 md:pb-20">
           {/* Bestsellers carousel panel — bleeds to right edge */}
           <div className="pl-5 md:pl-10 pr-0">

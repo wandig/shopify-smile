@@ -304,7 +304,7 @@ function Home() {
                     params={{ handle: card.handle }}
                     className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[390px] md:w-[390px] rounded-2xl overflow-hidden bg-white flex flex-col group md:aspect-auto md:h-[520px]"
                   >
-                    <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] md:aspect-auto md:h-[55%] shrink-0">
+                    <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] shrink-0">
                       <img
                         src={card.img}
                         alt={card.title}

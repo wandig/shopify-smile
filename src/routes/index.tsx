@@ -372,13 +372,15 @@ function Home() {
                 },
               ].map((u) => (
                 <div key={u.kicker} className="flex flex-col items-center max-w-sm mx-auto">
-                  <div className="text-[11px] tracking-[0.18em] text-[#d97706] uppercase mb-4">
+                  <div className="text-[9px] tracking-[0.18em] text-[#d97706] uppercase mb-3">
                     {u.kicker}
                   </div>
-                  <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540] leading-tight mb-4">
-                    {u.title}
-                  </h3>
-                  <p className="text-sm text-[#0a2540]/70 leading-relaxed">{u.body}</p>
+                  <div className="mb-3 md:min-h-[1.2em] flex items-center justify-center">
+                    <h3 className="font-serif text-xl md:text-2xl text-[#0a2540] leading-tight">
+                      {u.title}
+                    </h3>
+                  </div>
+                  <p className="text-[11px] text-[#0a2540]/70 leading-relaxed text-center">{u.body}</p>
                 </div>
               ))}
             </div>

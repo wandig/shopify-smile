@@ -218,7 +218,7 @@ function Home() {
                     <Link
                       to="/product/$handle"
                       params={{ handle: card.handle }}
-                      className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[390px] md:w-[390px] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[520px] group"
+                      className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[390px] md:w-[390px] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[4/3] md:aspect-auto md:h-[520px] group"
                     >
                       <img
                         src={card.img}

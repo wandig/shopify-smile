@@ -218,7 +218,7 @@ function Home() {
                     <Link
                       to="/product/$handle"
                       params={{ handle: card.handle }}
-                      className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[29%] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[520px] group"
+                      className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-[390px] md:w-[390px] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-[3/4] md:aspect-auto md:h-[520px] group"
                     >
                       <img
                         src={card.img}
@@ -302,7 +302,7 @@ function Home() {
                     key={card.title}
                     to="/product/$handle"
                     params={{ handle: card.handle }}
-                    className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[31%] rounded-2xl overflow-hidden bg-white flex flex-col group md:aspect-auto md:h-[520px]"
+                    className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[390px] md:w-[390px] rounded-2xl overflow-hidden bg-white flex flex-col group md:aspect-auto md:h-[520px]"
                   >
                     <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] md:aspect-auto md:h-[55%] shrink-0">
                       <img

@@ -270,7 +270,7 @@ function Home() {
                 {[
                   {
                     handle: "duo",
-                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179",
+                    img: tvOrangeImg.url,
                     title: "Duo",
                     price: "749 €",
                     rating: 3.5,

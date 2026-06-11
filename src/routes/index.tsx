@@ -399,7 +399,7 @@ function Home() {
             { img: detailMaatwerkImg, title: "Betaalbaar maatwerk" },
             { img: detailGeleverdImg, title: "Afgemonteerd geleverd" },
           ].map((item) => (
-            <div key={item.title} className="flex flex-col shrink-0 basis-[96%] md:basis-auto snap-start">
+            <div key={item.title} className="flex flex-col shrink-0 basis-[96%] md:basis-auto snap-start md:w-[90%] md:mx-auto">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-muted">
                 <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
               </div>

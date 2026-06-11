@@ -188,17 +188,18 @@ function Home() {
         <div className="pb-16 md:pb-20">
           {/* Bestsellers carousel panel — bleeds to right edge */}
           <div className="pl-5 md:pl-[calc(18%-80px)] pr-0">
-            <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">
+            <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4 md:pl-24">
+              {/* Vertical label — pinned, always visible */}
+              <div className="hidden md:flex absolute left-0 top-0 bottom-0 w-24 items-start justify-center pt-8 pointer-events-none">
+                <span
+                  className="font-serif tracking-[0.35em] text-[#0a2540] text-sm"
+                  style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+                >
+                  BESTSELLERS
+                </span>
+              </div>
               <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {/* Vertical label */}
-                <div className="hidden md:flex shrink-0 w-20 items-center justify-center">
-                  <span
-                    className="font-serif tracking-[0.35em] text-[#0a2540] text-sm"
-                    style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-                  >
-                    BESTSELLERS
-                  </span>
-                </div>
+
 
                 {/* Featured large card */}
                 {(() => {

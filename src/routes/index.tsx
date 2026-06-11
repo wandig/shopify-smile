@@ -187,7 +187,7 @@ function Home() {
       <section className="bg-[#fff7ee] pt-12 md:pt-16">
         <div className="pb-16 md:pb-20">
           {/* Bestsellers carousel panel — bleeds to right edge */}
-          <div className="pl-5 md:pl-10 pr-0">
+          <div className="pl-5 md:pl-[18%] pr-0">
             <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4">
               <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {/* Vertical label */}
@@ -303,7 +303,7 @@ function Home() {
                     params={{ handle: card.handle }}
                     className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[31%] rounded-2xl overflow-hidden bg-white flex flex-col group md:aspect-auto md:h-[520px]"
                   >
-                    <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] shrink-0">
+                    <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] md:aspect-auto md:h-[55%] shrink-0">
                       <img
                         src={card.img}
                         alt={card.title}

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsImg from "@/assets/werkplaats.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
+import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
@@ -269,7 +270,7 @@ function Home() {
                 {[
                   {
                     handle: "duo",
-                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/blackoak1.jpg?v=1748854179",
+                    img: tvOrangeImg.url,
                     title: "Duo",
                     price: "749 €",
                     rating: 3.5,

@@ -389,11 +389,11 @@ function Home() {
       </section>
 
       {/* Details maken het verschil */}
-      <section className="px-5 md:px-[calc(12%-40px)] pb-24 md:pb-32">
-        <h2 className="font-serif text-[1.7rem] md:text-[2.7rem] mt-14 md:mt-20 mb-8 md:mb-12">
+      <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
+        <h2 className="font-serif text-[1.7rem] md:text-[2.7rem] mt-14 md:mt-20 mb-[1.6rem] md:mb-[2.4rem]">
           Details maken het verschil
         </h2>
-        <div className="flex md:grid md:grid-cols-3 gap-[1.7rem] md:gap-[2.125rem] overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex md:grid md:grid-cols-3 gap-[1.7rem] md:gap-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
             { img: detailDesignImg, title: "Gepersonaliseerd design" },
             { img: detailMaatwerkImg, title: "Betaalbaar maatwerk" },

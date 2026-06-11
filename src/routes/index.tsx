@@ -400,7 +400,7 @@ function Home() {
             { img: detailGeleverdImg, title: "Afgemonteerd geleverd" },
           ].map((item) => (
             <div key={item.title} className="flex flex-col shrink-0 basis-[96%] md:basis-auto snap-start">
-              <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-muted max-h-[320px]">
+              <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl bg-muted">
                 <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
               </div>
               <h3 className="font-serif text-lg md:text-xl mt-5 flex items-center justify-between">

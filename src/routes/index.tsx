@@ -188,7 +188,7 @@ function Home() {
         <div className="pb-16 md:pb-20">
           {/* Bestsellers carousel panel — bleeds to right edge */}
           <div className="pl-5 md:pl-[calc(18%-80px)] pr-0">
-            <div className="relative rounded-l-3xl bg-[#f3d3b1] p-3 md:p-4 md:pl-24">
+            <div className="relative rounded-l-3xl bg-[#f3d3b1] py-3 pl-3 md:py-4 md:pl-24 pr-0">
               {/* Vertical label — pinned, always visible */}
               <div className="hidden md:flex absolute left-0 top-0 bottom-0 w-24 items-center justify-center pointer-events-none">
                 <span

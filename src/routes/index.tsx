@@ -192,7 +192,7 @@ function Home() {
               {/* Vertical label — pinned, always visible */}
               <div className="hidden md:flex absolute left-0 top-0 bottom-0 w-24 items-start justify-center pointer-events-none pt-8">
                 <span
-                  className="font-serif tracking-[0.2em] text-[#0a2540] text-xl"
+                  className="font-serif tracking-[0.2em] text-[#0a2540] text-[40px] leading-none"
                   style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                 >
                   BESTSELLERS

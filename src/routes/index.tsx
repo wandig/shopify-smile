@@ -393,13 +393,13 @@ function Home() {
         <h2 className="font-serif text-[1.7rem] md:text-[2.7rem] mt-14 md:mt-20 mb-[1.6rem] md:mb-[2.4rem]">
           Details maken het verschil
         </h2>
-        <div className="flex md:grid md:grid-cols-3 gap-[1.7rem] md:gap-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex md:grid md:grid-cols-3 gap-[1.7rem] md:gap-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
             { img: detailDesignImg, title: "Gepersonaliseerd design" },
             { img: detailMaatwerkImg, title: "Betaalbaar maatwerk" },
             { img: detailGeleverdImg, title: "Afgemonteerd geleverd" },
           ].map((item) => (
-            <div key={item.title} className="flex flex-col shrink-0 basis-[96%] md:basis-auto snap-start">
+            <div key={item.title} className="flex flex-col shrink-0 basis-[91%] md:basis-auto snap-start">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-muted">
                 <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
               </div>

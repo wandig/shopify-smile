@@ -221,7 +221,7 @@ function ProductView({ product }: { product: ProductNode }) {
                         <button
                           key={v}
                           onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                          className={`px-4 py-2 text-sm rounded-xl bg-[#f7f7f7] transition ${active ? "border-2 border-[#ef8874]" : "border-2 border-transparent hover:border-[#ef8874]/50"}`}
+                          className={`px-4 py-2 text-sm rounded-xl bg-[#f7f7f7] transition-all duration-300 ease-out hover:scale-[1.04] active:scale-[0.94] ${active ? "border-2 border-[#ef8874] shadow-[0_2px_8px_rgba(239,136,116,0.18)]" : "border-2 border-transparent hover:border-[#ef8874]/50"}`}
                         >
                           {v}
                         </button>

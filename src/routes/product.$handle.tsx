@@ -144,7 +144,8 @@ function ProductView({ product }: { product: ProductNode }) {
   const hasOptions = product.options.some((o) => o.values.length > 1 || o.name !== "Title");
 
   return (
-    <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-10 md:py-16">
+    <div className="bg-white">
+      <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-10 md:py-16">
       <nav className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8 flex items-center gap-2">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-3 w-3" />

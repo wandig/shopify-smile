@@ -203,10 +203,10 @@ function ProductView({ product }: { product: ProductNode }) {
                           onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
                           title={v}
                           aria-label={v}
-                          className={`h-10 w-10 rounded-full transition ${active ? "border-2 border-[#ef8874] p-0.5" : "border border-border p-0.5"}`}
+                          className={`h-10 w-10 rounded-full transition-all duration-300 ease-out hover:scale-110 active:scale-90 ${active ? "border-2 border-[#ef8874] p-0.5 shadow-[0_0_0_4px_rgba(239,136,116,0.15)]" : "border border-border p-0.5 hover:border-[#ef8874]/60"}`}
                         >
                           <span
-                            className="block h-full w-full rounded-full"
+                            className="block h-full w-full rounded-full transition-transform duration-300"
                             style={{ background: colorToCss(v) }}
                           />
                         </button>

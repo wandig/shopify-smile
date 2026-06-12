@@ -218,7 +218,7 @@ function ProductView({ product }: { product: ProductNode }) {
       <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 md:gap-14">
         {/* Gallery */}
         <div className="min-w-0">
-          <div className="mx-auto w-full max-w-[min(100%,calc(100svh-260px))]">
+          <div className="mx-auto w-full" style={{ maxWidth: "min(100%, calc(100svh - 260px))" }}>
             <div className="relative w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-square">
               {images[activeImg] && (
                 <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="absolute left-0 top-[-12.5%] w-full h-[125%] object-contain" />

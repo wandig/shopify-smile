@@ -392,7 +392,7 @@ function Home() {
 
       {/* Werkplaats video */}
       <section className="w-full">
-        <div className="overflow-hidden rounded-2xl bg-muted">
+        <div className="overflow-hidden bg-muted">
           <video
             src={werkplaatsVideo.url}
             autoPlay

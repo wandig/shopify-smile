@@ -252,6 +252,7 @@ function ProductView({ product }: { product: ProductNode }) {
           </div>
         </div>
       </div>
+      </div>
     </div>
   );
 }

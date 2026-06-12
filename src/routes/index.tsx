@@ -390,6 +390,20 @@ function Home() {
         </div>
       </section>
 
+      {/* Werkplaats video */}
+      <section className="w-full">
+        <div className="overflow-hidden rounded-2xl bg-muted">
+          <video
+            src={werkplaatsVideo.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </section>
+
       {/* Details maken het verschil */}
       <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
         <h2 className="font-serif text-[1.7rem] md:text-[2.7rem] mt-14 md:mt-20 mb-[1.6rem] md:mb-[2.4rem]">
@@ -411,20 +425,6 @@ function Home() {
               </h3>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Werkplaats video */}
-      <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
-        <div className="overflow-hidden rounded-2xl bg-muted">
-          <video
-            src={werkplaatsVideo.url}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
         </div>
       </section>
 

@@ -79,6 +79,59 @@ const PRODUCT_USPS = [
   "Inclusief gratis levering & montage",
 ];
 
+function ThumbStrip({
+  images,
+  activeImg,
+  onSelect,
+}: {
+  images: Array<{ node: { url: string; altText: string | null } }>;
+  activeImg: number;
+  onSelect: (i: number) => void;
+}) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+  return (
+    <div className="relative">
+      <div
+        ref={scrollerRef}
+        className="flex gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((img, i) => (
+          <button
+            key={img.node.url + i}
+            onClick={() => onSelect(i)}
+            className={`shrink-0 w-[18%] min-w-[88px] aspect-square overflow-hidden rounded-xl border-2 snap-start transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}
+          >
+            <img src={img.node.url} alt="" className="w-full h-full object-cover" />
+          </button>
+        ))}
+      </div>
+      {images.length > 5 && (
+        <>
+          <button
+            aria-label="Vorige"
+            onClick={() => scrollBy(-1)}
+            className="absolute left-1 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 shadow border border-border flex items-center justify-center hover:bg-white"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            aria-label="Volgende"
+            onClick={() => scrollBy(1)}
+            className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 shadow border border-border flex items-center justify-center hover:bg-white"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
 function ProductView({ product }: { product: ProductNode }) {
   const variants = useMemo(
     () => product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null }),

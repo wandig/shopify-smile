@@ -104,7 +104,7 @@ function ThumbStrip({
           <button
             key={img.node.url + i}
             onClick={() => onSelect(i)}
-            className={`shrink-0 w-[18%] min-w-[88px] aspect-square overflow-hidden rounded-xl border-2 snap-start transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}
+            className={`shrink-0 w-[18%] min-w-[56px] sm:min-w-[72px] aspect-square overflow-hidden rounded-xl border-2 snap-start transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}
           >
             <img src={img.node.url} alt="" className="w-full h-full object-cover" />
           </button>
@@ -217,24 +217,25 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 md:gap-14">
         {/* Gallery */}
-        <div>
-          <div className="relative w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-[16/17]">
-
-            {images[activeImg] && (
-              <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-contain" />
+        <div className="min-w-0">
+          <div className="mx-auto w-full" style={{ maxWidth: "min(100%, calc(100svh - 260px))" }}>
+            <div className="relative w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-square">
+              {images[activeImg] && (
+                <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="absolute left-0 top-[-12.5%] w-full h-[125%] object-contain" />
+              )}
+            </div>
+            {images.length > 1 && (
+              <ThumbStrip
+                images={images}
+                activeImg={activeImg}
+                onSelect={setActiveImg}
+              />
             )}
           </div>
-          {images.length > 1 && (
-            <ThumbStrip
-              images={images}
-              activeImg={activeImg}
-              onSelect={setActiveImg}
-            />
-          )}
         </div>
 
         {/* Info */}
-        <div className="md:sticky md:top-28 md:self-start">
+        <div className="min-w-0 md:sticky md:top-28 md:self-start">
           <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Cinewall</span>
           <h1 className="font-serif text-2xl md:text-4xl mt-3 leading-[1.05]">{product.title}</h1>
 

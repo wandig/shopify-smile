@@ -165,7 +165,7 @@ function ProductView({ product }: { product: ProductNode }) {
           {images.length > 1 && (
             <div className="grid grid-cols-5 gap-2">
               {images.map((img, i) => (
-                <button key={i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 ${i === activeImg ? "border-[#ef8874]" : "border-transparent"}`}>
+                <button key={i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}>
                   <img src={img.node.url} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}

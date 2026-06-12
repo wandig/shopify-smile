@@ -221,7 +221,7 @@ function ProductView({ product }: { product: ProductNode }) {
           <div className="relative w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-[4/5]">
 
             {images[activeImg] && (
-              <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-cover" />
+              <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-contain" />
             )}
           </div>
           {images.length > 1 && (

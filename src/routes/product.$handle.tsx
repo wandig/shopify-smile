@@ -7,6 +7,32 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, ChevronRight, Truck, Hammer, ShieldCheck } from "lucide-react";
 
+const COLOR_MAP: Record<string, string> = {
+  zwart: "#1a1a1a", black: "#1a1a1a",
+  wit: "#f5f5f5", white: "#f5f5f5",
+  grijs: "#9ca3af", grey: "#9ca3af", gray: "#9ca3af",
+  bruin: "#8b5a2b", brown: "#8b5a2b",
+  eik: "#c8a877", oak: "#c8a877", eiken: "#c8a877",
+  noten: "#5b3a22", walnut: "#5b3a22", walnoot: "#5b3a22",
+  beige: "#d8c9a8", zand: "#d8c9a8", sand: "#d8c9a8",
+  goud: "#c9a84c", gold: "#c9a84c",
+  zilver: "#c0c0c0", silver: "#c0c0c0",
+  oranje: "#ef8874", orange: "#ef8874",
+  rood: "#c0392b", red: "#c0392b",
+  blauw: "#2f5d8a", blue: "#2f5d8a",
+  groen: "#3d6b4a", green: "#3d6b4a",
+  antraciet: "#2f3438",
+};
+
+function colorToCss(name: string): string {
+  const key = name.toLowerCase().trim();
+  if (COLOR_MAP[key]) return COLOR_MAP[key];
+  for (const k of Object.keys(COLOR_MAP)) {
+    if (key.includes(k)) return COLOR_MAP[k];
+  }
+  return "#d4d4d4";
+}
+
 export const Route = createFileRoute("/product/$handle")({
   head: ({ params }) => ({
     meta: [

@@ -8,6 +8,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsImg from "@/assets/werkplaats.png.asset.json";
+import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import detailDesignImg from "@/assets/detail-design.jpg";

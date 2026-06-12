@@ -5,7 +5,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, Check, Star, Truck, Hammer, ShieldCheck, Sparkles, Ruler, Leaf } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, Check, Star, Truck, Hammer, ShieldCheck, Sparkles, Ruler, Leaf } from "lucide-react";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",

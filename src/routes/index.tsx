@@ -413,38 +413,17 @@ function Home() {
         </div>
       </section>
 
-      {/* Uit eigen werkplaats — image left, text right (full-bleed) */}
-      <section className="w-full">
-        <div className="grid md:grid-cols-2 md:h-[500px]">
-          <div className="hidden md:block overflow-hidden bg-muted h-full">
-            <img
-              src={werkplaatsImg.url}
-              alt="Maatwerk uit de Wandig werkplaats"
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex items-center bg-[#3d2424] text-[#f5ece6] px-8 md:px-16 py-16 md:py-0">
-            <div className="max-w-md text-center md:text-left mx-auto md:mx-0">
-              <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Handgemaakt</span>
-              <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
-                Uit eigen
-                <br />
-                werkplaats
-              </h2>
-              <p className="mt-6 text-[15px] leading-relaxed opacity-85">
-                Bij Wandig maken wij alle meubels vanuit onze eigen werkplaats in Nederland. In ons productieproces
-                combineren wij slimme technieken met ambachtelijk vakwerk. Zo kun jij profiteren van toegankelijk en
-                betaalbare maatwerk meubels van hoge kwaliteit.
-              </p>
-              <Link
-                to="/bezoek"
-                className="inline-block mt-8 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
-              >
-                Meer over Wandig
-              </Link>
-            </div>
-          </div>
+      {/* Werkplaats video */}
+      <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
+        <div className="overflow-hidden rounded-2xl bg-muted">
+          <video
+            src={werkplaatsVideo.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
         </div>
       </section>
 

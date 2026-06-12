@@ -268,7 +268,10 @@ function ProductView({ product }: { product: ProductNode }) {
             return (
               <div key={opt.name} className="mt-8">
                 <div className="mb-3">
-                  <span className="text-xs tracking-[0.2em] uppercase text-muted-foreground">{opt.name}</span>
+                  <span className="text-sm font-bold text-foreground">
+                    {opt.name.charAt(0).toUpperCase() + opt.name.slice(1).toLowerCase()}
+                    {selected[opt.name] ? `: ${selected[opt.name]}` : ""}
+                  </span>
                 </div>
                 {isColor ? (
                   <div className="flex flex-wrap gap-3">

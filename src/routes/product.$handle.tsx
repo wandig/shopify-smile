@@ -165,7 +165,7 @@ function ProductView({ product }: { product: ProductNode }) {
           {images.length > 1 && (
             <div className="grid grid-cols-5 gap-2">
               {images.map((img, i) => (
-                <button key={i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 ${i === activeImg ? "border-[#ef8874]" : "border-transparent"}`}>
+                <button key={i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}>
                   <img src={img.node.url} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}
@@ -203,10 +203,10 @@ function ProductView({ product }: { product: ProductNode }) {
                           onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
                           title={v}
                           aria-label={v}
-                          className={`h-10 w-10 rounded-full transition ${active ? "border-2 border-[#ef8874] p-0.5" : "border border-border p-0.5"}`}
+                          className={`h-10 w-10 rounded-full transition-all duration-300 ease-out hover:scale-110 active:scale-90 ${active ? "border-2 border-[#ef8874] p-0.5 shadow-[0_0_0_4px_rgba(239,136,116,0.15)]" : "border border-border p-0.5 hover:border-[#ef8874]/60"}`}
                         >
                           <span
-                            className="block h-full w-full rounded-full"
+                            className="block h-full w-full rounded-full transition-transform duration-300"
                             style={{ background: colorToCss(v) }}
                           />
                         </button>
@@ -221,7 +221,7 @@ function ProductView({ product }: { product: ProductNode }) {
                         <button
                           key={v}
                           onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                          className={`px-4 py-2 text-sm rounded-xl bg-[#f7f7f7] transition ${active ? "border-2 border-[#ef8874]" : "border-2 border-transparent hover:border-[#ef8874]/50"}`}
+                          className={`px-4 py-2 text-sm rounded-xl bg-[#f7f7f7] transition-all duration-300 ease-out hover:scale-[1.04] active:scale-[0.94] ${active ? "border-2 border-[#ef8874] shadow-[0_2px_8px_rgba(239,136,116,0.18)]" : "border-2 border-transparent hover:border-[#ef8874]/50"}`}
                         >
                           {v}
                         </button>

@@ -57,11 +57,13 @@ function ProductPage() {
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
-        <div className="aspect-[4/5] bg-muted animate-pulse" />
-        <div className="space-y-4">
-          <div className="h-10 w-2/3 bg-muted animate-pulse" />
-          <div className="h-6 w-1/3 bg-muted animate-pulse" />
+      <div className="bg-white">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
+          <div className="aspect-[4/5] bg-muted animate-pulse" />
+          <div className="space-y-4">
+            <div className="h-10 w-2/3 bg-muted animate-pulse" />
+            <div className="h-6 w-1/3 bg-muted animate-pulse" />
+          </div>
         </div>
       </div>
     );

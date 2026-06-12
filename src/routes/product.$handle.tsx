@@ -162,29 +162,30 @@ function ProductView({ product }: { product: ProductNode }) {
         <span className="text-foreground">{product.title}</span>
       </nav>
 
-      <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-16">
+      <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 md:gap-14">
         {/* Gallery */}
         <div>
-          <div className="aspect-[4/5] bg-muted overflow-hidden mb-3 rounded-2xl">
+          <div
+            className="relative mx-auto w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-[4/5]"
+            style={{ maxWidth: "calc((100svh - 200px) * 4 / 5)" }}
+          >
             {images[activeImg] && (
               <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-cover" />
             )}
           </div>
           {images.length > 1 && (
-            <div className="grid grid-cols-5 gap-2">
-              {images.map((img, i) => (
-                <button key={img.node.url + i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}>
-                  <img src={img.node.url} alt="" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
+            <ThumbStrip
+              images={images}
+              activeImg={activeImg}
+              onSelect={setActiveImg}
+            />
           )}
         </div>
 
         {/* Info */}
         <div className="md:sticky md:top-28 md:self-start">
           <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Cinewall</span>
-          <h1 className="font-serif text-4xl md:text-6xl mt-3 leading-[1]">{product.title}</h1>
+          <h1 className="font-serif text-2xl md:text-4xl mt-3 leading-[1.05]">{product.title}</h1>
 
           {/* Reviews */}
           <div className="mt-4 flex items-center gap-2 text-sm">

@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2, ChevronRight, Truck, Hammer, ShieldCheck } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Loader2, ChevronRight, Check, Star, Truck, Hammer, ShieldCheck, Sparkles, Ruler, Leaf } from "lucide-react";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",
@@ -73,8 +73,17 @@ function ProductPage() {
   return <ProductView product={data} />;
 }
 
+const PRODUCT_USPS = [
+  "Met de hand gemaakt in onze werkplaats",
+  "Volledig op maat voor jouw woonkamer",
+  "Inclusief gratis levering & montage",
+];
+
 function ProductView({ product }: { product: ProductNode }) {
-  const variants = product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null });
+  const variants = useMemo(
+    () => product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null }),
+    [product],
+  );
   const [activeImg, setActiveImg] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
@@ -103,7 +112,6 @@ function ProductView({ product }: { product: ProductNode }) {
     return all;
   }, [productImages, variants]);
 
-  // Filter gallery to only show images that belong to variants matching the selected color
   const colorKey = product.options.find((o) => /kleur|color/i.test(o.name))?.name;
   const selectedColor = colorKey ? selected[colorKey] : undefined;
 
@@ -119,15 +127,15 @@ function ProductView({ product }: { product: ProductNode }) {
     return filtered.length > 0 ? filtered : allImages;
   }, [allImages, variants, selectedColor, colorKey]);
 
+  // Only auto-set image when the color (image group) changes — not on every render
+  // and not when the user clicks a thumbnail.
+  const prevColorRef = useRef<string | undefined>(selectedColor);
   useEffect(() => {
-    const vImg = activeVariant?.image?.url;
-    if (!vImg) {
+    if (prevColorRef.current !== selectedColor) {
+      prevColorRef.current = selectedColor;
       setActiveImg(0);
-      return;
     }
-    const idx = images.findIndex((img) => img.node.url === vImg);
-    setActiveImg(idx >= 0 ? idx : 0);
-  }, [activeVariant, images]);
+  }, [selectedColor]);
 
   const handleAdd = async () => {
     if (!activeVariant) return;
@@ -165,7 +173,7 @@ function ProductView({ product }: { product: ProductNode }) {
           {images.length > 1 && (
             <div className="grid grid-cols-5 gap-2">
               {images.map((img, i) => (
-                <button key={i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}>
+                <button key={img.node.url + i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}>
                   <img src={img.node.url} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}
@@ -177,13 +185,30 @@ function ProductView({ product }: { product: ProductNode }) {
         <div className="md:sticky md:top-28 md:self-start">
           <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Cinewall</span>
           <h1 className="font-serif text-4xl md:text-6xl mt-3 leading-[1]">{product.title}</h1>
-          <p className="mt-5 text-2xl font-serif">
+
+          {/* Reviews */}
+          <div className="mt-4 flex items-center gap-2 text-sm">
+            <div className="flex">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-[#ff6e15] text-[#ff6e15]" strokeWidth={0} />
+              ))}
+            </div>
+            <span className="text-foreground/70">4.9 · 128 reviews</span>
+          </div>
+
+          {/* USPs */}
+          <ul className="mt-5 space-y-2">
+            {PRODUCT_USPS.map((u) => (
+              <li key={u} className="flex items-start gap-2 text-sm text-foreground/80">
+                <Check className="h-4 w-4 mt-0.5 text-[#ff6e15] shrink-0" strokeWidth={2.5} />
+                <span>{u}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-6 text-2xl font-serif">
             {activeVariant ? formatPrice(activeVariant.price.amount, activeVariant.price.currencyCode) : "Prijs op aanvraag"}
           </p>
-
-          {product.description && (
-            <p className="mt-6 text-foreground/75 leading-relaxed">{product.description}</p>
-          )}
 
           {hasOptions && product.options.map((opt) => {
             if (opt.name === "Title" && opt.values.length === 1) return null;
@@ -203,10 +228,10 @@ function ProductView({ product }: { product: ProductNode }) {
                           onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
                           title={v}
                           aria-label={v}
-                          className={`h-10 w-10 rounded-full transition-all duration-300 ease-out hover:scale-110 active:scale-90 ${active ? "border-2 border-[#ef8874] p-0.5 shadow-[0_0_0_4px_rgba(239,136,116,0.15)]" : "border border-border p-0.5 hover:border-[#ef8874]/60"}`}
+                          className={`h-10 w-10 rounded-full active:scale-90 transition-transform duration-150 ${active ? "border-2 border-[#ef8874] p-0.5" : "border border-border p-0.5 hover:border-[#ef8874]/60"}`}
                         >
                           <span
-                            className="block h-full w-full rounded-full transition-transform duration-300"
+                            className="block h-full w-full rounded-full"
                             style={{ background: colorToCss(v) }}
                           />
                         </button>
@@ -221,7 +246,7 @@ function ProductView({ product }: { product: ProductNode }) {
                         <button
                           key={v}
                           onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                          className={`px-4 py-2 text-sm rounded-xl bg-[#f7f7f7] transition-all duration-300 ease-out hover:scale-[1.04] active:scale-[0.94] ${active ? "border-2 border-[#ef8874] shadow-[0_2px_8px_rgba(239,136,116,0.18)]" : "border-2 border-transparent hover:border-[#ef8874]/50"}`}
+                          className={`px-4 py-2 text-sm rounded-xl bg-[#f7f7f7] active:scale-[0.96] transition-transform duration-150 ${active ? "border-2 border-[#ef8874]" : "border-2 border-transparent hover:border-[#ef8874]/50"}`}
                         >
                           {v}
                         </button>
@@ -236,23 +261,66 @@ function ProductView({ product }: { product: ProductNode }) {
           <Button
             onClick={handleAdd}
             disabled={isLoading || !activeVariant?.availableForSale}
-            className="mt-10 w-full rounded-none h-14 text-sm tracking-[0.2em] uppercase"
+            className="mt-10 w-full rounded-full h-14 text-sm tracking-[0.2em] uppercase bg-[#ff6e15] hover:bg-[#ff6e15]/90 text-white shadow-none"
           >
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : activeVariant?.availableForSale ? "In winkelmand" : "Uitverkocht"}
           </Button>
 
-          <div className="mt-10 space-y-3 text-sm text-foreground/75 border-t border-border/60 pt-6">
-            {[
-              { icon: Truck, label: "Gratis levering aan huis in Nederland" },
-              { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
-              { icon: ShieldCheck, label: "5 jaar garantie op alle modellen" },
-            ].map(({ icon: I, label }) => (
-              <div key={label} className="flex items-center gap-3"><I className="h-4 w-4 opacity-70" strokeWidth={1.5} /> {label}</div>
-            ))}
+          <div className="mt-4 flex items-center gap-2 text-sm text-foreground/80">
+            <Check className="h-4 w-4 text-[#ff6e15]" strokeWidth={2.5} />
+            <span>30 dagen bedenktijd</span>
           </div>
+
+          {product.description && (
+            <p className="mt-6 text-foreground/75 leading-relaxed">{product.description}</p>
+          )}
+
+          {/* Accordion */}
+          <Accordion type="single" collapsible className="mt-8 border-t border-border/60">
+            <AccordionItem value="details">
+              <AccordionTrigger className="text-xs tracking-[0.2em] uppercase">Details & formaat</AccordionTrigger>
+              <AccordionContent className="text-sm text-foreground/75 leading-relaxed space-y-2">
+                <p>Massief houten frame, op maat gemaakt voor jouw tv en woonkamer. Kabels onzichtbaar weggewerkt en geluidsdoorlatend front.</p>
+                <p>Standaard hoogte 240 cm — andere afmetingen op aanvraag mogelijk.</p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="shipping">
+              <AccordionTrigger className="text-xs tracking-[0.2em] uppercase">Verzending & retour</AccordionTrigger>
+              <AccordionContent className="text-sm text-foreground/75 leading-relaxed space-y-2">
+                <p>Gratis levering en montage bij jou thuis door onze eigen monteurs. Levertijd 4–6 weken na bestelling.</p>
+                <p>30 dagen bedenktijd — niet tevreden? Wij halen de cinewall kosteloos op.</p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
       </div>
+
+      {/* Selling points section */}
+      <section className="border-t border-border/60 bg-[#faf8f5]">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 md:py-24">
+          <div className="max-w-2xl mb-12">
+            <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Waarom Wandig</span>
+            <h2 className="font-serif text-3xl md:text-5xl mt-3 leading-[1.05]">Eén cinewall, eindeloos verfijnd</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+            {[
+              { icon: Hammer, title: "Met de hand gemaakt", body: "Elk paneel wordt in onze werkplaats in Nederland op maat geschaafd, gelijmd en afgewerkt." },
+              { icon: Ruler, title: "Volledig op maat", body: "Van schermformaat tot kabelgoten — wij bouwen rondom jouw tv en jouw muur, niet andersom." },
+              { icon: Leaf, title: "Duurzaam massief hout", body: "FSC-gecertificeerd hout uit Europese bossen. Geen plaatmateriaal, geen plastic afwerking." },
+              { icon: Truck, title: "Gratis levering & montage", body: "Onze eigen monteurs plaatsen jouw cinewall netjes en strak — jij hoeft niets te doen." },
+              { icon: ShieldCheck, title: "5 jaar garantie", body: "Wij staan achter ons werk: vijf jaar garantie op constructie en afwerking." },
+              { icon: Sparkles, title: "30 dagen bedenktijd", body: "Niet helemaal tevreden? Wij halen de cinewall binnen 30 dagen kosteloos op." },
+            ].map(({ icon: I, title, body }) => (
+              <div key={title} className="flex flex-col">
+                <I className="h-6 w-6 text-[#ff6e15] mb-4" strokeWidth={1.5} />
+                <h3 className="font-serif text-xl mb-2">{title}</h3>
+                <p className="text-sm text-foreground/70 leading-relaxed">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

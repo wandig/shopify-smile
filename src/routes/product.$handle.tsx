@@ -218,10 +218,10 @@ function ProductView({ product }: { product: ProductNode }) {
       <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 md:gap-14">
         {/* Gallery */}
         <div>
-          <div className="relative w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-[4/5]">
+          <div className="relative w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-[16/17]">
 
             {images[activeImg] && (
-              <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-cover" />
+              <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-contain" />
             )}
           </div>
           {images.length > 1 && (

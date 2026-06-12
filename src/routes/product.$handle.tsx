@@ -267,7 +267,7 @@ function ProductView({ product }: { product: ProductNode }) {
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : activeVariant?.availableForSale ? "In winkelmand" : "Uitverkocht"}
           </Button>
 
-          <div className="mt-4 flex items-center gap-2 text-sm text-foreground/80">
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-foreground/80">
             <Check className="h-4 w-4 text-[#ff6e15]" strokeWidth={2.5} />
             <span>30 dagen bedenktijd</span>
           </div>

@@ -327,7 +327,10 @@ function ProductView({ product }: { product: ProductNode }) {
           </div>
 
           {product.description && (
-            <p className="mt-6 text-foreground/75 leading-relaxed">{product.description}</p>
+            <div className="mt-6">
+              <h2 className="font-bold text-base mb-2">Productomschrijving</h2>
+              <p className="text-foreground/75 leading-relaxed">{product.description}</p>
+            </div>
           )}
 
           {/* Accordion */}

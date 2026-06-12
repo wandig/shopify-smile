@@ -128,7 +128,7 @@ function ProductView({ product }: { product: ProductNode }) {
       <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-16">
         {/* Gallery */}
         <div>
-          <div className="aspect-[4/5] bg-muted overflow-hidden mb-3">
+          <div className="aspect-[4/5] bg-muted overflow-hidden mb-3 rounded-2xl">
             {images[activeImg] && (
               <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-cover" />
             )}
@@ -136,7 +136,7 @@ function ProductView({ product }: { product: ProductNode }) {
           {images.length > 1 && (
             <div className="grid grid-cols-5 gap-2">
               {images.map((img, i) => (
-                <button key={i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden border ${i === activeImg ? "border-foreground" : "border-transparent"}`}>
+                <button key={i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 ${i === activeImg ? "border-[#ef8874]" : "border-transparent"}`}>
                   <img src={img.node.url} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}
@@ -161,24 +161,29 @@ function ProductView({ product }: { product: ProductNode }) {
             const isColor = /kleur|color/i.test(opt.name);
             return (
               <div key={opt.name} className="mt-8">
-                <div className="flex items-center justify-between mb-3">
+                <div className="mb-3">
                   <span className="text-xs tracking-[0.2em] uppercase text-muted-foreground">{opt.name}</span>
-                  {!isColor && <span className="text-sm">{selected[opt.name]}</span>}
                 </div>
                 {isColor ? (
-                  <Select
-                    value={selected[opt.name]}
-                    onValueChange={(v) => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                  >
-                    <SelectTrigger className="w-full rounded-none h-11">
-                      <SelectValue placeholder={`Kies ${opt.name.toLowerCase()}`} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {opt.values.map((v) => (
-                        <SelectItem key={v} value={v}>{v}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <div className="flex flex-wrap gap-3">
+                    {opt.values.map((v) => {
+                      const active = selected[opt.name] === v;
+                      return (
+                        <button
+                          key={v}
+                          onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
+                          title={v}
+                          aria-label={v}
+                          className={`h-10 w-10 rounded-full transition ${active ? "border-2 border-[#ef8874] p-0.5" : "border border-border p-0.5"}`}
+                        >
+                          <span
+                            className="block h-full w-full rounded-full"
+                            style={{ background: colorToCss(v) }}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
                 ) : (
                   <div className="flex flex-wrap gap-2">
                     {opt.values.map((v) => {
@@ -187,7 +192,7 @@ function ProductView({ product }: { product: ProductNode }) {
                         <button
                           key={v}
                           onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                          className={`px-4 py-2 text-sm border transition ${active ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"}`}
+                          className={`px-4 py-2 text-sm rounded-xl bg-[#f7f7f7] transition ${active ? "border-2 border-[#ef8874]" : "border-2 border-transparent hover:border-[#ef8874]/50"}`}
                         >
                           {v}
                         </button>

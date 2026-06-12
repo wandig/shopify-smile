@@ -5,7 +5,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, Check, Star, Truck, Hammer, ShieldCheck, Sparkles, Ruler, Leaf } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, Check, Star, Truck, Hammer, ShieldCheck, Sparkles, Ruler, Leaf } from "lucide-react";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",
@@ -78,6 +78,59 @@ const PRODUCT_USPS = [
   "Volledig op maat voor jouw woonkamer",
   "Inclusief gratis levering & montage",
 ];
+
+function ThumbStrip({
+  images,
+  activeImg,
+  onSelect,
+}: {
+  images: Array<{ node: { url: string; altText: string | null } }>;
+  activeImg: number;
+  onSelect: (i: number) => void;
+}) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+  return (
+    <div className="relative">
+      <div
+        ref={scrollerRef}
+        className="flex gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((img, i) => (
+          <button
+            key={img.node.url + i}
+            onClick={() => onSelect(i)}
+            className={`shrink-0 w-[18%] min-w-[88px] aspect-square overflow-hidden rounded-xl border-2 snap-start transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}
+          >
+            <img src={img.node.url} alt="" className="w-full h-full object-cover" />
+          </button>
+        ))}
+      </div>
+      {images.length > 5 && (
+        <>
+          <button
+            aria-label="Vorige"
+            onClick={() => scrollBy(-1)}
+            className="absolute left-1 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 shadow border border-border flex items-center justify-center hover:bg-white"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            aria-label="Volgende"
+            onClick={() => scrollBy(1)}
+            className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 shadow border border-border flex items-center justify-center hover:bg-white"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
 
 function ProductView({ product }: { product: ProductNode }) {
   const variants = useMemo(
@@ -162,29 +215,30 @@ function ProductView({ product }: { product: ProductNode }) {
         <span className="text-foreground">{product.title}</span>
       </nav>
 
-      <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-16">
+      <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 md:gap-14">
         {/* Gallery */}
         <div>
-          <div className="aspect-[4/5] bg-muted overflow-hidden mb-3 rounded-2xl">
+          <div
+            className="relative mx-auto w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-[4/5]"
+            style={{ maxWidth: "calc((100svh - 200px) * 4 / 5)" }}
+          >
             {images[activeImg] && (
               <img src={images[activeImg].node.url} alt={images[activeImg].node.altText || product.title} className="w-full h-full object-cover" />
             )}
           </div>
           {images.length > 1 && (
-            <div className="grid grid-cols-5 gap-2">
-              {images.map((img, i) => (
-                <button key={img.node.url + i} onClick={() => setActiveImg(i)} className={`aspect-square overflow-hidden rounded-xl border-2 transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}>
-                  <img src={img.node.url} alt="" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
+            <ThumbStrip
+              images={images}
+              activeImg={activeImg}
+              onSelect={setActiveImg}
+            />
           )}
         </div>
 
         {/* Info */}
         <div className="md:sticky md:top-28 md:self-start">
           <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Cinewall</span>
-          <h1 className="font-serif text-4xl md:text-6xl mt-3 leading-[1]">{product.title}</h1>
+          <h1 className="font-serif text-2xl md:text-4xl mt-3 leading-[1.05]">{product.title}</h1>
 
           {/* Reviews */}
           <div className="mt-4 flex items-center gap-2 text-sm">
@@ -266,7 +320,7 @@ function ProductView({ product }: { product: ProductNode }) {
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : activeVariant?.availableForSale ? "In winkelmand" : "Uitverkocht"}
           </Button>
 
-          <div className="mt-4 flex items-center gap-2 text-sm text-foreground/80">
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-foreground/80">
             <Check className="h-4 w-4 text-[#ff6e15]" strokeWidth={2.5} />
             <span>30 dagen bedenktijd</span>
           </div>

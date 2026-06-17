@@ -7,9 +7,9 @@ export const Route = createFileRoute("/producten")({
   head: () => ({
     meta: [
       { title: "Alle modellen — Wandig" },
-      { name: "description", content: "Ontdek alle Wandig TV cinewalls. Maatwerk modellen voor elk interieur." },
+      { name: "description", content: "Ontdek alle Wandig TV cinewalls. Plug & play modellen voor elk interieur." },
       { property: "og:title", content: "Alle modellen — Wandig" },
-      { property: "og:description", content: "Ontdek alle Wandig TV cinewalls op maat." },
+      { property: "og:description", content: "Ontdek alle Wandig plug & play TV cinewalls." },
     ],
   }),
   component: Producten,

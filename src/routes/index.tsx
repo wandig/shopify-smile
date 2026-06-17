@@ -50,16 +50,16 @@ function CartIconBtn() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wandig — Maatwerk TV cinewalls uit eigen werkplaats" },
+      { title: "Wandig — Plug & play TV cinewalls uit eigen werkplaats" },
       {
         name: "description",
         content:
-          "Tijdloze TV cinewalls op maat gemaakt. Bepaal je eigen maatvoering, indeling en kleur. Gratis levering en 5 jaar garantie.",
+          "Tijdloze plug & play TV cinewalls. Kies je formaat, indeling en kleur. Gratis levering en 5 jaar garantie.",
       },
-      { property: "og:title", content: "Wandig — Maatwerk TV cinewalls" },
+      { property: "og:title", content: "Wandig — Plug & play TV cinewalls" },
       {
         property: "og:description",
-        content: "Tijdloze TV cinewalls op maat gemaakt. Bepaal je eigen maatvoering, indeling en kleur.",
+        content: "Tijdloze plug & play TV cinewalls. Kies je formaat, indeling en kleur.",
       },
     ],
   }),
@@ -78,7 +78,7 @@ const REVIEWS = [
     location: "Amsterdam",
   },
   {
-    quote: "Vanaf het kleurstaal tot de installatie: alles klopte. Een rustig, tijdloos eindresultaat.",
+    quote: "Vanaf het kleurstaal tot de levering: alles klopte. Een rustig, tijdloos eindresultaat.",
     name: "Sanne D.",
     location: "Eindhoven",
   },
@@ -95,7 +95,7 @@ const COLLECTION_META: {
     title: "Wandig Solo",
     description: "De compacte cinewall — strak en tijdloos voor elke woonkamer.",
     korting: "€100,-",
-    tags: ["Compact", "Zwevend of staand", "Op maat"],
+    tags: ["Compact", "Zwevend of staand", "Plug & play"],
   },
   {
     title: "Wandig Duo",
@@ -106,9 +106,9 @@ const COLLECTION_META: {
   },
   {
     title: "Wandig Full House",
-    description: "Een volledige wand op maat — van vloer tot plafond, helemaal jouw stijl.",
+    description: "Een volledige wand-look — van vloer tot plafond, helemaal jouw stijl.",
     korting: "€250,-",
-    tags: ["Aanbevolen", "Wand-vullend", "Maximaal maatwerk"],
+    tags: ["Aanbevolen", "Wand-vullend", "Maximaal gemak"],
     highlight: true,
   },
 ];
@@ -116,7 +116,7 @@ const COLLECTION_META: {
 function Home() {
   const USPS = [
     { icon: Truck, label: "Gratis levering aan huis" },
-    { icon: Hammer, label: "Maatwerk uit eigen werkplaats" },
+    { icon: Hammer, label: "Gemaakt in eigen werkplaats" },
     { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
     { icon: ShieldCheck, label: "5 jaar garantie" },
   ];
@@ -398,8 +398,8 @@ function Home() {
         <div className="flex md:grid md:grid-cols-3 gap-[1.7rem] md:gap-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
             { img: detailDesignImg, title: "Gepersonaliseerd design" },
-            { img: detailMaatwerkImg, title: "Betaalbaar maatwerk" },
-            { img: detailGeleverdImg, title: "Afgemonteerd geleverd" },
+            { img: detailMaatwerkImg, title: "Slim samen te stellen" },
+            { img: detailGeleverdImg, title: "Plug & play geleverd" },
           ].map((item) => (
             <div key={item.title} className="flex flex-col shrink-0 basis-[91%] md:basis-auto snap-start">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-muted">
@@ -529,7 +529,7 @@ function Home() {
             We helpen je graag
           </h2>
           <p className="mt-8 text-[15px] leading-relaxed text-foreground/75 max-w-xl mx-auto">
-            Een maatwerk meubel bestellen was nog nooit zo makkelijk. Maar soms is het fijn om toch even contact te
+            Een plug & play cinewall bestellen was nog nooit zo makkelijk. Maar soms is het fijn om toch even contact te
             hebben. Bel of bezoek ons voor goed advies of hulp bij bestellen.
           </p>
           <div className="mt-10 flex items-center justify-center gap-3 flex-wrap">

@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div>
           <div className="font-serif text-2xl tracking-[0.2em] uppercase mb-4">wandig</div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Maatwerk TV cinewalls uit eigen werkplaats. Tijdloos design, gemaakt om generaties mee te gaan.
+            Plug & play TV cinewalls uit eigen werkplaats. Tijdloos design, gemaakt om generaties mee te gaan.
           </p>
         </div>
         <div>
@@ -40,7 +40,7 @@ export function SiteFooter() {
       <div className="border-t border-border/60">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-6 text-xs text-muted-foreground flex flex-wrap justify-between gap-2">
           <span>© {new Date().getFullYear()} Wandig. Alle rechten voorbehouden.</span>
-          <span>Maatwerk uit Nederland</span>
+          <span>Gemaakt in Nederland</span>
         </div>
       </div>
     </footer>

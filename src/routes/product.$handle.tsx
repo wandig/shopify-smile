@@ -9,6 +9,14 @@ import { Loader2, ChevronRight, ChevronLeft, Check, X, Star, Hammer, ShieldCheck
 import fullHouseEikenzwartRechtsImage from "@/assets/full-house-eikenzwart-rechts-temp.png";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
+import swatchDofroze from "@/assets/swatches/dofroze.jpg";
+import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
+import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
+import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
+import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
+import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
+import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
+import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",
@@ -27,6 +35,17 @@ const COLOR_MAP: Record<string, string> = {
   antraciet: "#2f3438",
 };
 
+const SWATCH_TEXTURES: Array<[RegExp, string]> = [
+  [/eikenzwart/, swatchEikenzwart],
+  [/eikengrijs/, swatchEikengrijs],
+  [/walnootbruin|walnoot|noten/, swatchWalnootbruin],
+  [/truffelbruin|truffel/, swatchTruffelbruin],
+  [/katoengrijs|katoen/, swatchKatoengrijs],
+  [/zandsteen/, swatchZandsteen],
+  [/kleibeige|klei/, swatchKleibeige],
+  [/dofroze|roze/, swatchDofroze],
+];
+
 function colorToCss(name: string): string {
   const key = name.toLowerCase().trim();
   if (COLOR_MAP[key]) return COLOR_MAP[key];
@@ -36,7 +55,22 @@ function colorToCss(name: string): string {
   return "#d4d4d4";
 }
 
+function swatchTexture(name: string): string | undefined {
+  const key = name.toLowerCase().trim();
+  return SWATCH_TEXTURES.find(([pattern]) => pattern.test(key))?.[1];
+}
+
 function swatchStyle(name: string): CSSProperties {
+  const texture = swatchTexture(name);
+  if (texture) {
+    return {
+      backgroundColor: colorToCss(name),
+      backgroundImage: `url(${texture})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    };
+  }
+
   const key = name.toLowerCase().trim();
   const hasOak = /eik|oak/.test(key);
   const hasGrey = /grijs|grey|gray/.test(key);
@@ -639,7 +673,7 @@ function ProductView({ product }: { product: ProductNode }) {
                                 className={`relative h-11 w-11 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 ease-out active:scale-95 ${active ? "border-[#ff6e15]" : "border-transparent hover:border-[#ff6e15]/45"}`}
                               >
                                 <span
-                                  className="relative block h-full w-full rounded-full"
+                                  className="relative block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.45),inset_0_-3px_5px_rgba(0,0,0,0.18)]"
                                   style={swatchStyle(v)}
                                 />
                               </button>

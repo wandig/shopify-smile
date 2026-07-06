@@ -21,6 +21,7 @@ export interface ShopifyProduct {
           price: { amount: string; currencyCode: string };
           availableForSale: boolean;
           selectedOptions: Array<{ name: string; value: string }>;
+          image?: { url: string; altText: string | null } | null;
         };
       }>;
     };
@@ -64,6 +65,7 @@ export const PRODUCTS_QUERY = `
               id title availableForSale
               price { amount currencyCode }
               selectedOptions { name value }
+              image { url altText }
             } }
           }
           options { name values }

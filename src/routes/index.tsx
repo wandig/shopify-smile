@@ -114,14 +114,51 @@ const COLLECTION_META: {
 ];
 
 function Home() {
+  const upgradeWords = ["woonkamer", "tv-wand", "rust", "stijl"];
   const USPS = [
     { icon: Truck, label: "Gratis levering aan huis" },
     { icon: Hammer, label: "Gemaakt in eigen werkplaats" },
     { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
     { icon: ShieldCheck, label: "5 jaar garantie" },
   ];
+  const [upgradeWordIdx, setUpgradeWordIdx] = useState(0);
+  const [upgradeWordVisible, setUpgradeWordVisible] = useState(true);
+  const [activeUpgradeMaxIdx, setActiveUpgradeMaxIdx] = useState(-1);
   const [uspIdx, setUspIdx] = useState(0);
   const [uspVisible, setUspVisible] = useState(true);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setUpgradeWordVisible(false);
+      setTimeout(() => {
+        setUpgradeWordIdx((i) => (i + 1) % upgradeWords.length);
+        setUpgradeWordVisible(true);
+      }, 220);
+    }, 2000);
+    return () => clearInterval(id);
+  }, []);
+  useEffect(() => {
+    const updateActiveUpgrade = () => {
+      const rows = Array.from(document.querySelectorAll<HTMLElement>("[data-upgrade-row]"));
+      const activationLine = window.innerHeight * 0.78;
+      let next = -1;
+
+      rows.forEach((row, index) => {
+        if (row.getBoundingClientRect().top < activationLine) {
+          next = index;
+        }
+      });
+
+      setActiveUpgradeMaxIdx(next);
+    };
+
+    updateActiveUpgrade();
+    window.addEventListener("scroll", updateActiveUpgrade, { passive: true });
+    window.addEventListener("resize", updateActiveUpgrade);
+    return () => {
+      window.removeEventListener("scroll", updateActiveUpgrade);
+      window.removeEventListener("resize", updateActiveUpgrade);
+    };
+  }, []);
   useEffect(() => {
     const id = setInterval(() => {
       setUspVisible(false);
@@ -246,7 +283,7 @@ function Home() {
                             <span className="underline underline-offset-2">{card.cat}</span>
                           </div>
                         </div>
-                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#f18972] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
                           <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
                             Aanpassen
                           </span>
@@ -329,7 +366,7 @@ function Home() {
                             <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
                           </div>
                         </div>
-                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef8871] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#f18972] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
                           <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
                             Aanpassen
                           </span>
@@ -391,26 +428,38 @@ function Home() {
       </section>
 
       {/* Details maken het verschil */}
-      <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
-        <h2 className="font-serif text-[1.7rem] md:text-[2.7rem] mt-14 md:mt-20 mb-[1.6rem] md:mb-[2.4rem]">
+      <section className="mx-auto max-w-[1400px] px-5 md:px-10 pt-10 md:pt-16 pb-24 md:pb-32">
+        <h2 className="mb-9 md:mb-12 max-w-4xl text-[2.45rem] md:text-[3.05rem] leading-[0.98] tracking-[-0.055em] text-black">
           Details maken het verschil
         </h2>
-        <div className="flex md:grid md:grid-cols-3 gap-[1.7rem] md:gap-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="-mx-5 overflow-hidden pl-5 md:mx-0 md:overflow-visible md:pl-0">
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth pr-5 pb-3 md:pr-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {[
             { img: detailDesignImg, title: "Gepersonaliseerd design" },
             { img: detailMaatwerkImg, title: "Slim samen te stellen" },
             { img: detailGeleverdImg, title: "Plug & play geleverd" },
           ].map((item) => (
-            <div key={item.title} className="flex flex-col shrink-0 basis-[91%] md:basis-auto snap-start">
-              <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-muted">
-                <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
+            <div key={item.title} className="group flex shrink-0 basis-[69%] flex-col snap-start md:basis-auto">
+              <div className="aspect-[1.45/1] w-full overflow-hidden rounded-[12px] bg-muted md:rounded-[14px]">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.025]"
+                />
               </div>
-              <h3 className="font-serif text-lg md:text-xl mt-5 flex items-center justify-between">
+              <h3 className="mt-5 flex items-center justify-between gap-5 text-[1.05rem] md:text-[1.12rem] font-medium leading-none tracking-[-0.035em] text-black">
                 <span>{item.title}</span>
-                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 shrink-0 ml-2" />
+                <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" strokeWidth={2} />
               </h3>
             </div>
           ))}
+          </div>
+        </div>
+        <div className="mt-4 flex items-center justify-center gap-2 md:hidden" aria-hidden="true">
+          <span className="h-2 w-2 rounded-full bg-black" />
+          <span className="h-2 w-2 rounded-full bg-black/18" />
+          <span className="h-2 w-2 rounded-full bg-black/18" />
         </div>
       </section>
 
@@ -425,6 +474,72 @@ function Home() {
             playsInline
             className="w-full h-full object-cover"
           />
+        </div>
+      </section>
+
+      {/* Wandig upgrade */}
+      <section className="bg-[#fef7ee] px-5 pt-8 pb-20 md:px-10 md:pt-14 md:pb-28">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="grid gap-10 md:grid-cols-[0.86fr_1fr] md:items-start">
+            <h2 className="mx-auto max-w-lg text-center text-[2.15rem] leading-[0.96] tracking-[-0.06em] text-black md:mx-0 md:text-left md:text-[4rem]">
+              <span className="block">Wandig tilt jouw</span>
+              <span
+                className={`block min-h-[0.96em] bg-gradient-to-r from-[#ef6f7a] via-[#f56e16] to-[#f08971] bg-clip-text text-transparent transition-all duration-300 ease-out ${upgradeWordVisible ? "translate-y-0 opacity-100 blur-0" : "translate-y-2 opacity-0 blur-sm"}`}
+              >
+                {upgradeWords[upgradeWordIdx]}
+              </span>
+            </h2>
+
+            <div className="space-y-7 md:space-y-10">
+              {[
+                {
+                  title: "Rustig beeld",
+                  body: "Een strakke wand rondom je tv, zonder losse kabels of rommelige meubels die de aandacht wegtrekken.",
+                  image: detailDesignImg,
+                  alt: "Strakke Wandig afwerking",
+                },
+                {
+                  title: "Kleur die klopt",
+                  body: "Kies een afwerking die mooi aansluit op je vloer, bank en interieur. Subtiel aanwezig, precies genoeg karakter.",
+                  image: detailMaatwerkImg,
+                  alt: "Wandig kleuren en materialen",
+                },
+                {
+                  title: "Plug & play gemak",
+                  body: "Slim ontworpen om eenvoudig zelf te plaatsen en aan te sluiten, met een resultaat dat voelt alsof het altijd zo hoorde.",
+                  image: detailGeleverdImg,
+                  alt: "Wandig plug and play levering",
+                },
+              ].map((item, index) => {
+                const active = index <= activeUpgradeMaxIdx;
+                return (
+                <div
+                  key={item.title}
+                  data-upgrade-row
+                  className="grid grid-cols-[5px_1fr] gap-x-3 md:grid-cols-[6px_1fr] md:gap-x-5"
+                >
+                  <div className={`row-span-2 rounded-full transition-colors duration-500 ${active ? "bg-[#f1747e]" : "bg-black/12"}`} />
+                  <div className="grid grid-cols-[1fr_92px] items-center gap-4 md:grid-cols-[1fr_132px] md:gap-6">
+                    <h3 className={`text-[1.18rem] font-medium leading-[1.12] tracking-[-0.05em] transition-colors duration-500 md:text-[1.5rem] ${active ? "text-black" : "text-black/38"}`}>
+                      {item.title}
+                    </h3>
+                    <div className="h-[51px] w-[92px] overflow-hidden rounded-[9px] bg-[#f4f1ed] md:h-[62px] md:w-[132px] md:rounded-[12px]">
+                      <img
+                        src={item.image}
+                        alt={item.alt}
+                        loading="lazy"
+                        className={`h-full w-full object-cover transition duration-500 ${active ? "scale-100 opacity-100 grayscale-0" : "scale-[1.02] opacity-70 grayscale"}`}
+                      />
+                    </div>
+                  </div>
+                  <p className={`col-start-2 max-w-[18.5rem] overflow-hidden text-[0.92rem] leading-[1.58] tracking-[-0.025em] text-black/58 transition-all duration-500 ease-out md:max-w-[31rem] md:text-[1rem] ${active ? "mt-3 max-h-32 opacity-100 md:mt-4" : "mt-0 max-h-0 opacity-0"}`}>
+                    {item.body}
+                  </p>
+                </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -453,13 +568,13 @@ function Home() {
             <div className="hidden md:flex items-center gap-3 shrink-0">
               <button
                 aria-label="Vorige"
-                className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition"
+                className="h-12 w-12 rounded-full bg-[#f18972] text-white flex items-center justify-center hover:bg-[#e87a62] transition"
               >
                 <ArrowRight className="h-4 w-4 rotate-180" />
               </button>
               <button
                 aria-label="Volgende"
-                className="h-12 w-12 rounded-full bg-background/70 flex items-center justify-center hover:bg-background transition"
+                className="h-12 w-12 rounded-full bg-[#f18972] text-white flex items-center justify-center hover:bg-[#e87a62] transition"
               >
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -535,19 +650,19 @@ function Home() {
           <div className="mt-10 flex items-center justify-center gap-3 flex-wrap">
             <a
               href="tel:0123456789"
-              className="rounded-full bg-[#fbf1ea] text-foreground hover:bg-[#f3e3d6] transition-colors h-11 px-6 text-sm flex items-center"
+              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] transition-colors h-11 px-6 text-sm flex items-center"
             >
               Bel 012 345 6789
             </a>
             <a
               href="mailto:info@wandig.nl"
-              className="rounded-full bg-[#fbf1ea] text-foreground hover:bg-[#f3e3d6] transition-colors h-11 px-6 text-sm flex items-center"
+              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] transition-colors h-11 px-6 text-sm flex items-center"
             >
               info@wandig.nl
             </a>
             <Link
               to="/bezoek"
-              className="rounded-full bg-[#3d2424] text-[#f5ece6] hover:bg-[#2e1b1b] transition-colors h-11 px-6 text-sm flex items-center"
+              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] transition-colors h-11 px-6 text-sm flex items-center"
             >
               Bezoek ons
             </Link>

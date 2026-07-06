@@ -11,6 +11,7 @@ import werkplaatsImg from "@/assets/werkplaats.png.asset.json";
 import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
+import duoOrangeStudioImg from "@/assets/duo-orange-studio.jpg";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
@@ -318,8 +319,8 @@ function Home() {
                   },
                   {
                     handle: "full-house",
-                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_FullHouse_Camera_Side_Wandig_6_Cotton_Taupe_f43a3337-8a33-4212-9868-e524d0eff1f5.jpg?v=1750342787",
-                    title: "Duo",
+                    img: duoOrangeStudioImg,
+                    title: "Full House",
                     price: "1.499 €",
                     rating: 4.5,
                     reviews: 56,

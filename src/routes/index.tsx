@@ -519,7 +519,7 @@ function Home() {
                   data-upgrade-row
                   className="grid grid-cols-[5px_1fr] gap-x-3 md:grid-cols-[6px_1fr] md:gap-x-5"
                 >
-                  <div className={`row-span-2 rounded-full transition-colors duration-500 ${active ? "bg-[#f1747e]" : "bg-black/12"}`} />
+                  <div className={`row-span-2 rounded-full transition-colors duration-500 ${active ? "bg-[#f18972]" : "bg-black/12"}`} />
                   <div className="grid grid-cols-[1fr_92px] items-center gap-4 md:grid-cols-[1fr_132px] md:gap-6">
                     <h3 className={`text-[1.18rem] font-medium leading-[1.12] tracking-[-0.05em] transition-colors duration-500 md:text-[1.5rem] ${active ? "text-black" : "text-black/38"}`}>
                       {item.title}

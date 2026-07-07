@@ -57,7 +57,7 @@ function ModelsMenu({
       <div
         className={`invisible fixed inset-x-0 ${panelTopClass} z-50 -translate-y-2 opacity-0 transition-all duration-200 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100`}
       >
-        <div className="border-y border-black/[0.06] bg-white text-[#1f1915] shadow-[0_30px_80px_rgba(31,25,21,0.16)]">
+        <div className="overflow-hidden rounded-b-[28px] border-y border-black/[0.06] bg-white text-[#1f1915] shadow-[0_30px_80px_rgba(31,25,21,0.16)]">
           <div className="mx-auto grid max-w-[1280px] grid-cols-[0.85fr_2.4fr] items-center gap-12 px-6 py-9 lg:px-10">
             <div>
               <span className="text-xs uppercase tracking-[0.2em] text-[#f56e16]">Collectie</span>

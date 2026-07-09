@@ -325,7 +325,7 @@ function Home() {
                     rating: 4.5,
                     reviews: 56,
                     size: "180x200",
-                    cat: "Bedframes",
+                    cat: "TV-wanden",
                   },
                   {
                     handle: "solo",
@@ -398,7 +398,7 @@ function Home() {
                 {
                   kicker: "GETEST EN BEWEZEN",
                   title: "+150.000 verkochte cinewalls",
-                  body: "Unsere hohen Ansprüche an Qualität, Design und Funktion gelten für jedes einzelne Bett",
+                  body: "Hoge eisen aan kwaliteit, design en functionaliteit gelden voor elk product",
                 },
                 {
                   kicker: "JOUW INTERIEUR IS BELANGRIJK VOOR ONS",
@@ -407,7 +407,7 @@ function Home() {
                 },
                 {
                   kicker: "KIES MET VOLLEDIGE GEMOEDSRUST",
-                  title: "30 dagen bedenktijd",
+                  title: "100 dagen bedenktijd",
                   body: "Wat je ook koopt — je krijgt 100 dagen om het thuis uit te proberen",
                 },
               ].map((u) => (

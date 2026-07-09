@@ -325,7 +325,7 @@ function Home() {
                     rating: 4.5,
                     reviews: 56,
                     size: "180x200",
-                    cat: "Bedframes",
+                    cat: "TV-wanden",
                   },
                   {
                     handle: "solo",
@@ -335,7 +335,7 @@ function Home() {
                     rating: 4.5,
                     reviews: 14,
                     size: "140x200",
-                    cat: "Slaapbanken",
+                    cat: "Banken",
                   },
                 ].map((card) => (
                   <Link
@@ -398,17 +398,17 @@ function Home() {
                 {
                   kicker: "GETEST EN BEWEZEN",
                   title: "+150.000 verkochte cinewalls",
-                  body: "Unsere hohen Ansprüche an Qualität, Design und Funktion gelten für jedes einzelne Bett",
+                  body: "Hoge eisen aan kwaliteit, design en functionaliteit gelden voor elk product",
                 },
                 {
-                  kicker: "JOUW SLAAP IS BELANGRIJK VOOR ONS",
+                  kicker: "JOUW INTERIEUR IS BELANGRIJK VOOR ONS",
                   title: "97% klanttevredenheid",
-                  body: "Slaap gerust — we hebben een score van 4,6 en meer dan 15.000 vijfsterrenbeoordelingen",
+                  body: "Geniet gerust — we hebben een score van 4,6 en meer dan 15.000 vijfsterrenbeoordelingen",
                 },
                 {
-                  kicker: "SLAAP MET VOLLEDIGE GEMOEDSRUST",
-                  title: "30 dagen bedenktijd",
-                  body: "Wat je ook koopt — je krijgt 100 nachten om het thuis uit te proberen",
+                  kicker: "KIES MET VOLLEDIGE GEMOEDSRUST",
+                  title: "100 dagen bedenktijd",
+                  body: "Wat je ook koopt — je krijgt 100 dagen om het thuis uit te proberen",
                 },
               ].map((u) => (
                 <div key={u.kicker} className="flex flex-col items-center max-w-sm mx-auto">

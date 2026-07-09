@@ -131,9 +131,9 @@ export function SiteHeader() {
         <div className="border-b border-white/20 bg-black/10 backdrop-blur-sm">
           <div className="px-5 md:px-10 h-10 flex items-center justify-between text-[12px] tracking-wide relative">
             <div className="hidden md:flex items-center gap-8 opacity-95">
-              <span>Proefperiode van 100 nachten</span>
+              <span>Proefperiode van 100 dagen</span>
               <span>Gratis levering &amp; retourneren</span>
-              <span>Tot 25 jaar garantie</span>
+              <span>Tot 5 jaar garantie</span>
             </div>
             <div className="hidden md:flex items-center gap-1 opacity-95">
               <span>NL | Dutch</span>

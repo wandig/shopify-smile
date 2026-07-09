@@ -14,7 +14,7 @@ import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import duoOrangeStudioImg from "@/assets/duo-orange-studio.jpg";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
-import detailGeleverdImg from "@/assets/detail-geleverd.jpg";
+import plugPlayGeleverdImg from "@/assets/plug-play-geleverd.png.asset.json";
 
 function RatingStars({ value, small, dark }: { value: number; small?: boolean; dark?: boolean }) {
   const size = small ? "h-3 w-3" : "h-3.5 w-3.5";
@@ -438,7 +438,7 @@ function Home() {
           {[
             { img: detailDesignImg, title: "Gepersonaliseerd design" },
             { img: detailMaatwerkImg, title: "Slim samen te stellen" },
-            { img: detailGeleverdImg, title: "Plug & play geleverd" },
+            { img: plugPlayGeleverdImg.url, title: "Plug & play geleverd" },
           ].map((item) => (
             <div key={item.title} className="group flex shrink-0 basis-[69%] flex-col snap-start md:basis-auto">
               <div className="aspect-[1.45/1] w-full overflow-hidden rounded-[12px] bg-muted md:rounded-[14px]">
@@ -508,7 +508,7 @@ function Home() {
                 {
                   title: "Plug & play gemak",
                   body: "Slim ontworpen om eenvoudig zelf te plaatsen en aan te sluiten, met een resultaat dat voelt alsof het altijd zo hoorde.",
-                  image: detailGeleverdImg,
+                  image: plugPlayGeleverdImg.url,
                   alt: "Wandig plug and play levering",
                 },
               ].map((item, index) => {

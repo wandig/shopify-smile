@@ -328,7 +328,7 @@ function Home() {
                     rating: 3.5,
                     reviews: 8,
                     size: "90x200 cm.",
-                    cat: "Mini-meubels",
+                    cat: "Cinewall",
                   },
                   {
                     handle: "full-house",

@@ -149,7 +149,7 @@ export function SiteHeader() {
         <div
           className={`border-b transition-[background-color,border-color] duration-300 ease-out ${
             modelsMenuOpen
-              ? "border-white bg-white"
+              ? "border-black/10 bg-white"
               : "border-white/20 bg-black/10 backdrop-blur-sm"
           }`}
         >

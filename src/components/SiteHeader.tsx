@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Menu, Search, Globe, ArrowRight } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
 import {

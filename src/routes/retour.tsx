@@ -101,7 +101,7 @@ function Retour() {
         </p>
         <Link
           to="/klantenservice"
-          className="mt-6 inline-flex rounded-full bg-[#f18972] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#e87a62]"
+          className="mt-6 inline-flex rounded-full bg-[#ef7027] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#d55f1e]"
         >
           Naar klantenservice
         </Link>

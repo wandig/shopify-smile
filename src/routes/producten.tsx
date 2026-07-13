@@ -369,7 +369,7 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
                   onClick={() => setSelectedColor(color)}
                   title={color}
                   aria-label={`Kies ${color}`}
-                  className={`relative h-7 w-7 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 active:scale-95 ${active ? "border-[#f18972]" : "border-transparent hover:border-[#f18972]/45"}`}
+                  className={`relative h-7 w-7 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 active:scale-95 ${active ? "border-[#ef7027]" : "border-transparent hover:border-[#ef7027]/45"}`}
                 >
                   <span
                     className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.45),inset_0_-3px_5px_rgba(0,0,0,0.18)]"

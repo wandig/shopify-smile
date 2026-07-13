@@ -218,7 +218,7 @@ export function SiteHeader() {
             <div className="flex items-center gap-3">
               <Link
                 to="/producten"
-                className="hidden md:inline-flex items-center h-10 px-5 rounded-full bg-[#f18972] hover:bg-[#e87a62] text-white text-sm font-semibold transition-colors duration-300 ease-out"
+                className="hidden md:inline-flex items-center h-10 px-5 rounded-full bg-[#ef7027] hover:bg-[#d55f1e] text-white text-sm font-semibold transition-colors duration-300 ease-out"
               >
                 Bekijk collectie
               </Link>

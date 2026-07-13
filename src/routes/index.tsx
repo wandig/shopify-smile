@@ -31,7 +31,7 @@ function RatingStars({ value, small, dark }: { value: number; small?: boolean; d
 
 function CartIconBtn() {
   return (
-    <span className="h-9 w-9 rounded-full bg-[#f18972] text-white flex items-center justify-center shadow-sm">
+    <span className="h-9 w-9 rounded-full bg-[#ef7027] text-white flex items-center justify-center shadow-sm">
       <svg
         viewBox="0 0 24 24"
         className="h-4 w-4"
@@ -221,7 +221,7 @@ function Home() {
           <div className="mt-10">
             <Button
               asChild
-              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] h-10 px-8 text-sm font-medium"
+              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] h-10 px-8 text-sm font-medium"
             >
               <Link to="/producten">Bekijk bestsellers</Link>
             </Button>
@@ -229,7 +229,7 @@ function Home() {
           <div className="mt-6 flex items-center gap-2 text-white text-[12px] tracking-wide">
             <div className="flex items-center gap-0.5">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-3.5 w-3.5 fill-[#f18972] text-[#f18972]" />
+                <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
               ))}
             </div>
             <span className="opacity-95">23.000+ beoordelingen</span>
@@ -297,7 +297,7 @@ function Home() {
                             <span className="underline underline-offset-2">{card.cat}</span>
                           </div>
                         </div>
-                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#f18972] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef7027] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
                           <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
                             Aanpassen
                           </span>
@@ -380,7 +380,7 @@ function Home() {
                             <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
                           </div>
                         </div>
-                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#f18972] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
+                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef7027] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
                           <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
                             Aanpassen
                           </span>
@@ -532,7 +532,7 @@ function Home() {
                   data-upgrade-row
                   className="grid grid-cols-[5px_1fr] gap-x-3 md:grid-cols-[6px_1fr] md:gap-x-5"
                 >
-                  <div className={`row-span-2 rounded-full transition-colors duration-500 ${active ? "bg-[#f18972]" : "bg-black/12"}`} />
+                  <div className={`row-span-2 rounded-full transition-colors duration-500 ${active ? "bg-[#ef7027]" : "bg-black/12"}`} />
                   <div className="grid grid-cols-[1fr_92px] items-center gap-4 md:grid-cols-[1fr_132px] md:gap-6">
                     <h3 className={`text-[1.18rem] font-medium leading-[1.12] tracking-[-0.05em] transition-colors duration-500 md:text-[1.5rem] ${active ? "text-black" : "text-black/38"}`}>
                       {item.title}
@@ -655,7 +655,7 @@ function Home() {
       {/* Gratis kleurstalen — text left, image right (full-bleed) */}
       <section className="w-full">
         <div className="grid md:grid-cols-2 md:h-[500px]">
-          <div className="flex items-center bg-[#f18972] text-white px-8 md:px-16 py-16 md:py-0 order-2 md:order-1">
+          <div className="flex items-center bg-[#ef7027] text-white px-8 md:px-16 py-16 md:py-0 order-2 md:order-1">
             <div className="max-w-md text-center md:text-left mx-auto md:mx-0 [text-shadow:0_2px_14px_rgba(80,35,24,0.22)]">
               <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Gratis service</span>
               <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
@@ -700,19 +700,19 @@ function Home() {
           <div className="mt-10 flex items-center justify-center gap-3 flex-wrap">
             <a
               href="tel:0123456789"
-              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] transition-colors h-11 px-6 text-sm flex items-center"
+              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] transition-colors h-11 px-6 text-sm flex items-center"
             >
               Bel 012 345 6789
             </a>
             <a
               href="mailto:info@wandig.nl"
-              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] transition-colors h-11 px-6 text-sm flex items-center"
+              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] transition-colors h-11 px-6 text-sm flex items-center"
             >
               info@wandig.nl
             </a>
             <Link
               to="/bezoek"
-              className="rounded-full bg-[#f18972] text-white hover:bg-[#e87a62] transition-colors h-11 px-6 text-sm flex items-center"
+              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] transition-colors h-11 px-6 text-sm flex items-center"
             >
               Bezoek ons
             </Link>

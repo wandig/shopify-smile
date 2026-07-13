@@ -31,7 +31,7 @@ const COLOR_MAP: Record<string, string> = {
   beige: "#d8c9a8", zand: "#d8c9a8", sand: "#d8c9a8",
   goud: "#c9a84c", gold: "#c9a84c",
   zilver: "#c0c0c0", silver: "#c0c0c0",
-  oranje: "#f18972", orange: "#f18972",
+  oranje: "#ef7027", orange: "#ef7027",
   rood: "#c0392b", red: "#c0392b",
   blauw: "#2f5d8a", blue: "#2f5d8a",
   groen: "#3d6b4a", green: "#3d6b4a",
@@ -640,7 +640,7 @@ function ProductView({ product }: { product: ProductNode }) {
           <div className="mt-4 flex items-center gap-2 text-sm">
             <div className="flex">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-[#f18972] text-[#f18972]" strokeWidth={0} />
+                <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" strokeWidth={0} />
               ))}
             </div>
             <span className="text-foreground/70">4.9 · 128 reviews</span>
@@ -650,7 +650,7 @@ function ProductView({ product }: { product: ProductNode }) {
             <div className="grid gap-2.5">
               {PRODUCT_USPS.map((u) => (
                 <div key={u} className="flex items-start gap-3 text-sm text-foreground/80">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f18972]/10 text-[#f18972]">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10 text-[#ef7027]">
                     <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
                   </span>
                   <span>{u}</span>
@@ -689,7 +689,7 @@ function ProductView({ product }: { product: ProductNode }) {
                                 onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
                                 title={v}
                                 aria-label={v}
-                                className={`relative h-11 w-11 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 ease-out active:scale-95 ${active ? "border-[#f18972]" : "border-transparent hover:border-[#f18972]/45"}`}
+                                className={`relative h-11 w-11 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 ease-out active:scale-95 ${active ? "border-[#ef7027]" : "border-transparent hover:border-[#ef7027]/45"}`}
                               >
                                 <span
                                   className="relative block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.45),inset_0_-3px_5px_rgba(0,0,0,0.18)]"
@@ -707,7 +707,7 @@ function ProductView({ product }: { product: ProductNode }) {
                               <button
                                 key={v}
                                 onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                                className={`min-h-11 rounded-xl border-2 px-3 py-2 text-sm font-medium transition-[border-color,background-color,color,transform] duration-150 ease-out active:scale-[0.98] ${active ? "border-[#f18972] bg-white text-foreground" : "border-transparent bg-[#f4f1ed] text-foreground/75 hover:border-[#f18972]/40 hover:bg-white"}`}
+                                className={`min-h-11 rounded-xl border-2 px-3 py-2 text-sm font-medium transition-[border-color,background-color,color,transform] duration-150 ease-out active:scale-[0.98] ${active ? "border-[#ef7027] bg-white text-foreground" : "border-transparent bg-[#f4f1ed] text-foreground/75 hover:border-[#ef7027]/40 hover:bg-white"}`}
                               >
                                 {v}
                               </button>
@@ -724,7 +724,7 @@ function ProductView({ product }: { product: ProductNode }) {
             <Button
               onClick={handleAdd}
               disabled={isLoading || !activeVariant?.availableForSale}
-              className="mt-[30px] h-14 w-full translate-y-0 rounded-full bg-[#f18972] px-6 text-sm font-bold uppercase tracking-[0.18em] text-white shadow-none transition-colors duration-150 hover:translate-y-0 hover:bg-[#e87a62] hover:shadow-none active:scale-100 active:translate-y-0"
+              className="mt-[30px] h-14 w-full translate-y-0 rounded-full bg-[#ef7027] px-6 text-sm font-bold uppercase tracking-[0.18em] text-white shadow-none transition-colors duration-150 hover:translate-y-0 hover:bg-[#d55f1e] hover:shadow-none active:scale-100 active:translate-y-0"
             >
               {isLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -740,11 +740,11 @@ function ProductView({ product }: { product: ProductNode }) {
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-foreground/70">
               <div className="flex items-center justify-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-[#f18972]" strokeWidth={1.8} />
+                <ShieldCheck className="h-4 w-4 text-[#ef7027]" strokeWidth={1.8} />
                 <span>30 dagen bedenktijd</span>
               </div>
               <div className="flex items-center justify-center gap-2">
-                <Hammer className="h-4 w-4 text-[#f18972]" strokeWidth={1.8} />
+                <Hammer className="h-4 w-4 text-[#ef7027]" strokeWidth={1.8} />
                 <span>Handgemaakt in Nederland</span>
               </div>
             </div>
@@ -811,7 +811,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   value={value}
                   className="border-b border-[#dedede] px-0 first:border-t"
                 >
-                  <AccordionTrigger className="py-5 text-left text-[15px] font-semibold text-foreground no-underline transition-colors hover:text-[#f18972] hover:no-underline [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-foreground/45">
+                  <AccordionTrigger className="py-5 text-left text-[15px] font-semibold text-foreground no-underline transition-colors hover:text-[#ef7027] hover:no-underline [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-foreground/45">
                     {title}
                   </AccordionTrigger>
                   <AccordionContent className="space-y-2 pb-5 pr-8 text-sm leading-relaxed text-foreground/68">
@@ -857,7 +857,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 },
               ].map(({ icon: I, title, body }) => (
                 <div key={title}>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[#f18972]/35 text-[#f18972]">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ef7027]/35 text-[#ef7027]">
                     <I className="h-4 w-4" strokeWidth={1.8} />
                   </div>
                   <h3 className="mt-2.5 text-[17.5px] font-semibold leading-tight">{title}</h3>
@@ -882,7 +882,7 @@ function ProductView({ product }: { product: ProductNode }) {
         <div className="mx-auto grid max-w-[1500px] items-center gap-12 md:grid-cols-[0.72fr_1.28fr] lg:gap-16">
           <div>
             <h2 className="max-w-lg font-serif text-[1.94rem] leading-[1.02] tracking-[-0.04em] text-foreground md:text-[2.92rem]">
-              Waarom Wandig de <span className="text-[#f18972]">perfecte keuze is</span>
+              Waarom Wandig de <span className="text-[#ef7027]">perfecte keuze is</span>
             </h2>
             <p className="mt-6 max-w-md text-[15px] leading-relaxed text-foreground/72 md:text-[16px]">
               Geen los meubel, geen half afgewerkte wand. Wandig combineert plug & play gemak, slimme afwerking en een strak eindbeeld in één oplossing voor jouw woonkamer.
@@ -1086,9 +1086,9 @@ function ProductView({ product }: { product: ProductNode }) {
                       </span>
                       <span className="text-base font-medium text-foreground">{review.name}</span>
                     </div>
-                    <div className="mb-3 flex gap-0.5 text-[#f18972]">
+                    <div className="mb-3 flex gap-0.5 text-[#ef7027]">
                       {Array.from({ length: 5 }).map((_, starIndex) => (
-                        <Star key={starIndex} className="h-4 w-4 fill-[#f18972] text-[#f18972]" strokeWidth={0} />
+                        <Star key={starIndex} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" strokeWidth={0} />
                       ))}
                     </div>
                     <h3 className="text-[18px] font-bold leading-snug text-foreground">{review.title}</h3>
@@ -1140,7 +1140,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 },
               ].map(({ value, question, answer }) => (
                 <AccordionItem key={value} value={value} className="border-b border-black/10 px-0 last:border-b-0">
-                  <AccordionTrigger className="py-6 text-left text-[18px] font-medium leading-tight text-foreground no-underline transition-colors hover:text-[#f18972] hover:no-underline md:text-[21px] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-foreground">
+                  <AccordionTrigger className="py-6 text-left text-[18px] font-medium leading-tight text-foreground no-underline transition-colors hover:text-[#ef7027] hover:no-underline md:text-[21px] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-foreground">
                     {question}
                   </AccordionTrigger>
                   <AccordionContent className="pb-6 pr-8 text-[15px] leading-relaxed text-foreground/68 md:text-base">

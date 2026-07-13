@@ -258,14 +258,14 @@ function Home() {
                 {(() => {
                   const card = {
                     handle: "full-house",
-                    badge: "Incl. Standaard hoofdbord",
+                    badge: "Cinewall",
                     img: fullhouseOrange.url,
                     title: "Full House",
                     price: "1.699 €",
                     rating: 4.5,
                     reviews: 2524,
                     size: "180x200",
-                    cat: "Boxspring",
+                    cat: "Cinewall",
                   };
                   return (
                     <Link
@@ -328,7 +328,7 @@ function Home() {
                     rating: 3.5,
                     reviews: 8,
                     size: "90x200 cm.",
-                    cat: "Mini-meubels",
+                    cat: "Cinewall",
                   },
                   {
                     handle: "full-house",
@@ -338,7 +338,7 @@ function Home() {
                     rating: 4.5,
                     reviews: 56,
                     size: "180x200",
-                    cat: "TV-wanden",
+                    cat: "Cinewall",
                   },
                   {
                     handle: "solo",
@@ -348,7 +348,7 @@ function Home() {
                     rating: 4.5,
                     reviews: 14,
                     size: "140x200",
-                    cat: "Banken",
+                    cat: "Cinewall",
                   },
                 ].map((card) => (
                   <Link

@@ -3,6 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import swatchDofroze from "@/assets/swatches/dofroze.jpg";
+import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
+import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
+import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
+import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
+import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
+import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
+import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 
 export const Route = createFileRoute("/producten")({
   head: () => ({
@@ -58,6 +66,17 @@ const COLOR_MAP: Record<string, string> = {
   antraciet: "#2f3438",
 };
 
+const SWATCH_TEXTURES: Array<[RegExp, string]> = [
+  [/eikenzwart/, swatchEikenzwart],
+  [/eikengrijs/, swatchEikengrijs],
+  [/walnootbruin|walnoot|noten/, swatchWalnootbruin],
+  [/truffelbruin|truffel/, swatchTruffelbruin],
+  [/katoengrijs|katoen/, swatchKatoengrijs],
+  [/zandsteen/, swatchZandsteen],
+  [/kleibeige|klei/, swatchKleibeige],
+  [/dofroze|roze/, swatchDofroze],
+];
+
 function colorToCss(name: string): string {
   const key = name.toLowerCase().trim();
   if (COLOR_MAP[key]) return COLOR_MAP[key];
@@ -67,7 +86,22 @@ function colorToCss(name: string): string {
   return "#d4d4d4";
 }
 
+function swatchTexture(name: string): string | undefined {
+  const key = name.toLowerCase().trim();
+  return SWATCH_TEXTURES.find(([pattern]) => pattern.test(key))?.[1];
+}
+
 function swatchStyle(name: string): CSSProperties {
+  const texture = swatchTexture(name);
+  if (texture) {
+    return {
+      backgroundColor: colorToCss(name),
+      backgroundImage: `url(${texture})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    };
+  }
+
   const key = name.toLowerCase().trim();
   const hasOak = /eik|oak/.test(key);
   const hasGrey = /grijs|grey|gray/.test(key);
@@ -335,9 +369,12 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
                   onClick={() => setSelectedColor(color)}
                   title={color}
                   aria-label={`Kies ${color}`}
-                  className={`relative h-7 w-7 rounded-full border bg-transparent p-0 transition-colors duration-150 ${active ? "border-[#f56e16]" : "border-black/10 hover:border-[#f56e16]/50"}`}
+                  className={`relative h-7 w-7 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 active:scale-95 ${active ? "border-[#f18972]" : "border-transparent hover:border-[#f18972]/45"}`}
                 >
-                  <span className="block h-full w-full rounded-full" style={swatchStyle(color)} />
+                  <span
+                    className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.45),inset_0_-3px_5px_rgba(0,0,0,0.18)]"
+                    style={swatchStyle(color)}
+                  />
                 </button>
               );
             })}

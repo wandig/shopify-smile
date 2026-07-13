@@ -14,7 +14,7 @@ import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import duoOrangeStudioImg from "@/assets/duo-orange-studio.jpg";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
-import plugPlayGeleverdImg from "@/assets/plug-play-geleverd.png.asset.json";
+import plugPlayOrangeStudioImg from "@/assets/plug-play-orange-studio.jpg";
 
 function RatingStars({ value, small, dark }: { value: number; small?: boolean; dark?: boolean }) {
   const size = small ? "h-3 w-3" : "h-3.5 w-3.5";
@@ -69,19 +69,32 @@ export const Route = createFileRoute("/")({
 
 const REVIEWS = [
   {
-    quote: "De wand staat strak tot op de millimeter. Het ziet eruit alsof hij altijd in de woonkamer heeft gezeten.",
+    title: "Eindelijk rust rondom de tv",
+    quote:
+      "We wilden geen losse kastjes meer en ook geen kabels in beeld. De Wandig past precies in onze woonkamer en voelt alsof hij er altijd al hoorde. Het geheel is strak, rustig en veel warmer dan onze oude tv-hoek.",
     name: "Lotte M.",
-    location: "Utrecht",
+    meta: "Full House in juni 2026",
   },
   {
-    quote: "Persoonlijk advies, snelle reactie en een afwerking die echt boven verwachting was. Aanrader.",
+    title: "Makkelijker geplaatst dan verwacht",
+    quote:
+      "Ik was bang dat zo'n cinewall veel gedoe zou zijn, maar alles kwam netjes voorbereid binnen. Met twee personen stond hij sneller dan gedacht. Vooral de plug & play aansluiting en weggewerkte kabels maken echt verschil.",
     name: "Jeroen V.",
-    location: "Amsterdam",
+    meta: "Duo in mei 2026",
   },
   {
-    quote: "Vanaf het kleurstaal tot de levering: alles klopte. Een rustig, tijdloos eindresultaat.",
+    title: "De kleur klopt perfect",
+    quote:
+      "De kleurstalen thuis bekijken was precies wat we nodig hadden. Uiteindelijk gekozen voor een afwerking die mooi bij onze vloer past. Het meubel oogt maatwerk, maar bestellen bleef heel overzichtelijk.",
     name: "Sanne D.",
-    location: "Eindhoven",
+    meta: "Solo in mei 2026",
+  },
+  {
+    title: "Veel opbergruimte zonder drukte",
+    quote:
+      "We hebben nu plek voor boeken, speakers en decoratie zonder dat het rommelig wordt. De tv valt veel rustiger weg in de wand en de afwerking is echt netjes. Bezoekers vragen steeds waar we hem hebben laten maken.",
+    name: "Milan R.",
+    meta: "Full House in april 2026",
   },
 ];
 
@@ -438,7 +451,7 @@ function Home() {
           {[
             { img: detailDesignImg, title: "Gepersonaliseerd design" },
             { img: detailMaatwerkImg, title: "Slim samen te stellen" },
-            { img: plugPlayGeleverdImg.url, title: "Plug & play geleverd" },
+            { img: plugPlayOrangeStudioImg, title: "Plug & play geleverd" },
           ].map((item) => (
             <div key={item.title} className="group flex shrink-0 basis-[69%] flex-col snap-start md:basis-auto">
               <div className="aspect-[1.45/1] w-full overflow-hidden rounded-[12px] bg-muted md:rounded-[14px]">
@@ -508,7 +521,7 @@ function Home() {
                 {
                   title: "Plug & play gemak",
                   body: "Slim ontworpen om eenvoudig zelf te plaatsen en aan te sluiten, met een resultaat dat voelt alsof het altijd zo hoorde.",
-                  image: plugPlayGeleverdImg.url,
+                  image: plugPlayOrangeStudioImg,
                   alt: "Wandig plug and play levering",
                 },
               ].map((item, index) => {
@@ -544,62 +557,98 @@ function Home() {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="bg-[#fbf1ea]">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28">
-          <div className="flex items-start justify-between gap-8 mb-12">
-            <div>
-              <h2 className="font-serif text-5xl md:text-7xl font-thin text-[#3d2424] leading-[1.05]">
-                Wat klanten zeggen
-              </h2>
-              <div className="mt-8 flex items-center gap-8 flex-wrap">
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-1">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#d4a574] text-[#d4a574]" />
-                    ))}
-                  </div>
-                  <span className="text-sm text-foreground/80">4.9 · 1180 beoordelingen</span>
-                </div>
-                <Link to="/" className="text-sm underline underline-offset-[6px] text-foreground/80 hover:opacity-70">
-                  Bekijk alle reviews
-                </Link>
-              </div>
-            </div>
-            <div className="hidden md:flex items-center gap-3 shrink-0">
-              <button
-                aria-label="Vorige"
-                className="h-12 w-12 rounded-full bg-[#f18972] text-white flex items-center justify-center hover:bg-[#e87a62] transition"
-              >
-                <ArrowRight className="h-4 w-4 rotate-180" />
-              </button>
-              <button
-                aria-label="Volgende"
-                className="h-12 w-12 rounded-full bg-[#f18972] text-white flex items-center justify-center hover:bg-[#e87a62] transition"
-              >
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-          <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-2 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {REVIEWS.map((r, idx) => (
-              <figure
-                key={r.name}
-                className="border border-border/60 bg-background/40 p-8 flex flex-col min-h-[360px] shrink-0 basis-[85%] md:basis-auto snap-start"
-              >
-                <div className="flex gap-1 mb-6" aria-label="5 sterren">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-[#d4a574] text-[#d4a574]" />
-                  ))}
-                </div>
-                <blockquote className="text-[15px] leading-relaxed text-foreground/85 flex-1">{r.quote}</blockquote>
-                <div className="border-t border-border/50 mt-8 pt-5">
-                  <div className="text-sm text-foreground/90">{r.name}</div>
-                  <div className="text-xs text-muted-foreground mt-1">0{4 + idx} jun 2026</div>
-                </div>
-              </figure>
+      {/* Desktop editorial mosaic */}
+      <section className="hidden bg-[#fef7ee] px-5 py-7 md:block md:px-10">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-6">
+          <article className="group relative row-span-2 h-[604px] overflow-hidden rounded-[16px] bg-[#f4f1ed] shadow-[0_18px_45px_rgba(31,25,21,0.10)]">
+            <img
+              src={fullhouseOrange.url}
+              alt="Wandig Full House in warme studio"
+              loading="lazy"
+              className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/36 to-transparent" />
+            <h2 className="absolute bottom-12 left-12 max-w-[520px] font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[33px] font-[414] leading-[1.02] tracking-[-0.052em] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.26)]">
+              Een wand die meteen klopt
+            </h2>
+          </article>
+
+          <div className="grid h-[604px] grid-cols-2 grid-rows-[1fr_1fr] gap-6">
+            {[
+              {
+                title: "Kleur die rust brengt",
+                img: tvOrangeImg.url,
+                alt: "Wandig kleurvisualisatie op telefoon",
+                className: "object-[48%_58%]",
+              },
+              {
+                title: "Studio afwerking",
+                img: duoOrangeStudioImg,
+                alt: "Wandig Duo in oranje studio",
+                className: "object-center",
+              },
+            ].map((item) => (
+              <article key={item.title} className="group relative overflow-hidden rounded-[16px] bg-[#f4f1ed] shadow-[0_18px_45px_rgba(31,25,21,0.08)]">
+                <img
+                  src={item.img}
+                  alt={item.alt}
+                  loading="lazy"
+                  className={`h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.035] ${item.className}`}
+                />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/34 to-transparent" />
+                <h3 className="absolute bottom-7 left-7 max-w-[260px] font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[23px] font-[414] leading-[1.05] tracking-[-0.0475em] text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.28)]">
+                  {item.title}
+                </h3>
+              </article>
             ))}
+
+            <article className="group relative col-span-2 overflow-hidden rounded-[16px] bg-[#f4f1ed] shadow-[0_18px_45px_rgba(31,25,21,0.08)]">
+              <img
+                src={plugPlayOrangeStudioImg}
+                alt="Wandig plug and play systeem in oranje studio"
+                loading="lazy"
+                className="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-[1.025]"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/36 to-transparent" />
+              <h3 className="absolute bottom-12 left-12 max-w-[520px] font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[33px] font-[414] leading-[1.02] tracking-[-0.052em] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.26)]">
+                Plug &amp; play geleverd
+              </h3>
+            </article>
           </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="overflow-hidden bg-[#fbf5ec] py-16 md:py-24">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+          <h2 className="mx-auto max-w-5xl text-center font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[1.45rem] font-[700] leading-[1.18] tracking-[-0.035em] text-[#16202a] md:text-[1.7rem]">
+            We stoppen pas als jouw tv-wand voelt alsof hij altijd al zo hoorde.
+          </h2>
+        </div>
+
+        <div className="mt-12 flex gap-5 overflow-x-auto px-5 pb-2 md:mt-14 md:px-[8vw] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {REVIEWS.map((r) => (
+            <figure
+              key={r.name}
+              className="flex min-h-[408px] w-[82vw] max-w-[442px] shrink-0 snap-start flex-col rounded-[16px] bg-[#f3eee8] px-8 py-8 md:min-h-[408px] md:w-[442px] md:px-9 md:py-9"
+            >
+              <div className="mb-7 flex gap-1.5" aria-label="5 sterren">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-[18px] w-[18px] fill-[#f56e16] text-[#f56e16]" strokeWidth={1.8} />
+                ))}
+              </div>
+              <figcaption className="mb-7 font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[16px] font-[700] leading-snug tracking-[-0.02em] text-[#16202a]">
+                {r.title}
+              </figcaption>
+              <blockquote className="flex-1 font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[15px] leading-[1.48] tracking-[-0.01em] text-[#37414c]">
+                {r.quote}
+              </blockquote>
+              <div className="mt-8 font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[12px] leading-[1.35] text-[#6f7a84]">
+                <div>{r.name}</div>
+                <div>{r.meta}</div>
+              </div>
+            </figure>
+          ))}
         </div>
       </section>
 

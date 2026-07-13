@@ -22,7 +22,7 @@ function Bezoek() {
       <div className="mt-12 grid sm:grid-cols-2 gap-8 text-sm">
         <div>
           <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-3">Adres</div>
-          <p>Wandig Showroom<br />Werkplaatsstraat 1<br />Nederland</p>
+          <p>Wandig Showroom<br />De Tongelreep 1 - 7<br />5684 PZ Best</p>
         </div>
         <div>
           <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-3">Openingstijden</div>

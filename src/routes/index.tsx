@@ -258,14 +258,14 @@ function Home() {
                 {(() => {
                   const card = {
                     handle: "full-house",
-                    badge: "Incl. Standaard hoofdbord",
+                    badge: "Cinewall",
                     img: fullhouseOrange.url,
                     title: "Full House",
                     price: "1.699 €",
                     rating: 4.5,
                     reviews: 2524,
                     size: "180x200",
-                    cat: "Boxspring",
+                    cat: "Cinewall",
                   };
                   return (
                     <Link

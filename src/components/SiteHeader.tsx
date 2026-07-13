@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Menu, Search, Globe, ArrowRight } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
 import {
@@ -51,6 +51,13 @@ function ModelsMenu({
     setOpen(nextOpen);
     onOpenChange?.(nextOpen);
   };
+
+  useEffect(() => {
+    if (!open) return;
+    const handleScroll = () => updateOpen(false);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [open]);
 
   return (
     <div
@@ -142,7 +149,7 @@ export function SiteHeader() {
         <div
           className={`border-b transition-[background-color,border-color] duration-300 ease-out ${
             modelsMenuOpen
-              ? "border-white bg-white"
+              ? "border-black/10 bg-white"
               : "border-white/20 bg-black/10 backdrop-blur-sm"
           }`}
         >

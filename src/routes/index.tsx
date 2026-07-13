@@ -348,7 +348,7 @@ function Home() {
                     rating: 4.5,
                     reviews: 14,
                     size: "140x200",
-                    cat: "Banken",
+                    cat: "Cinewall",
                   },
                 ].map((card) => (
                   <Link

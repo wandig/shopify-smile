@@ -338,7 +338,7 @@ function Home() {
                     rating: 4.5,
                     reviews: 56,
                     size: "180x200",
-                    cat: "TV-wanden",
+                    cat: "Cinewall",
                   },
                   {
                     handle: "solo",

@@ -52,6 +52,13 @@ function ModelsMenu({
     onOpenChange?.(nextOpen);
   };
 
+  useEffect(() => {
+    if (!open) return;
+    const handleScroll = () => updateOpen(false);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [open]);
+
   return (
     <div
       className="relative hidden self-stretch md:flex md:items-center"

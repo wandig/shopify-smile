@@ -5,13 +5,19 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, ChevronLeft, Check, X, Star, Hammer, ShieldCheck, Ruler } from "lucide-react";
-import fullHouseEikenzwartRechtsImage from "@/assets/full-house-eikenzwart-rechts-temp.png";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Star, Hammer, ShieldCheck, Ruler, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import comparisonDiyWallImg from "@/assets/comparison-diy-wall.jpg";
 import comparisonStandardFurnitureImg from "@/assets/comparison-standard-furniture.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
+import fullHouseGalleryMain from "@/assets/full-house-gallery-main.png";
+import fullHouseGalleryRoom from "@/assets/full-house-gallery-room.jpg";
+import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";
+import fullHouseGalleryStylingTwo from "@/assets/full-house-gallery-styling-two.webp";
+import fullHouseGalleryFinish from "@/assets/full-house-gallery-finish.webp";
+import fullHouseGalleryStorage from "@/assets/full-house-gallery-storage.webp";
+import fullHouseGalleryUse from "@/assets/full-house-gallery-use.webp";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
 import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
@@ -207,7 +213,7 @@ function ProductPage() {
 
   if (isLoading) {
     return (
-      <div className="bg-white">
+      <div className="bg-[#e5dcd4]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
           <div className="aspect-[4/5] bg-muted animate-pulse" />
           <div className="space-y-4">
@@ -223,99 +229,23 @@ function ProductPage() {
   return <ProductView product={data} />;
 }
 
-const PRODUCT_USPS = [
-  "Met de hand gemaakt in onze werkplaats",
-  "Plug & play voor jouw woonkamer",
-  "Gratis levering, eenvoudig zelf te plaatsen",
+const FULL_HOUSE_GALLERY = [
+  { src: fullHouseGalleryMain, alt: "Wandig Full House volledig vrijstaand in walnootbruin", full: true, square: true },
+  { src: fullHouseGalleryRoom, alt: "Wandig Full House gemonteerd in een lichte woonkamer", full: true },
+  { src: fullHouseGalleryStylingOne, alt: "Detail van de vakken en houtnerf van de Wandig Full House", full: false },
+  { src: fullHouseGalleryStylingTwo, alt: "Gestylede vakken van de Wandig Full House", full: false },
+  { src: fullHouseGalleryFinish, alt: "Close-up van de strakke frontafwerking", full: true },
+  { src: fullHouseGalleryStorage, alt: "Geopend opbergvak met beslag", full: false },
+  { src: fullHouseGalleryUse, alt: "Gebruik van het verborgen opbergvak", full: false },
 ];
 
-function ThumbStrip({
-  images,
-  activeImg,
-  onSelect,
-}: {
-  images: Array<{ node: { url: string; altText: string | null } }>;
-  activeImg: number;
-  onSelect: (i: number) => void;
-}) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const scrollBy = (dir: 1 | -1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
-  };
-  return (
-    <div className="relative">
-      <div
-        ref={scrollerRef}
-        className="flex gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {images.map((img, i) => (
-          <button
-            key={img.node.url + i}
-            onClick={() => onSelect(i)}
-            className={`shrink-0 w-[18%] min-w-[56px] sm:min-w-[72px] aspect-square overflow-hidden rounded-xl border-2 snap-start transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] ${i === activeImg ? "border-[#ef8874]" : "border-transparent hover:border-[#ef8874]/40"}`}
-          >
-            <img src={img.node.url} alt="" className="w-full h-full object-cover" />
-          </button>
-        ))}
-      </div>
-      {images.length > 5 && (
-        <>
-          <button
-            aria-label="Vorige"
-            onClick={() => scrollBy(-1)}
-            className="absolute left-1 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 shadow border border-border flex items-center justify-center hover:bg-white"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            aria-label="Volgende"
-            onClick={() => scrollBy(1)}
-            className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 shadow border border-border flex items-center justify-center hover:bg-white"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </>
-      )}
-    </div>
-  );
-}
-
-function CrossfadeImage({ src, alt }: { src: string; alt: string }) {
-  const [shown, setShown] = useState(src);
-  const [incoming, setIncoming] = useState<string | null>(null);
-  const [fadeIn, setFadeIn] = useState(false);
-
-  useEffect(() => {
-    if (src !== shown) {
-      setIncoming(src);
-      setFadeIn(false);
-    }
-  }, [src, shown]);
-
-  const promote = (url: string) => {
-    setShown(url);
-    setIncoming(null);
-    setFadeIn(false);
-  };
-
-  return (
-    <>
-      <img src={shown} alt={alt} className="absolute inset-0 h-full w-full scale-110 object-contain" />
-      {incoming && incoming !== shown && (
-        <img
-          key={incoming}
-          src={incoming}
-          alt={alt}
-          onLoad={() => requestAnimationFrame(() => setFadeIn(true))}
-          onTransitionEnd={() => promote(incoming)}
-          className={`absolute inset-0 h-full w-full scale-110 object-contain transition-opacity duration-300 ease-out ${fadeIn ? "opacity-100" : "opacity-0"}`}
-        />
-      )}
-    </>
-  );
-}
+const PRODUCT_BENEFITS = [
+  { title: "Rust zonder kabels", image: productStoryBlackOakOrangeImg },
+  { title: "Handgemaakt in NL", image: detailMaatwerkImg },
+  { title: "Ontworpen voor jouw woonkamer", image: fullHouseGalleryRoom },
+  { title: "5 jaar garantie", image: fullHouseGalleryStylingOne },
+  { title: "Eenvoudig te plaatsen", image: fullHouseGalleryUse },
+];
 
 function ComparisonMiniVisual({ type, compact = false }: { type: "diy" | "furniture"; compact?: boolean }) {
   const src = type === "diy" ? comparisonDiyWallImg : comparisonStandardFurnitureImg;
@@ -336,8 +266,8 @@ function ProductView({ product }: { product: ProductNode }) {
     () => product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null }),
     [product],
   );
-  const [activeImg, setActiveImg] = useState(0);
   const reviewCarouselRef = useRef<HTMLDivElement>(null);
+  const benefitsScrollerRef = useRef<HTMLDivElement>(null);
   const reviewDragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
@@ -412,20 +342,16 @@ function ProductView({ product }: { product: ProductNode }) {
     return filtered.length > 0 ? filtered : allImages;
   }, [allImages, variants, colorKey, selectedColor, positionKey, selectedPosition]);
 
-  // Follow the active variant's own image whenever ANY option changes (colour,
-  // links/rechts, etc.). Manual thumbnail clicks don't change these deps, so they
-  // are preserved. Falls back to the first image of the (colour-filtered) group.
-  const activeVariantImageUrl = activeVariant?.image?.url;
-  useEffect(() => {
-    if (activeVariantImageUrl) {
-      const idx = images.findIndex((img) => img.node.url === activeVariantImageUrl);
-      if (idx >= 0) {
-        setActiveImg(idx);
-        return;
-      }
-    }
-    setActiveImg(0);
-  }, [activeVariantImageUrl, images]);
+  const galleryItems = useMemo(() => {
+    if (product.handle === "full-house") return FULL_HOUSE_GALLERY;
+
+    return images.slice(0, 7).map(({ node }, index) => ({
+      src: node.url,
+      alt: node.altText || product.title,
+      full: index === 0 || index === 1 || index === 4,
+      square: index === 0,
+    }));
+  }, [images, product.handle, product.title]);
 
   // Preload every variant image so switching colour/option crossfades instantly.
   useEffect(() => {
@@ -588,16 +514,17 @@ function ProductView({ product }: { product: ProductNode }) {
   const visibleOptions = product.options.filter((o) => !(o.name === "Title" && o.values.length === 1));
   const hasOptions = visibleOptions.length > 0;
   const activePrice = activeVariant ? formatPrice(activeVariant.price.amount, activeVariant.price.currencyCode) : "Prijs op aanvraag";
-  const showButtonPrice = activeVariant && parseFloat(activeVariant.price.amount) > 0;
-  const temporaryFullHouseRightImage =
-    product.handle === "full-house" &&
-    Object.values(selected).some((value) => value.toLowerCase() === "rechts") &&
-    selectedColor?.toLowerCase().includes("eikenzwart")
-      ? fullHouseEikenzwartRechtsImage
-      : null;
-
+  const numericPrice = activeVariant ? parseFloat(activeVariant.price.amount) : 0;
+  const configuratorPrice = numericPrice > 0 ? activePrice.replace("€", "").trim() : product.handle === "full-house" ? "1699,-" : activePrice;
+  const installmentPrice = numericPrice > 0
+    ? formatPrice((numericPrice / 3).toFixed(2), activeVariant!.price.currencyCode)
+    : "€581,66";
+  const displayTitle = product.title.replace(/^Wandig\s+/i, "");
+  const scrollBenefits = (direction: -1 | 1) => {
+    benefitsScrollerRef.current?.scrollBy({ left: direction * 180, behavior: "smooth" });
+  };
   return (
-    <div className="bg-white">
+    <div className="bg-[#e5dcd4]">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-10 md:py-16">
       <nav className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8 flex items-center gap-2">
         <Link to="/" className="hover:text-foreground">Home</Link>
@@ -607,228 +534,188 @@ function ProductView({ product }: { product: ProductNode }) {
         <span className="text-foreground">{product.title}</span>
       </nav>
 
-      <div className="grid md:grid-cols-[1.22fr_1fr] gap-8 md:gap-16">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.42fr)_minmax(360px,0.78fr)] lg:gap-10 xl:gap-14">
         {/* Gallery */}
-        <div className="min-w-0">
-          <div className="md:sticky md:top-28 md:self-start">
-            <div className="md:ml-auto md:w-[80%]">
-              <div className="relative w-full bg-muted overflow-hidden rounded-2xl mb-3 aspect-square">
-                {images[activeImg] && (
-                  <CrossfadeImage
-                    src={temporaryFullHouseRightImage ?? images[activeImg].node.url}
-                    alt={images[activeImg].node.altText || product.title}
-                  />
-                )}
-              </div>
-              {images.length > 1 && (
-                <ThumbStrip
-                  images={images}
-                  activeImg={activeImg}
-                  onSelect={setActiveImg}
-                />
-              )}
-            </div>
-          </div>
+        <div className="grid min-w-0 grid-cols-2 gap-3 md:gap-4">
+          {galleryItems.map((image, index) => (
+            <figure
+              key={`${image.src}-${index}`}
+              className={`${image.full ? "col-span-2" : "col-span-1"} overflow-hidden rounded-[6px]`}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                className={`block w-full ${image.square ? "aspect-square object-contain" : "aspect-[4/3] object-cover"}`}
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
+              />
+            </figure>
+          ))}
         </div>
 
         {/* Info */}
-        <div className="min-w-0">
-          <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Cinewall</span>
-          <h1 className="font-serif text-2xl md:text-4xl mt-3 leading-[1.05]">{product.title}</h1>
-
-          {/* Reviews */}
-          <div className="mt-4 flex items-center gap-2 text-sm">
-            <div className="flex">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" strokeWidth={0} />
-              ))}
-            </div>
-            <span className="text-foreground/70">4.9 · 128 reviews</span>
-          </div>
-
-          <div className="mt-6">
-            <div className="grid gap-2.5">
-              {PRODUCT_USPS.map((u) => (
-                <div key={u} className="flex items-start gap-3 text-sm text-foreground/80">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10 text-[#ef7027]">
-                    <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
-                  </span>
-                  <span>{u}</span>
+        <div className="min-w-0 lg:sticky lg:top-24 lg:self-start">
+          <div className="space-y-3">
+            <section className="rounded-[20px] border border-black/10 bg-white p-4 shadow-[0_18px_45px_rgba(42,31,22,0.07)]">
+              <div className="grid grid-cols-[minmax(0,1fr)_132px] gap-4">
+                <div>
+                  <h1 className="text-[28px] font-bold leading-none text-[#071426]">{displayTitle}</h1>
+                  <div className="mt-3 flex items-center gap-2 text-[11px] text-[#071426]/65">
+                    <span className="grid h-3.5 w-5 overflow-hidden border border-black/10" aria-hidden="true">
+                      <span className="bg-[#ae1c28]" />
+                      <span className="bg-white" />
+                      <span className="bg-[#21468b]" />
+                    </span>
+                    <span>Nederlandse productie</span>
+                    <span className="ml-1 h-4 w-px bg-black/20" />
+                  </div>
+                  <p className="mt-3 text-[13px] font-medium text-[#071426]">Tv-kast</p>
+                  <div className="mt-1.5 flex items-center gap-1.5 text-[#071426]">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <Star key={index} className="h-4 w-4 fill-current" strokeWidth={0} />
+                    ))}
+                    <span className="ml-1 text-[11px] text-[#071426]/60">(1000+)</span>
+                  </div>
                 </div>
-              ))}
-            </div>
 
-            <p className="mt-5 font-serif text-3xl leading-none text-foreground">{activePrice}</p>
+                <div className="text-right">
+                  <p className="text-[28px] font-bold leading-none text-[#ff5a00]">{configuratorPrice}</p>
+                  <p className="mt-4 text-[10px] leading-relaxed text-[#071426]/76">
+                    3 betalingen van {installmentPrice}<br />tegen 0% rente met <strong className="text-[#071426]">Klarna.</strong>
+                  </p>
+                  <a href="https://www.klarna.com/nl/klantenservice/" target="_blank" rel="noreferrer" className="mt-2 inline-block text-[10px] text-[#071426] underline underline-offset-2">
+                    Meer informatie
+                  </a>
+                </div>
+              </div>
 
-            {hasOptions && (
-              <div className="mt-5 space-y-[26px]">
-                {visibleOptions.map((opt, optIndex) => {
-                  const isColor = /kleur|color/i.test(opt.name);
-                  return (
-                    <div key={opt.name}>
-                      <div className="mb-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/50">
-                          Stap {optIndex + 1}
-                        </span>
-                        {selected[opt.name] && (
-                          <>
-                            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/25">·</span>
-                            <span className="text-sm font-semibold text-foreground">
-                              {opt.name.charAt(0).toUpperCase() + opt.name.slice(1).toLowerCase()}: {selected[opt.name]}
-                            </span>
-                          </>
+              {hasOptions && (
+                <div className="mt-4 space-y-2">
+                  {visibleOptions.map((opt) => {
+                    const isColor = /kleur|color/i.test(opt.name);
+                    const label = isColor ? "Kleur" : /maat|size|inch/i.test(opt.name) ? "Tv-maat" : "Opstelling";
+
+                    return (
+                      <div key={opt.name} className="grid min-h-[52px] grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-[12px] border border-black/10 px-3">
+                        <span className="text-[14px] font-bold text-[#071426]">{label}</span>
+                        {isColor ? (
+                          <div className="grid grid-cols-8 items-center gap-1.5">
+                            {opt.values.map((value) => {
+                              const active = selected[opt.name] === value;
+                              return (
+                                <button
+                                  key={value}
+                                  type="button"
+                                  onClick={() => setSelected((current) => ({ ...current, [opt.name]: value }))}
+                                  title={value}
+                                  aria-label={`Kleur ${value}`}
+                                  aria-pressed={active}
+                                  className={`mx-auto h-6 w-6 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 xl:h-7 xl:w-7 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
+                                >
+                                  <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={swatchStyle(value)} />
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <label className="relative block min-w-0">
+                            <span className="sr-only">Kies {label.toLowerCase()}</span>
+                            <select
+                              value={selected[opt.name] || ""}
+                              onChange={(event) => setSelected((current) => ({ ...current, [opt.name]: event.target.value }))}
+                              className="h-10 w-full appearance-none bg-transparent pr-7 text-[14px] text-[#071426] outline-none"
+                            >
+                              {opt.values.map((value) => <option key={value} value={value}>{value}</option>)}
+                            </select>
+                            <ChevronDown className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-[#071426]/45" />
+                          </label>
                         )}
                       </div>
-                      {isColor ? (
-                        <div className="flex flex-wrap gap-3">
-                          {opt.values.map((v) => {
-                            const active = selected[opt.name] === v;
-                            return (
-                              <button
-                                key={v}
-                                onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                                title={v}
-                                aria-label={v}
-                                className={`relative h-11 w-11 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 ease-out active:scale-95 ${active ? "border-[#ef7027]" : "border-transparent hover:border-[#ef7027]/45"}`}
-                              >
-                                <span
-                                  className="relative block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.45),inset_0_-3px_5px_rgba(0,0,0,0.18)]"
-                                  style={swatchStyle(v)}
-                                />
-                              </button>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                          {opt.values.map((v) => {
-                            const active = selected[opt.name] === v;
-                            return (
-                              <button
-                                key={v}
-                                onClick={() => setSelected((s) => ({ ...s, [opt.name]: v }))}
-                                className={`min-h-11 rounded-xl border-2 px-3 py-2 text-sm font-medium transition-[border-color,background-color,color,transform] duration-150 ease-out active:scale-[0.98] ${active ? "border-[#ef7027] bg-white text-foreground" : "border-transparent bg-[#f4f1ed] text-foreground/75 hover:border-[#ef7027]/40 hover:bg-white"}`}
-                              >
-                                {v}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            <Button
-              onClick={handleAdd}
-              disabled={isLoading || !activeVariant?.availableForSale}
-              className="mt-[30px] h-14 w-full translate-y-0 rounded-full bg-[#ef7027] px-6 text-sm font-bold uppercase tracking-[0.18em] text-white shadow-none transition-colors duration-150 hover:translate-y-0 hover:bg-[#d55f1e] hover:shadow-none active:scale-100 active:translate-y-0"
-            >
-              {isLoading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : activeVariant?.availableForSale ? (
-                <span className="flex w-full items-center justify-center gap-3">
-                  <span>In winkelmand</span>
-                  {showButtonPrice && <span className="font-serif text-base tracking-normal opacity-90">· {activePrice}</span>}
-                </span>
-              ) : (
-                "Uitverkocht"
+                    );
+                  })}
+                </div>
               )}
-            </Button>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-foreground/70">
-              <div className="flex items-center justify-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-[#ef7027]" strokeWidth={1.8} />
-                <span>30 dagen bedenktijd</span>
+              <Button
+                onClick={handleAdd}
+                disabled={isLoading || !activeVariant?.availableForSale}
+                className="mt-3 h-12 w-full translate-y-0 rounded-full bg-[#ff5a00] px-6 text-sm font-bold text-white shadow-none transition-colors hover:translate-y-0 hover:bg-[#e95100] hover:shadow-none active:translate-y-0 active:scale-100"
+              >
+                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : activeVariant?.availableForSale ? (
+                  <span className="flex items-center justify-center gap-3"><ShoppingBag className="h-5 w-5" />In winkelwagen</span>
+                ) : "Uitverkocht"}
+              </Button>
+
+              <div className="mt-3 grid grid-cols-3 divide-x divide-black/10 text-[#071426]">
+                <div className="flex items-center justify-center gap-1.5 px-2 text-center text-[9px] leading-tight"><ShieldCheck className="h-[18px] w-[18px] shrink-0" /><span>5 jaar garantie</span></div>
+                <div className="flex items-center justify-center gap-1.5 px-2 text-center text-[9px] leading-tight"><Hammer className="h-[18px] w-[18px] shrink-0" /><span>Handgemaakt in NL</span></div>
+                <div className="flex items-center justify-center gap-1.5 px-2 text-center text-[9px] leading-tight"><Truck className="h-[18px] w-[18px] shrink-0" /><span>7 - 14 werkdagen levertijd</span></div>
               </div>
-              <div className="flex items-center justify-center gap-2">
-                <Hammer className="h-4 w-4 text-[#ef7027]" strokeWidth={1.8} />
-                <span>Handgemaakt in Nederland</span>
+            </section>
+
+            <section className="rounded-[20px] border border-black/10 bg-white p-4 shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-black/10 px-3 py-1.5 text-[11px] font-semibold text-[#071426]">
+                <span className="h-2 w-2 rounded-full bg-[#ff5a00]" />Laatste exemplaren
+              </span>
+              <p className="mt-2.5 text-[14px] font-bold text-[#071426]">Transformeer je woonkamer in 7 - 14 werkdagen.</p>
+              <p className="mt-1 text-[12px] text-[#071426]/55">Bestel vandaag en transformeer je woonkamer.</p>
+            </section>
+
+            <section className="overflow-hidden rounded-[20px] border border-black/10 bg-white p-3 shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
+              <div className="mb-3 flex items-center justify-between px-1">
+                <h2 className="text-[14px] font-bold text-[#071426]">Jouw voordelen</h2>
+                <div className="flex gap-1.5">
+                  <button type="button" aria-label="Vorige voordelen" onClick={() => scrollBenefits(-1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-black/10 text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronLeft className="h-3.5 w-3.5" /></button>
+                  <button type="button" aria-label="Volgende voordelen" onClick={() => scrollBenefits(1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-black/10 text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronRight className="h-3.5 w-3.5" /></button>
+                </div>
               </div>
-            </div>
-
-            <p className="mt-4 text-sm leading-relaxed text-foreground/70 animate-in fade-in slide-in-from-bottom-1 duration-700">
-              Elke Wandig cinewall wordt met de hand gemaakt — beschikbaar in vaste maten, kleuren en opstellingen. Kabels worden netjes weggewerkt, het front laat geluid moeiteloos door en de afwerking blijft jarenlang strak.
-            </p>
-          </div>
-
-          {product.description && (
-            <div className="mt-6">
-              <h2 className="font-bold text-base mb-2">Productomschrijving</h2>
-              <p className="text-foreground/75 leading-relaxed">{product.description}</p>
-            </div>
-          )}
-
-          {/* Details */}
-          <div className="mt-10 animate-in fade-in slide-in-from-bottom-1 duration-700">
-            <div className="mb-5">
-              <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Goed om te weten</span>
-              <h2 className="mt-2 font-serif text-2xl leading-tight">Alle details op een rij</h2>
-              <p className="mt-2 text-sm leading-relaxed text-foreground/60">
-                Van formaat tot levering — hieronder vind je alles rustig op een rij.
-              </p>
-            </div>
-
-            <Accordion type="single" collapsible className="space-y-3">
-              {[
-                {
-                  value: "details",
-                  title: "Details & formaat",
-                  body: [
-                    "Massief houten frame, gemaakt in vaste maten voor jouw tv en woonkamer. Kabels netjes weggewerkt en een geluidsdoorlatend front.",
-                    "Standaard hoogte 240 cm — andere afmetingen op aanvraag mogelijk.",
-                  ],
-                },
-                {
-                  value: "materiaal",
-                  title: "Materiaal & afwerking",
-                  body: [
-                    "FSC-gecertificeerd massief hout uit Europese bossen. Geen plaatmateriaal, geen plastic afwerking.",
-                    "Met de hand geschaafd, gelijmd en afgewerkt in onze eigen werkplaats.",
-                  ],
-                },
-                {
-                  value: "shipping",
-                  title: "Verzending & plaatsing",
-                  body: [
-                    "Gratis levering bij jou thuis. Levertijd 4–6 weken na bestelling.",
-                    "De cinewall is plug & play ontworpen, zodat je hem eenvoudig zelf neerzet en aansluit.",
-                  ],
-                },
-                {
-                  value: "garantie",
-                  title: "Garantie & retour",
-                  body: [
-                    "Vijf jaar garantie op constructie en afwerking.",
-                    "30 dagen bedenktijd — niet tevreden? Wij halen de cinewall kosteloos op.",
-                  ],
-                },
-              ].map(({ value, title, body }) => (
-                <AccordionItem
-                  key={value}
-                  value={value}
-                  className="border-b border-[#dedede] px-0 first:border-t"
-                >
-                  <AccordionTrigger className="py-5 text-left text-[15px] font-semibold text-foreground no-underline transition-colors hover:text-[#ef7027] hover:no-underline [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-foreground/45">
-                    {title}
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-2 pb-5 pr-8 text-sm leading-relaxed text-foreground/68">
-                    {body.map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+              <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {PRODUCT_BENEFITS.map((benefit) => (
+                  <article key={benefit.title} className="relative h-[136px] min-w-[116px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc]">
+                    <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/45" />
+                    <span className="absolute left-2.5 top-2.5 rounded-full bg-white/88 px-2 py-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-[#7a3422]">Inclusief</span>
+                    <h3 className="absolute inset-x-2.5 bottom-2.5 text-[12px] font-semibold leading-tight text-white drop-shadow">{benefit.title}</h3>
+                  </article>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       </div>
+
+      <section className="mt-10 grid gap-8 rounded-[20px] border border-black/10 bg-white p-6 md:p-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Productomschrijving</span>
+          <h2 className="mt-2 font-serif text-2xl leading-tight">Gemaakt voor rust in jouw woonkamer</h2>
+          <p className="mt-4 text-sm leading-relaxed text-foreground/70">
+            {product.description || "Elke Wandig cinewall wordt met de hand gemaakt en volledig voorbereid geleverd. Kabels, apparatuur en aansluitingen krijgen een vaste plek voor een rustig en strak eindbeeld."}
+          </p>
+        </div>
+
+        <div>
+          <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Goed om te weten</span>
+          <Accordion type="single" collapsible className="mt-2">
+            {[
+              { value: "details", title: "Details & formaat", body: ["Massief houten frame, gemaakt in vaste maten voor jouw tv en woonkamer. Kabels netjes weggewerkt en een geluidsdoorlatend front.", "Standaard hoogte 240 cm — andere afmetingen op aanvraag mogelijk."] },
+              { value: "materiaal", title: "Materiaal & afwerking", body: ["FSC-gecertificeerd massief hout uit Europese bossen. Geen plaatmateriaal, geen plastic afwerking.", "Met de hand geschaafd, gelijmd en afgewerkt in onze eigen werkplaats."] },
+              { value: "shipping", title: "Verzending & plaatsing", body: ["Gratis levering bij jou thuis. Levertijd 7–14 werkdagen.", "De cinewall is plug & play ontworpen, zodat je hem eenvoudig zelf neerzet en aansluit."] },
+              { value: "garantie", title: "Garantie & retour", body: ["Vijf jaar garantie op constructie en afwerking.", "30 dagen bedenktijd — niet tevreden? Wij halen de cinewall kosteloos op."] },
+            ].map(({ value, title, body }) => (
+              <AccordionItem key={value} value={value} className="border-b border-black/10 px-0 first:border-t">
+                <AccordionTrigger className="py-4 text-left text-[14px] font-semibold text-foreground no-underline hover:text-[#ff5a00] hover:no-underline">{title}</AccordionTrigger>
+                <AccordionContent className="space-y-2 pb-4 pr-8 text-sm leading-relaxed text-foreground/68">
+                  {body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
       </div>
 
       {/* Product story */}
-      <section className="bg-white px-5 py-8 md:px-10 md:py-10">
+      <section className="bg-[#e5dcd4] px-5 py-8 md:px-10 md:py-10">
         <div className="mx-auto grid max-w-[1500px] overflow-hidden rounded-[22px] border border-[#dedede] bg-white md:grid-cols-2">
           <div className="order-2 flex flex-col justify-center px-8 py-7 md:order-1 md:h-[720px] md:px-12 md:py-0 lg:px-16">
             <h2 className="max-w-xl font-serif text-[1.875rem] leading-[1.05] text-foreground md:text-[2.375rem]">
@@ -878,7 +765,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 md:px-10 md:py-24">
+      <section className="bg-[#e5dcd4] px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto grid max-w-[1500px] items-center gap-12 md:grid-cols-[0.72fr_1.28fr] lg:gap-16">
           <div>
             <h2 className="max-w-lg font-serif text-[1.94rem] leading-[1.02] tracking-[-0.04em] text-foreground md:text-[2.92rem]">
@@ -1051,7 +938,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </section>
 
-      <section className="bg-white px-5 pb-16 md:px-10 md:pb-24">
+      <section className="bg-[#e5dcd4] px-5 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-[1500px]">
           <div
             ref={reviewCarouselRef}
@@ -1101,7 +988,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 md:px-10 md:py-24">
+      <section className="bg-[#e5dcd4] px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1080px] text-center">
           <h2 className="font-serif text-[2.55rem] leading-none tracking-[-0.045em] text-foreground md:text-[4rem]">
             Questions?

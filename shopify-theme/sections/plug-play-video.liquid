@@ -1,0 +1,16 @@
+<section class="w-plug">
+  <div class="wrap-inner">
+    <div class="w-plug__frame">
+      <video src="{{ section.settings.video_url }}" autoplay muted loop playsinline></video>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Plug & play video",
+  "settings": [
+    { "type": "url", "id": "video_url", "label": "Video URL", "default": "https://shopify-smile.lovable.app/__l5e/assets-v1/141986ff-7372-4c54-8d1d-67f34471fc4a/hero-reel.mp4" }
+  ],
+  "presets": [{ "name": "Plug & play video", "category": "Image" }]
+}
+{% endschema %}

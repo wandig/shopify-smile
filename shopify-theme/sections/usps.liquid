@@ -1,0 +1,33 @@
+<section class="w-usps">
+  <div class="wrap-inner">
+    <div class="w-usps__row">
+      {% for block in section.blocks %}
+        <div>
+          <div class="w-usps__kicker">{{ block.settings.kicker }}</div>
+          <div class="w-usps__title">{{ block.settings.title }}</div>
+          <div class="w-usps__body">{{ block.settings.body }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "USPs",
+  "blocks": [
+    { "type": "usp", "name": "USP", "settings": [
+      { "type": "text", "id": "kicker", "label": "Kicker" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "body", "label": "Body" }
+    ]}
+  ],
+  "default": {
+    "blocks": [
+      { "type": "usp", "settings": { "kicker": "SINDS 2020", "title": "+150.000 verkochte cinewalls", "body": "Duizenden woonkamers voorzien" } },
+      { "type": "usp", "settings": { "kicker": "TEVREDENHEID", "title": "97% klanttevredenheid", "body": "Onze klanten geven ons een 9+" } },
+      { "type": "usp", "settings": { "kicker": "PROBEER THUIS", "title": "30 dagen bedenktijd", "body": "Niet tevreden? Geld terug" } }
+    ]
+  },
+  "presets": [{ "name": "USPs", "category": "Text" }]
+}
+{% endschema %}

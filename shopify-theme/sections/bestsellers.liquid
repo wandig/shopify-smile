@@ -1,0 +1,43 @@
+<section class="w-best">
+  <div class="w-best__label"><span>{{ section.settings.label }}</span></div>
+  <div class="w-best__scroll">
+    {% for block in section.blocks %}
+      {% assign wide = block.settings.wide %}
+      <article class="w-card {% if wide %}w-card--wide{% endif %}">
+        <div class="w-card__media"><img src="{{ block.settings.image_url }}" alt="{{ block.settings.title }}" loading="lazy"></div>
+        <div class="w-card__body">
+          <span class="w-card__badge">{{ block.settings.badge }}</span>
+          <h3 class="w-card__title">{{ block.settings.title }}</h3>
+          <div class="w-card__price">{{ block.settings.price }}</div>
+          <div class="w-card__meta">{{ block.settings.meta }}</div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Bestsellers",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Vertical label", "default": "BESTSELLERS" }
+  ],
+  "blocks": [
+    { "type": "card", "name": "Card", "settings": [
+      { "type": "checkbox", "id": "wide", "label": "Wide (square) card", "default": false },
+      { "type": "text", "id": "badge", "label": "Badge", "default": "Cinewall" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Full House" },
+      { "type": "text", "id": "price", "label": "Price", "default": "€749" },
+      { "type": "text", "id": "meta", "label": "Meta", "default": "vanaf €25/mnd" },
+      { "type": "url", "id": "image_url", "label": "Image URL", "default": "https://shopify-smile.lovable.app/__l5e/assets-v1/68fae183-bcd1-4399-9b29-4c92cea59908/fullhouse-orange-v2.png" }
+    ]}
+  ],
+  "default": {
+    "blocks": [
+      { "type": "card", "settings": { "wide": true, "title": "Full House", "badge": "Cinewall", "price": "€749", "image_url": "https://shopify-smile.lovable.app/__l5e/assets-v1/68fae183-bcd1-4399-9b29-4c92cea59908/fullhouse-orange-v2.png" } },
+      { "type": "card", "settings": { "title": "TV Wall", "badge": "Cinewall", "price": "€549", "image_url": "https://shopify-smile.lovable.app/__l5e/assets-v1/88291b49-2c1e-4145-a19f-b62732b1b213/tv-orange.png" } },
+      { "type": "card", "settings": { "title": "Plug & Play", "badge": "Cinewall", "price": "€649", "image_url": "https://shopify-smile.lovable.app/__l5e/assets-v1/9254e05e-935a-4ca8-a3ae-64dc5a556e90/plug-play-geleverd.png" } }
+    ]
+  },
+  "presets": [{ "name": "Bestsellers", "category": "Featured" }]
+}
+{% endschema %}

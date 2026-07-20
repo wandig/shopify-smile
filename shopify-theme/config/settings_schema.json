@@ -1,0 +1,18 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Wandig",
+    "theme_version": "1.0.0",
+    "theme_author": "Wandig",
+    "theme_documentation_url": "https://shopify-smile.lovable.app",
+    "theme_support_url": "https://shopify-smile.lovable.app"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_background", "label": "Background", "default": "#fff7ee" },
+      { "type": "color", "id": "color_primary", "label": "Primary", "default": "#ef7027" },
+      { "type": "color", "id": "color_accent", "label": "Accent", "default": "#ef8874" }
+    ]
+  }
+]

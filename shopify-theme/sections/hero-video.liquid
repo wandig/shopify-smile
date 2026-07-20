@@ -1,0 +1,23 @@
+<section class="w-hero">
+  <div class="w-hero__frame">
+    <video class="w-hero__video" src="{{ section.settings.video_url }}" autoplay muted loop playsinline></video>
+    <div class="w-hero__overlay">
+      <h1 class="w-hero__title">{{ section.settings.title }}</h1>
+      <a class="w-hero__cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+      <span class="w-hero__reviews">★★★★★ {{ section.settings.reviews_text }}</span>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Hero video",
+  "settings": [
+    { "type": "url", "id": "video_url", "label": "Video URL", "default": "https://shopify-smile.lovable.app/__l5e/assets-v1/141986ff-7372-4c54-8d1d-67f34471fc4a/hero-reel.mp4" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Cinewalls op maat, plug & play geleverd" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Bekijk cinewalls" },
+    { "type": "url", "id": "cta_url", "label": "CTA URL" },
+    { "type": "text", "id": "reviews_text", "label": "Reviews text", "default": "23.000+ beoordelingen" }
+  ],
+  "presets": [{ "name": "Hero video", "category": "Image" }]
+}
+{% endschema %}

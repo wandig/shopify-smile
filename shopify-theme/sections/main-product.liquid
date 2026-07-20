@@ -1,0 +1,132 @@
+{%- assign product_images = product.images -%}
+{%- assign first_image = product.featured_image -%}
+<section class="w-pdp">
+  <div class="w-pdp__wrap">
+    <div class="w-pdp__gallery">
+      <div class="w-pdp__main">
+        <img data-main-image src="{{ first_image | image_url: width: 1600 }}" alt="{{ product.title | escape }}">
+      </div>
+      <div class="w-pdp__thumbs">
+        <button class="w-pdp__thumb-btn prev" data-thumbs-nav="prev" aria-label="Previous">‹</button>
+        <div class="w-pdp__thumbs-track" data-thumbs-track>
+          {% for image in product_images %}
+            <button class="w-pdp__thumb {% if forloop.first %}is-active{% endif %}" data-thumb="{{ image | image_url: width: 1600 }}" aria-label="Image {{ forloop.index }}">
+              <img src="{{ image | image_url: width: 200 }}" alt="">
+            </button>
+          {% endfor %}
+        </div>
+        <button class="w-pdp__thumb-btn next" data-thumbs-nav="next" aria-label="Next">›</button>
+      </div>
+    </div>
+
+    <div class="w-pdp__info">
+      <h1 class="w-pdp__title">{{ product.title }}</h1>
+      <div class="w-pdp__reviews"><span class="w-pdp__stars">★★★★★</span> <span>4.9 · 2.300+ reviews</span></div>
+
+      <ul class="w-pdp__usps">
+        {% for block in section.blocks %}
+          {% if block.type == 'usp' %}
+            <li>{% render 'icon-check' %} {{ block.settings.text }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+      <div class="w-pdp__price" data-price>{{ product.selected_or_first_available_variant.price | money }}</div>
+
+      <form data-product-form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data"
+            data-variants='{{ product.variants | json | escape }}'>
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {% for option in product.options_with_values %}
+          {%- assign optname = option.name | downcase -%}
+          <div class="w-pdp__opt">
+            <div class="w-pdp__opt-title"><strong>{{ option.name | capitalize }}:</strong> <span data-opt-selected="{{ option.name }}">{{ option.selected_value }}</span></div>
+            <div class="w-pdp__opts">
+              {% for value in option.values %}
+                {% if optname contains 'kleur' or optname contains 'color' %}
+                  {%- assign v = value | downcase -%}
+                  {%- assign swatch = '#cccccc' -%}
+                  {%- if v contains 'zwart' or v contains 'black' -%}{% assign swatch = '#111111' %}{%- endif -%}
+                  {%- if v contains 'wit' or v contains 'white' -%}{% assign swatch = '#f2f2f2' %}{%- endif -%}
+                  {%- if v contains 'eiken' or v contains 'oak' -%}{% assign swatch = '#c9a274' %}{%- endif -%}
+                  {%- if v contains 'walnoot' or v contains 'walnut' -%}{% assign swatch = '#5b3a22' %}{%- endif -%}
+                  {%- if v contains 'noten' -%}{% assign swatch = '#7a4a2b' %}{%- endif -%}
+                  <button type="button" class="w-swatch {% if value == option.selected_value %}is-active{% endif %}"
+                          data-opt data-opt-group="{{ option.name }}" data-opt-value="{{ value }}"
+                          style="background:{{ swatch }}" aria-label="{{ value }}"></button>
+                {% else %}
+                  <button type="button" class="w-box {% if value == option.selected_value %}is-active{% endif %}"
+                          data-opt data-opt-group="{{ option.name }}" data-opt-value="{{ value }}">{{ value }}</button>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="w-pdp__cta">In winkelmand</button>
+        <div class="w-pdp__note">{% render 'icon-check' %} 30 dagen bedenktijd</div>
+      </form>
+
+      <div class="w-pdp__desc">
+        <h3>Productomschrijving</h3>
+        {{ product.description }}
+      </div>
+
+      <div class="w-acc">
+        <details>
+          <summary>Details &amp; formaat <span>+</span></summary>
+          <p>{{ section.settings.details_text }}</p>
+        </details>
+        <details>
+          <summary>Verzending &amp; retour <span>+</span></summary>
+          <p>{{ section.settings.shipping_text }}</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="w-sp">
+  <div class="wrap-inner">
+    <div class="w-sp__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'sellingpoint' %}
+          <div>
+            <div class="w-sp__icon">{% render 'icon-check' %}</div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.body }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "textarea", "id": "details_text", "label": "Details & formaat text", "default": "Handgemaakt uit massief hout. Op maat leverbaar in verschillende afmetingen." },
+    { "type": "textarea", "id": "shipping_text", "label": "Verzending & retour text", "default": "Gratis bezorging in NL/BE. 30 dagen bedenktijd, geld-terug-garantie." }
+  ],
+  "blocks": [
+    { "type": "usp", "name": "USP", "settings": [
+      { "type": "text", "id": "text", "label": "Text", "default": "Op maat gemaakt in NL" }
+    ]},
+    { "type": "sellingpoint", "name": "Selling point", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "body", "label": "Body" }
+    ]}
+  ],
+  "default": {
+    "blocks": [
+      { "type": "usp", "settings": { "text": "Op maat gemaakt in NL" } },
+      { "type": "usp", "settings": { "text": "Plug & play geleverd" } },
+      { "type": "usp", "settings": { "text": "Tot 5 jaar garantie" } },
+      { "type": "sellingpoint", "settings": { "title": "Handgemaakt", "body": "In onze eigen werkplaats" } },
+      { "type": "sellingpoint", "settings": { "title": "Snel geleverd", "body": "Binnen 2 weken thuis" } },
+      { "type": "sellingpoint", "settings": { "title": "30 dagen retour", "body": "Niet blij? Geld terug" } }
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "hero": { "type": "hero-video" },
+    "bestsellers": { "type": "bestsellers" },
+    "usps": { "type": "usps" },
+    "details": { "type": "details-grid" },
+    "plug": { "type": "plug-play-video" }
+  },
+  "order": ["hero", "bestsellers", "usps", "details", "plug"]
+}

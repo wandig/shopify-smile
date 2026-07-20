@@ -1,0 +1,32 @@
+<footer class="w-footer">
+  <div class="container">
+    <div class="w-footer__row">
+      {% for block in section.blocks %}
+        <div>
+          <h4>{{ block.settings.heading }}</h4>
+          {{ block.settings.links }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 4,
+  "blocks": [
+    { "type": "col", "name": "Column", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading" },
+      { "type": "richtext", "id": "links", "label": "Links (rich text)" }
+    ]}
+  ],
+  "default": {
+    "blocks": [
+      { "type": "col", "settings": { "heading": "Cinewalls", "links": "<p><a href='#'>Full House</a><a href='#'>TV Wall</a><a href='#'>Plug & Play</a></p>" } },
+      { "type": "col", "settings": { "heading": "Service", "links": "<p><a href='#'>Contact</a><a href='#'>FAQ</a><a href='#'>Retour</a></p>" } },
+      { "type": "col", "settings": { "heading": "Over", "links": "<p><a href='#'>Werkplaats</a><a href='#'>Reviews</a></p>" } },
+      { "type": "col", "settings": { "heading": "Volg", "links": "<p><a href='#'>Instagram</a><a href='#'>TikTok</a></p>" } }
+    ]
+  }
+}
+{% endschema %}

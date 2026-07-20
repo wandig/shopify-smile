@@ -1,0 +1,36 @@
+<section class="w-details">
+  <div class="wrap-inner">
+    <h2 class="w-details__heading">{{ section.settings.heading }}</h2>
+    <div class="w-details__grid">
+      {% for block in section.blocks %}
+        <a class="w-details__item" href="{{ block.settings.url }}">
+          <img src="{{ block.settings.image_url }}" alt="{{ block.settings.title }}" loading="lazy">
+          <div class="w-details__row"><span>{{ block.settings.title }}</span>{% render 'icon-arrow' %}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Details grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Details maken het verschil" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "url", "id": "url", "label": "URL" },
+      { "type": "url", "id": "image_url", "label": "Image URL" }
+    ]}
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "title": "Op maat gemaakt", "image_url": "https://shopify-smile.lovable.app/src/assets/detail-maatwerk.jpg" } },
+      { "type": "item", "settings": { "title": "Design details", "image_url": "https://shopify-smile.lovable.app/src/assets/detail-design.jpg" } },
+      { "type": "item", "settings": { "title": "Plug & play geleverd", "image_url": "https://shopify-smile.lovable.app/src/assets/detail-geleverd.jpg" } }
+    ]
+  },
+  "presets": [{ "name": "Details grid", "category": "Image" }]
+}
+{% endschema %}

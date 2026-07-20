@@ -1,0 +1,15 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "In winkelmand",
+      "sold_out": "Uitverkocht",
+      "unavailable": "Niet beschikbaar"
+    }
+  }
+}

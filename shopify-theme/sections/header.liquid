@@ -1,0 +1,44 @@
+<header class="w-header">
+  <div class="w-header__row">
+    <a class="w-header__logo" href="{{ routes.root_url }}">
+      {% if section.settings.logo %}
+        {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, loading: 'eager' }}
+      {% else %}
+        <img src="{{ section.settings.logo_url }}" alt="{{ shop.name }}">
+      {% endif %}
+    </a>
+    <nav class="w-header__nav" aria-label="Main">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+      {% endfor %}
+    </nav>
+    <div class="w-header__actions">
+      <a href="/search" class="w-header__icon-btn" aria-label="Search">🔍</a>
+      <a href="/account" class="w-header__icon-btn" aria-label="Account">👤</a>
+      <a href="/cart" class="w-header__icon-btn" aria-label="Cart">🛒 <span>{{ cart.item_count }}</span></a>
+    </div>
+  </div>
+</header>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "url", "id": "logo_url", "label": "Fallback logo URL", "default": "https://shopify-smile.lovable.app/__l5e/assets-v1/f395a4c3-7c80-4254-893a-2ed41c5b07b6/wandig-logo.png" }
+  ],
+  "blocks": [
+    { "type": "link", "name": "Menu link", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Alle modellen" },
+      { "type": "url", "id": "url", "label": "URL" }
+    ]}
+  ],
+  "default": {
+    "blocks": [
+      { "type": "link", "settings": { "label": "Alle modellen" } },
+      { "type": "link", "settings": { "label": "Proefperiode" } },
+      { "type": "link", "settings": { "label": "Reviews" } },
+      { "type": "link", "settings": { "label": "Contact" } }
+    ]
+  }
+}
+{% endschema %}

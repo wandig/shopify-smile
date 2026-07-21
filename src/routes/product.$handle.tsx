@@ -26,6 +26,7 @@ import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
+import basketIcon from "@/assets/basket-icon.png.asset.json";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",
@@ -852,7 +853,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 className="mt-3 h-12 w-full translate-y-0 rounded-full bg-[#ff5a00] px-6 text-sm font-bold text-white shadow-none transition-colors hover:translate-y-0 hover:bg-[#e95100] hover:shadow-none active:translate-y-0 active:scale-100"
               >
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : activeVariant?.availableForSale ? (
-                  <span className="flex items-center justify-center gap-3 font-[100]"><ShoppingBag className="h-5 w-5" />In winkelwagen</span>
+                  <span className="flex items-center justify-center gap-3 font-[100]"><img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" />In winkelwagen</span>
                 ) : "Uitverkocht"}
               </Button>
 

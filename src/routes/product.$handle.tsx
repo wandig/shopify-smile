@@ -775,7 +775,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   <article key={benefit.title} className="relative h-[175px] min-w-[125px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
                     <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
                     <div className="absolute inset-x-0 top-0 px-4 pt-5">
-                      <h3 className="text-center text-[13px] font-light leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
+                      <h3 className="text-center text-[13px] font-[330] leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
                     </div>
                   </article>
                 ))}

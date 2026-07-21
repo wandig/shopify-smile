@@ -26,6 +26,7 @@ import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
+import basketIcon from "@/assets/basket-icon.png.asset.json";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",

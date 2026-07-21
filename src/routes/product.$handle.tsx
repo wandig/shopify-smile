@@ -883,8 +883,25 @@ function ProductView({ product }: { product: ProductNode }) {
               <div className="mb-3 flex items-center justify-between px-1">
                 <h2 className="text-[14px] font-bold text-[#071426]">Jouw voordelen</h2>
                 <div className="flex gap-1.5">
-                  <button type="button" aria-label="Vorige voordelen" onClick={() => scrollBenefits(-1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-[#eeeeee] text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronLeft className="h-3.5 w-3.5" /></button>
-                  <button type="button" aria-label="Volgende voordelen" onClick={() => scrollBenefits(1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-[#eeeeee] text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronRight className="h-3.5 w-3.5" /></button>
+                  <button
+                    type="button"
+                    aria-label="Vorige voordelen"
+                    onClick={() => scrollBenefits(-1)}
+                    disabled={benefitsScrollState.atStart}
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-[#071426] transition-opacity disabled:text-[#071426]/25"
+                  >
+                    <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Volgende voordelen"
+                    onClick={() => scrollBenefits(1)}
+                    disabled={benefitsScrollState.atEnd}
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-[#071426] transition-opacity disabled:text-[#071426]/25"
+                  >
+                    <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
+                  </button>
+
                 </div>
               </div>
               <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">

@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect, useRef, type CSSProperties } from "react"
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
@@ -789,57 +789,6 @@ function ProductView({ product }: { product: ProductNode }) {
 
 
 
-      <section className="bg-[#f8f6f3] px-5 py-16 md:px-10 md:py-24">
-        <div className="mx-auto max-w-[1080px] text-center">
-          <h2 className="font-serif text-[2.55rem] leading-none tracking-[-0.045em] text-foreground md:text-[4rem]">
-            Questions?
-          </h2>
-          <p className="mt-6 text-[17px] text-foreground/76">
-            We hebben antwoorden
-          </p>
-
-          <div className="mt-12 rounded-[18px] bg-[#f4f1ed] px-6 py-5 text-left md:px-12 md:py-7">
-            <Accordion type="single" collapsible>
-              {[
-                {
-                  value: "faq-measure",
-                  question: "Hoe weet ik welke maat ik nodig heb?",
-                  answer: "Kies eerst je tv-formaat en opstelling. Na je bestelling stemmen we de exacte wandmaat, kijkhoogte en indeling rustig met je af voordat we gaan produceren.",
-                },
-                {
-                  value: "faq-cables",
-                  question: "Worden kabels en apparatuur weggewerkt?",
-                  answer: "Ja. Kabels, apparatuur en soundbar krijgen een vaste plek in het ontwerp, zodat het eindbeeld strak en rustig blijft.",
-                },
-                {
-                  value: "faq-delivery",
-                  question: "Is levering inbegrepen?",
-                  answer: "Ja, levering is inbegrepen. De cinewall is plug & play ontworpen, zodat je hem eenvoudig zelf neerzet en aansluit.",
-                },
-                {
-                  value: "faq-custom",
-                  question: "Kan ik afwijken van de standaard afmetingen?",
-                  answer: "Dat kan. De standaardhoogte is 240 cm, maar andere afmetingen en details zijn op aanvraag mogelijk.",
-                },
-                {
-                  value: "faq-warranty",
-                  question: "Hoe zit het met garantie?",
-                  answer: "Je krijgt 5 jaar garantie op constructie en afwerking, plus 30 dagen bedenktijd na plaatsing.",
-                },
-              ].map(({ value, question, answer }) => (
-                <AccordionItem key={value} value={value} className="border-b border-black/10 px-0 last:border-b-0">
-                  <AccordionTrigger className="py-6 text-left text-[18px] font-medium leading-tight text-foreground no-underline transition-colors hover:text-[#ef7027] hover:no-underline md:text-[21px] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-foreground">
-                    {question}
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6 pr-8 text-[15px] leading-relaxed text-foreground/68 md:text-base">
-                    {answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

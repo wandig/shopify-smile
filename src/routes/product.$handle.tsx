@@ -676,11 +676,17 @@ function ProductView({ product }: { product: ProductNode }) {
                 className="flex min-h-[42px] w-full items-center justify-between gap-4 px-4 text-left text-[#071426]"
               >
                 <span className="flex items-center gap-2 font-sans text-[14.4px] font-[450] text-[#cdc0b5]">
-                  <span className="grid h-3.5 w-5 shrink-0 overflow-hidden border border-black/15 opacity-60" aria-hidden="true">
-                    <span className="bg-[#ae1c28]" />
-                    <span className="bg-white" />
-                    <span className="bg-[#21468b]" />
+                  <span className="relative inline-flex shrink-0 items-center justify-center px-1.5 py-1" aria-hidden="true">
+                    <span className="grid h-3.5 w-5 overflow-hidden border border-black/15">
+                      <span className="bg-[#ae1c28]" />
+                      <span className="bg-white" />
+                      <span className="bg-[#21468b]" />
+                    </span>
+                    <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 40 24" fill="none" preserveAspectRatio="none">
+                      <path d="M6 13 C 4 7, 14 3, 22 3.5 C 32 4, 38 8, 37 14 C 36 19, 26 21.5, 17 20.5 C 9 19.7, 4 17, 5.5 12.5" stroke="#ef7027" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+                    </svg>
                   </span>
+
                   Dutch Design
                 </span>
                 <span className="flex h-[21.42px] w-[21.42px] shrink-0 items-center justify-center rounded-full border-2 border-[#cdc0b5] bg-transparent text-[#cdc0b5] shadow-none">

@@ -921,34 +921,6 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <section className="mt-10 grid gap-8 rounded-[20px] border border-black/10 bg-white p-6 md:p-8 lg:grid-cols-[0.8fr_1.2fr]">
-        <div>
-          <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Productomschrijving</span>
-          <h2 className="mt-2 font-serif text-2xl leading-tight">Gemaakt voor rust in jouw woonkamer</h2>
-          <p className="mt-4 text-sm leading-relaxed text-foreground/70">
-            {product.description || "Elke Wandig cinewall wordt met de hand gemaakt en volledig voorbereid geleverd. Kabels, apparatuur en aansluitingen krijgen een vaste plek voor een rustig en strak eindbeeld."}
-          </p>
-        </div>
-
-        <div>
-          <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">Goed om te weten</span>
-          <Accordion type="single" collapsible className="mt-2">
-            {[
-              { value: "details", title: "Details & formaat", body: ["Massief houten frame, gemaakt in vaste maten voor jouw tv en woonkamer. Kabels netjes weggewerkt en een geluidsdoorlatend front.", "Standaard hoogte 240 cm — andere afmetingen op aanvraag mogelijk."] },
-              { value: "materiaal", title: "Materiaal & afwerking", body: ["FSC-gecertificeerd massief hout uit Europese bossen. Geen plaatmateriaal, geen plastic afwerking.", "Met de hand geschaafd, gelijmd en afgewerkt in onze eigen werkplaats."] },
-              { value: "shipping", title: "Verzending & plaatsing", body: ["Gratis levering bij jou thuis. Levertijd 7–14 werkdagen.", "De cinewall is plug & play ontworpen, zodat je hem eenvoudig zelf neerzet en aansluit."] },
-              { value: "garantie", title: "Garantie & retour", body: ["Vijf jaar garantie op constructie en afwerking.", "30 dagen bedenktijd — niet tevreden? Wij halen de cinewall kosteloos op."] },
-            ].map(({ value, title, body }) => (
-              <AccordionItem key={value} value={value} className="border-b border-black/10 px-0 first:border-t">
-                <AccordionTrigger className="py-4 text-left text-[14px] font-semibold text-foreground no-underline hover:text-[#ff5a00] hover:no-underline">{title}</AccordionTrigger>
-                <AccordionContent className="space-y-2 pb-4 pr-8 text-sm leading-relaxed text-foreground/68">
-                  {body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
       </div>
 
       {/* Product story */}

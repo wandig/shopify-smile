@@ -250,6 +250,18 @@ const PRODUCT_BENEFITS = [
   { title: "5 jaar garantie", image: fullHouseGalleryFinish },
 ];
 
+const PRODUCT_DETAIL_SPECS: Array<{ title: string; body: string }> = [
+  { title: "Algemeen", body: "De Full House is onze meest complete cinewall: een strak wandmeubel dat je tv, speakers en styling samenbrengt in één rustig geheel. Ontworpen en gebouwd in onze Nederlandse werkplaats." },
+  { title: "Afmetingen", body: "Breedte 240 cm · Hoogte 180 cm · Diepte 25 cm. Op maat leverbaar in andere afmetingen op aanvraag, zodat de wand naadloos aansluit op jouw woonkamer." },
+  { title: "Materiaal", body: "Massief houten frame afgewerkt met fineer of gespoten paneel. Gebruikte lijmen en lakken zijn watergedragen en voldoen aan de strengste Europese emissienormen." },
+  { title: "TV-formaat", body: "Geschikt voor tv's van 55 tot 85 inch. De middelste opening en kabelgoten worden op maat afgestemd op jouw exacte tv-model tijdens het bestelproces." },
+  { title: "Kleuren", body: "Beschikbaar in 8 signature afwerkingen, waaronder walnoot, eiken, zwart en zandsteen. Alle stalen zijn gratis thuis te bestellen om rustig te vergelijken." },
+  { title: "Levering", body: "Gratis bezorging in Nederland en België binnen 7 tot 14 werkdagen. Onze bezorgers plaatsen de cinewall op de gewenste plek en nemen al het verpakkingsmateriaal weer mee." },
+  { title: "Montage", body: "Plug & play: het meubel wordt in voorgemonteerde delen geleverd en klikt met ons unieke bevestigingssysteem in een paar stappen aan de wand. Geen boren in de tv-kast, geen zichtbare schroeven." },
+  { title: "Onderhoud", body: "Afnemen met een licht vochtige microvezeldoek is voldoende. Vermijd agressieve schoonmaakmiddelen; voor het fineer is een druppel meubelolie per jaar meer dan genoeg." },
+];
+
+
 
 function ProductView({ product }: { product: ProductNode }) {
   const variants = useMemo(

@@ -260,7 +260,7 @@ function ProductView({ product }: { product: ProductNode }) {
   const mainGalleryImageRef = useRef<HTMLImageElement>(null);
   const galleryContinuationRef = useRef<HTMLDivElement>(null);
   const lastGalleryScrollYRef = useRef(0);
-  const reviewDragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
 

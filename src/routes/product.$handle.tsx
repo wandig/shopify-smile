@@ -580,7 +580,11 @@ function ProductView({ product }: { product: ProductNode }) {
   const displayedNumericPrice = numericPrice > 0 ? numericPrice : fallbackPrice;
   const currencyCode = activeVariant?.price.currencyCode || "EUR";
   const configuratorPrice = displayedNumericPrice > 0
-    ? formatPrice(displayedNumericPrice.toString(), currencyCode)
+    ? new Intl.NumberFormat("nl-NL", {
+        style: "decimal",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(displayedNumericPrice) + "\u2060,-"
     : "Prijs op aanvraag";
   const installmentPrice = displayedNumericPrice > 0
     ? new Intl.NumberFormat("nl-NL", {

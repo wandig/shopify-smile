@@ -5,13 +5,13 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Star, Hammer, ShieldCheck, Ruler, ShoppingBag, Truck } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Plus, Star, Hammer, ShieldCheck, Ruler, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import comparisonDiyWallImg from "@/assets/comparison-diy-wall.jpg";
 import comparisonStandardFurnitureImg from "@/assets/comparison-standard-furniture.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
-import fullHouseGalleryMain from "@/assets/full-house-gallery-main.png";
+import fullHouseGalleryMain from "@/assets/full-house-gallery-main-cropped.png";
 import fullHouseGalleryRoom from "@/assets/full-house-gallery-room.jpg";
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";
 import fullHouseGalleryStylingTwo from "@/assets/full-house-gallery-styling-two.webp";
@@ -213,7 +213,7 @@ function ProductPage() {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e5dcd4]">
+      <div className="bg-[#f8f6f3]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
           <div className="aspect-[4/5] bg-muted animate-pulse" />
           <div className="space-y-4">
@@ -268,6 +268,9 @@ function ProductView({ product }: { product: ProductNode }) {
   );
   const reviewCarouselRef = useRef<HTMLDivElement>(null);
   const benefitsScrollerRef = useRef<HTMLDivElement>(null);
+  const mainGalleryImageRef = useRef<HTMLImageElement>(null);
+  const galleryContinuationRef = useRef<HTMLDivElement>(null);
+  const lastGalleryScrollYRef = useRef(0);
   const reviewDragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
@@ -278,6 +281,8 @@ function ProductView({ product }: { product: ProductNode }) {
     first?.selectedOptions.forEach((o) => { init[o.name] = o.value; });
     return init;
   });
+  const [expandedVariantOption, setExpandedVariantOption] = useState<string | null>(null);
+  const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
 
   const activeVariant = useMemo(() => {
     return variants.find((v) =>
@@ -352,6 +357,63 @@ function ProductView({ product }: { product: ProductNode }) {
       square: index === 0,
     }));
   }, [images, product.handle, product.title]);
+
+  useEffect(() => {
+    const image = mainGalleryImageRef.current;
+    const continuation = galleryContinuationRef.current;
+    if (!image || !continuation) return;
+
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const updateMainImage = () => {
+      frame = 0;
+
+      if (!desktopQuery.matches) {
+        image.style.filter = "none";
+        image.style.transform = "none";
+        image.style.transitionDuration = "0ms";
+        lastGalleryScrollYRef.current = window.scrollY;
+        return;
+      }
+
+      const scrollY = window.scrollY;
+      const continuationTop = continuation.getBoundingClientRect().top;
+      const blurStart = window.innerHeight * 0.98;
+      const blurEnd = window.innerHeight * 0.58;
+      const progress = scrollY <= 2
+        ? 0
+        : Math.min(Math.max((blurStart - continuationTop) / (blurStart - blurEnd), 0), 1);
+      const scrollingUp = scrollY < lastGalleryScrollYRef.current;
+      const blur = progress * 10;
+      const scale = 1;
+
+      image.style.transitionDuration = reducedMotionQuery.matches ? "0ms" : progress === 0 || scrollingUp ? "90ms" : "280ms";
+      image.style.filter = `blur(${blur.toFixed(1)}px)`;
+      image.style.transform = `scale(${scale.toFixed(4)})`;
+      lastGalleryScrollYRef.current = scrollY;
+    };
+
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateMainImage);
+    };
+
+    updateMainImage();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    desktopQuery.addEventListener("change", scheduleUpdate);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      desktopQuery.removeEventListener("change", scheduleUpdate);
+      image.style.filter = "";
+      image.style.transform = "";
+      image.style.transitionDuration = "";
+    };
+  }, [galleryItems]);
 
   // Preload every variant image so switching colour/option crossfades instantly.
   useEffect(() => {
@@ -513,18 +575,27 @@ function ProductView({ product }: { product: ProductNode }) {
 
   const visibleOptions = product.options.filter((o) => !(o.name === "Title" && o.values.length === 1));
   const hasOptions = visibleOptions.length > 0;
-  const activePrice = activeVariant ? formatPrice(activeVariant.price.amount, activeVariant.price.currencyCode) : "Prijs op aanvraag";
   const numericPrice = activeVariant ? parseFloat(activeVariant.price.amount) : 0;
-  const configuratorPrice = numericPrice > 0 ? activePrice.replace("€", "").trim() : product.handle === "full-house" ? "1699,-" : activePrice;
-  const installmentPrice = numericPrice > 0
-    ? formatPrice((numericPrice / 3).toFixed(2), activeVariant!.price.currencyCode)
-    : "€581,66";
+  const fallbackPrice = product.handle === "full-house" ? 1699 : 0;
+  const displayedNumericPrice = numericPrice > 0 ? numericPrice : fallbackPrice;
+  const currencyCode = activeVariant?.price.currencyCode || "EUR";
+  const configuratorPrice = displayedNumericPrice > 0
+    ? formatPrice(displayedNumericPrice.toString(), currencyCode)
+    : "Prijs op aanvraag";
+  const installmentPrice = displayedNumericPrice > 0
+    ? new Intl.NumberFormat("nl-NL", {
+        style: "currency",
+        currency: currencyCode,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(displayedNumericPrice / 3)
+    : null;
   const displayTitle = product.title.replace(/^Wandig\s+/i, "");
   const scrollBenefits = (direction: -1 | 1) => {
     benefitsScrollerRef.current?.scrollBy({ left: direction * 180, behavior: "smooth" });
   };
   return (
-    <div className="bg-[#e5dcd4]">
+    <div className="bg-[#f8f6f3]">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-10 md:py-16">
       <nav className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8 flex items-center gap-2">
         <Link to="/" className="hover:text-foreground">Home</Link>
@@ -534,58 +605,111 @@ function ProductView({ product }: { product: ProductNode }) {
         <span className="text-foreground">{product.title}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.42fr)_minmax(360px,0.78fr)] lg:gap-10 xl:gap-14">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
         {/* Gallery */}
-        <div className="grid min-w-0 grid-cols-2 gap-3 md:gap-4">
-          {galleryItems.map((image, index) => (
-            <figure
-              key={`${image.src}-${index}`}
-              className={`${image.full ? "col-span-2" : "col-span-1"} overflow-hidden rounded-[6px]`}
-            >
+        <div className="min-w-0">
+          {galleryItems[0] && (
+            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#f8f6f3]" : ""}`}>
               <img
-                src={image.src}
-                alt={image.alt}
-                className={`block w-full ${image.square ? "aspect-square object-contain" : "aspect-[4/3] object-cover"}`}
-                loading={index === 0 ? "eager" : "lazy"}
-                fetchPriority={index === 0 ? "high" : "auto"}
+                ref={mainGalleryImageRef}
+                src={galleryItems[0].src}
+                alt={galleryItems[0].alt}
+                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${product.handle === "full-house" ? "h-auto w-[76.16%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
+                loading="eager"
+                fetchPriority="high"
               />
             </figure>
-          ))}
+          )}
+
+          <div ref={galleryContinuationRef} className="relative z-10 mt-3 grid grid-cols-2 gap-3 md:mt-4 md:gap-4">
+            {galleryItems.slice(1).map((image, index) => (
+              <figure
+                key={`${image.src}-${index + 1}`}
+                className={`${image.full ? "col-span-2" : "col-span-1"} overflow-hidden rounded-[6px]`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className={`block w-full ${image.square ? "aspect-square object-contain" : "aspect-[4/3] object-cover"}`}
+                  loading="lazy"
+                />
+              </figure>
+            ))}
+          </div>
         </div>
 
         {/* Info */}
-        <div className="min-w-0 lg:sticky lg:top-24 lg:self-start">
+        <div className="min-w-0 lg:sticky lg:top-3 lg:ml-auto lg:w-[490px] lg:self-start">
           <div className="space-y-3">
-            <section className="rounded-[20px] border border-black/10 bg-white p-4 shadow-[0_18px_45px_rgba(42,31,22,0.07)]">
-              <div className="grid grid-cols-[minmax(0,1fr)_132px] gap-4">
-                <div>
-                  <h1 className="text-[28px] font-bold leading-none text-[#071426]">{displayTitle}</h1>
-                  <div className="mt-3 flex items-center gap-2 text-[11px] text-[#071426]/65">
-                    <span className="grid h-3.5 w-5 overflow-hidden border border-black/10" aria-hidden="true">
-                      <span className="bg-[#ae1c28]" />
-                      <span className="bg-white" />
-                      <span className="bg-[#21468b]" />
-                    </span>
-                    <span>Nederlandse productie</span>
-                    <span className="ml-1 h-4 w-px bg-black/20" />
-                  </div>
-                  <p className="mt-3 text-[13px] font-medium text-[#071426]">Tv-kast</p>
-                  <div className="mt-1.5 flex items-center gap-1.5 text-[#071426]">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Star key={index} className="h-4 w-4 fill-current" strokeWidth={0} />
-                    ))}
-                    <span className="ml-1 text-[11px] text-[#071426]/60">(1000+)</span>
+            <section className="overflow-hidden rounded-[20px] border border-[#eeeeee] bg-[#fef9f5] shadow-[0_18px_45px_rgba(42,31,22,0.07)]">
+              <button
+                type="button"
+                onClick={() => setProductionDetailsOpen((open) => !open)}
+                aria-expanded={productionDetailsOpen}
+                className="flex min-h-[42px] w-full items-center justify-between gap-4 px-4 text-left text-[#071426]"
+              >
+                <span className="flex items-center gap-2 font-sans text-[14.4px] font-[450] text-[#cdc0b5]">
+                  <span className="grid h-3.5 w-5 shrink-0 overflow-hidden border border-black/15 opacity-60" aria-hidden="true">
+                    <span className="bg-[#ae1c28]" />
+                    <span className="bg-white" />
+                    <span className="bg-[#21468b]" />
+                  </span>
+                  Dutch Design
+                </span>
+                <span className="flex h-[21.42px] w-[21.42px] shrink-0 items-center justify-center rounded-full border-2 border-[#cdc0b5] bg-transparent text-[#cdc0b5] shadow-none">
+                  <Plus className={`h-[10.71px] w-[10.71px] transition-transform duration-400 ease-out ${productionDetailsOpen ? "rotate-45" : "rotate-0"}`} strokeWidth={2} />
+                </span>
+              </button>
+
+              <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${productionDetailsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                <div className="overflow-hidden">
+                  <div className="min-h-[210px] px-5 pb-8 pt-3 text-[#cdc0b5]">
+                    <p className="text-[17px] font-semibold text-[#071426]">Nederlands gemaakt. Met aandacht.</p>
+                    <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
+                      Elke Wandig cinewall wordt in onze Nederlandse werkplaats gebouwd, gecontroleerd en plug &amp; play voorbereid voor jouw woonkamer.
+                    </p>
+                    <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
+                      Van de eerste plank tot de laatste kabeldoorvoer: lokaal vakmanschap, precies passend rond jouw tv.
+                    </p>
                   </div>
                 </div>
+              </div>
 
-                <div className="text-right">
-                  <p className="text-[28px] font-bold leading-none text-[#ff5a00]">{configuratorPrice}</p>
-                  <p className="mt-4 text-[10px] leading-relaxed text-[#071426]/76">
-                    3 betalingen van {installmentPrice}<br />tegen 0% rente met <strong className="text-[#071426]">Klarna.</strong>
-                  </p>
-                  <a href="https://www.klarna.com/nl/klantenservice/" target="_blank" rel="noreferrer" className="mt-2 inline-block text-[10px] text-[#071426] underline underline-offset-2">
-                    Meer informatie
-                  </a>
+              <div className="rounded-t-[20px] bg-white p-4">
+              <div>
+                <div className="mt-[15px] grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_230px]">
+                  <div>
+                    <h1 className="text-[24px] font-bold leading-none text-[#071426]">{displayTitle}</h1>
+                    <p className="mt-2 text-[12px] text-[#071426]/45">Cinewall</p>
+                    <div className="mt-1 flex items-center text-[#4f5966]/78">
+                      <span className="flex items-center gap-0.5">
+                        {Array.from({ length: 5 }).map((_, index) => (
+                          <Star key={index} className="h-3 w-3 fill-current" strokeWidth={0} />
+                        ))}
+                      </span>
+                      <span className="ml-2 text-[10px] text-[#071426]/30">(1000+)</span>
+                    </div>
+                  </div>
+
+                  <div className="min-w-0 text-right">
+                    <p className="text-[23px] font-bold leading-none text-[#ff5a00]">{configuratorPrice}</p>
+                    {installmentPrice && (
+                      <div className="mt-2 text-[12px] leading-[1.4] text-[#071426]/42">
+                        <p className="whitespace-nowrap">3 betalingen van {installmentPrice} tegen 0% rente</p>
+                        <p className="mt-1 flex items-baseline justify-end gap-2">
+                          <strong
+                            className="text-[14px] font-bold leading-none text-[#071426]"
+                            style={{ fontFamily: '"Klarna Headline", "Circular-Regular", sans-serif' }}
+                          >
+                            Klarna.
+                          </strong>
+                          <a href="https://www.klarna.com/nl/klantenservice/" target="_blank" rel="noreferrer" className="underline underline-offset-2 transition-colors hover:text-[#071426]">
+                            Meer informatie
+                          </a>
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -593,32 +717,92 @@ function ProductView({ product }: { product: ProductNode }) {
                 <div className="mt-4 space-y-2">
                   {visibleOptions.map((opt) => {
                     const isColor = /kleur|color/i.test(opt.name);
-                    const label = isColor ? "Kleur" : /maat|size|inch/i.test(opt.name) ? "Tv-maat" : "Opstelling";
+                    const isPosition = /opstelling|position|richting|side/i.test(opt.name);
+                    const isTvSize = /maat|size|inch/i.test(opt.name);
+                    const label = isColor ? "Kleur" : isTvSize ? "Tv-maat" : "Opstelling";
+                    const optionExpanded = expandedVariantOption === opt.name;
+                    const optionChoices = isTvSize
+                      ? [
+                          { label: "40 - 50 inch", value: opt.values[0] },
+                          { label: "55 - 65 inch", value: opt.values[1] },
+                          { label: "70 - 80 inch", value: opt.values[2] },
+                        ].filter((choice): choice is { label: string; value: string } => Boolean(choice.value))
+                      : opt.values.map((value) => ({ label: value, value }));
+                    const selectedOptionLabel = isTvSize
+                      ? optionChoices.find((choice) => choice.value === selected[opt.name])?.label
+                        || (/^(70|80)/.test(selected[opt.name] || "") ? "70 - 80 inch" : selected[opt.name])
+                      : selected[opt.name];
+
+                    if (isPosition || isTvSize) {
+                      return (
+                        <div key={opt.name} className="overflow-hidden rounded-[12px] border border-[#eeeeee]">
+                          <button
+                            type="button"
+                            onClick={() => setExpandedVariantOption((current) => current === opt.name ? null : opt.name)}
+                            aria-expanded={optionExpanded}
+                            className="flex min-h-[52px] w-full items-center gap-2 px-3 text-left"
+                          >
+                            <span className="grid min-w-0 flex-1 grid-cols-[80px_minmax(0,1fr)] items-baseline gap-2">
+                              <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
+                              <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{selectedOptionLabel || optionChoices[0]?.label}</span>
+                            </span>
+                            <ChevronDown className={`h-4 w-4 text-[#071426]/45 transition-transform duration-300 ease-out ${optionExpanded ? "rotate-180" : "rotate-0"}`} />
+                          </button>
+
+                          <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${optionExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                            <div className="overflow-hidden">
+                              <div className={`grid gap-2 px-3 pb-3 pt-1 ${isTvSize ? "grid-cols-3" : "grid-cols-2"}`}>
+                                {optionChoices.map((choice) => {
+                                  const active = selected[opt.name] === choice.value
+                                    || (isTvSize && choice.label === "70 - 80 inch" && /^(70|80)/.test(selected[opt.name] || ""));
+                                  return (
+                                    <button
+                                      key={choice.label}
+                                      type="button"
+                                      onClick={() => setSelected((current) => ({ ...current, [opt.name]: choice.value }))}
+                                      aria-pressed={active}
+                                      className={`h-10 rounded-[8px] border bg-[#f8f6f4] px-2 text-[12px] font-medium text-[#071426] transition-[border-color,box-shadow,background-color,transform] duration-300 ease-out hover:bg-[#f3ece6] active:scale-[0.98] ${active ? "border-[#ff5a00] bg-[#fff8f3] shadow-[0_0_0_2px_rgba(255,90,0,0.18)]" : "border-[#eeeeee] shadow-none"}`}
+                                    >
+                                      {choice.label}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
 
                     return (
-                      <div key={opt.name} className="grid min-h-[52px] grid-cols-[76px_minmax(0,1fr)] items-center gap-3 rounded-[12px] border border-black/10 px-3">
-                        <span className="text-[14px] font-bold text-[#071426]">{label}</span>
+                      <div key={opt.name} className="grid min-h-[52px] grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-[12px] border border-[#eeeeee] px-3">
                         {isColor ? (
-                          <div className="grid grid-cols-8 items-center gap-1.5">
-                            {opt.values.map((value) => {
-                              const active = selected[opt.name] === value;
-                              return (
-                                <button
-                                  key={value}
-                                  type="button"
-                                  onClick={() => setSelected((current) => ({ ...current, [opt.name]: value }))}
-                                  title={value}
-                                  aria-label={`Kleur ${value}`}
-                                  aria-pressed={active}
-                                  className={`mx-auto h-6 w-6 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 xl:h-7 xl:w-7 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
-                                >
-                                  <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={swatchStyle(value)} />
-                                </button>
-                              );
-                            })}
-                          </div>
+                          <>
+                            <div className="grid min-w-0 grid-cols-[80px_minmax(0,1fr)] items-baseline gap-2">
+                              <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
+                              <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{selected[opt.name] || opt.values[0]}</span>
+                            </div>
+                            <div className="flex items-center justify-end gap-2.5">
+                              {opt.values.slice(0, 5).map((value) => {
+                                const active = selected[opt.name] === value;
+                                return (
+                                  <button
+                                    key={value}
+                                    type="button"
+                                    onClick={() => setSelected((current) => ({ ...current, [opt.name]: value }))}
+                                    title={value}
+                                    aria-label={`Kleur ${value}`}
+                                    aria-pressed={active}
+                                    className={`h-9 w-9 shrink-0 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
+                                  >
+                                    <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={swatchStyle(value)} />
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </>
                         ) : (
-                          <label className="relative block min-w-0">
+                          <label className="relative col-span-2 block min-w-0">
                             <span className="sr-only">Kies {label.toLowerCase()}</span>
                             <select
                               value={selected[opt.name] || ""}
@@ -646,36 +830,47 @@ function ProductView({ product }: { product: ProductNode }) {
                 ) : "Uitverkocht"}
               </Button>
 
-              <div className="mt-3 grid grid-cols-3 divide-x divide-black/10 text-[#071426]">
-                <div className="flex items-center justify-center gap-1.5 px-2 text-center text-[9px] leading-tight"><ShieldCheck className="h-[18px] w-[18px] shrink-0" /><span>5 jaar garantie</span></div>
-                <div className="flex items-center justify-center gap-1.5 px-2 text-center text-[9px] leading-tight"><Hammer className="h-[18px] w-[18px] shrink-0" /><span>Handgemaakt in NL</span></div>
-                <div className="flex items-center justify-center gap-1.5 px-2 text-center text-[9px] leading-tight"><Truck className="h-[18px] w-[18px] shrink-0" /><span>7 - 14 werkdagen levertijd</span></div>
+              <div className="mb-[10px] mt-[17px] hidden w-full grid-cols-[max-content_max-content_max-content_max-content_max-content] items-center justify-between text-[#071426] sm:grid">
+                <div className="flex items-center gap-1 text-[12px] font-[300] leading-none"><ShieldCheck className="h-[18px] w-[18px] shrink-0" /><span className="whitespace-nowrap">5 jaar garantie</span></div>
+                <span className="text-[13px] text-[#cdc0b5]" aria-hidden="true">|</span>
+                <div className="flex items-center gap-1 text-[12px] font-[300] leading-none"><Hammer className="h-[18px] w-[18px] shrink-0" /><span className="whitespace-nowrap">Handgemaakt in NL</span></div>
+                <span className="text-[13px] text-[#cdc0b5]" aria-hidden="true">|</span>
+                <div className="flex items-center gap-1 text-[12px] font-[300] leading-none"><Truck className="h-[18px] w-[18px] shrink-0" /><span className="whitespace-nowrap">7-14 werkdagen levertijd</span></div>
+              </div>
+
+              <div className="mb-[10px] mt-[17px] grid grid-cols-1 divide-y divide-[#eeeeee] text-[#071426] sm:hidden">
+                <div className="flex items-center justify-start gap-1 py-2 text-[12px] font-[300] leading-none"><ShieldCheck className="h-[18px] w-[18px] shrink-0" /><span>5 jaar garantie</span></div>
+                <div className="flex items-center justify-start gap-1 py-2 text-[12px] font-[300] leading-none"><Hammer className="h-[18px] w-[18px] shrink-0" /><span>Handgemaakt in NL</span></div>
+                <div className="flex items-center justify-start gap-1 py-2 text-[12px] font-[300] leading-none"><Truck className="h-[18px] w-[18px] shrink-0" /><span>7-14 werkdagen levertijd</span></div>
+              </div>
               </div>
             </section>
 
-            <section className="rounded-[20px] border border-black/10 bg-white p-4 shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
-              <span className="inline-flex items-center gap-2 rounded-full border border-black/10 px-3 py-1.5 text-[11px] font-semibold text-[#071426]">
+            <section className="rounded-[20px] border border-[#eeeeee] bg-white p-4 shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#eeeeee] px-3 py-1.5 text-[11px] font-semibold text-[#071426]">
                 <span className="h-2 w-2 rounded-full bg-[#ff5a00]" />Laatste exemplaren
               </span>
               <p className="mt-2.5 text-[14px] font-bold text-[#071426]">Transformeer je woonkamer in 7 - 14 werkdagen.</p>
               <p className="mt-1 text-[12px] text-[#071426]/55">Bestel vandaag en transformeer je woonkamer.</p>
             </section>
 
-            <section className="overflow-hidden rounded-[20px] border border-black/10 bg-white p-3 shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
+            <section className="overflow-hidden rounded-[20px] border border-[#eeeeee] bg-white p-3 shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
               <div className="mb-3 flex items-center justify-between px-1">
                 <h2 className="text-[14px] font-bold text-[#071426]">Jouw voordelen</h2>
                 <div className="flex gap-1.5">
-                  <button type="button" aria-label="Vorige voordelen" onClick={() => scrollBenefits(-1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-black/10 text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronLeft className="h-3.5 w-3.5" /></button>
-                  <button type="button" aria-label="Volgende voordelen" onClick={() => scrollBenefits(1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-black/10 text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronRight className="h-3.5 w-3.5" /></button>
+                  <button type="button" aria-label="Vorige voordelen" onClick={() => scrollBenefits(-1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-[#eeeeee] text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronLeft className="h-3.5 w-3.5" /></button>
+                  <button type="button" aria-label="Volgende voordelen" onClick={() => scrollBenefits(1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-[#eeeeee] text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronRight className="h-3.5 w-3.5" /></button>
                 </div>
               </div>
               <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {PRODUCT_BENEFITS.map((benefit) => (
-                  <article key={benefit.title} className="relative h-[136px] min-w-[116px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc]">
+                  <article key={benefit.title} className="relative h-[177px] min-w-[133px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc]">
                     <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/45" />
-                    <span className="absolute left-2.5 top-2.5 rounded-full bg-white/88 px-2 py-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-[#7a3422]">Inclusief</span>
-                    <h3 className="absolute inset-x-2.5 bottom-2.5 text-[12px] font-semibold leading-tight text-white drop-shadow">{benefit.title}</h3>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/52 via-black/10 to-black/20" />
+                    <div className="absolute inset-x-2 top-3 flex flex-col items-center text-center">
+                      <span className="rounded-full bg-white/88 px-2 py-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-[#7a3422]">Inclusief</span>
+                      <h3 className="mt-2 text-[12px] font-semibold leading-tight text-white drop-shadow">{benefit.title}</h3>
+                    </div>
                   </article>
                 ))}
               </div>
@@ -715,7 +910,7 @@ function ProductView({ product }: { product: ProductNode }) {
       </div>
 
       {/* Product story */}
-      <section className="bg-[#e5dcd4] px-5 py-8 md:px-10 md:py-10">
+      <section className="bg-[#f8f6f3] px-5 py-8 md:px-10 md:py-10">
         <div className="mx-auto grid max-w-[1500px] overflow-hidden rounded-[22px] border border-[#dedede] bg-white md:grid-cols-2">
           <div className="order-2 flex flex-col justify-center px-8 py-7 md:order-1 md:h-[720px] md:px-12 md:py-0 lg:px-16">
             <h2 className="max-w-xl font-serif text-[1.875rem] leading-[1.05] text-foreground md:text-[2.375rem]">
@@ -765,7 +960,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </section>
 
-      <section className="bg-[#e5dcd4] px-5 py-16 md:px-10 md:py-24">
+      <section className="bg-[#f8f6f3] px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto grid max-w-[1500px] items-center gap-12 md:grid-cols-[0.72fr_1.28fr] lg:gap-16">
           <div>
             <h2 className="max-w-lg font-serif text-[1.94rem] leading-[1.02] tracking-[-0.04em] text-foreground md:text-[2.92rem]">
@@ -938,7 +1133,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </section>
 
-      <section className="bg-[#e5dcd4] px-5 pb-16 md:px-10 md:pb-24">
+      <section className="bg-[#f8f6f3] px-5 pb-16 md:px-10 md:pb-24">
         <div className="mx-auto max-w-[1500px]">
           <div
             ref={reviewCarouselRef}
@@ -988,7 +1183,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </section>
 
-      <section className="bg-[#e5dcd4] px-5 py-16 md:px-10 md:py-24">
+      <section className="bg-[#f8f6f3] px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1080px] text-center">
           <h2 className="font-serif text-[2.55rem] leading-none tracking-[-0.045em] text-foreground md:text-[4rem]">
             Questions?

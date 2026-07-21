@@ -140,7 +140,21 @@ function ModelsMenu({
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
+  const isProductPage = pathname.startsWith("/product/");
   const [modelsMenuOpen, setModelsMenuOpen] = useState(false);
+  const [productHeaderHidden, setProductHeaderHidden] = useState(false);
+
+  useEffect(() => {
+    if (!isProductPage) {
+      setProductHeaderHidden(false);
+      return;
+    }
+
+    const updateHeader = () => setProductHeaderHidden(window.scrollY > 1);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, [isProductPage]);
 
   if (isHome) {
     return (
@@ -240,7 +254,9 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-[background-color,border-color,color] duration-300 ease-out ${
+      className={`sticky top-0 z-40 border-b transition-[transform,background-color,border-color,color] duration-300 ease-out ${
+        isProductPage && productHeaderHidden ? "pointer-events-none -translate-y-full" : "translate-y-0"
+      } ${
         modelsMenuOpen
           ? "border-white bg-white text-[#15110d]"
           : "border-border/60 bg-background/85 backdrop-blur"

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useMemo, useEffect, useRef, type CSSProperties, type PointerEvent } from "react";
+import { useState, useMemo, useEffect, useRef, type CSSProperties } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
@@ -255,12 +255,12 @@ function ProductView({ product }: { product: ProductNode }) {
     () => product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null }),
     [product],
   );
-  const reviewCarouselRef = useRef<HTMLDivElement>(null);
+  
   const benefitsScrollerRef = useRef<HTMLDivElement>(null);
   const mainGalleryImageRef = useRef<HTMLImageElement>(null);
   const galleryContinuationRef = useRef<HTMLDivElement>(null);
   const lastGalleryScrollYRef = useRef(0);
-  const reviewDragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
 
@@ -435,143 +435,6 @@ function ProductView({ product }: { product: ProductNode }) {
   }, []);
 
 
-  const reviews = useMemo(() => [
-    {
-      name: "Milan V.",
-      title: "Eindelijk geen losse kabels meer.",
-      body: "De wand oogt rustig en strak. Vooral het plug & play gemak maakte verschil: alles voelde direct logisch en netjes afgewerkt.",
-    },
-    {
-      name: "Sanne K.",
-      title: "Veel mooier dan een standaard tv-meubel.",
-      body: "We wilden iets dat echt bij de woonkamer past. De kleur, maat en indeling voelen alsof het altijd al zo hoorde.",
-    },
-    {
-      name: "Noah B.",
-      title: "Strak afgewerkt tot in de details.",
-      body: "Onze soundbar en apparatuur zijn weggewerkt zonder dat het geluid minder is geworden. Precies het rustige beeld dat we zochten.",
-    },
-    {
-      name: "Eva R.",
-      title: "Professioneel van ontwerp tot levering.",
-      body: "Het advies vooraf was duidelijk en de levering verliep heel netjes. Je ziet dat dit geen snelle standaardoplossing is.",
-    },
-    {
-      name: "Jeroen T.",
-      title: "De woonkamer voelt meteen luxer.",
-      body: "Iedereen die binnenkomt vraagt naar de cinewall. Het is functioneel, maar vooral heel mooi en rustig in het interieur.",
-    },
-    {
-      name: "Lisa D.",
-      title: "Alles klopt precies met de ruimte.",
-      body: "De cinewall voelt niet als een los meubel, maar als onderdeel van het huis. Dat maakt de woonkamer veel rustiger.",
-    },
-    {
-      name: "Bram H.",
-      title: "Montage was sneller dan verwacht.",
-      body: "Binnen een dag stond alles strak. Geen rommel, geen losse snoeren en de afwerking is echt netjes gedaan.",
-    },
-    {
-      name: "Nora P.",
-      title: "Precies de warme uitstraling die we wilden.",
-      body: "De kleurstalen hielpen enorm. Uiteindelijk past de gekozen afwerking perfect bij onze vloer en meubels.",
-    },
-  ], []);
-
-  useEffect(() => {
-    const carousel = reviewCarouselRef.current;
-    if (!carousel || reviews.length === 0) return;
-
-    const getMetrics = () => {
-      const firstCard = carousel.querySelector<HTMLElement>("[data-review-card]");
-      if (!firstCard) return null;
-
-      const gap = parseFloat(window.getComputedStyle(carousel).columnGap || "0");
-      const step = firstCard.offsetWidth + gap;
-      const loopWidth = step * reviews.length;
-      return step && loopWidth ? { step, loopWidth } : null;
-    };
-
-    const placeAtMiddleSet = () => {
-      const metrics = getMetrics();
-      if (metrics) carousel.scrollLeft = metrics.loopWidth;
-    };
-
-    placeAtMiddleSet();
-    window.setTimeout(placeAtMiddleSet, 100);
-
-    const advance = () => {
-      if (reviewDragRef.current.active) return;
-
-      const metrics = getMetrics();
-      if (!metrics) return;
-
-      const { step, loopWidth } = metrics;
-      if (carousel.scrollLeft >= loopWidth * 2 - step) {
-        carousel.scrollLeft -= loopWidth;
-      }
-
-      carousel.scrollBy({ left: step, behavior: "smooth" });
-
-      window.setTimeout(() => {
-        if (carousel.scrollLeft >= loopWidth * 2) {
-          carousel.scrollLeft -= loopWidth;
-        }
-      }, 850);
-    };
-
-    const interval = window.setInterval(advance, 7000);
-    return () => window.clearInterval(interval);
-  }, [reviews.length]);
-
-  const normalizeReviewCarousel = () => {
-    const carousel = reviewCarouselRef.current;
-    const firstCard = carousel?.querySelector<HTMLElement>("[data-review-card]");
-    if (!carousel || !firstCard) return;
-
-    const gap = parseFloat(window.getComputedStyle(carousel).columnGap || "0");
-    const loopWidth = (firstCard.offsetWidth + gap) * reviews.length;
-    if (!loopWidth) return;
-
-    if (carousel.scrollLeft < loopWidth * 0.5) {
-      carousel.scrollLeft += loopWidth;
-    } else if (carousel.scrollLeft > loopWidth * 2.5) {
-      carousel.scrollLeft -= loopWidth;
-    }
-  };
-
-  const startReviewDrag = (event: PointerEvent<HTMLDivElement>) => {
-    const carousel = reviewCarouselRef.current;
-    if (!carousel) return;
-
-    reviewDragRef.current = {
-      active: true,
-      startX: event.clientX,
-      scrollLeft: carousel.scrollLeft,
-    };
-    carousel.setPointerCapture(event.pointerId);
-  };
-
-  const moveReviewDrag = (event: PointerEvent<HTMLDivElement>) => {
-    const carousel = reviewCarouselRef.current;
-    if (!carousel || !reviewDragRef.current.active) return;
-
-    event.preventDefault();
-    const delta = event.clientX - reviewDragRef.current.startX;
-    carousel.scrollLeft = reviewDragRef.current.scrollLeft - delta;
-    normalizeReviewCarousel();
-  };
-
-  const endReviewDrag = (event: PointerEvent<HTMLDivElement>) => {
-    const carousel = reviewCarouselRef.current;
-    if (!carousel || !reviewDragRef.current.active) return;
-
-    reviewDragRef.current.active = false;
-    if (carousel.hasPointerCapture(event.pointerId)) {
-      carousel.releasePointerCapture(event.pointerId);
-    }
-    normalizeReviewCarousel();
-  };
 
   const handleAdd = async () => {
     if (!activeVariant) return;
@@ -925,55 +788,6 @@ function ProductView({ product }: { product: ProductNode }) {
       </div>
 
 
-      <section className="bg-[#f8f6f3] px-5 pb-16 md:px-10 md:pb-24">
-        <div className="mx-auto max-w-[1500px]">
-          <div
-            ref={reviewCarouselRef}
-            onPointerDown={startReviewDrag}
-            onPointerMove={moveReviewDrag}
-            onPointerUp={endReviewDrag}
-            onPointerCancel={endReviewDrag}
-            onPointerLeave={endReviewDrag}
-            className="flex cursor-grab gap-5 overflow-x-auto scroll-smooth pb-3 active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {[...reviews, ...reviews, ...reviews].map((review, index) => {
-              const image = allImages[index % Math.max(allImages.length, 1)]?.node;
-              return (
-                <article
-                  key={`${review.name}-${index}`}
-                  data-review-card
-                  className="min-w-[264px] max-w-[264px] overflow-hidden rounded-[18px] border border-[#dedede] bg-white md:min-w-[calc((100%_-_80px)/5)] md:max-w-[calc((100%_-_80px)/5)]"
-                >
-                  <div className="h-[150px] bg-[#f4f1ed] md:h-[168px]">
-                    <img
-                      src={image?.url || detailMaatwerkImg}
-                      alt={image?.altText || "Wandig cinewall bij klant thuis"}
-                      className="h-full w-full select-none object-cover"
-                      loading="lazy"
-                      draggable={false}
-                    />
-                  </div>
-                  <div className="p-5">
-                    <div className="mb-5 flex items-center gap-3">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#edf0ef] text-white">
-                        <span className="h-3.5 w-3.5 rounded-full bg-white" />
-                      </span>
-                      <span className="text-base font-medium text-foreground">{review.name}</span>
-                    </div>
-                    <div className="mb-3 flex gap-0.5 text-[#ef7027]">
-                      {Array.from({ length: 5 }).map((_, starIndex) => (
-                        <Star key={starIndex} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" strokeWidth={0} />
-                      ))}
-                    </div>
-                    <h3 className="text-[18px] font-bold leading-snug text-foreground">{review.title}</h3>
-                    <p className="mt-2 text-[16px] leading-relaxed text-foreground/82">{review.body}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       <section className="bg-[#f8f6f3] px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1080px] text-center">

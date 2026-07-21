@@ -27,6 +27,7 @@ import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
+import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",
@@ -676,11 +677,12 @@ function ProductView({ product }: { product: ProductNode }) {
                 className="flex min-h-[42px] w-full items-center justify-between gap-4 px-4 text-left text-[#071426]"
               >
                 <span className="flex items-center gap-2 font-sans text-[14.4px] font-[450] text-[#cdc0b5]">
-                  <span className="grid h-3.5 w-5 shrink-0 overflow-hidden opacity-60" aria-hidden="true">
-                    <span className="bg-[#ae1c28]" />
-                    <span className="bg-white" />
-                    <span className="bg-[#21468b]" />
-                  </span>
+                  <img
+                    src={dutchDesignIcon.url}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-3.5 w-5 shrink-0 object-contain opacity-80"
+                  />
                   Dutch Design
                 </span>
                 <span className="flex h-[21.42px] w-[21.42px] shrink-0 items-center justify-center rounded-full border-2 border-[#cdc0b5] bg-transparent text-[#cdc0b5] shadow-none">

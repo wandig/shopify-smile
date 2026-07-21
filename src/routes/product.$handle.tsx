@@ -27,7 +27,6 @@ import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
-import fullHouseDetailDiagram from "@/assets/full-house-detail-diagram.png.asset.json";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",
@@ -250,18 +249,6 @@ const PRODUCT_BENEFITS = [
   { title: "5 jaar garantie", image: fullHouseGalleryFinish },
 ];
 
-const PRODUCT_DETAIL_SPECS: Array<{ title: string; body: string }> = [
-  { title: "Algemeen", body: "De Full House is onze meest complete cinewall: een strak wandmeubel dat je tv, speakers en styling samenbrengt in één rustig geheel. Ontworpen en gebouwd in onze Nederlandse werkplaats." },
-  { title: "Afmetingen", body: "Breedte 240 cm · Hoogte 180 cm · Diepte 25 cm. Op maat leverbaar in andere afmetingen op aanvraag, zodat de wand naadloos aansluit op jouw woonkamer." },
-  { title: "Materiaal", body: "Massief houten frame afgewerkt met fineer of gespoten paneel. Gebruikte lijmen en lakken zijn watergedragen en voldoen aan de strengste Europese emissienormen." },
-  { title: "TV-formaat", body: "Geschikt voor tv's van 55 tot 85 inch. De middelste opening en kabelgoten worden op maat afgestemd op jouw exacte tv-model tijdens het bestelproces." },
-  { title: "Kleuren", body: "Beschikbaar in 8 signature afwerkingen, waaronder walnoot, eiken, zwart en zandsteen. Alle stalen zijn gratis thuis te bestellen om rustig te vergelijken." },
-  { title: "Levering", body: "Gratis bezorging in Nederland en België binnen 7 tot 14 werkdagen. Onze bezorgers plaatsen de cinewall op de gewenste plek en nemen al het verpakkingsmateriaal weer mee." },
-  { title: "Montage", body: "Plug & play: het meubel wordt in voorgemonteerde delen geleverd en klikt met ons unieke bevestigingssysteem in een paar stappen aan de wand. Geen boren in de tv-kast, geen zichtbare schroeven." },
-  { title: "Onderhoud", body: "Afnemen met een licht vochtige microvezeldoek is voldoende. Vermijd agressieve schoonmaakmiddelen; voor het fineer is een druppel meubelolie per jaar meer dan genoeg." },
-];
-
-
 
 function ProductView({ product }: { product: ProductNode }) {
   const variants = useMemo(
@@ -286,7 +273,6 @@ function ProductView({ product }: { product: ProductNode }) {
   const [expandedVariantOption, setExpandedVariantOption] = useState<string | null>(null);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
-  const [openDetailSpec, setOpenDetailSpec] = useState<number | null>(0);
 
 
   const activeVariant = useMemo(() => {
@@ -799,66 +785,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <section className="mt-16 md:mt-24">
-        <h2 className="text-center text-[28px] md:text-[36px] font-bold tracking-tight text-[#071426]">
-          De {displayTitle} in detail
-        </h2>
-
-        <div className="mt-10 md:mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16 items-start">
-          {/* Diagram with dimension labels */}
-          <div className="relative mx-auto w-full max-w-[560px]">
-            {/* Height label (left) */}
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-2 text-[12px] tracking-[0.08em] text-[#071426]/60">
-              <span className="block h-[140px] w-px bg-[#071426]/25" />
-              <span className="whitespace-nowrap">180 cm</span>
-            </div>
-            {/* Depth label (top-right) */}
-            <div className="absolute right-0 top-6 flex items-center gap-2 text-[12px] tracking-[0.08em] text-[#071426]/60">
-              <span className="whitespace-nowrap">25 cm</span>
-              <span className="block h-px w-8 bg-[#071426]/25" />
-            </div>
-            <img
-              src={fullHouseDetailDiagram.url}
-              alt={`${displayTitle} technische tekening`}
-              className="mx-auto block w-[78%] select-none"
-              loading="lazy"
-            />
-            {/* Width label (bottom) */}
-            <div className="mt-3 flex flex-col items-center gap-1.5 text-[12px] tracking-[0.08em] text-[#071426]/60">
-              <span className="block h-px w-[62%] bg-[#071426]/25" />
-              <span>240 cm</span>
-            </div>
-          </div>
-
-          {/* Accordion list */}
-          <div className="grid gap-3 sm:grid-cols-2">
-            {PRODUCT_DETAIL_SPECS.map((spec, index) => {
-              const open = openDetailSpec === index;
-              return (
-                <div key={spec.title} className="overflow-hidden rounded-[14px] border border-[#eeeeee] bg-white shadow-[0_10px_28px_rgba(42,31,22,0.04)]">
-                  <button
-                    type="button"
-                    onClick={() => setOpenDetailSpec((current) => current === index ? null : index)}
-                    aria-expanded={open}
-                    className="flex min-h-[50px] w-full items-center justify-between gap-3 px-4 text-left"
-                  >
-                    <span className="text-[14px] font-bold text-[#071426]">{spec.title}</span>
-                    <Plus className={`h-4 w-4 shrink-0 text-[#071426]/60 transition-transform duration-300 ease-out ${open ? "rotate-45" : "rotate-0"}`} strokeWidth={2} />
-                  </button>
-                  <div className={`grid transition-[grid-template-rows,opacity] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                    <div className="overflow-hidden">
-                      <p className="px-4 pb-4 pt-0 text-[13px] leading-relaxed text-[#071426]/70">{spec.body}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       </div>
-
 
 
 

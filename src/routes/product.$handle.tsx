@@ -693,7 +693,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
               <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${productionDetailsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                 <div className="overflow-hidden">
-                  <div className="min-h-[210px] px-5 pb-8 pt-3 text-[#cdc0b5]">
+                  <div className="relative min-h-[210px] px-5 pb-8 pt-3 text-[#cdc0b5]">
                     <p className="text-[17px] font-semibold text-[#071426]">Nederlands gemaakt. Met aandacht.</p>
                     <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
                       Elke Wandig cinewall wordt in onze Nederlandse werkplaats gebouwd, gecontroleerd en plug &amp; play voorbereid voor jouw woonkamer.
@@ -701,6 +701,12 @@ function ProductView({ product }: { product: ProductNode }) {
                     <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
                       Van de eerste plank tot de laatste kabeldoorvoer: lokaal vakmanschap, precies passend rond jouw tv.
                     </p>
+                    <img
+                      src={puzzlePiecesImg.url}
+                      alt=""
+                      aria-hidden="true"
+                      className="pointer-events-none absolute bottom-3 right-4 w-[140px] select-none"
+                    />
                   </div>
                 </div>
               </div>

@@ -874,17 +874,17 @@ function ProductView({ product }: { product: ProductNode }) {
               </Button>
 
               <div className="mb-[10px] mt-[17px] hidden w-full grid-cols-[max-content_max-content_max-content_max-content_max-content] items-center justify-between font-sans tracking-[0.04em] text-[#90949b] sm:grid">
-                <div className="flex items-center gap-1.5 text-[12px] font-light leading-none"><ShieldCheck className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">5 jaar garantie</span></div>
+                <div className="flex items-center gap-1.5 text-[12px] font-normal leading-none"><ShieldCheck className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">5 jaar garantie</span></div>
                 <span className="text-[13px] text-[#cdc0b5]" aria-hidden="true">|</span>
-                <div className="flex items-center gap-1.5 text-[12px] font-light leading-none"><Hammer className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">Handgemaakt in NL</span></div>
+                <div className="flex items-center gap-1.5 text-[12px] font-normal leading-none"><Hammer className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">Handgemaakt in NL</span></div>
                 <span className="text-[13px] text-[#cdc0b5]" aria-hidden="true">|</span>
-                <div className="flex items-center gap-1.5 text-[12px] font-light leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">7-14 werkdagen levertijd</span></div>
+                <div className="flex items-center gap-1.5 text-[12px] font-normal leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">7-14 werkdagen levertijd</span></div>
               </div>
 
               <div className="mb-[10px] mt-[17px] grid grid-cols-1 divide-y divide-[#eeeeee] font-sans tracking-[0.04em] text-[#90949b] sm:hidden">
-                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-light leading-none"><ShieldCheck className="h-[16px] w-[16px] shrink-0" /><span>5 jaar garantie</span></div>
-                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-light leading-none"><Hammer className="h-[16px] w-[16px] shrink-0" /><span>Handgemaakt in NL</span></div>
-                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-light leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span>7-14 werkdagen levertijd</span></div>
+                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><ShieldCheck className="h-[16px] w-[16px] shrink-0" /><span>5 jaar garantie</span></div>
+                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><Hammer className="h-[16px] w-[16px] shrink-0" /><span>Handgemaakt in NL</span></div>
+                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span>7-14 werkdagen levertijd</span></div>
               </div>
               </div>
             </section>

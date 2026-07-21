@@ -5,11 +5,9 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
-import comparisonDiyWallImg from "@/assets/comparison-diy-wall.jpg";
-import comparisonStandardFurnitureImg from "@/assets/comparison-standard-furniture.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
 import fullHouseGalleryMain from "@/assets/full-house-gallery-main-cropped.png";
 import fullHouseGalleryRoom from "@/assets/full-house-gallery-room.jpg";
@@ -251,19 +249,6 @@ const PRODUCT_BENEFITS = [
   { title: "5 jaar garantie", image: fullHouseGalleryFinish },
 ];
 
-function ComparisonMiniVisual({ type, compact = false }: { type: "diy" | "furniture"; compact?: boolean }) {
-  const src = type === "diy" ? comparisonDiyWallImg : comparisonStandardFurnitureImg;
-  const alt = type === "diy" ? "Zelfbouw tv-wand in aanbouw" : "Standaard tv-meubel in woonkamer";
-
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className={`rounded-[10px] object-cover shadow-[0_10px_26px_rgba(18,18,18,0.09)] ${compact ? "h-9 w-11" : "h-14 w-[78px]"}`}
-      loading="lazy"
-    />
-  );
-}
 
 function ProductView({ product }: { product: ProductNode }) {
   const variants = useMemo(

@@ -5,7 +5,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import comparisonDiyWallImg from "@/assets/comparison-diy-wall.jpg";
@@ -685,12 +685,9 @@ function ProductView({ product }: { product: ProductNode }) {
                   />
                   Dutch Design
                 </span>
-                <img
-                  src={dutchDesignIcon.url}
-                  alt=""
-                  aria-hidden="true"
-                  className={`h-5 w-5 shrink-0 transition-transform duration-400 ease-out ${productionDetailsOpen ? "rotate-90" : "rotate-0"}`}
-                />
+                <span className="flex h-[21.42px] w-[21.42px] shrink-0 items-center justify-center rounded-full border-2 border-[#cdc0b5] bg-transparent text-[#cdc0b5] shadow-none">
+                  <Plus className={`h-[10.71px] w-[10.71px] transition-transform duration-400 ease-out ${productionDetailsOpen ? "rotate-45" : "rotate-0"}`} strokeWidth={2} />
+                </span>
               </button>
 
               <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${productionDetailsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>

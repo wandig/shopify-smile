@@ -788,55 +788,6 @@ function ProductView({ product }: { product: ProductNode }) {
       </div>
 
 
-      <section className="bg-[#f8f6f3] px-5 pb-16 md:px-10 md:pb-24">
-        <div className="mx-auto max-w-[1500px]">
-          <div
-            ref={reviewCarouselRef}
-            onPointerDown={startReviewDrag}
-            onPointerMove={moveReviewDrag}
-            onPointerUp={endReviewDrag}
-            onPointerCancel={endReviewDrag}
-            onPointerLeave={endReviewDrag}
-            className="flex cursor-grab gap-5 overflow-x-auto scroll-smooth pb-3 active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {[...reviews, ...reviews, ...reviews].map((review, index) => {
-              const image = allImages[index % Math.max(allImages.length, 1)]?.node;
-              return (
-                <article
-                  key={`${review.name}-${index}`}
-                  data-review-card
-                  className="min-w-[264px] max-w-[264px] overflow-hidden rounded-[18px] border border-[#dedede] bg-white md:min-w-[calc((100%_-_80px)/5)] md:max-w-[calc((100%_-_80px)/5)]"
-                >
-                  <div className="h-[150px] bg-[#f4f1ed] md:h-[168px]">
-                    <img
-                      src={image?.url || detailMaatwerkImg}
-                      alt={image?.altText || "Wandig cinewall bij klant thuis"}
-                      className="h-full w-full select-none object-cover"
-                      loading="lazy"
-                      draggable={false}
-                    />
-                  </div>
-                  <div className="p-5">
-                    <div className="mb-5 flex items-center gap-3">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#edf0ef] text-white">
-                        <span className="h-3.5 w-3.5 rounded-full bg-white" />
-                      </span>
-                      <span className="text-base font-medium text-foreground">{review.name}</span>
-                    </div>
-                    <div className="mb-3 flex gap-0.5 text-[#ef7027]">
-                      {Array.from({ length: 5 }).map((_, starIndex) => (
-                        <Star key={starIndex} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" strokeWidth={0} />
-                      ))}
-                    </div>
-                    <h3 className="text-[18px] font-bold leading-snug text-foreground">{review.title}</h3>
-                    <p className="mt-2 text-[16px] leading-relaxed text-foreground/82">{review.body}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       <section className="bg-[#f8f6f3] px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-[1080px] text-center">

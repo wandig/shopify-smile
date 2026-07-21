@@ -525,7 +525,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 aria-expanded={productionDetailsOpen}
                 className="flex min-h-[42px] w-full items-center justify-between gap-4 px-4 text-left text-[#071426]"
               >
-                <span className="flex items-center gap-2 font-sans text-[14.4px] font-[385] text-[#cdc0b5]" style={{ textShadow: '0 0.5px 0.5px rgba(0,0,0,0.06)' }}>
+                <span className="flex items-center gap-2 font-sans text-[14.4px] font-[385] text-[#cdc0b5]" style={{ textShadow: '0 0.55px 0.55px rgba(0,0,0,0.065)' }}>
                   <img
                     src={dutchDesignIcon.url}
                     alt=""

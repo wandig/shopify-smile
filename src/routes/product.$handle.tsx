@@ -584,7 +584,7 @@ function ProductView({ product }: { product: ProductNode }) {
         style: "decimal",
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
-      }).format(displayedNumericPrice) + "\u2011,-"
+      }).format(displayedNumericPrice) + "\u00A0,-"
     : "Prijs op aanvraag";
   const installmentPrice = displayedNumericPrice > 0
     ? new Intl.NumberFormat("nl-NL", {

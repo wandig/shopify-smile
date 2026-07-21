@@ -799,7 +799,66 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
+      <section className="mt-16 md:mt-24">
+        <h2 className="text-center text-[28px] md:text-[36px] font-bold tracking-tight text-[#071426]">
+          De {displayTitle} in detail
+        </h2>
+
+        <div className="mt-10 md:mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16 items-start">
+          {/* Diagram with dimension labels */}
+          <div className="relative mx-auto w-full max-w-[560px]">
+            {/* Height label (left) */}
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-2 text-[12px] tracking-[0.08em] text-[#071426]/60">
+              <span className="block h-[140px] w-px bg-[#071426]/25" />
+              <span className="whitespace-nowrap">180 cm</span>
+            </div>
+            {/* Depth label (top-right) */}
+            <div className="absolute right-0 top-6 flex items-center gap-2 text-[12px] tracking-[0.08em] text-[#071426]/60">
+              <span className="whitespace-nowrap">25 cm</span>
+              <span className="block h-px w-8 bg-[#071426]/25" />
+            </div>
+            <img
+              src={fullHouseDetailDiagram.url}
+              alt={`${displayTitle} technische tekening`}
+              className="mx-auto block w-[78%] select-none"
+              loading="lazy"
+            />
+            {/* Width label (bottom) */}
+            <div className="mt-3 flex flex-col items-center gap-1.5 text-[12px] tracking-[0.08em] text-[#071426]/60">
+              <span className="block h-px w-[62%] bg-[#071426]/25" />
+              <span>240 cm</span>
+            </div>
+          </div>
+
+          {/* Accordion list */}
+          <div className="grid gap-3 sm:grid-cols-2">
+            {PRODUCT_DETAIL_SPECS.map((spec, index) => {
+              const open = openDetailSpec === index;
+              return (
+                <div key={spec.title} className="overflow-hidden rounded-[14px] border border-[#eeeeee] bg-white shadow-[0_10px_28px_rgba(42,31,22,0.04)]">
+                  <button
+                    type="button"
+                    onClick={() => setOpenDetailSpec((current) => current === index ? null : index)}
+                    aria-expanded={open}
+                    className="flex min-h-[50px] w-full items-center justify-between gap-3 px-4 text-left"
+                  >
+                    <span className="text-[14px] font-bold text-[#071426]">{spec.title}</span>
+                    <Plus className={`h-4 w-4 shrink-0 text-[#071426]/60 transition-transform duration-300 ease-out ${open ? "rotate-45" : "rotate-0"}`} strokeWidth={2} />
+                  </button>
+                  <div className={`grid transition-[grid-template-rows,opacity] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                    <div className="overflow-hidden">
+                      <p className="px-4 pb-4 pt-0 text-[13px] leading-relaxed text-[#071426]/70">{spec.body}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       </div>
+
 
 
 

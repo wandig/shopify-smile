@@ -28,6 +28,7 @@ import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
+import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",

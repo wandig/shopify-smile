@@ -705,7 +705,7 @@ function ProductView({ product }: { product: ProductNode }) {
                       src={puzzlePiecesImg.url}
                       alt=""
                       aria-hidden="true"
-                      className="pointer-events-none absolute bottom-3 right-4 w-[140px] select-none"
+                      className="pointer-events-none absolute bottom-5 right-5 w-[84px] select-none"
                     />
                   </div>
                 </div>

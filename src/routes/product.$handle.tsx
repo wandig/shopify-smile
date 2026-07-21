@@ -5,7 +5,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Plus, Star, Hammer, ShieldCheck, Ruler, ShoppingBag, Truck } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import comparisonDiyWallImg from "@/assets/comparison-diy-wall.jpg";

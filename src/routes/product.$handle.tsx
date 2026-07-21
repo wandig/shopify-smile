@@ -617,7 +617,7 @@ function ProductView({ product }: { product: ProductNode }) {
     : null;
   const displayTitle = product.title.replace(/^Wandig\s+/i, "");
   const scrollBenefits = (direction: -1 | 1) => {
-    benefitsScrollerRef.current?.scrollBy({ left: direction * 165, behavior: "smooth" });
+    benefitsScrollerRef.current?.scrollBy({ left: direction * 135, behavior: "smooth" });
   };
   return (
     <div className="bg-[#f8f6f3]">

@@ -859,10 +859,17 @@ function ProductView({ product }: { product: ProductNode }) {
               <Button
                 onClick={handleAdd}
                 disabled={isLoading || !activeVariant?.availableForSale}
-                className="mt-3 h-12 w-full translate-y-0 rounded-full bg-[#ff5a00] px-6 text-sm font-bold text-white shadow-none transition-colors hover:translate-y-0 hover:bg-[#e95100] hover:shadow-none active:translate-y-0 active:scale-100"
+                className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-[#ff5a00] px-6 text-sm font-bold text-white shadow-none transition-colors hover:translate-y-0 hover:bg-[#e95100] hover:shadow-none active:translate-y-0 active:scale-100"
               >
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : activeVariant?.availableForSale ? (
-                  <span className="flex items-center justify-center gap-1.5 font-[200]"><img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" />In winkelwagen</span>
+                  <span className="relative block h-full w-full overflow-hidden">
+                    <span className="absolute inset-0 flex items-center justify-center gap-1.5 font-[200] transition-transform duration-300 ease-out group-hover:-translate-y-full">
+                      <img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" />In winkelwagen
+                    </span>
+                    <span className="absolute inset-0 flex translate-y-full items-center justify-center gap-1.5 font-[200] transition-transform duration-300 ease-out group-hover:translate-y-0">
+                      <img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" />In winkelwagen
+                    </span>
+                  </span>
                 ) : "Uitverkocht"}
               </Button>
 

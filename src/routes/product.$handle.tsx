@@ -5,7 +5,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Plus, Star, Hammer, ShieldCheck, Ruler, ShoppingBag, Truck } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Check, X, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import comparisonDiyWallImg from "@/assets/comparison-diy-wall.jpg";
@@ -922,57 +922,6 @@ function ProductView({ product }: { product: ProductNode }) {
       </div>
 
       </div>
-
-      {/* Product story */}
-      <section className="bg-[#f8f6f3] px-5 py-8 md:px-10 md:py-10">
-        <div className="mx-auto grid max-w-[1500px] overflow-hidden rounded-[22px] border border-[#dedede] bg-white md:grid-cols-2">
-          <div className="order-2 flex flex-col justify-center px-8 py-7 md:order-1 md:h-[720px] md:px-12 md:py-0 lg:px-16">
-            <h2 className="max-w-xl font-serif text-[1.875rem] leading-[1.05] text-foreground md:text-[2.375rem]">
-              Rustig beeld, perfect weggewerkt.
-            </h2>
-            <p className="mt-3 max-w-xl text-[17.5px] leading-relaxed text-foreground/72">
-              Tv, soundbar, apparatuur en kabels krijgen één vaste plek in een cinewall die je eenvoudig samenstelt voor jouw ruimte. Geen losse snoeren, geen drukke hoekjes en geen meubel dat net niet past — alleen een rustig wandbeeld dat klopt in verhouding, materiaal en afwerking.
-            </p>
-
-            <div className="mt-7 grid gap-5 sm:grid-cols-3">
-              {[
-                {
-                  icon: Ruler,
-                  title: "Plug & play",
-                  body: "Keuze uit vaste maten, kleuren en opstellingen.",
-                },
-                {
-                  icon: Hammer,
-                  title: "Eenvoudig te plaatsen",
-                  body: "Slim ontworpen zodat je hem eenvoudig zelf neerzet en aansluit.",
-                },
-                {
-                  icon: ShieldCheck,
-                  title: "Zeker gevoel",
-                  body: "5 jaar garantie en 30 dagen bedenktijd na plaatsing.",
-                },
-              ].map(({ icon: I, title, body }) => (
-                <div key={title}>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ef7027]/35 text-[#ef7027]">
-                    <I className="h-4 w-4" strokeWidth={1.8} />
-                  </div>
-                  <h3 className="mt-2.5 text-[17.5px] font-semibold leading-tight">{title}</h3>
-                  <p className="mt-1.5 text-[16.25px] leading-relaxed text-foreground/64">{body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="order-1 h-[528px] bg-[#f2f0ed] md:order-2 md:h-[720px]">
-            <img
-              src={productStoryBlackOakOrangeImg}
-              alt="Ingezoomde Wandig Full House black oak cinewall in oranje studio"
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
 
       <section className="bg-[#f8f6f3] px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto grid max-w-[1500px] items-center gap-12 md:grid-cols-[0.72fr_1.28fr] lg:gap-16">

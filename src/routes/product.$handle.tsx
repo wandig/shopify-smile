@@ -584,15 +584,13 @@ function ProductView({ product }: { product: ProductNode }) {
     : "Prijs op aanvraag";
   const installmentPrice = displayedNumericPrice > 0
     ? new Intl.NumberFormat("nl-NL", {
-        style: "currency",
-        currency: currencyCode,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(displayedNumericPrice / 3)
     : null;
   const displayTitle = product.title.replace(/^Wandig\s+/i, "");
   const scrollBenefits = (direction: -1 | 1) => {
-    benefitsScrollerRef.current?.scrollBy({ left: direction * 180, behavior: "smooth" });
+    benefitsScrollerRef.current?.scrollBy({ left: direction * 165, behavior: "smooth" });
   };
   return (
     <div className="bg-[#f8f6f3]">
@@ -862,14 +860,13 @@ function ProductView({ product }: { product: ProductNode }) {
                   <button type="button" aria-label="Volgende voordelen" onClick={() => scrollBenefits(1)} className="flex h-7 w-7 items-center justify-center rounded-full border border-[#eeeeee] text-[#071426] transition-colors hover:bg-[#f7f3f0]"><ChevronRight className="h-3.5 w-3.5" /></button>
                 </div>
               </div>
-              <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {PRODUCT_BENEFITS.map((benefit) => (
-                  <article key={benefit.title} className="relative h-[177px] min-w-[133px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc]">
+                  <article key={benefit.title} className="relative h-[210px] min-w-[150px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc]">
                     <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/52 via-black/10 to-black/20" />
-                    <div className="absolute inset-x-2 top-3 flex flex-col items-center text-center">
-                      <span className="rounded-full bg-white/88 px-2 py-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-[#7a3422]">Inclusief</span>
-                      <h3 className="mt-2 text-[12px] font-semibold leading-tight text-white drop-shadow">{benefit.title}</h3>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/10 to-black/70" />
+                    <div className="absolute inset-x-0 bottom-0 p-3">
+                      <h3 className="text-[15px] font-bold leading-tight text-white">{benefit.title}</h3>
                     </div>
                   </article>
                 ))}

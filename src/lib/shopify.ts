@@ -94,7 +94,7 @@ export const PRODUCT_BY_HANDLE_QUERY = `
   }
 `;
 
-export function formatPrice(amount: string, currencyCode: string) {
+export function formatPrice(amount: string, _currencyCode: string) {
   const n = parseFloat(amount);
-  return new Intl.NumberFormat("nl-NL", { style: "currency", currency: currencyCode, maximumFractionDigits: 0 }).format(n);
+  return `${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)},-`;
 }

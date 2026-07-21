@@ -617,7 +617,7 @@ function ProductView({ product }: { product: ProductNode }) {
     : null;
   const displayTitle = product.title.replace(/^Wandig\s+/i, "");
   const scrollBenefits = (direction: -1 | 1) => {
-    benefitsScrollerRef.current?.scrollBy({ left: direction * 165, behavior: "smooth" });
+    benefitsScrollerRef.current?.scrollBy({ left: direction * 135, behavior: "smooth" });
   };
   return (
     <div className="bg-[#f8f6f3]">
@@ -904,12 +904,12 @@ function ProductView({ product }: { product: ProductNode }) {
 
                 </div>
               </div>
-              <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-2.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {PRODUCT_BENEFITS.map((benefit) => (
-                  <article key={benefit.title} className="relative h-[210px] min-w-[150px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc]">
+                  <article key={benefit.title} className="relative h-[175px] min-w-[125px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc]">
                     <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
-                    <div className="absolute inset-x-0 top-0 px-3 pt-6">
-                      <h3 className="text-center text-[15px] font-normal leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">{benefit.title}</h3>
+                    <div className="absolute inset-x-0 top-0 px-4 pt-5">
+                      <h3 className="text-center text-[13px] font-light leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
                     </div>
                   </article>
                 ))}

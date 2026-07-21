@@ -255,7 +255,7 @@ function ProductView({ product }: { product: ProductNode }) {
     () => product.variants.edges.map((e) => e.node as typeof e.node & { image?: { url: string; altText: string | null } | null }),
     [product],
   );
-  const reviewCarouselRef = useRef<HTMLDivElement>(null);
+  
   const benefitsScrollerRef = useRef<HTMLDivElement>(null);
   const mainGalleryImageRef = useRef<HTMLImageElement>(null);
   const galleryContinuationRef = useRef<HTMLDivElement>(null);

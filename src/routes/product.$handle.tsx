@@ -240,11 +240,12 @@ const FULL_HOUSE_GALLERY = [
 ];
 
 const PRODUCT_BENEFITS = [
-  { title: "Rust zonder kabels", image: productStoryBlackOakOrangeImg },
-  { title: "Handgemaakt in NL", image: detailMaatwerkImg },
-  { title: "Ontworpen voor jouw woonkamer", image: fullHouseGalleryRoom },
-  { title: "5 jaar garantie", image: fullHouseGalleryStylingOne },
-  { title: "Eenvoudig te plaatsen", image: fullHouseGalleryUse },
+  { title: "Ontworpen in Nederland", image: detailMaatwerkImg },
+  { title: "Kabels uit het zicht", image: productStoryBlackOakOrangeImg },
+  { title: "Eenvoudige klikmontage", image: fullHouseGalleryUse },
+  { title: "Persoonlijk advies", image: fullHouseGalleryRoom },
+  { title: "100 dagen kijkpleziergarantie", image: fullHouseGalleryStylingOne },
+  { title: "5 jaar garantie", image: fullHouseGalleryFinish },
 ];
 
 function ComparisonMiniVisual({ type, compact = false }: { type: "diy" | "furniture"; compact?: boolean }) {

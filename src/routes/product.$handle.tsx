@@ -425,6 +425,27 @@ function ProductView({ product }: { product: ProductNode }) {
     });
   }, [allImages]);
 
+  // Track benefits carousel scroll position to dim disabled arrows.
+  useEffect(() => {
+    const carousel = benefitsScrollerRef.current;
+    if (!carousel) return;
+
+    const updateScrollState = () => {
+      const atStart = carousel.scrollLeft <= 1;
+      const atEnd = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1;
+      setBenefitsScrollState({ atStart, atEnd });
+    };
+
+    updateScrollState();
+    carousel.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      carousel.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, []);
+
+
   const reviews = useMemo(() => [
     {
       name: "Milan V.",

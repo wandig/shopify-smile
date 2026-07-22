@@ -915,6 +915,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <BuiltToLastSection />
 
+      <FaqSection />
 
       </div>
 

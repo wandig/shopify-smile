@@ -904,6 +904,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <UniqueSection />
 
+      <BeforeAfterSection />
+
 
       </div>
 

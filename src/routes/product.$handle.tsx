@@ -1120,7 +1120,7 @@ function BeforeAfterSection() {
         <div
           ref={containerRef}
           className="relative w-full overflow-hidden rounded-2xl select-none touch-none"
-          style={{ aspectRatio: "4 / 3" }}
+          style={{ aspectRatio: "16 / 10" }}
           onPointerDown={(e) => {
             draggingRef.current = true;
             setFromClientX(e.clientX);

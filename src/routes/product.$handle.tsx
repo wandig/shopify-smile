@@ -27,6 +27,18 @@ import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
+import specsDiagram from "@/assets/full-house-specs-diagram.png.asset.json";
+
+const PRODUCT_SPECS: Array<{ title: string; body: string }> = [
+  { title: "Algemeen", body: "Handgemaakte plug & play cinewall uit onze eigen werkplaats. Volledig gemonteerd geleverd en klaar voor gebruik." },
+  { title: "Afmetingen", body: "Breedte 240 cm · Hoogte 180 cm · Diepte 40 cm. Geschikt voor TV's tot en met 75 inch." },
+  { title: "Materiaal", body: "Massief houten frame met MDF panelen, afgewerkt met een matte fineerlaag. Krasbestendig en duurzaam." },
+  { title: "TV-formaat", body: "Geschikt voor tv's van 55 tot en met 75 inch. VESA-montage tot 600 × 400 mm inbegrepen." },
+  { title: "Kleuren", body: "Beschikbaar in Walnootbruin, Eikenzwart, Eikengrijs, Truffelbruin, Katoengrijs, Zandsteen, Kleibeige en Dofroze." },
+  { title: "Levering", body: "Gratis levering in Nederland en België binnen 7-14 werkdagen. Bezorgd op de gewenste kamer." },
+  { title: "Montage-instructies", body: "Plug & play: klik-op-klaar systeem. Geen boren of schroeven nodig. Duidelijke handleiding meegeleverd." },
+  { title: "Onderhoud", body: "Reinig met een licht vochtige microvezeldoek. Vermijd agressieve schoonmaakmiddelen om de fineerlaag te beschermen." },
+];
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",
@@ -734,6 +746,30 @@ function ProductView({ product }: { product: ProductNode }) {
                 <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><Hammer className="h-[16px] w-[16px] shrink-0" /><span>Handgemaakt in NL</span></div>
                 <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span>7-14 werkdagen levertijd</span></div>
               </div>
+              </div>
+            </section>
+
+            <section className="overflow-hidden rounded-[20px] border border-[#eeeeee] bg-white shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
+              <div className="px-4 pt-4">
+                <h2 className="text-[14px] font-bold text-[#071426]">Specificaties</h2>
+              </div>
+              <div className="relative mx-4 mt-3 rounded-[14px] bg-[#f7f4f0] p-4">
+                <img src={specsDiagram.url} alt="Wandig Full House afmetingen" className="mx-auto block h-auto w-full max-w-[420px] object-contain" />
+                <div className="pointer-events-none absolute inset-x-4 bottom-4 flex items-center justify-between text-[11px] font-normal tracking-[0.06em] text-[#071426]/60">
+                  <span>240 cm</span>
+                  <span>180 cm</span>
+                </div>
+              </div>
+              <div className="mt-2 divide-y divide-[#eeeeee] px-4 pb-2">
+                {PRODUCT_SPECS.map((spec) => (
+                  <details key={spec.title} className="group py-3">
+                    <summary className="flex cursor-pointer list-none items-center justify-between text-[13px] font-normal text-[#071426]">
+                      <span>{spec.title}</span>
+                      <Plus className="h-4 w-4 shrink-0 text-[#071426]/60 transition-transform group-open:rotate-45" strokeWidth={1.5} />
+                    </summary>
+                    <p className="mt-2 text-[12px] leading-relaxed text-[#071426]/65">{spec.body}</p>
+                  </details>
+                ))}
               </div>
             </section>
 

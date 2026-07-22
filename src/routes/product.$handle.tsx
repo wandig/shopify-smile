@@ -913,6 +913,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <CustomerGallerySection />
 
+      <BuiltToLastSection />
+
 
       </div>
 
@@ -1331,6 +1333,143 @@ function CustomerGallerySection() {
 
 
 
+    </section>
+  );
+}
+
+
+const BUILT_TO_LAST_CARDS: Array<{
+  eyebrow: string;
+  title: string;
+  body: string;
+  image: string;
+  tone: "light" | "dark";
+}> = [
+  {
+    eyebrow: "Gemaakt om te blijven",
+    title: "10 jaar garantie\nop jouw tv-kast.",
+    body: "Ontworpen voor jarenlang dagelijks gebruik, zonder dat je je zorgen hoeft te maken.",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
+    tone: "light",
+  },
+  {
+    eyebrow: "Zo staat hij",
+    title: "Plug-and-play\ngemonteerd.",
+    body: "Slim voorbereid en eenvoudig in elkaar te zetten, zonder ingewikkeld maatwerk.",
+    image: "https://images.unsplash.com/photo-1581092918484-8313ab3a9862?auto=format&fit=crop&w=1200&q=80",
+    tone: "light",
+  },
+  {
+    eyebrow: "Kijk het rustig aan",
+    title: "100 dagen\nproefkijken.",
+    body: "Ervaar thuis of jouw nieuwe tv-kast echt bij je interieur past.",
+    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=1200&q=80",
+    tone: "dark",
+  },
+  {
+    eyebrow: "Van Nederlandse bodem",
+    title: "Dutch Design\nvoor aan de muur.",
+    body: "Rustig vormgegeven in Nederland, met aandacht voor ieder detail.",
+    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=1200&q=80",
+    tone: "dark",
+  },
+];
+
+function BuiltToLastSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollRef = useRef(0);
+  const movedRef = useRef(false);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    movedRef.current = false;
+    dragStartXRef.current = e.clientX;
+    dragStartScrollRef.current = el.scrollLeft;
+    el.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const el = scrollerRef.current;
+    if (!el) return;
+    const dx = e.clientX - dragStartXRef.current;
+    if (Math.abs(dx) > 4) movedRef.current = true;
+    el.scrollLeft = dragStartScrollRef.current - dx;
+  };
+  const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    setIsDragging(false);
+    const el = scrollerRef.current;
+    if (el && el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+  };
+
+  return (
+    <section className="mt-12 md:mt-20">
+      <div className="mb-6 text-center md:mb-10">
+        <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+          Gebouwd om mee te gaan
+        </h2>
+      </div>
+
+      <div
+        ref={scrollerRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onPointerLeave={endDrag}
+        className={`-mx-4 flex gap-3 overflow-x-auto scrollbar-hide px-4 md:mx-0 md:gap-4 md:px-0 ${
+          isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+        }`}
+        style={{ scrollSnapType: "x mandatory" }}
+      >
+        {BUILT_TO_LAST_CARDS.map((card, i) => (
+          <article
+            key={i}
+            className="relative shrink-0 overflow-hidden rounded-[18px] w-[280px] h-[380px] md:w-[360px] md:h-[480px]"
+            style={{ scrollSnapAlign: "start" }}
+          >
+            <img
+              src={card.image}
+              alt={card.title}
+              className="absolute inset-0 h-full w-full object-cover"
+              draggable={false}
+              loading="lazy"
+            />
+            {card.tone === "light" && (
+              <div className="absolute inset-0 bg-gradient-to-b from-[#f4efe6]/95 via-[#f4efe6]/70 to-transparent" />
+            )}
+            {card.tone === "dark" && (
+              <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-transparent" />
+            )}
+            <div
+              className={`relative flex h-full flex-col p-6 md:p-7 ${
+                card.tone === "light" ? "text-[#071426]" : "text-white"
+              }`}
+            >
+              <div
+                className={`text-[12px] md:text-[13px] font-normal ${
+                  card.tone === "light" ? "text-[#071426]/60" : "text-white/80"
+                }`}
+              >
+                {card.eyebrow}
+              </div>
+              <h3 className="mt-2 whitespace-pre-line text-[22px] md:text-[26px] font-bold leading-[1.15]">
+                {card.title}
+              </h3>
+              <p
+                className={`mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed ${
+                  card.tone === "light" ? "text-[#071426]/70" : "text-white/85"
+                }`}
+              >
+                {card.body}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

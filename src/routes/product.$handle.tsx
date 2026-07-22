@@ -1113,6 +1113,36 @@ function BeforeAfterSection() {
           <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65">
             Sleep de balk om te zien hoe de Full House een lege muur transformeert in een warme, opgeruimde woonkamer met ruimte voor alles wat je dierbaar is.
           </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-1">
+            <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+                <Hammer className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
+              </div>
+              <div>
+                <p className="text-[13px] font-medium text-[#071426]">Op maat gemaakt</p>
+                <p className="text-[12px] text-[#071426]/55">Afgestemd op jouw woonkamer</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+                <Truck className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
+              </div>
+              <div>
+                <p className="text-[13px] font-medium text-[#071426]">Snel geleverd</p>
+                <p className="text-[12px] text-[#071426]/55">Binnen 2-4 weken in huis</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+                <ShieldCheck className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
+              </div>
+              <div>
+                <p className="text-[13px] font-medium text-[#071426]">Made in NL</p>
+                <p className="text-[12px] text-[#071426]/55">Met de hand gebouwd</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div
@@ -1163,38 +1193,6 @@ function BeforeAfterSection() {
             <ChevronLeft className="h-4 w-4 text-[#071426]" strokeWidth={2.5} />
             <ChevronRight className="h-4 w-4 text-[#071426] -ml-1" strokeWidth={2.5} />
           </button>
-        </div>
-
-        <div className="md:col-span-2">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <Hammer className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
-              </div>
-              <div>
-                <p className="text-[13px] font-medium text-[#071426]">Op maat gemaakt</p>
-                <p className="text-[12px] text-[#071426]/55">Afgestemd op jouw woonkamer</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <Truck className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
-              </div>
-              <div>
-                <p className="text-[13px] font-medium text-[#071426]">Snel geleverd</p>
-                <p className="text-[12px] text-[#071426]/55">Binnen 2-4 weken in huis</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <ShieldCheck className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
-              </div>
-              <div>
-                <p className="text-[13px] font-medium text-[#071426]">Made in NL</p>
-                <p className="text-[12px] text-[#071426]/55">Met de hand gebouwd</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

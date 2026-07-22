@@ -1278,31 +1278,28 @@ function CustomerGallerySection() {
         </p>
       </div>
 
-      <div className="columns-2 gap-3 md:columns-3 md:gap-4">
-        {CUSTOMER_GALLERY_IMAGES.map((image, index) => (
-          <figure
-            key={index}
-            className={`relative mb-3 overflow-hidden rounded-[14px] break-inside-avoid md:mb-4 ${
-              image.ratio === "tall"
-                ? "aspect-[3/4]"
-                : image.ratio === "wide"
-                  ? "aspect-[4/3]"
-                  : "aspect-square"
-            }`}
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="h-full w-full object-cover"
-              loading="lazy"
-              draggable={false}
-            />
-            <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white shadow-[0_2px_8px_rgba(0,0,0,0.18)] md:bottom-3 md:right-3">
-              <PuzzleCornerIcon className="h-3.5 w-3.5" />
-            </span>
-          </figure>
-        ))}
+      <div className="-mx-4 overflow-x-auto scrollbar-hide md:mx-0">
+        <div className="flex gap-3 px-4 md:gap-4 md:px-0">
+          {CUSTOMER_GALLERY_IMAGES.map((image, index) => (
+            <figure
+              key={index}
+              className="relative h-[260px] w-[220px] shrink-0 overflow-hidden rounded-[14px] md:h-[360px] md:w-[300px]"
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="h-full w-full object-cover"
+                loading="lazy"
+                draggable={false}
+              />
+              <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white shadow-[0_2px_8px_rgba(0,0,0,0.18)] md:bottom-3 md:right-3">
+                <PuzzleCornerIcon className="h-3.5 w-3.5" />
+              </span>
+            </figure>
+          ))}
+        </div>
       </div>
+
     </section>
   );
 }

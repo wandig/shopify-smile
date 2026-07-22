@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -924,7 +924,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <NewsletterContactSection />
 
-
+      <TrustBannerSection />
 
     </div>
   );
@@ -1748,6 +1748,34 @@ function NewsletterContactSection() {
     </section>
   );
 }
+
+function TrustBannerSection() {
+  const items = [
+    { icon: Star, label: "100 dagen proef kijkgarantie" },
+    { icon: Truck, label: "Gratis bezorgd in Nederland" },
+    { icon: Monitor, label: "Geschikt voor tv's tot 80 inch" },
+    { icon: ShieldCheck, label: "10 jaar garantie" },
+  ];
+
+  return (
+    <section className="bg-[#fffbf7]">
+      <div className="mx-auto max-w-[1600px] px-5 py-10 md:px-10 md:py-14">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex items-center gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+                <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+              </div>
+              <p className="text-[14px] font-[500] leading-snug text-[#071426]">{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 
 
 

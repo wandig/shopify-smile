@@ -1533,17 +1533,14 @@ function FaqSection() {
             className="group rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all md:p-5"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
-              <div className="flex items-center gap-3 md:gap-4">
-                <span className="h-2 w-2 shrink-0 rounded-full bg-[#ef7027] md:h-2.5 md:w-2.5" />
-                <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
-                  {item.question}
-                </span>
-              </div>
+              <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
+                {item.question}
+              </span>
               <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
                 <Plus className="h-3 w-3" strokeWidth={2} />
               </span>
             </summary>
-            <div className="mt-3 pl-5 text-[13px] leading-relaxed text-[#071426]/65 md:pl-6 md:text-[14px]">
+            <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">
               {item.answer}
             </div>
           </details>

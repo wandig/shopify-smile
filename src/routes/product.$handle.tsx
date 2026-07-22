@@ -1317,7 +1317,7 @@ function CustomerGallerySection() {
                     <span className="grid max-w-0 overflow-hidden whitespace-nowrap text-[12px] font-medium leading-none transition-[max-width,opacity] duration-300 ease-out opacity-0 group-hover/pill:max-w-[160px] group-hover/pill:opacity-100 md:text-[13px]">
                       Bestel Full House
                     </span>
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[#ef7027] transition-transform duration-300 ease-out group-hover/pill:rotate-90 md:h-6 md:w-6">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ef7027] text-white transition-transform duration-300 ease-out group-hover/pill:rotate-90 md:h-6 md:w-6">
                       <PuzzleCornerIcon className="h-2.5 w-2.5 md:h-3 md:w-3" />
                     </span>
                   </button>

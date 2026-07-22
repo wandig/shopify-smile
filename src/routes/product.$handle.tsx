@@ -922,6 +922,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <ReviewsSection />
 
+      <NewsletterContactSection />
+
 
 
     </div>

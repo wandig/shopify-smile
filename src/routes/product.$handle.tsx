@@ -830,6 +830,57 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
+      <section className="mt-6 md:mt-10 rounded-[20px] bg-white shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
+        <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-14">
+          {/* Schematic */}
+          <div className="relative">
+            <div className="flex items-center gap-3 pl-8 pb-3 text-[11px] font-normal uppercase tracking-[0.18em] text-[#071426]/45">
+              <span className="h-px flex-1 bg-[#071426]/15" />
+              <span>240 cm</span>
+              <span className="h-px flex-1 bg-[#071426]/15" />
+            </div>
+            <div className="flex items-stretch gap-3">
+              <div className="flex w-6 flex-col items-center justify-center gap-2 text-[11px] font-normal uppercase tracking-[0.18em] text-[#071426]/45">
+                <span className="w-px flex-1 bg-[#071426]/15" />
+                <span className="[writing-mode:vertical-rl] rotate-180">180 cm</span>
+                <span className="w-px flex-1 bg-[#071426]/15" />
+              </div>
+              <div className="min-w-0 flex-1 overflow-hidden rounded-[12px] bg-[#f8f6f3]">
+                <img
+                  src={cinewallSchema.url}
+                  alt="Schematische weergave Wandig Full House, 240 cm breed en 180 cm hoog"
+                  className="block h-auto w-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Accordions */}
+          <div>
+            <h2 className="text-[22px] font-bold leading-tight text-[#071426]">Specificaties</h2>
+            <p className="mt-2 max-w-[420px] text-[13px] leading-relaxed text-[#071426]/55">
+              Alles wat je moet weten over de Wandig Full House cinewall, van afmetingen tot onderhoud.
+            </p>
+            <div className="mt-6 divide-y divide-[#eeeeee] border-t border-b border-[#eeeeee]">
+              {SPEC_SECTIONS.map((section) => (
+                <details key={section.title} className="group py-4">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden">
+                    <span>{section.title}</span>
+                    <span className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
+                      <Plus className="h-3 w-3" strokeWidth={2} />
+                    </span>
+                  </summary>
+                  <div className="mt-3 max-w-[440px] pr-8 text-[13px] leading-relaxed text-[#071426]/65">
+                    {section.body}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       </div>
 
 

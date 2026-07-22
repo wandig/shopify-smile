@@ -994,15 +994,11 @@ function UniqueSection() {
         ref={scrollerRef}
         className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-2 md:gap-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {UNIQUE_CARDS.map((card, i) => {
-          const isWide = card.variant === "overlay-top" && i === 2;
-          return (
-            <article
-              key={card.title}
-              className={`relative shrink-0 snap-center overflow-hidden rounded-[18px] ${
-                isWide ? "h-[440px] w-[340px] md:h-[520px] md:w-[520px]" : "h-[440px] w-[280px] md:h-[520px] md:w-[360px]"
-              }`}
-            >
+        {UNIQUE_CARDS.map((card) => (
+          <article
+            key={card.title}
+            className="relative h-[440px] w-[280px] shrink-0 snap-center overflow-hidden rounded-[18px] md:h-[520px] md:w-[360px]"
+          >
               {card.variant === "light" ? (
                 <div className="flex h-full w-full flex-col bg-[#f2ece3]">
                   <div className="px-6 pt-6 md:px-7 md:pt-7">

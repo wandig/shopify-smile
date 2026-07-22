@@ -913,6 +913,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <CustomerGallerySection />
 
+      <BuiltToLastSection />
+
 
       </div>
 

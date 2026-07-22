@@ -27,6 +27,51 @@ import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
+import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
+
+const SPEC_SECTIONS: Array<{ title: string; body: React.ReactNode }> = [
+  {
+    title: "Algemeen",
+    body: (
+      <p>Wandig Full House is een complete cinewall met open vakken, gesloten kastruimte en een centraal tv-vlak. Ontworpen in Nederland, met de hand gebouwd in onze eigen werkplaats en plug &amp; play voorbereid voor jouw woonkamer.</p>
+    ),
+  },
+  {
+    title: "Afmetingen",
+    body: (
+      <ul className="space-y-1.5">
+        <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">240 cm</span></li>
+        <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">180 cm</span></li>
+        <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">32 cm</span></li>
+        <li className="flex justify-between gap-4"><span>Tv-uitsparing</span><span className="text-[#071426]">tot 80 inch</span></li>
+      </ul>
+    ),
+  },
+  {
+    title: "Materiaal",
+    body: <p>Meubelplaat met een echt houtfineer aan de zichtzijden. Alle randen zijn afgewerkt met ABS-kantenband in dezelfde afwerking. Achterwand van gelakt MDF in de gekozen kleur.</p>,
+  },
+  {
+    title: "Tv-formaat",
+    body: <p>Geschikt voor tv&apos;s van 40 tot en met 80 inch. De tv wordt centraal gemonteerd met een VESA-compatibele wandsteun (niet inbegrepen). Kabels lopen onzichtbaar door de kabeldoorvoer in de achterwand.</p>,
+  },
+  {
+    title: "Kleuren",
+    body: <p>Beschikbaar in acht standaard afwerkingen: Eikenzwart, Eikengrijs, Walnootbruin, Truffelbruin, Katoengrijs, Zandsteen, Kleibeige en Dofroze. Kleurstalen kun je gratis bestellen.</p>,
+  },
+  {
+    title: "Levering",
+    body: <p>Levertijd 7 tot 14 werkdagen. Gratis bezorgd door onze eigen chauffeurs op de begane grond. Wij plannen samen met jou een dag en tijdslot in.</p>,
+  },
+  {
+    title: "Montage-instructies",
+    body: <p>De cinewall wordt in voorgemonteerde modules geleverd. Met de meegeleverde klikverbindingen zet je hem in gemiddeld 45 minuten samen. Een uitgebreide stap-voor-stap handleiding zit in de verpakking.</p>,
+  },
+  {
+    title: "Onderhoud",
+    body: <p>Neem het houtfineer af met een licht vochtige, zachte doek en droog direct na. Vermijd agressieve reinigers en schuursponzen. Voor hardnekkige vlekken kun je een neutrale meubelzeep gebruiken.</p>,
+  },
+];
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",

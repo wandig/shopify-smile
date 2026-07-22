@@ -1299,7 +1299,7 @@ function CustomerGallerySection() {
               {col.items.map((image, i) => (
                 <figure
                   key={i}
-                  className="relative min-h-0 flex-1 overflow-hidden rounded-[14px]"
+                  className="group relative min-h-0 flex-1 overflow-hidden rounded-[14px]"
                 >
                   <img
                     src={image.src}
@@ -1308,8 +1308,8 @@ function CustomerGallerySection() {
                     loading="lazy"
                     draggable={false}
                   />
-                  <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white shadow-[0_2px_8px_rgba(0,0,0,0.18)] md:bottom-3 md:right-3">
-                    <PuzzleCornerIcon className="h-3.5 w-3.5" />
+                  <span className="absolute bottom-2 right-2 flex h-5 w-5 items-center justify-center rounded-full bg-white/90 text-[#ef7027] shadow-[0_1px_4px_rgba(0,0,0,0.10)] transition-opacity duration-200 group-hover:opacity-100 md:bottom-3 md:right-3 md:h-6 md:w-6">
+                    <PuzzleCornerIcon className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </span>
                 </figure>
               ))}

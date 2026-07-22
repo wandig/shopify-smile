@@ -29,7 +29,7 @@ import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
 
-const SPEC_SECTIONS: Array<{ title: string; body: React.ReactNode }> = [
+const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {
     title: "Algemeen",
     body: (

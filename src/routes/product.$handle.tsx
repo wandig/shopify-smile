@@ -1428,7 +1428,7 @@ function BuiltToLastSection() {
         {BUILT_TO_LAST_CARDS.map((card, i) => (
           <article
             key={i}
-            className="relative shrink-0 overflow-hidden rounded-[18px] w-[280px] h-[380px] md:w-[360px] md:h-[480px]"
+            className="relative shrink-0 overflow-hidden rounded-[18px] w-[280px] h-[280px] md:w-[360px] md:h-[360px]"
             style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
           >
             <div
@@ -1443,7 +1443,7 @@ function BuiltToLastSection() {
               >
                 {card.eyebrow}
               </div>
-              <h3 className="mt-2 whitespace-pre-line text-[22px] md:text-[26px] font-bold leading-[1.15]">
+              <h3 className="mt-2 whitespace-pre-line text-[20px] md:text-[24px] font-bold leading-[1.15]">
                 {card.title}
               </h3>
               <p

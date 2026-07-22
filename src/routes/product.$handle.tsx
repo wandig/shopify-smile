@@ -884,7 +884,7 @@ function ProductView({ product }: { product: ProductNode }) {
             {SPEC_SECTIONS.map((section) => (
               <details
                 key={section.title}
-                className="group col-span-1 open:col-span-2 rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all"
+                className="group rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all"
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden">
                   <span>{section.title}</span>

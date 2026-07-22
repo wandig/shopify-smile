@@ -1574,7 +1574,7 @@ function ReviewsSection() {
   };
 
   return (
-    <section className="mt-12 md:mt-20">
+    <section className="mt-12 bg-[#fff7ef] py-10 md:mt-20 md:py-16">
       <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
         <div>
           <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>

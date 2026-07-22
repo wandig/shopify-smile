@@ -890,7 +890,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden">
                   <span>{section.title}</span>
                   <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
-                    <img src={puzzleIcon} alt="" className="h-3.5 w-3.5" />
+                    <img src={puzzleIcon} alt="" className="h-4 w-4" />
                   </span>
                 </summary>
                 <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65">

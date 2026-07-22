@@ -956,6 +956,10 @@ const UNIQUE_CARDS: Array<{
 function UniqueSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollRef = useRef(0);
+  const didDragRef = useRef(false);
 
   const scrollToIndex = (i: number) => {
     const el = scrollerRef.current;
@@ -983,6 +987,27 @@ function UniqueSection() {
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    didDragRef.current = false;
+    dragStartXRef.current = e.clientX;
+    dragStartScrollRef.current = el.scrollLeft;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    if (!el || !isDragging) return;
+    const dx = e.clientX - dragStartXRef.current;
+    if (Math.abs(dx) > 4) didDragRef.current = true;
+    el.scrollLeft = dragStartScrollRef.current - dx;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
   return (
     <section className="mt-12 md:mt-20">
       <div className="mb-6 md:mb-8">
@@ -992,7 +1017,11 @@ function UniqueSection() {
 
       <div
         ref={scrollerRef}
-        className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-2 md:gap-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        className={`-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-2 md:gap-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
       >
         {UNIQUE_CARDS.map((card) => (
           <article
@@ -1011,12 +1040,12 @@ function UniqueSection() {
                     )}
                   </div>
                   <div className="mt-auto h-[60%] w-full overflow-hidden">
-                    <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" />
+                    <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" draggable={false} />
                   </div>
                 </div>
               ) : (
                 <>
-                  <img src={card.image} alt={card.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                  <img src={card.image} alt={card.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" draggable={false} />
                   <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/55 to-transparent p-6 md:p-7">
                     {card.eyebrow && (
                       <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/85">{card.eyebrow}</p>

@@ -912,3 +912,140 @@ function ProductView({ product }: { product: ProductNode }) {
     </div>
   );
 }
+
+const UNIQUE_CARDS: Array<{
+  eyebrow?: string;
+  title: string;
+  body?: string;
+  image: string;
+  variant: "light" | "overlay-top" | "overlay-bottom";
+}> = [
+  {
+    title: "Sfeervolle verlichting",
+    body: "Warme accenten die je woonkamer laten leven.",
+    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=900&q=80",
+    variant: "light",
+  },
+  {
+    title: "Samengestelde kleuren",
+    body: "Natuurlijke tinten die perfect samenkomen.",
+    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=80",
+    variant: "light",
+  },
+  {
+    eyebrow: "Full House",
+    title: "Rust in je woonkamer, ruimte voor alles",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
+    variant: "overlay-top",
+  },
+  {
+    eyebrow: "SimpleClick® Montage",
+    title: "Als het allemaal klikt",
+    image: "https://images.unsplash.com/photo-1581092918484-8313ab3a9862?auto=format&fit=crop&w=900&q=80",
+    variant: "overlay-top",
+  },
+  {
+    eyebrow: "Uitsparing",
+    title: "Kabels uit het zicht",
+    body: "Voor een net en opgeruimd gevoel.",
+    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=900&q=80",
+    variant: "light",
+  },
+];
+
+function UniqueSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToIndex = (i: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const card = el.children[i] as HTMLElement | undefined;
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const children = Array.from(el.children) as HTMLElement[];
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let closest = 0;
+      let dist = Infinity;
+      children.forEach((c, i) => {
+        const mid = c.offsetLeft - el.offsetLeft + c.clientWidth / 2;
+        const d = Math.abs(mid - center);
+        if (d < dist) { dist = d; closest = i; }
+      });
+      setActiveIndex(closest);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <section className="mt-12 md:mt-20">
+      <div className="mb-6 md:mb-8">
+        <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">Dit maakt Full House uniek</h2>
+        <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">Doordacht design, gemaakt voor jouw interieur</p>
+      </div>
+
+      <div
+        ref={scrollerRef}
+        className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-2 md:gap-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {UNIQUE_CARDS.map((card, i) => {
+          const isWide = card.variant === "overlay-top" && i === 2;
+          return (
+            <article
+              key={card.title}
+              className={`relative shrink-0 snap-center overflow-hidden rounded-[18px] ${
+                isWide ? "h-[440px] w-[340px] md:h-[520px] md:w-[520px]" : "h-[440px] w-[280px] md:h-[520px] md:w-[360px]"
+              }`}
+            >
+              {card.variant === "light" ? (
+                <div className="flex h-full w-full flex-col bg-[#f2ece3]">
+                  <div className="px-6 pt-6 md:px-7 md:pt-7">
+                    {card.eyebrow && (
+                      <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#071426]/60">{card.eyebrow}</p>
+                    )}
+                    <h3 className="text-[20px] md:text-[22px] font-bold leading-tight text-[#071426]">{card.title}</h3>
+                    {card.body && (
+                      <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/60">{card.body}</p>
+                    )}
+                  </div>
+                  <div className="mt-auto h-[60%] w-full overflow-hidden">
+                    <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <img src={card.image} alt={card.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                  <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/55 to-transparent p-6 md:p-7">
+                    {card.eyebrow && (
+                      <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/85">{card.eyebrow}</p>
+                    )}
+                    <h3 className="text-[20px] md:text-[22px] font-bold leading-tight text-white">{card.title}</h3>
+                  </div>
+                </>
+              )}
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="mt-6 flex justify-center gap-2">
+        {UNIQUE_CARDS.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            aria-label={`Ga naar kaart ${i + 1}`}
+            onClick={() => scrollToIndex(i)}
+            className={`h-2 rounded-full transition-all ${activeIndex === i ? "w-6 bg-[#071426]" : "w-2 bg-[#071426]/25"}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+

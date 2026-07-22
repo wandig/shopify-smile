@@ -29,7 +29,7 @@ export function SiteFooter() {
             <li><Link to="/retour" className="hover:opacity-60">Retour</Link></li>
             <li><Link to="/algemene-voorwaarden" className="hover:opacity-60">Algemene voorwaarden</Link></li>
             <li><span className="text-muted-foreground">Gratis levering</span></li>
-            <li><span className="text-muted-foreground">5 jaar garantie</span></li>
+            <li><span className="text-muted-foreground">10 jaar garantie</span></li>
           </ul>
         </div>
         <div>

@@ -1149,12 +1149,6 @@ function BeforeAfterSection() {
             </div>
           </div>
 
-          <img
-            src={puzzlePiecesImg.url}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-0 right-0 w-[84px] translate-x-1/4 translate-y-1/4 select-none opacity-80"
-          />
         </div>
 
         <div

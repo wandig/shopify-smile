@@ -31,7 +31,7 @@ import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
-import kijkplezierIcon from "@/assets/100-dagen-kijkplezier-icon.svg.asset.json";
+import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [

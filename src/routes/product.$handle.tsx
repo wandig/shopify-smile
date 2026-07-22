@@ -1233,38 +1233,52 @@ function PuzzleCornerIcon({ className }: { className?: string }) {
   );
 }
 
-const CUSTOMER_GALLERY_IMAGES: Array<{ src: string; alt: string; ratio: "tall" | "wide" | "square" }> = [
+type GalleryImage = { src: string; alt: string };
+const GALLERY_IMG = (id: string, alt: string): GalleryImage => ({
+  src: `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=80`,
+  alt,
+});
+
+// Each column is either one tall image or a stack of two.
+const CUSTOMER_GALLERY_COLUMNS: Array<{
+  width: string;
+  items: GalleryImage[];
+}> = [
   {
-    src: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80",
-    alt: "Woonkamer met Wandig Full House cinewall",
-    ratio: "tall",
+    width: "w-[240px] md:w-[340px]",
+    items: [GALLERY_IMG("photo-1616486338812-3dadae4b4ace", "Woonkamer met Full House cinewall")],
   },
   {
-    src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",
-    alt: "Interieur met tv-meubel en sfeerverlichting",
-    ratio: "square",
+    width: "w-[200px] md:w-[280px]",
+    items: [
+      GALLERY_IMG("photo-1600210492486-724fe5c67fb0", "Interieur met tv-meubel"),
+      GALLERY_IMG("photo-1615529182904-14819c35db37", "Minimalistisch interieur met tv-wand"),
+    ],
   },
   {
-    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80",
-    alt: "Moderne woonkamer met opgeruimd tv-wand",
-    ratio: "wide",
+    width: "w-[220px] md:w-[300px]",
+    items: [GALLERY_IMG("photo-1616627561950-9f746e330187", "Warme woonkamer met houten cinewall")],
   },
   {
-    src: "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=900&q=80",
-    alt: "Warme woonkamer met houten cinewall",
-    ratio: "square",
+    width: "w-[200px] md:w-[280px]",
+    items: [
+      GALLERY_IMG("photo-1600607687939-ce8a6c25118c", "Moderne woonkamer met tv-wand"),
+      GALLERY_IMG("photo-1600566753190-17f0baa2a6c3", "Stijlvol tv-meubel"),
+    ],
   },
   {
-    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80",
-    alt: "Stijlvol tv-meubel in landelijke woonkamer",
-    ratio: "tall",
+    width: "w-[240px] md:w-[340px]",
+    items: [GALLERY_IMG("photo-1615873968403-89e068629265", "Sfeervolle woonkamer met cinewall")],
   },
   {
-    src: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=80",
-    alt: "Minimalistisch interieur met tv-wand",
-    ratio: "wide",
+    width: "w-[200px] md:w-[280px]",
+    items: [
+      GALLERY_IMG("photo-1616137466211-f939a420be84", "Design interieur"),
+      GALLERY_IMG("photo-1618220179428-22790b461013", "Lichte woonkamer"),
+    ],
   },
 ];
+
 
 function CustomerGallerySection() {
   return (

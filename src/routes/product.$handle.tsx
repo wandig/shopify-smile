@@ -1107,7 +1107,7 @@ function BeforeAfterSection() {
   return (
     <section className="mt-12 md:mt-20">
       <div className="grid gap-8 md:grid-cols-[minmax(0,40%)_minmax(0,60%)] md:gap-10 md:items-start">
-        <div>
+        <div className="relative">
           <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
           <h2 className="text-[22px] md:text-[32px] font-bold leading-tight text-[#071426]">Eén meubel.<br className="hidden md:block" /> Eén compleet andere woonkamer.</h2>
           <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65">

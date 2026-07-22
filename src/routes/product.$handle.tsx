@@ -5,7 +5,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Puzzle, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -28,6 +28,7 @@ import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
+import puzzleIcon from "@/assets/puzzle-icon.svg.asset.json";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {
@@ -889,7 +890,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden">
                   <span>{section.title}</span>
                   <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
-                    <Puzzle className="h-3.5 w-3.5" strokeWidth={2} />
+                    <img src={puzzleIcon.url} alt="" className="h-3.5 w-3.5" />
                   </span>
                 </summary>
                 <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65">

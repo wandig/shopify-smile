@@ -161,5 +161,6 @@
   }
   .group\/pill:hover &::before {
     opacity: 1;
+    transition-delay: 0.12s;
   }
 }

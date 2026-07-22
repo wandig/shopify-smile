@@ -28,7 +28,7 @@ import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
-import puzzleIcon from "@/assets/puzzle-icon.svg.asset.json";
+import puzzleIcon from "@/assets/puzzle-icon-thick.svg";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {

@@ -28,7 +28,6 @@ import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
-import puzzleIcon from "@/assets/puzzle-icon-thick.svg";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {
@@ -889,8 +888,8 @@ function ProductView({ product }: { product: ProductNode }) {
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden">
                   <span>{section.title}</span>
-                  <span className="flex h-[28px] w-[28px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
-                    <img src={puzzleIcon} alt="" className="h-6 w-6" />
+                  <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
+                    <Plus className="h-3 w-3" strokeWidth={2} />
                   </span>
                 </summary>
                 <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65">

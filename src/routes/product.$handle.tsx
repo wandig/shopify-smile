@@ -1443,7 +1443,7 @@ function BuiltToLastSection() {
               >
                 {card.eyebrow}
               </div>
-              <h3 className="mt-2 whitespace-pre-line text-[20px] md:text-[24px] font-bold leading-[1.15]">
+              <h3 className="mt-2 whitespace-pre-line text-[18px] md:text-[22px] font-bold leading-[1.15]">
                 {card.title}
               </h3>
               <p

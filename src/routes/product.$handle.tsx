@@ -1107,7 +1107,7 @@ function BeforeAfterSection() {
   return (
     <section className="mt-12 md:mt-20">
       <div className="grid gap-8 md:grid-cols-[minmax(0,40%)_minmax(0,60%)] md:gap-10 md:items-start">
-        <div>
+        <div className="relative">
           <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
           <h2 className="text-[22px] md:text-[32px] font-bold leading-tight text-[#071426]">Eén meubel.<br className="hidden md:block" /> Eén compleet andere woonkamer.</h2>
           <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65">
@@ -1117,7 +1117,12 @@ function BeforeAfterSection() {
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-1">
             <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <Plug className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
+                <img
+                  src={puzzlePiecesImg.url}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-5 w-5 object-contain opacity-90"
+                />
               </div>
               <div>
                 <p className="text-[13px] font-medium text-[#071426]">Plug-and-Play</p>
@@ -1143,6 +1148,13 @@ function BeforeAfterSection() {
               </div>
             </div>
           </div>
+
+          <img
+            src={puzzlePiecesImg.url}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-0 right-0 w-[84px] translate-x-1/4 translate-y-1/4 select-none opacity-80"
+          />
         </div>
 
         <div

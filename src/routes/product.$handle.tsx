@@ -1026,8 +1026,7 @@ function UniqueSection() {
                 </>
               )}
             </article>
-          );
-        })}
+        ))}
       </div>
 
       <div className="mt-6 flex justify-center gap-2">

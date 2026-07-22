@@ -134,3 +134,32 @@
 .animate-breathing {
   animation: breathing 2.2s ease-in-out infinite;
 }
+
+@keyframes pill-shimmer {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.65;
+  }
+}
+
+@utility pill-shimmer {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 132, 58, 0.4) 45%, transparent 72%);
+    z-index: -1;
+    animation: pill-shimmer 2.2s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}

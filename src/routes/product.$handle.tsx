@@ -917,6 +917,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <FaqSection />
 
+      <ReviewsSection />
+
       </div>
 
 
@@ -1544,6 +1546,85 @@ function FaqSection() {
               {item.answer}
             </div>
           </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+const REVIEWS: Array<{ name: string; location: string; rating: number; title: string; body: string; date: string }> = [
+  { name: "Sanne V.", location: "Utrecht", rating: 5, title: "Kwaliteit is top", body: "De Full House staat prachtig in onze woonkamer. Afwerking is echt perfect en de montage was zo gepiept.", date: "3 weken geleden" },
+  { name: "Jeroen B.", location: "Amsterdam", rating: 5, title: "Meer dan verwacht", body: "Bestelling verliep soepel en levering was op tijd. De kast oogt luxer dan op de foto's.", date: "1 maand geleden" },
+  { name: "Lisa D.", location: "Den Haag", rating: 5, title: "Fantastisch meubel", body: "Onze woonkamer is compleet veranderd. Kabels netjes weggewerkt en de soundbar past perfect.", date: "1 maand geleden" },
+  { name: "Mark H.", location: "Rotterdam", rating: 4, title: "Mooi en stevig", body: "Zeer tevreden over de kwaliteit. Montage duurde iets langer dan verwacht maar het resultaat is top.", date: "2 maanden geleden" },
+  { name: "Eva K.", location: "Eindhoven", rating: 5, title: "Precies wat we zochten", body: "De kleurstalen thuis waren super handig. Uiteindelijk gekozen voor eiken, ziet er warm en tijdloos uit.", date: "2 maanden geleden" },
+  { name: "Tom S.", location: "Groningen", rating: 5, title: "Klantenservice top", body: "Had een vraag over de afmetingen en werd direct geholpen. Aanrader!", date: "2 maanden geleden" },
+  { name: "Anouk M.", location: "Breda", rating: 5, title: "Design meubel", body: "Ziet er echt uit als een designstuk. Vrienden vragen meteen waar we hem vandaan hebben.", date: "3 maanden geleden" },
+  { name: "Rick J.", location: "Nijmegen", rating: 4, title: "Solide en netjes", body: "Kwaliteit is prima, prijs is eerlijk. Levertijd was 10 dagen, precies zoals aangegeven.", date: "3 maanden geleden" },
+  { name: "Fleur P.", location: "Haarlem", rating: 5, title: "Zo blij mee", body: "De tv-wand maakt onze woonkamer af. Zelfmontage was verrassend makkelijk met z'n tweeën.", date: "4 maanden geleden" },
+];
+
+function ReviewsSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * (el.clientWidth * 0.8), behavior: "smooth" });
+  };
+
+  return (
+    <section className="mt-12 md:mt-20">
+      <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
+        <div>
+          <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>
+          <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+            Wat klanten zeggen over hun tv-kast.
+          </h2>
+        </div>
+        <div className="hidden gap-2 md:flex">
+          <button
+            type="button"
+            onClick={() => scroll(-1)}
+            aria-label="Vorige"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={() => scroll(1)}
+            aria-label="Volgende"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+          >
+            ›
+          </button>
+        </div>
+      </div>
+
+      <div
+        ref={scrollerRef}
+        className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {REVIEWS.map((r, i) => (
+          <article
+            key={i}
+            className="flex w-[280px] shrink-0 snap-start flex-col justify-between rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[340px]"
+          >
+            <div>
+              <div className="flex items-center gap-1 text-[#ef7027]">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <span key={idx} className={idx < r.rating ? "text-[#ef7027]" : "text-[#e5ded4]"}>★</span>
+                ))}
+              </div>
+              <h3 className="mt-3 text-[15px] font-[500] text-[#071426]">{r.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">{r.body}</p>
+            </div>
+            <div className="mt-5 flex items-center justify-between text-[12px] text-[#071426]/55">
+              <span className="font-[500] text-[#071426]">{r.name} · {r.location}</span>
+              <span>{r.date}</span>
+            </div>
+          </article>
         ))}
       </div>
     </section>

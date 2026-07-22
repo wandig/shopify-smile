@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
@@ -921,6 +922,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <ReviewsSection />
 
+      <NewsletterContactSection />
+
 
 
     </div>
@@ -1633,6 +1636,95 @@ function ReviewsSection() {
   );
 }
 
+
+function NewsletterContactSection() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (status === "loading") return;
+    const trimmed = email.trim();
+    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setStatus("error");
+      setMessage("Vul een geldig e-mailadres in.");
+      return;
+    }
+    setStatus("loading");
+    setMessage("");
+    try {
+      const res = await subscribeNewsletter({ data: { email: trimmed, source: "product-page" } });
+      setStatus("success");
+      setMessage(res.alreadySubscribed ? "Je bent al ingeschreven — bedankt!" : "Bedankt! Je bent ingeschreven.");
+      setEmail("");
+    } catch (err) {
+      setStatus("error");
+      setMessage(err instanceof Error ? err.message : "Er ging iets mis. Probeer het opnieuw.");
+    }
+  };
+
+  return (
+    <section className="bg-[#ffefdd]">
+      <div className="mx-auto max-w-[1600px] px-5 py-12 md:px-10 md:py-20">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+          <div>
+            <h2 className="text-[24px] md:text-[32px] font-[500] leading-tight text-[#071426]">
+              Meld je aan voor onze nieuwsbrief
+            </h2>
+            <p className="mt-3 max-w-md text-[14px] md:text-[15px] leading-relaxed text-[#071426]/70">
+              Blijf op de hoogte van nieuwe modellen, styling-tips en exclusieve aanbiedingen. Geen spam — schrijf je uit wanneer je wilt.
+            </p>
+            <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center" noValidate>
+              <label htmlFor="newsletter-email" className="sr-only">E-mailadres</label>
+              <input
+                id="newsletter-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); if (status !== "idle") setStatus("idle"); }}
+                placeholder="jouw@email.nl"
+                className="h-12 flex-1 rounded-full border border-[#e2d3bf] bg-white px-5 text-[14px] text-[#071426] placeholder:text-[#071426]/40 focus:border-[#ef7027] focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="h-12 rounded-full bg-[#ef7027] px-7 text-[14px] font-[500] text-white transition hover:brightness-95 disabled:opacity-60"
+              >
+                {status === "loading" ? "Bezig..." : "Inschrijven"}
+              </button>
+            </form>
+            {message && (
+              <p className={`mt-3 text-[13px] ${status === "success" ? "text-[#2d6a3e]" : "text-[#b3341c]"}`}>{message}</p>
+            )}
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-3 md:gap-4">
+            <div>
+              <h3 className="text-[15px] font-[500] text-[#071426]">Bellen</h3>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
+                +31 085 107 1953<br />ma-vr 9:00-18:00
+              </p>
+            </div>
+            <div>
+              <h3 className="text-[15px] font-[500] text-[#071426]">Chatten</h3>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
+                Chat met ons<br />9:00-22:00
+              </p>
+            </div>
+            <div>
+              <h3 className="text-[15px] font-[500] text-[#071426]">Mailen</h3>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
+                support.nl@wandig.com<br />iedere werkdag
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 
 

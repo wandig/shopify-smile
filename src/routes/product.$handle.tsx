@@ -1342,35 +1342,35 @@ const BUILT_TO_LAST_CARDS: Array<{
   eyebrow: string;
   title: string;
   body: string;
-  image: string;
+  bg: string;
   tone: "light" | "dark";
 }> = [
   {
     eyebrow: "Gemaakt om te blijven",
     title: "10 jaar garantie\nop jouw tv-kast.",
     body: "Ontworpen voor jarenlang dagelijks gebruik, zonder dat je je zorgen hoeft te maken.",
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
+    bg: "#f0e4d5",
     tone: "light",
   },
   {
     eyebrow: "Zo staat hij",
     title: "Plug-and-play\ngemonteerd.",
     body: "Slim voorbereid en eenvoudig in elkaar te zetten, zonder ingewikkeld maatwerk.",
-    image: "https://images.unsplash.com/photo-1581092918484-8313ab3a9862?auto=format&fit=crop&w=1200&q=80",
+    bg: "#c0b3a4",
     tone: "light",
   },
   {
     eyebrow: "Kijk het rustig aan",
     title: "100 dagen\nproefkijken.",
     body: "Ervaar thuis of jouw nieuwe tv-kast echt bij je interieur past.",
-    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=1200&q=80",
+    bg: "#a55f3e",
     tone: "dark",
   },
   {
     eyebrow: "Van Nederlandse bodem",
     title: "Dutch Design\nvoor aan de muur.",
     body: "Rustig vormgegeven in Nederland, met aandacht voor ieder detail.",
-    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=1200&q=80",
+    bg: "#936850",
     tone: "dark",
   },
 ];
@@ -1429,21 +1429,8 @@ function BuiltToLastSection() {
           <article
             key={i}
             className="relative shrink-0 overflow-hidden rounded-[18px] w-[280px] h-[380px] md:w-[360px] md:h-[480px]"
-            style={{ scrollSnapAlign: "start" }}
+            style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
           >
-            <img
-              src={card.image}
-              alt={card.title}
-              className="absolute inset-0 h-full w-full object-cover"
-              draggable={false}
-              loading="lazy"
-            />
-            {card.tone === "light" && (
-              <div className="absolute inset-0 bg-gradient-to-b from-[#f4efe6]/95 via-[#f4efe6]/70 to-transparent" />
-            )}
-            {card.tone === "dark" && (
-              <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-transparent" />
-            )}
             <div
               className={`relative flex h-full flex-col p-6 md:p-7 ${
                 card.tone === "light" ? "text-[#071426]" : "text-white"

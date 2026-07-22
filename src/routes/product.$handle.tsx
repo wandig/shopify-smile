@@ -991,7 +991,7 @@ function UniqueSection() {
     const el = scrollerRef.current;
     if (!el) return;
     setIsDragging(true);
-    didDragRef.current = false);
+    didDragRef.current = false;
     dragStartXRef.current = e.clientX;
     dragStartScrollRef.current = el.scrollLeft;
   };

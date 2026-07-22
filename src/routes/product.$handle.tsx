@@ -1220,4 +1220,92 @@ function BeforeAfterSection() {
   );
 }
 
+function PuzzleCornerIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5a2.5 2.5 0 0 0-5 0V5H4c-1.1 0-2 .9-2 2v3.8h1.5c1.5 0 2.7 1.2 2.7 2.7S5 16.2 3.5 16.2H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.5 1.2-2.7 2.7-2.7s2.7 1.2 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5a2.5 2.5 0 0 0 0-5z" />
+    </svg>
+  );
+}
+
+const CUSTOMER_GALLERY_IMAGES: Array<{ src: string; alt: string; ratio: "tall" | "wide" | "square" }> = [
+  {
+    src: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80",
+    alt: "Woonkamer met Wandig Full House cinewall",
+    ratio: "tall",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",
+    alt: "Interieur met tv-meubel en sfeerverlichting",
+    ratio: "square",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80",
+    alt: "Moderne woonkamer met opgeruimd tv-wand",
+    ratio: "wide",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=900&q=80",
+    alt: "Warme woonkamer met houten cinewall",
+    ratio: "square",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80",
+    alt: "Stijlvol tv-meubel in landelijke woonkamer",
+    ratio: "tall",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=80",
+    alt: "Minimalistisch interieur met tv-wand",
+    ratio: "wide",
+  },
+];
+
+function CustomerGallerySection() {
+  return (
+    <section className="mt-12 md:mt-20">
+      <div className="mb-6 md:mb-8">
+        <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+          Binnenkijken bij onze klanten
+        </h2>
+        <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">
+          Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
+        </p>
+      </div>
+
+      <div className="columns-2 gap-3 md:columns-3 md:gap-4">
+        {CUSTOMER_GALLERY_IMAGES.map((image, index) => (
+          <figure
+            key={index}
+            className={`relative mb-3 overflow-hidden rounded-[14px] break-inside-avoid md:mb-4 ${
+              image.ratio === "tall"
+                ? "aspect-[3/4]"
+                : image.ratio === "wide"
+                  ? "aspect-[4/3]"
+                  : "aspect-square"
+            }`}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              draggable={false}
+            />
+            <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white shadow-[0_2px_8px_rgba(0,0,0,0.18)] md:bottom-3 md:right-3">
+              <PuzzleCornerIcon className="h-3.5 w-3.5" />
+            </span>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
 

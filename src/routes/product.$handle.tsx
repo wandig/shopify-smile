@@ -1512,5 +1512,49 @@ function BuiltToLastSection() {
   );
 }
 
+function FaqSection() {
+  return (
+    <section className="mt-12 md:mt-20">
+      <div className="mb-6 text-center md:mb-10">
+        <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
+        <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+          Veelgestelde vragen
+        </h2>
+        <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">
+          Alles wat je wilt weten over onze cinewalls.
+        </p>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+        {FAQ_ITEMS.map((item, i) => (
+          <details
+            key={i}
+            className="group rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all md:p-5"
+          >
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+              <div className="flex items-center gap-3 md:gap-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#ef7027] text-[12px] font-[500] text-[#ef7027] md:h-8 md:w-8 md:text-[13px]">
+                  {i + 1}
+                </span>
+                <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
+                  {item.question}
+                </span>
+              </div>
+              <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
+                <Plus className="h-3 w-3" strokeWidth={2} />
+              </span>
+            </summary>
+            <div className="mt-3 pl-10 text-[13px] leading-relaxed text-[#071426]/65 md:pl-12 md:text-[14px]">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+
 
 

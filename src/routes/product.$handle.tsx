@@ -264,7 +264,7 @@ function ProductPage() {
 
   if (isLoading) {
     return (
-      <div className="bg-[#f8f6f3]">
+      <div className="bg-[#f6f3ee]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
           <div className="aspect-[4/5] bg-muted animate-pulse" />
           <div className="space-y-4">
@@ -523,7 +523,7 @@ function ProductView({ product }: { product: ProductNode }) {
     benefitsScrollerRef.current?.scrollBy({ left: direction * 166, behavior: "smooth" });
   };
   return (
-    <div className="bg-[#f8f6f3]">
+    <div className="bg-[#f6f3ee]">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-10 md:py-16">
       <nav className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8 flex items-center gap-2">
         <Link to="/" className="hover:text-foreground">Home</Link>
@@ -537,7 +537,7 @@ function ProductView({ product }: { product: ProductNode }) {
         {/* Gallery */}
         <div className="min-w-0">
           {galleryItems[0] && (
-            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#f8f6f3]" : ""}`}>
+            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#f6f3ee]" : ""}`}>
               <img
                 ref={mainGalleryImageRef}
                 src={galleryItems[0].src}
@@ -869,7 +869,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   <span className="absolute -bottom-px -left-[3px] h-px w-[7px] bg-[#071426]/40" />
                 </span>
               </div>
-              <div className="relative min-w-0 flex-1 overflow-hidden rounded-[14px] bg-[#f8f6f3]">
+              <div className="relative min-w-0 flex-1 overflow-hidden rounded-[14px] bg-[#f6f3ee]">
                 {/* Corner brackets */}
                 <span className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l border-t border-[#071426]/25" />
                 <span className="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r border-t border-[#071426]/25" />

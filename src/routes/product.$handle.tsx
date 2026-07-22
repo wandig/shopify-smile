@@ -924,7 +924,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <NewsletterContactSection />
 
-
+      <TrustBannerSection />
 
     </div>
   );

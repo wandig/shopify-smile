@@ -1565,7 +1565,7 @@ const REVIEWS: Array<{ name: string; location: string; rating: number; title: st
 ];
 
 function ReviewsSection() {
-  const scrollerRef = React.useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: number) => {
     const el = scrollerRef.current;

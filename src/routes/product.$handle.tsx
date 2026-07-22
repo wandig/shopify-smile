@@ -1106,26 +1106,25 @@ function BeforeAfterSection() {
 
   return (
     <section className="mt-12 md:mt-20">
-      <div className="mb-6 md:mb-8">
-        <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
-        <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">Eén meubel. Eén compleet andere woonkamer.</h2>
-        <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55 max-w-2xl">
-          Sleep de balk om te zien hoe de Full House een lege muur transformeert in een warme, opgeruimde woonkamer.
-        </p>
-      </div>
-
-      <div className="mx-auto max-w-[820px]">
-
+      <div className="grid gap-8 md:grid-cols-2 md:gap-10 md:items-center">
+        <div>
+          <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
+          <h2 className="text-[22px] md:text-[32px] font-bold leading-tight text-[#071426]">Eén meubel.<br className="hidden md:block" /> Eén compleet andere woonkamer.</h2>
+          <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65">
+            Sleep de balk om te zien hoe de Full House een lege muur transformeert in een warme, opgeruimde woonkamer met ruimte voor alles wat je dierbaar is.
+          </p>
+        </div>
 
         <div
           ref={containerRef}
           className="relative w-full overflow-hidden rounded-2xl select-none touch-none"
-          style={{ aspectRatio: "16 / 10" }}
+          style={{ aspectRatio: "4 / 3" }}
           onPointerDown={(e) => {
             draggingRef.current = true;
             setFromClientX(e.clientX);
           }}
         >
+
           <img
             src={afterFullHouseAsset.url}
             alt="Woonkamer na Full House"

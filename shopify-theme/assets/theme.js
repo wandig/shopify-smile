@@ -25,6 +25,18 @@ document.addEventListener('click', (e) => {
     const track = document.querySelector('[data-thumbs-track]');
     if (track) track.scrollBy({ left: dir * 240, behavior: 'smooth' });
   }
+
+  // Accordions: opening one closes the others in the same group
+  const summary = e.target.closest('.w-acc details summary, .w-spec details summary');
+  if (summary) {
+    const clickedDetails = summary.closest('details');
+    const container = clickedDetails.closest('.w-acc, .w-spec');
+    if (container && !clickedDetails.open) {
+      container.querySelectorAll('details').forEach(d => {
+        if (d !== clickedDetails) d.open = false;
+      });
+    }
+  }
 });
 
 function updateVariant() {

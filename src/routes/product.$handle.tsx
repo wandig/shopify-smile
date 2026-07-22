@@ -1299,7 +1299,7 @@ function CustomerGallerySection() {
               {col.items.map((image, i) => (
                 <figure
                   key={i}
-                  className="relative min-h-0 flex-1 overflow-hidden rounded-[14px]"
+                  className="group relative min-h-0 flex-1 overflow-hidden rounded-[14px]"
                 >
                   <img
                     src={image.src}

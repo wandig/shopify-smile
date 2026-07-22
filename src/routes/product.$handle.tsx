@@ -1575,36 +1575,38 @@ function ReviewsSection() {
 
   return (
     <section className="mt-12 bg-[#fff7ef] py-10 md:mt-20 md:py-16">
-      <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
-        <div>
-          <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>
-          <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
-            Wat klanten zeggen over hun tv-kast.
-          </h2>
-        </div>
-        <div className="hidden gap-2 md:flex">
-          <button
-            type="button"
-            onClick={() => scroll(-1)}
-            aria-label="Vorige"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            onClick={() => scroll(1)}
-            aria-label="Volgende"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
-          >
-            ›
-          </button>
+      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
+          <div>
+            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>
+            <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+              Wat klanten zeggen over hun tv-kast.
+            </h2>
+          </div>
+          <div className="hidden gap-2 md:flex">
+            <button
+              type="button"
+              onClick={() => scroll(-1)}
+              aria-label="Vorige"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll(1)}
+              aria-label="Volgende"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+            >
+              ›
+            </button>
+          </div>
         </div>
       </div>
 
       <div
         ref={scrollerRef}
-        className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mx-auto flex max-w-[1600px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 md:px-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {REVIEWS.map((r, i) => (
           <article

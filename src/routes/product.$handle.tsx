@@ -915,6 +915,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <BuiltToLastSection />
 
+      <FaqSection />
 
       </div>
 
@@ -1375,6 +1376,57 @@ const BUILT_TO_LAST_CARDS: Array<{
   },
 ];
 
+const FAQ_ITEMS: Array<{ question: string; answer: string }> = [
+  {
+    question: "Wat zijn de afmetingen van de cinewall?",
+    answer: "De Wandig Full House is 240 cm breed, 180 cm hoog en 32 cm diep. Het centrale tv-vlak is geschikt voor televisies tot 80 inch.",
+  },
+  {
+    question: "Past mijn soundbar in de cinewall?",
+    answer: "Ja, de open vakken en het ruime ontwerp bieden genoeg plaats voor een soundbar, media-apparatuur en accessoires.",
+  },
+  {
+    question: "Is mijn muur geschikt voor een cinewall?",
+    answer: "De cinewall is geschikt voor de meeste vlakke, draagkrachtige muren. Bij twijfel kun je gratis contact opnemen met ons adviesteam.",
+  },
+  {
+    question: "Hoe bestel ik een kleurstaal?",
+    answer: "Je kunt eenvoudig gratis kleurstalen aanvragen via onze website. Zo zie je thuis precies hoe de afwerking bij jouw interieur past.",
+  },
+  {
+    question: "Wanneer staat mijn cinewall in huis?",
+    answer: "Na bestelling is de levertijd gemiddeld 7 tot 14 werkdagen. We plannen samen met jou een dag en tijdslot voor bezorging.",
+  },
+  {
+    question: "Hoe wordt de cinewall aan de muur bevestigd?",
+    answer: "De cinewall wordt geleverd inclusief bevestigingsmateriaal en een duidelijke handleiding. De muurbeugels zijn speciaal ontworpen voor een veilige montage.",
+  },
+  {
+    question: "Hoe bevestig ik mijn tv in de cinewall?",
+    answer: "Je tv wordt gemonteerd met een VESA-compatibele wandsteun op het centrale tv-vlak. De steun zelf is niet inbegrepen.",
+  },
+  {
+    question: "Hoe sluit ik mijn apparatuur netjes aan?",
+    answer: "De achterwand heeft een kabeldoorvoer, zodat alle kabels uit het zicht lopen en je interieur rustig blijft ogen.",
+  },
+  {
+    question: "Kan ik de cinewall zelf monteren?",
+    answer: "Ja, de cinewall wordt in voorgemonteerde modules geleverd. Met de meegeleverde klikverbindingen zet je hem in gemiddeld 45 minuten samen.",
+  },
+  {
+    question: "Lukt de montage ook in mijn eentje?",
+    answer: "We raden aan om de montage met twee personen te doen, vooral bij het optillen en uitlijnen van de grotere modules.",
+  },
+  {
+    question: "Heb ik speciaal gereedschap nodig?",
+    answer: "Nee, voor de montage heb je alleen basisgereedschap zoals een schroevendraaier en een boormachine nodig.",
+  },
+  {
+    question: "Hoeveel jaar garantie krijg ik?",
+    answer: "Op de Wandig Full House krijg je 10 jaar garantie. Zo geniet je jarenlang zorgeloos van jouw nieuwe tv-wand.",
+  },
+];
+
 function BuiltToLastSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -1460,6 +1512,50 @@ function BuiltToLastSection() {
     </section>
   );
 }
+
+function FaqSection() {
+  return (
+    <section className="mt-12 md:mt-20">
+      <div className="mb-6 text-center md:mb-10">
+        <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
+        <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+          Veelgestelde vragen
+        </h2>
+        <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">
+          Alles wat je wilt weten over onze cinewalls.
+        </p>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+        {FAQ_ITEMS.map((item, i) => (
+          <details
+            key={i}
+            className="group rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all md:p-5"
+          >
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+              <div className="flex items-center gap-3 md:gap-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#ef7027] text-[12px] font-[500] text-[#ef7027] md:h-8 md:w-8 md:text-[13px]">
+                  {i + 1}
+                </span>
+                <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
+                  {item.question}
+                </span>
+              </div>
+              <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
+                <Plus className="h-3 w-3" strokeWidth={2} />
+              </span>
+            </summary>
+            <div className="mt-3 pl-10 text-[13px] leading-relaxed text-[#071426]/65 md:pl-12 md:text-[14px]">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
 
 
 

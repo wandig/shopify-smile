@@ -1118,7 +1118,7 @@ function BeforeAfterSection() {
           </p>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-1">
-            <div className="flex items-center gap-3 rounded-xl bg-[#f1efe4] p-4">
+            <div className="flex items-center gap-3 rounded-xl bg-[#fef9f5] p-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
                 <img
                   src={plugAndPlayIcon.url}
@@ -1132,7 +1132,7 @@ function BeforeAfterSection() {
                 <p className="text-[13px] text-[#071426]/55">Eenvoudig en snel te monteren</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 rounded-xl bg-[#f1efe4] p-4">
+            <div className="flex items-center gap-3 rounded-xl bg-[#fef9f5] p-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
                 <img
                   src={warrantyIcon.url}
@@ -1146,7 +1146,7 @@ function BeforeAfterSection() {
                 <p className="text-[13px] text-[#071426]/55">Langdurige zekerheid</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 rounded-xl bg-[#f1efe4] p-4">
+            <div className="flex items-center gap-3 rounded-xl bg-[#fef9f5] p-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
                 <img
                   src={kijkplezierIcon.url}

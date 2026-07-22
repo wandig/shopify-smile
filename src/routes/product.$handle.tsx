@@ -1121,7 +1121,7 @@ function BeforeAfterSection() {
               </div>
               <div>
                 <p className="text-[13px] font-medium text-[#071426]">Plug-and-Play</p>
-                <p className="text-[12px] text-[#071426]/55">Eenvoudig zelf te plaatsen</p>
+                <p className="text-[12px] text-[#071426]/55">Eenvoudig en snel te monteren</p>
               </div>
             </div>
             <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">

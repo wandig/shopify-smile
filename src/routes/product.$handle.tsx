@@ -749,6 +749,30 @@ function ProductView({ product }: { product: ProductNode }) {
               </div>
             </section>
 
+            <section className="overflow-hidden rounded-[20px] border border-[#eeeeee] bg-white shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
+              <div className="px-4 pt-4">
+                <h2 className="text-[14px] font-bold text-[#071426]">Specificaties</h2>
+              </div>
+              <div className="relative mx-4 mt-3 rounded-[14px] bg-[#f7f4f0] p-4">
+                <img src={specsDiagram.url} alt="Wandig Full House afmetingen" className="mx-auto block h-auto w-full max-w-[420px] object-contain" />
+                <div className="pointer-events-none absolute inset-x-4 bottom-4 flex items-center justify-between text-[11px] font-normal tracking-[0.06em] text-[#071426]/60">
+                  <span>240 cm</span>
+                  <span>180 cm</span>
+                </div>
+              </div>
+              <div className="mt-2 divide-y divide-[#eeeeee] px-4 pb-2">
+                {PRODUCT_SPECS.map((spec) => (
+                  <details key={spec.title} className="group py-3">
+                    <summary className="flex cursor-pointer list-none items-center justify-between text-[13px] font-normal text-[#071426]">
+                      <span>{spec.title}</span>
+                      <Plus className="h-4 w-4 shrink-0 text-[#071426]/60 transition-transform group-open:rotate-45" strokeWidth={1.5} />
+                    </summary>
+                    <p className="mt-2 text-[12px] leading-relaxed text-[#071426]/65">{spec.body}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+
             <section className="rounded-[20px] border border-[#eeeeee] bg-white p-4 shadow-[0_14px_34px_rgba(42,31,22,0.05)]">
               <span className="inline-flex items-center gap-2 rounded-full border border-[#eeeeee] px-3 py-1.5 text-[12px] font-normal text-[#071426]/55">
                 <span className="h-2 w-2 animate-breathing rounded-full bg-[#ff5a00]" />Laatste exemplaren

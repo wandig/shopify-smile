@@ -902,6 +902,9 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </section>
 
+      <UniqueSection />
+
+
       </div>
 
 

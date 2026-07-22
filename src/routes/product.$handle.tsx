@@ -1711,7 +1711,7 @@ function NewsletterContactSection() {
                   <p className="text-[13px] text-[#071426]/60">9:00 - 18:00</p>
                 </div>
               </div>
-              <p className="mt-5 text-[20px] md:text-[22px] font-[500] leading-tight text-[#071426]">+31 085 107 1953</p>
+              <p className="mt-5 text-[12px] font-[500] leading-tight text-[#071426]">+31 085 107 1953</p>
               <div className="mt-5 h-px w-full bg-[#071426]/10" />
             </div>
 
@@ -1725,7 +1725,7 @@ function NewsletterContactSection() {
                   <p className="text-[13px] text-[#071426]/60">9:00 - 22:00</p>
                 </div>
               </div>
-              <p className="mt-5 text-[20px] md:text-[22px] font-[500] leading-tight text-[#071426]">Chat met ons</p>
+              <p className="mt-5 text-[12px] font-[500] leading-tight text-[#071426]">Chat met ons</p>
               <div className="mt-5 h-px w-full bg-[#071426]/10" />
             </div>
 
@@ -1739,7 +1739,7 @@ function NewsletterContactSection() {
                   <p className="text-[13px] text-[#071426]/60">iedere werkdag</p>
                 </div>
               </div>
-              <p className="mt-5 text-[20px] md:text-[22px] font-[500] leading-tight text-[#071426] break-words">support.nl@wandig.com</p>
+              <p className="mt-5 text-[12px] font-[500] leading-tight text-[#071426] break-words">support.nl@wandig.com</p>
               <div className="mt-5 h-px w-full bg-[#071426]/10" />
             </div>
           </div>

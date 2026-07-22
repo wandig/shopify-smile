@@ -16,6 +16,8 @@ import fullHouseGalleryStylingTwo from "@/assets/full-house-gallery-styling-two.
 import fullHouseGalleryFinish from "@/assets/full-house-gallery-finish.webp";
 import fullHouseGalleryStorage from "@/assets/full-house-gallery-storage.webp";
 import fullHouseGalleryUse from "@/assets/full-house-gallery-use.webp";
+import beforeFullHouseAsset from "@/assets/before-full-house.png.asset.json";
+import afterFullHouseAsset from "@/assets/after-full-house.jpg.asset.json";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
 import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
@@ -904,6 +906,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <UniqueSection />
 
+      <BeforeAfterSection />
+
 
       </div>
 
@@ -1072,4 +1076,96 @@ function UniqueSection() {
     </section>
   );
 }
+
+function BeforeAfterSection() {
+  const [position, setPosition] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const draggingRef = useRef(false);
+
+  const setFromClientX = (clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const pct = ((clientX - rect.left) / rect.width) * 100;
+    setPosition(Math.max(0, Math.min(100, pct)));
+  };
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      if (!draggingRef.current) return;
+      setFromClientX(e.clientX);
+    };
+    const onUp = () => { draggingRef.current = false; };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, []);
+
+  return (
+    <section className="mt-16 md:mt-24 px-4 md:px-8 lg:px-12">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="mb-6 md:mb-8">
+          <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
+          <h2 className="text-[22px] md:text-[28px] font-bold leading-tight text-[#071426]">Eén meubel. Eén compleet andere woonkamer.</h2>
+          <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/70 max-w-2xl">
+            Sleep de balk om te zien hoe de Full House een lege muur transformeert in een warme, opgeruimde woonkamer met ruimte voor alles wat je dierbaar is.
+          </p>
+        </div>
+
+        <div
+          ref={containerRef}
+          className="relative w-full overflow-hidden rounded-2xl select-none touch-none"
+          style={{ aspectRatio: "4 / 3" }}
+          onPointerDown={(e) => {
+            draggingRef.current = true;
+            setFromClientX(e.clientX);
+          }}
+        >
+          <img
+            src={afterFullHouseAsset.url}
+            alt="Woonkamer na Full House"
+            className="absolute inset-0 h-full w-full object-cover"
+            draggable={false}
+          />
+          <div
+            className="absolute inset-0 overflow-hidden"
+            style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+          >
+            <img
+              src={beforeFullHouseAsset.url}
+              alt="Woonkamer voor Full House"
+              className="absolute inset-0 h-full w-full object-cover"
+              draggable={false}
+            />
+          </div>
+
+          <div className="absolute top-4 left-4 rounded-full bg-black/55 backdrop-blur-sm px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Voor</div>
+          <div className="absolute top-4 right-4 rounded-full bg-black/55 backdrop-blur-sm px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Na</div>
+
+          <div
+            className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)] pointer-events-none"
+            style={{ left: `${position}%`, transform: "translateX(-50%)" }}
+          />
+          <button
+            type="button"
+            aria-label="Sleep om te vergelijken"
+            className="absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_4px_16px_rgba(0,0,0,0.25)] cursor-ew-resize"
+            style={{ left: `${position}%` }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              draggingRef.current = true;
+            }}
+          >
+            <ChevronLeft className="h-4 w-4 text-[#071426]" strokeWidth={2.5} />
+            <ChevronRight className="h-4 w-4 text-[#071426] -ml-1" strokeWidth={2.5} />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 

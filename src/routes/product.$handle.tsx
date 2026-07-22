@@ -1192,8 +1192,8 @@ function BeforeAfterSection() {
             />
           </div>
 
-          <div className="absolute top-4 left-4 rounded-full bg-black/55 backdrop-blur-sm px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Voor</div>
-          <div className="absolute top-4 right-4 rounded-full bg-black/55 backdrop-blur-sm px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Na</div>
+          <div className="absolute top-4 left-4 rounded-full bg-[#fef9f5] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-[#071426]">Voor</div>
+          <div className="absolute top-4 right-4 rounded-full bg-[#ff843a] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Na</div>
 
           <div
             className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)] pointer-events-none"

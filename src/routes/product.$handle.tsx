@@ -882,32 +882,22 @@ function ProductView({ product }: { product: ProductNode }) {
 
           {/* Spec tiles */}
           <div className="grid grid-cols-2 gap-3 md:gap-4">
-            {SPEC_SECTIONS.map((section) => {
-              const isOpen = openSpec === section.title;
-              return (
-                <details
-                  key={section.title}
-                  open={isOpen}
-                  className="rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all"
-                >
-                  <summary
-                    onClick={(event) => {
-                      event.preventDefault();
-                      setOpenSpec((current) => (current === section.title ? null : section.title));
-                    }}
-                    className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden"
-                  >
-                    <span>{section.title}</span>
-                    <span className={`flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : ""}`}>
-                      <Plus className="h-3 w-3" strokeWidth={2} />
-                    </span>
-                  </summary>
-                  <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65">
-                    {section.body}
-                  </div>
-                </details>
-              );
-            })}
+            {SPEC_SECTIONS.map((section) => (
+              <details
+                key={section.title}
+                className="group rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden">
+                  <span>{section.title}</span>
+                  <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
+                    <Plus className="h-3 w-3" strokeWidth={2} />
+                  </span>
+                </summary>
+                <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65">
+                  {section.body}
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>

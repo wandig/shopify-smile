@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, MessageCircle, Mail } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -1702,18 +1702,21 @@ function NewsletterContactSection() {
 
           <div className="grid gap-6 sm:grid-cols-3 md:gap-4">
             <div>
+              <Phone className="mb-2 h-5 w-5 text-[#ef7027]" strokeWidth={2} />
               <h3 className="text-[15px] font-[500] text-[#071426]">Bellen</h3>
               <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
                 +31 085 107 1953<br />ma-vr 9:00-18:00
               </p>
             </div>
             <div>
+              <MessageCircle className="mb-2 h-5 w-5 text-[#ef7027]" strokeWidth={2} />
               <h3 className="text-[15px] font-[500] text-[#071426]">Chatten</h3>
               <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
                 Chat met ons<br />9:00-22:00
               </p>
             </div>
             <div>
+              <Mail className="mb-2 h-5 w-5 text-[#ef7027]" strokeWidth={2} />
               <h3 className="text-[15px] font-[500] text-[#071426]">Mailen</h3>
               <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
                 support.nl@wandig.com<br />iedere werkdag

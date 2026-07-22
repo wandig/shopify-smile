@@ -318,7 +318,7 @@ function ProductView({ product }: { product: ProductNode }) {
   const [expandedVariantOption, setExpandedVariantOption] = useState<string | null>(null);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
-  const [openSpec, setOpenSpec] = useState<string | null>(null);
+  
 
 
   const activeVariant = useMemo(() => {

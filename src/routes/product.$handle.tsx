@@ -31,6 +31,7 @@ import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
+import kijkplezierIcon from "@/assets/100-dagen-kijkplezier-icon.svg.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
@@ -1147,7 +1148,12 @@ function BeforeAfterSection() {
             </div>
             <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <Smile className="h-4.5 w-4.5 text-[#071426]" strokeWidth={1.6} />
+                <img
+                  src={kijkplezierIcon.url}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-5 w-5 object-contain opacity-90"
+                />
               </div>
               <div>
                 <p className="text-[13px] font-medium text-[#071426]">100 dagen kijkpleziergarantie</p>

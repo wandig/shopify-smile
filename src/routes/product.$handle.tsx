@@ -911,6 +911,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <BeforeAfterSection />
 
+      <CustomerGallerySection />
+
 
       </div>
 

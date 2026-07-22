@@ -1375,6 +1375,57 @@ const BUILT_TO_LAST_CARDS: Array<{
   },
 ];
 
+const FAQ_ITEMS: Array<{ question: string; answer: string }> = [
+  {
+    question: "Wat zijn de afmetingen van de cinewall?",
+    answer: "De Wandig Full House is 240 cm breed, 180 cm hoog en 32 cm diep. Het centrale tv-vlak is geschikt voor televisies tot 80 inch.",
+  },
+  {
+    question: "Past mijn soundbar in de cinewall?",
+    answer: "Ja, de open vakken en het ruime ontwerp bieden genoeg plaats voor een soundbar, media-apparatuur en accessoires.",
+  },
+  {
+    question: "Is mijn muur geschikt voor een cinewall?",
+    answer: "De cinewall is geschikt voor de meeste vlakke, draagkrachtige muren. Bij twijfel kun je gratis contact opnemen met ons adviesteam.",
+  },
+  {
+    question: "Hoe bestel ik een kleurstaal?",
+    answer: "Je kunt eenvoudig gratis kleurstalen aanvragen via onze website. Zo zie je thuis precies hoe de afwerking bij jouw interieur past.",
+  },
+  {
+    question: "Wanneer staat mijn cinewall in huis?",
+    answer: "Na bestelling is de levertijd gemiddeld 7 tot 14 werkdagen. We plannen samen met jou een dag en tijdslot voor bezorging.",
+  },
+  {
+    question: "Hoe wordt de cinewall aan de muur bevestigd?",
+    answer: "De cinewall wordt geleverd inclusief bevestigingsmateriaal en een duidelijke handleiding. De muurbeugels zijn speciaal ontworpen voor een veilige montage.",
+  },
+  {
+    question: "Hoe bevestig ik mijn tv in de cinewall?",
+    answer: "Je tv wordt gemonteerd met een VESA-compatibele wandsteun op het centrale tv-vlak. De steun zelf is niet inbegrepen.",
+  },
+  {
+    question: "Hoe sluit ik mijn apparatuur netjes aan?",
+    answer: "De achterwand heeft een kabeldoorvoer, zodat alle kabels uit het zicht lopen en je interieur rustig blijft ogen.",
+  },
+  {
+    question: "Kan ik de cinewall zelf monteren?",
+    answer: "Ja, de cinewall wordt in voorgemonteerde modules geleverd. Met de meegeleverde klikverbindingen zet je hem in gemiddeld 45 minuten samen.",
+  },
+  {
+    question: "Lukt de montage ook in mijn eentje?",
+    answer: "We raden aan om de montage met twee personen te doen, vooral bij het optillen en uitlijnen van de grotere modules.",
+  },
+  {
+    question: "Heb ik speciaal gereedschap nodig?",
+    answer: "Nee, voor de montage heb je alleen basisgereedschap zoals een schroevendraaier en een boormachine nodig.",
+  },
+  {
+    question: "Hoeveel jaar garantie krijg ik?",
+    answer: "Op de Wandig Full House krijg je 10 jaar garantie. Zo geniet je jarenlang zorgeloos van jouw nieuwe tv-wand.",
+  },
+];
+
 function BuiltToLastSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);

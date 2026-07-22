@@ -29,6 +29,7 @@ import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
+import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
@@ -1118,7 +1119,7 @@ function BeforeAfterSection() {
             <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f7] p-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
                 <img
-                  src={puzzlePiecesImg.url}
+                  src={plugAndPlayIcon.url}
                   alt=""
                   aria-hidden="true"
                   className="h-5 w-5 object-contain opacity-90"

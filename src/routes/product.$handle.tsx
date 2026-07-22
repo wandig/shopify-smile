@@ -27,6 +27,18 @@ import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
+import specsDiagram from "@/assets/full-house-specs-diagram.png.asset.json";
+
+const PRODUCT_SPECS: Array<{ title: string; body: string }> = [
+  { title: "Algemeen", body: "Handgemaakte plug & play cinewall uit onze eigen werkplaats. Volledig gemonteerd geleverd en klaar voor gebruik." },
+  { title: "Afmetingen", body: "Breedte 240 cm · Hoogte 180 cm · Diepte 40 cm. Geschikt voor TV's tot en met 75 inch." },
+  { title: "Materiaal", body: "Massief houten frame met MDF panelen, afgewerkt met een matte fineerlaag. Krasbestendig en duurzaam." },
+  { title: "TV-formaat", body: "Geschikt voor tv's van 55 tot en met 75 inch. VESA-montage tot 600 × 400 mm inbegrepen." },
+  { title: "Kleuren", body: "Beschikbaar in Walnootbruin, Eikenzwart, Eikengrijs, Truffelbruin, Katoengrijs, Zandsteen, Kleibeige en Dofroze." },
+  { title: "Levering", body: "Gratis levering in Nederland en België binnen 7-14 werkdagen. Bezorgd op de gewenste kamer." },
+  { title: "Montage-instructies", body: "Plug & play: klik-op-klaar systeem. Geen boren of schroeven nodig. Duidelijke handleiding meegeleverd." },
+  { title: "Onderhoud", body: "Reinig met een licht vochtige microvezeldoek. Vermijd agressieve schoonmaakmiddelen om de fineerlaag te beschermen." },
+];
 
 const COLOR_MAP: Record<string, string> = {
   zwart: "#1a1a1a", black: "#1a1a1a",

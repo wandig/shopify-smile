@@ -1279,26 +1279,35 @@ function CustomerGallerySection() {
       </div>
 
       <div className="-mx-4 overflow-x-auto scrollbar-hide md:mx-0">
-        <div className="flex gap-3 px-4 md:gap-4 md:px-0">
-          {CUSTOMER_GALLERY_IMAGES.map((image, index) => (
-            <figure
-              key={index}
-              className="relative h-[260px] w-[220px] shrink-0 overflow-hidden rounded-[14px] md:h-[360px] md:w-[300px]"
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                draggable={false}
-              />
-              <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white shadow-[0_2px_8px_rgba(0,0,0,0.18)] md:bottom-3 md:right-3">
-                <PuzzleCornerIcon className="h-3.5 w-3.5" />
-              </span>
-            </figure>
-          ))}
+        <div className="flex h-[260px] gap-3 px-4 md:h-[360px] md:gap-4 md:px-0">
+          {CUSTOMER_GALLERY_IMAGES.map((image, index) => {
+            const widthClass =
+              image.ratio === "wide"
+                ? "w-[320px] md:w-[460px]"
+                : image.ratio === "tall"
+                  ? "w-[180px] md:w-[240px]"
+                  : "w-[240px] md:w-[330px]";
+            return (
+              <figure
+                key={index}
+                className={`relative h-full shrink-0 overflow-hidden rounded-[14px] ${widthClass}`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  draggable={false}
+                />
+                <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white shadow-[0_2px_8px_rgba(0,0,0,0.18)] md:bottom-3 md:right-3">
+                  <PuzzleCornerIcon className="h-3.5 w-3.5" />
+                </span>
+              </figure>
+            );
+          })}
         </div>
       </div>
+
 
     </section>
   );

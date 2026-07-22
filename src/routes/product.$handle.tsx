@@ -1606,7 +1606,7 @@ function ReviewsSection() {
 
       <div
         ref={scrollerRef}
-        className="mx-auto flex max-w-[1600px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 md:px-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mx-auto flex max-w-[1600px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 md:px-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-pl-5 md:scroll-pl-10"
       >
         {REVIEWS.map((r, i) => (
           <article

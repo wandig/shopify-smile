@@ -1667,7 +1667,7 @@ function NewsletterContactSection() {
   return (
     <section className="bg-[#ffefdd]">
       <div className="mx-auto max-w-[1600px] px-5 py-12 md:px-10 md:py-20">
-        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
           <div>
             <h2 className="text-[24px] md:text-[32px] font-[500] leading-tight text-[#071426]">
               Meld je aan voor onze nieuwsbrief
@@ -1700,27 +1700,47 @@ function NewsletterContactSection() {
             )}
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-3 md:gap-4">
-            <div>
-              <Phone className="mb-2 h-5 w-5 text-[#ef7027]" strokeWidth={2} />
-              <h3 className="text-[15px] font-[500] text-[#071426]">Bellen</h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
-                +31 085 107 1953<br />ma-vr 9:00-18:00
-              </p>
+          <div className="grid gap-8 sm:grid-cols-3 md:gap-6">
+            <div className="flex flex-col">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+                  <Phone className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                </div>
+                <div>
+                  <p className="text-[14px] font-[500] text-[#071426]">Bel ons, steun 9-5</p>
+                  <p className="text-[13px] text-[#071426]/60">9:00 - 18:00</p>
+                </div>
+              </div>
+              <p className="mt-5 text-[20px] md:text-[22px] font-[500] leading-tight text-[#071426]">+31 085 107 1953</p>
+              <div className="mt-5 h-px w-full bg-[#071426]/10" />
             </div>
-            <div>
-              <MessageCircle className="mb-2 h-5 w-5 text-[#ef7027]" strokeWidth={2} />
-              <h3 className="text-[15px] font-[500] text-[#071426]">Chatten</h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
-                Chat met ons<br />9:00-22:00
-              </p>
+
+            <div className="flex flex-col">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+                  <Headphones className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                </div>
+                <div>
+                  <p className="text-[14px] font-[500] text-[#071426]">Chat live, agent 9-5</p>
+                  <p className="text-[13px] text-[#071426]/60">9:00 - 22:00</p>
+                </div>
+              </div>
+              <p className="mt-5 text-[20px] md:text-[22px] font-[500] leading-tight text-[#071426]">Chat met ons</p>
+              <div className="mt-5 h-px w-full bg-[#071426]/10" />
             </div>
-            <div>
-              <Mail className="mb-2 h-5 w-5 text-[#ef7027]" strokeWidth={2} />
-              <h3 className="text-[15px] font-[500] text-[#071426]">Mailen</h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-[#071426]/70">
-                support.nl@wandig.com<br />iedere werkdag
-              </p>
+
+            <div className="flex flex-col">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+                  <Mail className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                </div>
+                <div>
+                  <p className="text-[14px] font-[500] text-[#071426]">Stuur een mail</p>
+                  <p className="text-[13px] text-[#071426]/60">iedere werkdag</p>
+                </div>
+              </div>
+              <p className="mt-5 text-[20px] md:text-[22px] font-[500] leading-tight text-[#071426] break-words">support.nl@wandig.com</p>
+              <div className="mt-5 h-px w-full bg-[#071426]/10" />
             </div>
           </div>
         </div>

@@ -1823,8 +1823,8 @@ function NewsletterContactSection() {
           <div className="grid gap-8 sm:grid-cols-3 md:gap-6">
             <div className="flex flex-col">
               <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Phone className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#071426]/5">
+                  <Phone className="h-[18px] w-[18px] text-[#071426]/45" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-[14px] font-[500] text-[#071426]">Bel ons, steun 9-5</p>
@@ -1837,8 +1837,8 @@ function NewsletterContactSection() {
 
             <div className="flex flex-col">
               <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Headphones className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#071426]/5">
+                  <Headphones className="h-[18px] w-[18px] text-[#071426]/45" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-[14px] font-[500] text-[#071426]">Chat live, agent 9-5</p>
@@ -1851,8 +1851,8 @@ function NewsletterContactSection() {
 
             <div className="flex flex-col">
               <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Mail className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#071426]/5">
+                  <Mail className="h-[18px] w-[18px] text-[#071426]/45" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-[14px] font-[500] text-[#071426]">Stuur een mail</p>

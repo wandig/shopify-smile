@@ -907,7 +907,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 </div>
 
                 {/* Soft-close accent label */}
-                <div className="mt-6 flex items-center justify-end gap-3">
+                <div className="mt-4 flex items-center justify-end gap-3">
                   <div className="h-px w-8 bg-[#ef7027]/40" />
                   <div className="text-right">
                     <span className="block text-[10px] font-bold uppercase tracking-widest text-[#ef7027]">Soft-close</span>
@@ -915,7 +915,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   </div>
                 </div>
 
-                <div className="mt-8 flex items-center justify-between border-t border-[#071426]/8 pt-5">
+                <div className="mt-5 flex items-center justify-between border-t border-[#071426]/8 pt-4">
                   <p className="text-[10px] italic text-[#071426]/45">Alle maten zijn in millimeters (mm) tenzij anders aangegeven.</p>
                   <div className="flex gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#071426]/20" />

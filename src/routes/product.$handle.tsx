@@ -1742,7 +1742,7 @@ function ReviewsSection() {
               <h3 className="mt-3 text-[15px] font-[500] text-[#071426]">{r.title}</h3>
               <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">{r.body}</p>
             </div>
-            <div className="mt-5 flex items-center gap-2.5 text-[12px]">
+            <div className="border-t border-[#e5ded4] pt-5 flex items-center gap-2.5 text-[12px]">
               <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#ef7027] bg-white text-[#ef7027]">
                 <User className="h-3.5 w-3.5" strokeWidth={2} />
               </span>

@@ -1221,7 +1221,7 @@ function BeforeAfterSection() {
       {/* Full-width slider */}
       <div
         className="relative w-full overflow-hidden rounded-2xl select-none touch-none shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-[#071426]/5"
-        style={{ aspectRatio: "16 / 9" }}
+        style={{ aspectRatio: "20 / 9" }}
         ref={containerRef}
         onPointerDown={(e) => {
           draggingRef.current = true;
@@ -1232,6 +1232,7 @@ function BeforeAfterSection() {
           src={afterFullHouseAsset.url}
           alt="Woonkamer na Full House"
           className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: "center 45%" }}
           draggable={false}
         />
         <div
@@ -1242,6 +1243,7 @@ function BeforeAfterSection() {
             src={beforeFullHouseAsset.url}
             alt="Woonkamer voor Full House"
             className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: "center 45%" }}
             draggable={false}
           />
         </div>

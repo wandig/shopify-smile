@@ -17,8 +17,8 @@ import fullHouseGalleryStylingTwo from "@/assets/full-house-gallery-styling-two.
 import fullHouseGalleryFinish from "@/assets/full-house-gallery-finish.webp";
 import fullHouseGalleryStorage from "@/assets/full-house-gallery-storage.webp";
 import fullHouseGalleryUse from "@/assets/full-house-gallery-use.webp";
-import beforeFullHouseAsset from "@/assets/before-full-house.png.asset.json";
-import afterFullHouseAsset from "@/assets/after-full-house.jpg.asset.json";
+import beforeFullHouseAsset from "@/assets/before-livingroom.png.asset.json";
+import afterFullHouseAsset from "@/assets/after-livingroom.png.asset.json";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
 import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";

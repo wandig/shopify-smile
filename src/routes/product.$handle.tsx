@@ -843,20 +843,18 @@ function ProductView({ product }: { product: ProductNode }) {
           {/* Sticky schematic */}
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
-              <div className="rounded-2xl bg-white p-4 shadow-[0_2px_20px_rgba(0,0,0,0.04)] md:p-5">
-                <div className="mb-4">
-                  <h3 className="text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
-                    FullHouse
-                  </h3>
-                </div>
+              <div>
+                <h3 className="text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
+                  FullHouse
+                </h3>
 
                 {/* Drawing area — dimensions framing the cabinet */}
                 <div
-                  className="relative"
-                  style={{ paddingTop: "36px", paddingBottom: "32px", paddingLeft: "24px", paddingRight: "40px" }}
+                  className="relative mt-3"
+                  style={{ paddingTop: "32px", paddingBottom: "28px", paddingLeft: "16px", paddingRight: "32px" }}
                 >
                   {/* Width dimension (top) */}
-                  <div className="absolute left-[24px] right-[40px] top-[12px] flex items-center">
+                  <div className="absolute left-[16px] right-[32px] top-[8px] flex items-center">
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
                       <path d="M9 1L1 5L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -870,11 +868,11 @@ function ProductView({ product }: { product: ProductNode }) {
                     </svg>
                   </div>
                   {/* Top extension ticks */}
-                  <span className="pointer-events-none absolute left-[24px] top-[12px] h-[24px] w-px bg-[#071426]/15" />
-                  <span className="pointer-events-none absolute right-[40px] top-[12px] h-[24px] w-px bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute left-[16px] top-[8px] h-[24px] w-px bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[32px] top-[8px] h-[24px] w-px bg-[#071426]/15" />
 
                   {/* Height dimension (right) */}
-                  <div className="absolute right-[10px] top-[36px] bottom-[32px] flex flex-col items-center">
+                  <div className="absolute right-[6px] top-[32px] bottom-[28px] flex flex-col items-center">
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
                       <path d="M1 9L5 1L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -888,11 +886,11 @@ function ProductView({ product }: { product: ProductNode }) {
                     </svg>
                   </div>
                   {/* Right extension ticks */}
-                  <span className="pointer-events-none absolute right-[10px] top-[36px] h-px w-[30px] bg-[#071426]/15" />
-                  <span className="pointer-events-none absolute right-[10px] bottom-[32px] h-px w-[30px] bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[6px] top-[32px] h-px w-[30px] bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[6px] bottom-[28px] h-px w-[30px] bg-[#071426]/15" />
 
                   {/* Depth dimension (bottom) */}
-                  <div className="absolute bottom-[6px] right-[40px] flex items-center gap-2">
+                  <div className="absolute bottom-[2px] right-[32px] flex items-center gap-2">
                     <span className="h-px w-6 bg-[#071426]/25" />
                     <span className="text-[10px] font-medium text-[#071426]/60">32 cm diep</span>
                   </div>
@@ -904,23 +902,6 @@ function ProductView({ product }: { product: ProductNode }) {
                     style={{ background: "transparent" }}
                     loading="lazy"
                   />
-                </div>
-
-                {/* Soft-close accent label */}
-                <div className="mt-4 flex items-center justify-end gap-3">
-                  <div className="h-px w-8 bg-[#ef7027]/40" />
-                  <div className="text-right">
-                    <span className="block text-[10px] font-bold uppercase tracking-widest text-[#ef7027]">Soft-close</span>
-                    <span className="text-[9px] text-[#071426]/50">Push-to-open systeem</span>
-                  </div>
-                </div>
-
-                <div className="mt-5 flex items-center justify-end border-t border-[#071426]/8 pt-4">
-                  <div className="flex gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#071426]/20" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#ef7027]" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#071426]" />
-                  </div>
                 </div>
               </div>
             </div>

@@ -1708,7 +1708,7 @@ function ReviewsSection() {
               type="button"
               onClick={() => scroll(-1)}
               aria-label="Vorige"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
             >
               ‹
             </button>
@@ -1716,7 +1716,7 @@ function ReviewsSection() {
               type="button"
               onClick={() => scroll(1)}
               aria-label="Volgende"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#cdc0b5] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
             >
               ›
             </button>

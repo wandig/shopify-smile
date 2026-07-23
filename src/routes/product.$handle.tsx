@@ -843,13 +843,10 @@ function ProductView({ product }: { product: ProductNode }) {
           {/* Sticky schematic */}
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
-              <div className="rounded-2xl bg-white p-6 shadow-[0_2px_20px_rgba(0,0,0,0.04)] md:p-10">
-                <div className="mb-8">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#071426]/40">
-                    Productspecificaties
-                  </span>
-                  <h3 className="mt-1 text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
-                    Technische tekening <span className="text-[#ef7027]">Full House</span>
+              <div className="rounded-2xl bg-white p-4 shadow-[0_2px_20px_rgba(0,0,0,0.04)] md:p-5">
+                <div className="mb-4">
+                  <h3 className="text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
+                    FullHouse
                   </h3>
                 </div>
 

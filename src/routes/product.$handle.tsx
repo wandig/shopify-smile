@@ -1655,8 +1655,14 @@ function FaqSection() {
   };
 
   return (
-    <section className="mt-12 md:mt-20">
-      <div className="mb-6 text-center md:mb-10">
+    <section className="relative mt-12 overflow-hidden md:mt-20">
+      <img
+        src={puzzlePiecesImg.url}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-20 top-8 w-[240px] -rotate-[14deg] select-none opacity-[0.05] md:w-[320px]"
+      />
+      <div className="relative mb-6 text-center md:mb-10">
         <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
         <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
           Veelgestelde vragen

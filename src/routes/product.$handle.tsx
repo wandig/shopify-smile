@@ -1885,7 +1885,20 @@ function TrustBannerSection() {
             <div key={label} className="flex items-center gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
                 {imageIcon ? (
-                  <img src={imageIcon} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
+                  <div
+                    className="h-5 w-5 bg-[#ef7027]"
+                    style={{
+                      maskImage: `url(${imageIcon})`,
+                      WebkitMaskImage: `url(${imageIcon})`,
+                      maskSize: "contain",
+                      WebkitMaskSize: "contain",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskPosition: "center",
+                      WebkitMaskPosition: "center",
+                    }}
+                    aria-hidden="true"
+                  />
                 ) : Icon ? (
                   <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
                 ) : null}

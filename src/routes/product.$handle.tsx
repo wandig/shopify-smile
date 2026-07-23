@@ -837,73 +837,81 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <section className="mt-8 md:mt-14">
-        <div className="mb-6 md:mb-8">
-          <h2 className="text-[22px] font-bold leading-tight text-[#071426]">Specificaties</h2>
-          <p className="mt-2 max-w-[520px] text-[13px] leading-relaxed text-[#071426]/55">
-            Alles wat je moet weten over de Wandig Full House cinewall, van afmetingen tot onderhoud.
-          </p>
-        </div>
-        <div className="grid gap-6 md:gap-8 lg:grid-cols-2 lg:items-stretch">
-          {/* Schematic with stylish dimensions */}
-          <div className="flex flex-col">
-            {/* Width dimension line */}
-            <div className="flex items-center gap-2 pl-10 pr-2 pb-3 text-[11px] font-normal uppercase tracking-[0.2em] text-[#071426]/55">
-              <span className="relative h-px flex-1 bg-[#071426]/25">
-                <span className="absolute -left-px -top-[3px] h-[7px] w-px bg-[#071426]/40" />
-                <span className="absolute -right-px -top-[3px] h-[7px] w-px bg-[#071426]/40" />
+      <section className="mt-10 md:mt-16">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
+          {/* Sticky schematic */}
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-24">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#071426]/45">
+                Technische tekening
               </span>
-              <span className="px-2">240 cm</span>
-              <span className="relative h-px flex-1 bg-[#071426]/25">
-                <span className="absolute -left-px -top-[3px] h-[7px] w-px bg-[#071426]/40" />
-                <span className="absolute -right-px -top-[3px] h-[7px] w-px bg-[#071426]/40" />
-              </span>
-            </div>
-            <div className="flex flex-1 items-stretch gap-3">
-              {/* Height dimension line */}
-              <div className="flex w-8 flex-col items-center py-2 text-[11px] font-normal uppercase tracking-[0.2em] text-[#071426]/55">
-                <span className="relative w-px flex-1 bg-[#071426]/25">
-                  <span className="absolute -top-px -left-[3px] h-px w-[7px] bg-[#071426]/40" />
-                </span>
-                <span className="py-2 [writing-mode:vertical-rl] rotate-180">180 cm</span>
-                <span className="relative w-px flex-1 bg-[#071426]/25">
-                  <span className="absolute -bottom-px -left-[3px] h-px w-[7px] bg-[#071426]/40" />
-                </span>
-              </div>
-              <div className="relative min-w-0 flex-1 overflow-hidden rounded-[14px] bg-[#f6f3ee]">
+              <div className="relative mt-4 aspect-[4/3] overflow-hidden rounded-[18px] border border-[#071426]/5 bg-white">
+                {/* Width dimension line */}
+                <div className="absolute inset-x-0 top-3 flex items-center gap-2 px-10 text-[10px] font-normal uppercase tracking-[0.2em] text-[#071426]/50">
+                  <span className="relative h-px flex-1 bg-[#071426]/20">
+                    <span className="absolute -left-px -top-[2.5px] h-[6px] w-px bg-[#071426]/35" />
+                    <span className="absolute -right-px -top-[2.5px] h-[6px] w-px bg-[#071426]/35" />
+                  </span>
+                  <span className="px-2">240 cm</span>
+                  <span className="relative h-px flex-1 bg-[#071426]/20">
+                    <span className="absolute -left-px -top-[2.5px] h-[6px] w-px bg-[#071426]/35" />
+                    <span className="absolute -right-px -top-[2.5px] h-[6px] w-px bg-[#071426]/35" />
+                  </span>
+                </div>
+                {/* Height dimension line */}
+                <div className="absolute inset-y-0 left-3 flex w-8 flex-col items-center py-8 text-[10px] font-normal uppercase tracking-[0.2em] text-[#071426]/50">
+                  <span className="relative w-px flex-1 bg-[#071426]/20">
+                    <span className="absolute -top-px -left-[2.5px] h-px w-[6px] bg-[#071426]/35" />
+                  </span>
+                  <span className="py-2 [writing-mode:vertical-rl] rotate-180">180 cm</span>
+                  <span className="relative w-px flex-1 bg-[#071426]/20">
+                    <span className="absolute -bottom-px -left-[2.5px] h-px w-[6px] bg-[#071426]/35" />
+                  </span>
+                </div>
                 {/* Corner brackets */}
-                <span className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l border-t border-[#071426]/25" />
-                <span className="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r border-t border-[#071426]/25" />
-                <span className="pointer-events-none absolute left-3 bottom-3 h-4 w-4 border-l border-b border-[#071426]/25" />
-                <span className="pointer-events-none absolute right-3 bottom-3 h-4 w-4 border-r border-b border-[#071426]/25" />
+                <span className="pointer-events-none absolute left-10 top-10 h-5 w-5 border-l border-t border-[#071426]/20" />
+                <span className="pointer-events-none absolute right-4 top-10 h-5 w-5 border-r border-t border-[#071426]/20" />
+                <span className="pointer-events-none absolute left-10 bottom-4 h-5 w-5 border-l border-b border-[#071426]/20" />
+                <span className="pointer-events-none absolute right-4 bottom-4 h-5 w-5 border-r border-b border-[#071426]/20" />
                 <img
                   src={cinewallSchema.url}
                   alt="Schematische weergave Wandig Full House, 240 cm breed en 180 cm hoog"
-                  className="block h-full w-full object-cover"
+                  className="block h-full w-full object-cover pl-10 pt-10"
                   loading="lazy"
                 />
               </div>
             </div>
           </div>
 
-          {/* Spec tiles */}
-          <div className="grid grid-cols-2 gap-3 md:gap-4">
-            {SPEC_SECTIONS.map((section) => (
-              <details
-                key={section.title}
-                className="group rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[14px] font-[600] text-[#071426] [&::-webkit-details-marker]:hidden">
-                  <span>{section.title}</span>
-                  <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
-                    <Plus className="h-3 w-3" strokeWidth={2} />
-                  </span>
-                </summary>
-                <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65">
-                  {section.body}
-                </div>
-              </details>
-            ))}
+          {/* Spec content */}
+          <div className="lg:col-span-7">
+            <header className="mb-8 md:mb-10">
+              <h2 className="text-[28px] font-bold leading-[1.1] tracking-tight text-[#071426] md:text-[36px]">
+                Specificaties
+              </h2>
+              <p className="mt-3 max-w-md text-[14px] leading-relaxed text-[#071426]/55">
+                Alles wat je moet weten over de Wandig Full House cinewall, van afmetingen tot onderhoud.
+              </p>
+            </header>
+
+            <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-x-10">
+              {SPEC_SECTIONS.map((section, i) => (
+                <details
+                  key={section.title}
+                  className="group border-b border-[#071426]/10 [&:nth-child(odd)]:md:pr-2 [&:nth-child(even)]:md:pl-2"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-[15px] font-semibold text-[#071426] [&::-webkit-details-marker]:hidden">
+                    <span>{section.title}</span>
+                    <span className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full border border-[#ef7027]/40 text-[#ef7027] transition-transform duration-300 ease-out group-open:rotate-45">
+                      <Plus className="h-3.5 w-3.5" strokeWidth={2} />
+                    </span>
+                  </summary>
+                  <div className="pb-6 text-[13.5px] leading-relaxed text-[#071426]/65">
+                    {section.body}
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>

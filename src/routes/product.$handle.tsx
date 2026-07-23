@@ -296,7 +296,7 @@ const PRODUCT_BENEFITS = [
   { title: "Kabels uit het zicht", image: productStoryBlackOakOrangeImg },
   { title: "Eenvoudige klikmontage", image: fullHouseGalleryUse },
   { title: "Persoonlijk advies", image: fullHouseGalleryRoom },
-  { title: "100 dagen proefkijken", image: fullHouseGalleryStylingOne },
+  { title: "100 dagen proefkijken", image: kijkplezierIcon.url },
   { title: "10 jaar garantie", image: fullHouseGalleryFinish },
 ];
 
@@ -1871,7 +1871,7 @@ function NewsletterContactSection() {
 
 function TrustBannerSection() {
   const items = [
-    { icon: Star, label: "100 dagen proefkijken" },
+    { imageIcon: kijkplezierIcon.url, label: "100 dagen proefkijken" },
     { icon: Truck, label: "Gratis bezorgd in Nederland" },
     { icon: Monitor, label: "Geschikt voor tv's tot 80 inch" },
     { icon: ShieldCheck, label: "10 jaar garantie" },
@@ -1881,10 +1881,14 @@ function TrustBannerSection() {
     <section className="bg-[#f7f3ef]">
       <div className="mx-auto max-w-[1600px] px-5 py-10 md:px-10 md:py-14">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map(({ icon: Icon, label }) => (
+          {items.map(({ icon: Icon, imageIcon, label }) => (
             <div key={label} className="flex items-center gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                {imageIcon ? (
+                  <img src={imageIcon} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
+                ) : Icon ? (
+                  <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                ) : null}
               </div>
               <p className="text-[14px] font-[500] leading-snug text-[#071426]">{label}</p>
             </div>

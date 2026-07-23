@@ -1824,7 +1824,7 @@ function NewsletterContactSection() {
             <div className="flex flex-col">
               <div className="flex items-start gap-3">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Phone className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                  <Phone className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-[14px] font-[500] text-[#071426]">Bel ons, steun 9-5</p>
@@ -1838,7 +1838,7 @@ function NewsletterContactSection() {
             <div className="flex flex-col">
               <div className="flex items-start gap-3">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Headphones className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                  <Headphones className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-[14px] font-[500] text-[#071426]">Chat live, agent 9-5</p>
@@ -1852,7 +1852,7 @@ function NewsletterContactSection() {
             <div className="flex flex-col">
               <div className="flex items-start gap-3">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Mail className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                  <Mail className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-[14px] font-[500] text-[#071426]">Stuur een mail</p>

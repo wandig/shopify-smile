@@ -921,7 +921,10 @@ function ProductView({ product }: { product: ProductNode }) {
                     <button
                       type="button"
                       onClick={() =>
-                        setOpenSpecs((current) => ({ ...current, [section.title]: !current[section.title] }))
+                        setOpenSpecs((current) => {
+                          const opening = !current[section.title];
+                          return opening ? { [section.title]: true } : {};
+                        })
                       }
                       aria-expanded={isOpen}
                       className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left text-[15px] font-semibold text-[#071426]"

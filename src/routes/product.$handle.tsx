@@ -1900,7 +1900,7 @@ function TrustBannerSection() {
                     aria-hidden="true"
                   />
                 ) : Icon ? (
-                  <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
+                  <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
                 ) : null}
               </div>
               <p className="text-[14px] font-[500] leading-snug text-[#071426]">{label}</p>

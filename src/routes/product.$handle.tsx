@@ -911,22 +911,40 @@ function ProductView({ product }: { product: ProductNode }) {
             </header>
 
             <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-x-10">
-              {SPEC_SECTIONS.map((section, i) => (
-                <details
-                  key={section.title}
-                  className="group border-b border-[#071426]/10 [&:nth-child(odd)]:md:pr-2 [&:nth-child(even)]:md:pl-2"
-                >
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-[15px] font-semibold text-[#071426] [&::-webkit-details-marker]:hidden">
-                    <span>{section.title}</span>
-                    <span className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full border border-[#ef7027]/40 text-[#ef7027] transition-transform duration-300 ease-out group-open:rotate-45">
-                      <Plus className="h-3.5 w-3.5" strokeWidth={2} />
-                    </span>
-                  </summary>
-                  <div className="pb-6 text-[13.5px] leading-relaxed text-[#071426]/65">
-                    {section.body}
+              {SPEC_SECTIONS.map((section) => {
+                const isOpen = !!openSpecs[section.title];
+                return (
+                  <div
+                    key={section.title}
+                    className="group border-b border-[#071426]/10 [&:nth-child(odd)]:md:pr-2 [&:nth-child(even)]:md:pl-2"
+                  >
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOpenSpecs((current) => ({ ...current, [section.title]: !current[section.title] }))
+                      }
+                      aria-expanded={isOpen}
+                      className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left text-[15px] font-semibold text-[#071426]"
+                    >
+                      <span>{section.title}</span>
+                      <span
+                        className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full border border-[#ef7027]/40 text-[#ef7027] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : "rotate-0"}`}
+                      >
+                        <Plus className="h-3.5 w-3.5" strokeWidth={2} />
+                      </span>
+                    </button>
+                    <div
+                      className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="pb-6 text-[13.5px] leading-relaxed text-[#071426]/65">
+                          {section.body}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </details>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

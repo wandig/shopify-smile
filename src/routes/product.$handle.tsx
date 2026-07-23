@@ -1267,7 +1267,7 @@ function BeforeAfterSection() {
         <div
           ref={containerRef}
           className="relative w-full overflow-hidden rounded-2xl select-none touch-none shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-[#071426]/5"
-          style={{ aspectRatio: "4 / 3" }}
+          style={{ aspectRatio: "5 / 3" }}
           onPointerDown={(e) => {
             draggingRef.current = true;
             setFromClientX(e.clientX);
@@ -1277,8 +1277,7 @@ function BeforeAfterSection() {
           <img
             src={afterFullHouseAsset.url}
             alt="Woonkamer na Full House"
-            className="absolute left-0 right-0 w-full object-cover"
-            style={{ top: "-12.5%", height: "125%" }}
+            className="absolute inset-0 h-full w-full object-cover"
             draggable={false}
           />
           <div
@@ -1288,11 +1287,11 @@ function BeforeAfterSection() {
             <img
               src={beforeFullHouseAsset.url}
               alt="Woonkamer voor Full House"
-              className="absolute left-0 right-0 w-full object-cover"
-              style={{ top: "-12.5%", height: "125%" }}
+              className="absolute inset-0 h-full w-full object-cover"
               draggable={false}
             />
           </div>
+
 
 
           <div className="absolute top-4 left-4 rounded-full bg-[#fef9f5] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-[#071426]">Voor</div>

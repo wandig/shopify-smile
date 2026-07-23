@@ -853,15 +853,15 @@ function ProductView({ product }: { product: ProductNode }) {
                 {/* Drawing area — dimensions framing the cabinet */}
                 <div
                   className="relative"
-                  style={{ paddingTop: "56px", paddingBottom: "48px", paddingLeft: "40px", paddingRight: "56px" }}
+                  style={{ paddingTop: "36px", paddingBottom: "32px", paddingLeft: "24px", paddingRight: "40px" }}
                 >
                   {/* Width dimension (top) */}
-                  <div className="absolute left-[40px] right-[56px] top-[20px] flex items-center">
+                  <div className="absolute left-[24px] right-[40px] top-[12px] flex items-center">
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
                       <path d="M9 1L1 5L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
-                    <span className="mx-3 rounded-full bg-[#f6f3ee] px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
+                    <span className="mx-2 rounded-full bg-[#f6f3ee] px-2 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
                       240 cm
                     </span>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
@@ -870,16 +870,16 @@ function ProductView({ product }: { product: ProductNode }) {
                     </svg>
                   </div>
                   {/* Top extension ticks */}
-                  <span className="pointer-events-none absolute left-[40px] top-[20px] h-[36px] w-px bg-[#071426]/15" />
-                  <span className="pointer-events-none absolute right-[56px] top-[20px] h-[36px] w-px bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute left-[24px] top-[12px] h-[24px] w-px bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[40px] top-[12px] h-[24px] w-px bg-[#071426]/15" />
 
                   {/* Height dimension (right) */}
-                  <div className="absolute right-[16px] top-[56px] bottom-[48px] flex flex-col items-center">
+                  <div className="absolute right-[10px] top-[36px] bottom-[32px] flex flex-col items-center">
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
                       <path d="M1 9L5 1L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
-                    <span className="my-3 rounded-full bg-[#f6f3ee] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
+                    <span className="my-2 rounded-full bg-[#f6f3ee] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
                       180 cm
                     </span>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
@@ -888,11 +888,11 @@ function ProductView({ product }: { product: ProductNode }) {
                     </svg>
                   </div>
                   {/* Right extension ticks */}
-                  <span className="pointer-events-none absolute right-[16px] top-[56px] h-px w-[40px] bg-[#071426]/15" />
-                  <span className="pointer-events-none absolute right-[16px] bottom-[48px] h-px w-[40px] bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[10px] top-[36px] h-px w-[30px] bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[10px] bottom-[32px] h-px w-[30px] bg-[#071426]/15" />
 
                   {/* Depth dimension (bottom) */}
-                  <div className="absolute bottom-[12px] right-[56px] flex items-center gap-2">
+                  <div className="absolute bottom-[6px] right-[40px] flex items-center gap-2">
                     <span className="h-px w-6 bg-[#071426]/25" />
                     <span className="text-[10px] font-medium text-[#071426]/60">32 cm diep</span>
                   </div>

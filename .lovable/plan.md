@@ -1,20 +1,40 @@
-Doel: het puzzelstukje (merkelement van Wandig) laten doorkomen op de productpagina door het te kleuren in de warme beige tint die al wordt gebruikt in de 'Dit maakt Full House uniek'-sectie (#f2ece3), en de zichtbaarheid te vergroten zonder opdringerig te worden.
+# Opties om de afbeelding in "Eén meubel" compacter te maken
 
-Aanpak:
-1. Bestaande watermarks aanpassen
-   - De drie huidige puzzel-watermarks in 'Dit maakt Full House uniek', 'Specificaties' en 'Veelgestelde vragen' krijgen een #f2ece3-kleur via CSS-filter of een getinte asset.
-   - De opacity gaat van 4–5% naar 12–15%, zodat het patroon duidelijk herkenbaar is maar de content blijft leesbaar.
-   - Posities en rotaties blijven ongewijzigd om de huidige compositie te respecteren.
+Huidige situatie:
+- Sectie heeft titel/tekst bovenaan.
+- Before/after-slider staat eronder op volle breedte met aspect-ratio `5 / 3`.
+- Onder de slider staan 3 USP's.
 
-2. Extra merkaccent toevoegen
-   - Bij de sectie 'Dit maakt Full House uniek' komt een klein puzzelstukje-icoon naast de titel, in #f2ece3 met een subtiele drop-shadow.
-   - Dit maakt het puzzelstukje een bewust design-element in plaats van alleen een achtergrond-watermark.
+Doel: minder verticale ruimte innemen met de afbeelding, zonder dat het visueel uit de toon valt.
 
-3. Interactieve hover-detail (licht)
-   - Het puzzel-icoon in de galerij-knoppen ('Bestel Full House') houdt zijn huidige oranje stijl, maar krijgt een subtiele rotatie-animatie op hover om het merkelement levendiger te maken.
+## Optie A: Slider smaller maken door bredere aspect-ratio
+- Aspect-ratio wijzigen van `5 / 3` naar bijvoorbeeld `21 / 9` of `2.5 / 1`.
+- De afbeelding wordt horizontaal uitgesneden (minder hoogte), maar blijft volle breedte behouden.
+- Eenvoudigste aanpassing, minimale impact op de rest van de layout.
+- Nadeel: minder van de kamer is zichtbaar.
 
-4. Afwerking
-   - Controleer op mobiel en desktop dat de puzzelstukjes niet overlappen met tekst of knoppen.
-   - Zorg dat de opacity- en kleurwaarden consistent zijn door de hele pagina.
+## Optie B: Tekst naast de slider op desktop (2-koloms)
+- Op desktop: linker kolom bevat titel + intro + USP's, rechter kolom bevat de slider.
+- Slider krijgt een vaste hoogte (bijv. 320px) en past zich aan binnen de kolom.
+- Op mobiel blijft alles onder elkaar staan.
+- Voordeel: tekst en afbeelding delen de ruimte, sectie wordt compacter.
+- Nadeel: slider wordt smaller, voor/na-effect is iets kleiner.
 
-Verwacht resultaat: de productpagina krijgt een herkenbaarder Wandig-puzzelstukje als visueel merkelement, gekoppeld aan de bestaande warme kleurtoon, zonder de rustige uitstraling te verstoren.
+## Optie C: Compacte strip met voor/na toggle
+- Geen grote slider meer, maar twee kleinere afbeeldingen naast elkaar in een rij.
+- Gebruiker klikt/tapt op "Voor" of "Na" om te wisselen, of er is een subtiele swipe.
+- Afbeeldingen krijgen bijv. `aspect-ratio: 16 / 10` en max-hoogte `240px`.
+- Voordeel: zeer compact, snel te scannen.
+- Nadeel: verliest het interactieve "sleep"-effect van de huidige slider.
+
+## Optie D: Gecentreerde slider met maximale breedte
+- Slider krijgt `max-w-4xl mx-auto` in plaats van volle breedte.
+- Aspect-ratio kan blijven of iets smaller (`5 / 3` of `16 / 9`).
+- Door smaller te zijn op breed scherm neemt hij minder totale ruimte in.
+- Voordeel: behoudt interactie en verhoudingen, rustiger op grote schermen.
+- Nadeel: op mobiel verandert er weinig.
+
+## Aanbeveling
+Optie **B** (tekst naast slider op desktop) geeft de meeste ruimtewinst zonder de interactie op te geven. Optie **A** is het snelst te implementeren als je alleen de hoogte wilt verkleinen.
+
+Welke richting wil je doornemen?

@@ -843,28 +843,25 @@ function ProductView({ product }: { product: ProductNode }) {
           {/* Sticky schematic */}
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
-              <div className="rounded-2xl bg-white p-6 shadow-[0_2px_20px_rgba(0,0,0,0.04)] md:p-10">
-                <div className="mb-8">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#071426]/40">
-                    Productspecificaties
-                  </span>
-                  <h3 className="mt-1 text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
-                    Technische tekening <span className="text-[#ef7027]">Full House</span>
+              <div className="rounded-2xl bg-white p-4 shadow-[0_2px_20px_rgba(0,0,0,0.04)] md:p-5">
+                <div className="mb-4">
+                  <h3 className="text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
+                    FullHouse
                   </h3>
                 </div>
 
                 {/* Drawing area — dimensions framing the cabinet */}
                 <div
                   className="relative"
-                  style={{ paddingTop: "56px", paddingBottom: "48px", paddingLeft: "40px", paddingRight: "56px" }}
+                  style={{ paddingTop: "36px", paddingBottom: "32px", paddingLeft: "24px", paddingRight: "40px" }}
                 >
                   {/* Width dimension (top) */}
-                  <div className="absolute left-[40px] right-[56px] top-[20px] flex items-center">
+                  <div className="absolute left-[24px] right-[40px] top-[12px] flex items-center">
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
                       <path d="M9 1L1 5L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
-                    <span className="mx-3 rounded-full bg-[#f6f3ee] px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
+                    <span className="mx-2 rounded-full bg-[#f6f3ee] px-2 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
                       240 cm
                     </span>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
@@ -873,16 +870,16 @@ function ProductView({ product }: { product: ProductNode }) {
                     </svg>
                   </div>
                   {/* Top extension ticks */}
-                  <span className="pointer-events-none absolute left-[40px] top-[20px] h-[36px] w-px bg-[#071426]/15" />
-                  <span className="pointer-events-none absolute right-[56px] top-[20px] h-[36px] w-px bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute left-[24px] top-[12px] h-[24px] w-px bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[40px] top-[12px] h-[24px] w-px bg-[#071426]/15" />
 
                   {/* Height dimension (right) */}
-                  <div className="absolute right-[16px] top-[56px] bottom-[48px] flex flex-col items-center">
+                  <div className="absolute right-[10px] top-[36px] bottom-[32px] flex flex-col items-center">
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
                       <path d="M1 9L5 1L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
-                    <span className="my-3 rounded-full bg-[#f6f3ee] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
+                    <span className="my-2 rounded-full bg-[#f6f3ee] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
                       180 cm
                     </span>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
@@ -891,11 +888,11 @@ function ProductView({ product }: { product: ProductNode }) {
                     </svg>
                   </div>
                   {/* Right extension ticks */}
-                  <span className="pointer-events-none absolute right-[16px] top-[56px] h-px w-[40px] bg-[#071426]/15" />
-                  <span className="pointer-events-none absolute right-[16px] bottom-[48px] h-px w-[40px] bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[10px] top-[36px] h-px w-[30px] bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[10px] bottom-[32px] h-px w-[30px] bg-[#071426]/15" />
 
                   {/* Depth dimension (bottom) */}
-                  <div className="absolute bottom-[12px] right-[56px] flex items-center gap-2">
+                  <div className="absolute bottom-[6px] right-[40px] flex items-center gap-2">
                     <span className="h-px w-6 bg-[#071426]/25" />
                     <span className="text-[10px] font-medium text-[#071426]/60">32 cm diep</span>
                   </div>
@@ -910,7 +907,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 </div>
 
                 {/* Soft-close accent label */}
-                <div className="mt-6 flex items-center justify-end gap-3">
+                <div className="mt-4 flex items-center justify-end gap-3">
                   <div className="h-px w-8 bg-[#ef7027]/40" />
                   <div className="text-right">
                     <span className="block text-[10px] font-bold uppercase tracking-widest text-[#ef7027]">Soft-close</span>
@@ -918,7 +915,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   </div>
                 </div>
 
-                <div className="mt-8 flex items-center justify-between border-t border-[#071426]/8 pt-5">
+                <div className="mt-5 flex items-center justify-between border-t border-[#071426]/8 pt-4">
                   <p className="text-[10px] italic text-[#071426]/45">Alle maten zijn in millimeters (mm) tenzij anders aangegeven.</p>
                   <div className="flex gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#071426]/20" />

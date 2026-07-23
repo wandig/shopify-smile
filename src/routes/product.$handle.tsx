@@ -844,10 +844,6 @@ function ProductView({ product }: { product: ProductNode }) {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
               <div>
-                <h3 className="text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
-                  FullHouse
-                </h3>
-
                 {/* Drawing area — dimensions framing the cabinet */}
                 <div
                   className="relative mt-3"

@@ -1743,10 +1743,11 @@ function ReviewsSection() {
               <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">{r.body}</p>
             </div>
             <div className="mt-5 flex items-center gap-2.5 text-[12px]">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#ef7027] bg-white text-[#ef7027]">
                 <User className="h-3.5 w-3.5" strokeWidth={2} />
               </span>
               <span className="font-[500] text-[#071426]">{r.name} · {r.location}</span>
+              <span className="text-[#071426]/50">· {r.date}</span>
             </div>
           </article>
         ))}

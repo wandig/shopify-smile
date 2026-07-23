@@ -1278,7 +1278,6 @@ function BeforeAfterSection() {
                 src={beforeFullHouseAsset.url}
                 alt="Woonkamer voor Full House"
                 className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: "center 45%" }}
                 draggable={false}
               />
             </div>

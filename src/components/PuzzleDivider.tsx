@@ -96,7 +96,7 @@ export function PuzzleDivider({
           viewBox={`0 0 ${KNOB_W} ${KNOB_H + 1}`}
           style={{ display: "block", overflow: "visible" }}
         >
-          <path d={knobPath} fill={topColor} />
+          <path d={knobPath} fill={knobDown ? topColor : bottomColor} />
         </svg>
       </div>
     </div>

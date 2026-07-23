@@ -1214,7 +1214,7 @@ function BeforeAfterSection() {
         <div className="lg:col-span-5 space-y-8 lg:space-y-10">
           <div className="space-y-3">
             <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55">Voor en na Full House</p>
-            <h2 className="text-[26px] md:text-[34px] lg:text-[40px] font-bold leading-[1.1] text-[#071426]">
+            <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
               Eén meubel.<br className="hidden md:block" /> Eén compleet andere woonkamer.
             </h2>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65 max-w-md">

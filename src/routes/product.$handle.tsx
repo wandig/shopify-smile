@@ -1886,7 +1886,7 @@ function TrustBannerSection() {
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
                 {imageIcon ? (
                   <div
-                    className="h-5 w-5 bg-[#ef7027]"
+                    className="h-6 w-6 bg-[#ef7027]"
                     style={{
                       maskImage: `url(${imageIcon})`,
                       WebkitMaskImage: `url(${imageIcon})`,

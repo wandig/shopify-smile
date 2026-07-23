@@ -838,8 +838,14 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <section className="mt-10 md:mt-16">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
+      <section className="relative mt-10 overflow-hidden md:mt-16">
+        <img
+          src={puzzlePiecesImg.url}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-16 -right-20 w-[260px] rotate-[24deg] select-none opacity-[0.04] md:w-[340px]"
+        />
+        <div className="relative grid gap-8 lg:grid-cols-12 lg:gap-16">
           {/* Sticky schematic */}
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">

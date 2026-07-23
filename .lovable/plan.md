@@ -1,27 +1,40 @@
-## Bestsellers section — match the reference exactly
+# Opties om de afbeelding in "Eén meubel" compacter te maken
 
-Edits all in `src/routes/index.tsx` (lines ~197–310), no logic changes.
+Huidige situatie:
+- Sectie heeft titel/tekst bovenaan.
+- Before/after-slider staat eronder op volle breedte met aspect-ratio `5 / 3`.
+- Onder de slider staan 3 USP's.
 
-### 1. Featured "Full House" card (left)
-- Change container from `aspect-[3/4] md:aspect-auto md:h-[640px]` → strict `aspect-[3/4]` on all breakpoints (per the reference and your request).
-- Keep current image, badge, centered title/price, bottom rating + cart button.
-- Reduce zoom back to `scale-[1.1]` so the bed is framed like the reference (it's currently cropped tight at `scale-[1.2]`).
+Doel: minder verticale ruimte innemen met de afbeelding, zonder dat het visueel uit de toon valt.
 
-### 2. Side cards (Vivo, Mollis, Moma)
-In the reference, each side card is a tall white card where:
-- the image sits in the **top ~55%** as a rounded rectangle inset (not edge-to-edge),
-- the bottom ~45% is white with title, price, rating, size · category, and the orange cart button on the right.
+## Optie A: Slider smaller maken door bredere aspect-ratio
+- Aspect-ratio wijzigen van `5 / 3` naar bijvoorbeeld `21 / 9` of `2.5 / 1`.
+- De afbeelding wordt horizontaal uitgesneden (minder hoogte), maar blijft volle breedte behouden.
+- Eenvoudigste aanpassing, minimale impact op de rest van de layout.
+- Nadeel: minder van de kamer is zichtbaar.
 
-Changes:
-- Make the whole card the same total height as the featured card by using `aspect-[3/4]` on the side cards too (matches the reference row height).
-- Replace the current `aspect-[4/3]` full-bleed image with an inset image block: `m-2 rounded-xl overflow-hidden h-[55%]` with `object-cover object-center` so Vivo and Mollis are no longer awkwardly cropped.
-- Keep the existing text block, but place it in the remaining `h-[45%]` with the same typography.
+## Optie B: Tekst naast de slider op desktop (2-koloms)
+- Op desktop: linker kolom bevat titel + intro + USP's, rechter kolom bevat de slider.
+- Slider krijgt een vaste hoogte (bijv. 320px) en past zich aan binnen de kolom.
+- Op mobiel blijft alles onder elkaar staan.
+- Voordeel: tekst en afbeelding delen de ruimte, sectie wordt compacter.
+- Nadeel: slider wordt smaller, voor/na-effect is iets kleiner.
 
-### 3. Vivo / Mollis "look weird"
-Root cause is the current `aspect-[4/3]` full-bleed crop on a wide image. The inset + `object-center` framing above fixes it without changing the image URLs. If you'd rather swap the images themselves, tell me which Shopify image to use for each and I'll wire them in instead.
+## Optie C: Compacte strip met voor/na toggle
+- Geen grote slider meer, maar twee kleinere afbeeldingen naast elkaar in een rij.
+- Gebruiker klikt/tapt op "Voor" of "Na" om te wisselen, of er is een subtiele swipe.
+- Afbeeldingen krijgen bijv. `aspect-ratio: 16 / 10` en max-hoogte `240px`.
+- Voordeel: zeer compact, snel te scannen.
+- Nadeel: verliest het interactieve "sleep"-effect van de huidige slider.
 
-### 4. Vertical BESTSELLERS label
-Already exists on `md+`. I'll also show it on mobile (small rotated label in the left gutter) so the layout matches the reference at every width.
+## Optie D: Gecentreerde slider met maximale breedte
+- Slider krijgt `max-w-4xl mx-auto` in plaats van volle breedte.
+- Aspect-ratio kan blijven of iets smaller (`5 / 3` of `16 / 9`).
+- Door smaller te zijn op breed scherm neemt hij minder totale ruimte in.
+- Voordeel: behoudt interactie en verhoudingen, rustiger op grote schermen.
+- Nadeel: op mobiel verandert er weinig.
 
-### Out of scope
-No changes to the hero, the three small category boxes above, or any other section.
+## Aanbeveling
+Optie **B** (tekst naast slider op desktop) geeft de meeste ruimtewinst zonder de interactie op te geven. Optie **A** is het snelst te implementeren als je alleen de hoogte wilt verkleinen.
+
+Welke richting wil je doornemen?

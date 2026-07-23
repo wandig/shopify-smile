@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -1742,9 +1742,11 @@ function ReviewsSection() {
               <h3 className="mt-3 text-[15px] font-[500] text-[#071426]">{r.title}</h3>
               <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">{r.body}</p>
             </div>
-            <div className="mt-5 flex items-center justify-between text-[12px] text-[#071426]/55">
+            <div className="mt-5 flex items-center gap-2.5 text-[12px]">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ef7027] text-white">
+                <User className="h-3.5 w-3.5" strokeWidth={2} />
+              </span>
               <span className="font-[500] text-[#071426]">{r.name} · {r.location}</span>
-              <span>{r.date}</span>
             </div>
           </article>
         ))}

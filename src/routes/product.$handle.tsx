@@ -1011,11 +1011,15 @@ function ProductView({ product }: { product: ProductNode }) {
 
       </div>
 
+      <PuzzleDivider topColor="#f6f3ee" bottomColor="#fff7ef" direction="down" offset={50} />
       <ReviewsSection />
 
+      <PuzzleDivider topColor="#fff7ef" bottomColor="#fffcf8" direction="up" offset={35} />
       <NewsletterContactSection />
 
+      <PuzzleDivider topColor="#fffcf8" bottomColor="#f7f3ef" direction="down" offset={65} />
       <TrustBannerSection />
+
 
     </div>
   );

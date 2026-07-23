@@ -296,7 +296,7 @@ const PRODUCT_BENEFITS = [
   { title: "Kabels uit het zicht", image: productStoryBlackOakOrangeImg },
   { title: "Eenvoudige klikmontage", image: fullHouseGalleryUse },
   { title: "Persoonlijk advies", image: fullHouseGalleryRoom },
-  { title: "100 dagen kijkpleziergarantie", image: fullHouseGalleryStylingOne },
+  { title: "100 dagen proefkijken", image: fullHouseGalleryStylingOne },
   { title: "10 jaar garantie", image: fullHouseGalleryFinish },
 ];
 
@@ -1246,7 +1246,7 @@ function BeforeAfterSection() {
                 <img src={kijkplezierIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
               </div>
               <div className="pt-0.5">
-                <p className="text-[15px] font-semibold text-[#071426]">100 dagen kijkpleziergarantie</p>
+                <p className="text-[15px] font-semibold text-[#071426]">100 dagen proefkijken</p>
                 <p className="text-[13px] text-[#071426]/55 leading-snug">Rustig uitproberen</p>
               </div>
             </div>

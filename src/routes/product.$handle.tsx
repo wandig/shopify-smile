@@ -1218,56 +1218,58 @@ function BeforeAfterSection() {
         </p>
       </div>
 
-      {/* Full-width slider */}
-      <div
-        className="relative w-full overflow-hidden rounded-2xl select-none touch-none shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-[#071426]/5"
-        style={{ aspectRatio: "20 / 9" }}
-        ref={containerRef}
-        onPointerDown={(e) => {
-          draggingRef.current = true;
-          setFromClientX(e.clientX);
-        }}
-      >
-        <img
-          src={afterFullHouseAsset.url}
-          alt="Woonkamer na Full House"
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: "center 45%" }}
-          draggable={false}
-        />
+      {/* Slider aligned with benefits width */}
+      <div className="mx-auto w-full max-w-4xl">
         <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+          className="relative w-full overflow-hidden rounded-2xl select-none touch-none shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-[#071426]/5"
+          style={{ aspectRatio: "20 / 9" }}
+          ref={containerRef}
+          onPointerDown={(e) => {
+            draggingRef.current = true;
+            setFromClientX(e.clientX);
+          }}
         >
           <img
-            src={beforeFullHouseAsset.url}
-            alt="Woonkamer voor Full House"
+            src={afterFullHouseAsset.url}
+            alt="Woonkamer na Full House"
             className="absolute inset-0 h-full w-full object-cover"
             style={{ objectPosition: "center 45%" }}
             draggable={false}
           />
+          <div
+            className="absolute inset-0 overflow-hidden"
+            style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+          >
+            <img
+              src={beforeFullHouseAsset.url}
+              alt="Woonkamer voor Full House"
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: "center 45%" }}
+              draggable={false}
+            />
+          </div>
+
+          <div className="absolute top-4 left-4 rounded-full bg-[#fef9f5] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-[#071426]">Voor</div>
+          <div className="absolute top-4 right-4 rounded-full bg-[#ff843a] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Na</div>
+
+          <div
+            className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)] pointer-events-none"
+            style={{ left: `${position}%`, transform: "translateX(-50%)" }}
+          />
+          <button
+            type="button"
+            aria-label="Sleep om te vergelijken"
+            className="absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_4px_16px_rgba(0,0,0,0.25)] cursor-ew-resize"
+            style={{ left: `${position}%` }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              draggingRef.current = true;
+            }}
+          >
+            <ChevronLeft className="h-4 w-4 text-[#071426]" strokeWidth={2.5} />
+            <ChevronRight className="h-4 w-4 text-[#071426] -ml-1" strokeWidth={2.5} />
+          </button>
         </div>
-
-        <div className="absolute top-4 left-4 rounded-full bg-[#fef9f5] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-[#071426]">Voor</div>
-        <div className="absolute top-4 right-4 rounded-full bg-[#ff843a] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Na</div>
-
-        <div
-          className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)] pointer-events-none"
-          style={{ left: `${position}%`, transform: "translateX(-50%)" }}
-        />
-        <button
-          type="button"
-          aria-label="Sleep om te vergelijken"
-          className="absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_4px_16px_rgba(0,0,0,0.25)] cursor-ew-resize"
-          style={{ left: `${position}%` }}
-          onPointerDown={(e) => {
-            e.stopPropagation();
-            draggingRef.current = true;
-          }}
-        >
-          <ChevronLeft className="h-4 w-4 text-[#071426]" strokeWidth={2.5} />
-          <ChevronRight className="h-4 w-4 text-[#071426] -ml-1" strokeWidth={2.5} />
-        </button>
       </div>
 
       {/* USPs centered below image */}

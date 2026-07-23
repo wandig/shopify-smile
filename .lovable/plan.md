@@ -1,39 +1,40 @@
-# Puzzelvormige sectie-overgangen
+# Opties om de afbeelding in "Eén meubel" compacter te maken
 
-Doel: de productpagina visueel laten "in elkaar klikken" met subtiele puzzelvormige randen tussen secties, geïnspireerd op het puzzelstukje in het Wandig-logo.
+Huidige situatie:
+- Sectie heeft titel/tekst bovenaan.
+- Before/after-slider staat eronder op volle breedte met aspect-ratio `5 / 3`.
+- Onder de slider staan 3 USP's.
 
-## Aanpak
+Doel: minder verticale ruimte innemen met de afbeelding, zonder dat het visueel uit de toon valt.
 
-Eén herbruikbare component `PuzzleDivider` die als SVG-rand tussen secties wordt geplaatst. De divider tekent een horizontale lijn met één (of twee) puzzeluitstulping(en) die van de bovenste sectie in de onderste sectie klikken — of andersom.
+## Optie A: Slider smaller maken door bredere aspect-ratio
+- Aspect-ratio wijzigen van `5 / 3` naar bijvoorbeeld `21 / 9` of `2.5 / 1`.
+- De afbeelding wordt horizontaal uitgesneden (minder hoogte), maar blijft volle breedte behouden.
+- Eenvoudigste aanpassing, minimale impact op de rest van de layout.
+- Nadeel: minder van de kamer is zichtbaar.
 
-### Component
+## Optie B: Tekst naast de slider op desktop (2-koloms)
+- Op desktop: linker kolom bevat titel + intro + USP's, rechter kolom bevat de slider.
+- Slider krijgt een vaste hoogte (bijv. 320px) en past zich aan binnen de kolom.
+- Op mobiel blijft alles onder elkaar staan.
+- Voordeel: tekst en afbeelding delen de ruimte, sectie wordt compacter.
+- Nadeel: slider wordt smaller, voor/na-effect is iets kleiner.
 
-`src/components/PuzzleDivider.tsx`:
-- Props: `topColor` (kleur van sectie erboven), `bottomColor` (kleur eronder), `direction` ("down" = uitstulping wijst omlaag, "up" = omhoog), `offset` (horizontale positie van het puzzelstuk in %, default 50).
-- Rendert een full-width SVG (`preserveAspectRatio="none"` op de horizontale lijn, vaste hoogte ~40px).
-- Het puzzelstukje zelf is een vaste-breedte SVG-shape (~80–100px breed) gecentreerd op de offset, met de klassieke puzzel-tab vorm (halve cirkel met smalle "hals").
-- Geen achtergrond/kaart — puur twee gevulde paden zodat het naadloos aansluit op de sectiekleuren erboven/onder.
+## Optie C: Compacte strip met voor/na toggle
+- Geen grote slider meer, maar twee kleinere afbeeldingen naast elkaar in een rij.
+- Gebruiker klikt/tapt op "Voor" of "Na" om te wisselen, of er is een subtiele swipe.
+- Afbeeldingen krijgen bijv. `aspect-ratio: 16 / 10` en max-hoogte `240px`.
+- Voordeel: zeer compact, snel te scannen.
+- Nadeel: verliest het interactieve "sleep"-effect van de huidige slider.
 
-### Plaatsing op de productpagina
+## Optie D: Gecentreerde slider met maximale breedte
+- Slider krijgt `max-w-4xl mx-auto` in plaats van volle breedte.
+- Aspect-ratio kan blijven of iets smaller (`5 / 3` of `16 / 9`).
+- Door smaller te zijn op breed scherm neemt hij minder totale ruimte in.
+- Voordeel: behoudt interactie en verhoudingen, rustiger op grote schermen.
+- Nadeel: op mobiel verandert er weinig.
 
-Tussen deze sectie-paren op `src/routes/product.$handle.tsx`, telkens met de juiste `topColor`/`bottomColor` uit de bestaande achtergronden (`#f6f3ee`, `#f1efe4`, `#fff7ef`, `#fffcf8`, `#f7f3ef`):
+## Aanbeveling
+Optie **B** (tekst naast slider op desktop) geeft de meeste ruimtewinst zonder de interactie op te geven. Optie **A** is het snelst te implementeren als je alleen de hoogte wilt verkleinen.
 
-1. Tussen **Jouw voordelen** en **Specificaties** — puzzelstuk wijst omlaag, offset 50%.
-2. Tussen **Eén meubel** (`#f1efe4`) en **Binnenkijken bij onze klanten** — puzzelstuk wijst omhoog, offset 35%.
-3. Tussen **Gebouwd om mee te gaan** en **Veelgestelde vragen** — omlaag, offset 65%.
-4. Tussen **Reviews** (`#fff7ef`) en **Nieuwsbrief/contact** (`#fffcf8`) — omhoog, offset 50%.
-
-Vier plaatsingen is genoeg om het als terugkerend merk-motief te laten voelen zonder druk te worden. Bestaande sectie-inhoud, padding en kleuren blijven onveranderd; de divider vervangt alleen de harde overgang.
-
-### Detail
-
-- Puzzelstuk-hoogte ~24–28px zodat het opvalt maar niet dominant is.
-- Zachte 1px lijn in `#00000010` langs de rand voor definitie (optioneel, alleen als het te "plat" oogt).
-- Volledig CSS/SVG — geen extra dependencies, geen animatie (past bij de rustige stijl van de pagina).
-- Responsive: op mobiel (<640px) puzzelstuk 60px breed, op desktop 90px.
-
-## Buiten scope
-
-- Geen wijzigingen aan sectie-inhoud, typografie, of andere styling.
-- Geen puzzelstukken in andere rollen (achtergrondpatroon, USP-kaarten, configurator) — dat zijn de andere opties uit het vorige bericht en kunnen later.
-- Alleen de productpagina; homepage/andere routes blijven ongewijzigd.
+Welke richting wil je doornemen?

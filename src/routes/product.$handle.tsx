@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
-import { PuzzleDivider } from "@/components/PuzzleDivider";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
@@ -1011,15 +1010,11 @@ function ProductView({ product }: { product: ProductNode }) {
 
       </div>
 
-      <PuzzleDivider topColor="#f6f3ee" bottomColor="#fff7ef" direction="down" offset={50} />
       <ReviewsSection />
 
-      <PuzzleDivider topColor="#fff7ef" bottomColor="#fffcf8" direction="up" offset={35} />
       <NewsletterContactSection />
 
-      <PuzzleDivider topColor="#fffcf8" bottomColor="#f7f3ef" direction="down" offset={65} />
       <TrustBannerSection />
-
 
     </div>
   );

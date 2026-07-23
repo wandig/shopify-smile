@@ -1404,7 +1404,7 @@ function CustomerGallerySection() {
                     aria-label="Bestel Full House"
                     className="group/pill absolute bottom-2 left-2 flex h-7 items-center gap-0 rounded-full bg-[#ff843a] pl-1 pr-1 text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-[padding,gap] duration-300 ease-out hover:gap-2 hover:pl-3 hover:pr-2 md:bottom-3 md:left-3 md:h-8"
                   >
-                    <span className="grid max-w-0 overflow-hidden whitespace-nowrap text-[12px] font-[330] leading-none tracking-[0.01em] transition-[max-width,opacity] duration-300 ease-out opacity-0 group-hover/pill:max-w-[160px] group-hover/pill:opacity-100 md:text-[13px]">
+                    <span className="grid max-w-0 overflow-hidden whitespace-nowrap text-[12px] font-[330] leading-none tracking-[0.04em] transition-[max-width,opacity] duration-300 ease-out opacity-0 group-hover/pill:max-w-[180px] group-hover/pill:opacity-100 md:text-[13px]">
                       Bestel Full House
                     </span>
                     <span className="pill-shimmer relative flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ff843a] text-white md:h-6 md:w-6">

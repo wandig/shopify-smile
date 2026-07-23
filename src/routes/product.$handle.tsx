@@ -928,23 +928,23 @@ function ProductView({ product }: { product: ProductNode }) {
 
           {/* Spec content */}
           <div className="lg:col-span-7">
-            <header className="mb-10 md:mb-12">
-              <h2 className="text-[22px] font-semibold leading-tight text-[#071426] md:text-[26px]">
+            <header className="mb-8 md:mb-10">
+              <h2 className="text-[22px] font-bold leading-tight text-[#071426] md:text-[26px]">
                 Specificaties
               </h2>
-              <p className="mt-3 max-w-md text-[14px] leading-relaxed text-[#071426]/50">
+              <p className="mt-3 max-w-md text-[14px] leading-relaxed text-[#071426]/55">
                 Alles wat je moet weten over de Wandig Full House cinewall, van afmetingen tot onderhoud.
               </p>
             </header>
 
-            <div className="flex flex-col gap-0 md:flex-row md:gap-x-12">
+            <div className="flex flex-col gap-0 md:flex-row md:gap-x-10">
               <div className="flex-1 md:pr-2">
                 {SPEC_SECTIONS.filter((_, i) => i % 2 === 0).map((section) => {
                   const isOpen = !!openSpecs[section.title];
                   return (
                     <div
                       key={section.title}
-                      className="group border-b border-[#071426]/8"
+                      className="group border-b border-[#071426]/10"
                     >
                       <button
                         type="button"
@@ -955,20 +955,20 @@ function ProductView({ product }: { product: ProductNode }) {
                           })
                         }
                         aria-expanded={isOpen}
-                        className="flex w-full cursor-pointer items-center justify-between gap-4 py-6 text-left text-[15px] font-medium text-[#071426]/65 transition-colors duration-300 group-hover:text-[#071426]"
+                        className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left text-[15px] font-semibold text-[#071426]"
                       >
                         <span>{section.title}</span>
                         <span
-                          className={`flex h-5 w-5 shrink-0 items-center justify-center text-[#ef7027]/55 transition-all duration-300 ease-out group-hover:text-[#ef7027] ${isOpen ? "rotate-45" : "rotate-0"}`}
+                          className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full border border-[#ef7027]/40 text-[#ef7027] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : "rotate-0"}`}
                         >
-                          <Plus className="h-4 w-4" strokeWidth={1.5} />
+                          <Plus className="h-3.5 w-3.5" strokeWidth={2} />
                         </span>
                       </button>
                       <div
                         className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
                       >
                         <div className="overflow-hidden">
-                          <div className="pb-7 text-[13.5px] leading-relaxed text-[#071426]/60">
+                          <div className="pb-6 text-[13.5px] leading-relaxed text-[#071426]/65">
                             {section.body}
                           </div>
                         </div>
@@ -983,7 +983,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   return (
                     <div
                       key={section.title}
-                      className="group border-b border-[#071426]/8"
+                      className="group border-b border-[#071426]/10"
                     >
                       <button
                         type="button"
@@ -994,20 +994,20 @@ function ProductView({ product }: { product: ProductNode }) {
                           })
                         }
                         aria-expanded={isOpen}
-                        className="flex w-full cursor-pointer items-center justify-between gap-4 py-6 text-left text-[15px] font-medium text-[#071426]/65 transition-colors duration-300 group-hover:text-[#071426]"
+                        className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left text-[15px] font-semibold text-[#071426]"
                       >
                         <span>{section.title}</span>
                         <span
-                          className={`flex h-5 w-5 shrink-0 items-center justify-center text-[#ef7027]/55 transition-all duration-300 ease-out group-hover:text-[#ef7027] ${isOpen ? "rotate-45" : "rotate-0"}`}
+                          className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full border border-[#ef7027]/40 text-[#ef7027] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : "rotate-0"}`}
                         >
-                          <Plus className="h-4 w-4" strokeWidth={1.5} />
+                          <Plus className="h-3.5 w-3.5" strokeWidth={2} />
                         </span>
                       </button>
                       <div
                         className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
                       >
                         <div className="overflow-hidden">
-                          <div className="pb-7 text-[13.5px] leading-relaxed text-[#071426]/60">
+                          <div className="pb-6 text-[13.5px] leading-relaxed text-[#071426]/65">
                             {section.body}
                           </div>
                         </div>

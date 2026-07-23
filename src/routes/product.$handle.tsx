@@ -1116,8 +1116,14 @@ function UniqueSection() {
   };
 
   return (
-    <section className="mt-12 md:mt-20">
-      <div className="mb-6 md:mb-8">
+    <section className="relative mt-12 overflow-hidden md:mt-20">
+      <img
+        src={puzzlePiecesImg.url}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -top-10 w-[220px] rotate-[18deg] select-none opacity-[0.05] md:w-[300px]"
+      />
+      <div className="relative mb-6 md:mb-8">
         <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">Dit maakt Full House uniek</h2>
         <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">Doordacht design, gemaakt voor jouw interieur</p>
       </div>

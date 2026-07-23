@@ -1269,7 +1269,6 @@ function BeforeAfterSection() {
               alt="Woonkamer na Full House"
               className="absolute inset-0 h-full w-full object-cover"
               draggable={false}
-
             />
             <div
               className="absolute inset-0 overflow-hidden"

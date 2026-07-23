@@ -901,7 +901,7 @@ function ProductView({ product }: { product: ProductNode }) {
           {/* Spec content */}
           <div className="lg:col-span-7">
             <header className="mb-8 md:mb-10">
-              <h2 className="text-[28px] font-bold leading-[1.1] tracking-tight text-[#071426] md:text-[36px]">
+              <h2 className="text-[22px] font-bold leading-tight text-[#071426] md:text-[26px]">
                 Specificaties
               </h2>
               <p className="mt-3 max-w-md text-[14px] leading-relaxed text-[#071426]/55">

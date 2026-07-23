@@ -843,58 +843,89 @@ function ProductView({ product }: { product: ProductNode }) {
           {/* Sticky schematic */}
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#071426]/45">
-                Technische tekening
-              </span>
-
-              {/* Drawing area — no background, dimensions framing the cabinet */}
-              <div
-                className="relative mt-6"
-                style={{ paddingTop: "72px", paddingBottom: "16px", paddingLeft: "8px", paddingRight: "56px" }}
-              >
-                {/* Width dimension (top) */}
-                <div className="absolute left-[8px] right-[56px] top-[28px] flex items-center">
-                  <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/55" viewBox="0 0 10 10" fill="none">
-                    <path d="M9 1L1 5L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="relative h-px flex-1 bg-[#071426]/30" />
-                  <span className="mx-3 rounded-full bg-[#f6f3ee] px-2 text-[11px] font-medium tracking-wide text-[#071426]">
-                    240 cm
+              <div className="rounded-2xl bg-white p-6 shadow-[0_2px_20px_rgba(0,0,0,0.04)] md:p-10">
+                <div className="mb-8">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#071426]/40">
+                    Productspecificaties
                   </span>
-                  <span className="relative h-px flex-1 bg-[#071426]/30" />
-                  <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/55" viewBox="0 0 10 10" fill="none">
-                    <path d="M1 1L9 5L1 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <h3 className="mt-1 text-[18px] font-semibold leading-tight text-[#071426] md:text-[20px]">
+                    Technische tekening <span className="text-[#ef7027]">Full House</span>
+                  </h3>
                 </div>
-                {/* Top extension ticks */}
-                <span className="pointer-events-none absolute left-[8px] top-[28px] h-[44px] w-px bg-[#071426]/20" />
-                <span className="pointer-events-none absolute right-[56px] top-[28px] h-[44px] w-px bg-[#071426]/20" />
 
-                {/* Height dimension (right) */}
-                <div className="absolute right-[16px] top-[72px] bottom-[16px] flex flex-col items-center">
-                  <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/55" viewBox="0 0 10 10" fill="none">
-                    <path d="M1 9L5 1L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="relative w-px flex-1 bg-[#071426]/30" />
-                  <span className="my-3 rounded-full bg-[#f6f3ee] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
-                    180 cm
-                  </span>
-                  <span className="relative w-px flex-1 bg-[#071426]/30" />
-                  <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/55" viewBox="0 0 10 10" fill="none">
-                    <path d="M1 1L5 9L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                {/* Drawing area — dimensions framing the cabinet */}
+                <div
+                  className="relative"
+                  style={{ paddingTop: "56px", paddingBottom: "48px", paddingLeft: "40px", paddingRight: "56px" }}
+                >
+                  {/* Width dimension (top) */}
+                  <div className="absolute left-[40px] right-[56px] top-[20px] flex items-center">
+                    <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
+                      <path d="M9 1L1 5L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="relative h-px flex-1 bg-[#071426]/25" />
+                    <span className="mx-3 rounded-full bg-[#f6f3ee] px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
+                      240 cm
+                    </span>
+                    <span className="relative h-px flex-1 bg-[#071426]/25" />
+                    <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
+                      <path d="M1 1L9 5L1 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  {/* Top extension ticks */}
+                  <span className="pointer-events-none absolute left-[40px] top-[20px] h-[36px] w-px bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[56px] top-[20px] h-[36px] w-px bg-[#071426]/15" />
+
+                  {/* Height dimension (right) */}
+                  <div className="absolute right-[16px] top-[56px] bottom-[48px] flex flex-col items-center">
+                    <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
+                      <path d="M1 9L5 1L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="relative w-px flex-1 bg-[#071426]/25" />
+                    <span className="my-3 rounded-full bg-[#f6f3ee] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
+                      180 cm
+                    </span>
+                    <span className="relative w-px flex-1 bg-[#071426]/25" />
+                    <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
+                      <path d="M1 1L5 9L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  {/* Right extension ticks */}
+                  <span className="pointer-events-none absolute right-[16px] top-[56px] h-px w-[40px] bg-[#071426]/15" />
+                  <span className="pointer-events-none absolute right-[16px] bottom-[48px] h-px w-[40px] bg-[#071426]/15" />
+
+                  {/* Depth dimension (bottom) */}
+                  <div className="absolute bottom-[12px] right-[56px] flex items-center gap-2">
+                    <span className="h-px w-6 bg-[#071426]/25" />
+                    <span className="text-[10px] font-medium text-[#071426]/60">32 cm diep</span>
+                  </div>
+
+                  <img
+                    src={cinewallSchema.url}
+                    alt="Schematische weergave Wandig Full House, 240 cm breed en 180 cm hoog"
+                    className="relative block h-auto w-full object-contain"
+                    style={{ background: "transparent" }}
+                    loading="lazy"
+                  />
                 </div>
-                {/* Right extension ticks */}
-                <span className="pointer-events-none absolute right-[16px] top-[72px] h-px w-[40px] bg-[#071426]/20" />
-                <span className="pointer-events-none absolute right-[16px] bottom-[16px] h-px w-[40px] bg-[#071426]/20" />
 
-                <img
-                  src={cinewallSchema.url}
-                  alt="Schematische weergave Wandig Full House, 240 cm breed en 180 cm hoog"
-                  className="relative block h-auto w-full object-contain"
-                  style={{ background: "transparent" }}
-                  loading="lazy"
-                />
+                {/* Soft-close accent label */}
+                <div className="mt-6 flex items-center justify-end gap-3">
+                  <div className="h-px w-8 bg-[#ef7027]/40" />
+                  <div className="text-right">
+                    <span className="block text-[10px] font-bold uppercase tracking-widest text-[#ef7027]">Soft-close</span>
+                    <span className="text-[9px] text-[#071426]/50">Push-to-open systeem</span>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex items-center justify-between border-t border-[#071426]/8 pt-5">
+                  <p className="text-[10px] italic text-[#071426]/45">Alle maten zijn in millimeters (mm) tenzij anders aangegeven.</p>
+                  <div className="flex gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#071426]/20" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#ef7027]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#071426]" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

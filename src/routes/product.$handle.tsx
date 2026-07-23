@@ -1886,9 +1886,9 @@ function TrustBannerSection() {
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
                 {imageIcon ? (
                   <img src={imageIcon} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
-                ) : (
+                ) : Icon ? (
                   <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={2} />
-                )}
+                ) : null}
               </div>
               <p className="text-[14px] font-[500] leading-snug text-[#071426]">{label}</p>
             </div>

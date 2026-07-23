@@ -1231,7 +1231,7 @@ function BeforeAfterSection() {
         <img
           src={afterFullHouseAsset.url}
           alt="Woonkamer na Full House"
-          className="absolute top-0 left-0 h-[125%] w-full object-cover -translate-y-[5%]"
+          className="absolute inset-0 h-full w-full object-cover"
           draggable={false}
         />
         <div
@@ -1241,7 +1241,7 @@ function BeforeAfterSection() {
           <img
             src={beforeFullHouseAsset.url}
             alt="Woonkamer voor Full House"
-            className="absolute top-0 left-0 h-[125%] w-full object-cover -translate-y-[5%]"
+            className="absolute inset-0 h-full w-full object-cover"
             draggable={false}
           />
         </div>

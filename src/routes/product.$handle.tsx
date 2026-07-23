@@ -1878,7 +1878,7 @@ function TrustBannerSection() {
   ];
 
   return (
-    <section className="bg-[#FFFFFF]">
+    <section className="bg-[#f7f3ef]">
       <div className="mx-auto max-w-[1600px] px-5 py-10 md:px-10 md:py-14">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: Icon, label }) => (

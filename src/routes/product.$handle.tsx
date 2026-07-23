@@ -266,7 +266,7 @@ function ProductPage() {
   if (isLoading) {
     return (
       <div className="bg-[#f6f3ee]">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
           <div className="aspect-[4/5] bg-muted animate-pulse" />
           <div className="space-y-4">
             <div className="h-10 w-2/3 bg-muted animate-pulse" />
@@ -526,7 +526,7 @@ function ProductView({ product }: { product: ProductNode }) {
   };
   return (
     <div className="bg-[#f6f3ee]">
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-10 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-10 md:py-16">
       <nav className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8 flex items-center gap-2">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-3 w-3" />
@@ -1695,7 +1695,7 @@ function ReviewsSection() {
 
   return (
     <section className="mt-12 bg-[#fff7ef] py-10 md:mt-20 md:py-16">
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
           <div>
             <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>
@@ -1726,7 +1726,7 @@ function ReviewsSection() {
 
       <div
         ref={scrollerRef}
-        className="mx-auto flex max-w-[1600px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 md:px-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-pl-5 md:scroll-pl-10"
+        className="mx-auto flex max-w-[1400px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 md:px-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-pl-5 md:scroll-pl-10"
       >
         {REVIEWS.map((r, i) => (
           <article
@@ -1786,7 +1786,7 @@ function NewsletterContactSection() {
 
   return (
     <section className="bg-[#fffcf8]">
-      <div className="mx-auto max-w-[1600px] px-5 py-12 md:px-10 md:py-20">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-20">
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
           <div>
             <h2 className="text-[24px] md:text-[32px] font-[500] leading-tight text-[#071426]">
@@ -1879,7 +1879,7 @@ function TrustBannerSection() {
 
   return (
     <section className="bg-[#f7f3ef]">
-      <div className="mx-auto max-w-[1600px] px-5 py-10 md:px-10 md:py-14">
+      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: Icon, imageIcon, label }) => (
             <div key={label} className="flex items-center gap-4">

@@ -841,10 +841,10 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <section className="relative mt-10 overflow-hidden md:mt-16">
         <img
-          src={puzzlePiecesImg.url}
+          src={puzzlePiecesBeigeImg.url}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-20 w-[260px] rotate-[24deg] select-none opacity-[0.04] md:w-[340px]"
+          className="pointer-events-none absolute -bottom-16 -right-20 w-[260px] rotate-[24deg] select-none opacity-[0.12] md:w-[340px]"
         />
         <div className="relative grid gap-8 lg:grid-cols-12 lg:gap-16">
           {/* Sticky schematic */}
@@ -1125,13 +1125,16 @@ function UniqueSection() {
   return (
     <section className="relative mt-12 overflow-hidden md:mt-20">
       <img
-        src={puzzlePiecesImg.url}
+        src={puzzlePiecesBeigeImg.url}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -right-16 -top-10 w-[220px] rotate-[18deg] select-none opacity-[0.05] md:w-[300px]"
+        className="pointer-events-none absolute -right-16 -top-10 w-[220px] rotate-[18deg] select-none opacity-[0.14] md:w-[300px]"
       />
       <div className="relative mb-6 md:mb-8">
-        <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">Dit maakt Full House uniek</h2>
+        <div className="flex items-center gap-2.5">
+          <PuzzleCornerIcon className="h-5 w-5 text-[#f2ece3] drop-shadow-[0_1px_2px_rgba(0,0,0,0.08)] md:h-6 md:w-6" />
+          <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">Dit maakt Full House uniek</h2>
+        </div>
         <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">Doordacht design, gemaakt voor jouw interieur</p>
       </div>
 
@@ -1664,10 +1667,10 @@ function FaqSection() {
   return (
     <section className="relative mt-12 overflow-hidden md:mt-20">
       <img
-        src={puzzlePiecesImg.url}
+        src={puzzlePiecesBeigeImg.url}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -left-20 top-8 w-[240px] -rotate-[14deg] select-none opacity-[0.05] md:w-[320px]"
+        className="pointer-events-none absolute -left-20 top-8 w-[240px] -rotate-[14deg] select-none opacity-[0.12] md:w-[320px]"
       />
       <div className="relative mb-6 text-center md:mb-10">
         <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>

@@ -1209,95 +1209,93 @@ function BeforeAfterSection() {
 
   return (
     <section className="mt-12 md:mt-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Title and intro — always first */}
-        <div className="order-1">
-          <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
-          <h2 className="text-[22px] md:text-[32px] font-bold leading-tight text-[#071426]">Eén meubel.<br className="hidden md:block" /> Eén compleet andere woonkamer.</h2>
-          <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65 max-w-2xl">
-            Sleep de balk om te zien hoe de Full House een lege muur transformeert in een warme, opgeruimde woonkamer met ruimte voor alles wat je dierbaar is.
-          </p>
-        </div>
+      {/* Title top-left above image */}
+      <div className="mb-6 md:mb-8 text-left">
+        <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
+        <h2 className="text-[22px] md:text-[32px] font-bold leading-tight text-[#071426]">Eén meubel.<br className="hidden md:block" /> Eén compleet andere woonkamer.</h2>
+        <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65 max-w-2xl">
+          Sleep de balk om te zien hoe de Full House een lege muur transformeert in een warme, opgeruimde woonkamer met ruimte voor alles wat je dierbaar is.
+        </p>
+      </div>
 
-        {/* Slider — second on mobile, right column on desktop */}
+      {/* Full-width slider */}
+      <div
+        className="relative w-full overflow-hidden rounded-2xl select-none touch-none shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-[#071426]/5"
+        style={{ aspectRatio: "16 / 9" }}
+        ref={containerRef}
+        onPointerDown={(e) => {
+          draggingRef.current = true;
+          setFromClientX(e.clientX);
+        }}
+      >
+        <img
+          src={afterFullHouseAsset.url}
+          alt="Woonkamer na Full House"
+          className="absolute inset-0 h-full w-full object-cover"
+          draggable={false}
+        />
         <div
-          className="order-2 md:row-span-2 relative w-full overflow-hidden rounded-2xl select-none touch-none shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-[#071426]/5"
-          style={{ aspectRatio: "5 / 3" }}
-          ref={containerRef}
-          onPointerDown={(e) => {
-            draggingRef.current = true;
-            setFromClientX(e.clientX);
-          }}
+          className="absolute inset-0 overflow-hidden"
+          style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
         >
           <img
-            src={afterFullHouseAsset.url}
-            alt="Woonkamer na Full House"
+            src={beforeFullHouseAsset.url}
+            alt="Woonkamer voor Full House"
             className="absolute inset-0 h-full w-full object-cover"
             draggable={false}
           />
-          <div
-            className="absolute inset-0 overflow-hidden"
-            style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-          >
-            <img
-              src={beforeFullHouseAsset.url}
-              alt="Woonkamer voor Full House"
-              className="absolute inset-0 h-full w-full object-cover"
-              draggable={false}
-            />
-          </div>
-
-          <div className="absolute top-4 left-4 rounded-full bg-[#fef9f5] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-[#071426]">Voor</div>
-          <div className="absolute top-4 right-4 rounded-full bg-[#ff843a] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Na</div>
-
-          <div
-            className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)] pointer-events-none"
-            style={{ left: `${position}%`, transform: "translateX(-50%)" }}
-          />
-          <button
-            type="button"
-            aria-label="Sleep om te vergelijken"
-            className="absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_4px_16px_rgba(0,0,0,0.25)] cursor-ew-resize"
-            style={{ left: `${position}%` }}
-            onPointerDown={(e) => {
-              e.stopPropagation();
-              draggingRef.current = true;
-            }}
-          >
-            <ChevronLeft className="h-4 w-4 text-[#071426]" strokeWidth={2.5} />
-            <ChevronRight className="h-4 w-4 text-[#071426] -ml-1" strokeWidth={2.5} />
-          </button>
         </div>
 
-        {/* USPs — third on mobile, left column below text on desktop */}
-        <div className="order-3">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-1 md:gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <img src={plugAndPlayIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
-              </div>
-              <div>
-                <p className="text-[14px] font-medium text-[#071426]">Plug-and-Play</p>
-                <p className="text-[13px] text-[#071426]/55">Eenvoudig en snel te monteren</p>
-              </div>
+        <div className="absolute top-4 left-4 rounded-full bg-[#fef9f5] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-[#071426]">Voor</div>
+        <div className="absolute top-4 right-4 rounded-full bg-[#ff843a] px-3 py-1 text-[11px] tracking-[0.14em] uppercase text-white">Na</div>
+
+        <div
+          className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.35)] pointer-events-none"
+          style={{ left: `${position}%`, transform: "translateX(-50%)" }}
+        />
+        <button
+          type="button"
+          aria-label="Sleep om te vergelijken"
+          className="absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_4px_16px_rgba(0,0,0,0.25)] cursor-ew-resize"
+          style={{ left: `${position}%` }}
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            draggingRef.current = true;
+          }}
+        >
+          <ChevronLeft className="h-4 w-4 text-[#071426]" strokeWidth={2.5} />
+          <ChevronRight className="h-4 w-4 text-[#071426] -ml-1" strokeWidth={2.5} />
+        </button>
+      </div>
+
+      {/* USPs centered below image */}
+      <div className="mt-8 md:mt-10 flex justify-center">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-10 max-w-4xl w-full">
+          <div className="flex items-center gap-3 justify-center sm:justify-start">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+              <img src={plugAndPlayIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
             </div>
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <img src={warrantyIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
-              </div>
-              <div>
-                <p className="text-[14px] font-medium text-[#071426]">10 jaar garantie</p>
-                <p className="text-[13px] text-[#071426]/55">Langdurige zekerheid</p>
-              </div>
+            <div>
+              <p className="text-[14px] font-medium text-[#071426]">Plug-and-Play</p>
+              <p className="text-[13px] text-[#071426]/55">Eenvoudig en snel te monteren</p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                <img src={kijkplezierIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
-              </div>
-              <div>
-                <p className="text-[14px] font-medium text-[#071426]">100 dagen kijkpleziergarantie</p>
-                <p className="text-[13px] text-[#071426]/55">Rustig uitproberen</p>
-              </div>
+          </div>
+          <div className="flex items-center gap-3 justify-center sm:justify-start">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+              <img src={warrantyIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
+            </div>
+            <div>
+              <p className="text-[14px] font-medium text-[#071426]">10 jaar garantie</p>
+              <p className="text-[13px] text-[#071426]/55">Langdurige zekerheid</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 justify-center sm:justify-start">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+              <img src={kijkplezierIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
+            </div>
+            <div>
+              <p className="text-[14px] font-medium text-[#071426]">100 dagen kijkpleziergarantie</p>
+              <p className="text-[13px] text-[#071426]/55">Rustig uitproberen</p>
             </div>
           </div>
         </div>

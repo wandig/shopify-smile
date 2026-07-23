@@ -1605,7 +1605,52 @@ function BuiltToLastSection() {
 }
 
 function FaqSection() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openLeft, setOpenLeft] = useState<number | null>(null);
+  const [openRight, setOpenRight] = useState<number | null>(null);
+
+  const mid = Math.ceil(FAQ_ITEMS.length / 2);
+  const leftItems = FAQ_ITEMS.slice(0, mid);
+  const rightItems = FAQ_ITEMS.slice(mid);
+
+  const renderItem = (
+    item: { question: string; answer: string },
+    i: number,
+    isRight: boolean
+  ) => {
+    const isOpen = isRight ? openRight === i : openLeft === i;
+    const setOpen = isRight ? setOpenRight : setOpenLeft;
+    return (
+      <div
+        key={`${isRight ? "r" : "l"}-${i}`}
+        className="rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-5"
+      >
+        <button
+          type="button"
+          onClick={() => setOpen(isOpen ? null : i)}
+          aria-expanded={isOpen}
+          className="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
+        >
+          <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
+            {item.question}
+          </span>
+          <span
+            className={`flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : "rotate-0"}`}
+          >
+            <Plus className="h-3 w-3" strokeWidth={2} />
+          </span>
+        </button>
+        <div
+          className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+        >
+          <div className="overflow-hidden">
+            <div className="pt-3 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">
+              {item.answer}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <section className="mt-12 md:mt-20">
@@ -1619,41 +1664,13 @@ function FaqSection() {
         </p>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-2 md:gap-4">
-        {FAQ_ITEMS.map((item, i) => {
-          const isOpen = openFaq === i;
-          return (
-            <div
-              key={i}
-              className="rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-5"
-            >
-              <button
-                type="button"
-                onClick={() => setOpenFaq(isOpen ? null : i)}
-                aria-expanded={isOpen}
-                className="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
-              >
-                <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
-                  {item.question}
-                </span>
-                <span
-                  className={`flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : "rotate-0"}`}
-                >
-                  <Plus className="h-3 w-3" strokeWidth={2} />
-                </span>
-              </button>
-              <div
-                className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
-              >
-                <div className="overflow-hidden">
-                  <div className="pt-3 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">
-                    {item.answer}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      <div className="flex flex-col gap-3 md:flex-row md:gap-4">
+        <div className="flex flex-1 flex-col gap-3 md:gap-4">
+          {leftItems.map((item, i) => renderItem(item, i, false))}
+        </div>
+        <div className="flex flex-1 flex-col gap-3 md:gap-4">
+          {rightItems.map((item, i) => renderItem(item, i, true))}
+        </div>
       </div>
     </section>
   );

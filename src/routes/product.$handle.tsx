@@ -1871,7 +1871,7 @@ function NewsletterContactSection() {
 
 function TrustBannerSection() {
   const items = [
-    { icon: Star, label: "100 dagen proef kijkgarantie" },
+    { icon: Star, label: "100 dagen proefkijken" },
     { icon: Truck, label: "Gratis bezorgd in Nederland" },
     { icon: Monitor, label: "Geschikt voor tv's tot 80 inch" },
     { icon: ShieldCheck, label: "10 jaar garantie" },

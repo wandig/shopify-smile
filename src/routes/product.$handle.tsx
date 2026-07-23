@@ -1605,6 +1605,8 @@ function BuiltToLastSection() {
 }
 
 function FaqSection() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   return (
     <section className="mt-12 md:mt-20">
       <div className="mb-6 text-center md:mb-10">
@@ -1618,24 +1620,40 @@ function FaqSection() {
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 md:gap-4">
-        {FAQ_ITEMS.map((item, i) => (
-          <details
-            key={i}
-            className="group rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-all md:p-5"
-          >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
-              <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
-                {item.question}
-              </span>
-              <span className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out group-open:rotate-45">
-                <Plus className="h-3 w-3" strokeWidth={2} />
-              </span>
-            </summary>
-            <div className="mt-3 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">
-              {item.answer}
+        {FAQ_ITEMS.map((item, i) => {
+          const isOpen = openFaq === i;
+          return (
+            <div
+              key={i}
+              className="rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-5"
+            >
+              <button
+                type="button"
+                onClick={() => setOpenFaq(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                className="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
+              >
+                <span className="text-[14px] font-[500] leading-snug text-[#071426] md:text-[15px]">
+                  {item.question}
+                </span>
+                <span
+                  className={`flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : "rotate-0"}`}
+                >
+                  <Plus className="h-3 w-3" strokeWidth={2} />
+                </span>
+              </button>
+              <div
+                className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+              >
+                <div className="overflow-hidden">
+                  <div className="pt-3 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">
+                    {item.answer}
+                  </div>
+                </div>
+              </div>
             </div>
-          </details>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

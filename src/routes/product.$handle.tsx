@@ -1209,11 +1209,11 @@ function BeforeAfterSection() {
 
   return (
     <section className="mt-12 md:mt-20">
-      {/* Title top-left above image */}
-      <div className="mb-6 md:mb-8 text-left">
+      {/* Title centered above image */}
+      <div className="mb-6 md:mb-8 text-center">
         <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase text-[#071426]/55 mb-2">Voor en na Full House</p>
         <h2 className="text-[22px] md:text-[32px] font-bold leading-tight text-[#071426]">Eén meubel.<br className="hidden md:block" /> Eén compleet andere woonkamer.</h2>
-        <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65 max-w-2xl">
+        <p className="mt-3 mx-auto text-[14px] md:text-[15px] leading-relaxed text-[#071426]/65 max-w-2xl">
           Sleep de balk om te zien hoe de Full House een lege muur transformeert in een warme, opgeruimde woonkamer met ruimte voor alles wat je dierbaar is.
         </p>
       </div>

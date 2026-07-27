@@ -1055,6 +1055,7 @@ const UNIQUE_CARDS: Array<{
   noGradient?: boolean;
   subtleGradient?: boolean;
   darkGradient?: boolean;
+  darkGradientLower?: boolean;
 }> = [
   {
     title: "Stijlvolle kleuren",
@@ -1088,7 +1089,7 @@ const UNIQUE_CARDS: Array<{
     image: eenvoudigeMontageV2Img.url,
     variant: "light",
     lightText: true,
-    darkGradient: true,
+    darkGradientLower: true,
   },
   {
     title: "Onderhoudsvriendelijk",
@@ -1184,11 +1185,13 @@ function UniqueSection() {
             />
             {!card.noGradient && (
               <div className={`absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7 ${
-                card.darkGradient
-                  ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.45)_0%,rgba(7,20,38,0.20)_18%,rgba(7,20,38,0.07)_35%,rgba(7,20,38,0.02)_55%,transparent_85%)]"
-                  : card.subtleGradient
-                    ? "bg-gradient-to-b from-white/75 via-white/60 via-25% via-white/40 via-55% via-white/15 via-80% to-transparent"
-                    : "bg-gradient-to-b from-white/55 via-white/45 via-25% via-white/28 via-55% via-white/10 via-80% to-transparent"
+                card.darkGradientLower
+                  ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.45)_0%,rgba(7,20,38,0.32)_22%,rgba(7,20,38,0.16)_42%,rgba(7,20,38,0.06)_60%,rgba(7,20,38,0.02)_78%,transparent_95%)]"
+                  : card.darkGradient
+                    ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.45)_0%,rgba(7,20,38,0.20)_18%,rgba(7,20,38,0.07)_35%,rgba(7,20,38,0.02)_55%,transparent_85%)]"
+                    : card.subtleGradient
+                      ? "bg-gradient-to-b from-white/75 via-white/60 via-25% via-white/40 via-55% via-white/15 via-80% to-transparent"
+                      : "bg-gradient-to-b from-white/55 via-white/45 via-25% via-white/28 via-55% via-white/10 via-80% to-transparent"
               }`} />
             )}
             <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7">

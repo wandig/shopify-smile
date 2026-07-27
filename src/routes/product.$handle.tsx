@@ -47,6 +47,7 @@ import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.a
 import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.json";
 import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
 import hoogwaardigeKwaliteitImg from "@/assets/hoogwaardige-kwaliteit.png.asset.json";
+import hoogwaardigeKwaliteitV2Img from "@/assets/hoogwaardige-kwaliteit-v2.png.asset.json";
 
 
 
@@ -1055,7 +1056,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Hoogwaardige kwaliteit",
     body: "Stevig gebouwd voor jarenlang woonplezier",
-    image: hoogwaardigeKwaliteitImg.url,
+    image: hoogwaardigeKwaliteitV2Img.url,
     variant: "light",
   },
   {

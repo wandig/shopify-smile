@@ -1173,7 +1173,7 @@ function UniqueSection() {
               loading="lazy"
               draggable={false}
             />
-            <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-white/80 via-white/45 to-transparent px-6 pb-10 pt-6 md:px-7 md:pt-7">
+            <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-white/60 via-white/30 via-45% to-transparent px-6 pb-10. .pt-6 md:px-7 md:pt-7">
               {card.eyebrow && (
                 <p className={`mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] ${card.lightText ? "text-white/70" : "text-[#071426]/60"}`}>{card.eyebrow}</p>
               )}

@@ -38,6 +38,7 @@ import ontworpenInNederlandImg from "@/assets/ontworpen-in-nederland.png.asset.j
 import kabelsUitZichtImg from "@/assets/kabels-uit-zicht.png.asset.json";
 import eenvoudigeKlikmontageImg from "@/assets/eenvoudige-klikmontage.png.asset.json";
 import persoonlijkAdviesImg from "@/assets/persoonlijk-advies.png.asset.json";
+import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {
@@ -300,7 +301,7 @@ const PRODUCT_BENEFITS = [
   { title: "Kabels uit het zicht", image: kabelsUitZichtImg.url },
   { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageImg.url },
   { title: "Persoonlijk advies", image: persoonlijkAdviesImg.url },
-  { title: "100 dagen proefkijken", image: kijkplezierIcon.url },
+  { title: "100 dagen proefkijken", image: proefkijkenImg.url },
   { title: "10 jaar garantie", image: fullHouseGalleryFinish },
 ];
 

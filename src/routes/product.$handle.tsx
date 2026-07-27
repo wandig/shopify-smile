@@ -1078,14 +1078,14 @@ const UNIQUE_CARDS: Array<{
     body: "Greeploos openen met één lichte druk",
     image: pushToOpenImg.url,
     variant: "light",
-    subtleGradient: true,
+    noGradient: true,
   },
   {
     title: "Eenvoudige montage",
     body: "Slim ontworpen voor een snelle plaatsing",
     image: eenvoudigeMontageV2Img.url,
     variant: "light",
-    subtleGradient: true,
+    noGradient: true,
   },
   {
     title: "Onderhoudsvriendelijk",

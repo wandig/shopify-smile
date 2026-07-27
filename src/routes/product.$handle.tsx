@@ -40,6 +40,8 @@ import eenvoudigeKlikmontageImg from "@/assets/eenvoudige-klikmontage.png.asset.
 import persoonlijkAdviesImg from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
+import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren.png.asset.json";
+
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {

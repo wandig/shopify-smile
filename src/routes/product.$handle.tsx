@@ -1052,6 +1052,7 @@ const UNIQUE_CARDS: Array<{
   image: string;
   variant: "light" | "overlay-top" | "overlay-bottom";
   lightText?: boolean;
+  noGradient?: boolean;
 }> = [
   {
     title: "Stijlvolle kleuren",
@@ -1076,18 +1077,22 @@ const UNIQUE_CARDS: Array<{
     body: "Greeploos openen met één lichte druk",
     image: pushToOpenImg.url,
     variant: "light",
+    noGradient: true,
   },
   {
     title: "Eenvoudige montage",
     body: "Slim ontworpen voor een snelle plaatsing",
     image: eenvoudigeMontageV2Img.url,
     variant: "light",
+    noGradient: true,
   },
   {
     title: "Onderhoudsvriendelijk",
     body: "Eenvoudig schoon te houden",
     image: onderhoudsvriendelijkV2Img.url,
     variant: "light",
+    lightText: true,
+    noGradient: true,
   },
 ];
 
@@ -1173,7 +1178,10 @@ function UniqueSection() {
               loading="lazy"
               draggable={false}
             />
-            <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-white/60 via-white/30 via-45% to-transparent px-6 pb-10 pt-6 md:px-7 md:pt-7">
+            {!card.noGradient && (
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-white/60 via-white/30 via-45% to-transparent px-6 pb-10 pt-6 md:px-7 md:pt-7" />
+            )}
+            <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7">
               {card.eyebrow && (
                 <p className={`mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] ${card.lightText ? "text-white/70" : "text-[#071426]/60"}`}>{card.eyebrow}</p>
               )}

@@ -48,6 +48,7 @@ import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.j
 import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
 import hoogwaardigeKwaliteitImg from "@/assets/hoogwaardige-kwaliteit.png.asset.json";
 import hoogwaardigeKwaliteitV2Img from "@/assets/hoogwaardige-kwaliteit-v2.png.asset.json";
+import hoogwaardigeKwaliteitV3Img from "@/assets/hoogwaardige-kwaliteit-v3.png.asset.json";
 import kabelsUitZichtV4Img from "@/assets/kabels-uit-zicht-v4.png.asset.json";
 import kabelsUitZichtVoordelenImg from "@/assets/kabels-uit-zicht-voordelen.png.asset.json";
 
@@ -1058,7 +1059,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Hoogwaardige kwaliteit",
     body: "Stevig gebouwd voor jarenlang woonplezier",
-    image: hoogwaardigeKwaliteitV2Img.url,
+    image: hoogwaardigeKwaliteitV3Img.url,
     variant: "light",
     lightText: true,
   },

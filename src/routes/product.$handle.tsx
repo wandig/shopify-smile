@@ -1066,6 +1066,7 @@ const UNIQUE_CARDS: Array<{
     body: "Snoeren en aansluitingen netjes weggewerkt",
     image: kabelsUitZichtV4Img.url,
     variant: "light",
+    lightText: true,
   },
   {
     title: "Push-to-open",

@@ -44,6 +44,7 @@ import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
 import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren-v2.png.asset.json";
 import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.asset.json";
+import eenvoudigeMontageV2Img from "@/assets/eenvoudige-montage-v2.png.asset.json";
 import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.json";
 import onderhoudsvriendelijkV2Img from "@/assets/onderhoudsvriendelijk-v2.png.asset.json";
 import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
@@ -1081,7 +1082,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Eenvoudige montage",
     body: "Slim ontworpen voor een snelle plaatsing",
-    image: eenvoudigeMontageDetailImg.url,
+    image: eenvoudigeMontageV2Img.url,
     variant: "light",
   },
   {

@@ -1183,7 +1183,13 @@ function UniqueSection() {
               draggable={false}
             />
             {!card.noGradient && (
-              <div className={`absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7 ${card.subtleGradient ? "bg-gradient-to-b from-white/75 via-white/60 via-25% via-white/40 via-55% via-white/15 via-80% to-transparent" : "bg-gradient-to-b from-white/55 via-white/45 via-25% via-white/28 via-55% via-white/10 via-80% to-transparent"}`} />
+              <div className={`absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7 ${
+                card.darkGradient
+                  ? "bg-gradient-to-b from-[#071426]/45 via-[#071426]/25 via-30% via-[#071426]/12 via-60% via-[#071426]/5 via-85% to-transparent"
+                  : card.subtleGradient
+                    ? "bg-gradient-to-b from-white/75 via-white/60 via-25% via-white/40 via-55% via-white/15 via-80% to-transparent"
+                    : "bg-gradient-to-b from-white/55 via-white/45 via-25% via-white/28 via-55% via-white/10 via-80% to-transparent"
+              }`} />
             )}
             <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7">
               {card.eyebrow && (

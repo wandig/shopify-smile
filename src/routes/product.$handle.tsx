@@ -1078,6 +1078,7 @@ const UNIQUE_CARDS: Array<{
     body: "Greeploos openen met één lichte druk",
     image: pushToOpenImg.url,
     variant: "light",
+    lightText: true,
     noGradient: true,
   },
   {

@@ -42,6 +42,7 @@ import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
 import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren-v2.png.asset.json";
 import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.asset.json";
+import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.json";
 
 
 

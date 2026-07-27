@@ -1180,7 +1180,7 @@ function UniqueSection() {
               draggable={false}
             />
             {!card.noGradient && (
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-white/60 via-white/30 via-45% to-transparent px-6 pb-10 pt-6 md:px-7 md:pt-7" />
+              <div className={`absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7 ${card.subtleGradient ? "bg-gradient-to-b from-white/80 via-white/45 via-55% to-transparent" : "bg-gradient-to-b from-white/60 via-white/30 via-45% to-transparent"}`} />
             )}
             <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7">
               {card.eyebrow && (

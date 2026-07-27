@@ -42,6 +42,7 @@ import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
 import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren-v2.png.asset.json";
 import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.asset.json";
+import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.json";
 
 
 
@@ -1073,7 +1074,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Onderhoudsvriendelijk",
     body: "Eenvoudig schoon te houden",
-    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=80",
+    image: onderhoudsvriendelijkImg.url,
     variant: "light",
   },
 ];

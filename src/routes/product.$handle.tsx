@@ -293,7 +293,7 @@ const FULL_HOUSE_GALLERY = [
 ];
 
 const PRODUCT_BENEFITS = [
-  { title: "Ontworpen in Nederland", image: detailMaatwerkImg },
+  { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url },
   { title: "Kabels uit het zicht", image: productStoryBlackOakOrangeImg },
   { title: "Eenvoudige klikmontage", image: fullHouseGalleryUse },
   { title: "Persoonlijk advies", image: fullHouseGalleryRoom },

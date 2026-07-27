@@ -1185,7 +1185,7 @@ function UniqueSection() {
             {!card.noGradient && (
               <div className={`absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7 ${
                 card.darkGradient
-                  ? "bg-gradient-to-b from-[#071426]/45 via-[#071426]/25 via-30% via-[#071426]/12 via-60% via-[#071426]/5 via-85% to-transparent"
+                  ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.40)_0%,rgba(7,20,38,0.22)_16%,rgba(34,197,94,0.28)_19%,rgba(34,197,94,0.10)_24%,rgba(7,20,38,0.12)_28%,rgba(7,20,38,0.05)_60%,rgba(7,20,38,0.02)_85%,transparent_100%)]"
                   : card.subtleGradient
                     ? "bg-gradient-to-b from-white/75 via-white/60 via-25% via-white/40 via-55% via-white/15 via-80% to-transparent"
                     : "bg-gradient-to-b from-white/55 via-white/45 via-25% via-white/28 via-55% via-white/10 via-80% to-transparent"

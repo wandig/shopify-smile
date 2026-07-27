@@ -1052,6 +1052,7 @@ const UNIQUE_CARDS: Array<{
   image: string;
   variant: "light" | "overlay-top" | "overlay-bottom";
   lightText?: boolean;
+  noGradient?: boolean;
 }> = [
   {
     title: "Stijlvolle kleuren",
@@ -1076,18 +1077,22 @@ const UNIQUE_CARDS: Array<{
     body: "Greeploos openen met één lichte druk",
     image: pushToOpenImg.url,
     variant: "light",
+    noGradient: true,
   },
   {
     title: "Eenvoudige montage",
     body: "Slim ontworpen voor een snelle plaatsing",
     image: eenvoudigeMontageV2Img.url,
     variant: "light",
+    noGradient: true,
   },
   {
     title: "Onderhoudsvriendelijk",
     body: "Eenvoudig schoon te houden",
     image: onderhoudsvriendelijkV2Img.url,
     variant: "light",
+    lightText: true,
+    noGradient: true,
   },
 ];
 

@@ -828,8 +828,8 @@ function ProductView({ product }: { product: ProductNode }) {
                 {PRODUCT_BENEFITS.map((benefit) => (
                   <article key={benefit.title} className="relative h-[195px] min-w-[150px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
                     <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
-                    <div className="absolute inset-x-0 top-0 flex justify-center px-3 pt-3">
-                      <h3 className="rounded-full bg-[#fffbf7] px-3 py-2 text-center text-[12px] font-normal leading-tight text-[#071426] shadow-[0_1px_6px_rgba(0,0,0,0.06)]">{benefit.title}</h3>
+                    <div className="absolute inset-x-0 top-0 px-4 pt-5">
+                      <h3 className="text-center text-[13px] font-[330] leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
                     </div>
                   </article>
                 ))}

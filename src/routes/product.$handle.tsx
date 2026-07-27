@@ -1064,7 +1064,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Kabels uit het zicht",
     body: "Snoeren en aansluitingen netjes weggewerkt",
-    image: kabelsUitZichtV3Img.url,
+    image: kabelsUitZichtV4Img.url,
     variant: "light",
   },
   {

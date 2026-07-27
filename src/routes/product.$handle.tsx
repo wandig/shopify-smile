@@ -1054,6 +1054,7 @@ const UNIQUE_CARDS: Array<{
   lightText?: boolean;
   noGradient?: boolean;
   subtleGradient?: boolean;
+  darkGradient?: boolean;
 }> = [
   {
     title: "Stijlvolle kleuren",
@@ -1079,14 +1080,15 @@ const UNIQUE_CARDS: Array<{
     image: pushToOpenImg.url,
     variant: "light",
     lightText: true,
-    noGradient: true,
+    darkGradient: true,
   },
   {
     title: "Eenvoudige montage",
     body: "Slim ontworpen voor een snelle plaatsing",
     image: eenvoudigeMontageV2Img.url,
     variant: "light",
-    noGradient: true,
+    lightText: true,
+    darkGradient: true,
   },
   {
     title: "Onderhoudsvriendelijk",

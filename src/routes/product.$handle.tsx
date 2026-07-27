@@ -36,6 +36,7 @@ import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
 import ontworpenInNederlandImg from "@/assets/ontworpen-in-nederland.png.asset.json";
 import kabelsUitZichtImg from "@/assets/kabels-uit-zicht.png.asset.json";
+import eenvoudigeKlikmontageImg from "@/assets/eenvoudige-klikmontage.png.asset.json";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {
@@ -296,7 +297,7 @@ const FULL_HOUSE_GALLERY = [
 const PRODUCT_BENEFITS = [
   { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url },
   { title: "Kabels uit het zicht", image: kabelsUitZichtImg.url },
-  { title: "Eenvoudige klikmontage", image: fullHouseGalleryUse },
+  { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageImg.url },
   { title: "Persoonlijk advies", image: fullHouseGalleryRoom },
   { title: "100 dagen proefkijken", image: kijkplezierIcon.url },
   { title: "10 jaar garantie", image: fullHouseGalleryFinish },

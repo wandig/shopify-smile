@@ -1039,7 +1039,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Stijlvolle kleuren",
     body: "Tijdloze tinten voor ieder interieur",
-    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=80",
+    image: stijlvolleKleurenImg.url,
     variant: "light",
   },
   {

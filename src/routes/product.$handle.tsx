@@ -1152,7 +1152,7 @@ function UniqueSection() {
             <img
               src={card.image}
               alt={card.title}
-              className="absolute inset-0 h-full w-full object-contain p-4 md:p-5"
+              className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
               draggable={false}
             />

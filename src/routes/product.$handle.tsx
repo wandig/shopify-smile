@@ -1076,6 +1076,7 @@ const UNIQUE_CARDS: Array<{
     body: "Eenvoudig schoon te houden",
     image: onderhoudsvriendelijkImg.url,
     variant: "light",
+    lightText: true,
   },
 ];
 

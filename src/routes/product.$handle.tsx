@@ -34,6 +34,7 @@ import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
+import ontworpenInNederlandImg from "@/assets/ontworpen-in-nederland.png.asset.json";
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {

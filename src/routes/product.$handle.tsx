@@ -40,6 +40,8 @@ import eenvoudigeKlikmontageImg from "@/assets/eenvoudige-klikmontage.png.asset.
 import persoonlijkAdviesImg from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
+import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren.png.asset.json";
+
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   {
@@ -1037,7 +1039,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Stijlvolle kleuren",
     body: "Tijdloze tinten voor ieder interieur",
-    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=80",
+    image: stijlvolleKleurenImg.url,
     variant: "light",
   },
   {

@@ -1035,34 +1035,39 @@ const UNIQUE_CARDS: Array<{
   variant: "light" | "overlay-top" | "overlay-bottom";
 }> = [
   {
-    title: "Sfeervolle verlichting",
-    body: "Warme accenten die je woonkamer laten leven.",
-    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=900&q=80",
-    variant: "light",
-  },
-  {
-    title: "Samengestelde kleuren",
-    body: "Natuurlijke tinten die perfect samenkomen.",
+    title: "Stijlvolle kleuren",
+    body: "Tijdloze tinten voor ieder interieur",
     image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=900&q=80",
     variant: "light",
   },
   {
-    eyebrow: "Full House",
-    title: "Rust in je woonkamer, ruimte voor alles",
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
-    variant: "overlay-top",
+    title: "Hoogwaardige kwaliteit",
+    body: "Stevig gebouwd voor jarenlang woonplezier",
+    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=900&q=80",
+    variant: "light",
   },
   {
-    eyebrow: "SimpleClick® Montage",
-    title: "Als het allemaal klikt",
-    image: "https://images.unsplash.com/photo-1581092918484-8313ab3a9862?auto=format&fit=crop&w=900&q=80",
-    variant: "overlay-top",
-  },
-  {
-    eyebrow: "Uitsparing",
     title: "Kabels uit het zicht",
-    body: "Voor een net en opgeruimd gevoel.",
+    body: "Snoeren en aansluitingen netjes weggewerkt",
     image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=900&q=80",
+    variant: "light",
+  },
+  {
+    title: "Push-to-open",
+    body: "Greeploos openen met één lichte druk",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
+    variant: "light",
+  },
+  {
+    title: "Eenvoudige montage",
+    body: "Slim ontworpen voor een snelle plaatsing",
+    image: "https://images.unsplash.com/photo-1581092918484-8313ab3a9862?auto=format&fit=crop&w=900&q=80",
+    variant: "light",
+  },
+  {
+    title: "Onderhoudsvriendelijk",
+    body: "Eenvoudig schoon te houden",
+    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=80",
     variant: "light",
   },
 ];

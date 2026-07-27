@@ -1058,6 +1058,7 @@ const UNIQUE_CARDS: Array<{
     body: "Stevig gebouwd voor jarenlang woonplezier",
     image: hoogwaardigeKwaliteitV2Img.url,
     variant: "light",
+    lightText: true,
   },
   {
     title: "Kabels uit het zicht",

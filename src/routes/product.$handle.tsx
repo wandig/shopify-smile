@@ -1147,35 +1147,25 @@ function UniqueSection() {
         {UNIQUE_CARDS.map((card) => (
           <article
             key={card.title}
-            className="relative h-[440px] w-[280px] shrink-0 snap-center overflow-hidden rounded-[18px] md:h-[520px] md:w-[360px]"
+            className="relative h-[440px] w-[280px] shrink-0 snap-center overflow-hidden rounded-[18px] bg-[#f2ece3] md:h-[520px] md:w-[360px]"
           >
-              {card.variant === "light" ? (
-                <div className="flex h-full w-full flex-col bg-[#f2ece3]">
-                  <div className="px-6 pt-6 md:px-7 md:pt-7">
-                    {card.eyebrow && (
-                      <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#071426]/60">{card.eyebrow}</p>
-                    )}
-                    <h3 className="text-[20px] md:text-[22px] font-bold leading-tight text-[#071426]">{card.title}</h3>
-                    {card.body && (
-                      <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/60">{card.body}</p>
-                    )}
-                  </div>
-                  <div className="mt-auto h-[60%] w-full overflow-hidden">
-                    <img src={card.image} alt={card.title} className="h-full w-full object-cover" loading="lazy" draggable={false} />
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <img src={card.image} alt={card.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" draggable={false} />
-                  <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/55 to-transparent p-6 md:p-7">
-                    {card.eyebrow && (
-                      <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/85">{card.eyebrow}</p>
-                    )}
-                    <h3 className="text-[20px] md:text-[22px] font-bold leading-tight text-white">{card.title}</h3>
-                  </div>
-                </>
+            <img
+              src={card.image}
+              alt={card.title}
+              className="absolute inset-0 h-full w-full object-contain p-4 md:p-5"
+              loading="lazy"
+              draggable={false}
+            />
+            <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-[#f2ece3]/95 via-[#f2ece3]/80 to-transparent px-6 pb-10 pt-6 md:px-7 md:pt-7">
+              {card.eyebrow && (
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#071426]/60">{card.eyebrow}</p>
               )}
-            </article>
+              <h3 className="text-[20px] md:text-[22px] font-bold leading-tight text-[#071426]">{card.title}</h3>
+              {card.body && (
+                <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/70">{card.body}</p>
+              )}
+            </div>
+          </article>
         ))}
       </div>
 

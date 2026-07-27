@@ -37,6 +37,7 @@ import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
 import ontworpenInNederlandImg from "@/assets/ontworpen-in-nederland.png.asset.json";
 import kabelsUitZichtImg from "@/assets/kabels-uit-zicht.png.asset.json";
 import kabelsUitZichtV2Img from "@/assets/kabels-uit-zicht-v2.png.asset.json";
+import kabelsUitZichtV3Img from "@/assets/kabels-uit-zicht-v3.png.asset.json";
 import eenvoudigeKlikmontageImg from "@/assets/eenvoudige-klikmontage.png.asset.json";
 import persoonlijkAdviesImg from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
@@ -1060,7 +1061,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Kabels uit het zicht",
     body: "Snoeren en aansluitingen netjes weggewerkt",
-    image: kabelsUitZichtV2Img.url,
+    image: kabelsUitZichtV3Img.url,
     variant: "light",
   },
   {

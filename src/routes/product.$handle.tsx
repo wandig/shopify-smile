@@ -1179,7 +1179,7 @@ function UniqueSection() {
               )}
               <h3 className={`text-[20px] md:text-[22px] font-bold leading-tight ${card.lightText ? "text-white" : "text-[#071426]"}`}>{card.title}</h3>
               {card.body && (
-                <p className={`mt-2 text-[13px] leading-relaxed ${card.lightText ? "text-white/80" : "text-[#071426]/70"}`}>{card.body}</p>
+                <p className={`mt-2 text-[13px] leading-relaxed ${card.lightText ? "text-white" : "text-[#071426]"}`}>{card.body}</p>
               )}
             </div>
           </article>

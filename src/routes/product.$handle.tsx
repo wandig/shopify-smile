@@ -41,6 +41,8 @@ import persoonlijkAdviesImg from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
 import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren-v2.png.asset.json";
+import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.asset.json";
+
 
 
 const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
@@ -1063,7 +1065,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Eenvoudige montage",
     body: "Slim ontworpen voor een snelle plaatsing",
-    image: "https://images.unsplash.com/photo-1581092918484-8313ab3a9862?auto=format&fit=crop&w=900&q=80",
+    image: eenvoudigeMontageDetailImg.url,
     variant: "light",
   },
   {

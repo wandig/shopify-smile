@@ -1162,11 +1162,11 @@ function UniqueSection() {
             />
             <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7">
               {card.eyebrow && (
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#071426]/60">{card.eyebrow}</p>
+                <p className={`mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] ${card.lightText ? "text-white/70" : "text-[#071426]/60"}`}>{card.eyebrow}</p>
               )}
-              <h3 className="text-[20px] md:text-[22px] font-bold leading-tight text-[#071426]">{card.title}</h3>
+              <h3 className={`text-[20px] md:text-[22px] font-bold leading-tight ${card.lightText ? "text-white" : "text-[#071426]"}`}>{card.title}</h3>
               {card.body && (
-                <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/70">{card.body}</p>
+                <p className={`mt-2 text-[13px] leading-relaxed ${card.lightText ? "text-white/80" : "text-[#071426]/70"}`}>{card.body}</p>
               )}
             </div>
           </article>

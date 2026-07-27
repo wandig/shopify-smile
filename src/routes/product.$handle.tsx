@@ -1074,7 +1074,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Onderhoudsvriendelijk",
     body: "Eenvoudig schoon te houden",
-    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=80",
+    image: onderhoudsvriendelijkImg.url,
     variant: "light",
   },
 ];

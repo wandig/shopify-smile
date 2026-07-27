@@ -830,7 +830,7 @@ function ProductView({ product }: { product: ProductNode }) {
                     <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
                     <div className="pointer-events-none absolute inset-x-0 top-0 h-[90px] bg-gradient-to-b from-black/55 via-black/25 to-transparent" />
                     <div className="absolute inset-x-0 top-0 px-4 pt-5">
-                      <h3 className="text-center text-[13px] font-[330] leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
+                      <h3 className="text-center text-[13px] font-normal leading-tight tracking-[0.03em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
                     </div>
                   </article>
                 ))}

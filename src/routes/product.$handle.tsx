@@ -1070,14 +1070,12 @@ const UNIQUE_CARDS: Array<{
     body: "Snoeren en aansluitingen netjes weggewerkt",
     image: kabelsUitZichtV4Img.url,
     variant: "light",
-    lightText: true,
   },
   {
     title: "Push-to-open",
     body: "Greeploos openen met één lichte druk",
     image: pushToOpenImg.url,
     variant: "light",
-    lightText: true,
   },
   {
     title: "Eenvoudige montage",
@@ -1090,7 +1088,6 @@ const UNIQUE_CARDS: Array<{
     body: "Eenvoudig schoon te houden",
     image: onderhoudsvriendelijkV2Img.url,
     variant: "light",
-    lightText: true,
   },
 ];
 

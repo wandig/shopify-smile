@@ -45,6 +45,7 @@ import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
 import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren-v2.png.asset.json";
 import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.asset.json";
 import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.json";
+import onderhoudsvriendelijkV2Img from "@/assets/onderhoudsvriendelijk-v2.png.asset.json";
 import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
 import hoogwaardigeKwaliteitImg from "@/assets/hoogwaardige-kwaliteit.png.asset.json";
 import hoogwaardigeKwaliteitV2Img from "@/assets/hoogwaardige-kwaliteit-v2.png.asset.json";
@@ -1085,7 +1086,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Onderhoudsvriendelijk",
     body: "Eenvoudig schoon te houden",
-    image: onderhoudsvriendelijkImg.url,
+    image: onderhoudsvriendelijkV2Img.url,
     variant: "light",
   },
 ];

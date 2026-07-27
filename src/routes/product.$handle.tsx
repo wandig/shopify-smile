@@ -49,6 +49,7 @@ import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
 import hoogwaardigeKwaliteitImg from "@/assets/hoogwaardige-kwaliteit.png.asset.json";
 import hoogwaardigeKwaliteitV2Img from "@/assets/hoogwaardige-kwaliteit-v2.png.asset.json";
 import kabelsUitZichtV4Img from "@/assets/kabels-uit-zicht-v4.png.asset.json";
+import kabelsUitZichtVoordelenImg from "@/assets/kabels-uit-zicht-voordelen.png.asset.json";
 
 
 
@@ -312,7 +313,7 @@ const FULL_HOUSE_GALLERY = [
 
 const PRODUCT_BENEFITS = [
   { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url },
-  { title: "Kabels uit het zicht", image: kabelsUitZichtImg.url },
+  { title: "Kabels uit het zicht", image: kabelsUitZichtVoordelenImg.url },
   { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageImg.url },
   { title: "Persoonlijk advies", image: persoonlijkAdviesImg.url },
   { title: "100 dagen proefkijken", image: proefkijkenImg.url },

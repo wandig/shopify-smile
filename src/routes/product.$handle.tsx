@@ -43,7 +43,6 @@ import persoonlijkAdviesImg from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenImg from "@/assets/100-dagen-proefkijken.png.asset.json";
 import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
 import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren-v2.png.asset.json";
-import stijlvolleKleurenV3Img from "@/assets/stijlvolle-kleuren-v3.png.asset.json";
 import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.asset.json";
 import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.json";
 import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
@@ -1053,7 +1052,7 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Stijlvolle kleuren",
     body: "Tijdloze tinten voor ieder interieur",
-    image: stijlvolleKleurenV3Img.url,
+    image: stijlvolleKleurenImg.url,
     variant: "light",
   },
   {

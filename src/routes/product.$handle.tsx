@@ -1081,14 +1081,12 @@ const UNIQUE_CARDS: Array<{
     body: "Slim ontworpen voor een snelle plaatsing",
     image: eenvoudigeMontageDetailImg.url,
     variant: "light",
-    lightText: true,
   },
   {
     title: "Onderhoudsvriendelijk",
     body: "Eenvoudig schoon te houden",
     image: onderhoudsvriendelijkImg.url,
     variant: "light",
-    lightText: true,
   },
 ];
 

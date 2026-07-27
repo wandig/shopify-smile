@@ -1037,6 +1037,7 @@ const UNIQUE_CARDS: Array<{
   body?: string;
   image: string;
   variant: "light" | "overlay-top" | "overlay-bottom";
+  lightText?: boolean;
 }> = [
   {
     title: "Stijlvolle kleuren",
@@ -1067,6 +1068,7 @@ const UNIQUE_CARDS: Array<{
     body: "Slim ontworpen voor een snelle plaatsing",
     image: eenvoudigeMontageDetailImg.url,
     variant: "light",
+    lightText: true,
   },
   {
     title: "Onderhoudsvriendelijk",

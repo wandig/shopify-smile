@@ -43,6 +43,9 @@ import garantieCinewallImg from "@/assets/garantie-cinewall.png.asset.json";
 import stijlvolleKleurenImg from "@/assets/stijlvolle-kleuren-v2.png.asset.json";
 import eenvoudigeMontageDetailImg from "@/assets/eenvoudige-montage-detail.png.asset.json";
 import onderhoudsvriendelijkImg from "@/assets/onderhoudsvriendelijk.png.asset.json";
+import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
+
+
 
 
 
@@ -1061,8 +1064,9 @@ const UNIQUE_CARDS: Array<{
   {
     title: "Push-to-open",
     body: "Greeploos openen met één lichte druk",
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
+    image: pushToOpenImg.url,
     variant: "light",
+    lightText: true,
   },
   {
     title: "Eenvoudige montage",

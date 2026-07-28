@@ -55,6 +55,7 @@ import hoogwaardigeKwaliteitV4Img from "@/assets/hoogwaardige-kwaliteit-v4.png.a
 import kabelsUitZichtV4Img from "@/assets/kabels-uit-zicht-v4.png.asset.json";
 import kabelsUitZichtVoordelenImg from "@/assets/kabels-uit-zicht-voordelen.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
+import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 
 
 
@@ -1384,7 +1385,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      GALLERY_IMG("photo-1600210492486-724fe5c67fb0", "Interieur met tv-meubel"),
+      { src: klantWoonkamer2Img.url, alt: "Woonkamer met fotowand en Full House" },
       GALLERY_IMG("photo-1615529182904-14819c35db37", "Minimalistisch interieur met tv-wand"),
     ],
   },

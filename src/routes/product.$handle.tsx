@@ -63,6 +63,7 @@ import klantWoonkamer6Img from "@/assets/klant-woonkamer-6.png.asset.json";
 import klantWoonkamer7Img from "@/assets/klant-woonkamer-7.png.asset.json";
 import klantWoonkamer8Img from "@/assets/klant-woonkamer-8.png.asset.json";
 import klantWoonkamer9Img from "@/assets/klant-woonkamer-9.png.asset.json";
+import klantWoonkamer10Img from "@/assets/klant-woonkamer-10.png.asset.json";
 
 
 
@@ -1415,7 +1416,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
     width: "w-[200px] md:w-[280px]",
     items: [
       { src: klantWoonkamer8Img.url, alt: "Donkere houten cinewall met tv en decoratie in moderne woonkamer" },
-      GALLERY_IMG("photo-1618220179428-22790b461013", "Lichte woonkamer"),
+      { src: klantWoonkamer10Img.url, alt: "Roze cinewall met tv en vakken in lichte woonkamer" },
     ],
   },
   {

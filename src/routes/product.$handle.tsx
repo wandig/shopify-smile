@@ -59,6 +59,7 @@ import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
 import klantWoonkamer6Img from "@/assets/klant-woonkamer-6.png.asset.json";
+import klantWoonkamer7Img from "@/assets/klant-woonkamer-7.png.asset.json";
 
 
 
@@ -1400,7 +1401,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
     width: "w-[200px] md:w-[280px]",
     items: [
       { src: klantWoonkamer4Img.url, alt: "Roze cinewall in moderne woonkamer" },
-      GALLERY_IMG("photo-1600566753190-17f0baa2a6c3", "Stijlvol tv-meubel"),
+      { src: klantWoonkamer7Img.url, alt: "Lichte cinewall in moderne woonkamer" },
     ],
   },
   {

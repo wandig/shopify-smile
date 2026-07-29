@@ -1658,7 +1658,7 @@ function BuiltToLastSection() {
                 {card.title}
               </h3>
               <p
-                className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed"
+                className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed font-light"
                 style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined }}
               >
                 {card.body}

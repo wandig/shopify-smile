@@ -64,6 +64,7 @@ import klantWoonkamer7Img from "@/assets/klant-woonkamer-7.png.asset.json";
 import klantWoonkamer8Img from "@/assets/klant-woonkamer-8.png.asset.json";
 import klantWoonkamer9Img from "@/assets/klant-woonkamer-9.png.asset.json";
 import klantWoonkamer10Img from "@/assets/klant-woonkamer-10.png.asset.json";
+import gebouwdOmMeeTeGaan1Img from "@/assets/gebouwd-om-mee-te-gaan-1.png.asset.json";
 
 
 
@@ -1488,6 +1489,7 @@ const BUILT_TO_LAST_CARDS: Array<{
   body: string;
   bg: string;
   tone: "light" | "dark";
+  image?: { src: string; alt: string };
 }> = [
   {
     eyebrow: "Gemaakt om te blijven",
@@ -1495,6 +1497,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     body: "Ontworpen voor jarenlang dagelijks gebruik, zonder dat je je zorgen hoeft te maken.",
     bg: "#f0e4d5",
     tone: "light",
+    image: { src: gebouwdOmMeeTeGaan1Img.url, alt: "Donkere houten tv-kast detail" },
   },
   {
     eyebrow: "Zo staat hij",
@@ -1627,7 +1630,7 @@ function BuiltToLastSection() {
             style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
           >
             <div
-              className={`relative flex h-full flex-col p-6 md:p-7 ${
+              className={`relative z-10 flex h-full flex-col p-6 md:p-7 ${
                 card.tone === "light" ? "text-[#071426]" : "text-white"
               }`}
             >
@@ -1649,6 +1652,14 @@ function BuiltToLastSection() {
                 {card.body}
               </p>
             </div>
+            {card.image && (
+              <img
+                src={card.image.src}
+                alt={card.image.alt}
+                className="absolute bottom-0 left-0 h-[58%] w-full object-cover object-center"
+                loading="lazy"
+              />
+            )}
           </article>
         ))}
       </div>

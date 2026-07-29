@@ -1416,7 +1416,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
     width: "w-[200px] md:w-[280px]",
     items: [
       { src: klantWoonkamer8Img.url, alt: "Donkere houten cinewall met tv en decoratie in moderne woonkamer" },
-      GALLERY_IMG("photo-1618220179428-22790b461013", "Lichte woonkamer"),
+      { src: klantWoonkamer10Img.url, alt: "Roze cinewall met tv en vakken in lichte woonkamer" },
     ],
   },
   {

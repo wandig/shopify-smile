@@ -1386,7 +1386,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      { src: klantWoonkamer2Img.url, alt: "Woonkamer met fotowand en Full House" },
+      { src: klantWoonkamer2Img.url, alt: "Roze cinewall met tv in woonkamer" },
       GALLERY_IMG("photo-1615529182904-14819c35db37", "Minimalistisch interieur met tv-wand"),
     ],
   },

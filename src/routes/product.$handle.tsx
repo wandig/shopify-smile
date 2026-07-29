@@ -58,6 +58,7 @@ import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
+import klantWoonkamer6Img from "@/assets/klant-woonkamer-6.png.asset.json";
 
 
 
@@ -1393,7 +1394,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   },
   {
     width: "w-[220px] md:w-[300px]",
-    items: [GALLERY_IMG("photo-1616627561950-9f746e330187", "Warme woonkamer met houten cinewall")],
+    items: [{ src: klantWoonkamer6Img.url, alt: "Donkere houten cinewall met tv en vakken" }],
   },
   {
     width: "w-[200px] md:w-[280px]",

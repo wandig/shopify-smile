@@ -56,6 +56,7 @@ import kabelsUitZichtV4Img from "@/assets/kabels-uit-zicht-v4.png.asset.json";
 import kabelsUitZichtVoordelenImg from "@/assets/kabels-uit-zicht-voordelen.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
+import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
 
 
 
@@ -1396,7 +1397,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      GALLERY_IMG("photo-1600607687939-ce8a6c25118c", "Moderne woonkamer met tv-wand"),
+      { src: klantWoonkamer4Img.url, alt: "Roze cinewall in moderne woonkamer" },
       GALLERY_IMG("photo-1600566753190-17f0baa2a6c3", "Stijlvol tv-meubel"),
     ],
   },

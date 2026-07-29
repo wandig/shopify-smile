@@ -64,6 +64,7 @@ import klantWoonkamer7Img from "@/assets/klant-woonkamer-7.png.asset.json";
 import klantWoonkamer8Img from "@/assets/klant-woonkamer-8.png.asset.json";
 import klantWoonkamer9Img from "@/assets/klant-woonkamer-9.png.asset.json";
 import klantWoonkamer10Img from "@/assets/klant-woonkamer-10.png.asset.json";
+import gebouwdOmMeeTeGaan1Img from "@/assets/gebouwd-om-mee-te-gaan-1.png.asset.json";
 
 
 

@@ -58,6 +58,11 @@ import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
+import klantWoonkamerGeselecteerdImg from "@/assets/klant-woonkamer-geselecteerd.png.asset.json";
+
+
+
+
 
 
 

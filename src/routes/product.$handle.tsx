@@ -56,6 +56,7 @@ import kabelsUitZichtV4Img from "@/assets/kabels-uit-zicht-v4.png.asset.json";
 import kabelsUitZichtVoordelenImg from "@/assets/kabels-uit-zicht-voordelen.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
+import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
 
 
@@ -1387,7 +1388,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
     width: "w-[200px] md:w-[280px]",
     items: [
       { src: klantWoonkamer2Img.url, alt: "Roze cinewall met tv in woonkamer" },
-      GALLERY_IMG("photo-1615529182904-14819c35db37", "Minimalistisch interieur met tv-wand"),
+      { src: klantWoonkamer3Img.url, alt: "Kinderen spelen voor houten cinewall" },
     ],
   },
   {

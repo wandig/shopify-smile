@@ -61,6 +61,7 @@ import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
 import klantWoonkamer5_2Img from "@/assets/klant-woonkamer-5-2.png.asset.json";
 import klantWoonkamer6Img from "@/assets/klant-woonkamer-6.png.asset.json";
 import klantWoonkamer7Img from "@/assets/klant-woonkamer-7.png.asset.json";
+import klantWoonkamer8Img from "@/assets/klant-woonkamer-8.png.asset.json";
 
 
 
@@ -1412,7 +1413,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      GALLERY_IMG("photo-1616137466211-f939a420be84", "Design interieur"),
+      { src: klantWoonkamer8Img.url, alt: "Donkere houten cinewall met tv en decoratie in moderne woonkamer" },
       GALLERY_IMG("photo-1618220179428-22790b461013", "Lichte woonkamer"),
     ],
   },

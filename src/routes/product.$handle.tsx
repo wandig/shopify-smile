@@ -58,11 +58,6 @@ import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
-import klantWoonkamerGeselecteerdImg from "@/assets/klant-woonkamer-geselecteerd.png.asset.json";
-
-
-
-
 
 
 
@@ -1392,7 +1387,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      { src: klantWoonkamerGeselecteerdImg.url, alt: "Donkerhouten cinewall in woonkamer" },
+      { src: klantWoonkamer2Img.url, alt: "Roze cinewall met tv in woonkamer" },
       { src: klantWoonkamer3Img.url, alt: "Kinderen spelen voor houten cinewall" },
     ],
   },

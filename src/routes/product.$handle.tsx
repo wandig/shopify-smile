@@ -1630,7 +1630,7 @@ function BuiltToLastSection() {
             style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
           >
             <div
-              className={`relative flex h-full flex-col p-6 md:p-7 ${
+              className={`relative z-10 flex h-full flex-col p-6 md:p-7 ${
                 card.tone === "light" ? "text-[#071426]" : "text-white"
               }`}
             >
@@ -1652,6 +1652,14 @@ function BuiltToLastSection() {
                 {card.body}
               </p>
             </div>
+            {card.image && (
+              <img
+                src={card.image.src}
+                alt={card.image.alt}
+                className="absolute bottom-0 left-0 h-[58%] w-full object-cover object-center"
+                loading="lazy"
+              />
+            )}
           </article>
         ))}
       </div>

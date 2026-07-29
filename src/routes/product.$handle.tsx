@@ -1418,6 +1418,10 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
       GALLERY_IMG("photo-1618220179428-22790b461013", "Lichte woonkamer"),
     ],
   },
+  {
+    width: "w-[240px] md:w-[340px]",
+    items: [{ src: klantWoonkamer9Img.url, alt: "Witte cinewall met tv in lichte woonkamer" }],
+  },
 ];
 
 

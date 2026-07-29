@@ -58,6 +58,7 @@ import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
+import klantWoonkamer5_2Img from "@/assets/klant-woonkamer-5-2.png.asset.json";
 import klantWoonkamer6Img from "@/assets/klant-woonkamer-6.png.asset.json";
 import klantWoonkamer7Img from "@/assets/klant-woonkamer-7.png.asset.json";
 
@@ -1406,7 +1407,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   },
   {
     width: "w-[240px] md:w-[340px]",
-    items: [GALLERY_IMG("photo-1615873968403-89e068629265", "Sfeervolle woonkamer met cinewall")],
+    items: [{ src: klantWoonkamer5_2Img.url, alt: "Houten cinewall met tv en decoratie in lichte woonkamer" }],
   },
   {
     width: "w-[200px] md:w-[280px]",

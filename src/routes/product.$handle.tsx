@@ -1392,7 +1392,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      { src: klantWoonkamer2Img.url, alt: "Roze cinewall met tv in woonkamer" },
+      { src: klantWoonkamerGeselecteerdImg.url, alt: "Donkerhouten cinewall in woonkamer" },
       { src: klantWoonkamer3Img.url, alt: "Kinderen spelen voor houten cinewall" },
     ],
   },

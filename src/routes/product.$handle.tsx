@@ -1489,6 +1489,7 @@ const BUILT_TO_LAST_CARDS: Array<{
   body: string;
   bg: string;
   tone: "light" | "dark";
+  image?: { src: string; alt: string };
 }> = [
   {
     eyebrow: "Gemaakt om te blijven",
@@ -1496,6 +1497,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     body: "Ontworpen voor jarenlang dagelijks gebruik, zonder dat je je zorgen hoeft te maken.",
     bg: "#f0e4d5",
     tone: "light",
+    image: { src: gebouwdOmMeeTeGaan1Img.url, alt: "Donkere houten tv-kast detail" },
   },
   {
     eyebrow: "Zo staat hij",

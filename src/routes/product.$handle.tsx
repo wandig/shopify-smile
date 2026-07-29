@@ -1490,6 +1490,7 @@ const BUILT_TO_LAST_CARDS: Array<{
   bg: string;
   tone: "light" | "dark";
   imageUrl?: string;
+  textColor?: string;
 }> = [
   {
     eyebrow: "Gemaakt om te blijven",
@@ -1498,6 +1499,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     bg: "#f0e4d5",
     tone: "light",
     imageUrl: gebouwdOmMeeTeGaan1Img.url,
+    textColor: "#071426",
   },
   {
     eyebrow: "Zo staat hij",
@@ -1638,13 +1640,17 @@ function BuiltToLastSection() {
             )}
             <div
               className={`relative flex h-full flex-col p-6 md:p-7 ${
-                card.tone === "light" ? "text-[#071426]" : "text-white"
+                card.textColor
+                  ? ""
+                  : card.tone === "light"
+                    ? "text-[#071426]"
+                    : "text-white"
               }`}
+              style={{ color: card.textColor }}
             >
               <div
-                className={`text-[12px] md:text-[13px] font-normal ${
-                  card.tone === "light" ? "text-[#071426]/60" : "text-white/80"
-                }`}
+                className="text-[12px] md:text-[13px] font-normal"
+                style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined }}
               >
                 {card.eyebrow}
               </div>
@@ -1652,9 +1658,8 @@ function BuiltToLastSection() {
                 {card.title}
               </h3>
               <p
-                className={`mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed ${
-                  card.tone === "light" ? "text-[#071426]/70" : "text-white/85"
-                }`}
+                className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed"
+                style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined }}
               >
                 {card.body}
               </p>

@@ -1397,7 +1397,7 @@ const CUSTOMER_GALLERY_COLUMNS: Array<{
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      GALLERY_IMG("photo-1600607687939-ce8a6c25118c", "Moderne woonkamer met tv-wand"),
+      { src: klantWoonkamer4Img.url, alt: "Roze cinewall in moderne woonkamer" },
       GALLERY_IMG("photo-1600566753190-17f0baa2a6c3", "Stijlvol tv-meubel"),
     ],
   },

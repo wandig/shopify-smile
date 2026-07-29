@@ -1490,6 +1490,7 @@ const BUILT_TO_LAST_CARDS: Array<{
   bg: string;
   tone: "light" | "dark";
   imageUrl?: string;
+  textColor?: string;
 }> = [
   {
     eyebrow: "Gemaakt om te blijven",
@@ -1498,6 +1499,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     bg: "#f0e4d5",
     tone: "light",
     imageUrl: gebouwdOmMeeTeGaan1Img.url,
+    textColor: "#071426",
   },
   {
     eyebrow: "Zo staat hij",

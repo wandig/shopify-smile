@@ -1966,6 +1966,14 @@ function NewsletterContactSection() {
 }
 
 
+function ShieldOnlyIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
+  return (
+    <div className={className}>
+      <Shield className="h-full w-full" strokeWidth={strokeWidth} />
+    </div>
+  );
+}
+
 function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
   return (
     <div className={className}>
@@ -1979,7 +1987,7 @@ function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; 
 
 function TrustBannerSection() {
   const items = [
-    { icon: ShieldMoonIcon, label: "4,7/5 klantbeoordeling" },
+    { icon: ShieldOnlyIcon, label: "4,7/5 klantbeoordeling" },
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 nachten proefslapen" },
     { icon: ShieldMoonIcon, label: "Tot 25 jaar garantie" },

@@ -1967,7 +1967,7 @@ function NewsletterContactSection() {
 }
 
 
-function PuzzlePieceTrustIcon({ className }: { className?: string }) {
+function PuzzlePieceTrustIcon({ className, strokeWidth: _strokeWidth }: { className?: string; strokeWidth?: number }) {
   return (
     <img
       src={puzzlePieceTrustIcon.url}

@@ -1521,7 +1521,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     tone: "dark",
     imageUrl: proefkijkenBgImg.url,
     bodyMaxWidth: "150px",
-  }
+  },
   {
     eyebrow: "Van Nederlandse bodem",
     title: "Dutch Design\nvoor aan de muur.",

@@ -68,6 +68,8 @@ import gebouwdOmMeeTeGaan1Img from "@/assets/gebouwd-om-mee-te-gaan-1.png.asset.
 import plugPlayGeleverdV2Img from "@/assets/plug-play-geleverd-v2.png.asset.json";
 import proefkijkenBgImg from "@/assets/100-dagen-proefkijken-bg.jpg.asset.json";
 import proefkijkenBgV2Img from "@/assets/100-dagen-proefkijken-bg-v2.png.asset.json";
+import dutchDesignBgImg from "@/assets/dutch-design-voor-aan-de-muur-bg.png.asset.json";
+
 
 
 
@@ -1529,6 +1531,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     body: "Rustig vormgegeven in Nederland, met aandacht voor ieder detail.",
     bg: "#936850",
     tone: "dark",
+    imageUrl: dutchDesignBgImg.url,
   },
 ];
 

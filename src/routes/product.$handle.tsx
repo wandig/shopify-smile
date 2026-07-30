@@ -1531,6 +1531,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     body: "Rustig vormgegeven in Nederland, met aandacht voor ieder detail.",
     bg: "#936850",
     tone: "dark",
+    imageUrl: dutchDesignBgImg.url,
   },
 ];
 

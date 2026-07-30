@@ -1967,14 +1967,13 @@ function NewsletterContactSection() {
 }
 
 
-function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
+function PuzzlePieceTrustIcon({ className }: { className?: string }) {
   return (
-    <div className={className}>
-      <div className="relative h-full w-full">
-        <Shield className="h-full w-full" strokeWidth={strokeWidth} />
-        <Moon className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2" strokeWidth={strokeWidth} />
-      </div>
-    </div>
+    <img
+      src={puzzlePieceTrustIcon.url}
+      alt="Puzzelstuk"
+      className={className}
+    />
   );
 }
 

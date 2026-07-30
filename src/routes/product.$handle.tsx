@@ -1881,7 +1881,7 @@ function NewsletterContactSection() {
   ];
 
   return (
-    <section className="bg-[#fff2e4]">
+    <section className="bg-[#f6f2ee]">
       <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-16">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>

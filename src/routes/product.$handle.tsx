@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
+
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";

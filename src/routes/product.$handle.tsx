@@ -566,7 +566,7 @@ function ProductView({ product }: { product: ProductNode }) {
   };
   return (
     <div className="bg-[#f6f3ee]">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-10 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10 pt-10 md:pt-16">
       <nav className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8 flex items-center gap-2">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-3 w-3" />
@@ -1047,9 +1047,9 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <BuiltToLastSection />
 
-      <FaqSection />
-
       </div>
+
+      <FaqSection />
 
       <ReviewsSection />
 
@@ -1732,23 +1732,25 @@ function FaqSection() {
   };
 
   return (
-    <section className="py-12 -mx-5 bg-white px-5 md:-mx-10 md:py-20 md:px-10">
-      <div className="mb-6 text-center md:mb-10">
-        <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
-        <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
-          Veelgestelde vragen
-        </h2>
-        <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">
-          Alles wat je wilt weten over onze cinewalls.
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-3 md:flex-row md:gap-4">
-        <div className="flex flex-1 flex-col gap-3 md:gap-4">
-          {leftItems.map((item, i) => renderItem(item, i, false))}
+    <section className="bg-white py-12 md:py-20">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="mb-6 text-center md:mb-10">
+          <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
+          <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+            Veelgestelde vragen
+          </h2>
+          <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">
+            Alles wat je wilt weten over onze cinewalls.
+          </p>
         </div>
-        <div className="flex flex-1 flex-col gap-3 md:gap-4">
-          {rightItems.map((item, i) => renderItem(item, i, true))}
+
+        <div className="flex flex-col gap-3 md:flex-row md:gap-4">
+          <div className="flex flex-1 flex-col gap-3 md:gap-4">
+            {leftItems.map((item, i) => renderItem(item, i, false))}
+          </div>
+          <div className="flex flex-1 flex-col gap-3 md:gap-4">
+            {rightItems.map((item, i) => renderItem(item, i, true))}
+          </div>
         </div>
       </div>
     </section>

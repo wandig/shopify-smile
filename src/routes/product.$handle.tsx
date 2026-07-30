@@ -1986,6 +1986,10 @@ function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; 
   );
 }
 
+function PuzzleIcon({ className }: { className?: string; strokeWidth?: number }) {
+  return <img src={puzzleIcon.url} alt="" className={className} />;
+}
+
 function TrustBannerSection() {
   const items = [
     { icon: ShieldOnlyIcon, label: "4,7/5 klantbeoordeling" },

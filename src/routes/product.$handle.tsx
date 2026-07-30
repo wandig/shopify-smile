@@ -1966,12 +1966,23 @@ function NewsletterContactSection() {
 }
 
 
+function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
+  return (
+    <div className={className}>
+      <div className="relative h-full w-full">
+        <Shield className="h-full w-full" strokeWidth={strokeWidth} />
+        <Moon className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2" strokeWidth={strokeWidth} />
+      </div>
+    </div>
+  );
+}
+
 function TrustBannerSection() {
   const items = [
-    { icon: Puzzle, label: "100 dagen proefkijken" },
-    { icon: Truck, label: "Gratis bezorgd in Nederland" },
-    { icon: Monitor, label: "Geschikt voor tv's tot 80 inch" },
-    { icon: ShieldCheck, label: "10 jaar garantie" },
+    { icon: ShieldMoonIcon, label: "4,7/5 klantbeoordeling" },
+    { icon: Truck, label: "Gratis levering & retourneren" },
+    { icon: CalendarClock, label: "100 nachten proefslapen" },
+    { icon: ShieldMoonIcon, label: "Tot 25 jaar garantie" },
   ];
 
   return (

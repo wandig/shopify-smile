@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock, SlidersHorizontal } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -366,6 +366,24 @@ function ProductView({ product }: { product: ProductNode }) {
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
+  const [showOrderWidget, setShowOrderWidget] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const continuation = galleryContinuationRef.current;
+      const threshold = continuation
+        ? continuation.getBoundingClientRect().bottom
+        : window.innerHeight;
+      setShowOrderWidget(threshold < 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
   
 
 
@@ -1057,6 +1075,33 @@ function ProductView({ product }: { product: ProductNode }) {
       <NewsletterContactSection />
 
       <TrustBannerSection />
+
+      {/* Sticky besteller-widget linksonder */}
+      <div
+        className={`pointer-events-none fixed bottom-5 left-5 z-50 transition-all duration-300 ease-out ${
+          showOrderWidget ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+        }`}
+      >
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label={`Bestel ${displayTitle} en kies je kleur`}
+          className={`group flex items-center gap-4 rounded-[18px] py-2.5 pl-5 pr-2.5 shadow-[0_14px_35px_rgba(42,31,22,0.18)] transition-transform duration-200 hover:-translate-y-0.5 ${
+            showOrderWidget ? "pointer-events-auto" : ""
+          }`}
+          style={{ background: "linear-gradient(105deg, #f6b48b 0%, #ef8a5a 55%, #e2703a 100%)" }}
+        >
+          <span className="text-left">
+            <span className="block text-[19px] font-bold leading-tight text-[#071426]">{displayTitle}</span>
+            <span className="block text-[15px] font-bold leading-tight text-[#ff5a00]">
+              {displayedNumericPrice > 0 ? `€ ${configuratorPrice.replace("\u2060,-", "")}` : configuratorPrice}
+            </span>
+          </span>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ff6e15] text-white shadow-[0_6px_14px_rgba(0,0,0,0.15)]">
+            <SlidersHorizontal className="h-5 w-5" strokeWidth={2} />
+          </span>
+        </button>
+      </div>
 
     </div>
   );

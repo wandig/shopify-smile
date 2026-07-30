@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer className="bg-[#0f1f2a] text-white">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-16 grid gap-12 md:grid-cols-4">
         <div>
-          <img src={footerLogoAsset.url} alt="Wandig" className="mb-4 h-auto w-[152px]" loading="lazy" />
+          <img src={footerLogoAsset.url} alt="Wandig" className="mb-4 h-auto w-[38px]" loading="lazy" />
           <p className="text-sm text-white/70 leading-relaxed">
             Plug & play TV cinewalls uit eigen werkplaats. Tijdloos design, gemaakt om generaties mee te gaan.
           </p>

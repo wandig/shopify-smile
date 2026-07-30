@@ -1,15 +1,21 @@
-Probleem
-De FAQ-sectie heeft een witte achtergrond (`bg-white`) maar gebruikt `mt-12 md:mt-20` om afstand te creëren. Omdat de pagina-achtergrond `#f6f3ee` is, verschijnt die warm-grijze kleur als horizontale stroken boven en onder de witte FAQ.
+Huidige situatie
+- De FAQ-sectie (`Veelgestelde vragen`) zit binnen de binnenste container in `src/routes/product.$handle.tsx`.
+- Die container heeft `py-10 md:py-16` padding en achtergrond `#f6f3ee`.
+- De reviews-sectie (`Wat klanten zeggen over hun tv-kast`) staat direct onder die container, buiten de padding.
+- Hierdoor toont de onderste padding van de container een grijze/beige band tussen de witte FAQ en de lichtoranje reviews.
 
-Oplossing
-1. In `src/routes/product.$handle.tsx` de `FaqSection` aanpassen:
-   - `mt-12 md:mt-20` vervangen door `py-12 md:py-20` zodat de witte achtergrond de ruimte boven én onder de FAQ vult.
-   - De bestaande `-mx-5 md:-mx-10` en `px-5 md:px-10` behouden zodat de witte achtergrond tot de zijkanten doorloopt (zoals eerder aangevraagd).
+Gewenste situatie
+- De FAQ-sectie sluit naadloos aan op de reviews-sectie, zonder grijze band ertussen.
+- De FAQ behoudt een witte, volle-breedte achtergrond en gecentreerde inhoud.
 
-2. De daaropvolgende `ReviewsSection` aanpassen:
-   - `mt-12 md:mt-20` verwijderen, omdat de FAQ nu zelf al `padding-bottom` heeft. Zo voorkomen we dubbele tussenruimte.
+Plan
+1. In `src/routes/product.$handle.tsx` de binnenste container (`<div className="mx-auto max-w-[1400px] px-5 md:px-10 py-10 md:py-16">`) sluiten vóór `<FaqSection />`.
+2. `<FaqSection />` verplaatsen naar buiten de container, direct boven `<ReviewsSection />`.
+3. De `FaqSection`-component aanpassen:
+   - Behoud `bg-white` en `py-12 md:py-20`.
+   - Verwijder de negatieve marges `-mx-5 md:-mx-10`, omdat de sectie nu zelf volle breedte is.
+   - Voeg een innerlijke wrapper toe met `mx-auto max-w-[1400px] px-5 md:px-10` om titel, intro en accordion-kolommen gecentreerd te houden.
+4. Typecheck draaien (`bunx tsgo --noEmit`) en visueel verifiëren met een screenshot van de overgang tussen FAQ en reviews.
 
-Verwacht resultaat
-- Geen grijze stroken meer boven en onder de FAQ.
-- Witte achtergrond loopt naadloos door vanaf de vorige sectie tot aan de reviews.
-- De totale verticale ruimte tussen de secties blijft ongeveer gelijk.
+Opmerking
+- Deze wijziging raakt alleen de layout-structuur; de inhoud en het gedrag van de accordions blijven onveranderd.

@@ -1904,7 +1904,7 @@ function NewsletterContactSection() {
             )}
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4">
             <div className="flex flex-col rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
                 <Phone className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />

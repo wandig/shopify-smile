@@ -1045,9 +1045,9 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <CustomerGallerySection />
 
-      <BuiltToLastSection />
-
       </div>
+
+      <BuiltToLastSection />
 
       <FaqSection />
 
@@ -1618,66 +1618,68 @@ function BuiltToLastSection() {
   };
 
   return (
-    <section className="mt-12 md:mt-20">
-      <div className="mb-6 text-center md:mb-10">
-        <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
-          Gebouwd om mee te gaan
-        </h2>
-      </div>
+    <section className="bg-gradient-to-b from-[#faf8f5] to-white pt-12 md:pt-20 pb-12 md:pb-20">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="mb-6 text-center md:mb-10">
+          <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+            Gebouwd om mee te gaan
+          </h2>
+        </div>
 
-      <div
-        ref={scrollerRef}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        onPointerLeave={endDrag}
-        className={`-mx-4 flex gap-3 overflow-x-auto scrollbar-hide px-4 md:mx-0 md:gap-4 md:px-0 ${
-          isDragging ? "cursor-grabbing select-none" : "cursor-grab"
-        }`}
-        style={{ scrollSnapType: "x mandatory" }}
-      >
-        {BUILT_TO_LAST_CARDS.map((card, i) => (
-          <article
-            key={i}
-            className="relative shrink-0 overflow-hidden rounded-[18px] w-[280px] h-[280px] md:w-[360px] md:h-[360px]"
-            style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
-          >
-            {card.imageUrl && (
-              <img
-                src={card.imageUrl}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            )}
-            <div
-              className={`relative flex h-full flex-col p-6 md:p-7 ${
-                card.textColor
-                  ? ""
-                  : card.tone === "light"
-                    ? "text-[#071426]"
-                    : "text-white"
-              }`}
-              style={{ color: card.textColor }}
+        <div
+          ref={scrollerRef}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onPointerLeave={endDrag}
+          className={`-mx-5 flex gap-3 overflow-x-auto scrollbar-hide px-5 md:mx-0 md:gap-4 md:px-0 ${
+            isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+          }`}
+          style={{ scrollSnapType: "x mandatory" }}
+        >
+          {BUILT_TO_LAST_CARDS.map((card, i) => (
+            <article
+              key={i}
+              className="relative shrink-0 overflow-hidden rounded-[18px] w-[280px] h-[280px] md:w-[360px] md:h-[360px]"
+              style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
             >
+              {card.imageUrl && (
+                <img
+                  src={card.imageUrl}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
               <div
-                className="text-[12px] md:text-[13px] font-normal"
-                style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined }}
+                className={`relative flex h-full flex-col p-6 md:p-7 ${
+                  card.textColor
+                    ? ""
+                    : card.tone === "light"
+                      ? "text-[#071426]"
+                      : "text-white"
+                }`}
+                style={{ color: card.textColor }}
               >
-                {card.eyebrow}
+                <div
+                  className="text-[12px] md:text-[13px] font-normal"
+                  style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined }}
+                >
+                  {card.eyebrow}
+                </div>
+                <h3 className="mt-2 whitespace-pre-line text-[18px] md:text-[22px] font-bold leading-[1.15]">
+                  {card.title}
+                </h3>
+                <p
+                  className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed font-light"
+                  style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined, maxWidth: card.bodyMaxWidth }}
+                >
+                  {card.body}
+                </p>
               </div>
-              <h3 className="mt-2 whitespace-pre-line text-[18px] md:text-[22px] font-bold leading-[1.15]">
-                {card.title}
-              </h3>
-              <p
-                className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed font-light"
-                style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined, maxWidth: card.bodyMaxWidth }}
-              >
-                {card.body}
-              </p>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -258,7 +258,7 @@ export function SiteHeader() {
         isProductPage && productHeaderHidden ? "pointer-events-none -translate-y-full" : "translate-y-0"
       } ${
         modelsMenuOpen
-          ? "border-white bg-white text-[#15110d]"
+          ? "border-[#faf8f5] bg-[#faf8f5] text-[#15110d]"
           : "border-border/60 bg-background/85 backdrop-blur"
       }`}
     >

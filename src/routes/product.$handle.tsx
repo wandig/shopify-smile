@@ -1868,14 +1868,15 @@ function NewsletterContactSection() {
   };
 
   return (
-    <section className="bg-[#fffcf8]">
+    <section className="bg-[#fff7ef]">
       <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-20">
-        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-          <div>
-            <h2 className="text-[24px] md:text-[32px] font-[500] leading-tight text-[#071426]">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+          <div className="rounded-[18px] bg-white p-6 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-8">
+            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Nieuwsbrief</span>
+            <h2 className="mt-2 text-[22px] font-bold leading-tight tracking-[0.01em] text-[#071426] md:text-[26px]">
               Meld je aan voor onze nieuwsbrief
             </h2>
-            <p className="mt-3 max-w-md text-[14px] md:text-[15px] leading-relaxed text-[#071426]/70">
+            <p className="mt-3 max-w-md text-[14px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[15px]">
               Blijf op de hoogte van nieuwe modellen, styling-tips en exclusieve aanbiedingen. Geen spam — schrijf je uit wanneer je wilt.
             </p>
             <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center" noValidate>
@@ -1888,62 +1889,47 @@ function NewsletterContactSection() {
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); if (status !== "idle") setStatus("idle"); }}
                 placeholder="jouw@email.nl"
-                className="h-12 flex-1 rounded-full border border-[#e2d3bf] bg-white px-5 text-[14px] text-[#071426] placeholder:text-[#071426]/40 focus:border-[#ef7027] focus:outline-none"
+                className="h-12 flex-1 rounded-full border border-[#eeeeee] bg-white px-5 text-[14px] tracking-[0.01em] text-[#071426] placeholder:text-[#071426]/40 transition focus:border-[#ef7027] focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="h-12 rounded-full bg-[#ef7027] px-7 text-[14px] font-[500] text-white transition hover:brightness-95 disabled:opacity-60"
+                className="h-12 rounded-full bg-[#ef7027] px-7 text-[14px] font-[500] tracking-[0.04em] text-white transition hover:brightness-95 disabled:opacity-60"
               >
                 {status === "loading" ? "Bezig..." : "Inschrijven"}
               </button>
             </form>
             {message && (
-              <p className={`mt-3 text-[13px] ${status === "success" ? "text-[#2d6a3e]" : "text-[#b3341c]"}`}>{message}</p>
+              <p className={`mt-3 text-[13px] tracking-[0.01em] ${status === "success" ? "text-[#2d6a3e]" : "text-[#b3341c]"}`}>{message}</p>
             )}
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-3 md:gap-6">
-            <div className="flex flex-col">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#071426]/5">
-                  <Phone className="h-[18px] w-[18px] text-[#071426]/45" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="text-[14px] font-[500] text-[#071426]">Bel ons, steun 9-5</p>
-                  <p className="text-[13px] text-[#071426]/60">9:00 - 18:00</p>
-                </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div className="flex flex-col rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+                <Phone className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />
               </div>
-              <p className="mt-5 text-[12px] font-[500] leading-tight text-[#071426]">+31 085 107 1953</p>
-              <div className="mt-5 h-px w-full bg-[#071426]/10" />
+              <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Bel ons, steun 9-5</p>
+              <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">9:00 - 18:00</p>
+              <p className="mt-4 text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426]">+31 085 107 1953</p>
             </div>
 
-            <div className="flex flex-col">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#071426]/5">
-                  <Headphones className="h-[18px] w-[18px] text-[#071426]/45" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="text-[14px] font-[500] text-[#071426]">Chat live, agent 9-5</p>
-                  <p className="text-[13px] text-[#071426]/60">9:00 - 22:00</p>
-                </div>
+            <div className="flex flex-col rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+                <Headphones className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />
               </div>
-              <p className="mt-5 text-[12px] font-[500] leading-tight text-[#071426]">Chat met ons</p>
-              <div className="mt-5 h-px w-full bg-[#071426]/10" />
+              <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Chat live, agent 9-5</p>
+              <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">9:00 - 22:00</p>
+              <p className="mt-4 text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426]">Chat met ons</p>
             </div>
 
-            <div className="flex flex-col">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#071426]/5">
-                  <Mail className="h-[18px] w-[18px] text-[#071426]/45" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="text-[14px] font-[500] text-[#071426]">Stuur een mail</p>
-                  <p className="text-[13px] text-[#071426]/60">iedere werkdag</p>
-                </div>
+            <div className="flex flex-col rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+                <Mail className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />
               </div>
-              <p className="mt-5 text-[12px] font-[500] leading-tight text-[#071426] break-words">support.nl@wandig.com</p>
-              <div className="mt-5 h-px w-full bg-[#071426]/10" />
+              <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Stuur een mail</p>
+              <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">iedere werkdag</p>
+              <p className="mt-4 break-words text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426]">support.nl@wandig.com</p>
             </div>
           </div>
         </div>

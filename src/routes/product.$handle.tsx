@@ -366,6 +366,24 @@ function ProductView({ product }: { product: ProductNode }) {
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
+  const [showOrderWidget, setShowOrderWidget] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const continuation = galleryContinuationRef.current;
+      const threshold = continuation
+        ? continuation.getBoundingClientRect().bottom
+        : window.innerHeight;
+      setShowOrderWidget(threshold < 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
   
 
 

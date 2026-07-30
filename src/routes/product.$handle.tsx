@@ -1967,12 +1967,16 @@ function NewsletterContactSection() {
 }
 
 
-function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
+function ShieldPuzzleIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
   return (
     <div className={className}>
       <div className="relative h-full w-full">
         <Shield className="h-full w-full" strokeWidth={strokeWidth} />
-        <Moon className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2" strokeWidth={strokeWidth} />
+        <img
+          src={puzzlePieceIcon.url}
+          alt=""
+          className="absolute left-1/2 top-1/2 h-[42%] w-[42%] -translate-x-1/2 -translate-y-1/2 object-contain"
+        />
       </div>
     </div>
   );

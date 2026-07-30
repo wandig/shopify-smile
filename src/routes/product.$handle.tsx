@@ -1492,6 +1492,7 @@ const BUILT_TO_LAST_CARDS: Array<{
   tone: "light" | "dark";
   imageUrl?: string;
   textColor?: string;
+  bodyMaxWidth?: string;
 }> = [
   {
     eyebrow: "Gemaakt om te blijven",
@@ -1509,6 +1510,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     bg: "#c0b3a4",
     tone: "light",
     imageUrl: plugPlayGeleverdV2Img.url,
+    bodyMaxWidth: "180px",
   },
   {
     eyebrow: "Kijk het rustig aan",
@@ -1661,7 +1663,7 @@ function BuiltToLastSection() {
               </h3>
               <p
                 className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed font-light"
-                style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined }}
+                style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined, maxWidth: card.bodyMaxWidth }}
               >
                 {card.body}
               </p>

@@ -305,7 +305,7 @@ function ProductPage() {
 
   if (isLoading) {
     return (
-      <div className="bg-[#f6f3ee]">
+      <div className="bg-[#faf8f5]">
         <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
           <div className="aspect-[4/5] bg-muted animate-pulse" />
           <div className="space-y-4">
@@ -565,7 +565,7 @@ function ProductView({ product }: { product: ProductNode }) {
     benefitsScrollerRef.current?.scrollBy({ left: direction * 166, behavior: "smooth" });
   };
   return (
-    <div className="bg-[#f6f3ee]">
+    <div className="bg-[#faf8f5]">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 pt-10 md:pt-16">
       <nav className="text-xs tracking-[0.15em] uppercase text-muted-foreground mb-8 flex items-center gap-2">
         <Link to="/" className="hover:text-foreground">Home</Link>
@@ -579,7 +579,7 @@ function ProductView({ product }: { product: ProductNode }) {
         {/* Gallery */}
         <div className="min-w-0">
           {galleryItems[0] && (
-            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#f6f3ee]" : ""}`}>
+            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <img
                 ref={mainGalleryImageRef}
                 src={galleryItems[0].src}
@@ -896,7 +896,7 @@ function ProductView({ product }: { product: ProductNode }) {
                       <path d="M9 1L1 5L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
-                    <span className="mx-2 rounded-full bg-[#f6f3ee] px-2 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
+                    <span className="mx-2 rounded-full bg-[#faf8f5] px-2 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
                       240 cm
                     </span>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
@@ -914,7 +914,7 @@ function ProductView({ product }: { product: ProductNode }) {
                       <path d="M1 9L5 1L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
-                    <span className="my-2 rounded-full bg-[#f6f3ee] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
+                    <span className="my-2 rounded-full bg-[#faf8f5] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
                       180 cm
                     </span>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
@@ -1793,7 +1793,7 @@ function ReviewsSection() {
               type="button"
               onClick={() => scroll(-1)}
               aria-label="Vorige"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
             >
               ‹
             </button>
@@ -1801,7 +1801,7 @@ function ReviewsSection() {
               type="button"
               onClick={() => scroll(1)}
               aria-label="Volgende"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#f6f3ee]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
             >
               ›
             </button>

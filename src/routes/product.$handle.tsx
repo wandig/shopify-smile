@@ -65,6 +65,7 @@ import klantWoonkamer8Img from "@/assets/klant-woonkamer-8.png.asset.json";
 import klantWoonkamer9Img from "@/assets/klant-woonkamer-9.png.asset.json";
 import klantWoonkamer10Img from "@/assets/klant-woonkamer-10.png.asset.json";
 import gebouwdOmMeeTeGaan1Img from "@/assets/gebouwd-om-mee-te-gaan-1.png.asset.json";
+import plugPlayGeleverdV2Img from "@/assets/plug-play-geleverd-v2.png.asset.json";
 
 
 
@@ -1507,6 +1508,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     body: "Slim voorbereid en eenvoudig in elkaar te zetten, zonder ingewikkeld maatwerk.",
     bg: "#c0b3a4",
     tone: "light",
+    imageUrl: plugPlayGeleverdV2Img.url,
   },
   {
     eyebrow: "Kijk het rustig aan",

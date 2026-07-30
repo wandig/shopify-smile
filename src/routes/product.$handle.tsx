@@ -1732,7 +1732,7 @@ function FaqSection() {
   };
 
   return (
-    <section className="mt-12 md:mt-20">
+    <section className="mt-12 bg-white md:mt-20">
       <div className="mb-6 text-center md:mb-10">
         <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
         <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
@@ -1881,7 +1881,7 @@ function NewsletterContactSection() {
   ];
 
   return (
-    <section className="bg-[#fff2e4]">
+    <section className="bg-[#ede7e0]">
       <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-16">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -1971,7 +1971,7 @@ function TrustBannerSection() {
   ];
 
   return (
-    <section className="bg-[#f2f2f2]">
+    <section className="bg-[#ffffff]">
       <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: Icon, imageIcon, label }) => (

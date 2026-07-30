@@ -1492,6 +1492,7 @@ const BUILT_TO_LAST_CARDS: Array<{
   tone: "light" | "dark";
   imageUrl?: string;
   textColor?: string;
+  bodyMaxWidth?: string;
 }> = [
   {
     eyebrow: "Gemaakt om te blijven",
@@ -1509,6 +1510,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     bg: "#c0b3a4",
     tone: "light",
     imageUrl: plugPlayGeleverdV2Img.url,
+    bodyMaxWidth: "180px",
   },
   {
     eyebrow: "Kijk het rustig aan",

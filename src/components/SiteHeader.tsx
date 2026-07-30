@@ -254,7 +254,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b border-[#faf8f5] bg-[#faf8f5] text-[#15110d] transition-[transform,background-color,border-color,color] duration-300 ease-out ${
+      className={`sticky top-0 z-40 border-b border-white bg-[#faf8f5] text-[#15110d] transition-[transform,background-color,border-color,color] duration-300 ease-out ${
         isProductPage && productHeaderHidden ? "pointer-events-none -translate-y-full" : "translate-y-0"
       }`}
     >

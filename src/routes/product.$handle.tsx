@@ -1045,9 +1045,9 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <CustomerGallerySection />
 
-      <BuiltToLastSection />
-
       </div>
+
+      <BuiltToLastSection />
 
       <FaqSection />
 

@@ -1984,10 +1984,10 @@ function ShieldPuzzleIcon({ className, strokeWidth = 1.5 }: { className?: string
 
 function TrustBannerSection() {
   const items = [
-    { icon: ShieldMoonIcon, label: "4,7/5 klantbeoordeling" },
+    { icon: ShieldPuzzleIcon, label: "4,7/5 klantbeoordeling" },
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 nachten proefslapen" },
-    { icon: ShieldMoonIcon, label: "Tot 25 jaar garantie" },
+    { icon: ShieldPuzzleIcon, label: "Tot 25 jaar garantie" },
   ];
 
   return (

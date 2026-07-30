@@ -1735,7 +1735,7 @@ function FaqSection() {
   };
 
   return (
-    <section className="bg-white py-12 md:py-20">
+    <section className="bg-white pb-12 pt-0 md:pb-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 text-center md:mb-10">
           <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>

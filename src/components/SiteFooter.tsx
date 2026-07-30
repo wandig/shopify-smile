@@ -12,28 +12,28 @@ export function SiteFooter() {
           </p>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-white/60 mb-4">Collectie</div>
-          <ul className="space-y-2 text-sm text-white/90">
-            <li><Link to="/product/$handle" params={{ handle: "solo" }} className="hover:text-white hover:opacity-60">Solo</Link></li>
-            <li><Link to="/product/$handle" params={{ handle: "duo" }} className="hover:text-white hover:opacity-60">Duo</Link></li>
-            <li><Link to="/product/$handle" params={{ handle: "trio" }} className="hover:text-white hover:opacity-60">Trio</Link></li>
-            <li><Link to="/product/$handle" params={{ handle: "prestige" }} className="hover:text-white hover:opacity-60">Prestige</Link></li>
-            <li><Link to="/product/$handle" params={{ handle: "full-house" }} className="hover:text-white hover:opacity-60">Full House</Link></li>
+          <div className="text-xs uppercase tracking-[0.18em] text-white mb-4">Collectie</div>
+          <ul className="space-y-2 text-sm text-white/70">
+            <li><Link to="/product/$handle" params={{ handle: "solo" }} className="hover:text-white">Solo</Link></li>
+            <li><Link to="/product/$handle" params={{ handle: "duo" }} className="hover:text-white">Duo</Link></li>
+            <li><Link to="/product/$handle" params={{ handle: "trio" }} className="hover:text-white">Trio</Link></li>
+            <li><Link to="/product/$handle" params={{ handle: "prestige" }} className="hover:text-white">Prestige</Link></li>
+            <li><Link to="/product/$handle" params={{ handle: "full-house" }} className="hover:text-white">Full House</Link></li>
           </ul>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-white/60 mb-4">Service</div>
-          <ul className="space-y-2 text-sm text-white/90">
-            <li><Link to="/klantenservice" className="hover:text-white hover:opacity-60">Klantenservice</Link></li>
-            <li><Link to="/bezoek" className="hover:text-white hover:opacity-60">Bezoek ons</Link></li>
-            <li><Link to="/retour" className="hover:text-white hover:opacity-60">Retour</Link></li>
-            <li><Link to="/algemene-voorwaarden" className="hover:text-white hover:opacity-60">Algemene voorwaarden</Link></li>
-            <li><span className="text-white/60">Gratis levering</span></li>
-            <li><span className="text-white/60">10 jaar garantie</span></li>
+          <div className="text-xs uppercase tracking-[0.18em] text-white mb-4">Service</div>
+          <ul className="space-y-2 text-sm text-white/70">
+            <li><Link to="/klantenservice" className="hover:text-white">Klantenservice</Link></li>
+            <li><Link to="/bezoek" className="hover:text-white">Bezoek ons</Link></li>
+            <li><Link to="/retour" className="hover:text-white">Retour</Link></li>
+            <li><Link to="/algemene-voorwaarden" className="hover:text-white">Algemene voorwaarden</Link></li>
+            <li><span className="text-white/70">Gratis levering</span></li>
+            <li><span className="text-white/70">10 jaar garantie</span></li>
           </ul>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-white/60 mb-4">Contact</div>
+          <div className="text-xs uppercase tracking-[0.18em] text-white mb-4">Contact</div>
           <ul className="space-y-2 text-sm text-white/70">
             <li>info@wandig.nl</li>
             <li>De Tongelreep 1 - 7<br />5684 PZ Best</li>

@@ -1520,6 +1520,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     bg: "#a55f3e",
     tone: "dark",
     imageUrl: proefkijkenBgImg.url,
+    bodyMaxWidth: "200px",
   },
   {
     eyebrow: "Van Nederlandse bodem",

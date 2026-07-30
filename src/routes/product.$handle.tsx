@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Puzzle } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -1968,7 +1968,7 @@ function NewsletterContactSection() {
 
 function TrustBannerSection() {
   const items = [
-    { imageIcon: kijkplezierIcon.url, label: "100 dagen proefkijken" },
+    { icon: Puzzle, label: "100 dagen proefkijken" },
     { icon: Truck, label: "Gratis bezorgd in Nederland" },
     { icon: Monitor, label: "Geschikt voor tv's tot 80 inch" },
     { icon: ShieldCheck, label: "10 jaar garantie" },
@@ -1977,29 +1977,13 @@ function TrustBannerSection() {
   return (
     <section className="bg-[#ffffff]">
       <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10 md:py-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map(({ icon: Icon, imageIcon, label }) => (
-            <div key={label} className="flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white">
-                {imageIcon ? (
-                  <div
-                    className="h-6 w-6 bg-[#0f1f2a]"
-                    style={{
-                      maskImage: `url(${imageIcon})`,
-                      WebkitMaskImage: `url(${imageIcon})`,
-                      maskSize: "contain",
-                      WebkitMaskSize: "contain",
-                      maskRepeat: "no-repeat",
-                      WebkitMaskRepeat: "no-repeat",
-                      maskPosition: "center",
-                      WebkitMaskPosition: "center",
-                    }}
-                    aria-hidden="true"
-                  />
-                ) : Icon ? (
-                  <Icon className="h-5 w-5 text-[#0f1f2a]" strokeWidth={1.5} />
-                ) : null}
-              </div>
+        <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-y-0 sm:divide-x sm:divide-[#e5e5e5]">
+          {items.map(({ icon: Icon, label }) => (
+            <div
+              key={label}
+              className="flex flex-1 items-center justify-center gap-3 py-4 sm:px-4 sm:py-0"
+            >
+              <Icon className="h-5 w-5 shrink-0 text-[#0f1f2a]" strokeWidth={1.5} />
               <p className="text-[14px] font-normal leading-snug text-[#0f1f2a]">{label}</p>
             </div>
           ))}

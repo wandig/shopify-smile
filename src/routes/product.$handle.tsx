@@ -819,7 +819,7 @@ function ProductView({ product }: { product: ProductNode }) {
               <Button
                 onClick={handleAdd}
                 disabled={isLoading || !activeVariant?.availableForSale}
-                className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-[#ef7027] px-6 text-sm font-bold text-white shadow-none transition-colors hover:translate-y-0 hover:bg-[#d55f1e] hover:shadow-none active:translate-y-0 active:scale-100"
+                className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] px-6 text-sm font-bold text-white shadow-none transition hover:translate-y-0 hover:from-[#e36820] hover:to-[#d8601b] hover:shadow-none active:translate-y-0 active:scale-100"
               >
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : activeVariant?.availableForSale ? (
                   <span className="relative block h-full w-full overflow-hidden">

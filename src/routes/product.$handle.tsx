@@ -1966,6 +1966,14 @@ function NewsletterContactSection() {
 }
 
 
+function ShieldOnlyIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
+  return (
+    <div className={className}>
+      <Shield className="h-full w-full" strokeWidth={strokeWidth} />
+    </div>
+  );
+}
+
 function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
   return (
     <div className={className}>

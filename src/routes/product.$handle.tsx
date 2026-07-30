@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -1842,6 +1842,7 @@ function ReviewsSection() {
 
 function NewsletterContactSection() {
   const [email, setEmail] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
@@ -1854,6 +1855,11 @@ function NewsletterContactSection() {
       setMessage("Vul een geldig e-mailadres in.");
       return;
     }
+    if (!acceptedTerms) {
+      setStatus("error");
+      setMessage("Accepteer de voorwaarden om door te gaan.");
+      return;
+    }
     setStatus("loading");
     setMessage("");
     try {
@@ -1861,6 +1867,7 @@ function NewsletterContactSection() {
       setStatus("success");
       setMessage(res.alreadySubscribed ? "Je bent al ingeschreven — bedankt!" : "Bedankt! Je bent ingeschreven.");
       setEmail("");
+      setAcceptedTerms(false);
     } catch (err) {
       setStatus("error");
       setMessage(err instanceof Error ? err.message : "Er ging iets mis. Probeer het opnieuw.");
@@ -1870,48 +1877,68 @@ function NewsletterContactSection() {
   return (
     <section className="bg-[#fff7ef]">
       <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-20">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-10 lg:items-stretch">
-          <div className="flex flex-col justify-center rounded-[18px] bg-white px-6 py-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:px-8 md:py-6">
-            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Nieuwsbrief</span>
-            <h2 className="mt-2 text-[22px] font-bold leading-tight tracking-[0.01em] text-[#071426] md:text-[26px]">
-              Meld je aan voor onze nieuwsbrief
+        <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10">
+          <div className="rounded-[18px] bg-white px-6 py-6 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:px-8 md:py-7">
+            <h2 className="text-[22px] font-bold leading-tight tracking-[0.01em] text-[#071426] md:text-[28px]">
+              Meld je aan voor<br className="hidden sm:block" /> onze nieuwsbrief
             </h2>
             <p className="mt-3 max-w-md text-[14px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[15px]">
-              Blijf op de hoogte van nieuwe modellen, styling-tips en exclusieve aanbiedingen. Geen spam — schrijf je uit wanneer je wilt.
+              Blijf op de hoogte van de nieuwste updates, tips en een exclusieve aanbiedingen.
             </p>
-            <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center" noValidate>
-              <label htmlFor="newsletter-email" className="sr-only">E-mailadres</label>
-              <input
-                id="newsletter-email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); if (status !== "idle") setStatus("idle"); }}
-                placeholder="jouw@email.nl"
-                className="h-12 flex-1 rounded-full border border-[#eeeeee] bg-white px-5 text-[14px] tracking-[0.01em] text-[#071426] placeholder:text-[#071426]/40 transition focus:border-[#ef7027] focus:outline-none"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="h-12 rounded-full bg-[#ef7027] px-7 text-[14px] font-[500] tracking-[0.04em] text-white transition hover:brightness-95 disabled:opacity-60"
-              >
-                {status === "loading" ? "Bezig..." : "Inschrijven"}
-              </button>
+            <form onSubmit={onSubmit} className="mt-6" noValidate>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <label htmlFor="newsletter-email" className="sr-only">E-mailadres</label>
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); if (status !== "idle") setStatus("idle"); }}
+                  placeholder="Voer je e-mailadres in"
+                  className="h-12 flex-1 rounded-full border border-[#eeeeee] bg-white px-5 text-[14px] tracking-[0.01em] text-[#071426] placeholder:text-[#071426]/40 transition focus:border-[#ef7027] focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#ef7027] px-6 text-[14px] font-[500] tracking-[0.04em] text-white transition hover:brightness-95 disabled:opacity-60"
+                >
+                  {status === "loading" ? "Bezig..." : (
+                    <>
+                      Inschrijven
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </div>
+              <label className="mt-4 flex cursor-pointer items-start gap-3">
+                <input
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={(e) => { setAcceptedTerms(e.target.checked); if (status !== "idle") setStatus("idle"); }}
+                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded border-[#cdc0b5] text-[#ef7027] focus:ring-[#ef7027]"
+                />
+                <span className="text-[13px] leading-snug tracking-[0.01em] text-[#071426]/70">
+                  Ik accepteer de voorwaarden.{" "}
+                  <Link to="/privacy-policy" className="underline decoration-[#071426]/30 underline-offset-2 transition hover:text-[#ef7027] hover:decoration-[#ef7027]">
+                    Privacyverklaring
+                  </Link>
+                </span>
+              </label>
             </form>
             {message && (
               <p className={`mt-3 text-[13px] tracking-[0.01em] ${status === "success" ? "text-[#2d6a3e]" : "text-[#b3341c]"}`}>{message}</p>
             )}
           </div>
 
-          <div className="grid gap-4">
+          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-3">
             <div className="flex flex-col rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
                 <Phone className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />
               </div>
               <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Bel ons, steun 9-5</p>
               <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">9:00 - 18:00</p>
-              <p className="mt-4 text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426]">+31 085 107 1953</p>
+              <p className="mt-4 text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426] underline decoration-[#071426]/30 underline-offset-4">+31 085 107 1953</p>
             </div>
 
             <div className="flex flex-col rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
@@ -1920,7 +1947,7 @@ function NewsletterContactSection() {
               </div>
               <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Chat live, agent 9-5</p>
               <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">9:00 - 22:00</p>
-              <p className="mt-4 text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426]">Chat met ons</p>
+              <p className="mt-4 text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426] underline decoration-[#071426]/30 underline-offset-4">Chat met ons</p>
             </div>
 
             <div className="flex flex-col rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
@@ -1929,7 +1956,7 @@ function NewsletterContactSection() {
               </div>
               <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Stuur een mail</p>
               <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">iedere werkdag</p>
-              <p className="mt-4 break-words text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426]">support.nl@wandig.com</p>
+              <p className="mt-4 break-words text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426] underline decoration-[#071426]/30 underline-offset-4">support.nl@wandig.com</p>
             </div>
           </div>
         </div>

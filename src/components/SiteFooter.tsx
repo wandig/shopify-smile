@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import wandigFooterLogo from "@/assets/wandig-logo-footer.png";
+import footerLogoAsset from "@/assets/Untitled_design_24.svg.asset.json";
 
 export function SiteFooter() {
   return (

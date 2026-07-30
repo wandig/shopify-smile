@@ -28,6 +28,7 @@ import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
+import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
@@ -1985,12 +1986,16 @@ function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; 
   );
 }
 
+function PuzzleIcon({ className }: { className?: string; strokeWidth?: number }) {
+  return <img src={puzzleIcon.url} alt="" className={className} />;
+}
+
 function TrustBannerSection() {
   const items = [
     { icon: ShieldOnlyIcon, label: "4,7/5 klantbeoordeling" },
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 nachten proefslapen" },
-    { icon: ShieldMoonIcon, label: "Tot 25 jaar garantie" },
+    { icon: PuzzleIcon, label: "Tot 25 jaar garantie" },
   ];
 
   return (

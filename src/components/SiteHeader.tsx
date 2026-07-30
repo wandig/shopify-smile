@@ -74,7 +74,7 @@ function ModelsMenu({
       <div
         className={`fixed inset-x-0 ${panelTopClass} z-50 transition-[opacity,visibility] duration-200 ease-out ${open ? "visible opacity-100" : "invisible opacity-0"}`}
       >
-        <div className="overflow-hidden rounded-b-[28px] border-x border-b border-white bg-white text-[#15110d] shadow-[0_30px_80px_rgba(31,25,21,0.14)]">
+        <div className="overflow-hidden rounded-b-[28px] border-x border-b border-[#faf8f5] bg-[#faf8f5] text-[#15110d] shadow-[0_30px_80px_rgba(31,25,21,0.14)]">
           <div className="mx-auto grid max-w-[1280px] grid-cols-[0.85fr_2.4fr] items-center gap-12 px-6 py-9 lg:px-10">
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#15110d]">Collectie</span>
@@ -258,7 +258,7 @@ export function SiteHeader() {
         isProductPage && productHeaderHidden ? "pointer-events-none -translate-y-full" : "translate-y-0"
       } ${
         modelsMenuOpen
-          ? "border-white bg-white text-[#15110d]"
+          ? "border-[#faf8f5] bg-[#faf8f5] text-[#15110d]"
           : "border-border/60 bg-background/85 backdrop-blur"
       }`}
     >

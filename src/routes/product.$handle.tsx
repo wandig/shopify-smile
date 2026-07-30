@@ -1732,7 +1732,7 @@ function FaqSection() {
   };
 
   return (
-    <section className="mt-12 -mx-5 bg-white px-5 md:-mx-10 md:mt-20 md:px-10">
+    <section className="py-12 -mx-5 bg-white px-5 md:-mx-10 md:py-20 md:px-10">
       <div className="mb-6 text-center md:mb-10">
         <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
         <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
@@ -1777,7 +1777,7 @@ function ReviewsSection() {
   };
 
   return (
-    <section className="mt-12 bg-[#fff7ef] py-10 md:mt-20 md:py-16">
+    <section className="bg-[#fff7ef] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
           <div>

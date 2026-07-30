@@ -66,6 +66,7 @@ import klantWoonkamer9Img from "@/assets/klant-woonkamer-9.png.asset.json";
 import klantWoonkamer10Img from "@/assets/klant-woonkamer-10.png.asset.json";
 import gebouwdOmMeeTeGaan1Img from "@/assets/gebouwd-om-mee-te-gaan-1.png.asset.json";
 import plugPlayGeleverdV2Img from "@/assets/plug-play-geleverd-v2.png.asset.json";
+import proefkijkenBgImg from "@/assets/100-dagen-proefkijken-bg.jpg.asset.json";
 
 
 
@@ -1518,6 +1519,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     body: "Ervaar thuis of jouw nieuwe tv-kast echt bij je interieur past.",
     bg: "#a55f3e",
     tone: "dark",
+    imageUrl: proefkijkenBgImg.url,
   },
   {
     eyebrow: "Van Nederlandse bodem",

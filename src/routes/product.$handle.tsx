@@ -1979,10 +1979,10 @@ function PuzzlePieceTrustIcon({ className }: { className?: string }) {
 
 function TrustBannerSection() {
   const items = [
-    { icon: ShieldMoonIcon, label: "4,7/5 klantbeoordeling" },
+    { icon: PuzzlePieceTrustIcon, label: "4,7/5 klantbeoordeling" },
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 nachten proefslapen" },
-    { icon: ShieldMoonIcon, label: "Tot 25 jaar garantie" },
+    { icon: PuzzlePieceTrustIcon, label: "Tot 25 jaar garantie" },
   ];
 
   return (

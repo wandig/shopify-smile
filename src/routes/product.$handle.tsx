@@ -1983,7 +1983,7 @@ function TrustBannerSection() {
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white">
                 {imageIcon ? (
                   <div
-                    className="h-6 w-6 bg-[#ef7027]"
+                    className="h-6 w-6 bg-[#0f1f2a]"
                     style={{
                       maskImage: `url(${imageIcon})`,
                       WebkitMaskImage: `url(${imageIcon})`,
@@ -1997,10 +1997,10 @@ function TrustBannerSection() {
                     aria-hidden="true"
                   />
                 ) : Icon ? (
-                  <Icon className="h-5 w-5 text-[#ef7027]" strokeWidth={1.5} />
+                  <Icon className="h-5 w-5 text-[#0f1f2a]" strokeWidth={1.5} />
                 ) : null}
               </div>
-              <p className="text-[14px] font-[500] leading-snug text-[#071426]">{label}</p>
+              <p className="text-[14px] font-normal leading-snug text-[#0f1f2a]">{label}</p>
             </div>
           ))}
         </div>

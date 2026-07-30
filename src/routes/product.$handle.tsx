@@ -1505,7 +1505,7 @@ const BUILT_TO_LAST_CARDS: Array<{
   {
     eyebrow: "Zo staat hij",
     title: "Plug-and-play\ngemonteerd.",
-    body: "Slim voorbereid en eenvoudig in elkaar te zetten, zonder ingewikkeld maatwerk.",
+    body: "Slim voorbereid en eenvoudig in elkaar te zetten,\nzonder ingewikkeld maatwerk.",
     bg: "#c0b3a4",
     tone: "light",
     imageUrl: plugPlayGeleverdV2Img.url,

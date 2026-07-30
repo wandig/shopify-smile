@@ -1976,6 +1976,7 @@ function ShieldPuzzleIcon({ className, strokeWidth = 1.5 }: { className?: string
           src={puzzlePieceIcon.url}
           alt=""
           className="absolute left-1/2 top-1/2 h-[42%] w-[42%] -translate-x-1/2 -translate-y-1/2 object-contain"
+          style={{ filter: "drop-shadow(0.4px 0 0 #0f1f2a) drop-shadow(-0.4px 0 0 #0f1f2a) drop-shadow(0 0.4px 0 #0f1f2a) drop-shadow(0 -0.4px 0 #0f1f2a)" }}
         />
       </div>
     </div>

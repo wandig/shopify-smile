@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { Menu, Search, Globe, ArrowRight } from "lucide-react";
+import { Menu, Search, Globe, ArrowRight, Star, Puzzle } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
 import {
   Sheet,
@@ -17,6 +17,16 @@ import {
 import wandigLogo from "@/assets/wandig-logo-header.png.asset.json";
 
 const MODELS_ORDER = ["solo", "duo", "full-house"];
+
+function StarRating() {
+  return (
+    <span className="inline-flex items-center gap-0.5 text-[#ef7027]">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} className="h-3 w-3 fill-current" />
+      ))}
+    </span>
+  );
+}
 
 function ModelsMenu({
   linkClassName,
@@ -140,160 +150,94 @@ function ModelsMenu({
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
-  const isProductPage = pathname.startsWith("/product/");
   const [modelsMenuOpen, setModelsMenuOpen] = useState(false);
-  const [productHeaderHidden, setProductHeaderHidden] = useState(false);
 
-  useEffect(() => {
-    if (!isProductPage) {
-      setProductHeaderHidden(false);
-      return;
-    }
-
-    const updateHeader = () => setProductHeaderHidden(window.scrollY > 1);
-    updateHeader();
-    window.addEventListener("scroll", updateHeader, { passive: true });
-    return () => window.removeEventListener("scroll", updateHeader);
-  }, [isProductPage]);
-
-  if (isHome) {
-    return (
-      <header className={`absolute top-0 left-0 right-0 z-40 transition-colors duration-300 ease-out ${modelsMenuOpen ? "text-[#15110d]" : "text-white"}`}>
-        {/* Top trust bar */}
-        <div
-          className={`border-b transition-[background-color,border-color] duration-300 ease-out ${
-            modelsMenuOpen
-              ? "border-black/10 bg-white"
-              : "border-white/20 bg-black/10 backdrop-blur-sm"
-          }`}
-        >
-          <div className="px-5 md:px-10 h-10 flex items-center justify-between text-[12px] tracking-wide relative transition-colors duration-300 ease-out">
-            <div className="hidden md:flex items-center gap-8 opacity-95">
-              <span>Proefperiode van 100 dagen</span>
-              <span>Gratis levering &amp; retourneren</span>
-              <span>Tot 5 jaar garantie</span>
-            </div>
-            <div className="hidden md:flex items-center gap-1 opacity-95">
-              <span>NL | Dutch</span>
-              <Globe className="h-3 w-3" />
-            </div>
+  return (
+    <header className="sticky top-0 z-40 bg-[#faf8f5] text-[#15110d]">
+      {/* Top trust bar */}
+      <div className="border-b border-[#ede7e0]">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-9 md:h-10 flex items-center justify-between text-[11px] md:text-xs tracking-wide">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            <span>100 dagen proefkijken</span>
+            <span>Gratis levering &amp; retourneren</span>
+            <span>10 jaar garantie</span>
+          </div>
+          <div className="flex items-center gap-1.5 md:mx-auto md:absolute md:left-1/2 md:-translate-x-1/2">
+            <StarRating />
+            <span className="font-medium">1000+ beoordelingen</span>
+          </div>
+          <div className="hidden md:flex items-center gap-1 opacity-80">
+            <span>NL | Dutch</span>
+            <Globe className="h-3 w-3" />
           </div>
         </div>
+      </div>
 
-        {/* Main bar */}
-        <div
-          className={`border-b transition-[background-color,border-color] duration-300 ease-out ${
-            modelsMenuOpen
-              ? "border-white bg-white"
-              : "border-white/20"
-          }`}
-        >
-          <div className="px-5 md:px-10 h-20 flex items-center justify-between relative">
+      {/* Main bar */}
+      <div className="border-b border-white">
+        <div className="mx-auto max-w-[1600px] px-4 md:px-10 h-16 md:h-20 flex items-center justify-between gap-4">
+          {/* Left: mobile hamburger + desktop nav */}
+          <div className="flex items-center gap-3 md:gap-6 shrink-0">
             <Sheet>
               <SheetTrigger asChild>
                 <button
-                  className="md:hidden flex items-center justify-center h-11 w-11 rounded-full bg-white/15 hover:bg-white/25 transition backdrop-blur-sm"
+                  className="flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-[#d6cfc7]/60 hover:bg-[#d6cfc7] text-[#15110d] transition"
                   aria-label="Menu openen"
                 >
                   <Menu className="h-5 w-5" strokeWidth={1.75} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] pt-14">
+              <SheetContent side="left" className="w-[280px] pt-14">
                 <nav className="flex flex-col gap-6 text-lg">
-                  <Link to="/producten" className="hover:opacity-60 transition">Alle modellen</Link>
-                  <Link to="/bezoek" className="hover:opacity-60 transition">Bezoek ons</Link>
-                  <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>
+                  <Link to="/producten" className="hover:opacity-60 transition">
+                    Collectie
+                  </Link>
+                  <Link to="/bezoek" className="hover:opacity-60 transition">
+                    Bezoek ons
+                  </Link>
+                  <Link to="/klantenservice" className="hover:opacity-60 transition">
+                    Klantenservice
+                  </Link>
+                  <Link to="/klantenservice" className="hover:opacity-60 transition">
+                    Gratis kleurstalen ontvangen
+                  </Link>
                 </nav>
               </SheetContent>
             </Sheet>
 
-            <nav className="hidden h-full md:flex items-center gap-8 text-sm font-medium tracking-wide">
-              <ModelsMenu
-                panelTopClass="top-[122px]"
-                linkClassName={`relative py-2 transition-colors duration-300 ease-out after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:transition-all hover:after:w-full ${modelsMenuOpen ? "hover:text-[#15110d] after:bg-[#15110d]" : "hover:text-white/75 after:bg-white"}`}
-                onOpenChange={setModelsMenuOpen}
-              />
-              <Link to="/bezoek" className={`relative py-2 transition-colors duration-300 ease-out after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:transition-all hover:after:w-full ${modelsMenuOpen ? "hover:text-[#15110d] after:bg-[#15110d]" : "hover:text-white/75 after:bg-white"}`}>
-                Bezoek ons
-              </Link>
-              <Link to="/klantenservice" className={`relative py-2 transition-colors duration-300 ease-out after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:transition-all hover:after:w-full ${modelsMenuOpen ? "hover:text-[#15110d] after:bg-[#15110d]" : "hover:text-white/75 after:bg-white"}`}>
-                Klantenservice
-              </Link>
+            <nav className="hidden h-full md:flex items-center gap-8 text-sm tracking-wide">
+              <ModelsMenu panelTopClass="top-[105px]" linkClassName="hover:opacity-60 transition" onOpenChange={setModelsMenuOpen} />
+              <Link to="/bezoek" className="hover:opacity-60 transition">Bezoek ons</Link>
+              <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>
             </nav>
+          </div>
 
+          {/* Center: logo */}
+          <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Wandig">
+            <img src={wandigLogo.url} alt="Wandig" className="h-7 md:h-9 w-auto" />
+          </Link>
+
+          {/* Right: configurator + search + cart */}
+          <div className="flex items-center gap-2 md:gap-3 shrink-0">
             <Link
-              to="/"
-              className="absolute left-1/2 -translate-x-1/2 flex items-center"
-              aria-label="Wandig"
+              to="/producten"
+              className="hidden sm:inline-flex items-center gap-2 h-10 md:h-11 px-4 md:px-5 rounded-full bg-[#0f1f2a] hover:bg-[#1a2d3a] text-white text-sm font-medium transition-colors duration-300 ease-out"
             >
-              <img src={wandigLogo.url} alt="Wandig" className="h-8 md:h-10 w-auto" />
+              <Puzzle className="h-4 w-4" strokeWidth={1.75} />
+              <span>Configureer jouw tv-kast</span>
             </Link>
 
-            <div className="flex items-center gap-3">
-              <Link
-                to="/producten"
-                className="hidden md:inline-flex items-center h-10 px-5 rounded-full bg-[#ef7027] hover:bg-[#d55f1e] text-white text-sm font-semibold transition-colors duration-300 ease-out"
-              >
-                Bekijk collectie
-              </Link>
-              <button
-                className={`hidden sm:flex items-center justify-center h-11 w-11 rounded-full transition-colors duration-300 ease-out ${modelsMenuOpen ? "bg-white text-[#15110d] hover:bg-white" : "bg-white/15 text-white hover:bg-white/25 backdrop-blur-sm"}`}
-                aria-label="Zoeken"
-              >
-                <Search className="h-5 w-5" strokeWidth={1.75} />
-              </button>
-              <div className={`[&_button]:rounded-full [&_button]:h-11 [&_button]:w-11 [&_button]:transition-colors [&_button]:duration-300 ${modelsMenuOpen ? "[&_button]:bg-white [&_button]:text-[#15110d] [&_button]:hover:bg-white" : "[&_button]:bg-white/15 [&_button]:text-white [&_button]:hover:bg-white/25 [&_button]:backdrop-blur-sm"}`}>
-                <CartDrawer />
-              </div>
+            <button
+              className="flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-[#d6cfc7]/60 hover:bg-[#d6cfc7] text-[#15110d] transition"
+              aria-label="Zoeken"
+            >
+              <Search className="h-5 w-5" strokeWidth={1.75} />
+            </button>
+
+            <div className="[&_button]:rounded-full [&_button]:h-10 [&_button]:w-10 md:[&_button]:h-11 md:[&_button]:w-11 [&_button]:bg-[#d6cfc7]/60 [&_button]:hover:bg-[#d6cfc7] [&_button]:text-[#15110d] [&_button]:transition">
+              <CartDrawer />
             </div>
           </div>
-        </div>
-      </header>
-    );
-  }
-
-  return (
-    <header
-      className={`sticky top-0 z-40 border-b border-white bg-[#faf8f5] text-[#15110d] transition-[transform,background-color,border-color,color] duration-300 ease-out ${
-        isProductPage && productHeaderHidden ? "pointer-events-none -translate-y-full" : "translate-y-0"
-      }`}
-    >
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Sheet>
-            <SheetTrigger asChild>
-              <button
-                className="md:hidden flex items-center justify-center h-10 w-10 -ml-2"
-                aria-label="Menu openen"
-              >
-                <Menu className="h-5 w-5" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[280px] pt-14">
-              <nav className="flex flex-col gap-6 text-lg">
-                <Link to="/producten" className="hover:opacity-60 transition">
-                  Collectie
-                </Link>
-                <Link to="/klantenservice" className="hover:opacity-60 transition">
-                  Klantenservice
-                </Link>
-                <Link to="/klantenservice" className="hover:opacity-60 transition">
-                  Gratis kleurstalen ontvangen
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
-          <nav className="hidden h-full md:flex items-center gap-8 text-sm tracking-wide">
-            <ModelsMenu panelTopClass="top-[81px]" linkClassName="hover:opacity-60 transition" onOpenChange={setModelsMenuOpen} />
-            <Link to="/bezoek" className="hover:opacity-60 transition">Bezoek ons</Link>
-            <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>
-          </nav>
-        </div>
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Wandig">
-          <img src={wandigLogo.url} alt="Wandig" className="h-7 md:h-9 w-auto" />
-        </Link>
-        <div className="flex items-center gap-4">
-          <CartDrawer />
         </div>
       </div>
     </header>

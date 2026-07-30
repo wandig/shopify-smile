@@ -1532,6 +1532,7 @@ const BUILT_TO_LAST_CARDS: Array<{
     bg: "#936850",
     tone: "dark",
     imageUrl: dutchDesignBgImg.url,
+    bodyMaxWidth: "170px",
   },
 ];
 

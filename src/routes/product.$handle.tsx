@@ -1089,7 +1089,7 @@ function ProductView({ product }: { product: ProductNode }) {
           className={`group flex items-center gap-4 rounded-[18px] py-2.5 pl-5 pr-2.5 shadow-[0_14px_35px_rgba(42,31,22,0.18)] transition-transform duration-200 hover:-translate-y-0.5 ${
             showOrderWidget ? "pointer-events-auto" : ""
           }`}
-          style={{ background: "linear-gradient(105deg, #f6b48b 0%, #ef8a5a 55%, #e2703a 100%)" }}
+          style={{ background: "linear-gradient(105deg, rgba(246,180,139,0.85) 0%, rgba(239,138,90,0.85) 55%, rgba(226,112,58,0.85) 100%)" }}
         >
           <span className="text-left">
             <span className="block text-[19px] font-bold leading-tight text-[#071426]">{displayTitle}</span>

@@ -14,7 +14,7 @@ import {
   formatPrice,
   type ShopifyProduct,
 } from "@/lib/shopify";
-import wandigLogo from "@/assets/wandig-logo.png.asset.json";
+import wandigLogo from "@/assets/wandig-logo-header.png.asset.json";
 
 const MODELS_ORDER = ["solo", "duo", "full-house"];
 

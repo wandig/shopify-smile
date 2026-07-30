@@ -1732,7 +1732,7 @@ function FaqSection() {
   };
 
   return (
-    <section className="mt-12 bg-white md:mt-20">
+    <section className="mt-12 -mx-5 bg-white px-5 md:mx-0 md:-mx-10 md:mt-20 md:px-10">
       <div className="mb-6 text-center md:mb-10">
         <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
         <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">

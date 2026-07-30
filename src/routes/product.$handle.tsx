@@ -1920,9 +1920,9 @@ function NewsletterContactSection() {
                 />
                 <span className="text-[13px] leading-snug tracking-[0.01em] text-[#071426]/70">
                   Ik accepteer de voorwaarden.{" "}
-                  <Link to="/privacy-policy" className="underline decoration-[#071426]/30 underline-offset-2 transition hover:text-[#ef7027] hover:decoration-[#ef7027]">
+                  <a href="/privacy-policy" className="underline decoration-[#071426]/30 underline-offset-2 transition hover:text-[#ef7027] hover:decoration-[#ef7027]">
                     Privacyverklaring
-                  </Link>
+                  </a>
                 </span>
               </label>
             </form>

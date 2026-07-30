@@ -34,6 +34,7 @@ import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
+import puzzlePieceIcon from "@/assets/puzzle-piece-icon.svg.asset.json";
 import ontworpenInNederlandImg from "@/assets/ontworpen-in-nederland.png.asset.json";
 import kabelsUitZichtImg from "@/assets/kabels-uit-zicht.png.asset.json";
 import kabelsUitZichtV2Img from "@/assets/kabels-uit-zicht-v2.png.asset.json";

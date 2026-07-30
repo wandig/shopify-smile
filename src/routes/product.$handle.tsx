@@ -1994,7 +1994,7 @@ function TrustBannerSection() {
   const items = [
     { icon: ShieldOnlyIcon, label: "4,7/5 klantbeoordeling" },
     { icon: Truck, label: "Gratis levering & retourneren" },
-    { icon: CalendarClock, label: "100 nachten proefslapen" },
+    { icon: CalendarClock, label: "100 dagen proefkijken" },
     { icon: PuzzleIcon, label: "Tot 25 jaar garantie" },
   ];
 

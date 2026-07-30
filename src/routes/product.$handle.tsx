@@ -28,6 +28,7 @@ import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
+import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";

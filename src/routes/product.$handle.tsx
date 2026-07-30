@@ -6,7 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, CalendarClock } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -34,7 +34,6 @@ import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
-import puzzlePieceIcon from "@/assets/puzzle-piece-icon.svg.asset.json";
 import ontworpenInNederlandImg from "@/assets/ontworpen-in-nederland.png.asset.json";
 import kabelsUitZichtImg from "@/assets/kabels-uit-zicht.png.asset.json";
 import kabelsUitZichtV2Img from "@/assets/kabels-uit-zicht-v2.png.asset.json";
@@ -1967,17 +1966,12 @@ function NewsletterContactSection() {
 }
 
 
-function ShieldPuzzleIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
+function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: string; strokeWidth?: number }) {
   return (
     <div className={className}>
       <div className="relative h-full w-full">
         <Shield className="h-full w-full" strokeWidth={strokeWidth} />
-        <img
-          src={puzzlePieceIcon.url}
-          alt=""
-          className="absolute left-1/2 top-1/2 h-[42%] w-[42%] -translate-x-1/2 -translate-y-1/2 object-contain"
-          style={{ filter: "drop-shadow(0.4px 0 0 #0f1f2a) drop-shadow(-0.4px 0 0 #0f1f2a) drop-shadow(0 0.4px 0 #0f1f2a) drop-shadow(0 -0.4px 0 #0f1f2a)" }}
-        />
+        <Moon className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2" strokeWidth={strokeWidth} />
       </div>
     </div>
   );
@@ -1985,10 +1979,10 @@ function ShieldPuzzleIcon({ className, strokeWidth = 1.5 }: { className?: string
 
 function TrustBannerSection() {
   const items = [
-    { icon: ShieldPuzzleIcon, label: "4,7/5 klantbeoordeling" },
+    { icon: ShieldMoonIcon, label: "4,7/5 klantbeoordeling" },
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 nachten proefslapen" },
-    { icon: ShieldPuzzleIcon, label: "Tot 25 jaar garantie" },
+    { icon: ShieldMoonIcon, label: "Tot 25 jaar garantie" },
   ];
 
   return (

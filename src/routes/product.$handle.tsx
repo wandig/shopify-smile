@@ -1870,8 +1870,8 @@ function NewsletterContactSection() {
   return (
     <section className="bg-[#fff7ef]">
       <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-20">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
-          <div className="rounded-[18px] bg-white p-6 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-8">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-10 lg:items-stretch">
+          <div className="flex flex-col rounded-[18px] bg-white p-6 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-8">
             <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Nieuwsbrief</span>
             <h2 className="mt-2 text-[22px] font-bold leading-tight tracking-[0.01em] text-[#071426] md:text-[26px]">
               Meld je aan voor onze nieuwsbrief

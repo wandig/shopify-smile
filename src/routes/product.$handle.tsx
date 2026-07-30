@@ -1874,21 +1874,26 @@ function NewsletterContactSection() {
     }
   };
 
+  const contactItems = [
+    { icon: Phone, label: "Bel ons, steun 9-5", sub: "9:00 - 18:00", value: "+31 085 107 1953" },
+    { icon: Headphones, label: "Chat live, agent 9-5", sub: "9:00 - 22:00", value: "Chat met ons" },
+    { icon: Mail, label: "Stuur een mail", sub: "iedere werkdag", value: "support.nl@wandig.com" },
+  ];
+
   return (
     <section className="bg-[#fff7ef]">
-      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-20">
-        <div className="grid items-stretch gap-8 lg:grid-cols-2 lg:gap-10">
-          <div className="flex h-full flex-col justify-between rounded-[18px] bg-white px-6 py-6 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:px-8 md:py-7">
-            <div>
-              <h2 className="text-[22px] font-bold leading-tight tracking-[0.01em] text-[#071426] md:text-[28px]">
-                Meld je aan voor<br className="hidden sm:block" /> onze nieuwsbrief
-              </h2>
-              <p className="mt-3 max-w-md text-[14px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[15px]">
-                Blijf op de hoogte van de nieuwste updates, tips en een exclusieve aanbiedingen.
-              </p>
-            </div>
-            <form onSubmit={onSubmit} className="flex flex-col justify-between" noValidate>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-16">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <h2 className="text-[22px] font-bold leading-[1.25] tracking-[0.01em] text-[#071426] md:text-[26px]">
+              Meld je aan voor<br className="hidden sm:block" /> onze nieuwsbrief
+            </h2>
+            <p className="mt-3 max-w-[380px] text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[14px]">
+              Blijf op de hoogte van de nieuwste updates, tips en een exclusieve aanbiedingen.
+            </p>
+
+            <form onSubmit={onSubmit} className="mt-6 max-w-[430px]" noValidate>
+              <div className="flex overflow-hidden rounded-[8px] border border-[#e7ded4] bg-white">
                 <label htmlFor="newsletter-email" className="sr-only">E-mailadres</label>
                 <input
                   id="newsletter-email"
@@ -1898,12 +1903,12 @@ function NewsletterContactSection() {
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); if (status !== "idle") setStatus("idle"); }}
                   placeholder="Voer je e-mailadres in"
-                  className="h-12 flex-1 rounded-full border border-[#eeeeee] bg-white px-5 text-[14px] tracking-[0.01em] text-[#071426] placeholder:text-[#071426]/40 transition focus:border-[#ef7027] focus:outline-none"
+                  className="h-[46px] min-w-0 flex-1 bg-white px-4 text-[14px] tracking-[0.01em] text-[#071426] placeholder:text-[#071426]/40 focus:outline-none"
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#ef7027] px-6 text-[14px] font-[500] tracking-[0.04em] text-white transition hover:brightness-95 disabled:opacity-60"
+                  className="inline-flex h-[46px] shrink-0 items-center justify-center gap-2 rounded-[8px] bg-[#ef7027] px-5 text-[14px] font-[500] tracking-[0.03em] text-white transition hover:brightness-95 disabled:opacity-60"
                 >
                   {status === "loading" ? "Bezig..." : (
                     <>
@@ -1918,11 +1923,11 @@ function NewsletterContactSection() {
                   type="checkbox"
                   checked={acceptedTerms}
                   onChange={(e) => { setAcceptedTerms(e.target.checked); if (status !== "idle") setStatus("idle"); }}
-                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded border-[#cdc0b5] text-[#ef7027] focus:ring-[#ef7027]"
+                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded-[3px] border-[#cdc0b5] text-[#ef7027] focus:ring-[#ef7027]"
                 />
-                <span className="text-[13px] leading-snug tracking-[0.01em] text-[#071426]/70">
+                <span className="text-[13px] leading-snug tracking-[0.01em] text-[#071426]/75">
                   Ik accepteer de voorwaarden.{" "}
-                  <a href="/privacy-policy" className="underline decoration-[#071426]/30 underline-offset-2 transition hover:text-[#ef7027] hover:decoration-[#ef7027]">
+                  <a href="/privacy-policy" className="underline decoration-[#071426]/40 underline-offset-2 transition hover:text-[#ef7027] hover:decoration-[#ef7027]">
                     Privacyverklaring
                   </a>
                 </span>
@@ -1933,45 +1938,29 @@ function NewsletterContactSection() {
             </form>
           </div>
 
-          <div className="grid h-full gap-4 sm:grid-cols-3 lg:grid-cols-3">
-            <div className="flex h-full flex-col justify-between rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
-              <div>
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Phone className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />
+          <div className="grid gap-8 sm:grid-cols-3 sm:gap-6">
+            {contactItems.map(({ icon: Icon, label, sub, value }) => (
+              <div key={label}>
+                <div className="flex items-start gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#ef7027]/10">
+                    <Icon className="h-[17px] w-[17px] text-[#ef7027]" strokeWidth={1.5} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[12px] leading-snug tracking-[0.01em] text-[#071426]/75">{label}</p>
+                    <p className="text-[12px] leading-snug tracking-[0.01em] text-[#071426]/75">{sub}</p>
+                  </div>
                 </div>
-                <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Bel ons, steun 9-5</p>
-                <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">9:00 - 18:00</p>
+                <p className="mt-4 break-words text-[15px] font-bold leading-tight tracking-[0.01em] text-[#071426]">{value}</p>
+                <div className="mt-3 h-px w-full bg-[#071426]/60" />
               </div>
-              <p className="text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426] underline decoration-[#071426]/30 underline-offset-4">+31 085 107 1953</p>
-            </div>
-
-            <div className="flex h-full flex-col justify-between rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
-              <div>
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Headphones className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />
-                </div>
-                <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Chat live, agent 9-5</p>
-                <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">9:00 - 22:00</p>
-              </div>
-              <p className="text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426] underline decoration-[#071426]/30 underline-offset-4">Chat met ons</p>
-            </div>
-
-            <div className="flex h-full flex-col justify-between rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)]">
-              <div>
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
-                  <Mail className="h-[18px] w-[18px] text-[#ef7027]" strokeWidth={1.5} />
-                </div>
-                <p className="mt-4 text-[14px] font-[500] tracking-[0.01em] text-[#071426]">Stuur een mail</p>
-                <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">iedere werkdag</p>
-              </div>
-              <p className="break-words text-[13px] font-[500] leading-tight tracking-[0.01em] text-[#071426] underline decoration-[#071426]/30 underline-offset-4">support.nl@wandig.com</p>
-            </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function TrustBannerSection() {
   const items = [

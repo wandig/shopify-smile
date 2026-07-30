@@ -1976,7 +1976,7 @@ function TrustBannerSection() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ icon: Icon, imageIcon, label }) => (
             <div key={label} className="flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ef7027]/10">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white">
                 {imageIcon ? (
                   <div
                     className="h-6 w-6 bg-[#ef7027]"

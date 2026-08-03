@@ -413,74 +413,97 @@ function ConfiguratorBannerSection() {
   );
 }
 
-/* ------------------------- 4b. waarom wij (kaarten) ----------------------- */
+/* ------------------------- 4b. binnenkijken ----------------------------- */
 
-const WHY_CARDS = [
+function PuzzleCornerIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5a2.5 2.5 0 0 0-5 0V5H4c-1.1 0-2 .9-2 2v3.8h1.5c1.5 0 2.7 1.2 2.7 2.7S5 16.2 3.5 16.2H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.5 1.2-2.7 2.7-2.7s2.7 1.2 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5a2.5 2.5 0 0 0 0-5z" />
+    </svg>
+  );
+}
+
+const CUSTOMER_GALLERY_COLUMNS = [
   {
-    badge: "100 dagen proefkijken",
-    title: "Probeer het 100 dagen zonder risico. Bevalt het niet? Geld terug.",
-    img: whyProefkijken.url,
+    width: "w-[240px] md:w-[340px]",
+    items: [{ src: klantWoonkamer1Img.url, alt: "Woonkamer met Full House cinewall" }],
   },
   {
-    badge: "Gratis levering",
-    title: "Altijd gratis levering, waar je ook woont in Nederland.",
-    img: whyLevering.url,
+    width: "w-[200px] md:w-[280px]",
+    items: [
+      { src: klantWoonkamer2Img.url, alt: "Roze cinewall met tv in woonkamer" },
+      { src: klantWoonkamer3Img.url, alt: "Kinderen spelen voor houten cinewall" },
+    ],
   },
   {
-    badge: "Beoordelingen",
-    title: "4,8 sterren uit meer dan 23.000 beoordelingen.",
-    img: whyReviews.url,
+    width: "w-[220px] md:w-[300px]",
+    items: [{ src: klantWoonkamer6Img.url, alt: "Donkere houten cinewall met tv en vakken" }],
   },
   {
-    badge: "Klantenservice",
-    title: "Persoonlijk advies van maandag t/m zaterdag.",
-    img: whyService.url,
+    width: "w-[200px] md:w-[280px]",
+    items: [
+      { src: klantWoonkamer4Img.url, alt: "Roze cinewall in moderne woonkamer" },
+      { src: klantWoonkamer7Img.url, alt: "Lichte cinewall in moderne woonkamer" },
+    ],
+  },
+  {
+    width: "w-[240px] md:w-[340px]",
+    items: [{ src: klantWoonkamer5_2Img.url, alt: "Houten cinewall met tv en decoratie in lichte woonkamer" }],
+  },
+  {
+    width: "w-[200px] md:w-[280px]",
+    items: [
+      { src: klantWoonkamer8Img.url, alt: "Donkere houten cinewall met tv en decoratie in moderne woonkamer" },
+      { src: klantWoonkamer10Img.url, alt: "Roze cinewall met tv en vakken in lichte woonkamer" },
+    ],
+  },
+  {
+    width: "w-[240px] md:w-[340px]",
+    items: [{ src: klantWoonkamer9Img.url, alt: "Witte cinewall met tv in lichte woonkamer" }],
   },
 ];
 
-function WhyUsSection() {
+function CustomerGallerySection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
-          <div className="flex gap-5">
-            <div className="hidden shrink-0 items-center gap-1 md:flex">
-              <span
-                className="whitespace-nowrap text-[26px] font-bold uppercase tracking-[0.06em] text-[#071426]"
-                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-              >
-                Waarom wij
-              </span>
-              <span
-                className="whitespace-nowrap text-[11px] tracking-[0.06em] text-[#071426]/55"
-                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-              >
-                Betere service
-              </span>
-            </div>
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
+            Binnenkijken bij onze klanten
+          </h2>
+          <p className="mt-2 text-[13px] md:text-[14px] text-[#071426]/55">
+            Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
+          </p>
+        </div>
 
-            <div className="flex min-w-0 flex-1 snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {WHY_CARDS.map((c) => (
-                <article
-                  key={c.badge}
-                  className="group relative w-[260px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[36%]"
-                >
-                  <img
-                    src={c.img}
-                    alt=""
-                    className="h-[380px] w-full object-cover transition duration-700 group-hover:scale-[1.03] md:h-[480px]"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-black/25" />
-                  <span className="absolute left-4 top-4 rounded-full border border-white/60 px-3.5 py-1.5 text-[11px] tracking-[0.02em] text-white">
-                    {c.badge}
-                  </span>
-                  <h3 className="absolute inset-x-5 bottom-6 text-[20px] font-[500] leading-[1.2] tracking-[0.01em] text-white md:text-[24px]">
-                    {c.title}
-                  </h3>
-                </article>
-              ))}
-            </div>
+        <div className="-mx-5 overflow-x-auto scrollbar-hide md:mx-0">
+          <div className="flex h-[420px] gap-3 px-5 md:h-[560px] md:gap-4 md:px-0">
+            {CUSTOMER_GALLERY_COLUMNS.map((col, colIndex) => (
+              <div key={colIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${col.width}`}>
+                {col.items.map((image, i) => (
+                  <figure key={i} className="group relative min-h-0 flex-1 overflow-hidden rounded-[14px]">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                    <Link
+                      to="/product/full-house"
+                      className="group/pill absolute bottom-2 left-2 flex h-7 items-center gap-0 rounded-full bg-[#ff843a] pl-1 pr-1 text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-[padding,gap] duration-300 ease-out hover:gap-2 hover:pl-3 hover:pr-2 md:bottom-3 md:left-3 md:h-8"
+                    >
+                      <span className="grid max-w-0 overflow-hidden whitespace-nowrap text-[12px] font-[330] leading-none tracking-[0.04em] transition-[max-width,opacity] duration-300 ease-out opacity-0 group-hover/pill:max-w-[180px] group-hover/pill:opacity-100 md:text-[13px]">
+                        Bestel Full House
+                      </span>
+                      <span className="pill-shimmer relative flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ff843a] text-white md:h-6 md:w-6">
+                        <PuzzleCornerIcon className="relative z-10 h-3.5 w-3.5 transition-transform duration-300 ease-out group-hover/pill:rotate-90 md:h-4 md:w-4" />
+                      </span>
+                    </Link>
+                  </figure>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>

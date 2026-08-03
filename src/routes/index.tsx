@@ -178,11 +178,15 @@ function HeroBenefitsSection() {
 
 const PRODUCTS = [
   {
-    handle: "solo",
-    title: "Solo",
-    tagline: "Compact en strak",
-    price: "749,-",
-    img: tvOrangeImg.url,
+    handle: "full-house",
+    title: "Full House",
+    tagline: "Volledige wand-look",
+    price: "1.699,-",
+    img: fullhouseOrange.url,
+    badge: "Incl. kabelgoot & montageset",
+    reviews: "(2.526)",
+    meta: "240 cm · Full House",
+    featured: true,
   },
   {
     handle: "duo",
@@ -190,15 +194,39 @@ const PRODUCTS = [
     tagline: "Symmetrisch met opbergruimte",
     price: "1.199,-",
     img: plugPlayImg.url,
+    reviews: "(143)",
+    meta: "180 cm · Duo",
+    delivery: "Levering: 10 werkdagen",
   },
   {
-    handle: "full-house",
-    title: "Full House",
-    tagline: "Volledige wand-look",
-    price: "1.699,-",
-    img: fullhouseOrange.url,
+    handle: "solo",
+    title: "Solo",
+    tagline: "Compact en strak",
+    price: "749,-",
+    img: tvOrangeImg.url,
+    reviews: "(143)",
+    meta: "120 cm · Solo",
+    delivery: "Levering: 10 werkdagen",
   },
 ];
+
+function Stars({ count = 5, className = "" }: { count?: number; className?: string }) {
+  return (
+    <span className={`flex items-center gap-0.5 ${className}`}>
+      {Array.from({ length: count }).map((_, i) => (
+        <Star key={i} className="h-3 w-3 fill-[#ef7027] text-[#ef7027]" />
+      ))}
+    </span>
+  );
+}
+
+function BasketButton() {
+  return (
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] text-white transition group-hover:brightness-95">
+      <ShoppingBasket className="h-[18px] w-[18px]" strokeWidth={1.5} />
+    </span>
+  );
+}
 
 function ProductCarouselSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -209,71 +237,138 @@ function ProductCarouselSection() {
   };
 
   return (
-    <section className="bg-[#faf8f5] py-10 md:py-16">
+    <section className="bg-[#faf8f5] pb-10 md:pb-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
-          <SectionHeading
-            kicker="Collectie"
-            title="Onze tv-wanden"
-            intro="Elk model op maat gemaakt, in de kleur en indeling die bij jouw woonkamer past."
-            align="left"
-          />
-          <div className="hidden gap-2 md:flex">
-            <button
-              type="button"
-              onClick={() => scroll(-1)}
-              aria-label="Vorige"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
+        <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
+          <div className="flex gap-5">
+            <div className="hidden shrink-0 items-center md:flex">
+              <span
+                className="whitespace-nowrap text-[26px] font-bold uppercase tracking-[0.06em] text-[#071426]"
+                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              >
+                Bestsellers
+              </span>
+            </div>
+
+            <div
+              ref={scrollerRef}
+              className="flex min-w-0 flex-1 snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              ‹
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll(1)}
-              aria-label="Volgende"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
-            >
-              ›
-            </button>
+              {PRODUCTS.map((p) =>
+                p.featured ? (
+                  <Link
+                    key={p.handle}
+                    to="/product/$handle"
+                    params={{ handle: p.handle }}
+                    className="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
+                  >
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      className="h-[380px] w-full object-cover transition duration-700 group-hover:scale-[1.03] md:h-[520px]"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
+                    {p.badge && (
+                      <span className="absolute left-4 top-4 rounded-full bg-white/90 px-4 py-2 text-[12px] tracking-[0.01em] text-[#071426]">
+                        {p.badge}
+                      </span>
+                    )}
+                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white">
+                      <div>
+                        <h3 className="text-[26px] font-bold leading-[1.1] tracking-[0.01em] md:text-[32px]">
+                          {p.title}
+                        </h3>
+                        <div className="text-[22px] font-bold leading-tight tracking-[0.01em] md:text-[26px]">
+                          {p.price}
+                        </div>
+                        <div className="mt-3 flex items-center gap-2 text-[12px] tracking-[0.01em] text-white/90">
+                          <Stars />
+                          <span>{p.reviews}</span>
+                        </div>
+                        <div className="mt-1 text-[12px] tracking-[0.01em] text-white/80">{p.meta}</div>
+                      </div>
+                      <BasketButton />
+                    </div>
+                  </Link>
+                ) : (
+                  <Link
+                    key={p.handle}
+                    to="/product/$handle"
+                    params={{ handle: p.handle }}
+                    className="group flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-white p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
+                  >
+                    <div className="overflow-hidden rounded-[12px] bg-[#f7f7f7]">
+                      <img
+                        src={p.img}
+                        alt={p.title}
+                        className="h-[200px] w-full object-cover transition duration-700 group-hover:scale-[1.03] md:h-[260px]"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <h3 className="text-[20px] font-bold leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[24px]">
+                            {p.title}
+                          </h3>
+                          <div className="mt-0.5 text-[18px] font-bold tracking-[0.01em] text-[#071426] md:text-[22px]">
+                            {p.price}
+                          </div>
+                        </div>
+                        {p.delivery && (
+                          <span className="mt-1 text-[11px] tracking-[0.01em] text-[#071426]/50">
+                            {p.delivery}
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-2 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.tagline}</p>
+                      <div className="mt-auto flex items-end justify-between gap-3 pt-6">
+                        <div>
+                          <div className="flex items-center gap-2 text-[12px] tracking-[0.01em] text-[#071426]/60">
+                            <Stars />
+                            <span>{p.reviews}</span>
+                          </div>
+                          <div className="mt-1 text-[12px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
+                        </div>
+                        <BasketButton />
+                      </div>
+                    </div>
+                  </Link>
+                ),
+              )}
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-center justify-between gap-4 px-1">
+            <p className="text-[12px] tracking-[0.01em] text-[#071426]/55">
+              Elk model op maat gemaakt, in de kleur en indeling die bij jouw woonkamer past.
+            </p>
+            <div className="hidden gap-2 md:flex">
+              <button
+                type="button"
+                onClick={() => scroll(-1)}
+                aria-label="Vorige"
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll(1)}
+                aria-label="Volgende"
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
+              >
+                ›
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div
-        ref={scrollerRef}
-        className="mx-auto flex max-w-[1400px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {PRODUCTS.map((p) => (
-          <Link
-            key={p.handle}
-            to="/product/$handle"
-            params={{ handle: p.handle }}
-            className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] bg-white shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[420px]"
-          >
-            <div className="aspect-[4/3] overflow-hidden bg-[#f7f7f7]">
-              <img
-                src={p.img}
-                alt={p.title}
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-            </div>
-            <div className="flex items-end justify-between gap-4 p-5">
-              <div>
-                <h3 className="text-[16px] font-bold tracking-[0.01em] text-[#071426]">{p.title}</h3>
-                <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.tagline}</p>
-              </div>
-              <div className="text-right">
-                <div className="text-[11px] uppercase tracking-[0.14em] text-[#90949b]">vanaf</div>
-                <div className="text-[16px] font-bold tracking-[0.01em] text-[#071426]">{p.price}</div>
-              </div>
-            </div>
-          </Link>
-        ))}
       </div>
     </section>
   );
 }
+
 
 /* ------------------------- 4. configurator banner ------------------------- */
 

@@ -467,6 +467,39 @@ function ProductView({ product }: { product: ProductNode }) {
     }));
   }, [images, product.handle, product.title]);
 
+  const subImageGroups = useMemo(() => {
+    const subs = galleryItems.slice(1);
+    const groups: Array<typeof galleryItems> = [];
+    for (let i = 0; i < subs.length; i += 3) {
+      groups.push(subs.slice(i, i + 3));
+    }
+    return groups;
+  }, [galleryItems]);
+
+  const scrollSubCarousel = (direction: -1 | 1) => {
+    const el = subCarouselRef.current;
+    if (!el) return;
+    const newPage = Math.max(0, Math.min(subPage + direction, subImageGroups.length - 1));
+    setSubPage(newPage);
+    el.scrollTo({ left: newPage * el.clientWidth, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const el = subCarouselRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const page = Math.round(el.scrollLeft / el.clientWidth);
+      setSubPage(page);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [subImageGroups.length]);
+
+  useEffect(() => {
+    setSubPage(0);
+    const el = subCarouselRef.current;
+    if (el) el.scrollLeft = 0;
+  }, [galleryItems]);
 
 
   useEffect(() => {

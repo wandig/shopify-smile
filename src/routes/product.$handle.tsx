@@ -1754,7 +1754,7 @@ function FaqSection() {
     return (
       <div
         key={`${isRight ? "r" : "l"}-${i}`}
-        className="rounded-[14px] bg-white p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-5"
+        className="rounded-[14px] bg-[#faf8f5] p-4 md:p-5"
       >
         <button
           type="button"

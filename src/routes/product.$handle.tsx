@@ -625,79 +625,33 @@ function ProductView({ product }: { product: ProductNode }) {
             </figure>
           )}
 
-          <div ref={galleryContinuationRef} className="relative z-10 mt-3 md:mt-4">
-            {subImageGroups.length > 0 && (
-              <>
-                <div
-                  ref={subCarouselRef}
-                  className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                >
-                  {subImageGroups.map((group, groupIndex) => (
-                    <div key={groupIndex} className="w-full flex-shrink-0 snap-start">
-                      <figure className="overflow-hidden rounded-[6px]">
+          <div ref={galleryContinuationRef} className="relative z-10 mt-3 space-y-3 md:mt-4 md:space-y-4">
+            {subImageGroups.map((group, groupIndex) => (
+              <div key={groupIndex}>
+                <figure className="overflow-hidden rounded-[6px]">
+                  <img
+                    src={group[0].src}
+                    alt={group[0].alt}
+                    className="block aspect-[4/3] w-full object-cover"
+                    loading="lazy"
+                  />
+                </figure>
+                {group.length > 1 && (
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    {group.slice(1).map((image, idx) => (
+                      <figure key={idx} className="overflow-hidden rounded-[6px]">
                         <img
-                          src={group[0].src}
-                          alt={group[0].alt}
+                          src={image.src}
+                          alt={image.alt}
                           className="block aspect-[4/3] w-full object-cover"
                           loading="lazy"
                         />
                       </figure>
-                      {group.length > 1 && (
-                        <div className="mt-3 grid grid-cols-2 gap-3">
-                          {group.slice(1).map((image, idx) => (
-                            <figure key={idx} className="overflow-hidden rounded-[6px]">
-                              <img
-                                src={image.src}
-                                alt={image.alt}
-                                className="block aspect-[4/3] w-full object-cover"
-                                loading="lazy"
-                              />
-                            </figure>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {subImageGroups.length > 1 && (
-                  <div className="mt-3 flex items-center justify-between">
-                    <button
-                      type="button"
-                      onClick={() => scrollSubCarousel(-1)}
-                      disabled={subPage === 0}
-                      aria-label="Vorige afbeeldingen"
-                      className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[#071426] transition-colors hover:bg-[#faf8f5] disabled:cursor-not-allowed disabled:opacity-40"
-                    >
-                      <ChevronLeft className="h-4 w-4" strokeWidth={1.5} />
-                    </button>
-                    <div className="flex items-center gap-1.5">
-                      {subImageGroups.map((_, i) => (
-                        <button
-                          key={i}
-                          type="button"
-                          onClick={() => {
-                            setSubPage(i);
-                            subCarouselRef.current?.scrollTo({ left: i * (subCarouselRef.current?.clientWidth || 0), behavior: "smooth" });
-                          }}
-                          aria-label={`Ga naar afbeeldingenpagina ${i + 1}`}
-                          className={`h-1.5 rounded-full transition-all ${i === subPage ? "w-4 bg-[#ef7027]" : "w-1.5 bg-[#d8d0c8]"}`}
-                        />
-                      ))}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => scrollSubCarousel(1)}
-                      disabled={subPage === subImageGroups.length - 1}
-                      aria-label="Volgende afbeeldingen"
-                      className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[#071426] transition-colors hover:bg-[#faf8f5] disabled:cursor-not-allowed disabled:opacity-40"
-                    >
-                      <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
-                    </button>
+                    ))}
                   </div>
                 )}
-              </>
-            )}
+              </div>
+            ))}
           </div>
         </div>
 

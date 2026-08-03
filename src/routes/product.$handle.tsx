@@ -356,7 +356,6 @@ function ProductView({ product }: { product: ProductNode }) {
   const benefitsScrollerRef = useRef<HTMLDivElement>(null);
   const mainGalleryImageRef = useRef<HTMLImageElement>(null);
   const galleryContinuationRef = useRef<HTMLDivElement>(null);
-  const subCarouselRef = useRef<HTMLDivElement>(null);
   const lastGalleryScrollYRef = useRef(0);
   
   const addItem = useCartStore((s) => s.addItem);

@@ -220,7 +220,7 @@ export function SiteHeader() {
           {/* Right: configurator + search + cart */}
           <div className="flex items-center gap-2 md:gap-3 shrink-0">
             <Link
-              to="/producten"
+              to="/configurator"
               className="hidden sm:inline-flex items-center gap-2 h-10 md:h-11 px-4 md:px-5 rounded-full bg-[#0f1f2a] hover:bg-[#1a2d3a] text-white text-sm font-medium transition-colors duration-300 ease-out"
             >
               <Puzzle className="h-4 w-4" strokeWidth={1.75} />

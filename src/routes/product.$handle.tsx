@@ -465,15 +465,16 @@ function ProductView({ product }: { product: ProductNode }) {
 
     if (product.handle === "full-house") {
       const main = FULL_HOUSE_GALLERY[0];
-      const rest = shopifyItems.filter((item) => item.src !== main.src).slice(0, 6);
+      const rest = shopifyItems.filter((item) => item.src !== main.src);
       return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
     }
 
-    return shopifyItems.slice(0, 7).map((item, index) => ({
+    return shopifyItems.map((item, index) => ({
       ...item,
       full: index === 0 || index === 1 || index === 4,
       square: index === 0,
     }));
+
   }, [images, product.handle, product.title]);
 
 

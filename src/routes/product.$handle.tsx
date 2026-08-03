@@ -61,6 +61,7 @@ import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import eenvoudigeKlikmontageUploadImg from "@/assets/eenvoudige-klikmontage-upload.png.asset.json";
 import persoonlijkAdviesUploadImg from "@/assets/persoonlijk-advies-upload.png.asset.json";
 import proefkijkenUploadImg from "@/assets/proefkijken-upload.png.asset.json";
+import garantieUploadImg from "@/assets/garantie-upload.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer4Img from "@/assets/klant-woonkamer-4.png.asset.json";
 import klantWoonkamer5_2Img from "@/assets/klant-woonkamer-5-2.png.asset.json";
@@ -342,7 +343,7 @@ const PRODUCT_BENEFITS = [
   { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageUploadImg.url },
   { title: "Persoonlijk advies", image: persoonlijkAdviesUploadImg.url },
   { title: "100 dagen proefkijken", image: proefkijkenUploadImg.url },
-  { title: "10 jaar garantie", image: garantieCinewallImg.url },
+  { title: "10 jaar garantie", image: garantieUploadImg.url },
 ];
 
 

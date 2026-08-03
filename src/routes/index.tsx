@@ -1,724 +1,779 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { ArrowRight, Truck, Hammer, BadgeCheck, ShieldCheck, Star } from "lucide-react";
-import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
-import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
-import { ProductCard } from "@/components/ProductCard";
-import { Button } from "@/components/ui/button";
+import { useRef, useState, type ReactNode } from "react";
+import {
+  ArrowRight,
+  CalendarClock,
+  Headphones,
+  Mail,
+  Phone,
+  Plus,
+  Shield,
+  SlidersHorizontal,
+  Star,
+  Truck,
+  User,
+} from "lucide-react";
+import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
-import werkplaatsImg from "@/assets/werkplaats.png.asset.json";
 import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
-import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
+import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
-import duoOrangeStudioImg from "@/assets/duo-orange-studio.jpg";
-import detailDesignImg from "@/assets/detail-design.jpg";
-import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
-import plugPlayOrangeStudioImg from "@/assets/plug-play-orange-studio.jpg";
-
-function RatingStars({ value, small, dark }: { value: number; small?: boolean; dark?: boolean }) {
-  const size = small ? "h-3 w-3" : "h-3.5 w-3.5";
-  const color = dark ? "fill-[#d97706] text-[#d97706]" : "fill-white text-white";
-  const empty = dark ? "text-[#d97706]/30" : "text-white/40";
-  return (
-    <span className="flex gap-0.5" aria-label={`${value} sterren`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`${size} ${i < Math.round(value) ? color : empty}`} strokeWidth={1.5} />
-      ))}
-    </span>
-  );
-}
-
-function CartIconBtn() {
-  return (
-    <span className="h-9 w-9 rounded-full bg-[#ef7027] text-white flex items-center justify-center shadow-sm">
-      <svg
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M6 7h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z" />
-        <path d="M9 7a3 3 0 0 1 6 0" />
-      </svg>
-    </span>
-  );
-}
+import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
+import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
+import dutchDesignBg from "@/assets/dutch-design-voor-aan-de-muur-bg.png.asset.json";
+import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
+import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
+import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
+import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
+import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wandig — Plug & play TV cinewalls uit eigen werkplaats" },
+      { title: "Wandig — Plug & play tv-wanden uit eigen werkplaats" },
       {
         name: "description",
         content:
-          "Tijdloze plug & play TV cinewalls. Kies je formaat, indeling en kleur. Gratis levering en 5 jaar garantie.",
+          "Tijdloze plug & play tv-wanden op maat. Kies je formaat, indeling en kleur. Gratis levering, 100 dagen proefkijken en 10 jaar garantie.",
       },
-      { property: "og:title", content: "Wandig — Plug & play TV cinewalls" },
+      { property: "og:title", content: "Wandig — Plug & play tv-wanden op maat" },
       {
         property: "og:description",
-        content: "Tijdloze plug & play TV cinewalls. Kies je formaat, indeling en kleur.",
+        content: "Tijdloze plug & play tv-wanden op maat. Kies je formaat, indeling en kleur.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
 });
 
-const REVIEWS = [
-  {
-    title: "Eindelijk rust rondom de tv",
-    quote:
-      "We wilden geen losse kastjes meer en ook geen kabels in beeld. De Wandig past precies in onze woonkamer en voelt alsof hij er altijd al hoorde. Het geheel is strak, rustig en veel warmer dan onze oude tv-hoek.",
-    name: "Lotte M.",
-    meta: "Full House in juni 2026",
-  },
-  {
-    title: "Makkelijker geplaatst dan verwacht",
-    quote:
-      "Ik was bang dat zo'n cinewall veel gedoe zou zijn, maar alles kwam netjes voorbereid binnen. Met twee personen stond hij sneller dan gedacht. Vooral de plug & play aansluiting en weggewerkte kabels maken echt verschil.",
-    name: "Jeroen V.",
-    meta: "Duo in mei 2026",
-  },
-  {
-    title: "De kleur klopt perfect",
-    quote:
-      "De kleurstalen thuis bekijken was precies wat we nodig hadden. Uiteindelijk gekozen voor een afwerking die mooi bij onze vloer past. Het meubel oogt maatwerk, maar bestellen bleef heel overzichtelijk.",
-    name: "Sanne D.",
-    meta: "Solo in mei 2026",
-  },
-  {
-    title: "Veel opbergruimte zonder drukte",
-    quote:
-      "We hebben nu plek voor boeken, speakers en decoratie zonder dat het rommelig wordt. De tv valt veel rustiger weg in de wand en de afwerking is echt netjes. Bezoekers vragen steeds waar we hem hebben laten maken.",
-    name: "Milan R.",
-    meta: "Full House in april 2026",
-  },
-];
+/* ---------------------------------- shared --------------------------------- */
 
-const COLLECTION_META: {
-  title: string;
-  description: string;
-  korting: string;
-  tags: string[];
-  highlight?: boolean;
-}[] = [
-  {
-    title: "Wandig Solo",
-    description: "De compacte cinewall — strak en tijdloos voor elke woonkamer.",
-    korting: "100,-",
-    tags: ["Compact", "Zwevend of staand", "Plug & play"],
-  },
-  {
-    title: "Wandig Duo",
-    description: "Extra opbergruimte links én rechts van je TV, in perfecte symmetrie.",
-    korting: "150,-",
-    tags: ["Populair", "Symmetrisch", "Veel opbergruimte"],
-    highlight: true,
-  },
-  {
-    title: "Wandig Full House",
-    description: "Een volledige wand-look — van vloer tot plafond, helemaal jouw stijl.",
-    korting: "250,-",
-    tags: ["Aanbevolen", "Wand-vullend", "Maximaal gemak"],
-    highlight: true,
-  },
-];
-
-function Home() {
-  const upgradeWords = ["woonkamer", "tv-wand", "rust", "stijl"];
-  const USPS = [
-    { icon: Truck, label: "Gratis levering aan huis" },
-    { icon: Hammer, label: "Gemaakt in eigen werkplaats" },
-    { icon: BadgeCheck, label: "Hoge kwaliteit, eerlijke prijs" },
-    { icon: ShieldCheck, label: "5 jaar garantie" },
-  ];
-  const [upgradeWordIdx, setUpgradeWordIdx] = useState(0);
-  const [upgradeWordVisible, setUpgradeWordVisible] = useState(true);
-  const [activeUpgradeMaxIdx, setActiveUpgradeMaxIdx] = useState(-1);
-  const [uspIdx, setUspIdx] = useState(0);
-  const [uspVisible, setUspVisible] = useState(true);
-  useEffect(() => {
-    const id = setInterval(() => {
-      setUpgradeWordVisible(false);
-      setTimeout(() => {
-        setUpgradeWordIdx((i) => (i + 1) % upgradeWords.length);
-        setUpgradeWordVisible(true);
-      }, 220);
-    }, 2000);
-    return () => clearInterval(id);
-  }, []);
-  useEffect(() => {
-    const updateActiveUpgrade = () => {
-      const rows = Array.from(document.querySelectorAll<HTMLElement>("[data-upgrade-row]"));
-      const activationLine = window.innerHeight * 0.78;
-      let next = -1;
-
-      rows.forEach((row, index) => {
-        if (row.getBoundingClientRect().top < activationLine) {
-          next = index;
-        }
-      });
-
-      setActiveUpgradeMaxIdx(next);
-    };
-
-    updateActiveUpgrade();
-    window.addEventListener("scroll", updateActiveUpgrade, { passive: true });
-    window.addEventListener("resize", updateActiveUpgrade);
-    return () => {
-      window.removeEventListener("scroll", updateActiveUpgrade);
-      window.removeEventListener("resize", updateActiveUpgrade);
-    };
-  }, []);
-  useEffect(() => {
-    const id = setInterval(() => {
-      setUspVisible(false);
-      setTimeout(() => {
-        setUspIdx((i) => (i + 1) % USPS.length);
-        setUspVisible(true);
-      }, 700);
-    }, 5000);
-    return () => clearInterval(id);
-  }, []);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const res = await storefrontApiRequest(PRODUCTS_QUERY, { first: 20 });
-      return (res?.data?.products?.edges ?? []) as ShopifyProduct[];
-    },
-  });
-
-  const allProducts = data ?? [];
-  const products = allProducts.filter((p) => {
-    const t = p.node.title.toLowerCase();
-    return !t.includes("prestige") && !t.includes("trio");
-  });
-  const hero = products[0];
-  const heroImg = hero?.node.images.edges[0]?.node.url;
-
+function SectionHeading({
+  kicker,
+  title,
+  intro,
+  align = "center",
+}: {
+  kicker?: string;
+  title: ReactNode;
+  intro?: string;
+  align?: "center" | "left";
+}) {
   return (
-    <div>
-      {/* Hero — full-bleed video */}
-      <section className="relative h-screen min-h-[600px] w-full overflow-hidden">
-        <video
-          src={heroVideo.url}
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={heroImg}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/35" />
-        <div className="relative h-full w-full flex flex-col items-center justify-center text-center text-background px-5">
-          <h1 className="font-serif font-thin text-background text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-            Onze bestsellers
-          </h1>
-          <div className="mt-10">
-            <Button
-              asChild
-              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] h-10 px-8 text-sm font-medium"
-            >
-              <Link to="/producten">Bekijk bestsellers</Link>
-            </Button>
-          </div>
-          <div className="mt-6 flex items-center gap-2 text-white text-[12px] tracking-wide">
-            <div className="flex items-center gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
-              ))}
-            </div>
-            <span className="opacity-95">23.000+ beoordelingen</span>
-          </div>
+    <div className={align === "center" ? "text-center" : "text-left"}>
+      {kicker && (
+        <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">{kicker}</span>
+      )}
+      <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight tracking-[0.01em] text-[#071426]">
+        {title}
+      </h2>
+      {intro && (
+        <p
+          className={`mt-2 text-[13px] md:text-[14px] leading-relaxed tracking-[0.01em] text-[#071426]/55 ${align === "center" ? "mx-auto max-w-[560px]" : "max-w-[520px]"}`}
+        >
+          {intro}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function PrimaryButton({ to, children }: { to: string; children: ReactNode }) {
+  return (
+    <Link
+      to={to}
+      className="inline-flex h-[46px] items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] px-7 text-[14px] font-[500] tracking-[0.04em] text-white transition hover:brightness-95"
+    >
+      {children}
+      <ArrowRight className="h-4 w-4" />
+    </Link>
+  );
+}
+
+/* ------------------------------- 1. hero ---------------------------------- */
+
+function HeroSection() {
+  return (
+    <section className="relative h-screen min-h-[600px] w-full overflow-hidden">
+      <video
+        src={heroVideo.url}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/35" />
+      <div className="relative flex h-full w-full flex-col items-center justify-center px-5 text-center text-white">
+        <h1 className="text-[32px] font-bold leading-[1.1] tracking-[0.01em] md:text-[52px]">
+          Jouw tv-wand, op maat gemaakt
+        </h1>
+        <p className="mt-4 max-w-[520px] text-[14px] leading-relaxed tracking-[0.01em] text-white/85 md:text-[15px]">
+          Plug &amp; play geleverd uit eigen werkplaats. Kies je formaat, indeling en kleur.
+        </p>
+        <div className="mt-8">
+          <PrimaryButton to="/producten">Configureer jouw tv-wand</PrimaryButton>
         </div>
-      </section>
-
-      <section className="bg-[#fff7ee] pt-12 md:pt-16">
-        <div className="pb-16 md:pb-20">
-          {/* Bestsellers carousel panel — bleeds to right edge */}
-          <div className="pl-5 md:pl-[calc(18%-80px)] pr-0">
-            <div className="relative rounded-l-3xl bg-[#f3d3b1] py-3 pl-3 md:py-4 md:pl-24 pr-0">
-              {/* Vertical label — pinned, always visible */}
-              <div className="hidden md:flex absolute left-0 top-0 bottom-0 w-24 items-start justify-center pointer-events-none pt-8">
-                <span
-                  className="font-serif tracking-[0.2em] text-[#0a2540] text-[28px] leading-none"
-                  style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-                >
-                  BESTSELLERS
-                </span>
-              </div>
-              <div className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-
-
-                {/* Featured large card */}
-                {(() => {
-                  const card = {
-                    handle: "full-house",
-                    badge: "Cinewall",
-                    img: fullhouseOrange.url,
-                    title: "Full House",
-                    price: "1.699,-",
-                    rating: 4.5,
-                    reviews: 2524,
-                    size: "180x200",
-                    cat: "Cinewall",
-                  };
-                  return (
-                    <Link
-                      to="/product/$handle"
-                      params={{ handle: card.handle }}
-                      className="relative shrink-0 snap-start basis-[88%] sm:basis-[60%] md:basis-auto md:w-[520px] rounded-2xl overflow-hidden bg-[#f5b88d] aspect-square group"
-                    >
-                      <img
-                        src={card.img}
-                        alt={card.title}
-                        className="absolute inset-0 w-full h-full object-cover scale-[1.1]"
-                        loading="lazy"
-                      />
-                      <span className="absolute top-4 left-4 z-10 rounded-full bg-white/15 backdrop-blur-md text-white text-xs px-3 py-1.5">
-                        {card.badge}
-                      </span>
-                      <div className="absolute top-1/2 -translate-y-1/2 left-6 right-6 text-white">
-                        <h3 className="font-serif text-3xl md:text-4xl leading-tight">{card.title}</h3>
-                        <div className="font-serif text-3xl md:text-4xl mt-2">{card.price}</div>
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between text-white">
-                        <div>
-                          <div className="flex items-center gap-1.5 text-xs opacity-95 mb-2">
-                            <RatingStars value={card.rating} small />
-                            <span>({card.reviews})</span>
-                          </div>
-                          <div className="text-xs">
-                            <span className="opacity-90">{card.size}</span> &nbsp;·&nbsp;{" "}
-                            <span className="underline underline-offset-2">{card.cat}</span>
-                          </div>
-                        </div>
-                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef7027] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
-                          <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
-                            Aanpassen
-                          </span>
-                          <svg
-                            className="w-4 h-4 shrink-0"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M5 12h14M13 5l7 7-7 7" />
-                          </svg>
-                        </span>
-                      </div>
-                    </Link>
-                  );
-                })()}
-
-                {/* Smaller cards */}
-                {[
-                  {
-                    handle: "duo",
-                    img: tvOrangeImg.url,
-                    title: "Duo",
-                    price: "749,-",
-                    rating: 3.5,
-                    reviews: 8,
-                    size: "90x200 cm.",
-                    cat: "Cinewall",
-                  },
-                  {
-                    handle: "full-house",
-                    img: duoOrangeStudioImg,
-                    title: "Full House",
-                    price: "1.499,-",
-                    rating: 4.5,
-                    reviews: 56,
-                    size: "180x200",
-                    cat: "Cinewall",
-                  },
-                  {
-                    handle: "solo",
-                    img: "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_Solo_Camera_Side_Wandig_4_Truffle_Brown_Oak.jpg?v=1744100488",
-                    title: "Moma",
-                    price: "1.499,-",
-                    rating: 4.5,
-                    reviews: 14,
-                    size: "140x200",
-                    cat: "Cinewall",
-                  },
-                ].map((card) => (
-                  <Link
-                    key={card.title}
-                    to="/product/$handle"
-                    params={{ handle: card.handle }}
-                    className="shrink-0 snap-start basis-[85%] sm:basis-[48%] md:basis-[390px] md:w-[390px] rounded-2xl overflow-hidden bg-white flex flex-col group md:aspect-auto md:h-[520px]"
-                  >
-                    <div className="mt-4 mx-4 mb-2 rounded-xl overflow-hidden bg-[#f5b88d] aspect-[4/3] md:aspect-auto md:h-[55%] shrink-0">
-                      <img
-                        src={card.img}
-                        alt={card.title}
-                        className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
-                        loading="lazy"
-                      />
-                    </div>
-
-                    <div className="px-5 pb-4 pt-2 flex flex-col flex-1">
-                      <h3 className="font-serif text-2xl md:text-3xl text-[#0a2540]">{card.title}</h3>
-                      <div className="font-serif text-xl md:text-2xl text-[#0a2540] mt-1">{card.price}</div>
-                      <div className="mt-auto pt-4 flex items-end justify-between gap-3">
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-1.5 text-[11px] text-[#0a2540]/70 mb-1.5">
-                            <RatingStars value={card.rating} small dark />
-                            <span>({card.reviews})</span>
-                          </div>
-                          <div className="text-[11px] text-[#0a2540]/80 whitespace-nowrap">
-                            {card.size} &nbsp;·&nbsp;{" "}
-                            <span className="underline underline-offset-2 text-[#d97706]">{card.cat}</span>
-                          </div>
-                        </div>
-                        <span className="shrink-0 inline-flex items-center justify-end gap-2 h-10 rounded-full bg-[#ef7027] text-white overflow-hidden transition-all duration-300 ease-out w-10 group-hover:w-32 pr-3">
-                          <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pl-4">
-                            Aanpassen
-                          </span>
-                          <svg
-                            className="w-4 h-4 shrink-0"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M5 12h14M13 5l7 7-7 7" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* USPs */}
-          <div className="px-5 md:px-[calc(18%-80px)] pt-16 md:pt-24">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
-              {[
-                {
-                  kicker: "GETEST EN BEWEZEN",
-                  title: "+150.000 verkochte cinewalls",
-                  body: "Hoge eisen aan kwaliteit, design en functionaliteit gelden voor elk product",
-                },
-                {
-                  kicker: "JOUW INTERIEUR IS BELANGRIJK VOOR ONS",
-                  title: "97% klanttevredenheid",
-                  body: "Geniet gerust — we hebben een score van 4,6 en meer dan 15.000 vijfsterrenbeoordelingen",
-                },
-                {
-                  kicker: "KIES MET VOLLEDIGE GEMOEDSRUST",
-                  title: "100 dagen bedenktijd",
-                  body: "Wat je ook koopt — je krijgt 100 dagen om het thuis uit te proberen",
-                },
-              ].map((u) => (
-                <div key={u.kicker} className="flex flex-col items-center max-w-sm mx-auto">
-                  <div className="text-[9px] tracking-[0.18em] text-[#d97706] uppercase mb-3">
-                    {u.kicker}
-                  </div>
-                  <div className="mb-3 md:min-h-[1.2em] flex items-center justify-center">
-                    <h3 className="font-serif text-xl md:text-2xl text-[#0a2540] leading-tight">
-                      {u.title}
-                    </h3>
-                  </div>
-                  <p className="text-[11px] text-[#0a2540]/70 leading-relaxed text-center">{u.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="mt-6 flex items-center gap-2 text-[12px] tracking-[0.01em]">
+          <span className="flex items-center gap-0.5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
+            ))}
+          </span>
+          <span className="opacity-95">23.000+ beoordelingen</span>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Details maken het verschil */}
-      <section className="mx-auto max-w-[1400px] px-5 md:px-10 pt-10 md:pt-16 pb-24 md:pb-32">
-        <h2 className="mb-9 md:mb-12 max-w-4xl text-[2.45rem] md:text-[3.05rem] leading-[0.98] tracking-[-0.055em] text-black">
-          Details maken het verschil
-        </h2>
-        <div className="-mx-5 overflow-hidden pl-5 md:mx-0 md:overflow-visible md:pl-0">
-          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth pr-5 pb-3 md:pr-0 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {[
-            { img: detailDesignImg, title: "Gepersonaliseerd design" },
-            { img: detailMaatwerkImg, title: "Slim samen te stellen" },
-            { img: plugPlayOrangeStudioImg, title: "Plug & play geleverd" },
-          ].map((item) => (
-            <div key={item.title} className="group flex shrink-0 basis-[69%] flex-col snap-start md:basis-auto">
-              <div className="aspect-[1.45/1] w-full overflow-hidden rounded-[12px] bg-muted md:rounded-[14px]">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.025]"
-                />
+/* --------------------------- 2. 3 benefits (hero) -------------------------- */
+
+const HERO_BENEFITS = [
+  {
+    icon: plugAndPlayIcon.url,
+    title: "Plug & play geleverd",
+    body: "Voorgemonteerd en klaar om op te hangen. Kabels netjes uit het zicht.",
+  },
+  {
+    icon: kijkplezierIcon.url,
+    title: "100 dagen proefkijken",
+    body: "Rustig thuis ervaren. Niet tevreden? Dan halen we hem gratis op.",
+  },
+  {
+    icon: warrantyIcon.url,
+    title: "10 jaar garantie",
+    body: "Gemaakt van hoogwaardige materialen, gebouwd om mee te gaan.",
+  },
+];
+
+function HeroBenefitsSection() {
+  return (
+    <section className="bg-[#faf8f5]">
+      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
+        <div className="grid gap-6 sm:grid-cols-3 md:gap-10">
+          {HERO_BENEFITS.map((b) => (
+            <div key={b.title} className="flex items-start gap-4">
+              <img src={b.icon} alt="" className="h-8 w-8 shrink-0" loading="lazy" />
+              <div>
+                <h3 className="text-[15px] font-bold tracking-[0.01em] text-[#071426]">{b.title}</h3>
+                <p className="mt-1.5 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/65">
+                  {b.body}
+                </p>
               </div>
-              <h3 className="mt-5 flex items-center justify-between gap-5 text-[1.05rem] md:text-[1.12rem] font-medium leading-none tracking-[-0.035em] text-black">
-                <span>{item.title}</span>
-                <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" strokeWidth={2} />
-              </h3>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------- 3. product carousel --------------------------- */
+
+const PRODUCTS = [
+  {
+    handle: "solo",
+    title: "Solo",
+    tagline: "Compact en strak",
+    price: "749,-",
+    img: tvOrangeImg.url,
+  },
+  {
+    handle: "duo",
+    title: "Duo",
+    tagline: "Symmetrisch met opbergruimte",
+    price: "1.199,-",
+    img: plugPlayImg.url,
+  },
+  {
+    handle: "full-house",
+    title: "Full House",
+    tagline: "Volledige wand-look",
+    price: "1.699,-",
+    img: fullhouseOrange.url,
+  },
+];
+
+function ProductCarouselSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scroll = (dir: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+
+  return (
+    <section className="bg-[#faf8f5] py-10 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
+          <SectionHeading
+            kicker="Collectie"
+            title="Onze tv-wanden"
+            intro="Elk model op maat gemaakt, in de kleur en indeling die bij jouw woonkamer past."
+            align="left"
+          />
+          <div className="hidden gap-2 md:flex">
+            <button
+              type="button"
+              onClick={() => scroll(-1)}
+              aria-label="Vorige"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll(1)}
+              aria-label="Volgende"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
+            >
+              ›
+            </button>
           </div>
         </div>
-        <div className="mt-4 flex items-center justify-center gap-2 md:hidden" aria-hidden="true">
-          <span className="h-2 w-2 rounded-full bg-black" />
-          <span className="h-2 w-2 rounded-full bg-black/18" />
-          <span className="h-2 w-2 rounded-full bg-black/18" />
-        </div>
-      </section>
+      </div>
 
-      {/* Werkplaats video */}
-      <section className="px-5 md:px-[calc(18%-80px)] pb-24 md:pb-32">
-        <div className="overflow-hidden rounded-2xl bg-muted">
+      <div
+        ref={scrollerRef}
+        className="mx-auto flex max-w-[1400px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {PRODUCTS.map((p) => (
+          <Link
+            key={p.handle}
+            to="/product/$handle"
+            params={{ handle: p.handle }}
+            className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] bg-white shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[420px]"
+          >
+            <div className="aspect-[4/3] overflow-hidden bg-[#f7f7f7]">
+              <img
+                src={p.img}
+                alt={p.title}
+                className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </div>
+            <div className="flex items-end justify-between gap-4 p-5">
+              <div>
+                <h3 className="text-[16px] font-bold tracking-[0.01em] text-[#071426]">{p.title}</h3>
+                <p className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.tagline}</p>
+              </div>
+              <div className="text-right">
+                <div className="text-[11px] uppercase tracking-[0.14em] text-[#90949b]">vanaf</div>
+                <div className="text-[16px] font-bold tracking-[0.01em] text-[#071426]">{p.price}</div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------- 4. configurator banner ------------------------- */
+
+function ConfiguratorBannerSection() {
+  return (
+    <section className="bg-[#faf8f5] pb-10 md:pb-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="grid items-center gap-8 overflow-hidden rounded-[20px] bg-[#0f1f2a] p-8 md:grid-cols-2 md:p-12">
+          <div className="text-white">
+            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-white/50">
+              Configurator
+            </span>
+            <h2 className="mt-2 text-[22px] font-bold leading-tight tracking-[0.01em] md:text-[28px]">
+              Stel jouw tv-wand samen
+            </h2>
+            <p className="mt-3 max-w-[420px] text-[13px] leading-relaxed tracking-[0.01em] text-white/70 md:text-[14px]">
+              Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
+            </p>
+            <div className="mt-7">
+              <PrimaryButton to="/producten">Start de configurator</PrimaryButton>
+            </div>
+          </div>
+          {/* asset slot: configurator visual */}
+          <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[16px] bg-white/5">
+            <SlidersHorizontal className="h-10 w-10 text-white/30" strokeWidth={1.5} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------ 5. marquee -------------------------------- */
+
+const PRESS = ["RTL Woonmagazine", "vtwonen", "Eigen Huis & Interieur", "Libelle", "AD", "Man Man", "Elle Decoration"];
+
+function PressMarqueeSection() {
+  const row = [...PRESS, ...PRESS];
+  return (
+    <section className="overflow-hidden border-y border-[#eee7de] bg-white py-6 md:py-8">
+      <p className="mb-4 text-center text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
+        Bekend van
+      </p>
+      <div className="relative">
+        <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-12 pr-12">
+          {row.map((name, i) => (
+            <span
+              key={`${name}-${i}`}
+              className="whitespace-nowrap text-[16px] font-[500] tracking-[0.06em] text-[#071426]/45 md:text-[20px]"
+            >
+              {name}
+            </span>
+          ))}
+        </div>
+      </div>
+      <style>{`@keyframes wandig-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+    </section>
+  );
+}
+
+/* --------------------------- 6. dutch design ------------------------------ */
+
+function DutchDesignSection() {
+  return (
+    <section className="bg-[#faf8f5] py-10 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="relative overflow-hidden rounded-[20px]">
+          {/* asset slot: dutch design achtergrond */}
+          <img
+            src={dutchDesignBg.url}
+            alt="Dutch design tv-wand"
+            className="h-[420px] w-full object-cover md:h-[520px]"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-center p-8 md:p-14">
+            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-white/60">
+              Dutch design
+            </span>
+            <h2 className="mt-2 max-w-[520px] text-[24px] font-bold leading-tight tracking-[0.01em] text-white md:text-[32px]">
+              Ontworpen én gemaakt in Nederland
+            </h2>
+            <p className="mt-3 max-w-[440px] text-[13px] leading-relaxed tracking-[0.01em] text-white/80 md:text-[14px]">
+              Eigen ontwerp, eigen werkplaats in Best. Tijdloze lijnen, eerlijke materialen en een
+              afwerking die je voelt.
+            </p>
+            <div className="mt-7">
+              <PrimaryButton to="/bezoek">Bekijk onze werkplaats</PrimaryButton>
+            </div>
+          </div>
+          <img
+            src={puzzlePiecesImg.url}
+            alt=""
+            className="pointer-events-none absolute bottom-4 right-4 w-[90px] opacity-90 md:w-[120px]"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------ 7. reviews -------------------------------- */
+
+const REVIEWS = [
+  { name: "Sanne V.", location: "Utrecht", rating: 5, title: "Kwaliteit is top", body: "De Full House staat prachtig in onze woonkamer. Afwerking is echt perfect en de montage was zo gepiept.", date: "3 weken geleden" },
+  { name: "Jeroen B.", location: "Amsterdam", rating: 5, title: "Meer dan verwacht", body: "Bestelling verliep soepel en levering was op tijd. De kast oogt luxer dan op de foto's.", date: "1 maand geleden" },
+  { name: "Lisa D.", location: "Den Haag", rating: 5, title: "Fantastisch meubel", body: "Onze woonkamer is compleet veranderd. Kabels netjes weggewerkt en de soundbar past perfect.", date: "1 maand geleden" },
+  { name: "Mark H.", location: "Rotterdam", rating: 4, title: "Mooi en stevig", body: "Zeer tevreden over de kwaliteit. Montage duurde iets langer dan verwacht maar het resultaat is top.", date: "2 maanden geleden" },
+  { name: "Eva K.", location: "Eindhoven", rating: 5, title: "Precies wat we zochten", body: "De kleurstalen thuis waren super handig. Uiteindelijk gekozen voor eiken, warm en tijdloos.", date: "2 maanden geleden" },
+  { name: "Tom S.", location: "Groningen", rating: 5, title: "Klantenservice top", body: "Had een vraag over de afmetingen en werd direct geholpen. Aanrader!", date: "2 maanden geleden" },
+];
+
+function ReviewsSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scroll = (dir: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+
+  return (
+    <section className="bg-[#fff7ef] py-10 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
+          <SectionHeading kicker="Reviews" title="Wat klanten zeggen over hun tv-wand." align="left" />
+          <div className="hidden gap-2 md:flex">
+            <button
+              type="button"
+              onClick={() => scroll(-1)}
+              aria-label="Vorige"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll(1)}
+              aria-label="Volgende"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        ref={scrollerRef}
+        className="mx-auto flex max-w-[1400px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {REVIEWS.map((r, i) => (
+          <article
+            key={i}
+            className="flex w-[280px] shrink-0 snap-start flex-col justify-between rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[340px]"
+          >
+            <div className="pb-5">
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <span key={idx} className={idx < r.rating ? "text-[#ef7027]" : "text-[#e5ded4]"}>
+                    ★
+                  </span>
+                ))}
+              </div>
+              <h3 className="mt-3 text-[15px] font-[500] tracking-[0.01em] text-[#071426]">{r.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/65 md:text-[14px]">
+                {r.body}
+              </p>
+            </div>
+            <div className="flex items-center gap-2.5 border-t border-[#e5ded4]/40 pt-5 text-[12px]">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#ef7027]">
+                <User className="h-3.5 w-3.5" strokeWidth={2} />
+              </span>
+              <span className="font-[500] text-[#071426]">
+                {r.name} · {r.location}
+              </span>
+              <span className="text-[#071426]/50">· {r.date}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------ 8. gratis kleurstalen --------------------------- */
+
+function ColorSamplesSection() {
+  return (
+    <section className="bg-[#faf8f5] py-10 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="grid items-center gap-8 overflow-hidden rounded-[20px] bg-[#ede7e0] md:grid-cols-2">
+          {/* asset slot: kleurstalen foto */}
+          <img
+            src={kleurstalenImg.url}
+            alt="Gratis kleurstalen van Wandig"
+            className="h-full max-h-[380px] w-full object-cover"
+            loading="lazy"
+          />
+          <div className="p-8 md:p-12">
+            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
+              Gratis thuis
+            </span>
+            <h2 className="mt-2 text-[22px] font-bold leading-tight tracking-[0.01em] text-[#071426] md:text-[28px]">
+              Bestel gratis kleurstalen
+            </h2>
+            <p className="mt-3 max-w-[420px] text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[14px]">
+              Twijfel je over de kleur? Wij sturen je gratis stalen zodat je thuis in je eigen licht kunt
+              kiezen.
+            </p>
+            <div className="mt-7">
+              <PrimaryButton to="/klantenservice">Bestel gratis kleurstalen</PrimaryButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------- 9. quote + video ----------------------------- */
+
+function QuoteVideoSection() {
+  return (
+    <section className="bg-[#faf8f5] pb-10 md:pb-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <blockquote className="mx-auto max-w-[820px] text-center">
+          <p className="text-[20px] font-[500] leading-[1.4] tracking-[0.01em] text-[#071426] md:text-[28px]">
+            “We maken tv-wanden die je niet elke vijf jaar hoeft te vervangen. Eerlijk materiaal, eigen
+            werkplaats, en een afwerking waar we onze naam op zetten.”
+          </p>
+          <footer className="mt-5 text-[13px] tracking-[0.01em] text-[#071426]/55">
+            Team Wandig — eigen werkplaats in Best
+          </footer>
+        </blockquote>
+
+        {/* asset slot: bedrijfsvideo */}
+        <div className="mt-8 overflow-hidden rounded-[20px] bg-black md:mt-12">
           <video
             src={werkplaatsVideo.url}
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
+            className="aspect-[16/9] w-full object-cover"
           />
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Wandig upgrade */}
-      <section className="bg-[#fef7ee] px-5 pt-8 pb-20 md:px-10 md:pt-14 md:pb-28">
-        <div className="mx-auto max-w-[1280px]">
-          <div className="grid gap-10 md:grid-cols-[0.86fr_1fr] md:items-start">
-            <h2 className="mx-auto max-w-lg text-center text-[2.15rem] leading-[0.96] tracking-[-0.06em] text-black md:mx-0 md:text-left md:text-[4rem]">
-              <span className="block">Wandig tilt jouw</span>
-              <span
-                className={`block min-h-[0.96em] bg-gradient-to-r from-[#ef6f7a] via-[#f56e16] to-[#f08971] bg-clip-text text-transparent transition-all duration-300 ease-out ${upgradeWordVisible ? "translate-y-0 opacity-100 blur-0" : "translate-y-2 opacity-0 blur-sm"}`}
+/* --------------------------- 10. FAQ + contact ---------------------------- */
+
+const FAQ_ITEMS = [
+  { question: "Hoe lang duurt de levering?", answer: "Gemiddeld leveren we binnen 10 werkdagen. Bij een maatwerkkleur kan dit iets langer duren; je hoort altijd vooraf de exacte levertijd." },
+  { question: "Moet ik zelf monteren?", answer: "Onze tv-wanden komen plug & play geleverd. Met twee personen hang je hem op met de bijgeleverde klikmontage." },
+  { question: "Past een soundbar in de kast?", answer: "Ja. Elk model heeft ruimte voor een soundbar en apparatuur, met kabeldoorvoer zodat kabels uit het zicht blijven." },
+  { question: "Kan ik de kleur thuis bekijken?", answer: "Zeker. Bestel gratis kleurstalen en bekijk ze rustig in je eigen woonkamer voordat je beslist." },
+  { question: "Wat als het meubel niet bevalt?", answer: "Je hebt 100 dagen proefkijken. Bevalt het niet, dan halen we het gratis bij je op." },
+  { question: "Hoeveel garantie krijg ik?", answer: "Op elke tv-wand geldt 10 jaar garantie op materiaal en constructie." },
+];
+
+function FaqContactSection() {
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <section className="bg-white py-12 md:py-20">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <SectionHeading
+          kicker="FAQ"
+          title="Veelgestelde vragen"
+          intro="Alles wat je wilt weten over onze tv-wanden."
+        />
+
+        <div className="mt-8 grid gap-3 md:mt-12 md:grid-cols-2 md:gap-4">
+          {FAQ_ITEMS.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <div
+                key={item.question}
+                className="rounded-[14px] bg-[#faf8f5] p-4 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:p-5"
               >
-                {upgradeWords[upgradeWordIdx]}
-              </span>
-            </h2>
-
-            <div className="space-y-7 md:space-y-10">
-              {[
-                {
-                  title: "Rustig beeld",
-                  body: "Een strakke wand rondom je tv, zonder losse kabels of rommelige meubels die de aandacht wegtrekken.",
-                  image: detailDesignImg,
-                  alt: "Strakke Wandig afwerking",
-                },
-                {
-                  title: "Kleur die klopt",
-                  body: "Kies een afwerking die mooi aansluit op je vloer, bank en interieur. Subtiel aanwezig, precies genoeg karakter.",
-                  image: detailMaatwerkImg,
-                  alt: "Wandig kleuren en materialen",
-                },
-                {
-                  title: "Plug & play gemak",
-                  body: "Slim ontworpen om eenvoudig zelf te plaatsen en aan te sluiten, met een resultaat dat voelt alsof het altijd zo hoorde.",
-                  image: plugPlayOrangeStudioImg,
-                  alt: "Wandig plug and play levering",
-                },
-              ].map((item, index) => {
-                const active = index <= activeUpgradeMaxIdx;
-                return (
-                <div
-                  key={item.title}
-                  data-upgrade-row
-                  className="grid grid-cols-[5px_1fr] gap-x-3 md:grid-cols-[6px_1fr] md:gap-x-5"
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  className="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
                 >
-                  <div className={`row-span-2 rounded-full transition-colors duration-500 ${active ? "bg-[#ef7027]" : "bg-black/12"}`} />
-                  <div className="grid grid-cols-[1fr_92px] items-center gap-4 md:grid-cols-[1fr_132px] md:gap-6">
-                    <h3 className={`text-[1.18rem] font-medium leading-[1.12] tracking-[-0.05em] transition-colors duration-500 md:text-[1.5rem] ${active ? "text-black" : "text-black/38"}`}>
-                      {item.title}
-                    </h3>
-                    <div className="h-[51px] w-[92px] overflow-hidden rounded-[9px] bg-[#f4f1ed] md:h-[62px] md:w-[132px] md:rounded-[12px]">
-                      <img
-                        src={item.image}
-                        alt={item.alt}
-                        loading="lazy"
-                        className={`h-full w-full object-cover transition duration-500 ${active ? "scale-100 opacity-100 grayscale-0" : "scale-[1.02] opacity-70 grayscale"}`}
-                      />
+                  <span className="text-[14px] font-[500] leading-snug tracking-[0.01em] text-[#071426] md:text-[15px]">
+                    {item.question}
+                  </span>
+                  <span
+                    className={`flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border border-[#cdc0b5] text-[#071426] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : "rotate-0"}`}
+                  >
+                    <Plus className="h-3 w-3" strokeWidth={2} />
+                  </span>
+                </button>
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pt-3 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/65 md:text-[14px]">
+                      {item.answer}
                     </div>
                   </div>
-                  <p className={`col-start-2 max-w-[18.5rem] overflow-hidden text-[0.92rem] leading-[1.58] tracking-[-0.025em] text-black/58 transition-all duration-500 ease-out md:max-w-[31rem] md:text-[1rem] ${active ? "mt-3 max-h-32 opacity-100 md:mt-4" : "mt-0 max-h-0 opacity-0"}`}>
-                    {item.body}
-                  </p>
                 </div>
-                );
-              })}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 grid gap-8 border-t border-[#eee7de] pt-10 sm:grid-cols-3 sm:gap-6">
+          {[
+            { icon: Phone, label: "Bel ons, steun 9-5", sub: "9:00 - 18:00", value: "+31 085 107 1953" },
+            { icon: Headphones, label: "Chat live, agent 9-5", sub: "9:00 - 22:00", value: "Chat met ons" },
+            { icon: Mail, label: "Stuur een mail", sub: "iedere werkdag", value: "support.nl@wandig.com" },
+          ].map(({ icon: Icon, label, sub, value }) => (
+            <div key={label}>
+              <div className="flex items-start gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#ef7027]/10">
+                  <Icon className="h-[17px] w-[17px] text-[#ef7027]" strokeWidth={1.5} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[12px] leading-snug tracking-[0.01em] text-[#071426]/75">{label}</p>
+                  <p className="text-[12px] leading-snug tracking-[0.01em] text-[#071426]/75">{sub}</p>
+                </div>
+              </div>
+              <p className="mt-4 break-words text-[15px] font-bold leading-tight tracking-[0.01em] text-[#071426]">
+                {value}
+              </p>
+              <div className="mt-3 h-px w-full bg-[#071426]/60" />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Desktop editorial mosaic */}
-      <section className="hidden bg-[#fef7ee] px-5 py-7 md:block md:px-10">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-6">
-          <article className="group relative row-span-2 h-[604px] overflow-hidden rounded-[16px] bg-[#f4f1ed] shadow-[0_18px_45px_rgba(31,25,21,0.10)]">
-            <img
-              src={fullhouseOrange.url}
-              alt="Wandig Full House in warme studio"
-              loading="lazy"
-              className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/36 to-transparent" />
-            <h2 className="absolute bottom-12 left-12 max-w-[520px] font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[33px] font-[414] leading-[1.02] tracking-[-0.052em] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.26)]">
-              Een wand die meteen klopt
-            </h2>
-          </article>
-
-          <div className="grid h-[604px] grid-cols-2 grid-rows-[1fr_1fr] gap-6">
-            {[
-              {
-                title: "Kleur die rust brengt",
-                img: tvOrangeImg.url,
-                alt: "Wandig kleurvisualisatie op telefoon",
-                className: "object-[48%_58%]",
-              },
-              {
-                title: "Studio afwerking",
-                img: duoOrangeStudioImg,
-                alt: "Wandig Duo in oranje studio",
-                className: "object-center",
-              },
-            ].map((item) => (
-              <article key={item.title} className="group relative overflow-hidden rounded-[16px] bg-[#f4f1ed] shadow-[0_18px_45px_rgba(31,25,21,0.08)]">
-                <img
-                  src={item.img}
-                  alt={item.alt}
-                  loading="lazy"
-                  className={`h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.035] ${item.className}`}
-                />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/34 to-transparent" />
-                <h3 className="absolute bottom-7 left-7 max-w-[260px] font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[23px] font-[414] leading-[1.05] tracking-[-0.0475em] text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.28)]">
-                  {item.title}
-                </h3>
-              </article>
-            ))}
-
-            <article className="group relative col-span-2 overflow-hidden rounded-[16px] bg-[#f4f1ed] shadow-[0_18px_45px_rgba(31,25,21,0.08)]">
-              <img
-                src={plugPlayOrangeStudioImg}
-                alt="Wandig plug and play systeem in oranje studio"
-                loading="lazy"
-                className="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-[1.025]"
-              />
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/36 to-transparent" />
-              <h3 className="absolute bottom-12 left-12 max-w-[520px] font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[33px] font-[414] leading-[1.02] tracking-[-0.052em] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.26)]">
-                Plug &amp; play geleverd
-              </h3>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="overflow-hidden bg-[#fbf5ec] py-16 md:py-24">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <h2 className="mx-auto max-w-5xl text-center font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[1.45rem] font-[700] leading-[1.18] tracking-[-0.035em] text-[#16202a] md:text-[1.7rem]">
-            We stoppen pas als jouw tv-wand voelt alsof hij altijd al zo hoorde.
-          </h2>
-        </div>
-
-        <div className="mt-12 flex gap-5 overflow-x-auto px-5 pb-2 md:mt-14 md:px-[8vw] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {REVIEWS.map((r) => (
-            <figure
-              key={r.name}
-              className="flex min-h-[408px] w-[82vw] max-w-[442px] shrink-0 snap-start flex-col rounded-[16px] bg-[#f3eee8] px-8 py-8 md:min-h-[408px] md:w-[442px] md:px-9 md:py-9"
-            >
-              <div className="mb-7 flex gap-1.5" aria-label="5 sterren">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-[18px] w-[18px] fill-[#f56e16] text-[#f56e16]" strokeWidth={1.8} />
-                ))}
-              </div>
-              <figcaption className="mb-7 font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[16px] font-[700] leading-snug tracking-[-0.02em] text-[#16202a]">
-                {r.title}
-              </figcaption>
-              <blockquote className="flex-1 font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[15px] leading-[1.48] tracking-[-0.01em] text-[#37414c]">
-                {r.quote}
-              </blockquote>
-              <div className="mt-8 font-['Helvetica_Neue',Helvetica,Arial,sans-serif] text-[12px] leading-[1.35] text-[#6f7a84]">
-                <div>{r.name}</div>
-                <div>{r.meta}</div>
-              </div>
-            </figure>
           ))}
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Gratis kleurstalen — text left, image right (full-bleed) */}
-      <section className="w-full">
-        <div className="grid md:grid-cols-2 md:h-[500px]">
-          <div className="flex items-center bg-[#ef7027] text-white px-8 md:px-16 py-16 md:py-0 order-2 md:order-1">
-            <div className="max-w-md text-center md:text-left mx-auto md:mx-0 [text-shadow:0_2px_14px_rgba(80,35,24,0.22)]">
-              <span className="text-[11px] tracking-[0.3em] uppercase opacity-70">Gratis service</span>
-              <h2 className="font-serif text-5xl md:text-5xl mt-6 leading-[1.05] font-thin">
-                Gratis
-                <br />
-                kleurstalen
-              </h2>
-              <p className="mt-6 text-[15px] leading-relaxed opacity-85">
-                Twijfel je tussen warm eiken, donker walnoot of een strak mat zwart? Vraag kosteloos onze kleurstalen
-                aan en voel het materiaal in je eigen interieur, bij jouw licht. Zo kies je met vertrouwen de afwerking
-                die past bij jouw woonkamer — vóór je bestelt.
-              </p>
-              <Link
-                to="/klantenservice"
-                className="inline-block mt-8 text-sm tracking-wide underline underline-offset-[6px] hover:opacity-70"
-              >
-                Vraag stalen aan
-              </Link>
-            </div>
-          </div>
-          <div className="hidden md:block overflow-hidden bg-muted h-full order-1 md:order-2">
-            <img
-              src={kleurstalenImg.url}
-              alt="Gratis kleurstalen van Wandig"
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
+/* ---------------------------- 11. nieuwsbrief ----------------------------- */
 
-      {/* We helpen je graag */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-20 md:py-28 text-center">
-          <h2 className="font-serif text-4xl md:text-6xl font-thin text-foreground leading-[1.05]">
-            We helpen je graag
+function NewsletterSection() {
+  const [email, setEmail] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (status === "loading") return;
+    const trimmed = email.trim();
+    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setStatus("error");
+      setMessage("Vul een geldig e-mailadres in.");
+      return;
+    }
+    if (!acceptedTerms) {
+      setStatus("error");
+      setMessage("Accepteer de voorwaarden om door te gaan.");
+      return;
+    }
+    setStatus("loading");
+    setMessage("");
+    try {
+      const res = await subscribeNewsletter({ data: { email: trimmed, source: "homepage" } });
+      setStatus("success");
+      setMessage(res.alreadySubscribed ? "Je bent al ingeschreven — bedankt!" : "Bedankt! Je bent ingeschreven.");
+      setEmail("");
+      setAcceptedTerms(false);
+    } catch (err) {
+      setStatus("error");
+      setMessage(err instanceof Error ? err.message : "Er ging iets mis. Probeer het opnieuw.");
+    }
+  };
+
+  return (
+    <section className="bg-[#fffcf8]">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-16">
+        <div className="mx-auto max-w-[560px] text-center">
+          <h2 className="text-[22px] font-bold leading-[1.25] tracking-[0.01em] text-[#071426] md:text-[26px]">
+            Meld je aan voor onze nieuwsbrief
           </h2>
-          <p className="mt-8 text-[15px] leading-relaxed text-foreground/75 max-w-xl mx-auto">
-            Een plug & play cinewall bestellen was nog nooit zo makkelijk. Maar soms is het fijn om toch even contact te
-            hebben. Bel of bezoek ons voor goed advies of hulp bij bestellen.
+          <p className="mt-3 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[14px]">
+            Blijf op de hoogte van de nieuwste updates, tips en exclusieve aanbiedingen.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-3 flex-wrap">
-            <a
-              href="tel:0123456789"
-              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] transition-colors h-11 px-6 text-sm flex items-center"
-            >
-              Bel 012 345 6789
-            </a>
-            <a
-              href="mailto:info@wandig.nl"
-              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] transition-colors h-11 px-6 text-sm flex items-center"
-            >
-              info@wandig.nl
-            </a>
-            <Link
-              to="/bezoek"
-              className="rounded-full bg-[#ef7027] text-white hover:bg-[#d55f1e] transition-colors h-11 px-6 text-sm flex items-center"
-            >
-              Bezoek ons
-            </Link>
-          </div>
+
+          <form onSubmit={onSubmit} className="mx-auto mt-6 max-w-[430px] text-left" noValidate>
+            <div className="flex overflow-hidden rounded-[8px] border border-[#e7ded4] bg-white">
+              <label htmlFor="home-newsletter-email" className="sr-only">
+                E-mailadres
+              </label>
+              <input
+                id="home-newsletter-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (status !== "idle") setStatus("idle");
+                }}
+                placeholder="Voer je e-mailadres in"
+                className="h-[46px] min-w-0 flex-1 bg-white px-4 text-[14px] tracking-[0.01em] text-[#071426] placeholder:text-[#071426]/40 focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="inline-flex h-[46px] shrink-0 items-center justify-center gap-2 rounded-[8px] bg-[#ef7027] px-5 text-[14px] font-[500] tracking-[0.03em] text-white transition hover:brightness-95 disabled:opacity-60"
+              >
+                {status === "loading" ? (
+                  "Bezig..."
+                ) : (
+                  <>
+                    Inschrijven
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
+              </button>
+            </div>
+            <label className="mt-4 flex cursor-pointer items-start gap-3">
+              <input
+                type="checkbox"
+                checked={acceptedTerms}
+                onChange={(e) => {
+                  setAcceptedTerms(e.target.checked);
+                  if (status !== "idle") setStatus("idle");
+                }}
+                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded-[3px] border-[#cdc0b5] text-[#ef7027] focus:ring-[#ef7027]"
+              />
+              <span className="text-[13px] leading-snug tracking-[0.01em] text-[#071426]/75">
+                Ik accepteer de voorwaarden.{" "}
+                <a
+                  href="/algemene-voorwaarden"
+                  className="underline decoration-[#071426]/40 underline-offset-2 transition hover:text-[#ef7027] hover:decoration-[#ef7027]"
+                >
+                  Privacyverklaring
+                </a>
+              </span>
+            </label>
+            {message && (
+              <p
+                className={`mt-3 text-[13px] tracking-[0.01em] ${status === "success" ? "text-[#2d6a3e]" : "text-[#b3341c]"}`}
+              >
+                {message}
+              </p>
+            )}
+          </form>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------- 12. 4 benefits ------------------------------ */
+
+function PuzzleImgIcon({ className }: { className?: string }) {
+  return <img src={puzzleIcon.url} alt="" className={className} />;
+}
+
+function TrustBannerSection() {
+  const items = [
+    { icon: Shield, label: "4,7/5 klantbeoordeling" },
+    { icon: Truck, label: "Gratis levering & retourneren" },
+    { icon: CalendarClock, label: "100 dagen proefkijken" },
+    { icon: PuzzleImgIcon, label: "10 jaar garantie" },
+  ];
+
+  return (
+    <section className="bg-[#f7f3ef]">
+      <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10 md:py-8">
+        <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-[#e5e5e5]">
+          {items.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex flex-1 items-center justify-center gap-3 py-4 sm:px-4 sm:py-0">
+              <Icon className="h-5 w-5 shrink-0 text-[#0f1f2a]" strokeWidth={1.5} />
+              <p className="text-[14px] font-normal leading-snug tracking-[0.01em] text-[#0f1f2a]">
+                {label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------- page ------------------------------------ */
+
+function Home() {
+  return (
+    <div className="bg-[#faf8f5]">
+      <HeroSection />
+      <HeroBenefitsSection />
+      <ProductCarouselSection />
+      <ConfiguratorBannerSection />
+      <PressMarqueeSection />
+      <DutchDesignSection />
+      <ReviewsSection />
+      <ColorSamplesSection />
+      <QuoteVideoSection />
+      <FaqContactSection />
+      <NewsletterSection />
+      <TrustBannerSection />
     </div>
   );
 }

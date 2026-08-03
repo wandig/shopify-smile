@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RetourRouteImport } from './routes/retour'
 import { Route as ProductenRouteImport } from './routes/producten'
 import { Route as KlantenserviceRouteImport } from './routes/klantenservice'
+import { Route as ConfiguratorRouteImport } from './routes/configurator'
 import { Route as BezoekRouteImport } from './routes/bezoek'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as IndexRouteImport } from './routes/index'
@@ -30,6 +31,11 @@ const ProductenRoute = ProductenRouteImport.update({
 const KlantenserviceRoute = KlantenserviceRouteImport.update({
   id: '/klantenservice',
   path: '/klantenservice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguratorRoute = ConfiguratorRouteImport.update({
+  id: '/configurator',
+  path: '/configurator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BezoekRoute = BezoekRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/bezoek': typeof BezoekRoute
+  '/configurator': typeof ConfiguratorRoute
   '/klantenservice': typeof KlantenserviceRoute
   '/producten': typeof ProductenRoute
   '/retour': typeof RetourRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/bezoek': typeof BezoekRoute
+  '/configurator': typeof ConfiguratorRoute
   '/klantenservice': typeof KlantenserviceRoute
   '/producten': typeof ProductenRoute
   '/retour': typeof RetourRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/bezoek': typeof BezoekRoute
+  '/configurator': typeof ConfiguratorRoute
   '/klantenservice': typeof KlantenserviceRoute
   '/producten': typeof ProductenRoute
   '/retour': typeof RetourRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/algemene-voorwaarden'
     | '/bezoek'
+    | '/configurator'
     | '/klantenservice'
     | '/producten'
     | '/retour'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/algemene-voorwaarden'
     | '/bezoek'
+    | '/configurator'
     | '/klantenservice'
     | '/producten'
     | '/retour'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/algemene-voorwaarden'
     | '/bezoek'
+    | '/configurator'
     | '/klantenservice'
     | '/producten'
     | '/retour'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
   BezoekRoute: typeof BezoekRoute
+  ConfiguratorRoute: typeof ConfiguratorRoute
   KlantenserviceRoute: typeof KlantenserviceRoute
   ProductenRoute: typeof ProductenRoute
   RetourRoute: typeof RetourRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/klantenservice'
       fullPath: '/klantenservice'
       preLoaderRoute: typeof KlantenserviceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configurator': {
+      id: '/configurator'
+      path: '/configurator'
+      fullPath: '/configurator'
+      preLoaderRoute: typeof ConfiguratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bezoek': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
   BezoekRoute: BezoekRoute,
+  ConfiguratorRoute: ConfiguratorRoute,
   KlantenserviceRoute: KlantenserviceRoute,
   ProductenRoute: ProductenRoute,
   RetourRoute: RetourRoute,
@@ -187,3 +208,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

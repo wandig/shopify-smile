@@ -106,7 +106,7 @@ export function SiteFooter() {
       <div className="relative -mb-[0.18em]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
           <div className="text-[18vw] md:text-[16vw] font-medium leading-[0.78] tracking-[-0.04em] text-[#8a9aaa] select-none">
-            Wandig
+            wandig
           </div>
         </div>
       </div>

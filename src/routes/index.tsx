@@ -8,6 +8,7 @@ import {
   Phone,
   Plus,
   Shield,
+  ShoppingBasket,
   SlidersHorizontal,
   Star,
   Truck,

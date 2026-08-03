@@ -456,15 +456,26 @@ function ProductView({ product }: { product: ProductNode }) {
   }, [allImages, variants, colorKey, selectedColor, positionKey, selectedPosition]);
 
   const galleryItems = useMemo(() => {
-    if (product.handle === "full-house") return FULL_HOUSE_GALLERY;
-
-    return images.slice(0, 7).map(({ node }, index) => ({
+    const shopifyItems = images.map(({ node }, index) => ({
       src: node.url,
       alt: node.altText || product.title,
+      full: index === 0 || index === 3,
+      square: false,
+    }));
+
+    if (product.handle === "full-house") {
+      const main = FULL_HOUSE_GALLERY[0];
+      const rest = shopifyItems.filter((item) => item.src !== main.src).slice(0, 6);
+      return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
+    }
+
+    return shopifyItems.slice(0, 7).map((item, index) => ({
+      ...item,
       full: index === 0 || index === 1 || index === 4,
       square: index === 0,
     }));
   }, [images, product.handle, product.title]);
+
 
   useEffect(() => {
     const image = mainGalleryImageRef.current;

@@ -27,6 +27,11 @@ import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
+import configuratorBg from "@/assets/klant-woonkamer-3.png.asset.json";
+import whyProefkijken from "@/assets/klant-woonkamer-1.png.asset.json";
+import whyLevering from "@/assets/klant-woonkamer-6.png.asset.json";
+import whyReviews from "@/assets/klant-woonkamer-8.png.asset.json";
+import whyService from "@/assets/klant-woonkamer-9.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({

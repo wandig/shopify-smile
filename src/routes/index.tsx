@@ -133,36 +133,38 @@ function HeroSection() {
 
 const HERO_BENEFITS = [
   {
-    icon: plugAndPlayIcon.url,
-    title: "Plug & play geleverd",
-    body: "Voorgemonteerd en klaar om op te hangen. Kabels netjes uit het zicht.",
+    kicker: "Uit eigen werkplaats",
+    title: "+4.000 tv-wanden",
+    body: "Onze eisen aan kwaliteit, design en functie gelden voor elke wand die we maken.",
   },
   {
-    icon: kijkplezierIcon.url,
+    kicker: "Jouw woonkamer is belangrijk voor ons",
+    title: "97% klanttevredenheid",
+    body: "Een score van 4,8 en meer dan 23.000 beoordelingen van klanten in heel Nederland.",
+  },
+  {
+    kicker: "Kies met volledige gemoedsrust",
     title: "100 dagen proefkijken",
-    body: "Rustig thuis ervaren. Niet tevreden? Dan halen we hem gratis op.",
-  },
-  {
-    icon: warrantyIcon.url,
-    title: "10 jaar garantie",
-    body: "Gemaakt van hoogwaardige materialen, gebouwd om mee te gaan.",
+    body: "Wat je ook kiest — je krijgt 100 dagen om het thuis rustig uit te proberen.",
   },
 ];
 
 function HeroBenefitsSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
-        <div className="grid gap-6 sm:grid-cols-3 md:gap-10">
+      <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
+        <div className="grid gap-10 sm:grid-cols-3 md:gap-16">
           {HERO_BENEFITS.map((b) => (
-            <div key={b.title} className="flex items-start gap-4">
-              <img src={b.icon} alt="" className="h-8 w-8 shrink-0" loading="lazy" />
-              <div>
-                <h3 className="text-[15px] font-bold tracking-[0.01em] text-[#071426]">{b.title}</h3>
-                <p className="mt-1.5 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/65">
-                  {b.body}
-                </p>
-              </div>
+            <div key={b.title} className="mx-auto max-w-[320px] text-center">
+              <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#ef7027]">
+                {b.kicker}
+              </span>
+              <h3 className="mt-3 text-[22px] font-bold leading-[1.2] tracking-[0.01em] text-[#071426] md:text-[26px]">
+                {b.title}
+              </h3>
+              <p className="mt-3 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/60 md:text-[14px]">
+                {b.body}
+              </p>
             </div>
           ))}
         </div>
@@ -170,6 +172,7 @@ function HeroBenefitsSection() {
     </section>
   );
 }
+
 
 /* -------------------------- 3. product carousel --------------------------- */
 

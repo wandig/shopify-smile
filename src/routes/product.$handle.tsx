@@ -411,70 +411,60 @@ function ProductView({ product }: { product: ProductNode }) {
 
   const colorKey = product.options.find((o) => /kleur|color/i.test(o.name))?.name;
   const selectedColor = colorKey ? selected[colorKey] : undefined;
-  const positionKey = product.options.find((o) => /opstelling|position|richting|side/i.test(o.name))?.name;
-  const selectedPosition = positionKey ? selected[positionKey] : undefined;
+  const sizeKey = product.options.find((o) => /maat|size|inch/i.test(o.name))?.name;
+  const selectedSize = sizeKey ? selected[sizeKey] : undefined;
 
+  // Shopify uploads the photos per variant as one consecutive block, starting at
+  // the variant's own image. So we slice from that anchor up to the next anchor.
   const images = useMemo(() => {
-    if (!colorKey || !selectedColor) return allImages;
+    const urlIndex = new Map(allImages.map((img, i) => [img.node.url, i] as const));
 
-    const anchorVariants = variants
-      .map((v) => ({
-        color: v.selectedOptions.find((o) => o.name === colorKey)?.value,
-        position: positionKey ? v.selectedOptions.find((o) => o.name === positionKey)?.value : undefined,
-        url: v.image?.url,
-      }))
-      .filter((v): v is { color: string; position: string | undefined; url: string } => Boolean(v.color && v.url));
+    const anchorIndexes = Array.from(
+      new Set(
+        variants
+          .map((v) => v.image?.url)
+          .filter((u): u is string => Boolean(u))
+          .map((u) => urlIndex.get(u))
+          .filter((i): i is number => i !== undefined),
+      ),
+    ).sort((a, b) => a - b);
 
-    const selectedAnchorUrls = new Set(
-      anchorVariants
-        .filter((v) => v.color === selectedColor && (!positionKey || !selectedPosition || v.position === selectedPosition))
-        .map((v) => v.url),
-    );
-    const boundaryAnchorUrls = new Set(
-      anchorVariants
-        .filter((v) => v.color !== selectedColor || (positionKey && selectedPosition && v.position !== selectedPosition))
-        .map((v) => v.url),
-    );
-    const startIndex = allImages.findIndex((img) => selectedAnchorUrls.has(img.node.url));
-
-    if (startIndex >= 0) {
-      const boundaryIndex = allImages.findIndex((img, index) => index > startIndex && boundaryAnchorUrls.has(img.node.url));
-      const grouped = allImages.slice(startIndex, boundaryIndex >= 0 ? boundaryIndex : undefined);
-      if (grouped.length > 0) return grouped;
-    }
-
-    const selectedVariantImages = allImages.filter((img) => selectedAnchorUrls.has(img.node.url));
-    const filtered = selectedVariantImages.length > 0 ? selectedVariantImages : allImages.filter((img) => {
-      const filename = img.node.url.toLowerCase();
-      return selectedColor
-        .toLowerCase()
-        .split(/\s|-/)
-        .every((part) => !part || filename.includes(part));
+    const match = variants.find((v) => {
+      if (!v.image?.url) return false;
+      const c = colorKey ? v.selectedOptions.find((o) => o.name === colorKey)?.value : undefined;
+      const s = sizeKey ? v.selectedOptions.find((o) => o.name === sizeKey)?.value : undefined;
+      return (!colorKey || c === selectedColor) && (!sizeKey || s === selectedSize);
     });
 
-    return filtered.length > 0 ? filtered : allImages;
-  }, [allImages, variants, colorKey, selectedColor, positionKey, selectedPosition]);
+    const start = match?.image?.url ? urlIndex.get(match.image.url) : undefined;
+    if (start === undefined) return allImages;
+
+    const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
+    const group = allImages.slice(start, end);
+    return group.length > 0 ? group : allImages;
+  }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize]);
 
   const galleryItems = useMemo(() => {
-    const shopifyItems = images.map(({ node }, index) => ({
+    const shopifyItems = images.map(({ node }) => ({
       src: node.url,
       alt: node.altText || product.title,
-      full: index === 0 || index === 3,
+      full: false,
       square: false,
     }));
 
     if (product.handle === "full-house") {
       const main = FULL_HOUSE_GALLERY[0];
-      const rest = shopifyItems.filter((item) => item.src !== main.src).slice(0, 6);
+      const rest = shopifyItems.filter((item) => item.src !== main.src);
       return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
     }
 
-    return shopifyItems.slice(0, 7).map((item, index) => ({
+    return shopifyItems.map((item, index) => ({
       ...item,
-      full: index === 0 || index === 1 || index === 4,
+      full: index === 0,
       square: index === 0,
     }));
   }, [images, product.handle, product.title]);
+
 
 
   useEffect(() => {

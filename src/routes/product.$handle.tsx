@@ -372,7 +372,6 @@ function ProductView({ product }: { product: ProductNode }) {
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
   const [showOrderWidget, setShowOrderWidget] = useState(false);
-  const [subPage, setSubPage] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {

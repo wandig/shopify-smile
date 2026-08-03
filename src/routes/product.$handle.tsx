@@ -867,7 +867,7 @@ function ProductView({ product }: { product: ProductNode }) {
                     aria-label="Vorige voordelen"
                     onClick={() => scrollBenefits(-1)}
                     disabled={benefitsScrollState.atStart}
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-[#071426] transition-opacity disabled:text-[#071426]/25"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#ebe8e3] text-[#071426] transition-colors disabled:bg-transparent disabled:text-[#071426]/25"
                   >
                     <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
                   </button>
@@ -876,7 +876,7 @@ function ProductView({ product }: { product: ProductNode }) {
                     aria-label="Volgende voordelen"
                     onClick={() => scrollBenefits(1)}
                     disabled={benefitsScrollState.atEnd}
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-[#071426] transition-opacity disabled:text-[#071426]/25"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#ebe8e3] text-[#071426] transition-colors disabled:bg-transparent disabled:text-[#071426]/25"
                   >
                     <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
                   </button>
@@ -885,15 +885,33 @@ function ProductView({ product }: { product: ProductNode }) {
               </div>
               <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {PRODUCT_BENEFITS.map((benefit) => (
-                  <article key={benefit.title} className="relative h-[195px] min-w-[150px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                    <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-[90px] bg-gradient-to-b from-black/55 via-black/25 to-transparent" />
-                    <div className="absolute inset-x-0 top-0 px-4 pt-5">
-                      <h3 className="text-center text-[13px] font-normal leading-tight tracking-[0.03em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
+                  <article
+                    key={benefit.title}
+                    className="relative flex h-[210px] min-w-[158px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
+                    style={{ backgroundColor: benefit.bg }}
+                  >
+                    <div className="px-3 pt-3.5">
+                      {benefit.badge && (
+                        <span
+                          className="mx-auto mb-2 block w-fit rounded-full bg-white/85 px-2.5 py-[3px] text-[9px] font-normal uppercase tracking-[0.14em] text-[#2b1c12]"
+                        >
+                          Inbegrepen
+                        </span>
+                      )}
+                      <h3
+                        className="text-center text-[13px] font-normal leading-tight tracking-[0.03em]"
+                        style={{ color: benefit.text }}
+                      >
+                        {benefit.title}
+                      </h3>
+                    </div>
+                    <div className="mt-auto h-[118px] w-full">
+                      <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
                     </div>
                   </article>
                 ))}
               </div>
+
             </section>
           </div>
         </div>

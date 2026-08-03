@@ -55,6 +55,7 @@ import hoogwaardigeKwaliteitV3Img from "@/assets/hoogwaardige-kwaliteit-v3.png.a
 import hoogwaardigeKwaliteitV4Img from "@/assets/hoogwaardige-kwaliteit-v4.png.asset.json";
 import kabelsUitZichtV4Img from "@/assets/kabels-uit-zicht-v4.png.asset.json";
 import kabelsUitZichtVoordelenImg from "@/assets/kabels-uit-zicht-voordelen.png.asset.json";
+import kabelsUitZichtVoordelenUploadImg from "@/assets/kabels-uit-zicht-voordelen-upload.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
@@ -334,7 +335,7 @@ const FULL_HOUSE_GALLERY = [
 
 const PRODUCT_BENEFITS = [
   { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url },
-  { title: "Kabels uit het zicht", image: kabelsUitZichtVoordelenImg.url },
+  { title: "Kabels uit het zicht", image: kabelsUitZichtVoordelenUploadImg.url },
   { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageImg.url },
   { title: "Persoonlijk advies", image: persoonlijkAdviesImg.url },
   { title: "100 dagen proefkijken", image: proefkijkenImg.url },

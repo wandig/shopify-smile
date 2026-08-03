@@ -375,32 +375,108 @@ function ProductCarouselSection() {
 
 function ConfiguratorBannerSection() {
   return (
-    <section className="bg-[#faf8f5] pb-10 md:pb-16">
+    <section className="relative w-full overflow-hidden">
+      <img
+        src={configuratorBg.url}
+        alt="Configureer jouw tv-wand"
+        className="h-[420px] w-full object-cover md:h-[620px]"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-black/25" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center text-white">
+        <span className="flex items-center gap-2 text-[12px] tracking-[0.06em] text-white/85">
+          <SlidersHorizontal className="h-3.5 w-3.5" strokeWidth={1.5} />
+          Configurator
+        </span>
+        <h2 className="mt-3 max-w-[820px] text-[28px] font-[500] leading-[1.15] tracking-[0.01em] md:text-[46px]">
+          Stel jouw tv-wand samen
+        </h2>
+        <p className="mt-4 max-w-[520px] text-[13px] leading-relaxed tracking-[0.01em] text-white/85 md:text-[15px]">
+          Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
+        </p>
+        <div className="mt-8">
+          <PrimaryButton to="/producten">Start de configurator</PrimaryButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------- 4b. waarom wij (kaarten) ----------------------- */
+
+const WHY_CARDS = [
+  {
+    badge: "100 dagen proefkijken",
+    title: "Probeer het 100 dagen zonder risico. Bevalt het niet? Geld terug.",
+    img: whyProefkijken.url,
+  },
+  {
+    badge: "Gratis levering",
+    title: "Altijd gratis levering, waar je ook woont in Nederland.",
+    img: whyLevering.url,
+  },
+  {
+    badge: "Beoordelingen",
+    title: "4,8 sterren uit meer dan 23.000 beoordelingen.",
+    img: whyReviews.url,
+  },
+  {
+    badge: "Klantenservice",
+    title: "Persoonlijk advies van maandag t/m zaterdag.",
+    img: whyService.url,
+  },
+];
+
+function WhyUsSection() {
+  return (
+    <section className="bg-[#faf8f5] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="grid items-center gap-8 overflow-hidden rounded-[20px] bg-[#0f1f2a] p-8 md:grid-cols-2 md:p-12">
-          <div className="text-white">
-            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-white/50">
-              Configurator
-            </span>
-            <h2 className="mt-2 text-[22px] font-bold leading-tight tracking-[0.01em] md:text-[28px]">
-              Stel jouw tv-wand samen
-            </h2>
-            <p className="mt-3 max-w-[420px] text-[13px] leading-relaxed tracking-[0.01em] text-white/70 md:text-[14px]">
-              Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
-            </p>
-            <div className="mt-7">
-              <PrimaryButton to="/producten">Start de configurator</PrimaryButton>
+        <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
+          <div className="flex gap-5">
+            <div className="hidden shrink-0 items-center gap-1 md:flex">
+              <span
+                className="whitespace-nowrap text-[26px] font-bold uppercase tracking-[0.06em] text-[#071426]"
+                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              >
+                Waarom wij
+              </span>
+              <span
+                className="whitespace-nowrap text-[11px] tracking-[0.06em] text-[#071426]/55"
+                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              >
+                Betere service
+              </span>
             </div>
-          </div>
-          {/* asset slot: configurator visual */}
-          <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[16px] bg-white/5">
-            <SlidersHorizontal className="h-10 w-10 text-white/30" strokeWidth={1.5} />
+
+            <div className="flex min-w-0 flex-1 snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {WHY_CARDS.map((c) => (
+                <article
+                  key={c.badge}
+                  className="group relative w-[260px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[36%]"
+                >
+                  <img
+                    src={c.img}
+                    alt=""
+                    className="h-[380px] w-full object-cover transition duration-700 group-hover:scale-[1.03] md:h-[480px]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-black/25" />
+                  <span className="absolute left-4 top-4 rounded-full border border-white/60 px-3.5 py-1.5 text-[11px] tracking-[0.02em] text-white">
+                    {c.badge}
+                  </span>
+                  <h3 className="absolute inset-x-5 bottom-6 text-[20px] font-[500] leading-[1.2] tracking-[0.01em] text-white md:text-[24px]">
+                    {c.title}
+                  </h3>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ------------------------------ 5. marquee -------------------------------- */
 

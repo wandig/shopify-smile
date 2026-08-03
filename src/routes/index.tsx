@@ -978,7 +978,7 @@ function Home() {
       <ConfiguratorBannerSection />
       <PressMarqueeSection />
       <DutchDesignSection />
-      <WhyUsSection />
+      <CustomerGallerySection />
 
       <ReviewsSection />
       <ColorSamplesSection />

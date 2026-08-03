@@ -333,13 +333,14 @@ const FULL_HOUSE_GALLERY = [
 ];
 
 const PRODUCT_BENEFITS = [
-  { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url },
-  { title: "Kabels uit het zicht", image: kabelsUitZichtVoordelenImg.url },
-  { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageImg.url },
-  { title: "Persoonlijk advies", image: persoonlijkAdviesImg.url },
-  { title: "100 dagen proefkijken", image: proefkijkenImg.url },
-  { title: "10 jaar garantie", image: garantieCinewallImg.url },
+  { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url, bg: "#f0e4d5", text: "#2b1c12", badge: true },
+  { title: "Kabels uit het zicht", image: kabelsUitZichtVoordelenImg.url, bg: "#a55f3e", text: "#ffffff", badge: true },
+  { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageImg.url, bg: "#3b2a20", text: "#ffffff", badge: false },
+  { title: "Persoonlijk advies", image: persoonlijkAdviesImg.url, bg: "#c0b3a4", text: "#2b1c12", badge: false },
+  { title: "100 dagen proefkijken", image: proefkijkenImg.url, bg: "#936850", text: "#ffffff", badge: true },
+  { title: "10 jaar garantie", image: garantieCinewallImg.url, bg: "#f0e4d5", text: "#2b1c12", badge: false },
 ];
+
 
 
 function ProductView({ product }: { product: ProductNode }) {

@@ -1,4 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import press1 from "@/assets/press/press1.svg";
+import press2 from "@/assets/press/press2.svg";
+import press3 from "@/assets/press/press3.svg";
+import press4 from "@/assets/press/press4.svg";
+import press5 from "@/assets/press/press5.svg";
+import press6 from "@/assets/press/press6.svg";
 import { useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,

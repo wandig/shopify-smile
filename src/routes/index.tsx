@@ -30,6 +30,7 @@ import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import configuratorBg from "@/assets/configurator-bg.png.asset.json";
 import waaromWijBg from "@/assets/waarom-wij-achtergrond.png.asset.json";
+import waaromWijCraft from "@/assets/waarom-wij-craft.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";

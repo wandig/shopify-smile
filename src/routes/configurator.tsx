@@ -192,13 +192,13 @@ function ConfiguratorPage() {
                   type="button"
                   onClick={() => setHasLeft(!hasLeft)}
                   aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
-                  className="absolute left-0 top-1/2 z-[6] grid h-11 w-11 -translate-x-[calc(100%+16px)] -translate-y-1/2 place-items-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
+                  className="absolute left-0 top-1/2 z-[6] flex h-11 w-11 -translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
                 >
-                  {hasLeft ? "−" : "+"}
+                  <span className="block translate-y-px">{hasLeft ? "−" : "+"}</span>
                 </button>
 
                 <div
-                  className={`relative z-[1] mr-[-3px] h-[99.8%] -translate-y-[1px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  className={`relative z-[1] mr-[-3px] h-[99.8%] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     hasLeft ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
                   }`}
                 >

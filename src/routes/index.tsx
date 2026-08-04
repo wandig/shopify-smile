@@ -28,6 +28,7 @@ import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
+import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";

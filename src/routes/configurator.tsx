@@ -198,7 +198,7 @@ function ConfiguratorPage() {
                 </button>
 
                 <div
-                  className={`relative z-[1] mr-[-3px] h-full -translate-y-[1px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  className={`relative z-[1] mr-[-3px] h-[99.8%] -translate-y-[1px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     hasLeft ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
                   }`}
                 >

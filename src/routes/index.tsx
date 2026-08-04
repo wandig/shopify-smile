@@ -26,6 +26,7 @@ import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
+import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import configuratorBg from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";

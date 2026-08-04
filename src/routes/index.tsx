@@ -522,7 +522,7 @@ function DutchDesignSection() {
             <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-white/60">
               Dutch design
             </span>
-            <h2 className="mt-2 max-w-[520px] text-[24px] font-bold leading-tight tracking-[0.01em] text-white md:text-[32px]">
+            <h2 className="mt-2 max-w-[520px] text-[24px] font-[600] leading-tight tracking-[0.01em] text-white md:text-[32px]">
               Ontworpen én gemaakt in Nederland
             </h2>
             <p className="mt-3 max-w-[440px] text-[13px] leading-relaxed tracking-[0.01em] text-white/80 md:text-[14px]">
@@ -647,7 +647,7 @@ function ColorSamplesSection() {
             <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
               Gratis thuis
             </span>
-            <h2 className="mt-2 text-[22px] font-bold leading-tight tracking-[0.01em] text-[#071426] md:text-[28px]">
+            <h2 className="mt-2 text-[22px] font-[600] leading-tight tracking-[0.01em] text-[#071426] md:text-[28px]">
               Bestel gratis kleurstalen
             </h2>
             <p className="mt-3 max-w-[420px] text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[14px]">

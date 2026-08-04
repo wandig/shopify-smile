@@ -486,8 +486,8 @@ function PressMarqueeSection() {
   const row = [...PRESS, ...PRESS];
   return (
     <section className="relative overflow-hidden bg-[#dfd7ce] py-8 md:py-10">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#dfd7ce] via-[#dfd7ce]/70 to-transparent md:w-32" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#dfd7ce] via-[#dfd7ce]/70 to-transparent md:w-32" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-28 bg-gradient-to-r from-[#dfd7ce] via-[#dfd7ce]/80 to-transparent md:w-56" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-28 bg-gradient-to-l from-[#dfd7ce] via-[#dfd7ce]/80 to-transparent md:w-56" />
       <div className="relative">
         <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-16 pr-16">
           {row.map((src, i) => (

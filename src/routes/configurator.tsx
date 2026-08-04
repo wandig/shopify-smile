@@ -290,7 +290,7 @@ function ConfiguratorPage() {
           </div>
 
           {/* Price panel */}
-          <div className="grid items-center gap-6 border-t border-[#e8e2dc] bg-white px-6 py-6 md:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="grid items-center gap-6 bg-white px-6 py-6 md:grid-cols-[minmax(0,1fr)_auto]">
             <div>
               <strong className="text-[14px] tracking-[0.01em] text-[#030c1a]">
                 Jouw Wandig

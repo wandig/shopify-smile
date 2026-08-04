@@ -111,7 +111,15 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01";
-  }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
   .font-serif {
     font-family: var(--font-serif);
     font-weight: 400;

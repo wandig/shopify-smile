@@ -531,6 +531,12 @@ const WHY_US_CARDS = [
     bg: "bg-gradient-to-br from-[#e8a87c] to-[#c4654a]",
     image: waaromWijMontage.url,
   },
+  {
+    badge: "10 jaar garantie",
+    title: "Gemaakt om jaren mee te gaan.",
+    subtitle: "Op elk meubel zit 10 jaar garantie.",
+    bg: "bg-gradient-to-br from-[#c9b8a8] to-[#8b6a5a]",
+  },
 ];
 
 function WhyUsSection() {
@@ -558,11 +564,11 @@ function WhyUsSection() {
           </div>
 
           {/* cards */}
-          <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
+          <div className="scrollbar-hide flex flex-1 snap-x snap-mandatory gap-3 overflow-x-auto md:gap-4">
           {WHY_US_CARDS.map((card) => (
               <div
                 key={card.badge}
-                className={`group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[24px] p-6 md:min-h-[520px] md:p-8 ${card.bg}`}
+                className={`group relative flex min-h-[420px] w-[85%] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-[24px] p-6 sm:w-[45%] md:min-h-[520px] md:w-[calc(33.333%-0.75rem)] md:p-8 ${card.bg}`}
               >
                 {card.image && (
                   <img

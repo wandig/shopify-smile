@@ -531,6 +531,12 @@ const WHY_US_CARDS = [
     bg: "bg-gradient-to-br from-[#e8a87c] to-[#c4654a]",
     image: waaromWijMontage.url,
   },
+  {
+    badge: "10 jaar garantie",
+    title: "Gemaakt om jaren mee te gaan.",
+    subtitle: "Op elk meubel zit 10 jaar garantie.",
+    bg: "bg-gradient-to-br from-[#c9b8a8] to-[#8b6a5a]",
+  },
 ];
 
 function WhyUsSection() {

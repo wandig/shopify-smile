@@ -488,16 +488,18 @@ const PRESS = [press1, press2, press3, press4, press5, press6];
 function PressMarqueeSection() {
   const row = [...PRESS, ...PRESS];
   return (
-    <section className="overflow-hidden border-b border-[#eee7de] bg-white py-6 md:py-8">
+    <section className="relative overflow-hidden bg-[#ede7e0] py-8 md:py-10">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#ede7e0] via-[#ede7e0]/70 to-transparent md:w-32" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#ede7e0] via-[#ede7e0]/70 to-transparent md:w-32" />
       <div className="relative">
-        <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-12 pr-12">
+        <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-16 pr-16">
           {row.map((src, i) => (
             <img
               key={`${src}-${i}`}
               src={src}
               alt=""
               aria-hidden="true"
-              className="h-6 w-auto shrink-0 md:h-8"
+              className="h-7 w-auto shrink-0 opacity-90 md:h-9"
             />
           ))}
         </div>

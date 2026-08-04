@@ -194,7 +194,18 @@ function ConfiguratorPage() {
                   aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
                   className="absolute left-0 top-1/2 z-[6] flex h-11 w-11 -translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
                 >
-                  <span className="block translate-y-px">{hasLeft ? "−" : "+"}</span>
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
+                    <path d="M5 12h14" />
+                    {!hasLeft && <path d="M12 5v14" />}
+                  </svg>
                 </button>
 
                 <div

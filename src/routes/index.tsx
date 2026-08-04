@@ -31,6 +31,7 @@ import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import configuratorBg from "@/assets/configurator-bg.png.asset.json";
 import waaromWijBg from "@/assets/waarom-wij-achtergrond.png.asset.json";
 import waaromWijCraft from "@/assets/waarom-wij-craft.png.asset.json";
+import waaromWijMontage from "@/assets/waarom-wij-montage.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
@@ -528,6 +529,7 @@ const WHY_US_CARDS = [
     title: "4,7 sterren van meer dan 15.000 reviews.",
     subtitle: "Echte klanten, echte ervaringen.",
     bg: "bg-gradient-to-br from-[#e8a87c] to-[#c4654a]",
+    image: waaromWijMontage.url,
   },
 ];
 

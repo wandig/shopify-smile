@@ -787,7 +787,7 @@ function FaqContactSection() {
 }
 
 
-/* ---------------------------- 12. 4 benefits ------------------------------ */
+/* ---------------------------- 11. 4 benefits ------------------------------ */
 
 function PuzzleImgIcon({ className }: { className?: string }) {
   return <img src={puzzleIcon.url} alt="" className={className} />;

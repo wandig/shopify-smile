@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 
-import cinewallVisual from "@/assets/cinewall-schema-fullhouse.png.asset.json";
+import cinewallVisual from "@/assets/Untitled_design_99-2.png.asset.json";
 
 export const Route = createFileRoute("/configurator")({
   head: () => ({

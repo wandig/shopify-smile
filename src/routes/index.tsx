@@ -252,7 +252,7 @@ function ProductCarouselSection() {
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
           <div className="flex gap-5">
-            <div className="hidden shrink-0 items-center md:flex">
+            <div className="hidden shrink-0 items-start pt-4 md:flex">
               <span
                 className="whitespace-nowrap text-[34px] font-[300] uppercase tracking-[0.06em] text-[#071426]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}

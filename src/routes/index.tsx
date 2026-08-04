@@ -671,7 +671,7 @@ function ColorSamplesSection() {
 
 function QuoteVideoSection() {
   return (
-    <section className="bg-[#faf8f5] pb-10 md:pb-16">
+    <section className="bg-white pb-10 md:pb-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <blockquote className="mx-auto max-w-[820px] text-center">
           <p className="text-[20px] font-[500] leading-[1.4] tracking-[0.01em] text-[#071426] md:text-[28px]">
@@ -710,7 +710,7 @@ function FaqContactSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="bg-gradient-to-b from-[#faf8f5] to-white py-12 md:py-20">
+    <section className="bg-white py-12 md:py-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <SectionHeading
           kicker="FAQ"
@@ -776,7 +776,7 @@ function TrustBannerSection() {
   ];
 
   return (
-    <section className="bg-[#f7f3ef]">
+    <section className="bg-white">
       <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10 md:py-8">
         <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-[#e5e5e5]">
           {items.map(({ icon: Icon, label }) => (

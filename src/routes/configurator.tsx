@@ -299,7 +299,13 @@ function ConfiguratorPage() {
                 {[
                   `Tv ${tv.value}`,
                   color.name,
-                  hasLeft ? "Met linker module" : "Alleen middenmodule",
+                  hasLeft && hasRight
+                    ? "Met linker & rechter module"
+                    : hasLeft
+                      ? "Met linker module"
+                      : hasRight
+                        ? "Met rechter module"
+                        : "Alleen middenmodule",
                 ].map((chip) => (
                   <span
                     key={chip}

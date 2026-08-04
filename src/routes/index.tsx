@@ -164,17 +164,23 @@ const HERO_BENEFITS = [
 function HeroBenefitsSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
-        <div className="grid gap-10 sm:grid-cols-3 md:gap-16">
-          {HERO_BENEFITS.map((b) => (
-            <div key={b.title} className="mx-auto max-w-[320px] text-center">
-              <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#ef7027]">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
+        <div className="grid gap-6 sm:grid-cols-3">
+          {HERO_BENEFITS.map((b, i) => (
+            <div
+              key={b.title}
+              className="group relative flex flex-col rounded-2xl bg-white p-8 shadow-[0_2px_20px_-4px_rgba(7,20,38,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_30px_-6px_rgba(7,20,38,0.1)] md:p-10"
+            >
+              <span className="absolute right-6 top-5 text-[40px] font-semibold leading-none text-[#071426]/[0.04] md:right-8 md:top-7 md:text-[52px]">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="text-[10px] font-[500] uppercase tracking-[0.16em] text-[#ef7027]">
                 {b.kicker}
               </span>
-              <h3 className="mt-3 text-[22px] font-bold leading-[1.2] tracking-[0.01em] text-[#071426] md:text-[26px]">
+              <h3 className="mt-5 text-[22px] font-semibold leading-[1.15] tracking-[0.01em] text-[#071426] md:mt-6 md:text-[28px]">
                 {b.title}
               </h3>
-              <p className="mt-3 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/60 md:text-[14px]">
+              <p className="mt-3 text-[13px] leading-[1.6] tracking-[0.01em] text-[#071426]/55 md:mt-4 md:text-[14px]">
                 {b.body}
               </p>
             </div>

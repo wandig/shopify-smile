@@ -255,7 +255,6 @@ function ProductCarouselSection() {
             </div>
 
             <div
-              ref={scrollerRef}
               className="flex min-w-0 flex-1 snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {PRODUCTS.map((p) =>

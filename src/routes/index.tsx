@@ -119,7 +119,7 @@ function HeroSection() {
       />
       <div className="absolute inset-0 bg-black/35" />
       <div className="relative flex h-full w-full flex-col items-center justify-center px-5 text-center text-white">
-        <h1 className="text-[32px] font-bold leading-[1.1] tracking-[0.01em] md:text-[52px]">
+        <h1 className="text-[32px] font-[600] leading-[1.1] tracking-[0.01em] md:text-[52px]">
           Jouw tv-wand, op maat gemaakt
         </h1>
         <p className="mt-4 max-w-[520px] text-[14px] leading-relaxed tracking-[0.01em] text-white/85 md:text-[15px]">

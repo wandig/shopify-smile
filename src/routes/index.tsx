@@ -26,6 +26,7 @@ import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
+import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import configuratorBg from "@/assets/klant-woonkamer-3.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
@@ -145,44 +146,68 @@ function HeroSection() {
 
 const HERO_BENEFITS = [
   {
-    kicker: "Uit eigen werkplaats",
-    title: "+4.000 tv-wanden",
-    body: "Onze eisen aan kwaliteit, design en functie gelden voor elke wand die we maken.",
-  },
-  {
-    kicker: "Jouw woonkamer is belangrijk voor ons",
-    title: "97% klanttevredenheid",
-    body: "Een score van 4,8 en meer dan 23.000 beoordelingen van klanten in heel Nederland.",
-  },
-  {
-    kicker: "Kies met volledige gemoedsrust",
+    icon: kijkplezierIcon.url,
     title: "100 dagen proefkijken",
-    body: "Wat je ook kiest — je krijgt 100 dagen om het thuis rustig uit te proberen.",
+    subtitle: "100 dagen rustig uitproberen thuis",
+  },
+  {
+    icon: dutchDesignIcon.url,
+    title: "Dutch Design",
+    subtitle: "Ontworpen en geproduceerd in Nederland",
+  },
+  {
+    icon: null,
+    title: "4,7/5 klantbeoordeling",
+    subtitle: "Gebaseerd op meer dan 23.000 reviews",
   },
 ];
 
 function HeroBenefitsSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-        <div className="grid gap-6 sm:grid-cols-3">
-          {HERO_BENEFITS.map((b, i) => (
+      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-16">
+        <div className="grid gap-4 sm:grid-cols-3">
+          {HERO_BENEFITS.map((b) => (
             <div
               key={b.title}
-              className="group relative flex flex-col rounded-2xl bg-white p-8 shadow-[0_2px_20px_-4px_rgba(7,20,38,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_30px_-6px_rgba(7,20,38,0.1)] md:p-10"
+              className="group flex items-center gap-4 rounded-2xl bg-white p-4 shadow-[0_2px_20px_-4px_rgba(7,20,38,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(7,20,38,0.1)] md:gap-5 md:p-5"
             >
-              <span className="absolute right-6 top-5 text-[40px] font-semibold leading-none text-[#071426]/[0.04] md:right-8 md:top-7 md:text-[52px]">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-[10px] font-[500] uppercase tracking-[0.16em] text-[#ef7027]">
-                {b.kicker}
-              </span>
-              <h3 className="mt-5 text-[22px] font-semibold leading-[1.15] tracking-[0.01em] text-[#071426] md:mt-6 md:text-[28px]">
-                {b.title}
-              </h3>
-              <p className="mt-3 text-[13px] leading-[1.6] tracking-[0.01em] text-[#071426]/55 md:mt-4 md:text-[14px]">
-                {b.body}
-              </p>
+              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-[#faf8f5] md:h-16 md:w-16">
+                {b.icon ? (
+                  <img
+                    src={b.icon}
+                    alt={b.title}
+                    className="h-8 w-8 object-contain md:h-9 md:w-9"
+                  />
+                ) : (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="#ef7027"
+                    className="h-8 w-8 md:h-9 md:w-9"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-[15px] font-semibold leading-tight tracking-[0.01em] text-[#071426] md:text-[17px]">
+                  {b.title}
+                </h3>
+                <p className="mt-0.5 text-[12px] leading-[1.5] tracking-[0.01em] text-[#071426]/55 md:text-[13px]">
+                  {b.subtitle}
+                </p>
+              </div>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="h-5 w-5 shrink-0 text-[#071426]/25 transition-transform duration-300 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              >
+                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
           ))}
         </div>

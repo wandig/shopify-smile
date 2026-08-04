@@ -437,10 +437,10 @@ function CustomerGallerySection() {
     <section className="bg-[#ffc79d] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 md:mb-8">
-          <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#7c4625]">
+          <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#0e1f2a]">
             Binnenkijken bij onze klanten
           </h2>
-          <p className="mt-2 text-[13px] md:text-[14px] text-[#7c4625]">
+          <p className="mt-2 text-[13px] md:text-[14px] text-[#0e1f2a]">
             Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
           </p>
         </div>

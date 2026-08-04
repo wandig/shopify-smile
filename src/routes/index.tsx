@@ -504,42 +504,71 @@ function PressMarqueeSection() {
   );
 }
 
-/* --------------------------- 6. dutch design ------------------------------ */
+/* --------------------------- 6. waarom wij -------------------------------- */
 
-function DutchDesignSection() {
+const WHY_US_CARDS = [
+  {
+    badge: "100 dagen proefkijken",
+    title: "Probeer het 100 dagen zonder risico.",
+    subtitle: "Bevalt het niet? Geld terug.",
+    bg: "bg-gradient-to-br from-[#ff9a6c] to-[#ef7027]",
+  },
+  {
+    badge: "Gratis levering",
+    title: "Altijd gratis levering.",
+    subtitle: "Waar je ook woont in Nederland & België.",
+    bg: "bg-gradient-to-br from-[#c0b3a4] to-[#a55f3e]",
+  },
+  {
+    badge: "Beoordelingen",
+    title: "4,7 sterren van meer dan 15.000 reviews.",
+    subtitle: "Echte klanten, echte ervaringen.",
+    bg: "bg-gradient-to-br from-[#e8a87c] to-[#c4654a]",
+  },
+];
+
+function WhyUsSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="relative overflow-hidden rounded-[20px]">
-          {/* asset slot: dutch design achtergrond */}
-          <img
-            src={dutchDesignBg.url}
-            alt="Dutch design tv-wand"
-            className="h-[420px] w-full object-cover md:h-[520px]"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent" />
-          <div className="absolute inset-0 flex flex-col justify-center p-8 md:p-14">
-            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-white/60">
-              Dutch design
-            </span>
-            <h2 className="mt-2 max-w-[520px] text-[24px] font-[600] leading-tight tracking-[0.01em] text-white md:text-[32px]">
-              Ontworpen én gemaakt in Nederland
-            </h2>
-            <p className="mt-3 max-w-[440px] text-[13px] leading-relaxed tracking-[0.01em] text-white/80 md:text-[14px]">
-              Eigen ontwerp, eigen werkplaats in Best. Tijdloze lijnen, eerlijke materialen en een
-              afwerking die je voelt.
-            </p>
-            <div className="mt-7">
-              <PrimaryButton to="/bezoek">Bekijk onze werkplaats</PrimaryButton>
+        <div className="flex flex-col gap-6 md:flex-row md:gap-8">
+          {/* vertical title */}
+          <div className="flex shrink-0 items-start md:w-[72px] md:justify-center">
+            <div className="flex items-center gap-3 md:-ml-2 md:mt-8 md:-rotate-90 md:origin-center">
+              <span className="whitespace-nowrap text-[13px] font-[500] uppercase tracking-[0.12em] text-[#0f1f2a]/60">
+                Betere service
+              </span>
+              <span className="whitespace-nowrap text-[28px] font-[600] uppercase tracking-[0.04em] text-[#0f1f2a] md:text-[32px]">
+                Waarom wij
+              </span>
             </div>
           </div>
-          <img
-            src={puzzlePiecesImg.url}
-            alt=""
-            className="pointer-events-none absolute bottom-4 right-4 w-[90px] opacity-90 md:w-[120px]"
-            loading="lazy"
-          />
+
+          {/* cards */}
+          <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-3">
+            {WHY_US_CARDS.map((card) => (
+              <div
+                key={card.badge}
+                className={`group relative flex min-h-[360px] flex-col justify-between overflow-hidden rounded-[20px] p-6 md:min-h-[420px] md:p-8 ${card.bg}`}
+              >
+                {/* asset slot: card background image */}
+                <div className="absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
+
+                <span className="relative z-10 w-fit rounded-full border border-white/30 bg-white/90 px-3 py-1.5 text-[11px] font-[500] uppercase tracking-[0.08em] text-[#0f1f2a]">
+                  {card.badge}
+                </span>
+
+                <div className="relative z-10">
+                  <h3 className="text-[22px] font-[500] leading-snug tracking-[0.01em] text-white md:text-[26px]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-[14px] font-[400] leading-relaxed text-white/85 md:text-[15px]">
+                    {card.subtitle}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

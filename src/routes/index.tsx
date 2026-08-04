@@ -24,6 +24,10 @@ import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
+import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
+import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
+import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
+import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
@@ -690,31 +694,72 @@ function ReviewsSection() {
 
 /* ------------------------ 8. gratis kleurstalen --------------------------- */
 
+const SAMPLE_CARDS = [
+  { name: "Eikenzwart", image: swatchEikenzwart },
+  { name: "Walnootbruin", image: swatchWalnootbruin },
+  { name: "Katoengrijs", image: swatchKatoengrijs },
+  { name: "Kleibeige", image: swatchKleibeige },
+];
+
 function ColorSamplesSection() {
   return (
     <section className="bg-gradient-to-b from-[#faf8f5] to-white py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="grid items-center gap-8 overflow-hidden rounded-[20px] bg-[#ede7e0] md:grid-cols-2">
-          {/* asset slot: kleurstalen foto */}
-          <img
-            src={kleurstalenImg.url}
-            alt="Gratis kleurstalen van Wandig"
-            className="h-full max-h-[380px] w-full object-cover"
-            loading="lazy"
-          />
-          <div className="p-8 md:p-12">
-            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
-              Gratis thuis
+        <div className="flex overflow-hidden rounded-[32px] bg-[#ede7e0] md:rounded-[48px]">
+          {/* vertical side label */}
+          <div className="hidden w-14 items-center justify-center border-r border-[#d9d1c7] md:flex md:w-20">
+            <span
+              className="whitespace-nowrap text-[11px] font-[500] uppercase tracking-[0.3em] text-[#071426]/50"
+              style={{ writingMode: "vertical-lr", transform: "rotate(180deg)" }}
+            >
+              Kleurstalen
             </span>
-            <h2 className="mt-2 text-[22px] font-[600] leading-tight tracking-[0.01em] text-[#071426] md:text-[28px]">
-              Bestel gratis kleurstalen
-            </h2>
-            <p className="mt-3 max-w-[420px] text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[14px]">
-              Twijfel je over de kleur? Wij sturen je gratis stalen zodat je thuis in je eigen licht kunt
-              kiezen.
-            </p>
-            <div className="mt-7">
-              <PrimaryButton to="/klantenservice">Bestel gratis kleurstalen</PrimaryButton>
+          </div>
+
+          {/* main content */}
+          <div className="flex flex-1 flex-col gap-8 p-6 md:flex-row md:items-center md:gap-12 md:p-10 lg:p-16">
+            {/* copy */}
+            <div className="flex flex-col justify-center space-y-4 md:w-1/2">
+              <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
+                Gratis thuis
+              </span>
+              <h2 className="text-[26px] font-[600] leading-tight tracking-[0.01em] text-[#071426] md:text-[34px] lg:text-[40px]">
+                Bestel gratis <br className="hidden md:block" />
+                kleurstalen
+              </h2>
+              <p className="max-w-[420px] text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[14px]">
+                Twijfel je over de kleur? Bestel onze gratis kleurstalen en bekijk ze op je gemak thuis bij
+                je eigen muur en lichtinval.
+              </p>
+              <div className="pt-2">
+                <PrimaryButton to="/klantenservice">Bestel gratis kleurstalen</PrimaryButton>
+              </div>
+            </div>
+
+            {/* sample cards grid */}
+            <div className="md:w-1/2">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                {SAMPLE_CARDS.map((card, i) => (
+                  <div
+                    key={card.name}
+                    className={`overflow-hidden rounded-[16px] bg-white p-2 shadow-sm transition-transform duration-300 hover:-translate-y-1 md:p-3 ${
+                      i % 2 === 1 ? "md:mt-6" : ""
+                    }`}
+                  >
+                    <div className="aspect-square overflow-hidden rounded-[12px]">
+                      <img
+                        src={card.image}
+                        alt={`Kleurstaal ${card.name}`}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p className="mt-2 text-center text-[12px] font-[500] tracking-[0.01em] text-[#071426]">
+                      {card.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

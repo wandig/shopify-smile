@@ -248,7 +248,7 @@ function ConfiguratorPage() {
                   }`}
                 >
                   <img
-                    src={rightModule.url}
+                    src={rightModuleUrl}
                     alt={`Wandig rechter module in ${color.name}`}
                     className={`block h-full w-auto select-none origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       hasRight ? "translate-x-0 scale-100" : "-translate-x-6 scale-[95%]"

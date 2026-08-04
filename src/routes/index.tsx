@@ -195,7 +195,6 @@ const PRODUCTS = [
     tagline: "Volledige wand-look",
     price: "1.699,-",
     img: fullhouseOrange.url,
-    badge: "Incl. kabelgoot & montageset",
     reviews: "(2.526)",
     meta: "240 cm · Full House",
     featured: true,

@@ -636,7 +636,7 @@ function ReviewsSection() {
 
 function ColorSamplesSection() {
   return (
-    <section className="bg-[#faf8f5] py-10 md:py-16">
+    <section className="bg-gradient-to-b from-[#faf8f5] to-white py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="grid items-center gap-8 overflow-hidden rounded-[20px] bg-[#ede7e0] md:grid-cols-2">
           {/* asset slot: kleurstalen foto */}
@@ -710,7 +710,7 @@ function FaqContactSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="bg-white py-12 md:py-20">
+    <section className="bg-gradient-to-b from-[#faf8f5] to-white py-12 md:py-20">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <SectionHeading
           kicker="FAQ"

@@ -820,7 +820,7 @@ function FaqContactSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="bg-white py-10 md:py-14">
+    <section className="bg-white pt-8 pb-10 md:pt-12 md:pb-14">
       <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <SectionHeading
           kicker="FAQ"

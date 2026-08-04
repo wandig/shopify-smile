@@ -186,9 +186,19 @@ function ConfiguratorPage() {
             {/* Configuration */}
             <div className="relative z-[3] flex w-full max-w-[1200px] origin-top scale-[0.61] items-end justify-center sm:scale-[0.765] lg:scale-[0.85]">
               {/* Wall unit — modules sit flush against each other */}
-              <div className="flex h-[420px] items-end lg:h-[520px]">
+              <div className="relative flex h-[420px] items-end lg:h-[520px]">
+                {/* Add / remove left module */}
+                <button
+                  type="button"
+                  onClick={() => setHasLeft(!hasLeft)}
+                  aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
+                  className="absolute left-0 top-1/2 z-[6] grid h-11 w-11 -translate-x-[calc(100%+16px)] -translate-y-1/2 place-items-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
+                >
+                  {hasLeft ? "−" : "+"}
+                </button>
+
                 <div
-                  className={`h-full overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  className={`relative z-[1] mr-[-3px] h-[97.5%] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     hasLeft ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
                   }`}
                 >
@@ -200,16 +210,7 @@ function ConfiguratorPage() {
                     }`}
                   />
                 </div>
-                <div className="relative h-full">
-                  {/* Add / remove left module */}
-                  <button
-                    type="button"
-                    onClick={() => setHasLeft(!hasLeft)}
-                    aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
-                    className="absolute left-0 top-1/2 z-[5] grid h-11 w-11 -translate-y-1/2 -translate-x-[calc(100%+14px)] place-items-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition hover:-translate-y-[calc(50%+1px)] hover:border-[#ef7027]"
-                  >
-                    {hasLeft ? "−" : "+"}
-                  </button>
+                <div className="relative z-[2] h-full">
                   <img
                     src={centerModule.url}
                     alt={`Wandig middenmodule in ${color.name}`}
@@ -227,6 +228,7 @@ function ConfiguratorPage() {
                   </button>
                 </div>
               </div>
+
             </div>
 
 

@@ -680,9 +680,6 @@ function QuoteVideoSection() {
           <p className="text-[20px] font-[500] leading-[1.4] tracking-[0.01em] text-[#071426] md:text-[28px]">
             Wandig, dat is handig.
           </p>
-          <footer className="mt-5 text-[13px] tracking-[0.01em] text-[#071426]/55">
-            Team Wandig — eigen werkplaats in Best
-          </footer>
         </blockquote>
 
         {/* asset slot: bedrijfsvideo */}

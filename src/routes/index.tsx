@@ -559,8 +559,7 @@ function WhyUsSection() {
                 key={card.badge}
                 className={`group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[24px] p-6 md:min-h-[520px] md:p-8 ${card.bg}`}
               >
-                {/* asset slot: card background image */}
-                <div className="absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
 
                 <span className="relative z-10 w-fit rounded-full bg-white px-3.5 py-1.5 text-[11px] font-[500] uppercase tracking-[0.08em] text-[#0f1f2a]">
                   {card.badge}

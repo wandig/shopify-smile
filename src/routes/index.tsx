@@ -947,9 +947,9 @@ function Home() {
 
       <ReviewsSection />
       <ColorSamplesSection />
-      <QuoteVideoSection />
       <FaqContactSection />
       <NewsletterSection />
+      <QuoteVideoSection />
       <TrustBannerSection />
     </div>
   );

@@ -678,8 +678,7 @@ function QuoteVideoSection() {
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <blockquote className="mx-auto max-w-[820px] text-center">
           <p className="text-[20px] font-[500] leading-[1.4] tracking-[0.01em] text-[#071426] md:text-[28px]">
-            “We maken tv-wanden die je niet elke vijf jaar hoeft te vervangen. Eerlijk materiaal, eigen
-            werkplaats, en een afwerking waar we onze naam op zetten.”
+            Wandig, dat is handig.
           </p>
           <footer className="mt-5 text-[13px] tracking-[0.01em] text-[#071426]/55">
             Team Wandig — eigen werkplaats in Best

@@ -571,7 +571,7 @@ function WhyUsSection() {
           {WHY_US_CARDS.map((card) => (
               <div
                 key={card.badge}
-                className={`group relative flex min-h-[420px] w-[85%] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-[24px] p-6 sm:w-[45%] md:min-h-[520px] md:w-[calc(33.333%-0.75rem)] md:p-8 ${card.bg}`}
+                className={`group relative flex min-h-[420px] w-[85%] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-[24px] p-6 sm:w-[45%] md:min-h-[520px] md:w-[calc(31.25%-0.9375rem)] md:p-8 ${card.bg}`}
               >
                 {card.image && (
                   <img

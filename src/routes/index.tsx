@@ -776,7 +776,7 @@ function TrustBannerSection() {
   ];
 
   return (
-    <section className="bg-white">
+    <section className="bg-[#f7f3ef]">
       <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10 md:py-8">
         <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-[#e5e5e5]">
           {items.map(({ icon: Icon, label }) => (

@@ -488,7 +488,7 @@ const PRESS = [press1, press2, press3, press4, press5, press6];
 function PressMarqueeSection() {
   const row = [...PRESS, ...PRESS];
   return (
-    <section className="overflow-hidden border-y border-[#eee7de] bg-white py-6 md:py-8">
+    <section className="overflow-hidden border-b border-[#eee7de] bg-white py-6 md:py-8">
       <div className="relative">
         <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-12 pr-12">
           {row.map((src, i) => (

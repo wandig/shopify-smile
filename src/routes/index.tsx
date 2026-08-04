@@ -531,6 +531,12 @@ const WHY_US_CARDS = [
     bg: "bg-gradient-to-br from-[#e8a87c] to-[#c4654a]",
     image: waaromWijMontage.url,
   },
+  {
+    badge: "10 jaar garantie",
+    title: "Gemaakt om jarenlang mee te gaan.",
+    subtitle: "10 jaar garantie op elk tv-meubel.",
+    bg: "bg-gradient-to-br from-[#e6c9a8] to-[#b9906e]",
+  },
 ];
 
 function WhyUsSection() {
@@ -558,7 +564,7 @@ function WhyUsSection() {
           </div>
 
           {/* cards */}
-          <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
+          <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4 md:gap-4">
           {WHY_US_CARDS.map((card) => (
               <div
                 key={card.badge}

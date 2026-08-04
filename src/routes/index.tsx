@@ -477,7 +477,7 @@ function CustomerGallerySection() {
 
 /* ------------------------------ 5. marquee -------------------------------- */
 
-const PRESS = ["RTL Woonmagazine", "vtwonen", "Eigen Huis & Interieur", "Libelle", "AD", "Man Man", "Elle Decoration"];
+const PRESS = [press1, press2, press3, press4, press5, press6];
 
 function PressMarqueeSection() {
   const row = [...PRESS, ...PRESS];
@@ -488,13 +488,14 @@ function PressMarqueeSection() {
       </p>
       <div className="relative">
         <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-12 pr-12">
-          {row.map((name, i) => (
-            <span
-              key={`${name}-${i}`}
-              className="whitespace-nowrap text-[16px] font-[500] tracking-[0.06em] text-[#071426]/45 md:text-[20px]"
-            >
-              {name}
-            </span>
+          {row.map((src, i) => (
+            <img
+              key={`${src}-${i}`}
+              src={src}
+              alt=""
+              aria-hidden="true"
+              className="h-6 w-auto shrink-0 opacity-40 md:h-8"
+            />
           ))}
         </div>
       </div>

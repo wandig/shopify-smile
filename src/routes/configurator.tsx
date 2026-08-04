@@ -261,7 +261,7 @@ function ConfiguratorPage() {
                   type="button"
                   onClick={() => setHasRight(!hasRight)}
                   aria-label={hasRight ? "Rechter module verwijderen" : "Rechter module toevoegen"}
-                  className="absolute right-0 top-1/2 z-[6] flex h-11 w-11 translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px+24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
+                  className="absolute right-0 top-1/2 z-[6] flex h-11 w-11 translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
                 >
                   <svg
                     aria-hidden="true"

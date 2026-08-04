@@ -280,11 +280,6 @@ function ProductCarouselSection() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
-                    {p.badge && (
-                      <span className="absolute left-4 top-4 rounded-full bg-white/90 px-4 py-2 text-[12px] tracking-[0.01em] text-[#071426]">
-                        {p.badge}
-                      </span>
-                    )}
                     <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white">
                       <div>
                         <h3 className="text-[26px] font-bold leading-[1.1] tracking-[0.01em] md:text-[32px]">

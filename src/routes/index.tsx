@@ -258,7 +258,7 @@ function ProductCarouselSection() {
                 className="whitespace-nowrap text-[26px] font-bold uppercase tracking-[0.06em] text-[#071426]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
-                Bestsellers
+                Kies jouw model
               </span>
             </div>
 

@@ -46,6 +46,8 @@ const BASE_PRICE = 1699;
 const BASE_WIDTH = 120;
 const LEFT_MODULE_PRICE = 475;
 const LEFT_MODULE_WIDTH = 40;
+const RIGHT_MODULE_PRICE = 475;
+const RIGHT_MODULE_WIDTH = 40;
 
 function euro(n: number) {
   return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;

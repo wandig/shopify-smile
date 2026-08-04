@@ -171,7 +171,7 @@ function HeroBenefitsSection() {
               <span className="text-[11px] font-[400] uppercase tracking-[0.14em] text-[#ef7027]">
                 {b.kicker}
               </span>
-              <h3 className="mt-3 text-[22px] font-[400] leading-[1.2] tracking-[0.01em] text-[#071426] md:text-[26px]">
+              <h3 className="mt-3 text-[16px] font-[400] leading-[1.3] tracking-[0.01em] text-[#071426] md:text-[18px]">
                 {b.title}
               </h3>
               <p className="mt-3 text-[13px] font-[300] leading-relaxed tracking-[0.01em] text-[#071426]/60 md:text-[14px]">

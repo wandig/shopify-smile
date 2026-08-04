@@ -24,8 +24,6 @@ import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
-import dutchDesignBg from "@/assets/dutch-design-voor-aan-de-muur-bg.png.asset.json";
-import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";

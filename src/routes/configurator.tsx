@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
-import rightModuleUrl from "@/assets/right-module-trim-tight.png";
+import rightModuleUrl from "@/assets/right-module-trim-tight-cropped.png";
 
 export const Route = createFileRoute("/configurator")({
   head: () => ({

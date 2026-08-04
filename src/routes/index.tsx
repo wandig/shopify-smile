@@ -29,6 +29,7 @@ import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import configuratorBg from "@/assets/configurator-bg.png.asset.json";
+import waaromWijBg from "@/assets/waarom-wij-achtergrond.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
@@ -512,6 +513,7 @@ const WHY_US_CARDS = [
     title: "Probeer het 100 dagen zonder risico.",
     subtitle: "Bevalt het niet? Geld terug.",
     bg: "bg-gradient-to-br from-[#ff9a6c] to-[#ef7027]",
+    image: waaromWijBg.url,
   },
   {
     badge: "Gratis levering",
@@ -553,13 +555,19 @@ function WhyUsSection() {
 
           {/* cards */}
           <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
-            {WHY_US_CARDS.map((card) => (
+          {WHY_US_CARDS.map((card) => (
               <div
                 key={card.badge}
                 className={`group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[24px] p-6 md:min-h-[520px] md:p-8 ${card.bg}`}
               >
-                {/* asset slot: card background image */}
-                <div className="absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
+                {card.image && (
+                  <img
+                    src={card.image}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                )}
+                <div className="absolute inset-0 bg-black/30 transition-opacity duration-500 group-hover:opacity-40" />
 
                 <span className="relative z-10 w-fit rounded-full bg-white px-3.5 py-1.5 text-[11px] font-[500] uppercase tracking-[0.08em] text-[#0f1f2a]">
                   {card.badge}

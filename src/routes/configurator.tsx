@@ -184,27 +184,32 @@ function ConfiguratorPage() {
             </div>
 
             {/* Configuration */}
-            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top scale-[0.72] items-end justify-center sm:scale-[0.9] lg:scale-100">
-              {/* Add / remove left module */}
-              <button
-                type="button"
-                onClick={() => setHasLeft(!hasLeft)}
-                aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
-                className="mb-[42%] mr-3 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition hover:-translate-y-px hover:border-[#ef7027]"
-              >
-                {hasLeft ? "−" : "+"}
-              </button>
-
+            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top scale-[0.61] items-end justify-center sm:scale-[0.765] lg:scale-[0.85]">
               {/* Wall unit — modules sit flush against each other */}
               <div className="flex h-[420px] items-end lg:h-[520px]">
-                {hasLeft && (
+                <div
+                  className={`h-full overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    hasLeft ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
+                  }`}
+                >
                   <img
                     src={leftModule.url}
                     alt={`Wandig linker module in ${color.name}`}
-                    className="block h-[99.5%] w-auto select-none"
+                    className={`block h-full w-auto select-none origin-bottom-right transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      hasLeft ? "translate-x-0 scale-100" : "translate-x-6 scale-95"
+                    }`}
                   />
-                )}
+                </div>
                 <div className="relative h-full">
+                  {/* Add / remove left module */}
+                  <button
+                    type="button"
+                    onClick={() => setHasLeft(!hasLeft)}
+                    aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
+                    className="absolute left-0 top-1/2 z-[5] grid h-11 w-11 -translate-y-1/2 -translate-x-[calc(100%+14px)] place-items-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition hover:-translate-y-[calc(50%+1px)] hover:border-[#ef7027]"
+                  >
+                    {hasLeft ? "−" : "+"}
+                  </button>
                   <img
                     src={centerModule.url}
                     alt={`Wandig middenmodule in ${color.name}`}
@@ -223,6 +228,7 @@ function ConfiguratorPage() {
                 </div>
               </div>
             </div>
+
 
             <div className="absolute bottom-[54px] left-1/2 z-[4] -translate-x-1/2 rounded-full bg-white/75 px-3 py-1.5 text-[11px] font-bold tracking-[0.01em] text-[#6d6762] backdrop-blur">
               {width} cm totale breedte

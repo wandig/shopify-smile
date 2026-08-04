@@ -274,10 +274,10 @@ function ProductCarouselSection() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
                     <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white">
                       <div>
-                        <h3 className="text-[26px] font-bold leading-[1.1] tracking-[0.01em] md:text-[32px]">
+                        <h3 className="text-[26px] font-[600] leading-[1.1] tracking-[0.01em] md:text-[32px]">
                           {p.title}
                         </h3>
-                        <div className="text-[22px] font-bold leading-tight tracking-[0.01em] md:text-[26px]">
+                        <div className="text-[22px] font-[600] leading-tight tracking-[0.01em] md:text-[26px]">
                           {p.price}
                         </div>
                         <div className="mt-3 flex items-center gap-2 text-[12px] tracking-[0.01em] text-white/90">
@@ -307,10 +307,10 @@ function ProductCarouselSection() {
                     <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <h3 className="text-[20px] font-bold leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[24px]">
+                          <h3 className="text-[20px] font-[600] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[24px]">
                             {p.title}
                           </h3>
-                          <div className="mt-0.5 text-[18px] font-bold tracking-[0.01em] text-[#071426] md:text-[22px]">
+                          <div className="mt-0.5 text-[18px] font-[600] tracking-[0.01em] text-[#071426] md:text-[22px]">
                             {p.price}
                           </div>
                         </div>

@@ -564,7 +564,7 @@ function WhyUsSection() {
           </div>
 
           {/* cards */}
-          <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
+          <div className="scrollbar-hide flex flex-1 snap-x snap-mandatory gap-3 overflow-x-auto md:gap-4">
           {WHY_US_CARDS.map((card) => (
               <div
                 key={card.badge}

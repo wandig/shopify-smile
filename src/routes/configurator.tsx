@@ -11,13 +11,12 @@ export const Route = createFileRoute("/configurator")({
       {
         name: "description",
         content:
-          "Stel jouw Wandig direct samen: kies de zijmodules, het tv-formaat en de kleur. De prijs zie je live in beeld.",
+          "Stel jouw Wandig direct samen: kies het tv-formaat en de kleur. De prijs zie je live in beeld.",
       },
       { property: "og:title", content: "Wandig configurator — stel jouw tv-wand samen" },
       {
         property: "og:description",
-        content:
-          "Kies je zijmodules, tv-formaat en kleur. Live preview en directe prijsindicatie.",
+        content: "Kies je tv-formaat en kleur. Live preview en directe prijsindicatie.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -34,9 +33,6 @@ const COLORS = [
   { name: "Blush", hex: "#d9a794" },
 ];
 
-
-
-
 const TV_OPTIONS = [
   { value: "40–50 inch", note: "Compact", price: 0 },
   { value: "50–60 inch", note: "Meest gekozen", price: 150 },
@@ -50,16 +46,10 @@ function euro(n: number) {
   return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;
 }
 
-function sideOption(v: SideType) {
-  return SIDE_OPTIONS.find((o) => o.value === v)!;
-}
-
 function ConfiguratorPage() {
   const [color, setColor] = useState(COLORS[0]);
-  const [leftType, setLeftType] = useState<SideType>("left");
-  const [rightType, setRightType] = useState<SideType>("right");
   const [tv, setTv] = useState(TV_OPTIONS[0]);
-  const [open, setOpen] = useState<"left" | "right" | "tv" | null>(null);
+  const [open, setOpen] = useState<"tv" | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -75,14 +65,8 @@ function ConfiguratorPage() {
     };
   }, []);
 
-  const width = useMemo(
-    () => BASE_WIDTH + sideOption(leftType).width + sideOption(rightType).width,
-    [leftType, rightType],
-  );
-  const total = useMemo(
-    () => BASE_PRICE + sideOption(leftType).price + sideOption(rightType).price + tv.price,
-    [leftType, rightType, tv],
-  );
+  const width = BASE_WIDTH;
+  const total = useMemo(() => BASE_PRICE + tv.price, [tv]);
 
   return (
     <main className="min-h-screen bg-[#f8f6f3] p-4 md:p-7">
@@ -96,9 +80,8 @@ function ConfiguratorPage() {
             Stel jouw Wandig direct samen.
           </h1>
           <p className="mt-3 max-w-[760px] text-[14px] leading-relaxed tracking-[0.01em] text-[#747981] md:text-[15px]">
-            Klik op het tv-vak in het midden om het formaat te wijzigen. Klik op een
-            zijmodule om te bepalen welk type daar moet komen. Het middenelement hangt
-            visueel tegen de wand.
+            Klik op de tv in het midden om het formaat te wijzigen. Kies daarnaast de
+            kleur van jouw kast.
           </p>
         </header>
 
@@ -162,74 +145,42 @@ function ConfiguratorPage() {
               </div>
             </div>
 
-            {/* Hint */}
-            <div className="absolute left-1/2 top-[22px] z-[6] hidden -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e8e2dc] bg-white/90 px-4 py-2.5 text-[12px] tracking-[0.01em] text-[#656a72] shadow-[0_10px_28px_rgba(3,12,26,0.07)] backdrop-blur md:block">
-              Klik op een onderdeel om het te wijzigen
-            </div>
-
             {/* Configuration */}
-            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top scale-[0.62] items-start justify-center gap-2.5 sm:scale-[0.84] lg:scale-100 lg:gap-[18px]">
-              <SideSlot
-                side="left"
-                type={leftType}
-                color={color.hex}
-                open={open === "left"}
-                onToggle={() => setOpen(open === "left" ? null : "left")}
-                onSelect={(v) => {
-                  setLeftType(v);
-                  setOpen(null);
-                }}
-              />
+            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top scale-[0.72] items-start justify-center sm:scale-[0.9] lg:scale-100">
+              <div className="relative w-[560px] max-w-full">
+                <img
+                  src={cinewallVisual.url}
+                  alt={`Wandig middenmodule in ${color.name}`}
+                  className="block h-auto w-full select-none rounded-[8px] drop-shadow-[0_16px_32px_rgba(0,0,0,0.10)]"
+                />
+                <button
+                  type="button"
+                  onClick={() => setOpen(open === "tv" ? null : "tv")}
+                  aria-label="Tv-formaat wijzigen"
+                  className="group absolute left-[8.2%] top-[27.8%] h-[42.6%] w-[81%] cursor-pointer rounded-[4px]"
+                >
+                  <span className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e8e2dc] bg-white px-3 py-2 text-[11px] font-black tracking-[0.01em] text-[#4f545b] opacity-0 shadow-[0_12px_28px_rgba(3,12,26,0.12)] transition group-hover:-top-11 group-hover:opacity-100">
+                    Klik voor tv-formaat
+                  </span>
+                </button>
 
-              {/* Center */}
-              <div className="flex min-h-[420px] w-[430px] justify-center lg:min-h-[520px] lg:w-[560px]">
-                <div className="relative w-[430px] max-w-full lg:w-[520px]">
-                  <img
-                    src={cinewallVisual.url}
-                    alt={`Wandig middenmodule in ${color.name}`}
-                    className="block h-auto w-full select-none rounded-[8px] drop-shadow-[0_16px_32px_rgba(0,0,0,0.10)]"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setOpen(open === "tv" ? null : "tv")}
-                    aria-label="Tv-formaat wijzigen"
-                    className="group absolute left-[8.2%] top-[27.8%] h-[42.6%] w-[81%] rounded-[4px] border-2 border-white/20 bg-[#030c1a]/[0.02] transition hover:-translate-y-[3px] hover:border-[#ef7027]/60 hover:bg-white/10"
-                  >
-                    <span className="pointer-events-none absolute bottom-[-16px] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e8e2dc] bg-white px-3 py-2 text-[10px] font-black tracking-[0.01em] text-[#4f545b] opacity-0 shadow-[0_12px_28px_rgba(3,12,26,0.12)] transition group-hover:bottom-[-12px] group-hover:opacity-100">
-                      Klik voor tv-formaat
-                    </span>
-                  </button>
-
-                  {open === "tv" && (
-                    <Popover className="left-1/2 top-[62%]">
-                      {TV_OPTIONS.map((o) => (
-                        <PopoverItem
-                          key={o.value}
-                          active={o.value === tv.value}
-                          label={o.value}
-                          note={o.note}
-                          onClick={() => {
-                            setTv(o);
-                            setOpen(null);
-                          }}
-                        />
-                      ))}
-                    </Popover>
-                  )}
-                </div>
+                {open === "tv" && (
+                  <Popover className="left-1/2 bottom-[calc(100%+14px)]">
+                    {TV_OPTIONS.map((o) => (
+                      <PopoverItem
+                        key={o.value}
+                        active={o.value === tv.value}
+                        label={o.value}
+                        note={o.note}
+                        onClick={() => {
+                          setTv(o);
+                          setOpen(null);
+                        }}
+                      />
+                    ))}
+                  </Popover>
+                )}
               </div>
-
-              <SideSlot
-                side="right"
-                type={rightType}
-                color={color.hex}
-                open={open === "right"}
-                onToggle={() => setOpen(open === "right" ? null : "right")}
-                onSelect={(v) => {
-                  setRightType(v);
-                  setOpen(null);
-                }}
-              />
             </div>
 
             <div className="absolute bottom-[54px] left-1/2 z-[4] -translate-x-1/2 rounded-full bg-white/75 px-3 py-1.5 text-[11px] font-bold tracking-[0.01em] text-[#6d6762] backdrop-blur">
@@ -247,12 +198,7 @@ function ConfiguratorPage() {
                 Jouw Wandig
               </strong>
               <div className="mt-2.5 flex flex-wrap gap-2">
-                {[
-                  tv.value,
-                  color.name,
-                  `Links: ${sideOption(leftType).label.toLowerCase()}`,
-                  `Rechts: ${sideOption(rightType).label.toLowerCase()}`,
-                ].map((chip) => (
+                {[tv.value, color.name].map((chip) => (
                   <span
                     key={chip}
                     className="rounded-full bg-[#f5f2ef] px-3 py-2 text-[11px] font-bold tracking-[0.01em] text-[#62676e]"
@@ -323,68 +269,5 @@ function PopoverItem({
       {label}
       <small className="font-bold text-[#747981]">{note}</small>
     </button>
-  );
-}
-
-function SideSlot({
-  side,
-  type,
-  color,
-  open,
-  onToggle,
-  onSelect,
-}: {
-  side: "left" | "right";
-  type: SideType;
-  color: string;
-  open: boolean;
-  onToggle: () => void;
-  onSelect: (v: SideType) => void;
-}) {
-  const empty = type === "none";
-  return (
-    <div className="relative flex justify-center pt-14">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-label={`${side === "left" ? "Linker" : "Rechter"} module wijzigen`}
-        className={`group relative h-[296px] w-[170px] rounded-[7px] transition hover:-translate-y-[3px] hover:brightness-[1.03] lg:h-[336px] lg:w-[200px] ${
-          empty
-            ? "grid place-items-center border-[1.5px] border-dashed border-[#b9b1aa] bg-white/40 p-7 text-center text-[12px] font-bold text-[#7c746e]"
-            : "shadow-[0_16px_34px_rgba(0,0,0,0.15)]"
-        }`}
-        style={empty ? undefined : { backgroundColor: color }}
-      >
-        {empty ? (
-          <span>Geen module</span>
-        ) : (
-          <>
-            <span className="pointer-events-none absolute inset-[18px] rounded-[3px] border border-white/20" />
-            <span
-              className={`pointer-events-none absolute top-[34px] h-1 w-[42px] rounded-full bg-white/50 ${
-                type === "left" ? "right-[25px]" : "left-[25px]"
-              }`}
-            />
-          </>
-        )}
-        <span className="pointer-events-none absolute bottom-[-16px] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e8e2dc] bg-white px-3 py-2 text-[10px] font-black tracking-[0.01em] text-[#4f545b] opacity-0 shadow-[0_12px_28px_rgba(3,12,26,0.12)] transition group-hover:bottom-[-12px] group-hover:opacity-100">
-          Klik om te wijzigen
-        </span>
-      </button>
-
-      {open && (
-        <Popover className="left-1/2 top-0">
-          {SIDE_OPTIONS.map((o) => (
-            <PopoverItem
-              key={o.value}
-              active={o.value === type}
-              label={o.label}
-              note={o.note}
-              onClick={() => onSelect(o.value)}
-            />
-          ))}
-        </Popover>
-      )}
-    </div>
   );
 }

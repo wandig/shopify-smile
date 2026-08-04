@@ -489,9 +489,6 @@ function PressMarqueeSection() {
   const row = [...PRESS, ...PRESS];
   return (
     <section className="overflow-hidden border-y border-[#eee7de] bg-white py-6 md:py-8">
-      <p className="mb-4 text-center text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
-        Bekend van
-      </p>
       <div className="relative">
         <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-12 pr-12">
           {row.map((src, i) => (

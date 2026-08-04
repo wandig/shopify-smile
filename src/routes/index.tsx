@@ -599,6 +599,7 @@ function WhyUsSection() {
           </div>
         </div>
       </div>
+    </div>
     </section>
   );
 }

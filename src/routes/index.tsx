@@ -536,13 +536,7 @@ function WhyUsSection() {
           <div className="hidden shrink-0 items-start justify-center md:flex md:w-[56px]">
             <div className="relative flex h-full flex-col items-center justify-start pt-4">
               <span
-                className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#0f1f2a]/55"
-                style={{ writingMode: "vertical-rl" }}
-              >
-                Betere service
-              </span>
-              <span
-                className="mt-4 text-[30px] font-[600] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
+                className="text-[30px] font-[600] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 Waarom wij
@@ -552,10 +546,7 @@ function WhyUsSection() {
 
           {/* mobile title */}
           <div className="md:hidden">
-            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#0f1f2a]/55">
-              Betere service
-            </span>
-            <h2 className="mt-1 text-[28px] font-[600] uppercase leading-tight tracking-[0.03em] text-[#0f1f2a]">
+            <h2 className="text-[28px] font-[600] uppercase leading-tight tracking-[0.03em] text-[#0f1f2a]">
               Waarom wij
             </h2>
           </div>

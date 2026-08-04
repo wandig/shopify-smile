@@ -945,8 +945,8 @@ function Home() {
       <HeroBenefitsSection />
       <ProductCarouselSection />
       <ConfiguratorBannerSection />
-      <PressMarqueeSection />
       <DutchDesignSection />
+      <PressMarqueeSection />
       <CustomerGallerySection />
 
       <ReviewsSection />

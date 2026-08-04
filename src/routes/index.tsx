@@ -513,6 +513,7 @@ const WHY_US_CARDS = [
     title: "Probeer het 100 dagen zonder risico.",
     subtitle: "Bevalt het niet? Geld terug.",
     bg: "bg-gradient-to-br from-[#ff9a6c] to-[#ef7027]",
+    image: waaromWijBg.url,
   },
   {
     badge: "Gratis levering",

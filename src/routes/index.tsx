@@ -829,7 +829,7 @@ function Home() {
       <HeroBenefitsSection />
       <ProductCarouselSection />
       <ConfiguratorBannerSection />
-      <DutchDesignSection />
+      <WhyUsSection />
       <PressMarqueeSection />
       <CustomerGallerySection />
 

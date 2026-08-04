@@ -67,10 +67,10 @@ function ConfiguratorPage() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  const width = BASE_WIDTH + (hasLeft ? LEFT_MODULE_WIDTH : 0);
+  const width = BASE_WIDTH + (hasLeft ? LEFT_MODULE_WIDTH : 0) + (hasRight ? RIGHT_MODULE_WIDTH : 0);
   const total = useMemo(
-    () => BASE_PRICE + tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0),
-    [tv, hasLeft],
+    () => BASE_PRICE + tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0),
+    [tv, hasLeft, hasRight],
   );
 
   return (

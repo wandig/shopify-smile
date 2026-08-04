@@ -243,7 +243,7 @@ function ConfiguratorPage() {
                   </button>
                 </div>
                 <div
-                  className={`relative z-[1] ml-[-11px] h-[calc(99.7%_+_0.3px)] -translate-y-[1px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  className={`relative z-[1] ml-[-11px] h-[calc(99.7%_+_0.3px)] -translate-y-[0.7px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     hasRight ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
                   }`}
                 >

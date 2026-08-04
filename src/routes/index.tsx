@@ -346,26 +346,6 @@ function ProductCarouselSection() {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-end gap-4 px-1">
-            <div className="hidden gap-2 md:flex">
-              <button
-                type="button"
-                onClick={() => scroll(-1)}
-                aria-label="Vorige"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                onClick={() => scroll(1)}
-                aria-label="Volgende"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
-              >
-                ›
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

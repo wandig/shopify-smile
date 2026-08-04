@@ -174,7 +174,7 @@ const HERO_BENEFITS = [
 function HeroBenefitsSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
+      <div className="mx-auto max-w-[1456px] px-5 py-10 md:px-10 md:py-14">
         <div className="grid gap-10 sm:grid-cols-3 md:gap-16">
           {HERO_BENEFITS.map((b) => (
             <div key={b.title} className="mx-auto max-w-[320px] text-center">
@@ -252,7 +252,7 @@ function BasketButton() {
 function ProductCarouselSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
           <div className="flex gap-5">
             <div className="hidden shrink-0 items-start pt-4 md:flex">
@@ -439,7 +439,7 @@ const CUSTOMER_GALLERY_COLUMNS = [
 function CustomerGallerySection() {
   return (
     <section className="bg-[#ffc79d] py-10 md:py-14">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <div className="mb-6 md:mb-8">
           <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#0e1f2a]">
             Binnenkijken bij onze klanten
@@ -550,7 +550,7 @@ const WHY_US_CARDS = [
 function WhyUsSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
           <div className="flex flex-col gap-6 md:flex-row md:gap-6">
           {/* vertical title */}
@@ -631,7 +631,7 @@ function ReviewsSection() {
 
   return (
     <section className="bg-[#faf8f6] py-10 md:py-14">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
           <SectionHeading kicker="Reviews" title="Wat klanten zeggen over hun tv-wand." align="left" />
 
@@ -658,7 +658,7 @@ function ReviewsSection() {
 
       <div
         ref={scrollerRef}
-        className="mx-auto flex max-w-[1400px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mx-auto flex max-w-[1456px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {REVIEWS.map((r, i) => (
           <article
@@ -707,7 +707,7 @@ const SAMPLE_CARDS = [
 function ColorSamplesSection() {
   return (
     <section className="bg-gradient-to-b from-[#faf8f5] to-white py-10 md:py-14">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <div className="flex overflow-hidden rounded-[32px] bg-[#ede7e0] md:rounded-[48px]">
           {/* vertical side label */}
           <div className="hidden w-14 items-center justify-center border-r border-[#d9d1c7] md:flex md:w-20">
@@ -782,7 +782,7 @@ function ColorSamplesSection() {
 function QuoteVideoSection() {
   return (
     <section className="bg-white py-10 md:py-14">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <blockquote className="mx-auto max-w-[820px] text-center">
           <p className="text-[20px] font-[500] leading-[1.4] tracking-[0.01em] text-[#071426] md:text-[28px]">
             Wandig, dat is handig.
@@ -821,7 +821,7 @@ function FaqContactSection() {
 
   return (
     <section className="bg-white py-10 md:py-14">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <SectionHeading
           kicker="FAQ"
           title="Veelgestelde vragen"
@@ -887,7 +887,7 @@ function TrustBannerSection() {
 
   return (
     <section className="bg-[#f7f3ef]">
-      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
+      <div className="mx-auto max-w-[1456px] px-5 py-10 md:px-10 md:py-14">
         <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-[#e5e5e5]">
           {items.map(({ icon: Icon, label }) => (
             <div key={label} className="flex flex-1 items-center justify-center gap-3 py-4 sm:px-4 sm:py-0">

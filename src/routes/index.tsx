@@ -550,7 +550,7 @@ function WhyUsSection() {
           <div className="hidden shrink-0 items-start justify-center md:flex md:w-[56px]">
             <div className="relative flex h-full flex-col items-center justify-start pt-4">
               <span
-                className="text-[30px] font-[600] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
+                className="text-[30px] font-[400] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 Waarom wij

@@ -497,7 +497,7 @@ function PressMarqueeSection() {
               src={src}
               alt=""
               aria-hidden="true"
-              className="h-6 w-auto shrink-0 opacity-40 md:h-8"
+              className="h-6 w-auto shrink-0 md:h-8"
             />
           ))}
         </div>

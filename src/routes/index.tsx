@@ -174,7 +174,7 @@ const HERO_BENEFITS = [
 function HeroBenefitsSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
+      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
         <div className="grid gap-10 sm:grid-cols-3 md:gap-16">
           {HERO_BENEFITS.map((b) => (
             <div key={b.title} className="mx-auto max-w-[320px] text-center">
@@ -251,7 +251,7 @@ function BasketButton() {
 
 function ProductCarouselSection() {
   return (
-    <section className="bg-[#faf8f5] pb-10 md:pb-16">
+    <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
           <div className="flex gap-5">
@@ -438,7 +438,7 @@ const CUSTOMER_GALLERY_COLUMNS = [
 
 function CustomerGallerySection() {
   return (
-    <section className="bg-[#ffc79d] py-10 md:py-16">
+    <section className="bg-[#ffc79d] py-10 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 md:mb-8">
           <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#0e1f2a]">
@@ -492,7 +492,7 @@ const PRESS = [press1, press2, press3, press4, press5, press6];
 function PressMarqueeSection() {
   const row = [...PRESS, ...PRESS];
   return (
-    <section className="relative overflow-hidden bg-[#dfd7ce] py-8 md:py-10">
+    <section className="relative overflow-hidden bg-[#dfd7ce] py-10 md:py-14">
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-28 bg-gradient-to-r from-[#dfd7ce] via-[#dfd7ce]/80 to-transparent md:w-56" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-28 bg-gradient-to-l from-[#dfd7ce] via-[#dfd7ce]/80 to-transparent md:w-56" />
       <div className="relative">
@@ -548,7 +548,7 @@ const WHY_US_CARDS = [
 
 function WhyUsSection() {
   return (
-    <section className="bg-[#faf8f5] py-10 md:py-16">
+    <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
           <div className="flex flex-col gap-6 md:flex-row md:gap-6">
@@ -629,7 +629,7 @@ function ReviewsSection() {
   };
 
   return (
-    <section className="bg-[#faf8f6] py-10 md:py-16">
+    <section className="bg-[#faf8f6] py-10 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
           <SectionHeading kicker="Reviews" title="Wat klanten zeggen over hun tv-wand." align="left" />
@@ -705,7 +705,7 @@ const SAMPLE_CARDS = [
 
 function ColorSamplesSection() {
   return (
-    <section className="bg-gradient-to-b from-[#faf8f5] to-white py-10 md:py-16">
+    <section className="bg-gradient-to-b from-[#faf8f5] to-white py-10 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="flex overflow-hidden rounded-[32px] bg-[#ede7e0] md:rounded-[48px]">
           {/* vertical side label */}
@@ -780,7 +780,7 @@ function ColorSamplesSection() {
 
 function QuoteVideoSection() {
   return (
-    <section className="bg-white pb-10 md:pb-16">
+    <section className="bg-white py-10 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <blockquote className="mx-auto max-w-[820px] text-center">
           <p className="text-[20px] font-[500] leading-[1.4] tracking-[0.01em] text-[#071426] md:text-[28px]">
@@ -819,7 +819,7 @@ function FaqContactSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="bg-white pb-12 pt-0 md:pb-20 md:pt-0">
+    <section className="bg-white py-10 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <SectionHeading
           kicker="FAQ"
@@ -886,7 +886,7 @@ function TrustBannerSection() {
 
   return (
     <section className="bg-[#f7f3ef]">
-      <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10 md:py-8">
+      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
         <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-[#e5e5e5]">
           {items.map(({ icon: Icon, label }) => (
             <div key={label} className="flex flex-1 items-center justify-center gap-3 py-4 sm:px-4 sm:py-0">

@@ -32,6 +32,7 @@ import configuratorBg from "@/assets/configurator-bg.png.asset.json";
 import waaromWijBg from "@/assets/waarom-wij-achtergrond.png.asset.json";
 import waaromWijCraft from "@/assets/waarom-wij-craft.png.asset.json";
 import waaromWijMontage from "@/assets/waarom-wij-montage.png.asset.json";
+import waaromWijService from "@/assets/waarom-wij-service.png.asset.json";
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
 import klantWoonkamer3Img from "@/assets/klant-woonkamer-3.png.asset.json";
@@ -536,6 +537,7 @@ const WHY_US_CARDS = [
     title: "Gemaakt om jaren mee te gaan.",
     subtitle: "Op elk meubel zit 10 jaar garantie.",
     bg: "bg-gradient-to-br from-[#c9b8a8] to-[#8b6a5a]",
+    image: waaromWijService.url,
   },
 ];
 

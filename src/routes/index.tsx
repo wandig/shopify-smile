@@ -440,7 +440,7 @@ function CustomerGallerySection() {
           <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#7c4625]">
             Binnenkijken bij onze klanten
           </h2>
-          <p className="mt-2 text-[13px] md:text-[14px] text-[#7c4625]/70">
+          <p className="mt-2 text-[13px] md:text-[14px] text-[#7c4625]">
             Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
           </p>
         </div>

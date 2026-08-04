@@ -118,7 +118,7 @@ function PrimaryButton({ to, children }: { to: string; children: ReactNode }) {
 
 function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[600px] w-full overflow-hidden">
+    <section className="relative h-screen max-h-[780px] min-h-[560px] w-full overflow-hidden">
       <video
         src={heroVideo.url}
         autoPlay

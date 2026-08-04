@@ -571,7 +571,7 @@ function ReviewsSection() {
   };
 
   return (
-    <section className="bg-[#fff7ef] py-10 md:py-16">
+    <section className="bg-[#faf8f6] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
           <SectionHeading kicker="Reviews" title="Wat klanten zeggen over hun tv-wand." align="left" />

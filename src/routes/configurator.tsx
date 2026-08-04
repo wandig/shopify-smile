@@ -86,7 +86,7 @@ function ConfiguratorPage() {
           </h1>
           <p className="mt-3 max-w-[760px] text-[14px] leading-relaxed tracking-[0.01em] text-[#747981] md:text-[15px]">
             Klik op de tv in het midden om het formaat te wijzigen en gebruik de plus links
-            om de linker module toe te voegen.
+            of rechts om de zijmodules toe te voegen.
           </p>
         </header>
 

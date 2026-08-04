@@ -9,9 +9,6 @@ import { useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   CalendarClock,
-  Headphones,
-  Mail,
-  Phone,
   Plus,
   Shield,
   ShoppingBasket,

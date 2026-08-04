@@ -346,10 +346,7 @@ function ProductCarouselSection() {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between gap-4 px-1">
-            <p className="text-[12px] tracking-[0.01em] text-[#071426]/55">
-              Elk model op maat gemaakt, in de kleur en indeling die bij jouw woonkamer past.
-            </p>
+          <div className="mt-4 flex items-center justify-end gap-4 px-1">
             <div className="hidden gap-2 md:flex">
               <button
                 type="button"

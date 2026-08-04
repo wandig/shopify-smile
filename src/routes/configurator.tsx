@@ -198,7 +198,7 @@ function ConfiguratorPage() {
                 </button>
 
                 <div
-                  className={`relative z-[1] mr-[-3px] h-[97.5%] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  className={`relative z-[1] mr-[-3px] h-[97.5%] -translate-y-[2px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     hasLeft ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
                   }`}
                 >
@@ -206,7 +206,7 @@ function ConfiguratorPage() {
                     src={leftModule.url}
                     alt={`Wandig linker module in ${color.name}`}
                     className={`block h-full w-auto select-none origin-bottom-right transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      hasLeft ? "translate-x-0 scale-100" : "translate-x-6 scale-95"
+                      hasLeft ? "translate-x-0 scale-[104%]" : "translate-x-6 scale-[99%]"
                     }`}
                   />
                 </div>

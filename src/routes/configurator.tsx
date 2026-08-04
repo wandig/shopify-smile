@@ -34,13 +34,8 @@ const COLORS = [
   { name: "Blush", hex: "#d9a794" },
 ];
 
-type SideType = "left" | "right" | "none";
 
-const SIDE_OPTIONS: Array<{ value: SideType; label: string; note: string; price: number; width: number }> = [
-  { value: "left", label: "Linker module", note: "Links", price: 475, width: 60 },
-  { value: "right", label: "Rechter module", note: "Rechts", price: 475, width: 60 },
-  { value: "none", label: "Geen module", note: "Leeg", price: 0, width: 0 },
-];
+
 
 const TV_OPTIONS = [
   { value: "40–50 inch", note: "Compact", price: 0 },

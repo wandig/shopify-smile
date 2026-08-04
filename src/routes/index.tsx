@@ -240,13 +240,6 @@ function BasketButton() {
 }
 
 function ProductCarouselSection() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const scroll = (dir: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
-  };
-
   return (
     <section className="bg-[#faf8f5] pb-10 md:pb-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">

@@ -531,38 +531,54 @@ function WhyUsSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="flex flex-col gap-6 md:flex-row md:gap-8">
+        <div className="flex flex-col gap-6 md:flex-row md:gap-6">
           {/* vertical title */}
-          <div className="flex shrink-0 items-start md:w-[72px] md:justify-center">
-            <div className="flex items-center gap-3 md:-ml-2 md:mt-8 md:-rotate-90 md:origin-center">
-              <span className="whitespace-nowrap text-[13px] font-[500] uppercase tracking-[0.12em] text-[#0f1f2a]/60">
+          <div className="hidden shrink-0 items-start justify-center md:flex md:w-[56px]">
+            <div className="relative flex h-full flex-col items-center justify-start pt-4">
+              <span
+                className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#0f1f2a]/55"
+                style={{ writingMode: "vertical-rl" }}
+              >
                 Betere service
               </span>
-              <span className="whitespace-nowrap text-[28px] font-[600] uppercase tracking-[0.04em] text-[#0f1f2a] md:text-[32px]">
+              <span
+                className="mt-4 text-[30px] font-[600] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
+                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              >
                 Waarom wij
               </span>
             </div>
           </div>
 
+          {/* mobile title */}
+          <div className="md:hidden">
+            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#0f1f2a]/55">
+              Betere service
+            </span>
+            <h2 className="mt-1 text-[28px] font-[600] uppercase leading-tight tracking-[0.03em] text-[#0f1f2a]">
+              Waarom wij
+            </h2>
+          </div>
+
           {/* cards */}
-          <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
             {WHY_US_CARDS.map((card) => (
               <div
                 key={card.badge}
-                className={`group relative flex min-h-[360px] flex-col justify-between overflow-hidden rounded-[20px] p-6 md:min-h-[420px] md:p-8 ${card.bg}`}
+                className={`group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[24px] p-6 md:min-h-[520px] md:p-8 ${card.bg}`}
               >
                 {/* asset slot: card background image */}
                 <div className="absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
 
-                <span className="relative z-10 w-fit rounded-full border border-white/30 bg-white/90 px-3 py-1.5 text-[11px] font-[500] uppercase tracking-[0.08em] text-[#0f1f2a]">
+                <span className="relative z-10 w-fit rounded-full bg-white px-3.5 py-1.5 text-[11px] font-[500] uppercase tracking-[0.08em] text-[#0f1f2a]">
                   {card.badge}
                 </span>
 
                 <div className="relative z-10">
-                  <h3 className="text-[22px] font-[500] leading-snug tracking-[0.01em] text-white md:text-[26px]">
+                  <h3 className="text-[24px] font-[500] leading-[1.15] tracking-[0.01em] text-white md:text-[30px]">
                     {card.title}
                   </h3>
-                  <p className="mt-2 text-[14px] font-[400] leading-relaxed text-white/85 md:text-[15px]">
+                  <p className="mt-2 text-[15px] font-[400] leading-relaxed text-white/85 md:text-[16px]">
                     {card.subtitle}
                   </p>
                 </div>

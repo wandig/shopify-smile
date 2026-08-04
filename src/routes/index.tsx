@@ -168,13 +168,13 @@ function HeroBenefitsSection() {
         <div className="grid gap-10 sm:grid-cols-3 md:gap-16">
           {HERO_BENEFITS.map((b) => (
             <div key={b.title} className="mx-auto max-w-[320px] text-center">
-              <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#ef7027]">
+              <span className="text-[11px] font-[400] uppercase tracking-[0.14em] text-[#ef7027]">
                 {b.kicker}
               </span>
-              <h3 className="mt-3 text-[22px] font-bold leading-[1.2] tracking-[0.01em] text-[#071426] md:text-[26px]">
+              <h3 className="mt-3 text-[22px] font-[400] leading-[1.2] tracking-[0.01em] text-[#071426] md:text-[26px]">
                 {b.title}
               </h3>
-              <p className="mt-3 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/60 md:text-[14px]">
+              <p className="mt-3 text-[13px] font-[300] leading-relaxed tracking-[0.01em] text-[#071426]/60 md:text-[14px]">
                 {b.body}
               </p>
             </div>

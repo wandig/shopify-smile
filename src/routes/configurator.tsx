@@ -57,6 +57,7 @@ function ConfiguratorPage() {
   const [color, setColor] = useState(COLORS[0]);
   const [tv, setTv] = useState(TV_OPTIONS[1]);
   const [hasLeft, setHasLeft] = useState(false);
+  const [hasRight, setHasRight] = useState(false);
   const [tvPickerOpen, setTvPickerOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
 

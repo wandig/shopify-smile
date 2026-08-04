@@ -521,6 +521,7 @@ const WHY_US_CARDS = [
     title: "Altijd gratis levering.",
     subtitle: "Waar je ook woont in Nederland & België.",
     bg: "bg-gradient-to-br from-[#c0b3a4] to-[#a55f3e]",
+    image: waaromWijCraft.url,
   },
   {
     badge: "Beoordelingen",

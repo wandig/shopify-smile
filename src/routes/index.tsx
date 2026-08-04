@@ -254,7 +254,7 @@ function ProductCarouselSection() {
           <div className="flex gap-5">
             <div className="hidden shrink-0 items-center md:flex">
               <span
-                className="whitespace-nowrap text-[26px] font-bold uppercase tracking-[0.06em] text-[#071426]"
+                className="whitespace-nowrap text-[34px] font-[300] uppercase tracking-[0.06em] text-[#071426]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 Kies jouw model

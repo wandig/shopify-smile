@@ -567,7 +567,7 @@ function WhyUsSection() {
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 )}
-                <div className="absolute inset-0 bg-black/30 transition-opacity duration-500 group-hover:opacity-40" />
+                <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:opacity-30" />
 
                 <span className="relative z-10 w-fit rounded-full bg-white px-3.5 py-1.5 text-[11px] font-[500] uppercase tracking-[0.08em] text-[#0f1f2a]">
                   {card.badge}

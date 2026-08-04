@@ -240,13 +240,6 @@ function BasketButton() {
 }
 
 function ProductCarouselSection() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const scroll = (dir: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
-  };
-
   return (
     <section className="bg-[#faf8f5] pb-10 md:pb-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
@@ -262,7 +255,6 @@ function ProductCarouselSection() {
             </div>
 
             <div
-              ref={scrollerRef}
               className="flex min-w-0 flex-1 snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {PRODUCTS.map((p) =>
@@ -346,26 +338,6 @@ function ProductCarouselSection() {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-end gap-4 px-1">
-            <div className="hidden gap-2 md:flex">
-              <button
-                type="button"
-                onClick={() => scroll(-1)}
-                aria-label="Vorige"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                onClick={() => scroll(1)}
-                aria-label="Volgende"
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
-              >
-                ›
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

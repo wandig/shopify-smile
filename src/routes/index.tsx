@@ -740,33 +740,27 @@ function ColorSamplesSection() {
 
             {/* sample cards grid */}
             <div className="md:w-1/2">
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-                {SAMPLE_CARDS.map((card, i) => {
-                  const isOffset = i === 1 || i === 3;
-                  const isLast = i === SAMPLE_CARDS.length - 1;
-                  return (
-                    <div
-                      key={card.name}
-                      className={`overflow-hidden rounded-[16px] bg-white p-2 shadow-sm transition-transform duration-300 hover:-translate-y-1 md:p-3 ${
-                        isOffset ? "mt-6" : ""
-                      } ${isLast ? "col-span-2 md:col-span-1" : ""} ${
-                        i === 3 ? "md:col-start-2" : ""
-                      } ${i === 4 ? "md:col-start-3" : ""}`}
-                    >
-                      <div className="aspect-square overflow-hidden rounded-[12px]">
-                        <img
-                          src={card.image}
-                          alt={`Kleurstaal ${card.name}`}
-                          className="h-full w-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                      <p className="mt-2 text-center text-[12px] font-[500] tracking-[0.01em] text-[#071426]">
-                        {card.name}
-                      </p>
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                {SAMPLE_CARDS.map((card, i) => (
+                  <div
+                    key={card.name}
+                    className={`overflow-hidden rounded-[16px] bg-white p-2 shadow-sm transition-transform duration-300 hover:-translate-y-1 md:p-3 ${
+                      i % 2 === 1 ? "mt-6" : ""
+                    }`}
+                  >
+                    <div className="aspect-square overflow-hidden rounded-[12px]">
+                      <img
+                        src={card.image}
+                        alt={`Kleurstaal ${card.name}`}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
                     </div>
-                  );
-                })}
+                    <p className="mt-2 text-center text-[12px] font-[500] tracking-[0.01em] text-[#071426]">
+                      {card.name}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

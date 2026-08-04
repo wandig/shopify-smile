@@ -20,7 +20,7 @@ import {
   Truck,
   User,
 } from "lucide-react";
-import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
+
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
 import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
@@ -786,121 +786,8 @@ function FaqContactSection() {
   );
 }
 
-/* ---------------------------- 11. nieuwsbrief ----------------------------- */
 
-function NewsletterSection() {
-  const [email, setEmail] = useState("");
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (status === "loading") return;
-    const trimmed = email.trim();
-    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-      setStatus("error");
-      setMessage("Vul een geldig e-mailadres in.");
-      return;
-    }
-    if (!acceptedTerms) {
-      setStatus("error");
-      setMessage("Accepteer de voorwaarden om door te gaan.");
-      return;
-    }
-    setStatus("loading");
-    setMessage("");
-    try {
-      const res = await subscribeNewsletter({ data: { email: trimmed, source: "homepage" } });
-      setStatus("success");
-      setMessage(res.alreadySubscribed ? "Je bent al ingeschreven — bedankt!" : "Bedankt! Je bent ingeschreven.");
-      setEmail("");
-      setAcceptedTerms(false);
-    } catch (err) {
-      setStatus("error");
-      setMessage(err instanceof Error ? err.message : "Er ging iets mis. Probeer het opnieuw.");
-    }
-  };
-
-  return (
-    <section className="bg-[#fffcf8]">
-      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-16">
-        <div className="mx-auto max-w-[560px] text-center">
-          <h2 className="text-[22px] font-bold leading-[1.25] tracking-[0.01em] text-[#071426] md:text-[26px]">
-            Meld je aan voor onze nieuwsbrief
-          </h2>
-          <p className="mt-3 text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[14px]">
-            Blijf op de hoogte van de nieuwste updates, tips en exclusieve aanbiedingen.
-          </p>
-
-          <form onSubmit={onSubmit} className="mx-auto mt-6 max-w-[430px] text-left" noValidate>
-            <div className="flex overflow-hidden rounded-[8px] border border-[#e7ded4] bg-white">
-              <label htmlFor="home-newsletter-email" className="sr-only">
-                E-mailadres
-              </label>
-              <input
-                id="home-newsletter-email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (status !== "idle") setStatus("idle");
-                }}
-                placeholder="Voer je e-mailadres in"
-                className="h-[46px] min-w-0 flex-1 bg-white px-4 text-[14px] tracking-[0.01em] text-[#071426] placeholder:text-[#071426]/40 focus:outline-none"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="inline-flex h-[46px] shrink-0 items-center justify-center gap-2 rounded-[8px] bg-[#ef7027] px-5 text-[14px] font-[500] tracking-[0.03em] text-white transition hover:brightness-95 disabled:opacity-60"
-              >
-                {status === "loading" ? (
-                  "Bezig..."
-                ) : (
-                  <>
-                    Inschrijven
-                    <ArrowRight className="h-4 w-4" />
-                  </>
-                )}
-              </button>
-            </div>
-            <label className="mt-4 flex cursor-pointer items-start gap-3">
-              <input
-                type="checkbox"
-                checked={acceptedTerms}
-                onChange={(e) => {
-                  setAcceptedTerms(e.target.checked);
-                  if (status !== "idle") setStatus("idle");
-                }}
-                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded-[3px] border-[#cdc0b5] text-[#ef7027] focus:ring-[#ef7027]"
-              />
-              <span className="text-[13px] leading-snug tracking-[0.01em] text-[#071426]/75">
-                Ik accepteer de voorwaarden.{" "}
-                <a
-                  href="/algemene-voorwaarden"
-                  className="underline decoration-[#071426]/40 underline-offset-2 transition hover:text-[#ef7027] hover:decoration-[#ef7027]"
-                >
-                  Privacyverklaring
-                </a>
-              </span>
-            </label>
-            {message && (
-              <p
-                className={`mt-3 text-[13px] tracking-[0.01em] ${status === "success" ? "text-[#2d6a3e]" : "text-[#b3341c]"}`}
-              >
-                {message}
-              </p>
-            )}
-          </form>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------------------- 12. 4 benefits ------------------------------ */
+/* ---------------------------- 11. 4 benefits ------------------------------ */
 
 function PuzzleImgIcon({ className }: { className?: string }) {
   return <img src={puzzleIcon.url} alt="" className={className} />;
@@ -948,7 +835,6 @@ function Home() {
       <ReviewsSection />
       <ColorSamplesSection />
       <FaqContactSection />
-      <NewsletterSection />
       <QuoteVideoSection />
       <TrustBannerSection />
     </div>

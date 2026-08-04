@@ -545,7 +545,8 @@ function WhyUsSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="flex flex-col gap-6 md:flex-row md:gap-6">
+        <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
+          <div className="flex flex-col gap-6 md:flex-row md:gap-6">
           {/* vertical title */}
           <div className="hidden shrink-0 items-start justify-center md:flex md:w-[56px]">
             <div className="relative flex h-full flex-col items-center justify-start pt-4">
@@ -598,6 +599,7 @@ function WhyUsSection() {
           </div>
         </div>
       </div>
+    </div>
     </section>
   );
 }

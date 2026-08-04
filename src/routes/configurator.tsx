@@ -242,6 +242,40 @@ function ConfiguratorPage() {
                     </span>
                   </button>
                 </div>
+                <div
+                  className={`relative z-[1] ml-[-3px] h-[99.7%] -translate-y-[1px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    hasRight ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
+                  }`}
+                >
+                  <img
+                    src={rightModule.url}
+                    alt={`Wandig rechter module in ${color.name}`}
+                    className={`block h-full w-auto select-none origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      hasRight ? "translate-x-0 scale-100" : "-translate-x-6 scale-[95%]"
+                    }`}
+                  />
+                </div>
+
+                {/* Add / remove right module */}
+                <button
+                  type="button"
+                  onClick={() => setHasRight(!hasRight)}
+                  aria-label={hasRight ? "Rechter module verwijderen" : "Rechter module toevoegen"}
+                  className="absolute right-0 top-1/2 z-[6] flex h-11 w-11 translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px+24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
+                >
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
+                    <path d="M5 12h14" />
+                    {!hasRight && <path d="M12 5v14" />}
+                  </svg>
+                </button>
               </div>
 
             </div>

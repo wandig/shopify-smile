@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
-import rightModule from "@/assets/right-module-trim.png.asset.json";
+import rightModuleUrl from "@/assets/right-module-trim-tight-cropped.png";
 
 export const Route = createFileRoute("/configurator")({
   head: () => ({
@@ -248,7 +248,7 @@ function ConfiguratorPage() {
                   }`}
                 >
                   <img
-                    src={rightModule.url}
+                    src={rightModuleUrl}
                     alt={`Wandig rechter module in ${color.name}`}
                     className={`block h-full w-auto select-none origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       hasRight ? "translate-x-0 scale-100" : "-translate-x-6 scale-[95%]"

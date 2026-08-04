@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
+import rightModule from "@/assets/right-module-trim.png.asset.json";
 
 export const Route = createFileRoute("/configurator")({
   head: () => ({
@@ -45,6 +46,8 @@ const BASE_PRICE = 1699;
 const BASE_WIDTH = 120;
 const LEFT_MODULE_PRICE = 475;
 const LEFT_MODULE_WIDTH = 40;
+const RIGHT_MODULE_PRICE = 475;
+const RIGHT_MODULE_WIDTH = 40;
 
 function euro(n: number) {
   return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;
@@ -54,6 +57,7 @@ function ConfiguratorPage() {
   const [color, setColor] = useState(COLORS[0]);
   const [tv, setTv] = useState(TV_OPTIONS[1]);
   const [hasLeft, setHasLeft] = useState(false);
+  const [hasRight, setHasRight] = useState(false);
   const [tvPickerOpen, setTvPickerOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
 
@@ -63,10 +67,10 @@ function ConfiguratorPage() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  const width = BASE_WIDTH + (hasLeft ? LEFT_MODULE_WIDTH : 0);
+  const width = BASE_WIDTH + (hasLeft ? LEFT_MODULE_WIDTH : 0) + (hasRight ? RIGHT_MODULE_WIDTH : 0);
   const total = useMemo(
-    () => BASE_PRICE + tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0),
-    [tv, hasLeft],
+    () => BASE_PRICE + tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0),
+    [tv, hasLeft, hasRight],
   );
 
   return (
@@ -82,7 +86,7 @@ function ConfiguratorPage() {
           </h1>
           <p className="mt-3 max-w-[760px] text-[14px] leading-relaxed tracking-[0.01em] text-[#747981] md:text-[15px]">
             Klik op de tv in het midden om het formaat te wijzigen en gebruik de plus links
-            om de linker module toe te voegen.
+            of rechts om de zijmodules toe te voegen.
           </p>
         </header>
 
@@ -238,6 +242,40 @@ function ConfiguratorPage() {
                     </span>
                   </button>
                 </div>
+                <div
+                  className={`relative z-[1] ml-[-3px] h-[99.7%] -translate-y-[1px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    hasRight ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
+                  }`}
+                >
+                  <img
+                    src={rightModule.url}
+                    alt={`Wandig rechter module in ${color.name}`}
+                    className={`block h-full w-auto select-none origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      hasRight ? "translate-x-0 scale-100" : "-translate-x-6 scale-[95%]"
+                    }`}
+                  />
+                </div>
+
+                {/* Add / remove right module */}
+                <button
+                  type="button"
+                  onClick={() => setHasRight(!hasRight)}
+                  aria-label={hasRight ? "Rechter module verwijderen" : "Rechter module toevoegen"}
+                  className="absolute right-0 top-1/2 z-[6] flex h-11 w-11 translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
+                >
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
+                    <path d="M5 12h14" />
+                    {!hasRight && <path d="M12 5v14" />}
+                  </svg>
+                </button>
               </div>
 
             </div>
@@ -261,7 +299,13 @@ function ConfiguratorPage() {
                 {[
                   `Tv ${tv.value}`,
                   color.name,
-                  hasLeft ? "Met linker module" : "Alleen middenmodule",
+                  hasLeft && hasRight
+                    ? "Met linker & rechter module"
+                    : hasLeft
+                      ? "Met linker module"
+                      : hasRight
+                        ? "Met rechter module"
+                        : "Alleen middenmodule",
                 ].map((chip) => (
                   <span
                     key={chip}

@@ -145,19 +145,19 @@ function HeroSection() {
 
 const HERO_BENEFITS = [
   {
-    kicker: "Uit eigen werkplaats",
-    title: "+4.000 tv-wanden",
-    body: "Onze eisen aan kwaliteit, design en functie gelden voor elke wand die we maken.",
+    kicker: "VERTROUWD DOOR KLANTEN",
+    title: "+15.000 verkochte tv-meubels",
+    body: "Ontworpen om jarenlang het middelpunt van je woonkamer te zijn.",
   },
   {
-    kicker: "Jouw woonkamer is belangrijk voor ons",
-    title: "97% klanttevredenheid",
-    body: "Een score van 4,8 en meer dan 23.000 beoordelingen van klanten in heel Nederland.",
-  },
-  {
-    kicker: "Kies met volledige gemoedsrust",
+    kicker: "ZORGELOOS THUIS PROBEREN",
     title: "100 dagen proefkijken",
-    body: "Wat je ook kiest — je krijgt 100 dagen om het thuis rustig uit te proberen.",
+    body: "Bekijk rustig thuis of het perfect past bij jouw interieur.",
+  },
+  {
+    kicker: "KWALITEIT GEGARANDEERD",
+    title: "10 jaar garantie",
+    body: "Duurzame kwaliteit waar je jarenlang op kunt vertrouwen.",
   },
 ];
 

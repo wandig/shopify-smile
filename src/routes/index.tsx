@@ -21,6 +21,7 @@ import {
 import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
 import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
+import fullHouseClosedFront from "@/assets/full-house-closed-front.jpg.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";

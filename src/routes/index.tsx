@@ -510,10 +510,10 @@ function ConfiguratorBannerSection() {
       </section>
 
       {/* Desktop: architectural layered canvas */}
-      <section className="hidden w-full bg-[#faf8f5] px-5 py-10 lg:block lg:py-16">
+      <section className="hidden w-full overflow-hidden bg-[#faf8f5] px-5 py-10 lg:block lg:py-16">
         <div className="relative mx-auto grid max-w-[1456px] grid-cols-12 items-center">
           {/* Image + swatches */}
-          <div className="col-span-12 lg:col-span-8 relative aspect-[4/3] lg:aspect-auto lg:h-[620px] overflow-hidden rounded-[24px] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.12)]">
+          <div className="col-span-12 lg:col-span-7 relative aspect-[4/3] lg:aspect-auto lg:h-[620px] overflow-hidden rounded-[24px] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.12)]">
             <img
               src={configuratorBg.url}
               alt="Configureer jouw tv-wand"

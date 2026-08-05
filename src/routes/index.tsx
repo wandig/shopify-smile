@@ -394,7 +394,6 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             <div className="mt-2">
               <ColorSwatches selected={color} onSelect={setColor} light />
             </div>
-            <div className="mt-1 text-[12px] tracking-[0.01em] text-white/85">{color}</div>
           </div>
           <BasketButton />
         </div>

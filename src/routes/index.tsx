@@ -364,7 +364,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group relative aspect-square w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
+        className="group relative h-[460px] w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:aspect-square md:h-auto md:w-[46%]"
       >
         <img
           key={img}
@@ -400,6 +400,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       </Link>
     );
   }
+
 
   return (
     <Link
@@ -450,6 +451,9 @@ function ProductCarouselSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1456px] px-5 md:px-10">
+        <h2 className="mb-4 text-[24px] font-[400] tracking-[0.01em] text-[#071426] md:hidden">
+          Kies jouw model
+        </h2>
         <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
           <div className="flex gap-5">
             <div className="hidden shrink-0 items-start pt-4 md:flex">
@@ -475,6 +479,7 @@ function ProductCarouselSection() {
     </section>
   );
 }
+
 
 
 /* ------------------------- 4. configurator banner ------------------------- */

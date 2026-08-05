@@ -450,7 +450,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 function ProductCarouselSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
-      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1456px] pl-5 md:pl-10 pr-0">
         <h2 className="mb-4 text-[24px] font-[400] tracking-[0.01em] text-[#071426] md:hidden">
           Kies jouw model
         </h2>

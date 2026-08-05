@@ -488,34 +488,20 @@ function ConfiguratorBannerSection() {
         className="h-[420px] w-full object-cover md:h-[620px]"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-black/15" />
-      <div className="absolute inset-0 flex items-center">
-        <div className="mx-auto w-full max-w-[1456px] px-5 md:px-10">
-          <div className="flex max-w-[600px] gap-4 rounded-[20px] bg-[#faf8f5]/92 p-5 backdrop-blur-sm md:gap-6 md:p-8">
-            <div className="hidden shrink-0 items-start justify-center md:flex">
-              <span
-                className="whitespace-nowrap text-[30px] font-[400] uppercase leading-none tracking-[0.03em] text-[#071426] md:text-[34px]"
-                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-              >
-                Configurator
-              </span>
-            </div>
-            <div className="flex-1">
-              <span className="flex items-center gap-2 text-[12px] tracking-[0.06em] text-[#071426]/70">
-                <SlidersHorizontal className="h-3.5 w-3.5" strokeWidth={1.5} />
-                Configurator
-              </span>
-              <h2 className="mt-3 max-w-[520px] text-[28px] font-[500] leading-[1.15] tracking-[0.01em] text-[#071426] md:text-[42px]">
-                Stel jouw tv-wand samen
-              </h2>
-              <p className="mt-4 max-w-[460px] text-[13px] leading-relaxed tracking-[0.01em] text-[#071426]/70 md:text-[15px]">
-                Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
-              </p>
-              <div className="mt-8">
-                <PrimaryButton to="/configurator">Start de configurator</PrimaryButton>
-              </div>
-            </div>
-          </div>
+      <div className="absolute inset-0 bg-black/25" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center text-white">
+        <span className="flex items-center gap-2 text-[12px] tracking-[0.06em] text-white/85">
+          <SlidersHorizontal className="h-3.5 w-3.5" strokeWidth={1.5} />
+          Configurator
+        </span>
+        <h2 className="mt-3 max-w-[820px] text-[28px] font-[500] leading-[1.15] tracking-[0.01em] md:text-[46px]">
+          Stel jouw tv-wand samen
+        </h2>
+        <p className="mt-4 max-w-[520px] text-[13px] leading-relaxed tracking-[0.01em] text-white/85 md:text-[15px]">
+          Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
+        </p>
+        <div className="mt-8">
+          <PrimaryButton to="/producten">Start de configurator</PrimaryButton>
         </div>
       </div>
     </section>

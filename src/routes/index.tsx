@@ -925,7 +925,7 @@ function ColorSamplesSection() {
                       key={card.name}
                       className={`overflow-hidden rounded-[16px] bg-white p-2 shadow-sm transition-transform duration-300 hover:-translate-y-1 md:p-3 ${
                         isOffset ? "mt-6" : ""
-                      } ${isLast ? "col-span-2 md:col-span-1" : ""} ${
+                      } ${isLast ? "col-span-1" : ""} ${
                         i === 3 ? "md:col-start-2" : ""
                       } ${i === 4 ? "md:col-start-3" : ""}`}
                     >

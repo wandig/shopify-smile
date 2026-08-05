@@ -3,28 +3,38 @@ Plan: compactere desktop-layout voor "Stel jouw tv-wand samen"
 Doel
 De huidige "Stel jouw tv-wand samen" banner op de homepage gebruikt op desktop een full-bleed achtergrondfoto die te veel verticale ruimte inneemt. We maken de sectie compacter zonder de boodschap of CTA te verwateren.
 
-Aanpak
-1. Herstructureer `ConfiguratorBannerSection` in `src/routes/index.tsx` voor desktop:
-   - Verwijder de full-bleed achtergrondfoto als hoofdoppervlak.
-   - Plaats de content (kicker, h2, subline, CTA) in een gecentreerde kaart of container met de bestaande warm-neutrale achtergrondkleur (`#f6f3ee` of `#ede7e0`).
-   - Gebruik de foto als een klein, afgerond accentvenster naast of boven de tekst, niet als volledige achtergrond.
-   - Houd de sectiehoogte beperkt (bijv. maximaal ~360–420 px op desktop).
+Gekozen richting
+Een horizontale, afgeronde kaart in de bestaande site-stijl:
+- De foto wordt een klein, vierkant accentvenster links in de kaart (bijv. ~320 × 320 px).
+- De tekst en CTA staan rechts ervan, gecentreerd in de hoogte.
+- De hele sectie krijgt een vaste, beperkte hoogte op desktop (max ~360–400 px).
 
-2. Behoud het bestaande design systeem:
-   - Achtergrond: `#faf8f5` of `#f6f3ee`.
+Details
+1. Herstructureer `ConfiguratorBannerSection` in `src/routes/index.tsx`:
+   - Gebruik een container met `max-w-[1100px]`, `bg-[#f6f3ee]`, `rounded-[24px]` en `overflow-hidden`.
+   - Op desktop (`md:`): grid met twee kolommen — links de afbeelding, rechts de content.
+   - Op mobiel: verticale stack, afbeelding bovenaan, content eronder.
+
+2. Behoud alle bestaande elementen:
+   - Kicker "Configurator" met `SlidersHorizontal` icoon.
+   - Headline: "Stel jouw tv-wand samen".
+   - Subline: "Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar."
+   - CTA: "Start de configurator" in `#ef7027` met pijl.
+
+3. Behoud het design systeem:
+   - Achtergrond sectie: `#faf8f5`.
+   - Kaartachtergrond: `#f6f3ee`.
    - Accent/CTA: `#ef7027`.
    - Typografie: Circular-Regular, Helvetica Neue, Helvetica, Arial, sans-serif.
-   - Kicker "Configurator" met `SlidersHorizontal` icoon.
-   - CTA: "Start de configurator" met pijl.
+   - Geen donkere overlay meer op de foto; de afbeelding blijft helder en warm.
 
-3. Mobiel blijft functioneel gelijkwaardig:
-   - De compacte kaart stapelt verticaal.
-   - Afbeelding blijft zichtbaar en goed geschaald.
+4. Responsief gedrag:
+   - Desktop: kaart is horizontaal en compact.
+   - Tablet/mobiel: kaart stapel verticaal, afbeelding volledige breedte bovenaan.
 
-4. Valideer visueel in de preview op desktop (1280 px+) dat:
-   - De sectie niet meer het scherm domineert.
-   - Tekst en CTA duidelijk leesbaar zijn.
-   - De afbeelding mooi is ingekaderd zonder vervaging of stretching.
+5. Validatie:
+   - Controleer in de desktop-preview dat de sectie niet meer dan ~400 px inneemt.
+   - Controleer dat tekst en CTA goed leesbaar zijn en de afbeelding niet uitrekt.
 
 Scope
 - Alleen de `ConfiguratorBannerSection` in `src/routes/index.tsx`.

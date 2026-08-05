@@ -275,24 +275,27 @@ function ProductCarouselSection() {
                     key={p.handle}
                     to="/product/$handle"
                     params={{ handle: p.handle }}
-                    className="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
+                    className="group relative aspect-square w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
                   >
                     <img
                       src={p.img}
                       alt={p.title}
-                      className="aspect-square w-full object-contain transition duration-700 group-hover:scale-[1.03]"
+                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
-                    
+
+                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-[#071426]">
+                      <h3 className="text-[30px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[44px]">
+                        {p.title}
+                      </h3>
+                      <div className="text-[26px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[38px]">
+                        {p.price}
+                      </div>
+                    </div>
+
                     <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-[#071426]">
                       <div>
-                        <h3 className="text-[26px] font-[600] leading-[1.1] tracking-[0.01em] md:text-[32px]">
-                          {p.title}
-                        </h3>
-                        <div className="text-[22px] font-[600] leading-tight tracking-[0.01em] md:text-[26px]">
-                          {p.price}
-                        </div>
-                        <div className="mt-3 flex items-center gap-2 text-[12px] tracking-[0.01em] text-[#071426]/90">
+                        <div className="flex items-center gap-2 text-[12px] tracking-[0.01em] text-[#071426]/90">
                           <Stars />
                           <span>{p.reviews}</span>
                         </div>
@@ -301,6 +304,7 @@ function ProductCarouselSection() {
                       <BasketButton />
                     </div>
                   </Link>
+
                 ) : (
                   <Link
                     key={p.handle}

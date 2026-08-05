@@ -406,7 +406,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
     <Link
       to="/product/$handle"
       params={{ handle: p.handle }}
-      className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#cbc5bc] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
+      className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
     >
       <div className="flex-1 min-h-0 overflow-hidden rounded-[12px] bg-[#f7f7f7]">
         <img

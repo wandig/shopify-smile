@@ -326,13 +326,7 @@ function ProductCarouselSection() {
                             {p.price}
                           </div>
                         </div>
-                        {p.delivery && (
-                          <span className="mt-1 text-[11px] tracking-[0.01em] text-[#071426]/50">
-                            {p.delivery}
-                          </span>
-                        )}
                       </div>
-                      <p className="mt-2 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.tagline}</p>
                       <div className="mt-auto flex items-end justify-between gap-3 pt-6">
                         <div>
                           <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">

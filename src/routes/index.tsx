@@ -361,6 +361,7 @@ function ProductCarouselSection() {
                           <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
                             {p.price}
                           </div>
+                          <PaymentInfo price={p.price} />
                         </div>
                       </div>
                       <div className="mt-auto flex items-end justify-between gap-3 pt-6">

@@ -284,7 +284,7 @@ function ProductCarouselSection() {
                       loading="lazy"
                     />
                     
-                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white">
+                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-[#071426]">
                       <div>
                         <h3 className="text-[26px] font-[600] leading-[1.1] tracking-[0.01em] md:text-[32px]">
                           {p.title}
@@ -292,11 +292,11 @@ function ProductCarouselSection() {
                         <div className="text-[22px] font-[600] leading-tight tracking-[0.01em] md:text-[26px]">
                           {p.price}
                         </div>
-                        <div className="mt-3 flex items-center gap-2 text-[12px] tracking-[0.01em] text-white/90">
+                        <div className="mt-3 flex items-center gap-2 text-[12px] tracking-[0.01em] text-[#071426]/90">
                           <Stars />
                           <span>{p.reviews}</span>
                         </div>
-                        <div className="mt-1 text-[12px] tracking-[0.01em] text-white/80">{p.meta}</div>
+                        <div className="mt-1 text-[12px] tracking-[0.01em] text-[#071426]/80">{p.meta}</div>
                       </div>
                       <BasketButton />
                     </div>

@@ -214,22 +214,18 @@ const PRODUCTS = [
   {
     handle: "duo",
     title: "Duo",
-    tagline: "Symmetrisch met opbergruimte",
     price: "1.199,-",
     img: plugPlayImg.url,
     reviews: "(143)",
     meta: "180 cm · Duo",
-    delivery: "Levering: 10 werkdagen",
   },
   {
     handle: "solo",
     title: "Solo",
-    tagline: "Compact en strak",
     price: "749,-",
     img: tvOrangeImg.url,
     reviews: "(143)",
     meta: "120 cm · Solo",
-    delivery: "Levering: 10 werkdagen",
   },
 ];
 

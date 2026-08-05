@@ -451,14 +451,11 @@ function ProductCarouselSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1456px] pl-5 md:pl-10 pr-0">
-        <h2 className="mb-4 text-[24px] font-[400] tracking-[0.01em] text-[#071426] md:hidden">
-          Kies jouw model
-        </h2>
         <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6">
-          <div className="flex gap-5">
-            <div className="hidden shrink-0 items-start pt-4 md:flex">
+          <div className="flex gap-3 md:gap-5">
+            <div className="flex shrink-0 items-start pt-2 md:pt-4">
               <span
-                className="whitespace-nowrap text-[34px] font-[400] uppercase tracking-[0.06em] text-[#071426]"
+                className="whitespace-nowrap text-[22px] font-[400] uppercase tracking-[0.06em] text-[#071426] md:text-[34px]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 Kies jouw model

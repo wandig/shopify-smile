@@ -529,7 +529,7 @@ function ConfiguratorBannerSection() {
           </div>
 
           {/* Floating content card */}
-          <div className="col-span-12 lg:col-span-5 lg:-ml-28 z-10 mt-[-48px] lg:mt-0">
+          <div className="col-span-12 lg:col-span-5 lg:-ml-16 z-10 mt-[-48px] lg:mt-0">
             <div className="rounded-[20px] border border-[#ede7e0] bg-white p-8 shadow-[20px_40px_80px_-20px_rgba(0,0,0,0.08)] lg:p-12">
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-[#d4cec6]" />

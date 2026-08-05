@@ -485,10 +485,11 @@ function ConfiguratorBannerSection() {
       <img
         src={configuratorBg.url}
         alt="Configureer jouw tv-wand"
-        className="h-[420px] w-full object-cover md:h-[620px]"
+        className="block h-[420px] w-full object-cover object-center md:h-auto md:object-contain"
         loading="lazy"
       />
       <div className="absolute inset-0 bg-black/25" />
+
       <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center text-white">
         <span className="flex items-center gap-2 text-[12px] tracking-[0.06em] text-white/85">
           <SlidersHorizontal className="h-3.5 w-3.5" strokeWidth={1.5} />

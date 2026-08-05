@@ -229,6 +229,41 @@ const PRODUCTS = [
   },
 ];
 
+function parsePriceToCents(price: string): number | null {
+  const normalized = price.replace(/\./g, "").replace(",-", "").replace(",", ".").trim();
+  const value = Number(normalized);
+  return Number.isFinite(value) && value > 0 ? value : null;
+}
+
+function formatInstallment(amount: number): string {
+  return `€${Math.round(amount).toLocaleString("nl-NL")},-`;
+}
+
+function PaymentInfo({ price, light = false }: { price: string; light?: boolean }) {
+  const value = parsePriceToCents(price);
+  if (value === null) return null;
+  const installment = value / 3;
+  const textColor = light ? "text-white/95" : "text-[#071426]/70";
+  const badgeBg = light ? "bg-white/20" : "bg-[#f7f3ef]";
+  const badgeText = light ? "text-white" : "text-[#071426]";
+
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-2">
+      <div className="flex items-center gap-1.5">
+        <span className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-[600] tracking-[0.02em] ${badgeBg} ${badgeText}`}>
+          Klarna
+        </span>
+        <span className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-[600] tracking-[0.02em] ${badgeBg} ${badgeText}`}>
+          iDEAL
+        </span>
+      </div>
+      <span className={`text-[11px] font-[400] tracking-[0.01em] ${textColor}`}>
+        Of 3x {formatInstallment(installment)}, 0% rente
+      </span>
+    </div>
+  );
+}
+
 function Stars({ count = 5, className = "" }: { count?: number; className?: string }) {
   return (
     <span className={`flex items-center gap-0.5 ${className}`}>
@@ -287,6 +322,7 @@ function ProductCarouselSection() {
                       <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
                         {p.price}
                       </div>
+                      <PaymentInfo price={p.price} light />
                     </div>
 
                     <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
@@ -325,6 +361,7 @@ function ProductCarouselSection() {
                           <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
                             {p.price}
                           </div>
+                          <PaymentInfo price={p.price} />
                         </div>
                       </div>
                       <div className="mt-auto flex items-end justify-between gap-3 pt-6">

@@ -283,23 +283,24 @@ function ProductCarouselSection() {
                       className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
 
-                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-[#071426]">
-                      <h3 className="text-[30px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[44px]">
+                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white">
+                      <h3 className="text-[36px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[48px]">
                         {p.title}
                       </h3>
-                      <div className="text-[26px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[38px]">
+                      <div className="text-[30px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[40px]">
                         {p.price}
                       </div>
                     </div>
 
-                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-[#071426]">
+                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white">
                       <div>
-                        <div className="flex items-center gap-2 text-[12px] tracking-[0.01em] text-[#071426]/90">
+                        <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
                           <Stars />
                           <span>{p.reviews}</span>
                         </div>
-                        <div className="mt-1 text-[12px] tracking-[0.01em] text-[#071426]/80">{p.meta}</div>
+                        <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
                       </div>
                       <BasketButton />
                     </div>
@@ -323,10 +324,10 @@ function ProductCarouselSection() {
                     <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <h3 className="text-[20px] font-[600] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[24px]">
+                          <h3 className="text-[22px] font-[600] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
                             {p.title}
                           </h3>
-                          <div className="mt-0.5 text-[18px] font-[600] tracking-[0.01em] text-[#071426] md:text-[22px]">
+                          <div className="mt-0.5 text-[18px] font-[600] tracking-[0.01em] text-[#071426] md:text-[24px]">
                             {p.price}
                           </div>
                         </div>
@@ -339,11 +340,11 @@ function ProductCarouselSection() {
                       <p className="mt-2 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.tagline}</p>
                       <div className="mt-auto flex items-end justify-between gap-3 pt-6">
                         <div>
-                          <div className="flex items-center gap-2 text-[12px] tracking-[0.01em] text-[#071426]/60">
+                          <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
                             <Stars />
                             <span>{p.reviews}</span>
                           </div>
-                          <div className="mt-1 text-[12px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
+                          <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
                         </div>
                         <BasketButton />
                       </div>

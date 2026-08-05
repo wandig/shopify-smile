@@ -322,6 +322,7 @@ function ProductCarouselSection() {
                       <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
                         {p.price}
                       </div>
+                      <PaymentInfo price={p.price} light />
                     </div>
 
                     <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">

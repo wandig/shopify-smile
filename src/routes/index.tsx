@@ -454,7 +454,7 @@ function ProductCarouselSection() {
         <h2 className="mb-4 text-[24px] font-[400] tracking-[0.01em] text-[#071426] md:hidden">
           Kies jouw model
         </h2>
-        <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] p-4 md:py-6 md:pl-6 md:pr-0">
+        <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6">
           <div className="flex gap-5">
             <div className="hidden shrink-0 items-start pt-4 md:flex">
               <span

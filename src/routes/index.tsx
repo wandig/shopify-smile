@@ -282,7 +282,7 @@ function ProductCarouselSection() {
                       className="h-[380px] w-full object-cover transition duration-700 group-hover:scale-[1.03] md:h-[520px]"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    
                     <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white">
                       <div>
                         <h3 className="text-[26px] font-[600] leading-[1.1] tracking-[0.01em] md:text-[32px]">

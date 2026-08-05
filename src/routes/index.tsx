@@ -22,7 +22,7 @@ import heroVideo from "@/assets/hero-reel.mp4.asset.json";
 import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
 import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
 import fullHouseClosedFrontV5 from "@/assets/full-house-closed-front-v5.png.asset.json";
-import fullHouseClosedFrontV6 from "@/assets/full-house-closed-front-v6.png.asset.json";
+import fullHouseSelectedV7 from "@/assets/full-house-selected-v7.png.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
@@ -206,7 +206,7 @@ const PRODUCTS = [
     title: "Full House",
     tagline: "Volledige wand-look",
     price: "1.699,-",
-    img: fullHouseClosedFrontV6.url,
+    img: fullHouseSelectedV7.url,
     reviews: "(2.526)",
     meta: "240 cm · Full House",
     featured: true,

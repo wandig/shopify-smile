@@ -285,10 +285,10 @@ function ProductCarouselSection() {
                     />
 
                     <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
-                      <h3 className="text-[36px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[48px]">
+                      <h3 className="text-[32px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[42px]">
                         {p.title}
                       </h3>
-                      <div className="text-[30px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[40px]">
+                      <div className="text-[26px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[34px]">
                         {p.price}
                       </div>
                     </div>

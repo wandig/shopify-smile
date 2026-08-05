@@ -172,3 +172,8 @@
     transition-delay: 0.12s;
   }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

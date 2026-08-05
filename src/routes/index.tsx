@@ -28,6 +28,7 @@ import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
+import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
@@ -200,7 +201,31 @@ function HeroBenefitsSection() {
 
 /* -------------------------- 3. product carousel --------------------------- */
 
-const PRODUCTS = [
+type ModelColor = {
+  name: string;
+  image?: string;
+  hex?: string;
+};
+
+const MODEL_COLORS: ModelColor[] = [
+  { name: "Walnootbruin", image: swatchWalnootbruin },
+  { name: "Truffelbruin", image: swatchTruffelbruin },
+  { name: "Cashmere", hex: "#e3d9c9" },
+  { name: "Wit", hex: "#f6f4f1" },
+  { name: "Blush", hex: "#e6c6bb" },
+];
+
+const PRODUCTS: {
+  handle: string;
+  title: string;
+  tagline?: string;
+  price: string;
+  img: string;
+  reviews: string;
+  meta: string;
+  featured?: boolean;
+  colorImages?: Record<string, string>;
+}[] = [
   {
     handle: "full-house",
     title: "Full House",
@@ -210,6 +235,7 @@ const PRODUCTS = [
     reviews: "(2.526)",
     meta: "240 cm · Full House",
     featured: true,
+    colorImages: {},
   },
   {
     handle: "duo",
@@ -218,6 +244,7 @@ const PRODUCTS = [
     img: plugPlayImg.url,
     reviews: "(143)",
     meta: "180 cm · Duo",
+    colorImages: {},
   },
   {
     handle: "solo",
@@ -226,6 +253,7 @@ const PRODUCTS = [
     img: tvOrangeImg.url,
     reviews: "(143)",
     meta: "120 cm · Solo",
+    colorImages: {},
   },
 ];
 
@@ -282,6 +310,144 @@ function BasketButton() {
   );
 }
 
+function ColorSwatches({
+  selected,
+  onSelect,
+  light = false,
+}: {
+  selected: string;
+  onSelect: (name: string) => void;
+  light?: boolean;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      {MODEL_COLORS.map((c) => {
+        const isActive = c.name === selected;
+        return (
+          <button
+            key={c.name}
+            type="button"
+            title={c.name}
+            aria-label={c.name}
+            aria-pressed={isActive}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onSelect(c.name);
+            }}
+            className={`h-6 w-6 shrink-0 overflow-hidden rounded-full border ${
+              light ? "border-white/70" : "border-[#071426]/15"
+            } ${
+              isActive
+                ? "ring-2 ring-[#ef7027] ring-offset-1 " +
+                  (light ? "ring-offset-transparent" : "ring-offset-white")
+                : ""
+            }`}
+            style={c.hex ? { background: c.hex } : undefined}
+          >
+            {c.image && (
+              <img src={c.image} alt="" className="h-full w-full object-cover" />
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
+  const [color, setColor] = useState(MODEL_COLORS[0].name);
+  const img = p.colorImages?.[color] ?? p.img;
+
+  if (p.featured) {
+    return (
+      <Link
+        to="/product/$handle"
+        params={{ handle: p.handle }}
+        className="group relative aspect-square w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
+      >
+        <img
+          key={img}
+          src={img}
+          alt={`${p.title} in ${color}`}
+          className="absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
+          loading="lazy"
+        />
+
+        <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
+          <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
+            {p.title}
+          </h3>
+          <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
+            {p.price}
+          </div>
+          <PaymentInfo price={p.price} light />
+        </div>
+
+        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
+          <div>
+            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
+              <Stars />
+              <span>{p.reviews}</span>
+            </div>
+            <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
+            <div className="mt-2">
+              <ColorSwatches selected={color} onSelect={setColor} light />
+            </div>
+            <div className="mt-1 text-[12px] tracking-[0.01em] text-white/85">{color}</div>
+          </div>
+          <BasketButton />
+        </div>
+      </Link>
+    );
+  }
+
+  return (
+    <Link
+      to="/product/$handle"
+      params={{ handle: p.handle }}
+      className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-white p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
+    >
+      <div className="flex-1 min-h-0 overflow-hidden rounded-[12px] bg-[#f7f7f7]">
+        <img
+          key={img}
+          src={img}
+          alt={`${p.title} in ${color}`}
+          className="h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
+          loading="lazy"
+        />
+      </div>
+      <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
+              {p.title}
+            </h3>
+            <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
+              {p.price}
+            </div>
+            <PaymentInfo price={p.price} />
+          </div>
+        </div>
+        <div className="mt-auto flex items-end justify-between gap-3 pt-6">
+          <div>
+            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
+              <Stars />
+              <span>{p.reviews}</span>
+            </div>
+            <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
+            <div className="mt-2">
+              <ColorSwatches selected={color} onSelect={setColor} />
+            </div>
+            <div className="mt-1 text-[12px] tracking-[0.01em] text-[#071426]/60">{color}</div>
+          </div>
+          <BasketButton />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 function ProductCarouselSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
@@ -300,84 +466,9 @@ function ProductCarouselSection() {
             <div
               className="flex min-w-0 flex-1 items-stretch snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {PRODUCTS.map((p) =>
-                p.featured ? (
-                  <Link
-                    key={p.handle}
-                    to="/product/$handle"
-                    params={{ handle: p.handle }}
-                    className="group relative aspect-square w-[280px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
-                  >
-                    <img
-                      src={p.img}
-                      alt={p.title}
-                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                      loading="lazy"
-                    />
-
-                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
-                      <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
-                        {p.title}
-                      </h3>
-                      <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
-                        {p.price}
-                      </div>
-                      <PaymentInfo price={p.price} light />
-                    </div>
-
-                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
-                      <div>
-                        <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
-                          <Stars />
-                          <span>{p.reviews}</span>
-                        </div>
-                        <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
-                      </div>
-                      <BasketButton />
-                    </div>
-                  </Link>
-
-                ) : (
-                  <Link
-                    key={p.handle}
-                    to="/product/$handle"
-                    params={{ handle: p.handle }}
-                    className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-white p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
-                  >
-                    <div className="flex-1 min-h-0 overflow-hidden rounded-[12px] bg-[#f7f7f7]">
-                      <img
-                        src={p.img}
-                        alt={p.title}
-                        className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
-                            {p.title}
-                          </h3>
-                          <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
-                            {p.price}
-                          </div>
-                          <PaymentInfo price={p.price} />
-                        </div>
-                      </div>
-                      <div className="mt-auto flex items-end justify-between gap-3 pt-6">
-                        <div>
-                          <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
-                            <Stars />
-                            <span>{p.reviews}</span>
-                          </div>
-                          <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
-                        </div>
-                        <BasketButton />
-                      </div>
-                    </div>
-                  </Link>
-                ),
-              )}
+              {PRODUCTS.map((p) => (
+                <ModelCard key={p.handle} p={p} />
+              ))}
             </div>
           </div>
 

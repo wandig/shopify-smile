@@ -279,7 +279,7 @@ function ProductCarouselSection() {
                     <img
                       src={p.img}
                       alt={p.title}
-                      className="h-[380px] w-full object-cover transition duration-700 group-hover:scale-[1.03] md:h-[520px]"
+                      className="aspect-square w-full object-contain transition duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
                     

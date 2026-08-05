@@ -283,9 +283,8 @@ function ProductCarouselSection() {
                       className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
 
-                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white">
+                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
                       <h3 className="text-[36px] font-[600] leading-[1.05] tracking-[0.01em] md:text-[48px]">
                         {p.title}
                       </h3>
@@ -294,7 +293,7 @@ function ProductCarouselSection() {
                       </div>
                     </div>
 
-                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white">
+                    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
                       <div>
                         <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
                           <Stars />

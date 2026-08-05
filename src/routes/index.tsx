@@ -734,24 +734,17 @@ function WhyUsSection() {
     <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1456px] pl-5 pr-0 md:pl-10 md:pr-0">
         <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6 md:pr-0">
-          <div className="flex flex-col gap-6 md:flex-row md:gap-6">
+          <div className="flex flex-row gap-3 md:gap-6">
           {/* vertical title */}
-          <div className="hidden shrink-0 items-start justify-center md:flex md:w-[56px]">
-            <div className="relative flex h-full flex-col items-center justify-start pt-4">
+          <div className="flex shrink-0 items-start justify-center w-[40px] md:w-[56px]">
+            <div className="relative flex h-full flex-col items-center justify-start pt-2 md:pt-4">
               <span
-                className="text-[30px] font-[400] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
+                className="text-[22px] font-[400] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 Waarom wij
               </span>
             </div>
-          </div>
-
-          {/* mobile title */}
-          <div className="md:hidden">
-            <h2 className="text-[28px] font-[600] uppercase leading-tight tracking-[0.03em] text-[#0f1f2a]">
-              Waarom wij
-            </h2>
           </div>
 
           {/* cards */}

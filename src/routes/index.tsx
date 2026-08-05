@@ -201,7 +201,31 @@ function HeroBenefitsSection() {
 
 /* -------------------------- 3. product carousel --------------------------- */
 
-const PRODUCTS = [
+type ModelColor = {
+  name: string;
+  image?: string;
+  hex?: string;
+};
+
+const MODEL_COLORS: ModelColor[] = [
+  { name: "Walnootbruin", image: swatchWalnootbruin },
+  { name: "Truffelbruin", image: swatchTruffelbruin },
+  { name: "Cashmere", hex: "#e3d9c9" },
+  { name: "Wit", hex: "#f6f4f1" },
+  { name: "Blush", hex: "#e6c6bb" },
+];
+
+const PRODUCTS: {
+  handle: string;
+  title: string;
+  tagline?: string;
+  price: string;
+  img: string;
+  reviews: string;
+  meta: string;
+  featured?: boolean;
+  colorImages?: Record<string, string>;
+}[] = [
   {
     handle: "full-house",
     title: "Full House",
@@ -211,6 +235,7 @@ const PRODUCTS = [
     reviews: "(2.526)",
     meta: "240 cm · Full House",
     featured: true,
+    colorImages: {},
   },
   {
     handle: "duo",
@@ -219,6 +244,7 @@ const PRODUCTS = [
     img: plugPlayImg.url,
     reviews: "(143)",
     meta: "180 cm · Duo",
+    colorImages: {},
   },
   {
     handle: "solo",
@@ -227,6 +253,7 @@ const PRODUCTS = [
     img: tvOrangeImg.url,
     reviews: "(143)",
     meta: "120 cm · Solo",
+    colorImages: {},
   },
 ];
 

@@ -1,21 +1,17 @@
 # Plan: 9 desktop-richtingen voor "Stel jouw tv-wand samen"
 
 ## Context
-De huidige homepage bevat een "Stel jouw tv-wand samen" banner. Op desktop is dit nu een editorial 60/40 split (afbeelding links, tekst rechts in een zachte beige card). De gebruiker wil de overige 9 van de 10 eerder bedachte alternatieven visueel zien en vervolgens één laten doorvoeren.
+De huidige homepage bevat een "Stel jouw tv-wand samen" banner. Op desktop is dit nu een editorial 60/40 split (afbeelding links, tekst rechts in een zachte beige card). De gebruiker wilde de overige 9 van de 10 eerder bedachte alternatieven visueel zien en vervolgens één laten doorvoeren.
 
-## Doel
-9 onderscheidende desktop-layouts genereren als klikbare prototypes, zodat de gebruiker er één kan kiezen om te implementeren.
+## Gekozen richting
+De gebruiker koos uit set A de richting **"Architectural layered canvas"**: een 12-koloms desktop-layout waarbij een grote afgeronde lifestyle-afbeelding 8 kolommen beslaat en een witte content-card met schaduw er deels overheen "float" (5 kolommen, negatieve marge). De card bevat kicker, titel met cursief accent, body, oranje CTA, secundaire link en een subtiele statusregel.
 
-## Aanpak
-1. Screenshot van de huidige sectie is al vastgelegd.
-2. Genereer 9 richtingen in 3 sets van 3, elk met een eigen structuur, energie en visueel concept:
-   - Set A: Compact centered product card, Asymmetric broken grid, Full-bleed lifestyle background met overlay
-   - Set B: Magazine two-column layout, Framed product stage, Wide panoramic banner
-   - Set C: Typography-first minimal layout, Configurator preview met kleur-swatches, CTA + social proof combo
-3. Presenteer alle 9 richtingen als visuele prototypes via een keuzevraag.
-4. Implementeer de gekozen richting in `src/routes/index.tsx`, alleen voor de desktopversie (`lg:` breakpoint). Mobiel blijft ongewijzigd.
+## Te implementeren
+1. Vervang de desktopversie (`lg:` breakpoint) van `ConfiguratorBannerSection` in `src/routes/index.tsx` door de gekozen "Architectural layered canvas"-layout.
+2. Behoud de bestaande mobiele banner (full-bleed afbeelding met overlay-tekst) ongewijzigd.
+3. Gebruik bestaande projectassets: `configuratorBg` en houtafwerking swatches (`swatchEikenzwart`, `swatchWalnootbruin`, `swatchTruffelbruin`).
+4. Behoud huisstijl: achtergrond `#faf8f5`, oranje CTA `#ef7027`, bestaande font-stack, `max-w-[1456px]` sectiebreedte.
+5. Geen nieuwe dependencies of functionaliteit toevoegen.
 
-## Technisch
-- Wijzigingen beperkt tot `ConfiguratorBannerSection` in `src/routes/index.tsx`.
-- Behoud bestaande afbeelding (`configuratorBg`), kleuren (`#faf8f5`, `#ef7027`) en typografie.
-- Geen nieuwe dependencies.
+## Resultaat
+De "Stel jouw tv-wand samen"-sectie krijgt op desktop een premium, gelaagde editorial-uitstraling met de afbeelding als middelpunt en een zwevende content-card als CTA.

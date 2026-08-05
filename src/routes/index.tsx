@@ -28,6 +28,7 @@ import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
+import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";

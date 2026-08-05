@@ -509,10 +509,10 @@ function ConfiguratorBannerSection() {
         </div>
       </section>
 
-      {/* Desktop: compacte kaart */}
+      {/* Desktop: editorial 60/40 split */}
       <section className="hidden w-full bg-[#faf8f5] px-5 py-10 lg:block lg:py-14">
-        <div className="mx-auto grid max-w-[1100px] overflow-hidden rounded-[24px] bg-[#f6f3ee] lg:grid-cols-2">
-          <div className="relative h-auto min-h-[360px]">
+        <div className="mx-auto grid max-w-[1100px] overflow-hidden rounded-[24px] bg-[#f6f3ee] lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="relative h-auto min-h-[420px]">
             <img
               src={configuratorBg.url}
               alt="Configureer jouw tv-wand"
@@ -521,15 +521,15 @@ function ConfiguratorBannerSection() {
             />
           </div>
 
-          <div className="flex flex-col items-center justify-center px-12 py-14 text-center">
-            <span className="flex items-center gap-2 text-[12px] tracking-[0.06em] text-[#90949b]">
+          <div className="flex flex-col items-start justify-center px-10 py-12 lg:px-14 lg:py-16">
+            <span className="flex items-center gap-2 text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
               <SlidersHorizontal className="h-3.5 w-3.5" strokeWidth={1.5} />
               Configurator
             </span>
-            <h2 className="mt-3 max-w-[420px] text-[34px] font-[500] leading-[1.15] tracking-[0.01em] text-[#071426]">
+            <h2 className="mt-4 max-w-[360px] text-[32px] font-[500] leading-[1.1] tracking-[0.01em] text-[#071426]">
               Stel jouw tv-wand samen
             </h2>
-            <p className="mt-4 max-w-[420px] text-[15px] leading-relaxed tracking-[0.01em] text-[#071426]/55">
+            <p className="mt-4 max-w-[360px] text-[15px] leading-[1.6] tracking-[0.01em] text-[#071426]/55">
               Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
             </p>
             <div className="mt-8">

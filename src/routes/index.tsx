@@ -735,8 +735,8 @@ const WHY_US_CARDS = [
 function WhyUsSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
-      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
-        <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:p-6">
+      <div className="mx-auto max-w-[1456px] pl-5 pr-0 md:pl-10 md:pr-0">
+        <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6 md:pr-0">
           <div className="flex flex-col gap-6 md:flex-row md:gap-6">
           {/* vertical title */}
           <div className="hidden shrink-0 items-start justify-center md:flex md:w-[56px]">

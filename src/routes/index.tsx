@@ -267,7 +267,7 @@ function ProductCarouselSection() {
             </div>
 
             <div
-              className="flex min-w-0 flex-1 snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex min-w-0 flex-1 items-stretch snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {PRODUCTS.map((p) =>
                 p.featured ? (
@@ -306,13 +306,13 @@ function ProductCarouselSection() {
                     key={p.handle}
                     to="/product/$handle"
                     params={{ handle: p.handle }}
-                    className="group flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-white p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
+                    className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-white p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
                   >
-                    <div className="overflow-hidden rounded-[12px] bg-[#f7f7f7]">
+                    <div className="flex-1 min-h-0 overflow-hidden rounded-[12px] bg-[#f7f7f7]">
                       <img
                         src={p.img}
                         alt={p.title}
-                        className="h-[200px] w-full object-cover transition duration-700 group-hover:scale-[1.03] md:h-[260px]"
+                        className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                         loading="lazy"
                       />
                     </div>

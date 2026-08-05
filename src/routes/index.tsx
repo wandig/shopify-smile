@@ -558,12 +558,6 @@ function ConfiguratorBannerSection() {
                 </Link>
               </div>
 
-              <div className="mt-8 flex items-center gap-2 border-t border-[#f0ebe5] pt-5">
-                <div className="h-2 w-2 rounded-full bg-[#22c55e]" />
-                <span className="text-[11px] font-[500] uppercase tracking-[0.08em] text-[#90949b]">
-                  Nu beschikbaar voor maatwerk
-                </span>
-              </div>
             </div>
           </div>
         </div>

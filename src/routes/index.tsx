@@ -509,31 +509,61 @@ function ConfiguratorBannerSection() {
         </div>
       </section>
 
-      {/* Desktop: editorial 60/40 split */}
-      <section className="hidden w-full bg-[#faf8f5] px-5 py-10 lg:block lg:py-14">
-        <div className="mx-auto grid max-w-[1100px] overflow-hidden rounded-[24px] bg-[#f6f3ee] lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="relative h-auto min-h-[420px]">
+      {/* Desktop: architectural layered canvas */}
+      <section className="hidden w-full bg-[#faf8f5] px-5 py-10 lg:block lg:py-16">
+        <div className="relative mx-auto grid max-w-[1456px] grid-cols-12 items-center">
+          {/* Image + swatches */}
+          <div className="col-span-12 lg:col-span-8 relative aspect-[4/3] lg:aspect-auto lg:h-[620px] overflow-hidden rounded-[24px] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.12)]">
             <img
               src={configuratorBg.url}
               alt="Configureer jouw tv-wand"
               className="h-full w-full object-cover object-center"
               loading="lazy"
             />
+            <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm">
+              <img src={swatchEikenzwart} alt="Eikenzwart" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <img src={swatchTruffelbruin} alt="Truffelbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <span className="ml-1 text-[11px] font-[500] tracking-[0.08em] text-[#071426]/60">+ meer</span>
+            </div>
           </div>
 
-          <div className="flex flex-col items-start justify-center px-10 py-12 lg:px-14 lg:py-16">
-            <span className="flex items-center gap-2 text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">
-              <SlidersHorizontal className="h-3.5 w-3.5" strokeWidth={1.5} />
-              Configurator
-            </span>
-            <h2 className="mt-4 max-w-[360px] text-[32px] font-[500] leading-[1.1] tracking-[0.01em] text-[#071426]">
-              Stel jouw tv-wand samen
-            </h2>
-            <p className="mt-4 max-w-[360px] text-[15px] leading-[1.6] tracking-[0.01em] text-[#071426]/55">
-              Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
-            </p>
-            <div className="mt-8">
-              <PrimaryButton to="/producten">Start de configurator</PrimaryButton>
+          {/* Floating content card */}
+          <div className="col-span-12 lg:col-span-5 lg:-ml-28 z-10 mt-[-48px] lg:mt-0">
+            <div className="rounded-[20px] border border-[#ede7e0] bg-white p-8 shadow-[20px_40px_80px_-20px_rgba(0,0,0,0.08)] lg:p-12">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-[#d4cec6]" />
+                <span className="flex items-center gap-2 text-[10px] font-[500] uppercase tracking-[0.2em] text-[#90949b]">
+                  <SlidersHorizontal className="h-3 w-3" strokeWidth={1.5} />
+                  Configurator
+                </span>
+              </div>
+
+              <h2 className="mt-5 max-w-[360px] text-[30px] font-[500] leading-[1.12] tracking-[0.01em] text-[#071426] lg:text-[36px]">
+                Stel jouw <span className="font-[400] italic text-[#071426]/85">tv-wand</span> samen
+              </h2>
+
+              <p className="mt-4 max-w-[360px] text-[14px] leading-[1.65] tracking-[0.01em] text-[#071426]/55">
+                Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
+              </p>
+
+              <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <PrimaryButton to="/producten">Start de configurator</PrimaryButton>
+                <Link
+                  to="/producten"
+                  className="group flex items-center gap-1.5 text-[13px] font-[500] tracking-[0.01em] text-[#071426]/80 transition hover:text-[#071426]"
+                >
+                  Bekijk voorbeelden
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+
+              <div className="mt-8 flex items-center gap-2 border-t border-[#f0ebe5] pt-5">
+                <div className="h-2 w-2 rounded-full bg-[#22c55e]" />
+                <span className="text-[11px] font-[500] uppercase tracking-[0.08em] text-[#90949b]">
+                  Nu beschikbaar voor maatwerk
+                </span>
+              </div>
             </div>
           </div>
         </div>

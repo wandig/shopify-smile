@@ -450,27 +450,30 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 function ProductCarouselSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
-      <h2 className="mb-4 px-5 text-[24px] font-[400] tracking-[0.01em] text-[#071426] md:hidden">
-        Kies jouw model
-      </h2>
-      <div className="flex flex-col md:flex-row">
-        <div className="hidden shrink-0 items-start pl-5 pt-4 md:flex md:pl-10 md:pr-6">
-          <span
-            className="whitespace-nowrap text-[34px] font-[400] uppercase tracking-[0.06em] text-[#071426]"
-            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-          >
-            Kies jouw model
-          </span>
-        </div>
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
+        <h2 className="mb-4 text-[24px] font-[400] tracking-[0.01em] text-[#071426] md:hidden">
+          Kies jouw model
+        </h2>
+        <div className="overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:py-6 md:pl-6 md:pr-0">
+          <div className="flex gap-5">
+            <div className="hidden shrink-0 items-start pt-4 md:flex">
+              <span
+                className="whitespace-nowrap text-[34px] font-[400] uppercase tracking-[0.06em] text-[#071426]"
+                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              >
+                Kies jouw model
+              </span>
+            </div>
 
-        <div className="mx-5 flex-1 overflow-hidden rounded-[20px] bg-[#ede7e0] p-4 md:mx-0 md:rounded-l-[20px] md:rounded-r-none md:py-6 md:pl-6 md:pr-0">
-          <div
-            className="flex min-w-0 flex-1 items-stretch snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {PRODUCTS.map((p) => (
-              <ModelCard key={p.handle} p={p} />
-            ))}
+            <div
+              className="flex min-w-0 flex-1 items-stretch snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {PRODUCTS.map((p) => (
+                <ModelCard key={p.handle} p={p} />
+              ))}
+            </div>
           </div>
+
         </div>
       </div>
     </section>

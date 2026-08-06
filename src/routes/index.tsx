@@ -742,7 +742,7 @@ function WhyUsSection() {
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1456px] pl-5 pr-0 md:pl-10 md:pr-0">
-        <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6 md:pr-0">
+        <div className="-mr-[calc((100vw-100%)/2)] overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6 md:pr-0">
           <div
             className="flex min-w-0 flex-1 items-stretch snap-x snap-proximity gap-3 overflow-x-auto scroll-smooth [scrollbar-width:none] md:gap-4 [&::-webkit-scrollbar]:hidden"
           >

@@ -740,25 +740,23 @@ function WhyUsSection() {
     <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1456px] pl-5 pr-0 md:pl-10 md:pr-0">
         <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6 md:pr-0">
-          <div className="flex flex-row gap-3 md:gap-6">
-          {/* vertical title */}
-          <div className="flex shrink-0 items-start justify-center w-[40px] md:w-[56px]">
-            <div className="relative flex h-full flex-col items-center justify-start pt-2 md:pt-4">
+          <div
+            className="flex min-w-0 flex-1 items-stretch snap-x snap-proximity gap-3 overflow-x-auto scroll-smooth [scrollbar-width:none] md:gap-4 [&::-webkit-scrollbar]:hidden"
+          >
+            {/* vertical title */}
+            <div className="flex shrink-0 snap-start items-start pt-2 md:pt-4">
               <span
-                className="text-[22px] font-[400] uppercase leading-none tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
+                className="whitespace-nowrap text-[22px] font-[400] uppercase tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 Waarom wij
               </span>
             </div>
-          </div>
 
-          {/* cards */}
-          <div className="scrollbar-hide flex flex-1 snap-x snap-mandatory gap-3 overflow-x-auto md:gap-4">
-          {WHY_US_CARDS.map((card) => (
+            {WHY_US_CARDS.map((card) => (
               <div
                 key={card.badge}
-                className={`group relative flex min-h-[420px] w-[85%] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-[24px] p-6 sm:w-[45%] md:min-h-[520px] md:w-[calc(31.25%-0.9375rem)] md:p-8 ${card.bg}`}
+                className={`group relative flex min-h-[420px] w-[85%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[24px] p-6 sm:w-[45%] md:min-h-[520px] md:w-[calc(31.25%-0.9375rem)] md:p-8 ${card.bg}`}
               >
                 {card.image && (
                   <img
@@ -786,7 +784,6 @@ function WhyUsSection() {
           </div>
         </div>
       </div>
-    </div>
     </section>
   );
 }

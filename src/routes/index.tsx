@@ -744,7 +744,7 @@ function WhyUsSection() {
             className="flex min-w-0 flex-1 items-stretch snap-x snap-proximity gap-3 overflow-x-auto scroll-smooth [scrollbar-width:none] md:gap-4 [&::-webkit-scrollbar]:hidden"
           >
             {/* vertical title */}
-            <div className="flex shrink-0 snap-start items-start pt-2 md:pt-4">
+            <div className="flex shrink-0 snap-start snap-always items-start pt-2 md:pt-4">
               <span
                 className="whitespace-nowrap text-[22px] font-[400] uppercase tracking-[0.03em] text-[#0f1f2a] md:text-[34px]"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}

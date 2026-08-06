@@ -1063,7 +1063,26 @@ function TrustBannerSection() {
   return (
     <section className="bg-[#f7f3ef]">
       <div className="mx-auto max-w-[1456px] px-5 py-10 md:px-10 md:py-14">
-        <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-[#e5e5e5]">
+        {/* Mobile: horizontal marquee per benefit */}
+        <div className="sm:hidden overflow-hidden">
+          <div className="flex w-max animate-usp-marquee">
+            {[...items, ...items].map(({ icon: Icon, label }, i) => (
+              <div
+                key={`${label}-${i}`}
+                className="flex items-center justify-center gap-3 px-6"
+                style={{ minWidth: "50vw" }}
+              >
+                <Icon className="h-5 w-5 shrink-0 text-[#0f1f2a]" strokeWidth={1.5} />
+                <p className="text-[14px] font-normal leading-snug tracking-[0.01em] text-[#0f1f2a] whitespace-nowrap">
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: static 4-column bar */}
+        <div className="hidden flex-col divide-y divide-[#e5e5e5] sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-[#e5e5e5]">
           {items.map(({ icon: Icon, label }) => (
             <div key={label} className="flex flex-1 items-center justify-center gap-3 py-4 sm:px-4 sm:py-0">
               <Icon className="h-5 w-5 shrink-0 text-[#0f1f2a]" strokeWidth={1.5} />

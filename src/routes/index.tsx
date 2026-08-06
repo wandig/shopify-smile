@@ -1062,7 +1062,7 @@ function TrustBannerSection() {
 
   return (
     <section className="bg-[#f7f3ef]">
-      <div className="mx-auto max-w-[1456px] px-5 py-10 md:px-10 md:py-14">
+      <div className="mx-auto max-w-[1456px] px-5 py-6 md:px-10 md:py-14">
         {/* Mobile: horizontal marquee per benefit */}
         <div className="sm:hidden overflow-hidden">
           <div className="flex w-max animate-usp-marquee">

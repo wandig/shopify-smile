@@ -369,43 +369,47 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group relative h-full w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:h-full md:w-[46%]"
+        className="group relative flex h-full w-[360px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] md:h-full md:w-[46%]"
       >
-        <picture className="absolute inset-0">
-          {p.mobileImg && (
-            <source media="(max-width: 767px)" srcSet={p.mobileImg} />
-          )}
-          <img
-            key={img}
-            src={img}
-            alt={`${p.title} in ${color}`}
-            className="absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        </picture>
-
-        <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
-          <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
-            {p.title}
-          </h3>
-          <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
-            {p.price}
-          </div>
-          <PaymentInfo price={p.price} light />
+        <div className="relative flex-1 min-h-0 overflow-hidden rounded-[12px]">
+          <picture className="absolute inset-0">
+            {p.mobileImg && (
+              <source media="(max-width: 767px)" srcSet={p.mobileImg} />
+            )}
+            <img
+              key={img}
+              src={img}
+              alt={`${p.title} in ${color}`}
+              className="absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+          </picture>
         </div>
 
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
-          <div>
-            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
-              <Stars />
-              <span>{p.reviews}</span>
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
+            <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
+              {p.title}
+            </h3>
+            <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
+              {p.price}
             </div>
-            <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
-            <div className="mt-2">
-              <ColorSwatches selected={color} onSelect={setColor} light />
-            </div>
+            <PaymentInfo price={p.price} light />
           </div>
-          <BasketButton />
+
+          <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
+            <div>
+              <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
+                <Stars />
+                <span>{p.reviews}</span>
+              </div>
+              <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
+              <div className="mt-2">
+                <ColorSwatches selected={color} onSelect={setColor} light />
+              </div>
+            </div>
+            <BasketButton />
+          </div>
         </div>
       </Link>
     );

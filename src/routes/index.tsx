@@ -369,13 +369,18 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         params={{ handle: p.handle }}
         className="group relative h-[460px] w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:aspect-square md:h-auto md:w-[46%]"
       >
-        <img
-          key={img}
-          src={img}
-          alt={`${p.title} in ${color}`}
-          className="absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
-          loading="lazy"
-        />
+        <picture className="absolute inset-0">
+          {p.mobileImg && (
+            <source media="(max-width: 767px)" srcSet={p.mobileImg} />
+          )}
+          <img
+            key={img}
+            src={img}
+            alt={`${p.title} in ${color}`}
+            className="absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+        </picture>
 
         <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
           <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">

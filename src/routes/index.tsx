@@ -5,7 +5,7 @@ import press3 from "@/assets/press/press3.svg";
 import press4 from "@/assets/press/press4.svg";
 import press5 from "@/assets/press/press5.svg";
 import press6 from "@/assets/press/press6.svg";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   CalendarClock,
@@ -359,16 +359,16 @@ function ColorSwatches({
   );
 }
 
-function ModelCard({ p, isActive }: { p: (typeof PRODUCTS)[number]; isActive: boolean }) {
+function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
   const [color, setColor] = useState(MODEL_COLORS[0].name);
   const img = p.colorImages?.[color] ?? p.img;
 
-  if (isActive) {
+  if (p.featured) {
     return (
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group relative h-[460px] w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] transition-[width] duration-500 ease-out md:aspect-square md:h-auto md:w-[46%]"
+        className="group relative h-[460px] w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:aspect-square md:h-auto md:w-[46%]"
       >
         <picture className="absolute inset-0">
           {p.mobileImg && (
@@ -404,12 +404,7 @@ function ModelCard({ p, isActive }: { p: (typeof PRODUCTS)[number]; isActive: bo
               <ColorSwatches selected={color} onSelect={setColor} light />
             </div>
           </div>
-          <span className="flex h-10 shrink-0 items-center gap-2 rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] pl-4 pr-1.5 text-[15px] font-[400] tracking-[0.01em] text-white [text-shadow:none] transition group-hover:brightness-95">
-            <span>Aanpassen</span>
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20">
-              <ShoppingBasket className="h-[16px] w-[16px]" strokeWidth={1.5} />
-            </span>
-          </span>
+          <BasketButton />
         </div>
       </Link>
     );
@@ -420,7 +415,7 @@ function ModelCard({ p, isActive }: { p: (typeof PRODUCTS)[number]; isActive: bo
     <Link
       to="/product/$handle"
       params={{ handle: p.handle }}
-      className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] transition-[width] duration-500 ease-out md:w-[32%]"
+      className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
     >
       <div className="flex-1 min-h-0 overflow-hidden rounded-[12px] bg-[#f7f7f7]">
         <img
@@ -462,44 +457,6 @@ function ModelCard({ p, isActive }: { p: (typeof PRODUCTS)[number]; isActive: bo
 }
 
 function ProductCarouselSection() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const cards = Array.from(el.children) as HTMLElement[];
-      if (cards.length === 0) return;
-      const anchor = el.scrollLeft + 24;
-      let best = 0;
-      let bestDist = Infinity;
-      cards.forEach((card, i) => {
-        const dist = Math.abs(card.offsetLeft - el.offsetLeft - anchor);
-        if (dist < bestDist) {
-          bestDist = dist;
-          best = i;
-        }
-      });
-      setActiveIndex(best);
-    };
-
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(update);
-    };
-
-    el.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => {
-      el.removeEventListener("scroll", onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
-
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
       <div className="mx-auto max-w-[1456px] pl-5 md:pl-10 pr-0">
@@ -515,11 +472,10 @@ function ProductCarouselSection() {
             </div>
 
             <div
-              ref={scrollerRef}
               className="flex min-w-0 flex-1 items-stretch snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {PRODUCTS.map((p, i) => (
-                <ModelCard key={p.handle} p={p} isActive={i === activeIndex} />
+              {PRODUCTS.map((p) => (
+                <ModelCard key={p.handle} p={p} />
               ))}
             </div>
           </div>
@@ -529,7 +485,6 @@ function ProductCarouselSection() {
     </section>
   );
 }
-
 
 
 

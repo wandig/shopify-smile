@@ -11,7 +11,7 @@ export function SiteFooter() {
             <img
               src={footerLogoAsset.url}
               alt="Wandig"
-              className="h-auto w-[38px]"
+              className="h-auto w-[48px]"
               loading="lazy"
             />
             <p className="mt-6 max-w-[260px] text-sm leading-relaxed text-white/60">

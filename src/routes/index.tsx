@@ -369,43 +369,47 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group relative h-[460px] w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:aspect-square md:h-auto md:w-[46%]"
+        className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
       >
-        <picture className="absolute inset-0">
-          {p.mobileImg && (
-            <source media="(max-width: 767px)" srcSet={p.mobileImg} />
-          )}
-          <img
-            key={img}
-            src={img}
-            alt={`${p.title} in ${color}`}
-            className="absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        </picture>
-
-        <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
-          <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
-            {p.title}
-          </h3>
-          <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
-            {p.price}
-          </div>
-          <PaymentInfo price={p.price} light />
+        <div className="aspect-[4/3] w-full overflow-hidden rounded-[12px] bg-[#f7f7f7]">
+          <picture className="block h-full w-full">
+            {p.mobileImg && (
+              <source media="(max-width: 767px)" srcSet={p.mobileImg} />
+            )}
+            <img
+              key={img}
+              src={img}
+              alt={`${p.title} in ${color}`}
+              className="h-full w-full animate-[fadeIn_.4s_ease] object-contain transition duration-700 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+          </picture>
         </div>
-
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
-          <div>
-            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
-              <Stars />
-              <span>{p.reviews}</span>
-            </div>
-            <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
-            <div className="mt-2">
-              <ColorSwatches selected={color} onSelect={setColor} light />
+        <div className="flex flex-col px-2 pb-1 pt-4">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
+                {p.title}
+              </h3>
+              <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
+                {p.price}
+              </div>
+              <PaymentInfo price={p.price} />
             </div>
           </div>
-          <BasketButton />
+          <div className="mt-auto flex items-end justify-between gap-3 pt-6">
+            <div>
+              <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
+                <Stars />
+                <span>{p.reviews}</span>
+              </div>
+              <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
+              <div className="mt-2">
+                <ColorSwatches selected={color} onSelect={setColor} />
+              </div>
+            </div>
+            <BasketButton />
+          </div>
         </div>
       </Link>
     );

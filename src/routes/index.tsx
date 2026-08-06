@@ -397,7 +397,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             <PaymentInfo price={p.price} light />
           </div>
 
-          <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
+          <div className="pointer-events-auto absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
             <div>
               <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
                 <Stars />

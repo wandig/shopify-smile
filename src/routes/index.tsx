@@ -369,7 +369,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group relative h-[460px] w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:aspect-square md:h-auto md:w-[46%]"
+        className="group relative h-full w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:h-full md:w-[46%]"
       >
         <picture className="absolute inset-0">
           {p.mobileImg && (

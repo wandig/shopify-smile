@@ -371,7 +371,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         params={{ handle: p.handle }}
         className="group flex h-full w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
       >
-        <div className="flex-1 min-h-0 overflow-hidden rounded-[12px] bg-[#f7f7f7]">
+        <div className="aspect-[4/3] w-full overflow-hidden rounded-[12px] bg-[#f7f7f7]">
           <picture className="block h-full w-full">
             {p.mobileImg && (
               <source media="(max-width: 767px)" srcSet={p.mobileImg} />
@@ -385,7 +385,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             />
           </picture>
         </div>
-        <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
+        <div className="flex flex-col px-2 pb-1 pt-4">
           <div className="flex items-start justify-between gap-3">
             <div>
               <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">

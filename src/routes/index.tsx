@@ -245,7 +245,7 @@ const PRODUCTS: {
     handle: "duo",
     title: "Duo",
     price: "1.199,-",
-    img: plugPlayImg.url,
+    img: duoCardImg.url,
     reviews: "(143)",
     meta: "180 cm · Duo",
     colorImages: {},

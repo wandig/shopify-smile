@@ -369,9 +369,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group relative h-0 w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
+        className="group relative w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
       >
-        <picture className="absolute inset-0">
+        <picture className="block w-full">
           {p.mobileImg && (
             <source media="(max-width: 767px)" srcSet={p.mobileImg} />
           )}
@@ -379,7 +379,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             key={img}
             src={img}
             alt={`${p.title} in ${color}`}
-            className="absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
+            className="h-auto w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
             loading="lazy"
           />
         </picture>

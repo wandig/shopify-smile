@@ -26,6 +26,7 @@ import fullHouseSelectedV7 from "@/assets/full-house-selected-v7.png.asset.json"
 import fullHouseMobile from "@/assets/full-house-mobile.png.asset.json";
 import tvOrangeImg from "@/assets/tv-orange.png.asset.json";
 import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
+import duoCardImg from "@/assets/duo-card.jpg.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";

@@ -630,7 +630,7 @@ const CUSTOMER_GALLERY_COLUMNS = [
 function CustomerGallerySection() {
   return (
     <section className="bg-[#ffc79d] py-10 md:py-14">
-      <div className="mx-auto max-w-[1456px] pl-5 md:pl-10">
+      <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <div className="mb-6 md:mb-8">
           <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#0e1f2a]">
             Binnenkijken bij onze klanten
@@ -640,8 +640,8 @@ function CustomerGallerySection() {
           </p>
         </div>
 
-        <div className="-mr-[calc((100vw-100%)/2)] overflow-x-auto scrollbar-hide">
-          <div className="flex h-[420px] gap-3 pr-0 md:h-[560px] md:gap-4">
+        <div className="-mx-5 overflow-x-auto scrollbar-hide md:mx-0">
+          <div className="flex h-[420px] gap-3 px-5 md:h-[560px] md:gap-4 md:px-0">
             {CUSTOMER_GALLERY_COLUMNS.map((col, colIndex) => (
               <div key={colIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${col.width}`}>
                 {col.items.map((image, i) => (

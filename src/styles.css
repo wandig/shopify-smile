@@ -126,6 +126,20 @@
     letter-spacing: -0.01em;
   }
 
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e76c23;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c85a18;
+  }
 }
 
 @keyframes usp-marquee {

@@ -235,7 +235,7 @@ const PRODUCTS: {
     title: "Full House",
     tagline: "Volledige wand-look",
     price: "1.699,-",
-    img: fullHouseSelectedV7.url,
+    img: fullHouseCard.url,
     mobileImg: fullHouseMobile.url,
     reviews: "(2.526)",
     meta: "240 cm · Full House",

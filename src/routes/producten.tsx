@@ -1,16 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
-import swatchDofroze from "@/assets/swatches/dofroze.jpg";
-import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
-import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
-import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
-import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
-import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
-import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
-import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
+import { wandigSwatchStyle } from "@/lib/wandig-colors";
 
 export const Route = createFileRoute("/producten")({
   head: () => ({
@@ -54,162 +47,6 @@ const SERIES_COPY: Record<string, {
     specs: ["Maximale opbergruimte", "Wandvullende uitstraling", "Onze meest complete serie"],
   },
 };
-
-const COLOR_MAP: Record<string, string> = {
-  zwart: "#1a1a1a", black: "#1a1a1a",
-  wit: "#f5f5f5", white: "#f5f5f5",
-  grijs: "#9ca3af", grey: "#9ca3af", gray: "#9ca3af",
-  bruin: "#8b5a2b", brown: "#8b5a2b",
-  eik: "#c8a877", oak: "#c8a877", eiken: "#c8a877",
-  noten: "#5b3a22", walnut: "#5b3a22", walnoot: "#5b3a22",
-  beige: "#d8c9a8", zand: "#d8c9a8", sand: "#d8c9a8",
-  antraciet: "#2f3438",
-};
-
-const SWATCH_TEXTURES: Array<[RegExp, string]> = [
-  [/eikenzwart/, swatchEikenzwart],
-  [/eikengrijs/, swatchEikengrijs],
-  [/walnootbruin|walnoot|noten/, swatchWalnootbruin],
-  [/truffelbruin|truffel/, swatchTruffelbruin],
-  [/katoengrijs|katoen/, swatchKatoengrijs],
-  [/zandsteen/, swatchZandsteen],
-  [/kleibeige|klei/, swatchKleibeige],
-  [/dofroze|roze/, swatchDofroze],
-];
-
-function colorToCss(name: string): string {
-  const key = name.toLowerCase().trim();
-  if (COLOR_MAP[key]) return COLOR_MAP[key];
-  for (const k of Object.keys(COLOR_MAP)) {
-    if (key.includes(k)) return COLOR_MAP[k];
-  }
-  return "#d4d4d4";
-}
-
-function swatchTexture(name: string): string | undefined {
-  const key = name.toLowerCase().trim();
-  return SWATCH_TEXTURES.find(([pattern]) => pattern.test(key))?.[1];
-}
-
-function swatchStyle(name: string): CSSProperties {
-  const texture = swatchTexture(name);
-  if (texture) {
-    return {
-      backgroundColor: colorToCss(name),
-      backgroundImage: `url(${texture})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    };
-  }
-
-  const key = name.toLowerCase().trim();
-  const hasOak = /eik|oak/.test(key);
-  const hasGrey = /grijs|grey|gray/.test(key);
-  const hasBlack = /zwart|black|antraciet/.test(key);
-  const hasBrown = /bruin|brown|noten|walnut|walnoot/.test(key);
-  const hasBeige = /beige|zand|sand|naturel|natural/.test(key);
-
-  if (key.includes("eikenzwart")) {
-    return {
-      backgroundColor: "#171615",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 5px), repeating-linear-gradient(2deg, rgba(0,0,0,0.22) 0 2px, transparent 2px 13px), linear-gradient(135deg, #11100f 0%, #26231f 50%, #171615 100%)",
-    };
-  }
-
-  if (key.includes("eikengrijs")) {
-    return {
-      backgroundColor: "#9c9b90",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(66,58,48,0.24) 0 1px, transparent 1px 5px), repeating-linear-gradient(6deg, rgba(239,235,218,0.2) 0 2px, transparent 2px 15px), linear-gradient(135deg, #b9b5a7 0%, #98978e 52%, #777970 100%)",
-    };
-  }
-
-  if (key.includes("walnoot") || key.includes("noten")) {
-    return {
-      backgroundColor: "#6b3f22",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(37,18,8,0.28) 0 1px, transparent 1px 5px), repeating-linear-gradient(5deg, rgba(211,149,83,0.14) 0 2px, transparent 2px 15px), linear-gradient(135deg, #8b552c 0%, #68401f 54%, #3e2413 100%)",
-    };
-  }
-
-  if (key.includes("truffel")) {
-    return {
-      backgroundColor: "#7a5a43",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(48,33,22,0.22) 0 1px, transparent 1px 5px), repeating-linear-gradient(7deg, rgba(205,174,139,0.14) 0 2px, transparent 2px 16px), linear-gradient(135deg, #8b6a50 0%, #72523e 55%, #4f392d 100%)",
-    };
-  }
-
-  if (key.includes("katoen")) {
-    return {
-      backgroundColor: "#aeb3b3",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(75,82,82,0.16) 0 1px, transparent 1px 5px), repeating-linear-gradient(8deg, rgba(255,255,255,0.14) 0 2px, transparent 2px 16px), linear-gradient(135deg, #c7cbcb 0%, #aeb3b3 55%, #8e9698 100%)",
-    };
-  }
-
-  if (key.includes("zandsteen")) {
-    return {
-      backgroundColor: "#c6a15f",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(104,75,32,0.18) 0 1px, transparent 1px 5px), repeating-linear-gradient(8deg, rgba(255,234,186,0.18) 0 2px, transparent 2px 16px), linear-gradient(135deg, #d8b873 0%, #bd9655 55%, #98723b 100%)",
-    };
-  }
-
-  if (key.includes("klei")) {
-    return {
-      backgroundColor: "#bcae9d",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(95,76,58,0.16) 0 1px, transparent 1px 5px), repeating-linear-gradient(8deg, rgba(255,247,230,0.18) 0 2px, transparent 2px 16px), linear-gradient(135deg, #d0c4b3 0%, #b8aa97 55%, #978976 100%)",
-    };
-  }
-
-  if (key.includes("dofroze") || key.includes("roze")) {
-    return {
-      backgroundColor: "#c4a29e",
-      backgroundImage:
-        "repeating-linear-gradient(94deg, rgba(105,71,70,0.16) 0 1px, transparent 1px 5px), repeating-linear-gradient(8deg, rgba(255,235,230,0.18) 0 2px, transparent 2px 16px), linear-gradient(135deg, #d3b4af 0%, #bd9a95 55%, #9f7b77 100%)",
-    };
-  }
-
-  if (hasOak && hasBlack) {
-    return {
-      backgroundColor: "#1f1d1a",
-      backgroundImage:
-        "repeating-linear-gradient(86deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 7px), repeating-linear-gradient(6deg, rgba(0,0,0,0.3) 0 2px, transparent 2px 16px), linear-gradient(135deg, #11100f 0%, #24211e 45%, #151413 100%)",
-    };
-  }
-
-  if (hasOak && hasGrey) {
-    return {
-      backgroundColor: "#a9aba6",
-      backgroundImage:
-        "repeating-linear-gradient(88deg, rgba(70,64,55,0.2) 0 1px, transparent 1px 7px), repeating-linear-gradient(12deg, rgba(255,255,255,0.14) 0 2px, transparent 2px 18px), linear-gradient(135deg, #c8c6bb 0%, #a8a59b 48%, #7e8078 100%)",
-    };
-  }
-
-  if (hasOak || hasBeige) {
-    return {
-      backgroundColor: "#c7ad78",
-      backgroundImage:
-        "repeating-linear-gradient(88deg, rgba(103,67,31,0.18) 0 1px, transparent 1px 7px), repeating-linear-gradient(10deg, rgba(255,244,211,0.18) 0 2px, transparent 2px 18px), linear-gradient(135deg, #d9bf86 0%, #bd9860 52%, #8d6334 100%)",
-    };
-  }
-
-  if (hasBrown) {
-    return {
-      backgroundColor: "#8a572b",
-      backgroundImage:
-        "repeating-linear-gradient(88deg, rgba(38,18,8,0.24) 0 1px, transparent 1px 7px), repeating-linear-gradient(9deg, rgba(255,211,155,0.12) 0 2px, transparent 2px 17px), linear-gradient(135deg, #a26734 0%, #7b4824 52%, #422513 100%)",
-    };
-  }
-
-  return {
-    backgroundColor: colorToCss(name),
-    backgroundImage: "repeating-linear-gradient(90deg, rgba(0,0,0,0.08) 0 1px, transparent 1px 9px), linear-gradient(135deg, rgba(255,255,255,0.08), rgba(0,0,0,0.1))",
-  };
-}
 
 function CrossfadeImage({ src, alt }: { src: string; alt: string }) {
   const [shown, setShown] = useState(src);
@@ -373,7 +210,7 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
                 >
                   <span
                     className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.45),inset_0_-3px_5px_rgba(0,0,0,0.18)]"
-                    style={swatchStyle(color)}
+                    style={wandigSwatchStyle(color)}
                   />
                 </button>
               );

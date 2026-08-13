@@ -1,10 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { CalendarCheck, ChevronDown, ChevronLeft, ChevronRight, Hammer, Plug, Plus, Puzzle, Ruler, ShieldCheck, ShoppingBag, Star, Truck } from "lucide-react";
 import { toast } from "sonner";
 
+import { Button } from "@/components/ui/button";
+import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
 import rightModuleUrl from "@/assets/right-module-trim-tight-cropped.png";
+import werkplaatsImg from "@/assets/werkplaats.jpg";
+import fullHouseFinishImg from "@/assets/full-house-gallery-finish.webp";
+import fullHouseUseImg from "@/assets/full-house-gallery-use.webp";
+import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
+import fullHouseRoomImg from "@/assets/full-house-gallery-room.jpg";
+import detailDesignImg from "@/assets/detail-design.jpg";
+import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import { FULL_HOUSE_COLORS, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
 
 export const Route = createFileRoute("/configurator")({
   head: () => ({
@@ -27,19 +39,11 @@ export const Route = createFileRoute("/configurator")({
   component: ConfiguratorPage,
 });
 
-const COLORS = [
-  { name: "Eikenzwart", hex: "#242424" },
-  { name: "Walnootbruin", hex: "#6b4630" },
-  { name: "Truffelbruin", hex: "#8a6a52" },
-  { name: "Steenwit", hex: "#ece6dd" },
-  { name: "Blush", hex: "#d9a794" },
-];
-
 const TV_OPTIONS = [
-  { value: '43"', note: "40–50 inch", price: 0 },
-  { value: '55"', note: "50–60 inch", price: 150 },
-  { value: '65"', note: "60–70 inch", price: 250 },
-  { value: '75"', note: "70–80 inch", price: 350 },
+  { value: '43"', note: "40–50 inch", shopifyValue: "40 - 50 inch", price: 0, wallHeight: 170 },
+  { value: '55"', note: "50–60 inch", shopifyValue: "55 - 65 inch", price: 150, wallHeight: 180 },
+  { value: '65"', note: "60–70 inch", shopifyValue: "70 - 75 inch", price: 250, wallHeight: 190 },
+  { value: '75"', note: "70–80 inch", shopifyValue: "80 - 85 inch", price: 350, wallHeight: 200 },
 ];
 
 const BASE_PRICE = 1699;
@@ -48,149 +52,347 @@ const LEFT_MODULE_PRICE = 475;
 const LEFT_MODULE_WIDTH = 40;
 const RIGHT_MODULE_PRICE = 475;
 const RIGHT_MODULE_WIDTH = 40;
+const MODULE_REVEAL = "moduleColorReveal 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both";
+
+const CONFIGURATOR_BENEFITS = [
+  { title: "Ontworpen in Nederland", image: werkplaatsImg },
+  { title: "Kabels uit het zicht", image: fullHouseFinishImg },
+  { title: "Eenvoudige klikmontage", image: fullHouseUseImg },
+  { title: "Persoonlijk advies", image: detailMaatwerkImg },
+  { title: "100 dagen proefkijken", image: fullHouseRoomImg },
+  { title: "10 jaar garantie", image: detailDesignImg },
+];
+
+const FULL_HOUSE_FRONT_IMAGES: Record<string, string> = {
+  Truffelbruin:
+    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_febf1f75-a372-4cd7-aa4a-98f7231d208a.jpg?v=1785761296",
+  Cashmeregrijs:
+    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_bb9754f6-1ec4-4bb9-b906-0f6c91cfc4da.jpg?v=1785762097",
+  Blush:
+    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_daab0722-3ff3-46ab-99f4-71ef038faecf.jpg?v=1785762321",
+  Kristalwit:
+    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_1cb0343f-93b7-4c9c-ac58-92a733dc67be.jpg?v=1785762395",
+};
+
+const MODULE_CROPS = {
+  left: { left: 0.19, top: 0.182, width: 0.144, height: 0.569 },
+  center: { left: 0.334, top: 0.182, width: 0.331, height: 0.569 },
+  right: { left: 0.665, top: 0.182, width: 0.147, height: 0.569 },
+} as const;
+
+type ModulePosition = keyof typeof MODULE_CROPS;
+
+function CroppedModuleImage({
+  color,
+  position,
+  source,
+  animate = true,
+  testId = true,
+  className = "",
+}: {
+  color: string;
+  position: ModulePosition;
+  source: string;
+  animate?: boolean;
+  testId?: boolean;
+  className?: string;
+}) {
+  const crop = MODULE_CROPS[position];
+
+  return (
+    <div
+      data-testid={testId ? `configurator-${position}-module` : undefined}
+      className={`relative h-full shrink-0 overflow-hidden ${className}`}
+      style={{
+        aspectRatio: `${(crop.width * 4) / (crop.height * 3)}`,
+        animation: animate ? MODULE_REVEAL : undefined,
+        backfaceVisibility: "hidden",
+        contain: "paint",
+        willChange: animate ? "opacity" : undefined,
+      }}
+    >
+      <img
+        src={source}
+        alt={`Wandig ${position === "center" ? "middenmodule" : `${position === "left" ? "linker" : "rechter"} module`} in ${color}`}
+        className="pointer-events-none absolute max-w-none select-none"
+        style={{
+          width: `${100 / crop.width}%`,
+          height: `${100 / crop.height}%`,
+          left: `${(-crop.left / crop.width) * 100}%`,
+          top: `${(-crop.top / crop.height) * 100}%`,
+        }}
+      />
+    </div>
+  );
+}
+
+function ConfiguratorModuleImage({
+  color,
+  position,
+  source,
+  animate = true,
+  testId = true,
+  className = "",
+}: {
+  color: string;
+  position: ModulePosition;
+  source: string | null;
+  animate?: boolean;
+  testId?: boolean;
+  className?: string;
+}) {
+  const usesWalnutAsset = color === FULL_HOUSE_COLORS[0];
+
+  if (!usesWalnutAsset) {
+    return (
+      <CroppedModuleImage
+        color={color}
+        position={position}
+        source={source!}
+        animate={animate}
+        testId={testId}
+        className={className}
+      />
+    );
+  }
+
+  const walnutSource =
+    position === "left" ? leftModule.url : position === "center" ? centerModule.url : rightModuleUrl;
+
+  return (
+    <img
+      src={walnutSource}
+      alt={`Wandig ${position === "center" ? "middenmodule" : `${position === "left" ? "linker" : "rechter"} module`} in ${color}`}
+      data-testid={testId ? `configurator-${position}-module` : undefined}
+      className={`block h-full w-auto select-none ${className}`}
+      style={{
+        animation: animate ? MODULE_REVEAL : undefined,
+        backfaceVisibility: "hidden",
+        willChange: animate ? "opacity" : undefined,
+      }}
+    />
+  );
+}
 
 function euro(n: number) {
   return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;
 }
 
+function euroWithCents(n: number) {
+  return `€ ${new Intl.NumberFormat("nl-NL", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(n)}`;
+}
+
 function ConfiguratorPage() {
-  const [color, setColor] = useState(COLORS[0]);
+  const { data: fullHouseProduct } = useQuery({
+    queryKey: ["product", "full-house"],
+    queryFn: async () => {
+      const response = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle: "full-house" });
+      return (response?.data?.product ?? null) as ShopifyProduct["node"] | null;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const colors = useMemo(() => {
+    const liveColors = fullHouseProduct?.options
+      .filter((option) => /kleur|color/i.test(option.name))
+      .flatMap((option) => option.values) ?? [];
+    const sortedColors = sortWandigColors(liveColors);
+    return sortedColors.length > 0 ? sortedColors : [...FULL_HOUSE_COLORS];
+  }, [fullHouseProduct]);
+
+  const [color, setColor] = useState<string>(FULL_HOUSE_COLORS[0]);
+  const [previewColor, setPreviewColor] = useState<string>(FULL_HOUSE_COLORS[0]);
+  const [previousPreviewColor, setPreviousPreviewColor] = useState<string | null>(null);
   const [tv, setTv] = useState(TV_OPTIONS[1]);
   const [hasLeft, setHasLeft] = useState(false);
   const [hasRight, setHasRight] = useState(false);
-  const [tvPickerOpen, setTvPickerOpen] = useState(false);
+  const [showMeasurements, setShowMeasurements] = useState(false);
+  const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
+  const [tvSizeOpen, setTvSizeOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
+  const benefitsScrollerRef = useRef<HTMLDivElement>(null);
+  const previewCleanupTimerRef = useRef<number | null>(null);
+
+  const scrollBenefits = (direction: -1 | 1) => {
+    benefitsScrollerRef.current?.scrollBy({ left: direction * 166, behavior: "smooth" });
+  };
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setTvPickerOpen(false);
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    if (!colors.includes(color)) {
+      setColor(colors[0]);
+      setPreviewColor(colors[0]);
+    }
+  }, [color, colors]);
+
+  useEffect(() => {
+    const images = Object.values(FULL_HOUSE_FRONT_IMAGES).map((source) => {
+      const image = new Image();
+      image.src = source;
+      return image;
+    });
+
+    void Promise.all(images.map((image) => image.decode().catch(() => undefined)));
   }, []);
 
-  const width = BASE_WIDTH + (hasLeft ? LEFT_MODULE_WIDTH : 0) + (hasRight ? RIGHT_MODULE_WIDTH : 0);
-  const total = useMemo(
-    () => BASE_PRICE + tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0),
-    [tv, hasLeft, hasRight],
+  useEffect(
+    () => () => {
+      if (previewCleanupTimerRef.current !== null) {
+        window.clearTimeout(previewCleanupTimerRef.current);
+      }
+    },
+    [],
   );
 
+  const selectColor = (nextColor: string) => {
+    if (nextColor === color) return;
+
+    setPreviousPreviewColor(previewColor);
+    setColor(nextColor);
+    setPreviewColor(nextColor);
+
+    if (previewCleanupTimerRef.current !== null) {
+      window.clearTimeout(previewCleanupTimerRef.current);
+    }
+    previewCleanupTimerRef.current = window.setTimeout(() => {
+      setPreviousPreviewColor(null);
+    }, 320);
+  };
+
+  const width = BASE_WIDTH + (hasLeft ? LEFT_MODULE_WIDTH : 0) + (hasRight ? RIGHT_MODULE_WIDTH : 0);
+  const selectedShopifyVariant = useMemo(() => {
+    const shopifyArrangement = hasRight && !hasLeft ? "Rechts" : "Links";
+
+    return fullHouseProduct?.variants.edges
+      .map((edge) => edge.node)
+      .find((variant) => {
+        const selections = new Map(
+          variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
+        );
+        return (
+          selections.get("kleur") === color &&
+          selections.get("opstelling") === shopifyArrangement &&
+          selections.get("maat tv") === tv.shopifyValue
+        );
+      });
+  }, [color, fullHouseProduct, hasLeft, hasRight, tv.shopifyValue]);
+  const shopifyBasePrice = Number(selectedShopifyVariant?.price.amount ?? 0);
+  const configuredBasePrice = shopifyBasePrice > 0 ? shopifyBasePrice : BASE_PRICE;
+  const optionPriceAdjustment =
+    tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0);
+  const total = useMemo(
+    () => configuredBasePrice + optionPriceAdjustment,
+    [configuredBasePrice, optionPriceAdjustment],
+  );
+  const shopifyCompareAtPrice = Number(selectedShopifyVariant?.compareAtPrice?.amount ?? 0);
+  const beforeTotal =
+    shopifyCompareAtPrice > configuredBasePrice
+      ? shopifyCompareAtPrice + optionPriceAdjustment
+      : null;
+  const usesWalnutModules = previewColor === FULL_HOUSE_COLORS[0];
+  const colorModuleSource = useMemo(() => {
+    if (usesWalnutModules) return null;
+
+    const matchingVariant = fullHouseProduct?.variants.edges
+      .map((edge) => edge.node)
+      .find((variant) => {
+        const selections = new Map(
+          variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
+        );
+        return (
+          selections.get("kleur") === previewColor &&
+          selections.get("opstelling") === "Links" &&
+          selections.get("maat tv") === "55 - 65 inch"
+        );
+      });
+
+    return matchingVariant?.image?.url ?? FULL_HOUSE_FRONT_IMAGES[previewColor];
+  }, [fullHouseProduct, previewColor, usesWalnutModules]);
+  const previousModuleSource = useMemo(() => {
+    if (!previousPreviewColor || previousPreviewColor === FULL_HOUSE_COLORS[0]) return null;
+
+    const matchingVariant = fullHouseProduct?.variants.edges
+      .map((edge) => edge.node)
+      .find((variant) => {
+        const selections = new Map(
+          variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
+        );
+        return (
+          selections.get("kleur") === previousPreviewColor &&
+          selections.get("opstelling") === "Links" &&
+          selections.get("maat tv") === "55 - 65 inch"
+        );
+      });
+
+    return matchingVariant?.image?.url ?? FULL_HOUSE_FRONT_IMAGES[previousPreviewColor];
+  }, [fullHouseProduct, previousPreviewColor]);
+
   return (
-    <main className="min-h-screen bg-[#f8f6f3] p-4 md:p-7">
-      <div className="mx-auto max-w-[1500px]">
-        {/* Heading */}
-        <header className="mb-5">
-          <span className="text-[12px] font-bold uppercase tracking-[0.15em] text-[#ef7027]">
-            Wandig configurator
-          </span>
-          <h1 className="mt-2 max-w-[740px] text-[28px] font-bold leading-[1.02] tracking-[-0.03em] text-[#030c1a] md:text-[44px]">
-            Stel jouw Wandig direct samen.
-          </h1>
-          <p className="mt-3 max-w-[760px] text-[14px] leading-relaxed tracking-[0.01em] text-[#747981] md:text-[15px]">
-            Klik op de tv in het midden om het formaat te wijzigen en gebruik de plus links
-            of rechts om de zijmodules toe te voegen.
-          </p>
-        </header>
+    <main className="min-h-screen bg-[#f8f6f3]">
+      <div className="w-full">
+        <div className="relative grid w-full items-start overflow-hidden bg-[#e9e3dc] lg:min-h-[calc(85vh-39px)] lg:grid-cols-[minmax(0,1fr)_528px] lg:py-[30px]">
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-[79%] border-b border-black/[0.08]"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse at 52% 34%, rgba(255,255,255,0.98) 0%, rgba(249,246,242,0.82) 34%, rgba(232,225,217,0.2) 72%), linear-gradient(180deg, #f3efea 0%, #e8e1d9 100%)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[21%]"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 22%), linear-gradient(180deg, #ded6cd 0%, #cfc4b9 100%)",
+              boxShadow: "inset 0 18px 30px rgba(76,61,48,0.045)",
+            }}
+          />
+          <div className="pointer-events-none absolute bottom-[18.5%] left-[37.5%] h-6 w-[44%] -translate-x-1/2 rounded-[50%] bg-black/[0.13] blur-xl" />
 
-        {/* Stage card */}
-        <div className="overflow-hidden rounded-[24px] border border-[#e8e2dc] bg-white shadow-[0_22px_60px_rgba(3,12,26,0.10)]">
-          <div className="flex items-center justify-between gap-5 border-b border-[#e8e2dc] px-5 py-4">
-            <div className="flex items-center gap-3">
-              <strong className="text-[14px] tracking-[0.01em] text-[#030c1a]">
-                Jouw configuratie
-              </strong>
-              <span className="hidden text-[12px] tracking-[0.01em] text-[#747981] sm:inline">
-                Alle keuzes maak je direct in de kast
-              </span>
-            </div>
-            <span className="rounded-full bg-[#f3f0ec] px-3 py-2 text-[11px] font-bold tracking-[0.01em] text-[#5f625f]">
-              Live preview
-            </span>
-          </div>
-
+          <section className="relative z-[1] min-w-0 overflow-hidden lg:h-full">
           {/* Scene */}
           <div
             ref={stageRef}
-            className="relative flex min-h-[560px] items-center justify-center overflow-hidden bg-gradient-to-b from-[#f4f1ed] to-[#efebe6] px-3 py-16 md:min-h-[700px] md:px-8 md:pb-[78px] md:pt-[76px]"
+            className="relative flex min-h-[620px] items-center justify-center overflow-hidden px-3 py-16 md:min-h-[760px] md:px-8 md:pb-[78px] md:pt-[76px] lg:h-full lg:min-h-0"
           >
-            <div
-              className="pointer-events-none absolute inset-0 opacity-[0.48]"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle at 50% 18%, rgba(255,255,255,.75), transparent 42%), linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px), linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px)",
-                backgroundSize: "auto, 54px 54px, 54px 54px",
-              }}
-            />
-            <div className="absolute inset-x-0 bottom-0 h-[42px] border-t border-black/[0.03] bg-gradient-to-b from-[#ece7e1] to-[#e2dbd2]" />
-
-            {/* Variant selectors */}
-            <div className="absolute left-3 top-3 z-[9] w-[228px] md:left-[18px] md:top-[18px]">
-              <div className="rounded-[13px] border border-[#e8e2dc] bg-white/90 p-3 shadow-[0_10px_26px_rgba(3,12,26,0.07)] backdrop-blur">
-                <div className="mb-2 flex items-baseline gap-1.5">
-                  <span className="text-[10px] font-bold tracking-[0.01em] text-[#747981]">
-                    Kleur
-                  </span>
-                  <strong className="text-[12px] tracking-[0.01em] text-[#030c1a]">
-                    {color.name}
-                  </strong>
-                </div>
-                <div className="flex gap-1.5">
-                  {COLORS.map((c) => (
-                    <button
-                      key={c.name}
-                      type="button"
-                      onClick={() => setColor(c)}
-                      aria-label={c.name}
-                      aria-pressed={c.name === color.name}
-                      className={`h-[23px] w-[23px] rounded-full border-2 transition hover:-translate-y-px ${
-                        c.name === color.name
-                          ? "border-[#ef7027] shadow-[0_0_0_3px_rgba(239,112,39,0.12),inset_0_0_0_1px_rgba(0,0,0,0.18)]"
-                          : "border-transparent shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18)]"
-                      }`}
-                      style={{ backgroundColor: c.hex }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {tvPickerOpen && (
-                <div className="mt-2.5 rounded-[13px] border border-[#e8e2dc] bg-white/90 p-3 shadow-[0_10px_26px_rgba(3,12,26,0.07)] backdrop-blur">
-                  <div className="mb-2 flex items-baseline gap-1.5">
-                    <span className="text-[10px] font-bold tracking-[0.01em] text-[#747981]">
-                      Tv-formaat
-                    </span>
-                    <strong className="text-[12px] tracking-[0.01em] text-[#030c1a]">
-                      {tv.value}
-                    </strong>
-                  </div>
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {TV_OPTIONS.map((o) => (
-                      <button
-                        key={o.value}
-                        type="button"
-                        onClick={() => setTv(o)}
-                        aria-pressed={o.value === tv.value}
-                        className={`rounded-[9px] border-2 px-2 py-2 text-left transition hover:-translate-y-px ${
-                          o.value === tv.value
-                            ? "border-[#ef7027] bg-[#fff5ee] shadow-[0_0_0_3px_rgba(239,112,39,0.12)]"
-                            : "border-[#e8e2dc] bg-white"
-                        }`}
-                      >
-                        <span className="block text-[12px] font-bold tracking-[0.01em] text-[#030c1a]">
-                          {o.value}
-                        </span>
-                        <span className="block text-[9px] font-bold tracking-[0.01em] text-[#8a837b]">
-                          {o.note}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+            <button
+              type="button"
+              onClick={() => setShowMeasurements((visible) => !visible)}
+              aria-label={showMeasurements ? "Afmetingen verbergen" : "Afmetingen tonen"}
+              aria-pressed={showMeasurements}
+              title={showMeasurements ? "Afmetingen verbergen" : "Afmetingen tonen"}
+              className={`absolute left-4 top-4 z-[9] flex h-11 w-11 items-center justify-center rounded-full border shadow-[0_10px_24px_rgba(3,12,26,0.11)] transition-all duration-300 hover:-translate-y-px md:left-6 md:top-6 lg:left-auto lg:right-3 lg:top-2 ${
+                showMeasurements
+                  ? "border-[#ef7027] bg-[#ef7027] text-white"
+                  : "border-[#ded7d0] bg-white/92 text-[#303640] backdrop-blur"
+              }`}
+            >
+              <Ruler className="h-[19px] w-[19px]" strokeWidth={1.8} />
+            </button>
 
             {/* Configuration */}
-            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top scale-[0.61] items-end justify-center sm:scale-[0.765] lg:scale-[0.85]">
+            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-[10%] scale-[0.67] items-end justify-center sm:scale-[0.785] lg:scale-[0.716] xl:scale-[0.901] 2xl:scale-[0.97]">
               {/* Wall unit — modules sit flush against each other */}
               <div className="relative flex h-[420px] items-end lg:h-[520px]">
+                {showMeasurements && (
+                  <div className="pointer-events-none absolute inset-0 z-[8] text-[#303640]">
+                    <div className="absolute -top-[46px] inset-x-0 flex items-center gap-3">
+                      <span className="h-px flex-1 bg-[#303640]/55" />
+                      <span className="rounded-full border border-[#303640]/15 bg-white/92 px-3 py-1.5 text-[12px] font-semibold shadow-sm backdrop-blur">
+                        Breedte {width} cm
+                      </span>
+                      <span className="h-px flex-1 bg-[#303640]/55" />
+                    </div>
+                    <div className="absolute -left-[112px] inset-y-0 flex w-10 flex-col items-center gap-3">
+                      <span className="w-px flex-1 bg-[#303640]/55" />
+                      <span className="whitespace-nowrap rounded-full border border-[#303640]/15 bg-white/92 px-3 py-1.5 text-[12px] font-semibold shadow-sm backdrop-blur [writing-mode:vertical-rl] rotate-180">
+                        Hoogte {tv.wallHeight} cm
+                      </span>
+                      <span className="w-px flex-1 bg-[#303640]/55" />
+                    </div>
+                  </div>
+                )}
                 {/* Add / remove left module */}
                 <button
                   type="button"
@@ -213,44 +415,87 @@ function ConfiguratorPage() {
                 </button>
 
                 <div
-                  className={`relative z-[1] mr-[-3px] h-[99.7%] -translate-y-[1px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  className={`relative z-[1] mr-[-3px] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
                     hasLeft ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
                   }`}
+                  style={{
+                    transitionProperty: "max-width, opacity",
+                    transitionDuration: "650ms, 650ms",
+                    transitionTimingFunction:
+                      "cubic-bezier(0.22,1,0.36,1), cubic-bezier(0.22,1,0.36,1)",
+                  }}
                 >
-                  <img
-                    src={leftModule.url}
-                    alt={`Wandig linker module in ${color.name}`}
-                    className={`block h-full w-auto select-none origin-bottom-right transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  {previousPreviewColor && (
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-0" aria-hidden="true">
+                      <ConfiguratorModuleImage
+                        color={previousPreviewColor}
+                        position="left"
+                        source={previousModuleSource}
+                        animate={false}
+                        testId={false}
+                      />
+                    </div>
+                  )}
+                  <ConfiguratorModuleImage
+                    key={`left-${previewColor}`}
+                    color={previewColor}
+                    position="left"
+                    source={colorModuleSource}
+                    className={`relative z-[1] origin-bottom-right transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       hasLeft ? "translate-x-0 scale-100" : "translate-x-6 scale-[95%]"
                     }`}
                   />
                 </div>
                 <div className="relative z-[2] h-full">
-                  <img
-                    src={centerModule.url}
-                    alt={`Wandig middenmodule in ${color.name}`}
-                    className="block h-full w-auto select-none"
+                  {previousPreviewColor && (
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-0" aria-hidden="true">
+                      <ConfiguratorModuleImage
+                        color={previousPreviewColor}
+                        position="center"
+                        source={previousModuleSource}
+                        animate={false}
+                        testId={false}
+                      />
+                    </div>
+                  )}
+                  <ConfiguratorModuleImage
+                    key={`center-${previewColor}`}
+                    color={previewColor}
+                    position="center"
+                    source={colorModuleSource}
+                    className="relative z-[1]"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setTvPickerOpen(!tvPickerOpen)}
-                    aria-label="Tv-formaat wijzigen"
-                    className="group absolute left-[6.2%] top-[25.4%] h-[48.6%] w-[87.6%] cursor-pointer"
-                  >
-                    <span className="pointer-events-none absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#e8e2dc] bg-white px-3 py-2 text-[11px] font-black tracking-[0.01em] text-[#4f545b] opacity-0 shadow-[0_12px_28px_rgba(3,12,26,0.12)] transition group-hover:-top-10 group-hover:opacity-100">
-                      Klik voor tv-formaat
-                    </span>
-                  </button>
                 </div>
                 <div
-                  className={`relative z-[1] ml-[-11px] h-[calc(99.7%_+_0.1px)] -translate-y-[0.7px] overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  className={`relative z-[1] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
+                    usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"
+                  } ${
                     hasRight ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
                   }`}
+                  style={{
+                    transitionProperty: "max-width, opacity",
+                    transitionDuration: "650ms, 650ms",
+                    transitionTimingFunction:
+                      "cubic-bezier(0.22,1,0.36,1), cubic-bezier(0.22,1,0.36,1)",
+                  }}
                 >
-                  <img
-                    src={rightModuleUrl}
-                    alt={`Wandig rechter module in ${color.name}`}
-                    className={`block h-full w-auto select-none origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  {previousPreviewColor && (
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-0" aria-hidden="true">
+                      <ConfiguratorModuleImage
+                        color={previousPreviewColor}
+                        position="right"
+                        source={previousModuleSource}
+                        animate={false}
+                        testId={false}
+                      />
+                    </div>
+                  )}
+                  <ConfiguratorModuleImage
+                    key={`right-${previewColor}`}
+                    color={previewColor}
+                    position="right"
+                    source={colorModuleSource}
+                    className={`relative z-[1] origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       hasRight ? "translate-x-0 scale-100" : "-translate-x-6 scale-[95%]"
                     }`}
                   />
@@ -279,68 +524,313 @@ function ConfiguratorPage() {
               </div>
 
             </div>
-
-
-            <div className="absolute bottom-[54px] left-1/2 z-[4] -translate-x-1/2 rounded-full bg-white/75 px-3 py-1.5 text-[11px] font-bold tracking-[0.01em] text-[#6d6762] backdrop-blur">
-              {width} cm totale breedte
-            </div>
-            <div className="absolute bottom-[58px] right-[22px] z-[4] hidden rounded-full border border-black/[0.04] bg-white/70 px-3 py-1.5 text-[11px] font-bold tracking-[0.01em] text-[#8a837b] backdrop-blur md:block">
-              Cinewall look · wandgemonteerd
-            </div>
           </div>
+          </section>
 
-          {/* Price panel */}
-          <div className="grid items-center gap-6 bg-white px-6 py-6 md:grid-cols-[minmax(0,1fr)_auto]">
-            <div>
-              <strong className="text-[14px] tracking-[0.01em] text-[#030c1a]">
-                Jouw Wandig
-              </strong>
-              <div className="mt-2.5 flex flex-wrap gap-2">
-                {[
-                  `Tv ${tv.value}`,
-                  color.name,
-                  hasLeft && hasRight
-                    ? "Met linker & rechter module"
-                    : hasLeft
-                      ? "Met linker module"
-                      : hasRight
-                        ? "Met rechter module"
-                        : "Alleen middenmodule",
-                ].map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-full bg-[#f5f2ef] px-3 py-2 text-[11px] font-bold tracking-[0.01em] text-[#62676e]"
-                  >
-                    {chip}
+          <aside className="relative z-[2] mx-4 my-5 overflow-hidden rounded-[22px] border border-[#e8e2dc] bg-white p-5 shadow-[0_18px_48px_rgba(3,12,26,0.09)] lg:mx-0 lg:my-0 lg:h-full lg:w-[492px] lg:justify-self-start lg:px-4 lg:pb-3 lg:pt-0">
+            <section className="-mx-4 mb-3 overflow-hidden bg-[#fef9f5]">
+              <button
+                type="button"
+                onClick={() => setProductionDetailsOpen((open) => !open)}
+                aria-expanded={productionDetailsOpen}
+                className="flex min-h-[42px] w-full items-center justify-between gap-4 px-4 text-left text-[#071426]"
+              >
+                <span
+                  className="flex items-center gap-2 font-sans text-[14.4px] font-[385] text-[#cdc0b5]"
+                  style={{ textShadow: "0 0.55px 0.55px rgba(0,0,0,0.065)" }}
+                >
+                  <span className="grid h-3.5 w-5 shrink-0 grid-rows-3 overflow-hidden rounded-[1px] opacity-80" aria-hidden="true">
+                    <span className="bg-[#ae1c28]" />
+                    <span className="bg-white" />
+                    <span className="bg-[#21468b]" />
                   </span>
+                  Dutch Design
+                </span>
+                <span className="flex h-[21.42px] w-[21.42px] shrink-0 items-center justify-center rounded-full border-2 border-[#cdc0b5] bg-transparent text-[#cdc0b5] shadow-none">
+                  <Plus
+                    className={`h-[10.71px] w-[10.71px] transition-transform duration-400 ease-out ${productionDetailsOpen ? "rotate-45" : "rotate-0"}`}
+                    strokeWidth={2}
+                  />
+                </span>
+              </button>
+
+              <div
+                className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  productionDetailsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="relative min-h-[210px] px-5 pb-8 pt-3">
+                    <p className="text-[17px] font-semibold text-[#071426]">Nederlands gemaakt. Met aandacht.</p>
+                    <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
+                      Elke Wandig cinewall wordt in onze Nederlandse werkplaats gebouwd, gecontroleerd en plug &amp; play voorbereid voor jouw woonkamer.
+                    </p>
+                    <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
+                      Van de eerste plank tot de laatste kabeldoorvoer: lokaal vakmanschap, precies passend rond jouw tv.
+                    </p>
+                    <div className="pointer-events-none absolute bottom-5 right-5 flex items-end text-[#cdc0b5]" aria-hidden="true">
+                      <Puzzle className="h-10 w-10 -rotate-12 opacity-65" strokeWidth={1.5} />
+                      <Puzzle className="-ml-2 h-14 w-14 rotate-12 opacity-85" strokeWidth={1.5} />
+                      <Puzzle className="-ml-3 h-9 w-9 -rotate-6 opacity-55" strokeWidth={1.5} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div className="border-b border-[#eeeeee] pb-3">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-5 gap-y-1">
+                <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-[#ef7027]">
+                  Jouw configuratie
+                </span>
+                <div className="flex items-baseline justify-end gap-2.5 text-right">
+                  {beforeTotal !== null && (
+                    <span className="whitespace-nowrap text-[14px] font-medium text-[#9a9da2] line-through decoration-1">
+                      {euro(beforeTotal)}
+                    </span>
+                  )}
+                  <strong className="whitespace-nowrap text-[34px] font-bold leading-none tracking-[-0.03em] text-[#ff5a00]">
+                    {euro(total)}
+                  </strong>
+                </div>
+
+                <span aria-hidden="true" />
+                <p className="whitespace-nowrap text-right text-[12px] leading-[1.4] text-[#071426]/42">
+                  3 betalingen van {euroWithCents(total / 3)} tegen 0% rente
+                </p>
+
+                <div className="flex items-center text-[#4f5966]/78">
+                  <span className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <Star key={index} className="h-3 w-3 fill-current" strokeWidth={0} />
+                    ))}
+                  </span>
+                  <span className="ml-2 text-[10px] text-[#071426]/30">(1000+)</span>
+                </div>
+                <p className="flex items-baseline justify-end gap-2 text-[12px] leading-[1.4] text-[#071426]/42">
+                  <strong
+                    className="text-[14px] font-bold leading-none text-[#071426]"
+                    style={{ fontFamily: '"Klarna Headline", "Circular-Regular", sans-serif' }}
+                  >
+                    Klarna.
+                  </strong>
+                  <a
+                    href="https://www.klarna.com/nl/klantenservice/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline underline-offset-2 transition-colors hover:text-[#071426]"
+                  >
+                    Meer informatie
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-3 grid min-h-[52px] grid-cols-[80px_minmax(0,1fr)_auto] items-center gap-2 rounded-[12px] border border-[#eeeeee] px-3">
+              <strong className="text-[15px] font-[750] leading-none text-[#071426]">Kleur</strong>
+              <div className="flex min-w-0 items-center justify-start gap-2">
+                {colors.map((colorName) => (
+                  <button
+                    key={colorName}
+                    type="button"
+                    onClick={() => selectColor(colorName)}
+                    aria-label={colorName}
+                    title={colorName}
+                    aria-pressed={colorName === color}
+                    className={`h-8 w-8 shrink-0 rounded-full border-2 transition-all duration-200 hover:-translate-y-px lg:h-[35px] lg:w-[35px] ${
+                      colorName === color
+                        ? "border-[#ef7027] shadow-[0_0_0_3px_rgba(239,112,39,0.12),inset_0_0_0_1px_rgba(0,0,0,0.18)]"
+                        : "border-transparent shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18)]"
+                    }`}
+                    style={wandigSwatchStyle(colorName)}
+                  />
                 ))}
               </div>
+              <span className="whitespace-nowrap text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{color}</span>
             </div>
 
-            <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between md:gap-[18px]">
-              <div className="text-left md:text-right">
-                <span className="mb-1 block text-[11px] tracking-[0.01em] text-[#747981]">
-                  Indicatieve totaalprijs
-                </span>
-                <strong className="text-[30px] font-bold tracking-[-0.03em] text-[#030c1a]">
-                  {euro(total)}
-                </strong>
-              </div>
+            <div className="mb-3 mt-2 overflow-hidden rounded-[12px] border border-[#eeeeee]">
               <button
+                type="button"
+                onClick={() => setTvSizeOpen((open) => !open)}
+                aria-expanded={tvSizeOpen}
+                className="flex min-h-[52px] w-full items-center gap-2 px-3 text-left"
+              >
+                <span className="grid min-w-0 flex-1 grid-cols-[80px_minmax(0,1fr)] items-baseline gap-2">
+                  <span className="text-[15px] font-[750] leading-none text-[#071426]">Tv-maat</span>
+                  <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">
+                    {tv.note}
+                  </span>
+                </span>
+                <ChevronDown
+                  className={`h-4 w-4 text-[#071426]/45 transition-transform duration-300 ease-out ${tvSizeOpen ? "rotate-180" : "rotate-0"}`}
+                />
+              </button>
+
+              <div
+                className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  tvSizeOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="grid grid-cols-2 gap-2 px-3 pb-3 pt-1">
+                    {TV_OPTIONS.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => setTv(option)}
+                        aria-pressed={option.value === tv.value}
+                        className={`h-10 rounded-[8px] border bg-[#f8f6f4] px-2 text-[12px] font-medium text-[#071426] transition-[border-color,box-shadow,background-color,transform] duration-300 ease-out hover:bg-[#f3ece6] active:scale-[0.98] ${
+                          option.value === tv.value
+                            ? "border-[#ff5a00] bg-[#fff8f3] shadow-[0_0_0_2px_rgba(255,90,0,0.18)]"
+                            : "border-[#eeeeee] shadow-none"
+                        }`}
+                      >
+                        {option.note}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-3">
+              <Button
                 type="button"
                 onClick={() =>
                   toast.success("Samenstelling opgeslagen", {
-                    description: `Tv ${tv.value} · ${color.name} · ${width} cm · ${euro(total)}`,
+                    description: `Tv ${tv.value} · ${color} · ${width} cm · ${euro(total)}`,
                   })
                 }
-                className="whitespace-nowrap rounded-[14px] bg-[#ef7027] px-5 py-4 text-[13px] font-black tracking-[0.04em] text-white shadow-[0_12px_25px_rgba(239,112,39,0.24)] transition hover:-translate-y-px hover:bg-[#e36820]"
+                className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] px-6 text-sm font-bold text-white shadow-none transition hover:translate-y-0 hover:from-[#e36820] hover:to-[#d8601b] hover:shadow-none active:translate-y-0 active:scale-100"
               >
-                Voeg samenstelling toe
-              </button>
+                <span className="relative block h-full w-full overflow-hidden">
+                  <span className="absolute inset-0 flex items-center justify-center gap-1.5 font-[200] transition-transform duration-300 ease-out group-hover:-translate-y-full">
+                    <ShoppingBag className="h-5 w-5" strokeWidth={1.6} />Voeg samenstelling toe
+                  </span>
+                  <span className="absolute inset-0 flex translate-y-full items-center justify-center gap-1.5 font-[200] transition-transform duration-300 ease-out group-hover:translate-y-0">
+                    <ShoppingBag className="h-5 w-5" strokeWidth={1.6} />Voeg samenstelling toe
+                  </span>
+                </span>
+              </Button>
+
+              <div className="mb-[10px] mt-[17px] hidden w-full grid-cols-[max-content_max-content_max-content_max-content_max-content] items-center justify-between font-sans tracking-[0.04em] text-[#90949b] sm:grid">
+                <div className="flex items-center gap-1.5 text-[10.8px] font-normal leading-none"><ShieldCheck className="h-[14.4px] w-[14.4px] shrink-0" /><span className="whitespace-nowrap">10 jaar garantie</span></div>
+                <span className="text-[11.7px] text-[#cdc0b5]" aria-hidden="true">|</span>
+                <div className="flex items-center gap-1.5 text-[10.8px] font-normal leading-none"><Hammer className="h-[14.4px] w-[14.4px] shrink-0" /><span className="whitespace-nowrap">Handgemaakt in NL</span></div>
+                <span className="text-[11.7px] text-[#cdc0b5]" aria-hidden="true">|</span>
+                <div className="flex items-center gap-1.5 text-[10.8px] font-normal leading-none"><Truck className="h-[14.4px] w-[14.4px] shrink-0" /><span className="whitespace-nowrap">7-14 werkdagen levertijd</span></div>
+              </div>
+
+              <div className="mb-[10px] mt-[17px] grid grid-cols-1 divide-y divide-[#eeeeee] font-sans tracking-[0.04em] text-[#90949b] sm:hidden">
+                <div className="flex items-center justify-start gap-1.5 py-2 text-[10.8px] font-normal leading-none"><ShieldCheck className="h-[14.4px] w-[14.4px] shrink-0" /><span>10 jaar garantie</span></div>
+                <div className="flex items-center justify-start gap-1.5 py-2 text-[10.8px] font-normal leading-none"><Hammer className="h-[14.4px] w-[14.4px] shrink-0" /><span>Handgemaakt in NL</span></div>
+                <div className="flex items-center justify-start gap-1.5 py-2 text-[10.8px] font-normal leading-none"><Truck className="h-[14.4px] w-[14.4px] shrink-0" /><span>7-14 werkdagen levertijd</span></div>
+              </div>
+
+              <section className="mt-4 border-t border-[#eeeeee] pt-3">
+                <div className="mb-3 flex items-center justify-between">
+                  <h3 className="text-[14px] font-bold text-[#030c1a]">Jouw voordelen</h3>
+                  <div className="flex gap-1">
+                    <button
+                      type="button"
+                      aria-label="Vorige voordelen"
+                      onClick={() => scrollBenefits(-1)}
+                      className="flex h-7 w-7 items-center justify-center rounded-full text-[#030c1a] transition-colors hover:bg-[#f8f6f3]"
+                    >
+                      <ChevronLeft className="h-4 w-4" strokeWidth={1.5} />
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Volgende voordelen"
+                      onClick={() => scrollBenefits(1)}
+                      className="flex h-7 w-7 items-center justify-center rounded-full text-[#030c1a] transition-colors hover:bg-[#f8f6f3]"
+                    >
+                      <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
+                    </button>
+                  </div>
+                </div>
+                <div
+                  ref={benefitsScrollerRef}
+                  className="flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                >
+                  {CONFIGURATOR_BENEFITS.map((benefit) => (
+                    <article
+                      key={benefit.title}
+                      className="relative h-[195px] min-w-[150px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc] shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
+                    >
+                      <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-[90px] bg-gradient-to-b from-black/55 via-black/25 to-transparent" />
+                      <h4 className="absolute inset-x-0 top-0 px-3 pt-5 text-center text-[13px] font-normal leading-tight tracking-[0.03em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">
+                        {benefit.title}
+                      </h4>
+                    </article>
+                  ))}
+                </div>
+              </section>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
+      <section className="w-full border-t border-[#eeeeee] bg-white">
+        <div className="mx-auto grid min-h-[198px] max-w-[1500px] grid-cols-1 gap-8 px-7 py-10 text-[#1b1d20] sm:grid-cols-2 lg:grid-cols-[1.05fr_repeat(4,1fr)] lg:items-start lg:gap-7 lg:px-12 lg:py-[52px] xl:px-16">
+          <div>
+            <p className="max-w-[225px] text-[11px] leading-[1.45] text-[#474b50]">
+              Gebaseerd op meer dan 1000 beoordelingen van onze klanten
+            </p>
+            <div className="mt-3 flex items-center gap-2">
+              <strong className="text-[22px] font-semibold leading-none tracking-0">4,9/5</strong>
+              <span className="flex items-center gap-0.5" aria-label="5 van 5 sterren">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star key={index} className="h-[17px] w-[17px] fill-current" strokeWidth={0} />
+                ))}
+              </span>
+            </div>
+          </div>
+
+          <article className="grid grid-cols-[22px_minmax(0,1fr)] items-start gap-3">
+            <Hammer className="mt-0.5 h-[19px] w-[19px]" strokeWidth={1.5} />
+            <div>
+              <h2 className="text-[15px] font-medium leading-tight">Gemaakt in Nederland</h2>
+              <p className="mt-2 text-[11px] leading-relaxed text-[#62666b]">Met aandacht, speciaal voor jou</p>
+            </div>
+          </article>
+
+          <article className="grid grid-cols-[22px_minmax(0,1fr)] items-start gap-3">
+            <CalendarCheck className="mt-0.5 h-[19px] w-[19px]" strokeWidth={1.5} />
+            <div>
+              <h2 className="text-[15px] font-medium leading-tight">100 dagen garantie</h2>
+              <p className="mt-2 text-[11px] leading-relaxed text-[#62666b]">Rustig ervaren in jouw interieur</p>
+              <a href="/retour" className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60">
+                Meer informatie
+              </a>
+            </div>
+          </article>
+
+          <article className="grid grid-cols-[22px_minmax(0,1fr)] items-start gap-3">
+            <Plug className="mt-0.5 h-[19px] w-[19px]" strokeWidth={1.5} />
+            <div>
+              <h2 className="text-[15px] font-medium leading-tight">Plug &amp; play</h2>
+              <p className="mt-2 text-[11px] leading-relaxed text-[#62666b]">Aansluiten en direct genieten</p>
+              <a href="/klantenservice" className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60">
+                Meer informatie
+              </a>
+            </div>
+          </article>
+
+          <article className="grid grid-cols-[22px_minmax(0,1fr)] items-start gap-3">
+            <ShieldCheck className="mt-0.5 h-[19px] w-[19px]" strokeWidth={1.5} />
+            <div>
+              <h2 className="text-[15px] font-medium leading-tight">10 jaar garantie</h2>
+              <p className="mt-2 text-[11px] leading-relaxed text-[#62666b]">Gebouwd om jarenlang mee te gaan</p>
+              <a href="/klantenservice" className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60">
+                Meer informatie
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+      <CustomerGallerySection />
     </main>
   );
 }

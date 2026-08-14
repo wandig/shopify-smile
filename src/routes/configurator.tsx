@@ -866,7 +866,10 @@ function ConfiguratorPage() {
         </div>
       </div>
       <section className="w-full border-t border-[#eeeeee] bg-[#faf8f4]">
-        <div className="mx-auto grid min-h-[198px] max-w-[1500px] grid-cols-1 gap-8 px-7 py-10 text-[#1b1d20] sm:grid-cols-2 lg:grid-cols-[1.05fr_repeat(4,1fr)] lg:items-start lg:gap-7 lg:px-12 lg:py-[52px] xl:px-16">
+        <div
+          className="mx-auto grid min-h-[198px] max-w-[1500px] grid-cols-1 gap-8 px-7 py-10 text-[#1b1d20] sm:grid-cols-2 lg:grid-cols-[1.05fr_repeat(4,1fr)] lg:items-start lg:gap-7 lg:px-12 lg:py-[52px] xl:px-16"
+          style={{ fontFamily: '"Circular-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif' }}
+        >
           <div>
             <p className="max-w-[225px] text-[11px] leading-[1.45] text-[#474b50]">
               Gebaseerd op meer dan 1000 beoordelingen van onze klanten
@@ -894,9 +897,10 @@ function ConfiguratorPage() {
             <div>
               <h2 className="text-[15px] font-medium leading-tight">100 dagen garantie</h2>
               <p className="mt-2 text-[11px] leading-relaxed text-[#62666b]">Rustig ervaren in jouw interieur</p>
-              <a href="/retour" className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60">
-                Meer informatie
-              </a>
+              <InfoDrawerLink
+                topic="proefkijken"
+                className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60"
+              />
             </div>
           </article>
 
@@ -905,9 +909,10 @@ function ConfiguratorPage() {
             <div>
               <h2 className="text-[15px] font-medium leading-tight">Plug &amp; play</h2>
               <p className="mt-2 text-[11px] leading-relaxed text-[#62666b]">Aansluiten en direct genieten</p>
-              <a href="/klantenservice" className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60">
-                Meer informatie
-              </a>
+              <InfoDrawerLink
+                topic="plugplay"
+                className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60"
+              />
             </div>
           </article>
 
@@ -916,11 +921,14 @@ function ConfiguratorPage() {
             <div>
               <h2 className="text-[15px] font-medium leading-tight">10 jaar garantie</h2>
               <p className="mt-2 text-[11px] leading-relaxed text-[#62666b]">Gebouwd om jarenlang mee te gaan</p>
-              <a href="/klantenservice" className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60">
-                Meer informatie
-              </a>
+              <InfoDrawerLink
+                topic="garantie"
+                className="mt-3 inline-block border-b border-current pb-0.5 text-[11px] font-medium leading-none transition-opacity hover:opacity-60"
+              />
             </div>
           </article>
+        </div>
+
         </div>
       </section>
       <div className="mx-auto max-w-[1400px] px-5 pb-14 md:px-10">

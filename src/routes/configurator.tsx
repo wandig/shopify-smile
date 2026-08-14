@@ -6,6 +6,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
+import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
 import rightModuleUrl from "@/assets/right-module-trim-tight-cropped.png";
@@ -772,7 +773,7 @@ function ConfiguratorPage() {
           </aside>
         </div>
       </div>
-      <section className="w-full border-t border-[#eeeeee] bg-white">
+      <section className="w-full border-t border-[#eeeeee] bg-[#faf8f4]">
         <div className="mx-auto grid min-h-[198px] max-w-[1500px] grid-cols-1 gap-8 px-7 py-10 text-[#1b1d20] sm:grid-cols-2 lg:grid-cols-[1.05fr_repeat(4,1fr)] lg:items-start lg:gap-7 lg:px-12 lg:py-[52px] xl:px-16">
           <div>
             <p className="max-w-[225px] text-[11px] leading-[1.45] text-[#474b50]">
@@ -830,7 +831,13 @@ function ConfiguratorPage() {
           </article>
         </div>
       </section>
-      <CustomerGallerySection />
+      <div className="mx-auto max-w-[1456px] px-4 pb-14 md:px-10">
+        <SpecificationsSection />
+        <UniqueSection title="Dit maakt Wandig uniek" />
+        <BeforeAfterSection />
+      </div>
+
+      <CustomerGallerySection backgroundClassName="bg-[#faf8f4]" />
     </main>
   );
 }

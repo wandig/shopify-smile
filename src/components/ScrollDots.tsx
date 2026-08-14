@@ -19,9 +19,12 @@ export function ScrollDots({
 
     const update = () => {
       const max = el.scrollWidth - el.clientWidth;
-      const ratio = max > 0 ? el.scrollLeft / max : 0;
-      setActive(Math.round(ratio * (DOT_COUNT - 1)));
+      if (max <= 0) return setActive(0);
+      if (el.scrollLeft <= 4) return setActive(0);
+      if (el.scrollLeft >= max - 4) return setActive(2);
+      setActive(1);
     };
+
 
     update();
     el.addEventListener("scroll", update, { passive: true });

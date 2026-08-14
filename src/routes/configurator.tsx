@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
+import { BuiltToLastSection, FaqSection, ReviewsSection } from "@/components/ProductTrustSections";
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
 import rightModuleUrl from "@/assets/right-module-trim-tight-cropped.png";

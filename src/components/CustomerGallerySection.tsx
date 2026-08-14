@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
+
+import { ScrollDots } from "@/components/ScrollDots";
 
 import klantWoonkamer1Img from "@/assets/klant-woonkamer-1.png.asset.json";
 import klantWoonkamer2Img from "@/assets/klant-woonkamer-2.png.asset.json";
@@ -74,6 +77,8 @@ const CUSTOMER_GALLERY_COLUMNS = [
 ];
 
 export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }: { backgroundClassName?: string }) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
   return (
     <section className={`${backgroundClassName} py-10 md:py-14`}>
       <div className="mx-auto max-w-[1400px]">
@@ -89,7 +94,7 @@ export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }:
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1400px] overflow-x-auto scrollbar-hide px-5 md:px-10">
+      <div ref={scrollerRef} className="mx-auto max-w-[1400px] overflow-x-auto scrollbar-hide px-5 md:px-10">
         <div className="flex h-[420px] w-max gap-3 md:h-[560px] md:gap-4">
           {CUSTOMER_GALLERY_COLUMNS.map((column, columnIndex) => (
             <div key={columnIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${column.width}`}>
@@ -120,6 +125,8 @@ export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }:
           ))}
         </div>
       </div>
+
+      <ScrollDots scrollRef={scrollerRef} className="mt-4" />
     </section>
   );
 }

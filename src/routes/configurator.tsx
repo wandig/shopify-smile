@@ -831,7 +831,7 @@ function ConfiguratorPage() {
           </article>
         </div>
       </section>
-      <div className="mx-auto max-w-[1500px] px-7 pb-14 lg:px-12 xl:px-16">
+      <div className="mx-auto max-w-[1456px] px-4 pb-14 md:px-10">
         <SpecificationsSection />
         <UniqueSection title="Dit maakt Wandig uniek" />
         <BeforeAfterSection />

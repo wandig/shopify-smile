@@ -683,8 +683,10 @@ function WhyUsSection() {
             ))}
           </div>
         </div>
+        <ScrollDots scrollRef={scrollerRef} className="mt-4 pr-5" />
       </div>
     </section>
+
   );
 }
 

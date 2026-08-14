@@ -929,7 +929,6 @@ function ConfiguratorPage() {
           </article>
         </div>
 
-        </div>
       </section>
       <div className="mx-auto max-w-[1400px] px-5 pb-14 md:px-10">
         <SpecificationsSection />

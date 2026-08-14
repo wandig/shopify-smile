@@ -250,7 +250,7 @@ function InfoDrawerLink({ topic, className }: { topic: InfoTopicKey; className?:
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent
           side="right"
-          className="w-full max-w-[440px] border-l border-[#eeeeee] bg-[#faf8f5] px-7 py-10 sm:max-w-[440px]"
+          className="w-full max-w-[440px] rounded-l-3xl border-l border-[#eeeeee] bg-[#faf8f5] px-7 py-10 sm:max-w-[440px]"
           style={{ fontFamily: '"Circular-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif' }}
         >
           <SheetHeader className="space-y-3 text-left">

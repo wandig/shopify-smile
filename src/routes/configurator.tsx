@@ -838,6 +838,12 @@ function ConfiguratorPage() {
       </div>
 
       <CustomerGallerySection backgroundClassName="bg-[#faf8f4]" />
+
+      <BuiltToLastSection />
+
+      <FaqSection />
+
+      <ReviewsSection />
     </main>
   );
 }

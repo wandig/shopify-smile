@@ -710,14 +710,11 @@ function ConfiguratorPage() {
                   >
                     Klarna.
                   </strong>
-                  <a
-                    href="https://www.klarna.com/nl/klantenservice/"
-                    target="_blank"
-                    rel="noreferrer"
+                  <InfoDrawerLink
+                    topic="klarna"
                     className="underline underline-offset-2 transition-colors hover:text-[#071426]"
-                  >
-                    Meer informatie
-                  </a>
+                  />
+
                 </p>
               </div>
             </div>

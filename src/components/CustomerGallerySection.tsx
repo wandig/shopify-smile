@@ -76,19 +76,21 @@ const CUSTOMER_GALLERY_COLUMNS = [
 export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }: { backgroundClassName?: string }) {
   return (
     <section className={`${backgroundClassName} py-10 md:py-14`}>
-      <div className="px-5 md:px-10">
-        <div className="mb-6 md:mb-8">
-          <h2 className="text-[22px] font-bold leading-tight text-[#0e1f2a] md:text-[26px]">
-            Binnenkijken bij onze klanten
-          </h2>
-          <p className="mt-2 text-[13px] text-[#0e1f2a] md:text-[14px]">
-            Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
-          </p>
+      <div className="mx-auto max-w-[1400px]">
+        <div className="px-5 md:px-10">
+          <div className="mb-6 md:mb-8">
+            <h2 className="text-[22px] font-bold leading-tight text-[#0e1f2a] md:text-[26px]">
+              Binnenkijken bij onze klanten
+            </h2>
+            <p className="mt-2 text-[13px] text-[#0e1f2a] md:text-[14px]">
+              Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
+            </p>
+          </div>
         </div>
       </div>
 
       <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex h-[420px] gap-3 pl-5 md:h-[560px] md:gap-4 md:pl-10">
+        <div className="mx-auto flex h-[420px] max-w-[1400px] gap-3 pl-5 md:h-[560px] md:gap-4 md:pl-10">
           {CUSTOMER_GALLERY_COLUMNS.map((column, columnIndex) => (
             <div key={columnIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${column.width}`}>
               {column.items.map((image, imageIndex) => (

@@ -762,7 +762,10 @@ function ReviewsSection() {
           </article>
         ))}
       </div>
+
+      <ScrollDots scrollRef={scrollerRef} className="mt-4" />
     </section>
+
   );
 }
 

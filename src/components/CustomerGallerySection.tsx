@@ -73,9 +73,9 @@ const CUSTOMER_GALLERY_COLUMNS = [
   },
 ];
 
-export function CustomerGallerySection() {
+export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }: { backgroundClassName?: string }) {
   return (
-    <section className="bg-[#ffc79d] py-10 md:py-14">
+    <section className={`${backgroundClassName} py-10 md:py-14`}>
       <div className="mx-auto max-w-[1456px] px-5 md:px-10">
         <div className="mb-6 md:mb-8">
           <h2 className="text-[22px] font-bold leading-tight text-[#0e1f2a] md:text-[26px]">

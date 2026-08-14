@@ -89,8 +89,8 @@ export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }:
         </div>
       </div>
 
-      <div className="overflow-x-auto scrollbar-hide">
-        <div className="mx-auto flex h-[420px] max-w-[1400px] gap-3 pl-5 md:h-[560px] md:gap-4 md:pl-10">
+      <div className="mx-auto max-w-[1400px] overflow-x-auto scrollbar-hide px-5 md:px-10">
+        <div className="flex h-[420px] w-max gap-3 md:h-[560px] md:gap-4">
           {CUSTOMER_GALLERY_COLUMNS.map((column, columnIndex) => (
             <div key={columnIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${column.width}`}>
               {column.items.map((image, imageIndex) => (

@@ -187,6 +187,98 @@ function euroWithCents(n: number) {
   }).format(n)}`;
 }
 
+const INFO_TOPICS = {
+  klarna: {
+    eyebrow: "Betalen in 3 termijnen",
+    title: "Betalen met Klarna",
+    paragraphs: [
+      "Met Klarna verdeel je het bedrag in 3 gelijke termijnen, zonder rente en zonder extra kosten.",
+      "De eerste termijn betaal je bij je bestelling, de volgende twee automatisch met een maand tussenruimte.",
+    ],
+    bullets: [
+      "0% rente en geen afsluitkosten",
+      "Automatische incasso van dezelfde rekening",
+      "Je kiest Klarna gewoon af bij het afrekenen",
+    ],
+  },
+  proefkijken: {
+    eyebrow: "100 dagen garantie",
+    title: "100 dagen rustig proefkijken",
+    paragraphs: [
+      "Je Wandig staat 100 dagen bij je thuis op proef. Ervaar de kast in jouw licht, bij jouw bank en met jouw tv.",
+      "Past het niet? Dan halen we de kast gratis bij je op en krijg je het volledige bedrag terug.",
+    ],
+    bullets: ["Gratis retour ophalen aan huis", "Volledige terugbetaling", "Geen vragen, geen kleine lettertjes"],
+  },
+  plugplay: {
+    eyebrow: "Plug & play",
+    title: "Aansluiten en direct genieten",
+    paragraphs: [
+      "Elke Wandig komt voorbereid uit onze werkplaats: kabelgoten, doorvoeren en montagerails zitten er al in.",
+      "Met de klikmontage hang je de kast recht aan de wand en schuif je de modules tegen elkaar aan.",
+    ],
+    bullets: [
+      "Montagemateriaal en handleiding inbegrepen",
+      "Kabels netjes uit het zicht",
+      "Gemiddeld binnen een uur klaar",
+    ],
+  },
+  garantie: {
+    eyebrow: "10 jaar garantie",
+    title: "Gebouwd om jarenlang mee te gaan",
+    paragraphs: [
+      "We geven 10 jaar garantie op de constructie, het beslag en de afwerking van je Wandig.",
+      "Gaat er onverhoopt toch iets mis? Dan lossen we het op met onderdelen uit onze eigen werkplaats.",
+    ],
+    bullets: ["10 jaar op constructie en beslag", "Onderdelen blijven leverbaar", "Persoonlijke service uit Nederland"],
+  },
+} as const;
+
+type InfoTopicKey = keyof typeof INFO_TOPICS;
+
+function InfoDrawerLink({ topic, className }: { topic: InfoTopicKey; className?: string }) {
+  const [open, setOpen] = useState(false);
+  const info = INFO_TOPICS[topic];
+
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)} className={className}>
+        Meer informatie
+      </button>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent
+          side="right"
+          className="w-full max-w-[440px] border-l border-[#eeeeee] bg-[#faf8f5] px-7 py-10 sm:max-w-[440px]"
+          style={{ fontFamily: '"Circular-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif' }}
+        >
+          <SheetHeader className="space-y-3 text-left">
+            <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-[#ef7027]">{info.eyebrow}</span>
+            <SheetTitle className="text-[26px] font-normal leading-tight tracking-[0.01em] text-[#071426]">
+              {info.title}
+            </SheetTitle>
+          </SheetHeader>
+          <div className="mt-6 space-y-4">
+            {info.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="text-[13.5px] leading-relaxed text-[#071426]/70">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <ul className="mt-7 space-y-3 border-t border-[#eeeeee] pt-6">
+            {info.bullets.map((bullet) => (
+              <li key={bullet} className="flex items-start gap-2.5 text-[13px] leading-relaxed text-[#071426]">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#ef7027]" strokeWidth={2} />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SheetContent>
+      </Sheet>
+    </>
+  );
+}
+
+
 function ConfiguratorPage() {
   const { data: fullHouseProduct } = useQuery({
     queryKey: ["product", "full-house"],

@@ -1055,7 +1055,7 @@ function TrustBannerSection() {
 
 function Home() {
   return (
-    <div className="bg-[#faf8f5]">
+    <div className="overflow-x-clip bg-[#faf8f5]">
       <HeroSection />
       <HeroBenefitsSection />
       <ProductCarouselSection />

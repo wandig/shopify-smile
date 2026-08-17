@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
 import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
+import swatchKristalwitAsset from "@/assets/kristalwit.webp.asset.json";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
@@ -27,7 +28,8 @@ const TEXTURES: Array<{ pattern: RegExp; image: string; color: string }> = [
   { pattern: /truffelbruin|truffel/, image: swatchDonkereikenAsset.url, color: "#3b302a" },
   { pattern: /cashmeregrijs|cashmere|katoengrijs|katoen/, image: swatchKatoengrijs, color: "#b6aea3" },
   { pattern: /zandsteen/, image: swatchZandsteen, color: "#c3a26b" },
-  { pattern: /kristalwit|kleibeige|klei/, image: swatchKleibeige, color: "#b9aa97" },
+  { pattern: /kristalwit/, image: swatchKristalwitAsset.url, color: "#fbfaf3" },
+  { pattern: /kleibeige|klei/, image: swatchKleibeige, color: "#b9aa97" },
   { pattern: /blush|dofroze|roze/, image: swatchDofroze, color: "#d1aaa0" },
 ];
 

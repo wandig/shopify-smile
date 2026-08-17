@@ -22,13 +22,13 @@ const COLOR_ORDER = new Map(
 );
 
 const TEXTURES: Array<{ pattern: RegExp; image: string; color: string }> = [
-  { pattern: /eikenzwart/, image: swatchEikenzwart, color: "#1d1b19" },
+  { pattern: /donkereiken|eikenzwart/, image: swatchEikenzwart, color: "#1d1b19" },
   { pattern: /eikengrijs/, image: swatchEikengrijs, color: "#9b9990" },
   { pattern: /walnootbruin|walnoot|noten/, image: swatchWalnootbruin, color: "#684326" },
   { pattern: /truffelbruin|truffel/, image: swatchTruffelbruin, color: "#755844" },
   { pattern: /cashmeregrijs|cashmere|katoengrijs|katoen/, image: swatchKatoengrijs, color: "#b6aea3" },
   { pattern: /zandsteen/, image: swatchZandsteen, color: "#c3a26b" },
-  { pattern: /kleibeige|klei/, image: swatchKleibeige, color: "#b9aa97" },
+  { pattern: /kristalwit|kleibeige|klei/, image: swatchKleibeige, color: "#b9aa97" },
   { pattern: /blush|dofroze|roze/, image: swatchDofroze, color: "#d1aaa0" },
 ];
 

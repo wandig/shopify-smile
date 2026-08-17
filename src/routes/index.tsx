@@ -527,7 +527,7 @@ function ConfiguratorBannerSection() {
               loading="lazy"
             />
             <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm">
-              <img src={swatchEikenzwart} alt="Eikenzwart" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <img src={swatchEikenzwart} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <img src={swatchTruffelbruin} alt="Truffelbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <span className="ml-1 text-[11px] font-[500] tracking-[0.08em] text-[#071426]/60">+ meer</span>
@@ -780,10 +780,10 @@ function ReviewsSection() {
 /* ------------------------ 8. gratis kleurstalen --------------------------- */
 
 const SAMPLE_CARDS = [
-  { name: "Eikenzwart", image: swatchEikenzwart },
+  { name: "Donkereiken", image: swatchEikenzwart },
   { name: "Walnootbruin", image: swatchWalnootbruin },
-  { name: "Katoengrijs", image: swatchKatoengrijs },
-  { name: "Kleibeige", image: swatchKleibeige },
+  { name: "Cashmeregrijs", image: swatchKatoengrijs },
+  { name: "Kristalwit", image: swatchKleibeige },
   { name: "Dofroze", image: swatchDofroze },
 ];
 

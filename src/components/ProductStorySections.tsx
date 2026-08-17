@@ -429,7 +429,10 @@ export function UniqueSection({ title = "Dit maakt Full House uniek" }: { title?
   );
 }
 
-export function BeforeAfterSection() {
+export function BeforeAfterSection({
+  beforeSrc = beforeFullHouseAsset.url,
+  afterSrc = afterFullHouseAsset.url,
+}: { beforeSrc?: string; afterSrc?: string } = {}) {
   const [position, setPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef(false);

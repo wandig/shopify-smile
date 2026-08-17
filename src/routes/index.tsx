@@ -29,11 +29,11 @@ import fullHouseCard from "@/assets/full-house-card.png.asset.json";
 import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import duoCardImg from "@/assets/duo-card.jpg.asset.json";
 import soloCardImg from "@/assets/solo-card.jpg.asset.json";
+import cashmereAssetTmp from "@/assets/cashmeregrijs.jpg.asset.json";
+import kristalwitAssetTmp from "@/assets/kristalwit.webp.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
-import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
-import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
@@ -528,7 +528,7 @@ function ConfiguratorBannerSection() {
             <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm">
               <img src={swatchDonkereikenAsset.url} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
-              <img src={swatchKatoengrijs} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <img src={cashmereAssetTmp.url} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <span className="ml-1 text-[11px] font-[500] tracking-[0.08em] text-[#071426]/60">+ meer</span>
             </div>
           </div>
@@ -781,8 +781,8 @@ function ReviewsSection() {
 const SAMPLE_CARDS = [
   { name: "Donkereiken", image: swatchDonkereikenAsset.url },
   { name: "Walnootbruin", image: swatchWalnootbruin },
-  { name: "Cashmeregrijs", image: swatchKatoengrijs },
-  { name: "Kristalwit", image: swatchKleibeige },
+  { name: "Cashmeregrijs", image: cashmereAssetTmp.url },
+  { name: "Kristalwit", image: kristalwitAssetTmp.url },
   { name: "Dofroze", image: swatchDofroze },
 ];
 

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
+import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 import { BuiltToLastSection, FaqSection, ReviewsSection } from "@/components/ProductTrustSections";
 import {

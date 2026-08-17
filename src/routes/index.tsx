@@ -427,7 +427,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             </div>
             <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
             <div className="mt-2">
-              <ColorSwatches selected={color} onSelect={setColor} light />
+              <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} light />
             </div>
           </div>
           <BasketButton />
@@ -472,7 +472,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             </div>
             <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
             <div className="mt-2">
-              <ColorSwatches selected={color} onSelect={setColor} />
+              <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} />
             </div>
           </div>
           <BasketButton />

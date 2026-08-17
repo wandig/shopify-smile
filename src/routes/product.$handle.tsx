@@ -160,18 +160,25 @@ function ProductView({ product }: { product: ProductNode }) {
 
   const [selected, setSelected] = useState<Record<string, string>>(() => {
     const init: Record<string, string> = {};
+    // De tv-maat optie: "58 - 65 inch" is de tweede waarde (of de waarde die 58 bevat).
+    const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
+    const preferredSizeValue = sizeOption
+      ? sizeOption.values.find((v) => /58/.test(v)) || sizeOption.values[1]
+      : undefined;
     const isPreferredSize = (v: (typeof variants)[number]) =>
-      v.selectedOptions.some(
-        (o) => o.name.toLowerCase().includes("maat") && o.value.includes("58 - 65"),
-      );
+      !sizeOption ||
+      !preferredSizeValue ||
+      v.selectedOptions.some((o) => o.name === sizeOption.name && o.value === preferredSizeValue);
     const first =
       variants.find((v) => v.availableForSale && isPreferredSize(v)) ||
       variants.find(isPreferredSize) ||
       variants.find((v) => v.availableForSale) ||
       variants[0];
     first?.selectedOptions.forEach((o) => { init[o.name] = o.value; });
+    if (sizeOption && preferredSizeValue) init[sizeOption.name] = preferredSizeValue;
     return init;
   });
+
 
   const [expandedVariantOption, setExpandedVariantOption] = useState<string | null>(null);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);

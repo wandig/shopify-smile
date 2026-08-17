@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { CreditCard, Eye, Lock, Percent, ShieldCheck, X, Zap } from "lucide-react";
+import { Eye, Lock, Percent, ShieldCheck, X, Zap } from "lucide-react";
 
 import in3Logo from "@/assets/in3-logo.jpg.asset.json";
+import sprayPayLogo from "@/assets/spraypay.svg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const euro = (value: number, decimals = 0) =>
@@ -112,8 +113,8 @@ const In3Logo = () => (
 );
 
 const SpreadLogo = () => (
-  <span className="flex h-7 w-11 items-center justify-center rounded-[6px] bg-[#fff1e7] text-[#ef7027]">
-    <CreditCard className="h-4 w-4" />
+  <span className="flex h-7 w-11 items-center justify-center overflow-hidden rounded-[6px] bg-white">
+    <img src={sprayPayLogo} alt="SprayPay" className="h-5 w-auto object-contain" />
   </span>
 );
 
@@ -201,7 +202,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
 
       <ModalShell open={openSpread} onOpenChange={setOpenSpread} brand={<SpreadLogo />} title="Gespreid betalen">
         <Pill>
-          <CreditCard className="h-3 w-3" /> Gespreid betalen
+          <Percent className="h-3 w-3" /> Gespreid betalen
         </Pill>
         <h3 className="mt-3 text-[22px] font-bold leading-tight text-[#071426]">Kies je maandbedrag</h3>
         <p className="mt-2 text-[13px] leading-snug text-[#071426]/60">

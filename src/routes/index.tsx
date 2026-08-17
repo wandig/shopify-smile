@@ -377,13 +377,18 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
   const variantImage = useMemo(() => {
     if (!shopifyProduct || !colorOption || !activeColor) return undefined;
     const variants = shopifyProduct.variants.edges.map((edge) => edge.node);
-    const match = variants.find((variant) =>
+    const hasColor = (variant: (typeof variants)[number]) =>
       variant.selectedOptions.some(
         (option) => option.name === colorOption.name && option.value === activeColor,
-      ),
-    );
+      );
+    const isPreferredSize = (variant: (typeof variants)[number]) =>
+      variant.selectedOptions.some((option) => /58\s*-\s*65/.test(option.value));
+    const match =
+      variants.find((variant) => hasColor(variant) && isPreferredSize(variant)) ??
+      variants.find(hasColor);
     return match?.image?.url;
   }, [shopifyProduct, colorOption, activeColor]);
+
 
   const img = variantImage ?? p.colorImages?.[activeColor] ?? p.img;
 

@@ -36,6 +36,7 @@ import fullHouseGalleryStorage from "@/assets/full-house-gallery-storage.webp";
 import fullHouseGalleryUse from "@/assets/full-house-gallery-use.webp";
 import beforeFullHouseAsset from "@/assets/before-livingroom.png.asset.json";
 import afterFullHouseAsset from "@/assets/after-livingroom.jpg.asset.json";
+import soloWoonkamerLampAsset from "@/assets/solo-woonkamer-lamp.jpeg.asset.json";
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";

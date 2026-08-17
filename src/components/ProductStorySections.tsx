@@ -61,8 +61,16 @@ const buildSpecSections = (
   },
 ];
 
-export function SpecificationsSection() {
+export function SpecificationsSection({
+  widthLabel = "240",
+  heightLabel = "180",
+}: {
+  widthLabel?: string;
+  heightLabel?: string;
+} = {}) {
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
+  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel);
+
 
   return (
       <section className="mt-10 md:mt-16">

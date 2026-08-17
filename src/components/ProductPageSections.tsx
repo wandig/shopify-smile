@@ -137,7 +137,15 @@ export const CUSTOMER_GALLERY_COLUMNS: Array<{
 ];
 
 
-export function CustomerGallerySection() {
+export function CustomerGallerySection({ firstImageSrc }: { firstImageSrc?: string } = {}) {
+  const columns = firstImageSrc
+    ? CUSTOMER_GALLERY_COLUMNS.map((col, i) =>
+        i === 0
+          ? { ...col, items: col.items.map((it, j) => (j === 0 ? { ...it, src: firstImageSrc } : it)) }
+          : col,
+      )
+    : CUSTOMER_GALLERY_COLUMNS;
+
   return (
     <section className="mt-12 md:mt-20">
       <div className="mb-6 md:mb-8">
@@ -151,7 +159,7 @@ export function CustomerGallerySection() {
 
       <div className="-mx-4 overflow-x-auto scrollbar-hide md:mx-0">
         <div className="flex h-[420px] gap-3 px-4 md:h-[560px] md:gap-4 md:px-0">
-          {CUSTOMER_GALLERY_COLUMNS.map((col, colIndex) => (
+          {columns.map((col, colIndex) => (
             <div key={colIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${col.width}`}>
               {col.items.map((image, i) => (
                 <figure

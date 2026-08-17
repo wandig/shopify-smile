@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
+import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 import { BuiltToLastSection, FaqSection, ReviewsSection } from "@/components/ProductTrustSections";
 import {
@@ -72,12 +73,6 @@ function euro(n: number) {
   return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;
 }
 
-function euroWithCents(n: number) {
-  return `€ ${new Intl.NumberFormat("nl-NL", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(n)}`;
-}
 
 const INFO_TOPICS = {
   klarna: {
@@ -581,15 +576,10 @@ function ConfiguratorPage() {
                       {euro(beforeTotal)}
                     </span>
                   )}
-                  <strong className="whitespace-nowrap text-[34px] font-bold leading-none tracking-[-0.03em] text-[#ff5a00]">
+                  <strong className="whitespace-nowrap text-[23px] font-bold leading-none text-[#ff5a00]">
                     {euro(total)}
                   </strong>
                 </div>
-
-                <span aria-hidden="true" />
-                <p className="whitespace-nowrap text-right text-[12px] leading-[1.4] text-[#071426]/42">
-                  3 betalingen van {euroWithCents(total / 3)} tegen 0% rente
-                </p>
 
                 <div className="flex items-center text-[#4f5966]/78">
                   <span className="flex items-center gap-0.5">
@@ -599,20 +589,10 @@ function ConfiguratorPage() {
                   </span>
                   <span className="ml-2 text-[10px] text-[#071426]/30">(1000+)</span>
                 </div>
-                <p className="flex items-baseline justify-end gap-2 text-[12px] leading-[1.4] text-[#071426]/42">
-                  <strong
-                    className="text-[14px] font-bold leading-none text-[#071426]"
-                    style={{ fontFamily: '"Klarna Headline", "Circular-Regular", sans-serif' }}
-                  >
-                    Klarna.
-                  </strong>
-                  <InfoDrawerLink
-                    topic="klarna"
-                    className="underline underline-offset-2 transition-colors hover:text-[#071426]"
-                  />
-
-                </p>
+                <span aria-hidden="true" />
               </div>
+
+              <PaymentOptionsBadges price={total} />
             </div>
 
             <div className="mt-3 grid min-h-[52px] grid-cols-[80px_minmax(0,1fr)_auto] items-center gap-2 rounded-[12px] border border-[#eeeeee] px-3">

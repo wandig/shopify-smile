@@ -20,7 +20,7 @@ import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import fullHouseRoomImg from "@/assets/full-house-gallery-room.jpg";
 import detailDesignImg from "@/assets/detail-design.jpg";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
-import { FULL_HOUSE_COLORS, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
+import { FULL_HOUSE_COLORS, displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
 
 export const Route = createFileRoute("/configurator")({
   head: () => ({
@@ -727,8 +727,8 @@ function ConfiguratorPage() {
                     key={colorName}
                     type="button"
                     onClick={() => selectColor(colorName)}
-                    aria-label={colorName}
-                    title={colorName}
+                    aria-label={displayWandigColor(colorName)}
+                    title={displayWandigColor(colorName)}
                     aria-pressed={colorName === color}
                     className={`h-8 w-8 shrink-0 rounded-full border-2 transition-all duration-200 hover:-translate-y-px lg:h-[35px] lg:w-[35px] ${
                       colorName === color
@@ -739,7 +739,7 @@ function ConfiguratorPage() {
                   />
                 ))}
               </div>
-              <span className="whitespace-nowrap text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{color}</span>
+              <span className="whitespace-nowrap text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{displayWandigColor(color)}</span>
             </div>
 
             <div className="mb-3 mt-2 overflow-hidden rounded-[12px] border border-[#eeeeee]">

@@ -3,7 +3,7 @@ import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
-import { wandigSwatchStyle } from "@/lib/wandig-colors";
+import { displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
@@ -592,7 +592,7 @@ function ProductView({ product }: { product: ProductNode }) {
                           <>
                             <div className="grid min-w-0 grid-cols-[80px_minmax(0,1fr)] items-baseline gap-2">
                               <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
-                              <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{selected[opt.name] || opt.values[0]}</span>
+                              <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{displayWandigColor(selected[opt.name] || opt.values[0])}</span>
                             </div>
                             <div className="flex items-center justify-end gap-2.5">
                               {opt.values.slice(0, 5).map((value) => {
@@ -602,8 +602,8 @@ function ProductView({ product }: { product: ProductNode }) {
                                     key={value}
                                     type="button"
                                     onClick={() => setSelected((current) => ({ ...current, [opt.name]: value }))}
-                                    title={value}
-                                    aria-label={`Kleur ${value}`}
+                                    title={displayWandigColor(value)}
+                                    aria-label={`Kleur ${displayWandigColor(value)}`}
                                     aria-pressed={active}
                                     className={`h-9 w-9 shrink-0 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
                                   >

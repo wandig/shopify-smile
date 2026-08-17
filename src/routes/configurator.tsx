@@ -355,10 +355,13 @@ function ConfiguratorPage() {
     }, 320);
   };
 
-  const width =
-    (tv.fullWidth - LEFT_MODULE_WIDTH - RIGHT_MODULE_WIDTH) +
-    (hasLeft ? LEFT_MODULE_WIDTH : 0) +
-    (hasRight ? RIGHT_MODULE_WIDTH : 0);
+  const widthCm =
+    tv.centerWidth +
+    (hasLeft ? tv.moduleWidth : 0) +
+    (hasRight ? tv.moduleWidth : 0);
+  const width = Number.isInteger(widthCm)
+    ? String(widthCm)
+    : widthCm.toFixed(1).replace(".", ",");
   const selectedShopifyVariant = useMemo(() => {
     const shopifyArrangement = hasRight && !hasLeft ? "Rechts" : "Links";
 

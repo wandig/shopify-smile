@@ -137,7 +137,11 @@ export const CUSTOMER_GALLERY_COLUMNS: Array<{
 ];
 
 
-export function CustomerGallerySection({ firstImageSrc }: { firstImageSrc?: string } = {}) {
+export function CustomerGallerySection({
+  firstImageSrc,
+  ctaLabel = "Bestel Full House",
+  ctaTo,
+}: { firstImageSrc?: string; ctaLabel?: string; ctaTo?: string } = {}) {
   const columns = firstImageSrc
     ? CUSTOMER_GALLERY_COLUMNS.map((col, i) =>
         i === 0

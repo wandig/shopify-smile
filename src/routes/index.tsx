@@ -402,7 +402,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           <img
             key={img}
             src={img}
-            alt={`${p.title} in ${color}`}
+            alt={`${p.title} in ${activeColor}`}
             className="h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
             loading="lazy"
           />
@@ -447,7 +447,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         <img
           key={img}
           src={img}
-          alt={`${p.title} in ${color}`}
+          alt={`${p.title} in ${activeColor}`}
           className="h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
           loading="lazy"
         />

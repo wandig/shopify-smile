@@ -88,53 +88,6 @@ export const Route = createFileRoute("/product/$handle")({
 
 type ProductNode = ShopifyProduct["node"];
 
-function DeliveryInfoPopover() {
-  const [open, setOpen] = useState(false);
-  const closeTimer = useRef<number | null>(null);
-
-  const show = () => {
-    if (closeTimer.current) window.clearTimeout(closeTimer.current);
-    setOpen(true);
-  };
-  const hide = () => {
-    if (closeTimer.current) window.clearTimeout(closeTimer.current);
-    closeTimer.current = window.setTimeout(() => setOpen(false), 140);
-  };
-
-  return (
-    <span className="relative inline-flex" onMouseEnter={show} onMouseLeave={hide}>
-      <button
-        type="button"
-        aria-label="Informatie over de levering"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        className={`flex h-[16px] w-[16px] items-center justify-center rounded-full border text-[10px] font-bold leading-none transition-colors ${
-          open ? "border-[#ef7027] bg-[#ef7027] text-white" : "border-[#c8ccd2] text-[#90949b] hover:border-[#ef7027] hover:text-[#ef7027]"
-        }`}
-      >
-        i
-      </button>
-      <span
-        role="tooltip"
-        className={`absolute bottom-[calc(100%+10px)] left-1/2 z-[40] w-[268px] -translate-x-1/2 rounded-[16px] border border-[#eeeeee] bg-white p-4 text-left shadow-[0_18px_44px_rgba(42,31,22,0.14)] transition-all duration-200 ease-out ${
-          open ? "visible translate-y-0 opacity-100" : "invisible translate-y-1 opacity-0"
-        }`}
-      >
-        <span className="block text-[13px] font-bold normal-case tracking-normal text-[#071426]">
-          Hoe wordt mijn tv kast geleverd?
-        </span>
-        <span className="mt-1.5 block text-[12px] font-normal leading-[1.55] tracking-normal text-[#071426]/65">
-          Je tv kast wordt plug and play en grotendeels voorgemonteerd geleverd. Geen ingewikkeld bouwpakket dus. Met
-          twee personen bevestig je de verschillende onderdelen eenvoudig aan de muur, zodat je snel van je nieuwe tv
-          kast kunt genieten.
-        </span>
-        <span className="absolute left-1/2 top-full h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r border-[#eeeeee] bg-white" />
-      </span>
-    </span>
-  );
-}
-
-
 function ProductPage() {
   const { handle } = Route.useParams();
   const { data, isLoading, error } = useQuery({
@@ -701,13 +654,13 @@ function ProductView({ product }: { product: ProductNode }) {
                 <span className="text-[13px] text-[#cdc0b5]" aria-hidden="true">|</span>
                 <div className="flex items-center gap-1.5 text-[12px] font-normal leading-none"><Hammer className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">Handgemaakt in NL</span></div>
                 <span className="text-[13px] text-[#cdc0b5]" aria-hidden="true">|</span>
-                <div className="flex items-center gap-1.5 text-[12px] font-normal leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">7-14 werkdagen levertijd</span><DeliveryInfoPopover /></div>
+                <div className="flex items-center gap-1.5 text-[12px] font-normal leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">7-14 werkdagen levertijd</span></div>
               </div>
 
               <div className="mb-[10px] mt-[17px] grid grid-cols-1 divide-y divide-[#eeeeee] font-sans tracking-[0.04em] text-[#90949b] sm:hidden">
                 <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><ShieldCheck className="h-[16px] w-[16px] shrink-0" /><span>10 jaar garantie</span></div>
                 <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><Hammer className="h-[16px] w-[16px] shrink-0" /><span>Handgemaakt in NL</span></div>
-                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span>7-14 werkdagen levertijd</span><DeliveryInfoPopover /></div>
+                <div className="flex items-center justify-start gap-1.5 py-2 text-[12px] font-normal leading-none"><Truck className="h-[16px] w-[16px] shrink-0" /><span>7-14 werkdagen levertijd</span></div>
               </div>
               </div>
             </section>

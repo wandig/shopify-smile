@@ -396,9 +396,10 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         className="group relative w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
       >
         <picture className="absolute inset-0 block h-full w-full">
-          {p.mobileImg && (
+          {p.mobileImg && !variantImage && (
             <source media="(max-width: 767px)" srcSet={p.mobileImg} />
           )}
+
           <img
             key={img}
             src={img}

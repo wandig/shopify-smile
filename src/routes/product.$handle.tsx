@@ -535,14 +535,15 @@ function ProductView({ product }: { product: ProductNode }) {
                     const optionExpanded = expandedVariantOption === opt.name;
                     const optionChoices = isTvSize
                       ? [
-                          { label: "40 - 50 inch", value: opt.values[0] },
-                          { label: "55 - 65 inch", value: opt.values[1] },
-                          { label: "70 - 80 inch", value: opt.values[2] },
+                          { label: "40 - 55 inch", value: opt.values[0] },
+                          { label: "58 - 65 inch", value: opt.values[1] },
+                          { label: "70 - 75 inch", value: opt.values[2] },
+                          { label: "77 - 85 inch", value: opt.values[3] },
                         ].filter((choice): choice is { label: string; value: string } => Boolean(choice.value))
                       : opt.values.map((value) => ({ label: value, value }));
                     const selectedOptionLabel = isTvSize
                       ? optionChoices.find((choice) => choice.value === selected[opt.name])?.label
-                        || (/^(70|80)/.test(selected[opt.name] || "") ? "70 - 80 inch" : selected[opt.name])
+                        || selected[opt.name]
                       : selected[opt.name];
 
                     if (isPosition || isTvSize) {
@@ -563,10 +564,9 @@ function ProductView({ product }: { product: ProductNode }) {
 
                           <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${optionExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                             <div className="overflow-hidden">
-                              <div className={`grid gap-2 px-3 pb-3 pt-1 ${isTvSize ? "grid-cols-3" : "grid-cols-2"}`}>
+                              <div className={`grid gap-2 px-3 pb-3 pt-1 ${isTvSize ? "grid-cols-2" : "grid-cols-2"}`}>
                                 {optionChoices.map((choice) => {
-                                  const active = selected[opt.name] === choice.value
-                                    || (isTvSize && choice.label === "70 - 80 inch" && /^(70|80)/.test(selected[opt.name] || ""));
+                                  const active = selected[opt.name] === choice.value;
                                   return (
                                     <button
                                       key={choice.label}

@@ -842,39 +842,12 @@ function ConfiguratorPage() {
                     : "Alleen midden (1)",
           }}
           preview={
-            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
-              <div className="absolute inset-0 flex items-end justify-center pb-[12%]">
-                <div className="flex h-[109%] translate-y-[30px] items-end">
-                  {hasLeft && (
-                    <ConfiguratorModuleImage
-                      color={color}
-                      position="left"
-                      source={colorModuleSource}
-                      animate={false}
-                      testId={false}
-                      className={usesWalnutModules ? "mr-[-11px]" : "mr-[-3px]"}
-                    />
-                  )}
-                  <ConfiguratorModuleImage
-                    color={color}
-                    position="center"
-                    source={colorModuleSource}
-                    animate={false}
-                    testId={false}
-                  />
-                  {hasRight && (
-                    <ConfiguratorModuleImage
-                      color={color}
-                      position="right"
-                      source={colorModuleSource}
-                      animate={false}
-                      testId={false}
-                      className={usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
+            <WandigSpecPreview
+              color={color}
+              source={colorModuleSource}
+              hasLeft={hasLeft}
+              hasRight={hasRight}
+            />
           }
         />
         <UniqueSection title="Dit maakt Wandig uniek" />

@@ -13,7 +13,10 @@ import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
 import eenvoudigeMontageV2Img from "@/assets/eenvoudige-montage-v2.png.asset.json";
 import onderhoudsvriendelijkV2Img from "@/assets/onderhoudsvriendelijk-v2.png.asset.json";
 
-const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
+const buildSpecSections = (
+  widthLabel: string,
+  heightLabel: string,
+): Array<{ title: string; body: ReactNode }> => [
   {
     title: "Algemeen",
     body: (
@@ -24,13 +27,14 @@ const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
     title: "Afmetingen",
     body: (
       <ul className="space-y-1.5">
-        <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">240 cm</span></li>
-        <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">180 cm</span></li>
+        <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">{widthLabel} cm</span></li>
+        <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">{heightLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">32 cm</span></li>
         <li className="flex justify-between gap-4"><span>Tv-uitsparing</span><span className="text-[#071426]">tot 80 inch</span></li>
       </ul>
     ),
   },
+
   {
     title: "Materiaal",
     body: <p>Meubelplaat met een echt houtfineer aan de zichtzijden. Alle randen zijn afgewerkt met ABS-kantenband in dezelfde afwerking. Achterwand van gelakt MDF in de gekozen kleur.</p>,

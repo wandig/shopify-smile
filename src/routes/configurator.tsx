@@ -44,10 +44,10 @@ export const Route = createFileRoute("/configurator")({
 });
 
 const TV_OPTIONS = [
-  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", price: 0, wallHeight: 180, centerWidth: 137, moduleWidth: 61.3 },
-  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", price: 150, wallHeight: 180, centerWidth: 158, moduleWidth: 54.7 },
-  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 180, moduleWidth: 47.5 },
-  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", price: 350, wallHeight: 190, centerWidth: 202, moduleWidth: 40.3 },
+  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", price: 0, wallHeight: 180, centerWidth: 137, leftWidth: 61.3, rightWidth: 41.7 },
+  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", price: 150, wallHeight: 180, centerWidth: 158, leftWidth: 54.7, rightWidth: 37.3 },
+  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 180, leftWidth: 47.5, rightWidth: 32.5 },
+  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", price: 350, wallHeight: 190, centerWidth: 202, leftWidth: 40.3, rightWidth: 27.7 },
 ];
 
 const BASE_PRICE = 1699;
@@ -357,8 +357,8 @@ function ConfiguratorPage() {
 
   const widthCm =
     tv.centerWidth +
-    (hasLeft ? tv.moduleWidth : 0) +
-    (hasRight ? tv.moduleWidth : 0);
+    (hasLeft ? tv.leftWidth : 0) +
+    (hasRight ? tv.rightWidth : 0);
   const width = Number.isInteger(widthCm)
     ? String(widthCm)
     : widthCm.toFixed(1).replace(".", ",");
@@ -952,7 +952,7 @@ function ConfiguratorPage() {
           preview={
             <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
               <div className="absolute inset-0 flex items-end justify-center pb-[12%]">
-                <div className="flex h-[91%] items-end">
+                <div className="flex h-[109%] translate-y-[15px] items-end">
                   {hasLeft && (
                     <ConfiguratorModuleImage
                       color={color}

@@ -144,7 +144,7 @@ export function WandigSpecPreview({
               source={source}
               animate={false}
               testId={false}
-              className={usesWalnutModules ? "mr-[-11px]" : "mr-[-3px]"}
+              className={`relative z-[1] ${usesWalnutModules ? "mr-[-11px]" : "mr-[-3px]"}`}
             />
           )}
           <ConfiguratorModuleImage
@@ -153,6 +153,7 @@ export function WandigSpecPreview({
             source={source}
             animate={false}
             testId={false}
+            className="relative z-[2]"
           />
           {hasRight && (
             <ConfiguratorModuleImage
@@ -161,10 +162,11 @@ export function WandigSpecPreview({
               source={source}
               animate={false}
               testId={false}
-              className={usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"}
+              className={`relative z-[1] ${usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"}`}
             />
           )}
         </div>
+
       </div>
     </div>
   );

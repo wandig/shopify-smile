@@ -72,12 +72,16 @@ const buildSpecSections = (
 export function SpecificationsSection({
   widthLabel = "240",
   heightLabel = "180",
+  preview,
+  configSummary,
 }: {
   widthLabel?: string;
   heightLabel?: string;
+  preview?: ReactNode;
+  configSummary?: { colorLabel?: string; modulesLabel?: string };
 } = {}) {
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
-  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel);
+  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel, configSummary);
 
 
   return (

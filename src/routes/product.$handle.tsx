@@ -11,6 +11,15 @@ import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
+import {
+  CustomerGallerySection,
+  BuiltToLastSection,
+  FaqSection,
+  ReviewsSection,
+  NewsletterContactSection,
+  TrustBannerSection,
+  PuzzleCornerIcon,
+} from "@/components/ProductPageSections";
 
 import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock, SlidersHorizontal } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";

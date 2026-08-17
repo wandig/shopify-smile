@@ -18,7 +18,7 @@ import {
   User,
 } from "lucide-react";
 
-import heroVideo from "@/assets/hero-reel.mp4.asset.json";
+import heroVideo from "@/assets/hero-reel-v2.mp4.asset.json";
 import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
 import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
 import fullHouseClosedFrontV5 from "@/assets/full-house-closed-front-v5.png.asset.json";

@@ -34,7 +34,6 @@ import kristalwitAssetTmp from "@/assets/kristalwit.webp.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
-import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
@@ -530,7 +529,7 @@ function ConfiguratorBannerSection() {
             <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm">
               <img src={swatchDonkereikenAsset.url} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
-              <img src={swatchKatoengrijs} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <img src={cashmereAssetTmp.url} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <span className="ml-1 text-[11px] font-[500] tracking-[0.08em] text-[#071426]/60">+ meer</span>
             </div>
           </div>

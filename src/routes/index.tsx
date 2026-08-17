@@ -30,9 +30,8 @@ import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import duoCardImg from "@/assets/duo-card.jpg.asset.json";
 import soloCardImg from "@/assets/solo-card.jpg.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
-import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
+import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
-import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
@@ -205,7 +204,7 @@ type ModelColor = {
 
 const MODEL_COLORS: ModelColor[] = [
   { name: "Walnootbruin", image: swatchWalnootbruin },
-  { name: "Truffelbruin", image: swatchTruffelbruin },
+  { name: "Donkereiken", image: swatchDonkereikenAsset.url },
   { name: "Cashmere", hex: "#e3d9c9" },
   { name: "Wit", hex: "#f6f4f1" },
   { name: "Blush", hex: "#e6c6bb" },
@@ -527,9 +526,9 @@ function ConfiguratorBannerSection() {
               loading="lazy"
             />
             <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm">
-              <img src={swatchEikenzwart} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <img src={swatchDonkereikenAsset.url} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
-              <img src={swatchTruffelbruin} alt="Truffelbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <img src={swatchKatoengrijs} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
               <span className="ml-1 text-[11px] font-[500] tracking-[0.08em] text-[#071426]/60">+ meer</span>
             </div>
           </div>
@@ -780,7 +779,7 @@ function ReviewsSection() {
 /* ------------------------ 8. gratis kleurstalen --------------------------- */
 
 const SAMPLE_CARDS = [
-  { name: "Donkereiken", image: swatchEikenzwart },
+  { name: "Donkereiken", image: swatchDonkereikenAsset.url },
   { name: "Walnootbruin", image: swatchWalnootbruin },
   { name: "Cashmeregrijs", image: swatchKatoengrijs },
   { name: "Kristalwit", image: swatchKleibeige },

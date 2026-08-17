@@ -5,7 +5,6 @@ import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
-import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 
@@ -25,7 +24,7 @@ const TEXTURES: Array<{ pattern: RegExp; image: string; color: string }> = [
   { pattern: /donkereiken|eikenzwart/, image: swatchDonkereikenAsset.url, color: "#3b302a" },
   { pattern: /eikengrijs/, image: swatchEikengrijs, color: "#9b9990" },
   { pattern: /walnootbruin|walnoot|noten/, image: swatchWalnootbruin, color: "#684326" },
-  { pattern: /truffelbruin|truffel/, image: swatchTruffelbruin, color: "#755844" },
+  { pattern: /truffelbruin|truffel/, image: swatchDonkereikenAsset.url, color: "#3b302a" },
   { pattern: /cashmeregrijs|cashmere|katoengrijs|katoen/, image: swatchKatoengrijs, color: "#b6aea3" },
   { pattern: /zandsteen/, image: swatchZandsteen, color: "#c3a26b" },
   { pattern: /kristalwit|kleibeige|klei/, image: swatchKleibeige, color: "#b9aa97" },
@@ -41,6 +40,15 @@ const SOLID_COLORS: Array<{ pattern: RegExp; color: string }> = [
   { pattern: /bruin|brown|walnut/, color: "#755039" },
   { pattern: /beige|zand|sand/, color: "#c8b89f" },
 ];
+
+const DISPLAY_NAMES: Array<{ pattern: RegExp; label: string }> = [
+  { pattern: /truffelbruin|truffel|eikenzwart|donkereiken/, label: "Donkereiken" },
+];
+
+export function displayWandigColor(name: string): string {
+  const key = name.toLocaleLowerCase("nl-NL").trim();
+  return DISPLAY_NAMES.find(({ pattern }) => pattern.test(key))?.label ?? name;
+}
 
 export function sortWandigColors(values: string[]): string[] {
   const unique = Array.from(

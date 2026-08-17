@@ -41,7 +41,7 @@ const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   },
   {
     title: "Kleuren",
-    body: <p>Afhankelijk van het model beschikbaar in Donkereiken, Eikengrijs, Walnootbruin, Truffelbruin, Cashmeregrijs, Zandsteen, Kristalwit, Blush en lichte afwerkingen zoals Steenwit. Kleurstalen kun je gratis bestellen.</p>,
+    body: <p>Afhankelijk van het model beschikbaar in Donkereiken, Eikengrijs, Walnootbruin, Cashmeregrijs, Zandsteen, Kristalwit, Blush en lichte afwerkingen zoals Steenwit. Kleurstalen kun je gratis bestellen.</p>,
   },
   {
     title: "Levering",

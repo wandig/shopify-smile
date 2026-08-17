@@ -34,7 +34,6 @@ import kristalwitAssetTmp from "@/assets/kristalwit.webp.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
-import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";

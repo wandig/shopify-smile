@@ -160,10 +160,19 @@ function ProductView({ product }: { product: ProductNode }) {
 
   const [selected, setSelected] = useState<Record<string, string>>(() => {
     const init: Record<string, string> = {};
-    const first = variants.find((v) => v.availableForSale) || variants[0];
+    const isPreferredSize = (v: (typeof variants)[number]) =>
+      v.selectedOptions.some(
+        (o) => o.name.toLowerCase().includes("maat") && o.value.includes("58 - 65"),
+      );
+    const first =
+      variants.find((v) => v.availableForSale && isPreferredSize(v)) ||
+      variants.find(isPreferredSize) ||
+      variants.find((v) => v.availableForSale) ||
+      variants[0];
     first?.selectedOptions.forEach((o) => { init[o.name] = o.value; });
     return init;
   });
+
   const [expandedVariantOption, setExpandedVariantOption] = useState<string | null>(null);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });

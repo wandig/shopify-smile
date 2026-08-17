@@ -44,6 +44,7 @@ import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import configuratorBg from "@/assets/configurator-bg.png.asset.json";
+import configuratorBannerKids from "@/assets/configurator-banner-kids.png.asset.json";
 import waaromWijBg from "@/assets/waarom-wij-achtergrond.png.asset.json";
 import waaromWijCraft from "@/assets/waarom-wij-craft.png.asset.json";
 import waaromWijMontage from "@/assets/waarom-wij-montage.png.asset.json";

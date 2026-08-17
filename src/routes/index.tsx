@@ -568,7 +568,7 @@ function ConfiguratorBannerSection() {
           {/* Image + swatches */}
           <div className="col-span-12 lg:col-span-7 relative aspect-[4/3] lg:aspect-auto lg:h-[620px] overflow-hidden rounded-[24px] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.12)]">
             <img
-              src={configuratorBg.url}
+              src={configuratorBannerKids.url}
               alt="Configureer jouw tv-wand"
               className="h-full w-full object-cover object-center"
               loading="lazy"

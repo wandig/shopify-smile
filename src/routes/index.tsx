@@ -44,6 +44,7 @@ import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import kijkplezierIcon from "@/assets/100-dagen-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";
 import configuratorBg from "@/assets/configurator-bg.png.asset.json";
+import configuratorBannerKids from "@/assets/configurator-banner-kids.png.asset.json";
 import waaromWijBg from "@/assets/waarom-wij-achtergrond.png.asset.json";
 import waaromWijCraft from "@/assets/waarom-wij-craft.png.asset.json";
 import waaromWijMontage from "@/assets/waarom-wij-montage.png.asset.json";
@@ -567,7 +568,7 @@ function ConfiguratorBannerSection() {
           {/* Image + swatches */}
           <div className="col-span-12 lg:col-span-7 relative aspect-[4/3] lg:aspect-auto lg:h-[620px] overflow-hidden rounded-[24px] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.12)]">
             <img
-              src={configuratorBg.url}
+              src={configuratorBannerKids.url}
               alt="Configureer jouw tv-wand"
               className="h-full w-full object-cover object-center"
               loading="lazy"

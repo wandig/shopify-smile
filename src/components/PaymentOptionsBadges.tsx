@@ -202,7 +202,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
 
       <ModalShell open={openSpread} onOpenChange={setOpenSpread} brand={<SpreadLogo />} title="Gespreid betalen">
         <Pill>
-          <CreditCard className="h-3 w-3" /> Gespreid betalen
+          <Percent className="h-3 w-3" /> Gespreid betalen
         </Pill>
         <h3 className="mt-3 text-[22px] font-bold leading-tight text-[#071426]">Kies je maandbedrag</h3>
         <p className="mt-2 text-[13px] leading-snug text-[#071426]/60">

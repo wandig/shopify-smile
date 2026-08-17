@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
+import { FreeColorSamples } from "@/components/FreeColorSamples";
 import { FULL_HOUSE_COLORS, displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
 import { FULL_HOUSE_FRONT_IMAGES, WandigSpecPreview } from "@/components/WandigModulePreview";
 import { useCartStore } from "@/stores/cartStore";

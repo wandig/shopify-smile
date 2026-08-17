@@ -493,14 +493,22 @@ function ProductView({ product }: { product: ProductNode }) {
                   <div>
                     <h1 className="text-[24px] font-bold leading-none text-[#071426]">{displayTitle}</h1>
                     <p className="mt-2 text-[12px] text-[#071426]/45">Cinewall</p>
-                    <div className="mt-1 flex items-center text-[#4f5966]/78">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        document.getElementById("klantbeoordelingen")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                      }
+                      className="mt-1 flex cursor-pointer items-center text-[#4f5966]/78 transition hover:text-[#ef7027]"
+                      aria-label="Bekijk alle klantbeoordelingen"
+                    >
                       <span className="flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, index) => (
                           <Star key={index} className="h-3 w-3 fill-current" strokeWidth={0} />
                         ))}
                       </span>
                       <span className="ml-2 text-[10px] text-[#071426]/30">(1000+)</span>
-                    </div>
+                    </button>
+
                   </div>
 
                   <div className="min-w-0 text-right">

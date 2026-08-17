@@ -265,7 +265,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
           onClick={() => setOpenSpread(false)}
           className="mt-5 h-12 w-full rounded-full bg-[#ef7027] text-[14px] font-semibold text-white transition hover:bg-[#e2651e]"
         >
-          Kies gespreid betalen bij het afrekenen
+          Kies SprayPay bij het afrekenen
         </button>
       </ModalShell>
     </>

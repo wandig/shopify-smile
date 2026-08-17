@@ -357,7 +357,10 @@ function ConfiguratorPage() {
     }, 320);
   };
 
-  const width = BASE_WIDTH + (hasLeft ? LEFT_MODULE_WIDTH : 0) + (hasRight ? RIGHT_MODULE_WIDTH : 0);
+  const width =
+    (tv.fullWidth - LEFT_MODULE_WIDTH - RIGHT_MODULE_WIDTH) +
+    (hasLeft ? LEFT_MODULE_WIDTH : 0) +
+    (hasRight ? RIGHT_MODULE_WIDTH : 0);
   const selectedShopifyVariant = useMemo(() => {
     const shopifyArrangement = hasRight && !hasLeft ? "Rechts" : "Links";
 

@@ -243,7 +243,8 @@ function ProductView({ product }: { product: ProductNode }) {
   const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
   const sizeIndex = sizeOption && selectedSize ? sizeOption.values.indexOf(selectedSize) : -1;
   const dimensionSize = WANDIG_SIZES[sizeIndex >= 0 ? sizeIndex : 0];
-  const specWidthLabel = formatCm(wandigWidth(dimensionSize, 2));
+  const isSolo = product.handle === "solo";
+  const specWidthLabel = formatCm(wandigWidth(dimensionSize, isSolo ? 0 : 2));
   const specHeightLabel = String(dimensionSize.wallHeight);
 
   // Kleurpreview in de specificaties: alle modules in de gekozen kleur
@@ -794,7 +795,19 @@ function ProductView({ product }: { product: ProductNode }) {
       <SpecificationsSection
         widthLabel={specWidthLabel}
         heightLabel={specHeightLabel}
-        preview={<WandigSpecPreview color={specPreviewColor} source={specPreviewSource} />}
+        preview={
+          isSolo ? (
+            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
+              <img
+                src={galleryItems[0]?.src}
+                alt={`Wandig Solo in ${specPreviewColor}`}
+                className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"
+              />
+            </div>
+          ) : (
+            <WandigSpecPreview color={specPreviewColor} source={specPreviewSource} />
+          )
+        }
       />
 
       <UniqueSection />

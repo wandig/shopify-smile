@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RetourRouteImport } from './routes/retour'
 import { Route as ProductenRouteImport } from './routes/producten'
+import { Route as KleurstalenRouteImport } from './routes/kleurstalen'
 import { Route as KlantenserviceRouteImport } from './routes/klantenservice'
 import { Route as ConfiguratorRouteImport } from './routes/configurator'
 import { Route as BezoekRouteImport } from './routes/bezoek'
@@ -26,6 +27,11 @@ const RetourRoute = RetourRouteImport.update({
 const ProductenRoute = ProductenRouteImport.update({
   id: '/producten',
   path: '/producten',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KleurstalenRoute = KleurstalenRouteImport.update({
+  id: '/kleurstalen',
+  path: '/kleurstalen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KlantenserviceRoute = KlantenserviceRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/bezoek': typeof BezoekRoute
   '/configurator': typeof ConfiguratorRoute
   '/klantenservice': typeof KlantenserviceRoute
+  '/kleurstalen': typeof KleurstalenRoute
   '/producten': typeof ProductenRoute
   '/retour': typeof RetourRoute
   '/product/$handle': typeof ProductHandleRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/bezoek': typeof BezoekRoute
   '/configurator': typeof ConfiguratorRoute
   '/klantenservice': typeof KlantenserviceRoute
+  '/kleurstalen': typeof KleurstalenRoute
   '/producten': typeof ProductenRoute
   '/retour': typeof RetourRoute
   '/product/$handle': typeof ProductHandleRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/bezoek': typeof BezoekRoute
   '/configurator': typeof ConfiguratorRoute
   '/klantenservice': typeof KlantenserviceRoute
+  '/kleurstalen': typeof KleurstalenRoute
   '/producten': typeof ProductenRoute
   '/retour': typeof RetourRoute
   '/product/$handle': typeof ProductHandleRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/bezoek'
     | '/configurator'
     | '/klantenservice'
+    | '/kleurstalen'
     | '/producten'
     | '/retour'
     | '/product/$handle'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/bezoek'
     | '/configurator'
     | '/klantenservice'
+    | '/kleurstalen'
     | '/producten'
     | '/retour'
     | '/product/$handle'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/bezoek'
     | '/configurator'
     | '/klantenservice'
+    | '/kleurstalen'
     | '/producten'
     | '/retour'
     | '/product/$handle'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   BezoekRoute: typeof BezoekRoute
   ConfiguratorRoute: typeof ConfiguratorRoute
   KlantenserviceRoute: typeof KlantenserviceRoute
+  KleurstalenRoute: typeof KleurstalenRoute
   ProductenRoute: typeof ProductenRoute
   RetourRoute: typeof RetourRoute
   ProductHandleRoute: typeof ProductHandleRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/producten'
       fullPath: '/producten'
       preLoaderRoute: typeof ProductenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kleurstalen': {
+      id: '/kleurstalen'
+      path: '/kleurstalen'
+      fullPath: '/kleurstalen'
+      preLoaderRoute: typeof KleurstalenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/klantenservice': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   BezoekRoute: BezoekRoute,
   ConfiguratorRoute: ConfiguratorRoute,
   KlantenserviceRoute: KlantenserviceRoute,
+  KleurstalenRoute: KleurstalenRoute,
   ProductenRoute: ProductenRoute,
   RetourRoute: RetourRoute,
   ProductHandleRoute: ProductHandleRoute,

@@ -198,7 +198,7 @@ export function SiteHeader() {
                   <Link to="/klantenservice" className="hover:opacity-60 transition">
                     Klantenservice
                   </Link>
-                  <Link to="/klantenservice" className="hover:opacity-60 transition">
+                  <Link to="/kleurstalen" className="hover:opacity-60 transition">
                     Gratis kleurstalen ontvangen
                   </Link>
                 </nav>

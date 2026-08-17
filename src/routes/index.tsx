@@ -864,7 +864,7 @@ function ColorSamplesSection() {
                 je eigen muur en lichtinval.
               </p>
               <div className="pt-2">
-                <PrimaryButton to="/klantenservice">Bestel gratis kleurstalen</PrimaryButton>
+                <PrimaryButton to="/kleurstalen">Bestel gratis kleurstalen</PrimaryButton>
               </div>
             </div>
 

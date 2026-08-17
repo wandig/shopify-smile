@@ -13,7 +13,10 @@ import pushToOpenImg from "@/assets/push-to-open.png.asset.json";
 import eenvoudigeMontageV2Img from "@/assets/eenvoudige-montage-v2.png.asset.json";
 import onderhoudsvriendelijkV2Img from "@/assets/onderhoudsvriendelijk-v2.png.asset.json";
 
-const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
+const buildSpecSections = (
+  widthLabel: string,
+  heightLabel: string,
+): Array<{ title: string; body: ReactNode }> => [
   {
     title: "Algemeen",
     body: (
@@ -24,13 +27,14 @@ const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
     title: "Afmetingen",
     body: (
       <ul className="space-y-1.5">
-        <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">240 cm</span></li>
-        <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">180 cm</span></li>
+        <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">{widthLabel} cm</span></li>
+        <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">{heightLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">32 cm</span></li>
         <li className="flex justify-between gap-4"><span>Tv-uitsparing</span><span className="text-[#071426]">tot 80 inch</span></li>
       </ul>
     ),
   },
+
   {
     title: "Materiaal",
     body: <p>Meubelplaat met een echt houtfineer aan de zichtzijden. Alle randen zijn afgewerkt met ABS-kantenband in dezelfde afwerking. Achterwand van gelakt MDF in de gekozen kleur.</p>,
@@ -57,8 +61,16 @@ const SPEC_SECTIONS: Array<{ title: string; body: ReactNode }> = [
   },
 ];
 
-export function SpecificationsSection() {
+export function SpecificationsSection({
+  widthLabel = "240",
+  heightLabel = "180",
+}: {
+  widthLabel?: string;
+  heightLabel?: string;
+} = {}) {
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
+  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel);
+
 
   return (
       <section className="mt-10 md:mt-16">
@@ -79,7 +91,7 @@ export function SpecificationsSection() {
                     </svg>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
                     <span className="mx-2 rounded-full bg-[#faf8f5] px-2 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
-                      240 cm
+                      {widthLabel} cm
                     </span>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
@@ -97,7 +109,7 @@ export function SpecificationsSection() {
                     </svg>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
                     <span className="my-2 rounded-full bg-[#faf8f5] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
-                      180 cm
+                      {heightLabel} cm
                     </span>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
@@ -116,7 +128,7 @@ export function SpecificationsSection() {
 
                   <img
                     src={cinewallSchema.url}
-                    alt="Schematische weergave Wandig Full House, 240 cm breed en 180 cm hoog"
+                    alt={`Schematische weergave Wandig Full House, ${widthLabel} cm breed en ${heightLabel} cm hoog`}
                     className="relative block h-auto w-full object-contain"
                     style={{ background: "transparent" }}
                     loading="lazy"

@@ -935,7 +935,7 @@ function ConfiguratorPage() {
 
       </section>
       <div className="mx-auto max-w-[1400px] px-5 pb-14 md:px-10">
-        <SpecificationsSection />
+        <SpecificationsSection widthLabel={width} heightLabel={String(tv.wallHeight)} />
         <UniqueSection title="Dit maakt Wandig uniek" />
         <BeforeAfterSection />
       </div>

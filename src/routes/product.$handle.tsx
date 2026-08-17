@@ -283,7 +283,7 @@ function ProductView({ product }: { product: ProductNode }) {
     const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
     const group = allImages.slice(start, end);
     return group.length > 0 ? group : allImages;
-  }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize]);
+  }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
 
   const galleryItems = useMemo(() => {
     const shopifyItems = images.map(({ node }) => ({

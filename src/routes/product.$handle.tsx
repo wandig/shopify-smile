@@ -493,14 +493,22 @@ function ProductView({ product }: { product: ProductNode }) {
                   <div>
                     <h1 className="text-[24px] font-bold leading-none text-[#071426]">{displayTitle}</h1>
                     <p className="mt-2 text-[12px] text-[#071426]/45">Cinewall</p>
-                    <div className="mt-1 flex items-center text-[#4f5966]/78">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        document.getElementById("klantbeoordelingen")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                      }
+                      className="mt-1 flex cursor-pointer items-center text-[#4f5966]/78 transition hover:text-[#ef7027]"
+                      aria-label="Bekijk alle klantbeoordelingen"
+                    >
                       <span className="flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, index) => (
                           <Star key={index} className="h-3 w-3 fill-current" strokeWidth={0} />
                         ))}
                       </span>
                       <span className="ml-2 text-[10px] text-[#071426]/30">(1000+)</span>
-                    </div>
+                    </button>
+
                   </div>
 
                   <div className="min-w-0 text-right">
@@ -1196,89 +1204,238 @@ function FaqSection() {
   );
 }
 
-const REVIEWS: Array<{ name: string; location: string; rating: number; title: string; body: string; date: string }> = [
-  { name: "Sanne V.", location: "Utrecht", rating: 5, title: "Kwaliteit is top", body: "De Full House staat prachtig in onze woonkamer. Afwerking is echt perfect en de montage was zo gepiept.", date: "3 weken geleden" },
-  { name: "Jeroen B.", location: "Amsterdam", rating: 5, title: "Meer dan verwacht", body: "Bestelling verliep soepel en levering was op tijd. De kast oogt luxer dan op de foto's.", date: "1 maand geleden" },
-  { name: "Lisa D.", location: "Den Haag", rating: 5, title: "Fantastisch meubel", body: "Onze woonkamer is compleet veranderd. Kabels netjes weggewerkt en de soundbar past perfect.", date: "1 maand geleden" },
-  { name: "Mark H.", location: "Rotterdam", rating: 4, title: "Mooi en stevig", body: "Zeer tevreden over de kwaliteit. Montage duurde iets langer dan verwacht maar het resultaat is top.", date: "2 maanden geleden" },
-  { name: "Eva K.", location: "Eindhoven", rating: 5, title: "Precies wat we zochten", body: "De kleurstalen thuis waren super handig. Uiteindelijk gekozen voor eiken, ziet er warm en tijdloos uit.", date: "2 maanden geleden" },
-  { name: "Tom S.", location: "Groningen", rating: 5, title: "Klantenservice top", body: "Had een vraag over de afmetingen en werd direct geholpen. Aanrader!", date: "2 maanden geleden" },
-  { name: "Anouk M.", location: "Breda", rating: 5, title: "Design meubel", body: "Ziet er echt uit als een designstuk. Vrienden vragen meteen waar we hem vandaan hebben.", date: "3 maanden geleden" },
-  { name: "Rick J.", location: "Nijmegen", rating: 4, title: "Solide en netjes", body: "Kwaliteit is prima, prijs is eerlijk. Levertijd was 10 dagen, precies zoals aangegeven.", date: "3 maanden geleden" },
-  { name: "Fleur P.", location: "Haarlem", rating: 5, title: "Zo blij mee", body: "De tv-wand maakt onze woonkamer af. Zelfmontage was verrassend makkelijk met z'n tweeën.", date: "4 maanden geleden" },
+type ReviewItem = { name: string; location: string; rating: number; title: string; body: string; date: string; days: number };
+
+const REVIEWS: ReviewItem[] = [
+  { name: "Sanne V.", location: "Utrecht", rating: 5, title: "Kwaliteit is top", body: "De Full House staat prachtig in onze woonkamer. Afwerking is echt perfect en de montage was zo gepiept.", date: "3 weken geleden", days: 21 },
+  { name: "Jeroen B.", location: "Amsterdam", rating: 5, title: "Meer dan verwacht", body: "Bestelling verliep soepel en levering was op tijd. De kast oogt luxer dan op de foto's.", date: "1 maand geleden", days: 32 },
+  { name: "Lisa D.", location: "Den Haag", rating: 5, title: "Fantastisch meubel", body: "Onze woonkamer is compleet veranderd. Kabels netjes weggewerkt en de soundbar past perfect.", date: "1 maand geleden", days: 38 },
+  { name: "Mark H.", location: "Rotterdam", rating: 4, title: "Mooi en stevig", body: "Zeer tevreden over de kwaliteit. Montage duurde iets langer dan verwacht maar het resultaat is top.", date: "2 maanden geleden", days: 55 },
+  { name: "Eva K.", location: "Eindhoven", rating: 5, title: "Precies wat we zochten", body: "De kleurstalen thuis waren super handig. Uiteindelijk gekozen voor donkereiken, ziet er warm en tijdloos uit.", date: "2 maanden geleden", days: 62 },
+  { name: "Tom S.", location: "Groningen", rating: 5, title: "Klantenservice top", body: "Had een vraag over de afmetingen en werd direct geholpen. Aanrader!", date: "2 maanden geleden", days: 68 },
+  { name: "Anouk M.", location: "Breda", rating: 5, title: "Design meubel", body: "Ziet er echt uit als een designstuk. Vrienden vragen meteen waar we hem vandaan hebben.", date: "3 maanden geleden", days: 88 },
+  { name: "Rick J.", location: "Nijmegen", rating: 4, title: "Solide en netjes", body: "Kwaliteit is prima, prijs is eerlijk. Levertijd was 10 dagen, precies zoals aangegeven.", date: "3 maanden geleden", days: 95 },
+  { name: "Fleur P.", location: "Haarlem", rating: 5, title: "Zo blij mee", body: "De tv-wand maakt onze woonkamer af. Zelfmontage was verrassend makkelijk met z'n tweeën.", date: "4 maanden geleden", days: 120 },
+  { name: "Bas W.", location: "Zwolle", rating: 5, title: "Strak en tijdloos", body: "De cinewall past precies zoals we hoopten. De open vakken zijn ideaal voor onze apparatuur.", date: "4 maanden geleden", days: 128 },
+  { name: "Ilse R.", location: "Tilburg", rating: 4, title: "Fijne aankoop", body: "Levering ging netjes en de bezorgers waren vriendelijk. Kleine kras op een paneel werd direct opgelost.", date: "5 maanden geleden", days: 150 },
+  { name: "Peter K.", location: "Almere", rating: 5, title: "Alles klopt", body: "Van advies tot montage: alles liep soepel. De kabeldoorvoer werkt perfect.", date: "5 maanden geleden", days: 158 },
+  { name: "Nadia el A.", location: "Arnhem", rating: 5, title: "Woonkamer af", body: "Precies het rustige beeld dat we zochten. De tv lijkt nu deel van de wand.", date: "6 maanden geleden", days: 180 },
+  { name: "Sven D.", location: "Leiden", rating: 3, title: "Mooi, montage kost tijd", body: "Het resultaat is prachtig, maar reken wel op een middag met twee personen.", date: "6 maanden geleden", days: 188 },
+  { name: "Judith H.", location: "Apeldoorn", rating: 5, title: "Prachtige afwerking", body: "De matte afwerking is echt mooi en makkelijk schoon te houden.", date: "7 maanden geleden", days: 210 },
+  { name: "Wouter M.", location: "Delft", rating: 5, title: "Slim doordacht", body: "Voorgemonteerde modules klikken netjes in elkaar. Weinig gepuzzel.", date: "7 maanden geleden", days: 220 },
+  { name: "Karin B.", location: "Amersfoort", rating: 4, title: "Goede prijs-kwaliteit", body: "Voor deze kwaliteit een eerlijke prijs. Zou hem opnieuw kopen.", date: "8 maanden geleden", days: 245 },
+  { name: "Dennis vd V.", location: "Maastricht", rating: 5, title: "Iedereen vraagt ernaar", body: "Complimenten van alle bezoekers. Ziet echt uit als maatwerk.", date: "9 maanden geleden", days: 275 },
 ];
 
-function ReviewsSection() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
+const REVIEW_TOTAL = 1042;
+const REVIEW_DISTRIBUTION: Array<{ stars: number; count: number }> = [
+  { stars: 5, count: 798 },
+  { stars: 4, count: 178 },
+  { stars: 3, count: 41 },
+  { stars: 2, count: 15 },
+  { stars: 1, count: 10 },
+];
+const REVIEW_AVERAGE =
+  Math.round(
+    (REVIEW_DISTRIBUTION.reduce((sum, d) => sum + d.stars * d.count, 0) / REVIEW_TOTAL) * 10,
+  ) / 10;
 
-  const scroll = (dir: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * (el.clientWidth * 0.8), behavior: "smooth" });
+const REVIEW_SORTS = [
+  { value: "relevant", label: "Meest relevant" },
+  { value: "newest", label: "Nieuwste eerst" },
+  { value: "highest", label: "Hoogste score" },
+  { value: "lowest", label: "Laagste score" },
+] as const;
+
+const REVIEWS_PER_PAGE = 4;
+
+function ReviewStars({ rating, className = "h-3.5 w-3.5" }: { rating: number; className?: string }) {
+  return (
+    <span className="flex items-center gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`${className} ${i < rating ? "fill-[#ef7027] text-[#ef7027]" : "fill-[#e5ded4] text-[#e5ded4]"}`}
+          strokeWidth={0}
+        />
+      ))}
+    </span>
+  );
+}
+
+function ReviewsSection() {
+  const [sort, setSort] = useState<(typeof REVIEW_SORTS)[number]["value"]>("relevant");
+  const [sortOpen, setSortOpen] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const sorted = useMemo(() => {
+    const list = [...REVIEWS];
+    if (sort === "newest") return list.sort((a, b) => a.days - b.days);
+    if (sort === "highest") return list.sort((a, b) => b.rating - a.rating || a.days - b.days);
+    if (sort === "lowest") return list.sort((a, b) => a.rating - b.rating || a.days - b.days);
+    return list;
+  }, [sort]);
+
+  const pageCount = Math.ceil(sorted.length / REVIEWS_PER_PAGE);
+  const visible = sorted.slice((page - 1) * REVIEWS_PER_PAGE, page * REVIEWS_PER_PAGE);
+  const activeSortLabel = REVIEW_SORTS.find((s) => s.value === sort)?.label ?? "Meest relevant";
+
+  const goToPage = (next: number) => {
+    setPage(Math.min(Math.max(next, 1), pageCount));
+    document.getElementById("klantbeoordelingen")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <section className="bg-[#fff7ef] py-10 md:py-16">
+    <section id="klantbeoordelingen" className="scroll-mt-24 bg-[#fff7ef] py-10 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <div className="mb-6 flex items-end justify-between gap-4 md:mb-10">
-          <div>
-            <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>
-            <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
-              Wat klanten zeggen over hun tv-kast.
-            </h2>
+        {/* Score-overzicht */}
+        <div className="text-center">
+          <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>
+          <h2 className="mt-2 text-[22px] font-bold leading-tight text-[#071426] md:text-[26px]">
+            Klantbeoordelingen
+          </h2>
+          <p className="mt-6 text-[38px] font-bold leading-none text-[#ef7027] md:text-[46px]">
+            {REVIEW_AVERAGE.toLocaleString("nl-NL", { minimumFractionDigits: 1 })}
+          </p>
+          <div className="mt-3 flex justify-center">
+            <ReviewStars rating={Math.round(REVIEW_AVERAGE)} className="h-5 w-5" />
           </div>
-          <div className="hidden gap-2 md:flex">
-            <button
-              type="button"
-              onClick={() => scroll(-1)}
-              aria-label="Vorige"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll(1)}
-              aria-label="Volgende"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#071426] transition hover:bg-[#faf8f5]"
-            >
-              ›
-            </button>
-          </div>
+          <p className="mt-3 text-[12px] text-[#071426]/50 md:text-[13px]">
+            Gebaseerd op {REVIEW_TOTAL.toLocaleString("nl-NL")} beoordelingen
+          </p>
         </div>
-      </div>
 
-      <div
-        ref={scrollerRef}
-        className="mx-auto flex max-w-[1400px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 md:px-10 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-pl-5 md:scroll-pl-10"
-      >
-        {REVIEWS.map((r, i) => (
-          <article
-            key={i}
-            className="flex w-[280px] shrink-0 snap-start flex-col justify-between rounded-[14px] bg-white p-5 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[340px]"
-          >
-            <div className="pb-5">
-              <div className="flex items-center gap-1 text-[#ef7027]">
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <span key={idx} className={idx < r.rating ? "text-[#ef7027]" : "text-[#e5ded4]"}>★</span>
+        {/* Staafdiagram */}
+        <div className="mx-auto mt-7 flex max-w-[420px] flex-col gap-2">
+          {REVIEW_DISTRIBUTION.map((d) => (
+            <div key={d.stars} className="flex items-center gap-3">
+              <span className="flex w-[26px] shrink-0 items-center justify-end gap-1 text-[11px] text-[#071426]/60">
+                {d.stars}
+                <Star className="h-3 w-3 fill-[#ef7027] text-[#ef7027]" strokeWidth={0} />
+              </span>
+              <span className="h-[3px] flex-1 overflow-hidden rounded-full bg-[#e7ddd1]">
+                <span
+                  className="block h-full rounded-full bg-[#ef7027] transition-[width] duration-700 ease-out"
+                  style={{ width: `${(d.count / REVIEW_TOTAL) * 100}%` }}
+                />
+              </span>
+              <span className="w-[42px] shrink-0 text-right text-[11px] text-[#071426]/50 tabular-nums">
+                {d.count.toLocaleString("nl-NL")}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Sorteren */}
+        <div className="mt-9 flex justify-center">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setSortOpen((o) => !o)}
+              aria-expanded={sortOpen}
+              className="flex cursor-pointer items-center gap-2 rounded-full border border-[#e0d5c8] bg-white px-5 py-2.5 text-[13px] text-[#071426] transition hover:border-[#ef7027]"
+            >
+              {activeSortLabel}
+              <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${sortOpen ? "rotate-180" : ""}`} />
+            </button>
+            {sortOpen && (
+              <div className="absolute left-1/2 z-20 mt-2 w-[200px] -translate-x-1/2 overflow-hidden rounded-[14px] border border-[#eee4dc] bg-white shadow-[0_10px_30px_rgba(42,31,22,0.12)]">
+                {REVIEW_SORTS.map((s) => (
+                  <button
+                    key={s.value}
+                    type="button"
+                    onClick={() => {
+                      setSort(s.value);
+                      setPage(1);
+                      setSortOpen(false);
+                    }}
+                    className={`block w-full cursor-pointer px-4 py-2.5 text-left text-[13px] transition hover:bg-[#fff7ef] ${
+                      s.value === sort ? "text-[#ef7027]" : "text-[#071426]"
+                    }`}
+                  >
+                    {s.label}
+                  </button>
                 ))}
               </div>
-              <h3 className="mt-3 text-[15px] font-[500] text-[#071426]">{r.title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">{r.body}</p>
-            </div>
-            <div className="border-t border-[#e5ded4]/40 pt-5 flex items-center gap-2.5 text-[12px]">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#f4f2ee] bg-white text-[#ef7027]">
-                <User className="h-3.5 w-3.5" strokeWidth={2} />
-              </span>
-              <span className="font-[500] text-[#071426]">{r.name} · {r.location}</span>
-              <span className="text-[#071426]/50">· {r.date}</span>
-            </div>
-          </article>
-        ))}
+            )}
+          </div>
+        </div>
+
+        {/* Reviewlijst */}
+        <div className="mt-6 flex flex-col gap-3 md:mt-8 md:gap-4">
+          {visible.map((r) => (
+            <article
+              key={`${r.name}-${r.days}`}
+              className="overflow-hidden rounded-[14px] border border-[#eee4dc] bg-white"
+            >
+              <header className="flex flex-wrap items-center justify-between gap-2 border-b border-[#f1e8de] px-5 py-3.5">
+                <div className="flex items-center gap-2.5 text-[13px]">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#f3ddc9] bg-white text-[#ef7027]">
+                    <User className="h-3.5 w-3.5" strokeWidth={2} />
+                  </span>
+                  <span className="font-[500] text-[#071426]">{r.name}</span>
+                  <span className="text-[#e0d5c8]">|</span>
+                  <span className="text-[#071426]/45">Geverifieerde koper</span>
+                </div>
+                <span className="text-[12px] text-[#071426]/40">{r.date}</span>
+              </header>
+              <div className="px-5 py-4">
+                <ReviewStars rating={r.rating} />
+                <h3 className="mt-3 text-[15px] font-[500] text-[#071426]">{r.title}</h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-[#071426]/65 md:text-[14px]">{r.body}</p>
+                <p className="mt-4 text-[11px] text-[#071426]/40">
+                  Beoordeeld product: <span className="text-[#071426]/70">Full House</span> · {r.location}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Paginering */}
+        {pageCount > 1 && (
+          <div className="mt-8 flex items-center justify-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => goToPage(page - 1)}
+              disabled={page === 1}
+              aria-label="Vorige pagina"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-[10px] text-[#071426]/50 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            {Array.from({ length: pageCount }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goToPage(i + 1)}
+                aria-current={page === i + 1}
+                className={`h-9 w-9 cursor-pointer rounded-[10px] text-[13px] transition ${
+                  page === i + 1
+                    ? "bg-[#ef7027] font-[500] text-white"
+                    : "text-[#071426]/60 hover:bg-white"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => goToPage(page + 1)}
+              disabled={page === pageCount}
+              aria-label="Volgende pagina"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-[10px] text-[#071426]/50 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
 }
+
+
+
 
 
 function NewsletterContactSection() {

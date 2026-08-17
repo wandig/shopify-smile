@@ -118,6 +118,12 @@ function ProductPage() {
   return <ProductView product={data} />;
 }
 
+// Volgorde waarin de kleurblokken in de Shopify-galerij zijn geüpload (per handle).
+const GALLERY_COLOR_ORDER: Record<string, string[]> = {
+  solo: ["Kristalwit", "Dofroze", "Cashmeregrijs", "Donkereiken", "Walnootbruin"],
+};
+
+
 const FULL_HOUSE_GALLERY = [
   { src: fullHouseGalleryMain, alt: "Wandig Full House volledig vrijstaand in walnootbruin", full: true, square: true },
   { src: fullHouseGalleryRoom, alt: "Wandig Full House gemonteerd in een lichte woonkamer", full: true },
@@ -231,6 +237,27 @@ function ProductView({ product }: { product: ProductNode }) {
   // Shopify uploads the photos per variant as one consecutive block, starting at
   // the variant's own image. So we slice from that anchor up to the next anchor.
   const images = useMemo(() => {
+    // Solo: de galerij is geüpload als blokken per kleur x tv-maat, elk blok start
+    // bij een "Closed_Front" foto. De variant-featured images zijn losse duplicaten
+    // aan het eind, dus we mappen op blokpositie in plaats van op de variantfoto.
+    const galleryColorOrder = GALLERY_COLOR_ORDER[product.handle];
+    if (galleryColorOrder && selectedColor && selectedSize && sizeOption) {
+      const blockStarts = allImages
+        .map((img, i) => (/Closed_Front/i.test(img.node.url) ? i : -1))
+        .filter((i) => i >= 0);
+      const colorPos = galleryColorOrder.indexOf(selectedColor);
+      const sizePos = sizeOption.values.indexOf(selectedSize);
+      if (colorPos >= 0 && sizePos >= 0) {
+        const blockIndex = colorPos * sizeOption.values.length + sizePos;
+        const start = blockStarts[blockIndex];
+        if (start !== undefined) {
+          const nextStart = blockStarts[blockIndex + 1] ?? allImages.length;
+          const group = allImages.slice(start, Math.min(nextStart, start + 9));
+          if (group.length > 0) return group;
+        }
+      }
+    }
+
     const urlIndex = new Map(allImages.map((img, i) => [img.node.url, i] as const));
 
     const anchorIndexes = Array.from(
@@ -256,7 +283,7 @@ function ProductView({ product }: { product: ProductNode }) {
     const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
     const group = allImages.slice(start, end);
     return group.length > 0 ? group : allImages;
-  }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize]);
+  }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
 
   const galleryItems = useMemo(() => {
     const shopifyItems = images.map(({ node }) => ({

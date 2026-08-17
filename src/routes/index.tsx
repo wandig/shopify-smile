@@ -5,7 +5,11 @@ import press3 from "@/assets/press/press3.svg";
 import press4 from "@/assets/press/press4.svg";
 import press5 from "@/assets/press/press5.svg";
 import press6 from "@/assets/press/press6.svg";
-import { useRef, useState, type ReactNode } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import { displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
+
 import {
   ArrowRight,
   CalendarClock,
@@ -308,29 +312,31 @@ function BasketButton() {
 }
 
 function ColorSwatches({
+  colors,
   selected,
   onSelect,
   light = false,
 }: {
+  colors: string[];
   selected: string;
   onSelect: (name: string) => void;
   light?: boolean;
 }) {
   return (
     <div className="flex flex-wrap items-center gap-1.5">
-      {MODEL_COLORS.map((c) => {
-        const isActive = c.name === selected;
+      {colors.map((name) => {
+        const isActive = name === selected;
         return (
           <button
-            key={c.name}
+            key={name}
             type="button"
-            title={c.name}
-            aria-label={c.name}
+            title={displayWandigColor(name)}
+            aria-label={displayWandigColor(name)}
             aria-pressed={isActive}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              onSelect(c.name);
+              onSelect(name);
             }}
             className={`h-6 w-6 shrink-0 overflow-hidden rounded-full border ${
               light ? "border-white/70" : "border-[#071426]/15"
@@ -340,12 +346,8 @@ function ColorSwatches({
                   (light ? "ring-offset-transparent" : "ring-offset-white")
                 : ""
             }`}
-            style={c.hex ? { background: c.hex } : undefined}
-          >
-            {c.image && (
-              <img src={c.image} alt="" className="h-full w-full object-cover" />
-            )}
-          </button>
+            style={wandigSwatchStyle(name)}
+          />
         );
       })}
     </div>
@@ -353,8 +355,38 @@ function ColorSwatches({
 }
 
 function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
-  const [color, setColor] = useState(MODEL_COLORS[0].name);
-  const img = p.colorImages?.[color] ?? p.img;
+  const { data } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await storefrontApiRequest(PRODUCTS_QUERY, { first: 20 });
+      return (res?.data?.products?.edges ?? []) as ShopifyProduct[];
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const shopifyProduct = data?.find((edge) => edge.node.handle === p.handle)?.node;
+  const colorOption = shopifyProduct?.options.find((option) => /kleur|color/i.test(option.name));
+  const colors = useMemo(
+    () => (colorOption ? sortWandigColors(colorOption.values) : MODEL_COLORS.map((c) => c.name)),
+    [colorOption],
+  );
+
+  const [color, setColor] = useState<string>("");
+  const activeColor = color && colors.includes(color) ? color : (colors[0] ?? "");
+
+  const variantImage = useMemo(() => {
+    if (!shopifyProduct || !colorOption || !activeColor) return undefined;
+    const variants = shopifyProduct.variants.edges.map((edge) => edge.node);
+    const match = variants.find((variant) =>
+      variant.selectedOptions.some(
+        (option) => option.name === colorOption.name && option.value === activeColor,
+      ),
+    );
+    return match?.image?.url;
+  }, [shopifyProduct, colorOption, activeColor]);
+
+  const img = variantImage ?? p.colorImages?.[activeColor] ?? p.img;
+
 
   if (p.featured) {
     return (
@@ -364,13 +396,14 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         className="group relative w-[360px] shrink-0 snap-start overflow-hidden rounded-[16px] md:w-[46%]"
       >
         <picture className="absolute inset-0 block h-full w-full">
-          {p.mobileImg && (
+          {p.mobileImg && !variantImage && (
             <source media="(max-width: 767px)" srcSet={p.mobileImg} />
           )}
+
           <img
             key={img}
             src={img}
-            alt={`${p.title} in ${color}`}
+            alt={`${p.title} in ${activeColor}`}
             className="h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
             loading="lazy"
           />
@@ -395,7 +428,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             </div>
             <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
             <div className="mt-2">
-              <ColorSwatches selected={color} onSelect={setColor} light />
+              <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} light />
             </div>
           </div>
           <BasketButton />
@@ -415,7 +448,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         <img
           key={img}
           src={img}
-          alt={`${p.title} in ${color}`}
+          alt={`${p.title} in ${activeColor}`}
           className="h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
           loading="lazy"
         />
@@ -440,7 +473,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             </div>
             <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
             <div className="mt-2">
-              <ColorSwatches selected={color} onSelect={setColor} />
+              <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} />
             </div>
           </div>
           <BasketButton />

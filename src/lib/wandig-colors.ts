@@ -3,7 +3,6 @@ import type { CSSProperties } from "react";
 import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
-import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";

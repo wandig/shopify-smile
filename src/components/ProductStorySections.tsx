@@ -134,13 +134,17 @@ export function SpecificationsSection({
                     <span className="text-[10px] font-medium text-[#071426]/60">32 cm diep</span>
                   </div>
 
-                  <img
-                    src={cinewallSchema.url}
-                    alt={`Schematische weergave Wandig Full House, ${widthLabel} cm breed en ${heightLabel} cm hoog`}
-                    className="relative block h-auto w-full object-contain"
-                    style={{ background: "transparent" }}
-                    loading="lazy"
-                  />
+                  {preview ? (
+                    <div className="relative block w-full">{preview}</div>
+                  ) : (
+                    <img
+                      src={cinewallSchema.url}
+                      alt={`Schematische weergave Wandig Full House, ${widthLabel} cm breed en ${heightLabel} cm hoog`}
+                      className="relative block h-auto w-full object-contain"
+                      style={{ background: "transparent" }}
+                      loading="lazy"
+                    />
+                  )}
                 </div>
               </div>
             </div>

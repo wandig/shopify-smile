@@ -16,6 +16,7 @@ import onderhoudsvriendelijkV2Img from "@/assets/onderhoudsvriendelijk-v2.png.as
 const buildSpecSections = (
   widthLabel: string,
   heightLabel: string,
+  configSummary?: { colorLabel?: string; modulesLabel?: string },
 ): Array<{ title: string; body: ReactNode }> => [
   {
     title: "Algemeen",
@@ -27,6 +28,12 @@ const buildSpecSections = (
     title: "Afmetingen",
     body: (
       <ul className="space-y-1.5">
+        {configSummary?.colorLabel && (
+          <li className="flex justify-between gap-4"><span>Kleur</span><span className="text-[#071426]">{configSummary.colorLabel}</span></li>
+        )}
+        {configSummary?.modulesLabel && (
+          <li className="flex justify-between gap-4"><span>Modules</span><span className="text-[#071426]">{configSummary.modulesLabel}</span></li>
+        )}
         <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">{widthLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">{heightLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">32 cm</span></li>
@@ -34,6 +41,7 @@ const buildSpecSections = (
       </ul>
     ),
   },
+
 
   {
     title: "Materiaal",
@@ -64,12 +72,16 @@ const buildSpecSections = (
 export function SpecificationsSection({
   widthLabel = "240",
   heightLabel = "180",
+  preview,
+  configSummary,
 }: {
   widthLabel?: string;
   heightLabel?: string;
+  preview?: ReactNode;
+  configSummary?: { colorLabel?: string; modulesLabel?: string };
 } = {}) {
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
-  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel);
+  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel, configSummary);
 
 
   return (
@@ -126,13 +138,17 @@ export function SpecificationsSection({
                     <span className="text-[10px] font-medium text-[#071426]/60">32 cm diep</span>
                   </div>
 
-                  <img
-                    src={cinewallSchema.url}
-                    alt={`Schematische weergave Wandig Full House, ${widthLabel} cm breed en ${heightLabel} cm hoog`}
-                    className="relative block h-auto w-full object-contain"
-                    style={{ background: "transparent" }}
-                    loading="lazy"
-                  />
+                  {preview ? (
+                    <div className="relative block w-full">{preview}</div>
+                  ) : (
+                    <img
+                      src={cinewallSchema.url}
+                      alt={`Schematische weergave Wandig Full House, ${widthLabel} cm breed en ${heightLabel} cm hoog`}
+                      className="relative block h-auto w-full object-contain"
+                      style={{ background: "transparent" }}
+                      loading="lazy"
+                    />
+                  )}
                 </div>
               </div>
             </div>

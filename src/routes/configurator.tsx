@@ -935,7 +935,56 @@ function ConfiguratorPage() {
 
       </section>
       <div className="mx-auto max-w-[1400px] px-5 pb-14 md:px-10">
-        <SpecificationsSection widthLabel={width} heightLabel={String(tv.wallHeight)} />
+        <SpecificationsSection
+          widthLabel={width}
+          heightLabel={String(tv.wallHeight)}
+          configSummary={{
+            colorLabel: displayWandigColor(color),
+            modulesLabel:
+              hasLeft && hasRight
+                ? "Midden + links en rechts (3)"
+                : hasLeft
+                  ? "Midden + links (2)"
+                  : hasRight
+                    ? "Midden + rechts (2)"
+                    : "Alleen midden (1)",
+          }}
+          preview={
+            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
+              <div className="absolute inset-0 flex items-end justify-center pb-[12%]">
+                <div className="flex h-[70%] items-end">
+                  {hasLeft && (
+                    <ConfiguratorModuleImage
+                      color={color}
+                      position="left"
+                      source={colorModuleSource}
+                      animate={false}
+                      testId={false}
+                      className={usesWalnutModules ? "mr-[-11px]" : "mr-[-3px]"}
+                    />
+                  )}
+                  <ConfiguratorModuleImage
+                    color={color}
+                    position="center"
+                    source={colorModuleSource}
+                    animate={false}
+                    testId={false}
+                  />
+                  {hasRight && (
+                    <ConfiguratorModuleImage
+                      color={color}
+                      position="right"
+                      source={colorModuleSource}
+                      animate={false}
+                      testId={false}
+                      className={usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          }
+        />
         <UniqueSection title="Dit maakt Wandig uniek" />
         <BeforeAfterSection />
       </div>

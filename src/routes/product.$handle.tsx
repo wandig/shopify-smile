@@ -708,6 +708,9 @@ function ProductView({ product }: { product: ProductNode }) {
                 ) : "Uitverkocht"}
               </Button>
 
+              <FreeColorSamples />
+
+
               <div className="mb-[10px] mt-[17px] hidden w-full grid-cols-[max-content_max-content_max-content_max-content_max-content] items-center justify-between font-sans tracking-[0.04em] text-[#90949b] sm:grid">
                 <div className="flex items-center gap-1.5 text-[12px] font-normal leading-none"><ShieldCheck className="h-[16px] w-[16px] shrink-0" /><span className="whitespace-nowrap">10 jaar garantie</span></div>
                 <span className="text-[13px] text-[#cdc0b5]" aria-hidden="true">|</span>

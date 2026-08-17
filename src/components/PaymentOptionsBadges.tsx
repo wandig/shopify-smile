@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { CreditCard, Eye, Lock, Percent, ShieldCheck, X, Zap } from "lucide-react";
+import { Eye, Lock, Percent, ShieldCheck, X, Zap } from "lucide-react";
 
 import in3Logo from "@/assets/in3-logo.jpg.asset.json";
+import sprayPayLogo from "@/assets/spraypay.svg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const euro = (value: number, decimals = 0) =>

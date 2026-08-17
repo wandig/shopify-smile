@@ -6,6 +6,7 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
+import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 
 import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock, SlidersHorizontal } from "lucide-react";
@@ -201,6 +202,13 @@ function ProductView({ product }: { product: ProductNode }) {
   const selectedColor = colorKey ? selected[colorKey] : undefined;
   const sizeKey = product.options.find((o) => /maat|size|inch/i.test(o.name))?.name;
   const selectedSize = sizeKey ? selected[sizeKey] : undefined;
+
+  // Afmetingen volgen de gekozen tv-maat (midden module + twee zijmodules)
+  const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
+  const sizeIndex = sizeOption && selectedSize ? sizeOption.values.indexOf(selectedSize) : -1;
+  const dimensionSize = WANDIG_SIZES[sizeIndex >= 0 ? sizeIndex : 0];
+  const specWidthLabel = formatCm(wandigWidth(dimensionSize, 2));
+  const specHeightLabel = String(dimensionSize.wallHeight);
 
   // Shopify uploads the photos per variant as one consecutive block, starting at
   // the variant's own image. So we slice from that anchor up to the next anchor.
@@ -725,7 +733,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <SpecificationsSection />
+      <SpecificationsSection widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
 
       <UniqueSection />
 

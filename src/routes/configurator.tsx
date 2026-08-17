@@ -952,7 +952,7 @@ function ConfiguratorPage() {
           preview={
             <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
               <div className="absolute inset-0 flex items-end justify-center pb-[12%]">
-                <div className="flex h-[109%] translate-y-[15px] items-end">
+                <div className="flex h-[109%] translate-y-[30px] items-end">
                   {hasLeft && (
                     <ConfiguratorModuleImage
                       color={color}

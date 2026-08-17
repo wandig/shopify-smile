@@ -91,7 +91,7 @@ export function SpecificationsSection({
                     </svg>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
                     <span className="mx-2 rounded-full bg-[#faf8f5] px-2 py-0.5 text-[11px] font-medium tracking-wide text-[#071426]">
-                      240 cm
+                      {widthLabel} cm
                     </span>
                     <span className="relative h-px flex-1 bg-[#071426]/25" />
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
@@ -109,7 +109,7 @@ export function SpecificationsSection({
                     </svg>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
                     <span className="my-2 rounded-full bg-[#faf8f5] px-2 py-1 text-[11px] font-medium tracking-wide text-[#071426] [writing-mode:vertical-rl] rotate-180">
-                      180 cm
+                      {heightLabel} cm
                     </span>
                     <span className="relative w-px flex-1 bg-[#071426]/25" />
                     <svg className="h-[10px] w-[10px] shrink-0 text-[#071426]/50" viewBox="0 0 10 10" fill="none">
@@ -128,7 +128,7 @@ export function SpecificationsSection({
 
                   <img
                     src={cinewallSchema.url}
-                    alt="Schematische weergave Wandig Full House, 240 cm breed en 180 cm hoog"
+                    alt={`Schematische weergave Wandig Full House, ${widthLabel} cm breed en ${heightLabel} cm hoog`}
                     className="relative block h-auto w-full object-contain"
                     style={{ background: "transparent" }}
                     loading="lazy"

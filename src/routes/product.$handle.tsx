@@ -819,7 +819,7 @@ function ProductView({ product }: { product: ProductNode }) {
           : {})}
       />
 
-      <CustomerGallerySection />
+      <CustomerGallerySection firstImageSrc={isSolo ? soloWoonkamerLampAsset.url : undefined} />
 
       </div>
 

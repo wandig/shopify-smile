@@ -73,23 +73,6 @@ import plugPlayGeleverdV2Img from "@/assets/plug-play-geleverd-v2.png.asset.json
 import proefkijkenBgImg from "@/assets/100-dagen-proefkijken-bg.jpg.asset.json";
 import proefkijkenBgV2Img from "@/assets/100-dagen-proefkijken-bg-v2.png.asset.json";
 import dutchDesignBgImg from "@/assets/dutch-design-voor-aan-de-muur-bg.png.asset.json";
-
-
-
-
-
-
-
-export const Route = createFileRoute("/product/$handle")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `Wandig ${params.handle.charAt(0).toUpperCase() + params.handle.slice(1)} — Plug & play cinewall` },
-      { name: "description", content: `Bekijk de Wandig ${params.handle} cinewall. Plug & play gemaakt in onze werkplaats.` },
-    ],
-  }),
-  component: ProductPage,
-});
-
 export function PuzzleCornerIcon({ className }: { className?: string }) {
   return (
     <svg

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CreditCard, Eye, Lock, Percent, ShieldCheck, X, Zap } from "lucide-react";
 
+import in3Logo from "@/assets/in3-logo.jpg.asset.json";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const euro = (value: number, decimals = 0) =>
@@ -105,8 +106,8 @@ function ModalShell({
 }
 
 const In3Logo = () => (
-  <span className="flex h-7 w-11 items-center justify-center rounded-[6px] bg-[#eef1ff] text-[13px] font-bold tracking-tight text-[#1b2a8c]">
-    in3
+  <span className="flex h-7 w-11 items-center justify-center overflow-hidden rounded-[6px] bg-white">
+    <img src={in3Logo.url} alt="in3" className="h-3.5 w-auto object-contain" />
   </span>
 );
 

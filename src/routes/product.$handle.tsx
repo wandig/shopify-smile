@@ -446,12 +446,6 @@ function ProductView({ product }: { product: ProductNode }) {
         maximumFractionDigits: 0,
       }).format(displayedNumericPrice) + "\u2060,-"
     : "Prijs op aanvraag";
-  const installmentPrice = displayedNumericPrice > 0
-    ? new Intl.NumberFormat("nl-NL", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(displayedNumericPrice / 3)
-    : null;
   const displayTitle = product.title.replace(/^Wandig\s+/i, "");
   const scrollBenefits = (direction: -1 | 1) => {
     benefitsScrollerRef.current?.scrollBy({ left: direction * 166, behavior: "smooth" });

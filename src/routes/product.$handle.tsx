@@ -768,6 +768,42 @@ function ProductView({ product }: { product: ProductNode }) {
   );
 }
 
+function DeliveryInfoTooltip() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <span
+      className="relative ml-1.5 inline-block align-middle"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-label="Meer informatie over de levering"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-[16px] w-[16px] items-center justify-center rounded-full border border-[#ff6e15] text-[10px] font-bold leading-none text-[#ff6e15] transition-colors hover:bg-[#ff6e15] hover:text-white"
+      >
+        i
+      </button>
+      <span
+        role="tooltip"
+        className={`absolute bottom-[calc(100%+10px)] left-1/2 z-30 w-[266px] -translate-x-1/2 rounded-[16px] border border-[#eeeeee] bg-white p-3.5 text-left shadow-[0_18px_40px_rgba(42,31,22,0.14)] transition-all duration-200 ${
+          open ? "visible opacity-100 translate-y-0" : "invisible translate-y-1 opacity-0"
+        }`}
+      >
+        <span className="block text-[13px] font-bold text-[#071426]">Hoe wordt mijn tv kast geleverd?</span>
+        <span className="mt-1.5 block text-[12px] font-normal leading-[1.55] text-[#071426]/60">
+          Je tv kast wordt plug and play en grotendeels voorgemonteerd geleverd. Geen ingewikkeld bouwpakket dus. Met twee
+          personen bevestig je de verschillende onderdelen eenvoudig aan de muur, zodat je snel van je nieuwe tv kast kunt
+          genieten.
+        </span>
+        <span className="absolute left-1/2 top-full h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r border-[#eeeeee] bg-white" />
+      </span>
+    </span>
+  );
+}
+
 
 function PuzzleCornerIcon({ className }: { className?: string }) {
   return (

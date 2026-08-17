@@ -429,7 +429,10 @@ export function UniqueSection({ title = "Dit maakt Full House uniek" }: { title?
   );
 }
 
-export function BeforeAfterSection() {
+export function BeforeAfterSection({
+  beforeSrc = beforeFullHouseAsset.url,
+  afterSrc = afterFullHouseAsset.url,
+}: { beforeSrc?: string; afterSrc?: string } = {}) {
   const [position, setPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef(false);
@@ -514,7 +517,7 @@ export function BeforeAfterSection() {
             }}
           >
             <img
-              src={afterFullHouseAsset.url}
+              src={afterSrc}
               alt="Woonkamer na Full House"
               className="absolute inset-0 h-full w-full object-cover"
               draggable={false}
@@ -524,7 +527,7 @@ export function BeforeAfterSection() {
               style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
             >
               <img
-                src={beforeFullHouseAsset.url}
+                src={beforeSrc}
                 alt="Woonkamer voor Full House"
                 className="absolute inset-0 h-full w-full object-cover"
                 draggable={false}

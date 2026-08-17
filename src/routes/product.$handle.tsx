@@ -11,6 +11,8 @@ import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
+import beforeSoloAsset from "@/assets/before-solo.png.asset.json";
+import afterSoloAsset from "@/assets/after-solo.jpg.asset.json";
 import {
   CustomerGallerySection,
   BuiltToLastSection,
@@ -797,7 +799,11 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <UniqueSection />
 
-      <BeforeAfterSection />
+      <BeforeAfterSection
+        {...(product.handle === "solo"
+          ? { beforeSrc: beforeSoloAsset.url, afterSrc: afterSoloAsset.url }
+          : {})}
+      />
 
       <CustomerGallerySection />
 

@@ -7,10 +7,16 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
-import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
-import { BuiltToLastSection, FaqSection, ReviewsSection } from "@/components/ProductTrustSections";
+import {
+  CustomerGallerySection,
+  BuiltToLastSection,
+  FaqSection,
+  ReviewsSection,
+  NewsletterContactSection,
+  TrustBannerSection,
+} from "@/components/ProductPageSections";
 import {
   ConfiguratorModuleImage,
   FULL_HOUSE_FRONT_IMAGES,
@@ -830,17 +836,21 @@ function ConfiguratorPage() {
             />
           }
         />
-        <UniqueSection title="Dit maakt Wandig uniek" />
+        <UniqueSection />
         <BeforeAfterSection />
-      </div>
 
-      <CustomerGallerySection backgroundClassName="bg-[#faf8f4]" />
+        <CustomerGallerySection />
+      </div>
 
       <BuiltToLastSection />
 
       <FaqSection />
 
       <ReviewsSection />
+
+      <NewsletterContactSection />
+
+      <TrustBannerSection />
     </main>
   );
 }

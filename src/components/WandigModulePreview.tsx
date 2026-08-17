@@ -144,7 +144,7 @@ export function WandigSpecPreview({
               source={source}
               animate={false}
               testId={false}
-              className={`relative z-[1] ${usesWalnutModules ? "mr-[-11px]" : "mr-[-3px]"}`}
+              className="relative z-[1] mr-[-3px]"
             />
           )}
           <ConfiguratorModuleImage

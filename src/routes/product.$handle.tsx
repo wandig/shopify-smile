@@ -118,6 +118,12 @@ function ProductPage() {
   return <ProductView product={data} />;
 }
 
+// Volgorde waarin de kleurblokken in de Shopify-galerij zijn geüpload (per handle).
+const GALLERY_COLOR_ORDER: Record<string, string[]> = {
+  solo: ["Kristalwit", "Dofroze", "Cashmeregrijs", "Donkereiken", "Walnootbruin"],
+};
+
+
 const FULL_HOUSE_GALLERY = [
   { src: fullHouseGalleryMain, alt: "Wandig Full House volledig vrijstaand in walnootbruin", full: true, square: true },
   { src: fullHouseGalleryRoom, alt: "Wandig Full House gemonteerd in een lichte woonkamer", full: true },

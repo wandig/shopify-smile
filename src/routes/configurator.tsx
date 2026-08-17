@@ -44,10 +44,10 @@ export const Route = createFileRoute("/configurator")({
 });
 
 const TV_OPTIONS = [
-  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", price: 0, wallHeight: 170 },
-  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", price: 150, wallHeight: 180 },
-  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", price: 250, wallHeight: 190 },
-  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", price: 350, wallHeight: 200 },
+  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", price: 0, wallHeight: 180, fullWidth: 240 },
+  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", price: 150, wallHeight: 180, fullWidth: 250 },
+  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, fullWidth: 260 },
+  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", price: 350, wallHeight: 190, fullWidth: 270 },
 ];
 
 const BASE_PRICE = 1699;

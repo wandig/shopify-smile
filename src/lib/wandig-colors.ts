@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
 
+import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
-import swatchEikenzwart from "@/assets/swatches/eikenzwart.jpg";
 import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchTruffelbruin from "@/assets/swatches/truffelbruin.jpg";
@@ -22,7 +22,7 @@ const COLOR_ORDER = new Map(
 );
 
 const TEXTURES: Array<{ pattern: RegExp; image: string; color: string }> = [
-  { pattern: /donkereiken|eikenzwart/, image: swatchEikenzwart, color: "#1d1b19" },
+  { pattern: /donkereiken|eikenzwart/, image: swatchDonkereikenAsset.url, color: "#3b302a" },
   { pattern: /eikengrijs/, image: swatchEikengrijs, color: "#9b9990" },
   { pattern: /walnootbruin|walnoot|noten/, image: swatchWalnootbruin, color: "#684326" },
   { pattern: /truffelbruin|truffel/, image: swatchTruffelbruin, color: "#755844" },

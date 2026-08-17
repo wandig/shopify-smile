@@ -377,17 +377,26 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
   const variantImage = useMemo(() => {
     if (!shopifyProduct || !colorOption || !activeColor) return undefined;
     const variants = shopifyProduct.variants.edges.map((edge) => edge.node);
+    const sizeOption = shopifyProduct.options.find((option) => /maat|size|inch/i.test(option.name));
+    const preferredSizeValue = sizeOption
+      ? sizeOption.values.find((v) => /58/.test(v)) ?? sizeOption.values[1]
+      : undefined;
     const hasColor = (variant: (typeof variants)[number]) =>
       variant.selectedOptions.some(
         (option) => option.name === colorOption.name && option.value === activeColor,
       );
     const isPreferredSize = (variant: (typeof variants)[number]) =>
-      variant.selectedOptions.some((option) => /58\s*-\s*65/.test(option.value));
+      !!sizeOption &&
+      !!preferredSizeValue &&
+      variant.selectedOptions.some(
+        (option) => option.name === sizeOption.name && option.value === preferredSizeValue,
+      );
     const match =
       variants.find((variant) => hasColor(variant) && isPreferredSize(variant)) ??
       variants.find(hasColor);
     return match?.image?.url;
   }, [shopifyProduct, colorOption, activeColor]);
+
 
 
   const img = variantImage ?? p.colorImages?.[activeColor] ?? p.img;

@@ -5,7 +5,6 @@ import swatchCashmeregrijsAsset from "@/assets/cashmeregrijs.jpg.asset.json";
 import swatchKristalwitAsset from "@/assets/kristalwit.webp.asset.json";
 import swatchDofroze from "@/assets/swatches/dofroze.jpg";
 import swatchEikengrijs from "@/assets/swatches/eikengrijs.jpg";
-import swatchKatoengrijs from "@/assets/swatches/katoengrijs.jpg";
 import swatchKleibeige from "@/assets/swatches/kleibeige.jpg";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
 import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";

@@ -470,7 +470,7 @@ function ConfiguratorPage() {
             </button>
 
             {/* Configuration */}
-            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-[10%] scale-[0.67] items-end justify-center sm:scale-[0.785] lg:scale-[0.716] xl:scale-[0.901] 2xl:scale-[0.97]">
+            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-[10%] scale-[0.603] items-end justify-center sm:scale-[0.707] lg:scale-[0.644] xl:scale-[0.811] 2xl:scale-[0.873]">
               {/* Wall unit — modules sit flush against each other */}
               <div className="relative flex h-[420px] items-end lg:h-[520px]">
                 {showMeasurements && (

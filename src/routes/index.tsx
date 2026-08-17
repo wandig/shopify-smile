@@ -29,6 +29,8 @@ import fullHouseCard from "@/assets/full-house-card.png.asset.json";
 import plugPlayImg from "@/assets/plug-play-geleverd.png.asset.json";
 import duoCardImg from "@/assets/duo-card.jpg.asset.json";
 import soloCardImg from "@/assets/solo-card.jpg.asset.json";
+import cashmereAssetTmp from "@/assets/cashmeregrijs.jpg.asset.json";
+import kristalwitAssetTmp from "@/assets/kristalwit.webp.asset.json";
 import kleurstalenImg from "@/assets/kleurstalen.png.asset.json";
 import swatchDonkereikenAsset from "@/assets/donkereiken.jpg.asset.json";
 import swatchWalnootbruin from "@/assets/swatches/walnootbruin.jpg";
@@ -781,8 +783,8 @@ function ReviewsSection() {
 const SAMPLE_CARDS = [
   { name: "Donkereiken", image: swatchDonkereikenAsset.url },
   { name: "Walnootbruin", image: swatchWalnootbruin },
-  { name: "Cashmeregrijs", image: swatchKatoengrijs },
-  { name: "Kristalwit", image: swatchKleibeige },
+  { name: "Cashmeregrijs", image: cashmereAssetTmp.url },
+  { name: "Kristalwit", image: kristalwitAssetTmp.url },
   { name: "Dofroze", image: swatchDofroze },
 ];
 

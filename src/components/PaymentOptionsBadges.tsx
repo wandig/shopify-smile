@@ -194,7 +194,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
         <button
           type="button"
           onClick={() => setOpenIn3(false)}
-          className="mt-5 h-12 w-full rounded-full bg-[#ef7027] text-[14px] font-semibold text-white transition hover:bg-[#e2651e]"
+          className="mt-5 h-12 w-full rounded-full bg-[#ef7027] text-[14px] font-light text-white transition hover:bg-[#e2651e]"
         >
           Kies in3 bij het afrekenen
         </button>
@@ -263,7 +263,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
         <button
           type="button"
           onClick={() => setOpenSpread(false)}
-          className="mt-5 h-12 w-full rounded-full bg-[#ef7027] text-[14px] font-semibold text-white transition hover:bg-[#e2651e]"
+          className="mt-5 h-12 w-full rounded-full bg-[#ef7027] text-[14px] font-light text-white transition hover:bg-[#e2651e]"
         >
           Kies SprayPay bij het afrekenen
         </button>

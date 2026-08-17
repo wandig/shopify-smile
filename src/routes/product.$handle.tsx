@@ -3,7 +3,8 @@ import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
-import { displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
+import { FULL_HOUSE_COLORS, displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
+import { FULL_HOUSE_FRONT_IMAGES, WandigSpecPreview } from "@/components/WandigModulePreview";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
@@ -209,6 +210,23 @@ function ProductView({ product }: { product: ProductNode }) {
   const dimensionSize = WANDIG_SIZES[sizeIndex >= 0 ? sizeIndex : 0];
   const specWidthLabel = formatCm(wandigWidth(dimensionSize, 2));
   const specHeightLabel = String(dimensionSize.wallHeight);
+
+  // Kleurpreview in de specificaties: alle modules in de gekozen kleur
+  const specPreviewColor = selectedColor ?? FULL_HOUSE_COLORS[0];
+  const specPreviewSource = useMemo(() => {
+    if (specPreviewColor === FULL_HOUSE_COLORS[0]) return null;
+    const matchingVariant = variants.find((v) => {
+      const selections = new Map(
+        v.selectedOptions.map((o) => [o.name.toLocaleLowerCase("nl-NL"), o.value]),
+      );
+      return (
+        selections.get("kleur") === specPreviewColor &&
+        selections.get("opstelling") === "Links" &&
+        selections.get("maat tv") === "58 - 65 inch"
+      );
+    });
+    return matchingVariant?.image?.url ?? FULL_HOUSE_FRONT_IMAGES[specPreviewColor] ?? null;
+  }, [variants, specPreviewColor]);
 
   // Shopify uploads the photos per variant as one consecutive block, starting at
   // the variant's own image. So we slice from that anchor up to the next anchor.
@@ -733,7 +751,11 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <SpecificationsSection widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
+      <SpecificationsSection
+        widthLabel={specWidthLabel}
+        heightLabel={specHeightLabel}
+        preview={<WandigSpecPreview color={specPreviewColor} source={specPreviewSource} />}
+      />
 
       <UniqueSection />
 

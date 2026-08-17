@@ -10,9 +10,12 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 import { BuiltToLastSection, FaqSection, ReviewsSection } from "@/components/ProductTrustSections";
-import centerModule from "@/assets/center-module-trim.png.asset.json";
-import leftModule from "@/assets/left-module-trim.png.asset.json";
-import rightModuleUrl from "@/assets/right-module-trim-tight-cropped.png";
+import {
+  ConfiguratorModuleImage,
+  FULL_HOUSE_FRONT_IMAGES,
+  WandigSpecPreview,
+  type ModulePosition,
+} from "@/components/WandigModulePreview";
 import werkplaatsImg from "@/assets/werkplaats.jpg";
 import fullHouseFinishImg from "@/assets/full-house-gallery-finish.webp";
 import fullHouseUseImg from "@/assets/full-house-gallery-use.webp";
@@ -54,7 +57,6 @@ const BASE_PRICE = 1699;
 const LEFT_MODULE_PRICE = 475;
 const RIGHT_MODULE_PRICE = 475;
 
-const MODULE_REVEAL = "moduleColorReveal 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both";
 
 const CONFIGURATOR_BENEFITS = [
   { title: "Ontworpen in Nederland", image: werkplaatsImg },
@@ -65,116 +67,6 @@ const CONFIGURATOR_BENEFITS = [
   { title: "10 jaar garantie", image: detailDesignImg },
 ];
 
-const FULL_HOUSE_FRONT_IMAGES: Record<string, string> = {
-  Truffelbruin:
-    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_febf1f75-a372-4cd7-aa4a-98f7231d208a.jpg?v=1785761296",
-  Cashmeregrijs:
-    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_bb9754f6-1ec4-4bb9-b906-0f6c91cfc4da.jpg?v=1785762097",
-  Blush:
-    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_daab0722-3ff3-46ab-99f4-71ef038faecf.jpg?v=1785762321",
-  Kristalwit:
-    "https://cdn.shopify.com/s/files/1/0909/6010/1720/files/Wandig_55in_FullHouse_Closed_Front_1cb0343f-93b7-4c9c-ac58-92a733dc67be.jpg?v=1785762395",
-};
-
-const MODULE_CROPS = {
-  left: { left: 0.19, top: 0.182, width: 0.144, height: 0.569 },
-  center: { left: 0.334, top: 0.182, width: 0.331, height: 0.569 },
-  right: { left: 0.665, top: 0.182, width: 0.147, height: 0.569 },
-} as const;
-
-type ModulePosition = keyof typeof MODULE_CROPS;
-
-function CroppedModuleImage({
-  color,
-  position,
-  source,
-  animate = true,
-  testId = true,
-  className = "",
-}: {
-  color: string;
-  position: ModulePosition;
-  source: string;
-  animate?: boolean;
-  testId?: boolean;
-  className?: string;
-}) {
-  const crop = MODULE_CROPS[position];
-
-  return (
-    <div
-      data-testid={testId ? `configurator-${position}-module` : undefined}
-      className={`relative h-full shrink-0 overflow-hidden ${className}`}
-      style={{
-        aspectRatio: `${(crop.width * 4) / (crop.height * 3)}`,
-        animation: animate ? MODULE_REVEAL : undefined,
-        backfaceVisibility: "hidden",
-        contain: "paint",
-        willChange: animate ? "opacity" : undefined,
-      }}
-    >
-      <img
-        src={source}
-        alt={`Wandig ${position === "center" ? "middenmodule" : `${position === "left" ? "linker" : "rechter"} module`} in ${color}`}
-        className="pointer-events-none absolute max-w-none select-none"
-        style={{
-          width: `${100 / crop.width}%`,
-          height: `${100 / crop.height}%`,
-          left: `${(-crop.left / crop.width) * 100}%`,
-          top: `${(-crop.top / crop.height) * 100}%`,
-        }}
-      />
-    </div>
-  );
-}
-
-function ConfiguratorModuleImage({
-  color,
-  position,
-  source,
-  animate = true,
-  testId = true,
-  className = "",
-}: {
-  color: string;
-  position: ModulePosition;
-  source: string | null;
-  animate?: boolean;
-  testId?: boolean;
-  className?: string;
-}) {
-  const usesWalnutAsset = color === FULL_HOUSE_COLORS[0];
-
-  if (!usesWalnutAsset) {
-    return (
-      <CroppedModuleImage
-        color={color}
-        position={position}
-        source={source!}
-        animate={animate}
-        testId={testId}
-        className={className}
-      />
-    );
-  }
-
-  const walnutSource =
-    position === "left" ? leftModule.url : position === "center" ? centerModule.url : rightModuleUrl;
-
-  return (
-    <img
-      src={walnutSource}
-      alt={`Wandig ${position === "center" ? "middenmodule" : `${position === "left" ? "linker" : "rechter"} module`} in ${color}`}
-      data-testid={testId ? `configurator-${position}-module` : undefined}
-      className={`block h-full w-auto select-none ${className}`}
-      style={{
-        animation: animate ? MODULE_REVEAL : undefined,
-        backfaceVisibility: "hidden",
-        willChange: animate ? "opacity" : undefined,
-      }}
-    />
-  );
-}
 
 function euro(n: number) {
   return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;
@@ -950,39 +842,12 @@ function ConfiguratorPage() {
                     : "Alleen midden (1)",
           }}
           preview={
-            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
-              <div className="absolute inset-0 flex items-end justify-center pb-[12%]">
-                <div className="flex h-[109%] translate-y-[30px] items-end">
-                  {hasLeft && (
-                    <ConfiguratorModuleImage
-                      color={color}
-                      position="left"
-                      source={colorModuleSource}
-                      animate={false}
-                      testId={false}
-                      className={usesWalnutModules ? "mr-[-11px]" : "mr-[-3px]"}
-                    />
-                  )}
-                  <ConfiguratorModuleImage
-                    color={color}
-                    position="center"
-                    source={colorModuleSource}
-                    animate={false}
-                    testId={false}
-                  />
-                  {hasRight && (
-                    <ConfiguratorModuleImage
-                      color={color}
-                      position="right"
-                      source={colorModuleSource}
-                      animate={false}
-                      testId={false}
-                      className={usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
+            <WandigSpecPreview
+              color={color}
+              source={colorModuleSource}
+              hasLeft={hasLeft}
+              hasRight={hasRight}
+            />
           }
         />
         <UniqueSection title="Dit maakt Wandig uniek" />

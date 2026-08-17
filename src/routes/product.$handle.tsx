@@ -800,7 +800,7 @@ function ProductView({ product }: { product: ProductNode }) {
       <UniqueSection />
 
       <BeforeAfterSection
-        {...(handle === "solo"
+        {...(product.handle === "solo"
           ? { beforeSrc: beforeSoloAsset.url, afterSrc: afterSoloAsset.url }
           : {})}
       />

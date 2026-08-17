@@ -3,7 +3,8 @@ import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
-import { displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
+import { FULL_HOUSE_COLORS, displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
+import { FULL_HOUSE_FRONT_IMAGES, WandigSpecPreview } from "@/components/WandigModulePreview";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
@@ -750,7 +751,11 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <SpecificationsSection widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
+      <SpecificationsSection
+        widthLabel={specWidthLabel}
+        heightLabel={specHeightLabel}
+        preview={<WandigSpecPreview color={specPreviewColor} source={specPreviewSource} />}
+      />
 
       <UniqueSection />
 

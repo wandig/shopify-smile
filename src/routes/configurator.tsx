@@ -76,7 +76,7 @@ const CONFIGURATOR_BENEFITS = [
 
 
 function euro(n: number) {
-  return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;
+  return `${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)},-`;
 }
 
 

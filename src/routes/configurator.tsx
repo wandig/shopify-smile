@@ -73,12 +73,6 @@ function euro(n: number) {
   return `€ ${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)}`;
 }
 
-function euroWithCents(n: number) {
-  return `€ ${new Intl.NumberFormat("nl-NL", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(n)}`;
-}
 
 const INFO_TOPICS = {
   klarna: {

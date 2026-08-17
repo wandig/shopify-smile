@@ -112,8 +112,8 @@ const In3Logo = () => (
 );
 
 const SpreadLogo = () => (
-  <span className="flex h-7 w-11 items-center justify-center rounded-[6px] bg-[#fff1e7] text-[#ef7027]">
-    <CreditCard className="h-4 w-4" />
+  <span className="flex h-7 w-11 items-center justify-center overflow-hidden rounded-[6px] bg-white">
+    <img src={sprayPayLogo} alt="SprayPay" className="h-5 w-auto object-contain" />
   </span>
 );
 

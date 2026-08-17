@@ -3,6 +3,7 @@ import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
 import { FULL_HOUSE_COLORS, displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
 import { FULL_HOUSE_FRONT_IMAGES, WandigSpecPreview } from "@/components/WandigModulePreview";
 import { useCartStore } from "@/stores/cartStore";
@@ -445,12 +446,6 @@ function ProductView({ product }: { product: ProductNode }) {
         maximumFractionDigits: 0,
       }).format(displayedNumericPrice) + "\u2060,-"
     : "Prijs op aanvraag";
-  const installmentPrice = displayedNumericPrice > 0
-    ? new Intl.NumberFormat("nl-NL", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(displayedNumericPrice / 3)
-    : null;
   const displayTitle = product.title.replace(/^Wandig\s+/i, "");
   const scrollBenefits = (direction: -1 | 1) => {
     benefitsScrollerRef.current?.scrollBy({ left: direction * 166, behavior: "smooth" });
@@ -582,25 +577,12 @@ function ProductView({ product }: { product: ProductNode }) {
 
                   <div className="min-w-0 text-right">
                     <p className="text-[23px] font-bold leading-none text-[#ff5a00]">{configuratorPrice}</p>
-                    {installmentPrice && (
-                      <div className="mt-2 text-[12px] leading-[1.4] text-[#071426]/42">
-                        <p className="whitespace-nowrap">3 betalingen van {installmentPrice} tegen 0% rente</p>
-                        <p className="mt-1 flex items-baseline justify-end gap-2">
-                          <strong
-                            className="text-[14px] font-bold leading-none text-[#071426]"
-                            style={{ fontFamily: '"Klarna Headline", "Circular-Regular", sans-serif' }}
-                          >
-                            Klarna.
-                          </strong>
-                          <a href="https://www.klarna.com/nl/klantenservice/" target="_blank" rel="noreferrer" className="underline underline-offset-2 transition-colors hover:text-[#071426]">
-                            Meer informatie
-                          </a>
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </div>
+
+                <PaymentOptionsBadges price={displayedNumericPrice} />
               </div>
+
 
               {hasOptions && (
                 <div className="mt-4 space-y-2">

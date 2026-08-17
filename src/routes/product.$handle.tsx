@@ -582,25 +582,12 @@ function ProductView({ product }: { product: ProductNode }) {
 
                   <div className="min-w-0 text-right">
                     <p className="text-[23px] font-bold leading-none text-[#ff5a00]">{configuratorPrice}</p>
-                    {installmentPrice && (
-                      <div className="mt-2 text-[12px] leading-[1.4] text-[#071426]/42">
-                        <p className="whitespace-nowrap">3 betalingen van {installmentPrice} tegen 0% rente</p>
-                        <p className="mt-1 flex items-baseline justify-end gap-2">
-                          <strong
-                            className="text-[14px] font-bold leading-none text-[#071426]"
-                            style={{ fontFamily: '"Klarna Headline", "Circular-Regular", sans-serif' }}
-                          >
-                            Klarna.
-                          </strong>
-                          <a href="https://www.klarna.com/nl/klantenservice/" target="_blank" rel="noreferrer" className="underline underline-offset-2 transition-colors hover:text-[#071426]">
-                            Meer informatie
-                          </a>
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </div>
+
+                <PaymentOptionsBadges price={displayedNumericPrice} />
               </div>
+
 
               {hasOptions && (
                 <div className="mt-4 space-y-2">

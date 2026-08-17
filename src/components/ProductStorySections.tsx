@@ -16,6 +16,7 @@ import onderhoudsvriendelijkV2Img from "@/assets/onderhoudsvriendelijk-v2.png.as
 const buildSpecSections = (
   widthLabel: string,
   heightLabel: string,
+  configSummary?: { colorLabel?: string; modulesLabel?: string },
 ): Array<{ title: string; body: ReactNode }> => [
   {
     title: "Algemeen",
@@ -27,6 +28,12 @@ const buildSpecSections = (
     title: "Afmetingen",
     body: (
       <ul className="space-y-1.5">
+        {configSummary?.colorLabel && (
+          <li className="flex justify-between gap-4"><span>Kleur</span><span className="text-[#071426]">{configSummary.colorLabel}</span></li>
+        )}
+        {configSummary?.modulesLabel && (
+          <li className="flex justify-between gap-4"><span>Modules</span><span className="text-[#071426]">{configSummary.modulesLabel}</span></li>
+        )}
         <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">{widthLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">{heightLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">32 cm</span></li>
@@ -34,6 +41,7 @@ const buildSpecSections = (
       </ul>
     ),
   },
+
 
   {
     title: "Materiaal",

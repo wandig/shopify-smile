@@ -538,7 +538,7 @@ function ConfiguratorBannerSection() {
       {/* Mobile + tablet: oude full-bleed banner */}
       <section className="relative w-full overflow-hidden lg:hidden">
         <img
-          src={configuratorBg.url}
+          src={configuratorBannerKids.url}
           alt="Configureer jouw tv-wand"
           className="block h-[420px] w-full object-cover object-center"
           loading="lazy"

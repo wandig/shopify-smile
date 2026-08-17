@@ -210,6 +210,23 @@ function ProductView({ product }: { product: ProductNode }) {
   const specWidthLabel = formatCm(wandigWidth(dimensionSize, 2));
   const specHeightLabel = String(dimensionSize.wallHeight);
 
+  // Kleurpreview in de specificaties: alle modules in de gekozen kleur
+  const specPreviewColor = selectedColor ?? FULL_HOUSE_COLORS[0];
+  const specPreviewSource = useMemo(() => {
+    if (specPreviewColor === FULL_HOUSE_COLORS[0]) return null;
+    const matchingVariant = variants.find((v) => {
+      const selections = new Map(
+        v.selectedOptions.map((o) => [o.name.toLocaleLowerCase("nl-NL"), o.value]),
+      );
+      return (
+        selections.get("kleur") === specPreviewColor &&
+        selections.get("opstelling") === "Links" &&
+        selections.get("maat tv") === "58 - 65 inch"
+      );
+    });
+    return matchingVariant?.image?.url ?? FULL_HOUSE_FRONT_IMAGES[specPreviewColor] ?? null;
+  }, [variants, specPreviewColor]);
+
   // Shopify uploads the photos per variant as one consecutive block, starting at
   // the variant's own image. So we slice from that anchor up to the next anchor.
   const images = useMemo(() => {

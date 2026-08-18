@@ -269,19 +269,26 @@ const UNIQUE_CARDS: Array<{
     body: "Tijdloze tinten voor ieder interieur",
     image: stijlvolleKleurenImg.url,
     variant: "light",
+    lightText: true,
+    darkGradient: true,
   },
   {
     title: "Hoogwaardige kwaliteit",
     body: "Stevig gebouwd voor jarenlang woonplezier",
     image: hoogwaardigeKwaliteitV4Img.url,
     variant: "light",
+    lightText: true,
+    darkGradient: true,
   },
   {
     title: "Kabels uit het zicht",
     body: "Snoeren en aansluitingen netjes weggewerkt",
     image: kabelsUitZichtV4Img.url,
     variant: "light",
+    lightText: true,
+    darkGradient: true,
   },
+
   {
     title: "Push-to-open",
     body: "Greeploos openen met één lichte druk",
@@ -409,14 +416,15 @@ export function UniqueSection({ title = "Dit maakt Full House uniek" }: { title?
               }`} />
             )}
 
-            <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7">
+            <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7" style={{ textShadow: "0 1px 8px rgba(7,20,38,0.45)" }}>
               {card.eyebrow && (
-                <p className={`mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] ${card.lightText ? "text-white/70" : "text-[#071426]/60"}`}>{card.eyebrow}</p>
+                <p className={`mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] ${card.lightText ? "text-white/80" : "text-[#071426]/60"}`}>{card.eyebrow}</p>
               )}
               <h3 className={`text-[20px] md:text-[22px] font-bold leading-tight ${card.lightText ? "text-white" : "text-[#071426]"}`}>{card.title}</h3>
               {card.body && (
                 <p className={`mt-2 text-[13px] leading-relaxed ${card.lightText ? "text-white" : "text-[#071426]"}`}>{card.body}</p>
               )}
+
             </div>
           </article>
         ))}

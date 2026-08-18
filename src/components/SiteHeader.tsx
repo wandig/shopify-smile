@@ -106,8 +106,18 @@ function ModelsMenu({
                 ? models.map((p) => {
                     const node = p.node;
                     const image = node.images.edges[0]?.node;
-                    const price = node.priceRange.minVariantPrice;
-                    const hasPrice = parseFloat(price.amount) > 0;
+                    const variantPrices = (node.variants?.edges ?? [])
+                      .map((v) => v.node.price)
+                      .filter((p) => p && parseFloat(p.amount) > 0);
+                    const fallbackPrice = variantPrices.sort(
+                      (a, b) => parseFloat(a.amount) - parseFloat(b.amount),
+                    )[0];
+                    const price =
+                      parseFloat(node.priceRange.minVariantPrice.amount) > 0
+                        ? node.priceRange.minVariantPrice
+                        : fallbackPrice;
+                    const hasPrice = !!price && parseFloat(price.amount) > 0;
+
                     return (
                       <Link
                         key={node.id}

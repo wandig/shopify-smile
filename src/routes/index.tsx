@@ -502,7 +502,7 @@ function ProductCarouselSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   return (
     <section className="bg-[#faf8f5] py-10 md:py-14">
-      <div className="mx-auto max-w-[1456px] pl-5 md:pl-10 pr-0 -mr-[calc((100vw-100%)/2)]">
+      <div className="mx-auto max-w-[1456px] xl:max-w-[1720px] 2xl:max-w-none pl-5 md:pl-10 2xl:pl-16 pr-0 -mr-[calc((100vw-100%)/2)]">
         <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6">
           <div
             ref={scrollerRef}

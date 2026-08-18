@@ -167,9 +167,8 @@ function Producten() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-14 md:pt-20 pb-20 md:pb-28">
 
-
-      <section className="mx-auto max-w-[1200px] px-5 md:px-10 pb-20 md:pb-28">
         {isLoading ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 3 }).map((_, i) => (

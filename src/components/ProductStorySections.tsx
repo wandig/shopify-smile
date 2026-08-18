@@ -269,19 +269,26 @@ const UNIQUE_CARDS: Array<{
     body: "Tijdloze tinten voor ieder interieur",
     image: stijlvolleKleurenImg.url,
     variant: "light",
+    lightText: true,
+    darkGradient: true,
   },
   {
     title: "Hoogwaardige kwaliteit",
     body: "Stevig gebouwd voor jarenlang woonplezier",
     image: hoogwaardigeKwaliteitV4Img.url,
     variant: "light",
+    lightText: true,
+    darkGradient: true,
   },
   {
     title: "Kabels uit het zicht",
     body: "Snoeren en aansluitingen netjes weggewerkt",
     image: kabelsUitZichtV4Img.url,
     variant: "light",
+    lightText: true,
+    darkGradient: true,
   },
+
   {
     title: "Push-to-open",
     body: "Greeploos openen met één lichte druk",

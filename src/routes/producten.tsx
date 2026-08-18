@@ -198,25 +198,20 @@ function CollectionSeriesCard({ product, offset = false }: { product: ProductNod
   const hasVisiblePrice = price !== null;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.06]">
-      <Link
-        to="/product/$handle"
-        params={{ handle: product.handle }}
-        className="relative block aspect-[4/3] overflow-hidden bg-[#f4f1ed]"
-      >
-        {image && <CrossfadeImage src={image.url} alt={image.altText || product.title} />}
-      </Link>
-
-      <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-baseline justify-between gap-3">
-          <h2 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h2>
-          <span className="shrink-0 text-sm font-semibold text-[#1f1915]">
-            {hasVisiblePrice ? formatPrice(price!.amount, price!.currencyCode) : "Samenstellen"}
-          </span>
-        </div>
+    <article className={`group relative flex flex-col ${offset ? "lg:-mt-12" : ""}`}>
+      <div className="relative mb-6 overflow-hidden border border-[#0f1f2a]/5 bg-[#f6f3ee] shadow-sm md:mb-8">
+        <Link
+          to="/product/$handle"
+          params={{ handle: product.handle }}
+          className="relative block aspect-[3/4] overflow-hidden"
+        >
+          <div className="absolute inset-0 transition-transform duration-[1000ms] ease-out group-hover:scale-105">
+            {image && <CrossfadeImage src={image.url} alt={image.altText || product.title} />}
+          </div>
+        </Link>
 
         {colorValues.length > 0 && (
-          <div className="mt-5 flex flex-wrap items-center gap-2.5">
+          <div className="pointer-events-auto absolute bottom-5 left-5 right-5 flex flex-wrap items-center gap-2 opacity-100 transition-opacity duration-500 lg:opacity-0 lg:group-hover:opacity-100 lg:focus-within:opacity-100">
             {colorValues.map((color) => {
               const active = selectedColor === color;
               return (
@@ -226,7 +221,7 @@ function CollectionSeriesCard({ product, offset = false }: { product: ProductNod
                   onClick={() => setSelectedColor(color)}
                   title={color}
                   aria-label={`Kies ${color}`}
-                  className={`relative h-7 w-7 overflow-hidden rounded-full border-2 bg-transparent p-0 transition-[border-color,transform] duration-150 active:scale-95 ${active ? "border-[#ef7027]" : "border-transparent hover:border-[#ef7027]/45"}`}
+                  className={`relative h-6 w-6 overflow-hidden rounded-full border bg-transparent p-0 transition-transform duration-150 hover:scale-110 active:scale-95 ${active ? "border-[#ef7027] ring-1 ring-[#ef7027]" : "border-white"}`}
                 >
                   <span
                     className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.45),inset_0_-3px_5px_rgba(0,0,0,0.18)]"
@@ -237,16 +232,25 @@ function CollectionSeriesCard({ product, offset = false }: { product: ProductNod
             })}
           </div>
         )}
+      </div>
+
+      <div className="space-y-4">
+        <div className="flex items-baseline justify-between gap-3">
+          <h2 className="text-2xl font-light tracking-tight text-[#0f1f2a]">{copy.title}</h2>
+          <span className="shrink-0 text-sm text-[#0f1f2a]/50">
+            {hasVisiblePrice ? `vanaf ${formatPrice(price!.amount, price!.currencyCode)}` : "Samenstellen"}
+          </span>
+        </div>
 
         <Link
           to="/product/$handle"
           params={{ handle: product.handle }}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f1915] transition hover:text-[#f56e16]"
+          className="block w-full border border-[#0f1f2a] py-4 text-center text-sm font-medium uppercase tracking-widest text-[#0f1f2a] transition-all duration-300 hover:bg-[#0f1f2a] hover:text-white"
         >
           Zelf samenstellen
-          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
         </Link>
       </div>
     </article>
   );
 }
+

@@ -189,8 +189,8 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     intro: product.description,
     specs: ["Plug & play", "Gratis levering", "5 jaar garantie"],
   };
-  const price = product.priceRange.minVariantPrice;
-  const hasVisiblePrice = parseFloat(price.amount) > 0;
+  const price = lowestPaidPrice(product);
+  const hasVisiblePrice = price !== null;
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.06]">

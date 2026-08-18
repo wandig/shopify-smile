@@ -125,7 +125,7 @@ function Producten() {
             <div className="w-full lg:max-w-[520px]">
               <h1 className="font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">
 
-                Kies je Wandig serie
+                Cinewalls
               </h1>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-[#1f1915]/60">
                 Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.

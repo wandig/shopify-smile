@@ -136,13 +136,9 @@ function ModelsMenu({
                         </div>
                         <div className="mt-5 flex items-baseline justify-between gap-3 px-1 text-[#15110d]">
                           <p className="whitespace-nowrap text-[17px] font-medium tracking-tight">{node.title}</p>
-                          {hasPrice ? (
+                          {hasPrice && (
                             <span className="shrink-0 text-[15px] text-[#15110d]/60">
-                              {formatPrice(price.amount, price.currencyCode)}
-                            </span>
-                          ) : (
-                            <span className="shrink-0 text-[11px] font-bold uppercase tracking-wider text-[#ef7027]">
-                              Samenstellen
+                              {formatPrice(price!.amount, price!.currencyCode)}
                             </span>
                           )}
                         </div>

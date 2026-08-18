@@ -121,8 +121,8 @@ function Producten() {
         <div className="grid lg:grid-cols-2">
           <div className="flex items-center px-5 py-12 md:px-10 md:py-16 lg:justify-end">
             <div className="w-full lg:max-w-[520px]">
-              <span className="block text-xs uppercase tracking-[0.2em] text-[#f56e16]">Collectie</span>
-              <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">
+              <h1 className="font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">
+
                 Kies je Wandig serie
               </h1>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-[#1f1915]/60">

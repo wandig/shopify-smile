@@ -147,8 +147,6 @@ function ModelsMenu({
                   ))}
             </div>
           </div>
-
-          </div>
         </div>
       </div>
     </div>

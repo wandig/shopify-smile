@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
@@ -119,7 +120,7 @@ function KleurstalenPage() {
                   >
                     <div className="overflow-hidden rounded-[14px] bg-[#f7f7f7]">
                       {image ? (
-                        <img
+                        <Img
                           src={image}
                           alt={`Kleurstaal ${product.node.title}`}
                           loading="lazy"

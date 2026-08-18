@@ -1,3 +1,5 @@
+import { Img } from "@/components/Img";
+import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
@@ -27,8 +29,10 @@ import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, Sh
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
-import fullHouseGalleryMain from "@/assets/full-house-gallery-main-cropped.png";
-import fullHouseGalleryRoom from "@/assets/full-house-gallery-room.jpg";
+import fullHouseGalleryMainAsset from "@/assets/full-house-gallery-main-cropped.png.asset.json";
+const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
+import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
+const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";
 import fullHouseGalleryStylingTwo from "@/assets/full-house-gallery-styling-two.webp";
 import fullHouseGalleryFinish from "@/assets/full-house-gallery-finish.webp";
@@ -405,13 +409,24 @@ function ProductView({ product }: { product: ProductNode }) {
     };
   }, [galleryItems]);
 
-  // Preload every variant image so switching colour/option crossfades instantly.
+  // Preload alleen de afbeeldingen van de huidige selectie, geoptimaliseerd en
+  // pas wanneer de browser rustig is — niet de volledige variantenbibliotheek.
   useEffect(() => {
-    allImages.forEach(({ node }) => {
-      const img = new Image();
-      img.src = node.url;
-    });
-  }, [allImages]);
+    const preload = () => {
+      images.slice(0, 10).forEach(({ node }) => {
+        const img = new Image();
+        const url = optimizeImageUrl(node.url, 1200);
+        if (url) img.src = url;
+      });
+    };
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
+    if (idle) {
+      idle(preload);
+      return;
+    }
+    const timer = window.setTimeout(preload, 1200);
+    return () => window.clearTimeout(timer);
+  }, [images]);
 
   // Track benefits carousel scroll position to dim disabled arrows.
   useEffect(() => {
@@ -480,8 +495,10 @@ function ProductView({ product }: { product: ProductNode }) {
         <div className="min-w-0">
           {galleryItems[0] && (
             <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
-              <img
+              <Img
                 ref={mainGalleryImageRef}
+                w={1200}
+                priority
                 src={galleryItems[0].src}
                 alt={galleryItems[0].alt}
                 className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${product.handle === "full-house" ? "h-auto w-[76.16%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
@@ -495,7 +512,7 @@ function ProductView({ product }: { product: ProductNode }) {
             {subImageGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <figure className="overflow-hidden rounded-[6px]">
-                  <img
+                  <Img
                     src={group[0].src}
                     alt={group[0].alt}
                     className="block aspect-[4/3] w-full object-cover"
@@ -506,7 +523,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   <div className="mt-3 grid grid-cols-2 gap-3">
                     {group.slice(1).map((image, idx) => (
                       <figure key={idx} className="overflow-hidden rounded-[6px]">
-                        <img
+                        <Img
                           src={image.src}
                           alt={image.alt}
                           className="block aspect-[4/3] w-full object-cover"
@@ -532,8 +549,9 @@ function ProductView({ product }: { product: ProductNode }) {
                 className="flex min-h-[42px] w-full items-center justify-between gap-4 px-4 text-left text-[#071426]"
               >
                 <span className="flex items-center gap-2 font-sans text-[14.4px] font-[385] text-[#cdc0b5]" style={{ textShadow: '0 0.55px 0.55px rgba(0,0,0,0.065)' }}>
-                  <img
+                  <Img
                     src={dutchDesignIcon.url}
+                    w={64}
                     alt=""
                     aria-hidden="true"
                     className="h-3.5 w-5 shrink-0 object-contain opacity-80"
@@ -555,8 +573,9 @@ function ProductView({ product }: { product: ProductNode }) {
                     <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
                       Van de eerste plank tot de laatste kabeldoorvoer: lokaal vakmanschap, precies passend rond jouw tv.
                     </p>
-                    <img
+                    <Img
                       src={puzzlePiecesImg.url}
+                      w={220}
                       alt=""
                       aria-hidden="true"
                       className="pointer-events-none absolute bottom-5 right-5 w-[84px] select-none"
@@ -713,10 +732,10 @@ function ProductView({ product }: { product: ProductNode }) {
                 {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : activeVariant?.availableForSale ? (
                   <span className="relative block h-full w-full overflow-hidden">
                     <span className="absolute inset-0 flex items-center justify-center gap-1.5 font-[200] transition-transform duration-300 ease-out group-hover:-translate-y-full">
-                      <img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" />In winkelwagen
+                      <Img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" w={64} />In winkelwagen
                     </span>
                     <span className="absolute inset-0 flex translate-y-full items-center justify-center gap-1.5 font-[200] transition-transform duration-300 ease-out group-hover:translate-y-0">
-                      <img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" />In winkelwagen
+                      <Img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" w={64} />In winkelwagen
                     </span>
                   </span>
                 ) : "Uitverkocht"}
@@ -780,7 +799,7 @@ function ProductView({ product }: { product: ProductNode }) {
               <div ref={benefitsScrollerRef} className="flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {PRODUCT_BENEFITS.map((benefit) => (
                   <article key={benefit.title} className="relative h-[195px] min-w-[150px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-                    <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                    <Img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
                     <div className="pointer-events-none absolute inset-x-0 top-0 h-[90px] bg-gradient-to-b from-black/55 via-black/25 to-transparent" />
                     <div className="absolute inset-x-0 top-0 px-4 pt-5">
                       <h3 className="text-center text-[13px] font-normal leading-tight tracking-[0.03em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">{benefit.title}</h3>
@@ -799,7 +818,7 @@ function ProductView({ product }: { product: ProductNode }) {
         preview={
           isSolo ? (
             <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
-              <img
+              <Img
                 src={galleryItems[0]?.src}
                 alt={`Wandig Solo in ${specPreviewColor}`}
                 className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"

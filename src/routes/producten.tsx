@@ -1,3 +1,5 @@
+import { Img } from "@/components/Img";
+import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
@@ -64,9 +66,9 @@ function CrossfadeImage({ src, alt }: { src: string; alt: string }) {
 
   return (
     <>
-      <img src={shown} alt={alt} className="absolute inset-0 h-full w-full object-cover" />
+      <Img src={shown} alt={alt} className="absolute inset-0 h-full w-full object-cover" />
       {incoming && incoming !== shown && (
-        <img
+        <Img
           key={incoming}
           src={incoming}
           alt={alt}
@@ -158,8 +160,10 @@ function Producten() {
           </div>
 
           <div className="relative bg-[#f4f1ed]">
-            <img
+            <Img
               src={lifestyleAsset.url}
+              w={1100}
+              priority
               alt="Woonkamer met een Wandig tv-wand in gebruik"
               className="h-[300px] w-full object-cover sm:h-[400px] lg:h-full lg:min-h-[520px]"
             />
@@ -202,12 +206,22 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
   }, [colorValues, selectedColor]);
 
   useEffect(() => {
-    variants.forEach((variant) => {
-      if (variant.image?.url) {
-        const img = new Image();
-        img.src = variant.image.url;
-      }
-    });
+    const preload = () => {
+      variants.slice(0, 12).forEach((variant) => {
+        const url = optimizeImageUrl(variant.image?.url, 700);
+        if (url) {
+          const img = new Image();
+          img.src = url;
+        }
+      });
+    };
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
+    if (idle) {
+      idle(preload);
+      return;
+    }
+    const timer = window.setTimeout(preload, 1200);
+    return () => window.clearTimeout(timer);
   }, [variants]);
 
   const sizeOption = product.options.find((option) => /maat|size|inch/i.test(option.name));

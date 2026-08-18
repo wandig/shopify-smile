@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -81,7 +82,7 @@ export function CartDrawer() {
                     <div className="flex gap-4">
                       <div className="h-[84px] w-[84px] shrink-0 overflow-hidden rounded-xl bg-[#f7f7f7]">
                         {image && (
-                          <img src={image.url} alt={item.product.node.title} className="h-full w-full object-cover" />
+                          <Img src={image.url} alt={item.product.node.title} className="h-full w-full object-cover" w={180} />
                         )}
                       </div>
                       <div className="flex-1 min-w-0">

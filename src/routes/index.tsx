@@ -1,3 +1,5 @@
+import { Img } from "@/components/Img";
+import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import press1 from "@/assets/press/press1.svg";
 import press2 from "@/assets/press/press2.svg";
@@ -22,8 +24,11 @@ import {
   User,
 } from "lucide-react";
 
-import heroVideo from "@/assets/hero-reel-v2.mp4.asset.json";
-import werkplaatsVideo from "@/assets/wandig-werkplaats.mov.asset.json";
+import heroVideo from "@/assets/hero-reel-web.mp4.asset.json";
+import heroPoster from "@/assets/hero-poster.jpg.asset.json";
+import werkplaatsVideo from "@/assets/werkplaats-web.mp4.asset.json";
+import werkplaatsPoster from "@/assets/werkplaats-poster.jpg.asset.json";
+import { LazyVideo } from "@/components/LazyVideo";
 import fullhouseOrange from "@/assets/fullhouse-orange.jpeg.asset.json";
 import fullHouseClosedFrontV5 from "@/assets/full-house-closed-front-v5.png.asset.json";
 import fullHouseSelectedV7 from "@/assets/full-house-selected-v7.png.asset.json";
@@ -68,6 +73,11 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "preload", as: "image", href: heroPoster.url, fetchPriority: "high" },
+      { rel: "preconnect", href: "https://hu0i4f-1k.myshopify.com" },
+      { rel: "preconnect", href: "https://cdn.shopify.com" },
     ],
   }),
   component: Home,
@@ -122,12 +132,10 @@ function PrimaryButton({ to, children }: { to: string; children: ReactNode }) {
 function HeroSection() {
   return (
     <section className="relative h-screen max-h-[780px] min-h-[560px] w-full overflow-hidden">
-      <video
+      <LazyVideo
         src={heroVideo.url}
-        autoPlay
-        muted
-        loop
-        playsInline
+        poster={heroPoster.url}
+        eager
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/35" />
@@ -412,10 +420,10 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       >
         <picture className="absolute inset-0 block h-full w-full">
           {p.mobileImg && !variantImage && (
-            <source media="(max-width: 767px)" srcSet={p.mobileImg} />
+            <source media="(max-width: 767px)" srcSet={optimizeImageUrl(p.mobileImg, 800)} />
           )}
 
-          <img
+          <Img
             key={img}
             src={img}
             alt={`${p.title} in ${activeColor}`}
@@ -460,7 +468,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
     >
       <div className="flex-1 min-h-0 overflow-hidden rounded-[12px] bg-[#f7f7f7]">
-        <img
+        <Img
           key={img}
           src={img}
           alt={`${p.title} in ${activeColor}`}
@@ -537,8 +545,9 @@ function ConfiguratorBannerSection() {
     <>
       {/* Mobile + tablet: oude full-bleed banner */}
       <section className="relative w-full overflow-hidden lg:hidden">
-        <img
+        <Img
           src={configuratorBannerKids.url}
+          w={1600}
           alt="Configureer jouw tv-wand"
           className="block h-[420px] w-full object-cover object-center"
           loading="lazy"
@@ -567,16 +576,17 @@ function ConfiguratorBannerSection() {
         <div className="relative mx-auto grid max-w-[1456px] grid-cols-12 items-center">
           {/* Image + swatches */}
           <div className="col-span-12 lg:col-span-7 relative aspect-[4/3] lg:aspect-auto lg:h-[620px] overflow-hidden rounded-[24px] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.12)]">
-            <img
+            <Img
               src={configuratorBannerKids.url}
+          w={1600}
               alt="Configureer jouw tv-wand"
               className="h-full w-full object-cover object-center"
               loading="lazy"
             />
             <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm">
-              <img src={swatchDonkereikenAsset.url} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
-              <img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
-              <img src={cashmereAssetTmp.url} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" />
+              <Img src={swatchDonkereikenAsset.url} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" w={96} />
+              <Img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" w={96} />
+              <Img src={cashmereAssetTmp.url} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" w={96} />
               <span className="ml-1 text-[11px] font-[500] tracking-[0.08em] text-[#071426]/60">+ meer</span>
             </div>
           </div>
@@ -632,7 +642,7 @@ function PressMarqueeSection() {
       <div className="relative">
         <div className="flex w-max animate-[wandig-marquee_32s_linear_infinite] items-center gap-16 pr-16">
           {row.map((src, i) => (
-            <img
+            <Img
               key={`${src}-${i}`}
               src={src}
               alt=""
@@ -706,7 +716,7 @@ function WhyUsSection() {
                 className={`group relative flex min-h-[420px] w-[85%] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[24px] p-6 sm:w-[45%] md:min-h-[520px] md:w-[calc(31.25%-0.9375rem)] md:p-8 ${card.bg}`}
               >
                 {card.image && (
-                  <img
+                  <Img
                     src={card.image}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -885,7 +895,7 @@ function ColorSamplesSection() {
                       } ${i === 4 ? "md:col-start-3" : ""}`}
                     >
                       <div className="aspect-square overflow-hidden rounded-[12px]">
-                        <img
+                        <Img
                           src={card.image}
                           alt={`Kleurstaal ${card.name}`}
                           className="h-full w-full object-cover"
@@ -921,12 +931,9 @@ function QuoteVideoSection() {
 
         {/* asset slot: bedrijfsvideo */}
         <div className="mt-8 overflow-hidden rounded-[20px] bg-black md:mt-12">
-          <video
+          <LazyVideo
             src={werkplaatsVideo.url}
-            autoPlay
-            muted
-            loop
-            playsInline
+            poster={werkplaatsPoster.url}
             className="aspect-[16/9] w-full object-cover"
           />
         </div>
@@ -1004,7 +1011,7 @@ function FaqContactSection() {
 /* ---------------------------- 11. 4 benefits ------------------------------ */
 
 function PuzzleImgIcon({ className }: { className?: string }) {
-  return <img src={puzzleIcon.url} alt="" className={className} />;
+  return <Img src={puzzleIcon.url} alt="" className={className} />;
 }
 
 function TrustBannerSection() {

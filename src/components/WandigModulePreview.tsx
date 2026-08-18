@@ -1,7 +1,9 @@
+import { Img } from "@/components/Img";
 import { FULL_HOUSE_COLORS } from "@/lib/wandig-colors";
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
-import rightModuleUrl from "@/assets/right-module-trim-tight-cropped.png";
+import rightModuleUrlAsset from "@/assets/right-module-trim-tight-cropped.png.asset.json";
+const rightModuleUrl = rightModuleUrlAsset.url;
 
 export const MODULE_REVEAL = "moduleColorReveal 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both";
 
@@ -61,7 +63,7 @@ export function CroppedModuleImage({
         willChange: animate ? "opacity" : undefined,
       }}
     >
-      <img
+      <Img
         src={source}
         alt={`Wandig ${moduleLabel(position)} in ${color}`}
         className="pointer-events-none absolute max-w-none select-none"
@@ -110,7 +112,7 @@ export function ConfiguratorModuleImage({
     position === "left" ? leftModule.url : position === "center" ? centerModule.url : rightModuleUrl;
 
   return (
-    <img
+    <Img
       src={walnutSource}
       alt={`Wandig ${moduleLabel(position)} in ${color}`}
       data-testid={testId ? `configurator-${position}-module` : undefined}

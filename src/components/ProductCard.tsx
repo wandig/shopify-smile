@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { Link } from "@tanstack/react-router";
 import type { ShopifyProduct } from "@/lib/shopify";
 
@@ -19,7 +20,7 @@ export function ProductCard({
     >
       <div className="aspect-[4/3] bg-muted overflow-hidden">
         {img && (
-          <img
+          <Img
             src={img.url}
             alt={img.altText || p.title}
             className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"

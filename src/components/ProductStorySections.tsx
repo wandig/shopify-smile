@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
@@ -141,7 +142,7 @@ export function SpecificationsSection({
                   {preview ? (
                     <div className="relative block w-full">{preview}</div>
                   ) : (
-                    <img
+                    <Img
                       src={cinewallSchema.url}
                       alt={`Schematische weergave Wandig Full House, ${widthLabel} cm breed en ${heightLabel} cm hoog`}
                       className="relative block h-auto w-full object-contain"
@@ -393,7 +394,7 @@ export function UniqueSection({ title = "Dit maakt Full House uniek" }: { title?
             key={card.title}
             className="relative h-[440px] w-[280px] shrink-0 snap-center overflow-hidden rounded-[18px] bg-[#f2ece3] md:h-[520px] md:w-[360px]"
           >
-            <img
+            <Img
               src={card.image}
               alt={card.title}
               className="absolute inset-0 h-full w-full object-cover"
@@ -496,7 +497,7 @@ export function BeforeAfterSection({
           <div className="space-y-5">
             <div className="flex items-start gap-4 group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] border border-[#071426]/5 group-hover:border-[#ef7027]/30 transition-colors">
-                <img src={plugAndPlayIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
+                <Img src={plugAndPlayIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" w={64} />
               </div>
               <div className="pt-0.5">
                 <p className="text-[15px] font-semibold text-[#071426]">Plug-and-Play</p>
@@ -505,7 +506,7 @@ export function BeforeAfterSection({
             </div>
             <div className="flex items-start gap-4 group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] border border-[#071426]/5 group-hover:border-[#ef7027]/30 transition-colors">
-                <img src={warrantyIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
+                <Img src={warrantyIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" w={64} />
               </div>
               <div className="pt-0.5">
                 <p className="text-[15px] font-semibold text-[#071426]">10 jaar garantie</p>
@@ -514,7 +515,7 @@ export function BeforeAfterSection({
             </div>
             <div className="flex items-start gap-4 group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] border border-[#071426]/5 group-hover:border-[#ef7027]/30 transition-colors">
-                <img src={kijkplezierIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" />
+                <Img src={kijkplezierIcon.url} alt="" aria-hidden="true" className="h-5 w-5 object-contain opacity-90" w={64} />
               </div>
               <div className="pt-0.5">
                 <p className="text-[15px] font-semibold text-[#071426]">100 dagen proefkijken</p>
@@ -535,7 +536,7 @@ export function BeforeAfterSection({
               setFromClientX(e.clientX);
             }}
           >
-            <img
+            <Img
               src={afterSrc}
               alt="Woonkamer na Full House"
               className="absolute inset-0 h-full w-full object-cover"
@@ -545,7 +546,7 @@ export function BeforeAfterSection({
               className="absolute inset-0 overflow-hidden"
               style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
             >
-              <img
+              <Img
                 src={beforeSrc}
                 alt="Woonkamer voor Full House"
                 className="absolute inset-0 h-full w-full object-cover"

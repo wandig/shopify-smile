@@ -1,3 +1,5 @@
+import { Img } from "@/components/Img";
+import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -29,7 +31,8 @@ import werkplaatsImg from "@/assets/werkplaats.jpg";
 import fullHouseFinishImg from "@/assets/full-house-gallery-finish.webp";
 import fullHouseUseImg from "@/assets/full-house-gallery-use.webp";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
-import fullHouseRoomImg from "@/assets/full-house-gallery-room.jpg";
+import fullHouseRoomImgAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
+const fullHouseRoomImg = fullHouseRoomImgAsset.url;
 import detailDesignImg from "@/assets/detail-design.jpg";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { FULL_HOUSE_COLORS, displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
@@ -219,7 +222,7 @@ function ConfiguratorPage() {
   useEffect(() => {
     const images = Object.values(FULL_HOUSE_FRONT_IMAGES).map((source) => {
       const image = new Image();
-      image.src = source;
+      image.src = optimizeImageUrl(source, 1200) ?? source;
       return image;
     });
 
@@ -534,7 +537,7 @@ function ConfiguratorPage() {
                   className="flex items-center gap-2 font-sans text-[14.4px] font-[385] text-[#cdc0b5]"
                   style={{ textShadow: "0 0.55px 0.55px rgba(0,0,0,0.065)" }}
                 >
-                  <img
+                  <Img
                     src={dutchDesignIcon.url}
                     alt=""
                     aria-hidden="true"
@@ -564,7 +567,7 @@ function ConfiguratorPage() {
                     <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
                       Van de eerste plank tot de laatste kabeldoorvoer: lokaal vakmanschap, precies passend rond jouw tv.
                     </p>
-                    <img
+                    <Img
                       src={puzzlePiecesImg.url}
                       alt=""
                       aria-hidden="true"
@@ -738,7 +741,7 @@ function ConfiguratorPage() {
                       key={benefit.title}
                       className="relative h-[195px] min-w-[150px] snap-start overflow-hidden rounded-[13px] bg-[#eee4dc] shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
                     >
-                      <img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                      <Img src={benefit.image} alt="" className="h-full w-full object-cover" loading="lazy" />
                       <div className="pointer-events-none absolute inset-x-0 top-0 h-[90px] bg-gradient-to-b from-black/55 via-black/25 to-transparent" />
                       <h4 className="absolute inset-x-0 top-0 px-3 pt-5 text-center text-[13px] font-normal leading-tight tracking-[0.03em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]">
                         {benefit.title}

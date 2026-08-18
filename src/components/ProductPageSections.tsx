@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
@@ -16,8 +17,10 @@ import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, Sh
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
-import fullHouseGalleryMain from "@/assets/full-house-gallery-main-cropped.png";
-import fullHouseGalleryRoom from "@/assets/full-house-gallery-room.jpg";
+import fullHouseGalleryMainAsset from "@/assets/full-house-gallery-main-cropped.png.asset.json";
+const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
+import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
+const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";
 import fullHouseGalleryStylingTwo from "@/assets/full-house-gallery-styling-two.webp";
 import fullHouseGalleryFinish from "@/assets/full-house-gallery-finish.webp";
@@ -170,7 +173,7 @@ export function CustomerGallerySection({
                   key={i}
                   className="group relative min-h-0 flex-1 overflow-hidden rounded-[14px]"
                 >
-                  <img
+                  <Img
                     src={image.src}
                     alt={image.alt}
                     className="h-full w-full object-cover"
@@ -377,7 +380,7 @@ export function BuiltToLastSection() {
               style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
             >
               {card.imageUrl && (
-                <img
+                <Img
                   src={card.imageUrl}
                   alt=""
                   className="absolute inset-0 h-full w-full object-cover"
@@ -867,7 +870,7 @@ export function ShieldMoonIcon({ className, strokeWidth = 1.5 }: { className?: s
 }
 
 export function PuzzleIcon({ className }: { className?: string; strokeWidth?: number }) {
-  return <img src={puzzleIcon.url} alt="" className={className} />;
+  return <Img src={puzzleIcon.url} alt="" className={className} />;
 }
 
 export function TrustBannerSection() {

@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone } from "lucide-react";
 import footerLogoAsset from "@/assets/Untitled_design_24.svg.asset.json";
@@ -10,10 +11,10 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
           {/* Logo + tagline */}
           <div>
-            <img
+            <Img
               src={footerLogoAsset.url}
               alt="Wandig"
-              className="h-auto w-[48px]"
+              className="h-auto w-[48px]" w={110}
               loading="lazy"
             />
             <p className="mt-6 max-w-[260px] text-sm leading-relaxed text-white/60">

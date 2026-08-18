@@ -392,6 +392,15 @@ export function UniqueSection({ title = "Dit maakt Full House uniek" }: { title?
               loading="lazy"
               draggable={false}
             />
+            {card.blurBehind && (
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-[42%] backdrop-blur-md"
+                style={{
+                  maskImage: "linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)",
+                  WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)",
+                }}
+              />
+            )}
             {!card.noGradient && (
               <div className={`absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7 ${
                 card.darkGradientLower

@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star, Truck, RotateCcw, ShieldCheck } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
 import { wandigSwatchStyle } from "@/lib/wandig-colors";
+import lifestyleAsset from "@/assets/after-livingroom.jpg.asset.json";
+
 
 export const Route = createFileRoute("/producten")({
   head: () => ({

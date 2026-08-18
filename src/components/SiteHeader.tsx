@@ -106,18 +106,8 @@ function ModelsMenu({
                 ? models.map((p) => {
                     const node = p.node;
                     const image = node.images.edges[0]?.node;
-                    const variantPrices = (node.variants?.edges ?? [])
-                      .map((v) => v.node.price)
-                      .filter((p) => p && parseFloat(p.amount) > 0);
-                    const fallbackPrice = variantPrices.sort(
-                      (a, b) => parseFloat(a.amount) - parseFloat(b.amount),
-                    )[0];
-                    const price =
-                      parseFloat(node.priceRange.minVariantPrice.amount) > 0
-                        ? node.priceRange.minVariantPrice
-                        : fallbackPrice;
-                    const hasPrice = !!price && parseFloat(price.amount) > 0;
-
+                    const price = node.priceRange.minVariantPrice;
+                    const hasPrice = parseFloat(price.amount) > 0;
                     return (
                       <Link
                         key={node.id}
@@ -136,9 +126,13 @@ function ModelsMenu({
                         </div>
                         <div className="mt-5 flex items-baseline justify-between gap-3 px-1 text-[#15110d]">
                           <p className="whitespace-nowrap text-[17px] font-medium tracking-tight">{node.title}</p>
-                          {hasPrice && (
+                          {hasPrice ? (
                             <span className="shrink-0 text-[15px] text-[#15110d]/60">
-                              {formatPrice(price!.amount, price!.currencyCode)}
+                              {formatPrice(price.amount, price.currencyCode)}
+                            </span>
+                          ) : (
+                            <span className="shrink-0 text-[11px] font-bold uppercase tracking-wider text-[#ef7027]">
+                              Samenstellen
                             </span>
                           )}
                         </div>

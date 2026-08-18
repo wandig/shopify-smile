@@ -104,30 +104,34 @@ function Producten() {
   );
 
   return (
-    <div className="bg-[#fbfaf8]">
-      <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-16 md:pt-20 pb-10 md:pb-12">
-        <span className="text-xs tracking-[0.2em] uppercase text-[#f56e16]">Collectie</span>
-        <h1 className="font-serif text-4xl md:text-5xl mt-3 leading-[1.05] text-[#1f1915]">
-          Kies je Wandig serie
-        </h1>
-        <p className="mt-4 max-w-xl text-base text-[#1f1915]/60 leading-relaxed">
-          Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
-        </p>
+    <div className="bg-[#faf8f5]">
+      <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-16 md:pt-24">
+        <div className="flex flex-col gap-8 border-b border-[#0f1f2a]/10 pb-10 md:flex-row md:items-end md:justify-between md:gap-16 md:pb-14">
+          <div className="max-w-2xl">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#ef7027]">Collectie</p>
+            <h1 className="mt-4 text-4xl font-light leading-[1.02] tracking-tight text-[#0f1f2a] md:text-6xl lg:text-[68px]">
+              Vind jouw <span className="font-serif italic text-[#1f1915]">perfecte</span> opstelling
+            </h1>
+          </div>
+          <p className="text-base font-light leading-relaxed text-[#0f1f2a]/60 md:max-w-xs md:text-lg">
+            Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
+          </p>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-[1200px] px-5 md:px-10 pb-20 md:pb-28">
+      <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-14 pb-20 md:pt-20 md:pb-28">
         {isLoading ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="h-[420px] rounded-2xl bg-[#f4f1ed] animate-pulse" />
+              <div key={i} className="aspect-[3/4] bg-[#f6f3ee] animate-pulse" />
             ))}
           </div>
         ) : filteredProducts.length === 0 ? (
           <p className="text-muted-foreground py-20 text-center">Geen producten gevonden</p>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map((p) => (
-              <CollectionSeriesCard key={p.node.id} product={p.node} />
+          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
+            {filteredProducts.map((p, i) => (
+              <CollectionSeriesCard key={p.node.id} product={p.node} offset={i === 1} />
             ))}
           </div>
         )}
@@ -135,6 +139,7 @@ function Producten() {
     </div>
   );
 }
+
 
 function CollectionSeriesCard({ product }: { product: ProductNode }) {
   const variants = useMemo(() => product.variants.edges.map((edge) => edge.node), [product]);

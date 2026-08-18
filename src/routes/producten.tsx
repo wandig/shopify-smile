@@ -107,14 +107,6 @@ function Producten() {
 
   return (
     <div className="bg-[#fbfaf8]">
-      {/* actiebalk */}
-      <div className="bg-[#ef7027] text-white">
-        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-center gap-x-3 gap-y-1 px-5 py-2.5 text-center text-[13px] md:px-10">
-          <span className="font-semibold">Zomeractie: gratis levering &amp; montageset</span>
-          <span className="hidden opacity-70 md:inline">•</span>
-          <span className="opacity-90">100 dagen proefkijken op elke serie</span>
-        </div>
-      </div>
 
       <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-10 md:pt-14 pb-10 md:pb-14">
         <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14">

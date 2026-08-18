@@ -107,68 +107,66 @@ function Producten() {
 
   return (
     <div className="bg-[#fbfaf8]">
+      {/* benefits bar */}
+      <div className="border-y border-[#1f1915]/8 bg-[#f7f3ef]">
+        <ul className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-center gap-x-10 gap-y-2 px-5 py-3 text-[13px] text-[#1f1915]/75 md:px-10">
+          <li className="inline-flex items-center gap-2"><Truck className="h-4 w-4 text-[#ef7027]" /> Gratis levering</li>
+          <li className="inline-flex items-center gap-2"><RotateCcw className="h-4 w-4 text-[#ef7027]" /> 100 dagen proefkijken</li>
+          <li className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[#ef7027]" /> 10 jaar garantie</li>
+        </ul>
+      </div>
 
-      <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-10 md:pt-14 pb-10 md:pb-14">
-        <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
-          <div>
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="flex items-center gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" />
-                ))}
+      {/* hero */}
+      <section className="bg-[#f2eee7]">
+        <div className="grid lg:grid-cols-2">
+          <div className="flex items-center px-5 py-12 md:px-10 md:py-16 lg:justify-end">
+            <div className="w-full lg:max-w-[520px]">
+              <span className="block text-xs uppercase tracking-[0.2em] text-[#f56e16]">Collectie</span>
+              <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">
+                Kies je Wandig serie
+              </h1>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-[#1f1915]/60">
+                Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
+              </p>
+
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <Link
+                  to="/configurator"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#ef7027] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#d95f1c]"
+                >
+                  Configureer jouw kast
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/kleurstalen"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#1f1915]/15 bg-white px-6 py-3 text-sm font-semibold text-[#1f1915] transition hover:border-[#ef7027] hover:text-[#ef7027]"
+                >
+                  Gratis kleurstalen
+                </Link>
               </div>
-              <span className="text-sm font-semibold text-[#1f1915]">4,8/5</span>
-              <span className="text-sm text-[#1f1915]/55">uit 1.000+ beoordelingen</span>
+
+              <div className="mt-7 flex flex-wrap items-center gap-2.5">
+                <div className="flex items-center gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" />
+                  ))}
+                </div>
+                <span className="text-sm font-semibold text-[#1f1915]">4,8/5</span>
+                <span className="text-sm text-[#1f1915]/55">uit 1.000+ beoordelingen</span>
+              </div>
             </div>
-
-            <span className="mt-6 block text-xs uppercase tracking-[0.2em] text-[#f56e16]">Collectie</span>
-            <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">
-              Kies je Wandig serie
-            </h1>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-[#1f1915]/60">
-              Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
-            </p>
-
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link
-                to="/configurator"
-                className="inline-flex items-center gap-2 rounded-full bg-[#ef7027] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#d95f1c]"
-              >
-                Configureer jouw kast
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/kleurstalen"
-                className="inline-flex items-center gap-2 rounded-full border border-[#1f1915]/15 px-6 py-3 text-sm font-semibold text-[#1f1915] transition hover:border-[#ef7027] hover:text-[#ef7027]"
-              >
-                Gratis kleurstalen
-              </Link>
-            </div>
-
-            <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#1f1915]/65">
-              <li className="inline-flex items-center gap-2"><Truck className="h-4 w-4 text-[#ef7027]" /> Gratis levering</li>
-              <li className="inline-flex items-center gap-2"><RotateCcw className="h-4 w-4 text-[#ef7027]" /> 100 dagen proefkijken</li>
-              <li className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[#ef7027]" /> 10 jaar garantie</li>
-            </ul>
           </div>
 
-          <div className="relative overflow-hidden rounded-3xl bg-[#f4f1ed]">
+          <div className="relative bg-[#f4f1ed]">
             <img
               src={lifestyleAsset.url}
               alt="Woonkamer met een Wandig tv-wand in gebruik"
-              className="h-[280px] w-full object-cover sm:h-[380px] lg:h-[460px]"
+              className="h-[300px] w-full object-cover sm:h-[400px] lg:h-full lg:min-h-[520px]"
             />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 rounded-2xl bg-white/85 px-4 py-3 backdrop-blur-[3px]">
-              <p className="text-sm font-semibold text-[#1f1915]">Zo staat een Wandig bij onze klanten thuis</p>
-              <div className="flex items-center gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
+
 
 
       <section className="mx-auto max-w-[1200px] px-5 md:px-10 pb-20 md:pb-28">

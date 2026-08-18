@@ -206,7 +206,7 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
         <div className="flex items-baseline justify-between gap-3">
           <h2 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h2>
           <span className="shrink-0 text-sm font-semibold text-[#1f1915]">
-            {hasVisiblePrice ? formatPrice(price.amount, price.currencyCode) : "Samenstellen"}
+            {hasVisiblePrice ? formatPrice(price!.amount, price!.currencyCode) : "Samenstellen"}
           </span>
         </div>
 

@@ -109,7 +109,7 @@ function Producten() {
     <div className="bg-[#fbfaf8]">
       {/* benefits bar */}
       <div className="border-y border-[#1f1915]/8 bg-[#f7f3ef]">
-        <ul className="mx-auto flex max-w-[760px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-3 text-[13px] text-[#1f1915]/75 md:gap-x-10 md:px-10">
+        <ul className="mx-auto flex max-w-[1220px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-3 text-[13px] text-[#1f1915]/75 md:justify-between md:gap-x-10 md:px-0">
           <li className="inline-flex items-center gap-2"><Truck className="h-4 w-4 text-[#ef7027]" /> Gratis levering</li>
           <li className="inline-flex items-center gap-2"><RotateCcw className="h-4 w-4 text-[#ef7027]" /> 100 dagen proefkijken</li>
           <li className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[#ef7027]" /> 10 jaar garantie</li>

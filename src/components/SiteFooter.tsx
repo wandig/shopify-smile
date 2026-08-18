@@ -39,16 +39,6 @@ export function SiteFooter() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/product/$handle" params={{ handle: "trio" }} className="hover:text-white transition-colors">
-                    Trio
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/product/$handle" params={{ handle: "prestige" }} className="hover:text-white transition-colors">
-                    Prestige
-                  </Link>
-                </li>
-                <li>
                   <Link to="/product/$handle" params={{ handle: "full-house" }} className="hover:text-white transition-colors">
                     Full House
                   </Link>

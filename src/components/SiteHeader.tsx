@@ -12,6 +12,7 @@ import {
   storefrontApiRequest,
   PRODUCTS_QUERY,
   formatPrice,
+  lowestPaidPrice,
   type ShopifyProduct,
 } from "@/lib/shopify";
 import wandigLogo from "@/assets/wandig-logo-header.png.asset.json";

@@ -303,7 +303,8 @@ const UNIQUE_CARDS: Array<{
     image: onderhoudsvriendelijkV2Img.url,
     variant: "light",
     lightText: true,
-    noGradient: true,
+    darkGradient: true,
+    blurBehind: true,
   },
 ];
 

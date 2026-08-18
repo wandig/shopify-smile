@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Hammer, Plug, Plus, Puzzle, Ruler, ShieldCheck, ShoppingBag, Star, Truck } from "lucide-react";
+import { CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Hammer, Plug, Plus, Ruler, ShieldCheck, ShoppingBag, Star, Truck } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,8 @@ import {
   WandigSpecPreview,
   type ModulePosition,
 } from "@/components/WandigModulePreview";
+import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
+import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import werkplaatsImg from "@/assets/werkplaats.jpg";
 import fullHouseFinishImg from "@/assets/full-house-gallery-finish.webp";
 import fullHouseUseImg from "@/assets/full-house-gallery-use.webp";
@@ -532,11 +534,12 @@ function ConfiguratorPage() {
                   className="flex items-center gap-2 font-sans text-[14.4px] font-[385] text-[#cdc0b5]"
                   style={{ textShadow: "0 0.55px 0.55px rgba(0,0,0,0.065)" }}
                 >
-                  <span className="grid h-3.5 w-5 shrink-0 grid-rows-3 overflow-hidden rounded-[1px] opacity-80" aria-hidden="true">
-                    <span className="bg-[#ae1c28]" />
-                    <span className="bg-white" />
-                    <span className="bg-[#21468b]" />
-                  </span>
+                  <img
+                    src={dutchDesignIcon.url}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-3.5 w-5 shrink-0 object-contain opacity-80"
+                  />
                   Dutch Design
                 </span>
                 <span className="flex h-[21.42px] w-[21.42px] shrink-0 items-center justify-center rounded-full border-2 border-[#cdc0b5] bg-transparent text-[#cdc0b5] shadow-none">
@@ -553,7 +556,7 @@ function ConfiguratorPage() {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <div className="relative min-h-[210px] px-5 pb-8 pt-3">
+                  <div className="relative min-h-[210px] px-5 pb-8 pt-3 text-[#cdc0b5]">
                     <p className="text-[17px] font-semibold text-[#071426]">Nederlands gemaakt. Met aandacht.</p>
                     <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
                       Elke Wandig cinewall wordt in onze Nederlandse werkplaats gebouwd, gecontroleerd en plug &amp; play voorbereid voor jouw woonkamer.

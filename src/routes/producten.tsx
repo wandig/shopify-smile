@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
 import { wandigSwatchStyle } from "@/lib/wandig-colors";
 
 export const Route = createFileRoute("/producten")({
@@ -189,8 +189,8 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     intro: product.description,
     specs: ["Plug & play", "Gratis levering", "5 jaar garantie"],
   };
-  const price = product.priceRange.minVariantPrice;
-  const hasVisiblePrice = parseFloat(price.amount) > 0;
+  const price = lowestPaidPrice(product);
+  const hasVisiblePrice = price !== null;
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.06]">
@@ -206,7 +206,7 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
         <div className="flex items-baseline justify-between gap-3">
           <h2 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h2>
           <span className="shrink-0 text-sm font-semibold text-[#1f1915]">
-            {hasVisiblePrice ? formatPrice(price.amount, price.currencyCode) : "Samenstellen"}
+            {hasVisiblePrice ? formatPrice(price!.amount, price!.currencyCode) : "Samenstellen"}
           </span>
         </div>
 

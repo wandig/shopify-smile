@@ -101,3 +101,17 @@ export function formatPrice(amount: string, _currencyCode: string) {
   const n = parseFloat(amount);
   return `${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)},-`;
 }
+
+/** Laagste variantprijs die groter dan 0 is; null als geen enkele variant een prijs heeft. */
+export function lowestPaidPrice(product: ShopifyProduct["node"]): { amount: string; currencyCode: string } | null {
+  const fromRange = parseFloat(product.priceRange?.minVariantPrice?.amount ?? "0");
+  if (fromRange > 0) return product.priceRange.minVariantPrice;
+
+  const paid = (product.variants?.edges ?? [])
+    .map((edge) => edge.node.price)
+    .filter((price) => price && parseFloat(price.amount) > 0)
+    .sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
+
+  return paid[0] ?? null;
+}
+

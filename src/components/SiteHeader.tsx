@@ -12,6 +12,7 @@ import {
   storefrontApiRequest,
   PRODUCTS_QUERY,
   formatPrice,
+  lowestPaidPrice,
   type ShopifyProduct,
 } from "@/lib/shopify";
 import wandigLogo from "@/assets/wandig-logo-header.png.asset.json";
@@ -114,8 +115,8 @@ function ModelsMenu({
                 ? models.map((p) => {
                     const node = p.node;
                     const image = node.images.edges[0]?.node;
-                    const price = node.priceRange.minVariantPrice;
-                    const hasPrice = parseFloat(price.amount) > 0;
+                    const price = lowestPaidPrice(node);
+                    const hasPrice = price !== null;
                     return (
                       <Link
                         key={node.id}
@@ -136,8 +137,9 @@ function ModelsMenu({
                           <p className="whitespace-nowrap text-[17px] font-medium tracking-tight">{node.title}</p>
                           {hasPrice ? (
                             <span className="shrink-0 text-[15px] text-[#15110d]/60">
-                              {formatPrice(price.amount, price.currencyCode)}
+                              {formatPrice(price!.amount, price!.currencyCode)}
                             </span>
+
                           ) : (
                             <span className="shrink-0 text-[11px] font-bold uppercase tracking-wider text-[#ef7027]">
                               Samenstellen

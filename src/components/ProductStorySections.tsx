@@ -262,6 +262,7 @@ const UNIQUE_CARDS: Array<{
   subtleGradient?: boolean;
   darkGradient?: boolean;
   darkGradientLower?: boolean;
+  blurBehind?: boolean;
 }> = [
   {
     title: "Stijlvolle kleuren",

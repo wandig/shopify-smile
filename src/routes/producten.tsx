@@ -157,15 +157,30 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     });
   }, [variants]);
 
+  const sizeOption = product.options.find((option) => /maat|size|inch/i.test(option.name));
+  const preferredSizeValue = sizeOption
+    ? sizeOption.values.find((v) => /58/.test(v)) ?? sizeOption.values[1] ?? sizeOption.values[0]
+    : undefined;
+
   const selectedVariant = useMemo(() => {
-    if (!colorOption || !selectedColor) return variants.find((variant) => variant.availableForSale) ?? variants[0];
-    return variants.find((variant) =>
-      variant.availableForSale &&
-      variant.selectedOptions.some((option) => option.name === colorOption.name && option.value === selectedColor),
-    ) ?? variants.find((variant) =>
-      variant.selectedOptions.some((option) => option.name === colorOption.name && option.value === selectedColor),
-    ) ?? variants[0];
-  }, [colorOption, selectedColor, variants]);
+    const matchesColor = (variant: VariantNode) =>
+      !colorOption ||
+      !selectedColor ||
+      variant.selectedOptions.some((option) => option.name === colorOption.name && option.value === selectedColor);
+    const matchesSize = (variant: VariantNode) =>
+      !sizeOption ||
+      !preferredSizeValue ||
+      variant.selectedOptions.some((option) => option.name === sizeOption.name && option.value === preferredSizeValue);
+
+    return (
+      variants.find((v) => v.availableForSale && matchesColor(v) && matchesSize(v)) ??
+      variants.find((v) => matchesColor(v) && matchesSize(v)) ??
+      variants.find((v) => v.availableForSale && matchesColor(v)) ??
+      variants.find(matchesColor) ??
+      variants.find((v) => v.availableForSale) ??
+      variants[0]
+    );
+  }, [colorOption, selectedColor, sizeOption, preferredSizeValue, variants]);
 
   const image = selectedVariant?.image ?? product.images.edges[0]?.node;
   const copy = SERIES_COPY[product.handle] ?? {

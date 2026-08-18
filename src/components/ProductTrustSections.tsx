@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { useRef, useState } from "react";
 import { Plus, User } from "lucide-react";
 import gebouwdOmMeeTeGaan1Img from "@/assets/gebouwd-om-mee-te-gaan-1.png.asset.json";
@@ -176,7 +177,7 @@ export function BuiltToLastSection() {
               style={{ scrollSnapAlign: "start", backgroundColor: card.bg }}
             >
               {card.imageUrl && (
-                <img src={card.imageUrl} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                <Img src={card.imageUrl} alt="" className="absolute inset-0 h-full w-full object-cover" />
               )}
               <div
                 className={`relative flex h-full flex-col p-6 md:p-7 ${

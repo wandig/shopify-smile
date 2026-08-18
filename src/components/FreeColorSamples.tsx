@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Check, Loader2 } from "lucide-react";
@@ -113,7 +114,7 @@ export function FreeColorSamples() {
                   >
                     <div className="overflow-hidden rounded-[9px] bg-white">
                       {image ? (
-                        <img
+                        <Img
                           src={image}
                           alt={`Kleurstaal ${product.node.title}`}
                           loading="lazy"

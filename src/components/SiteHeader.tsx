@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
@@ -126,7 +127,7 @@ function ModelsMenu({
                       >
                         <div className="aspect-[4/5] overflow-hidden rounded-[18px] bg-[#f2efeb]">
                           {image && (
-                            <img
+                            <Img
                               src={image.url}
                               alt={image.altText || node.title}
                               className="h-full w-full object-cover transition duration-700 ease-out group-hover/card:scale-[1.04]"
@@ -230,7 +231,7 @@ export function SiteHeader() {
 
           {/* Center: logo */}
           <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Wandig">
-            <img src={wandigLogo.url} alt="Wandig" className="h-7 md:h-9 w-auto" />
+            <Img src={wandigLogo.url} alt="Wandig" className="h-7 md:h-9 w-auto" w={160} />
           </Link>
 
           {/* Right: configurator + search + cart */}

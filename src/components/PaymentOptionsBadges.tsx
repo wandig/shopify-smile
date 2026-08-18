@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { useState } from "react";
 import { Eye, Lock, Percent, ShieldCheck, X, Zap } from "lucide-react";
 
@@ -108,13 +109,13 @@ function ModalShell({
 
 const In3Logo = () => (
   <span className="flex h-7 w-11 items-center justify-center overflow-hidden rounded-[6px] bg-white">
-    <img src={in3Logo.url} alt="in3" className="h-3.5 w-auto object-contain" />
+    <Img src={in3Logo.url} alt="in3" className="h-3.5 w-auto object-contain" w={64} />
   </span>
 );
 
 const SpreadLogo = () => (
   <span className="flex h-7 w-11 items-center justify-center overflow-hidden rounded-[6px] bg-white">
-    <img src={sprayPayLogo} alt="SprayPay" className="h-5 w-auto object-contain" />
+    <Img src={sprayPayLogo} alt="SprayPay" className="h-5 w-auto object-contain" w={64} />
   </span>
 );
 

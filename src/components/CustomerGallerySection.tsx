@@ -1,3 +1,4 @@
+import { Img } from "@/components/Img";
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 
@@ -100,7 +101,7 @@ export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }:
             <div key={columnIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${column.width}`}>
               {column.items.map((image, imageIndex) => (
                 <figure key={imageIndex} className="group relative min-h-0 flex-1 overflow-hidden rounded-[14px]">
-                  <img
+                  <Img
                     src={image.src}
                     alt={image.alt}
                     className="h-full w-full object-cover"

@@ -141,7 +141,7 @@ function Producten() {
 }
 
 
-function CollectionSeriesCard({ product }: { product: ProductNode }) {
+function CollectionSeriesCard({ product, offset = false }: { product: ProductNode; offset?: boolean }) {
   const variants = useMemo(() => product.variants.edges.map((edge) => edge.node), [product]);
   const colorOption = product.options.find((option) => /kleur|color/i.test(option.name));
   const colorValues = colorOption?.values ?? [];

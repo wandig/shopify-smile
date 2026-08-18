@@ -392,26 +392,23 @@ export function UniqueSection({ title = "Dit maakt Full House uniek" }: { title?
               loading="lazy"
               draggable={false}
             />
-            {card.blurBehind && (
-              <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-[42%] backdrop-blur-md"
-                style={{
-                  maskImage: "linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)",
-                  WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)",
-                }}
-              />
-            )}
+            <div
+              className={`pointer-events-none absolute inset-x-0 top-0 h-[40%] ${card.blurBehind ? "backdrop-blur-lg" : "backdrop-blur-[3px]"}`}
+              style={{
+                maskImage: "linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)",
+              }}
+            />
             {!card.noGradient && (
-              <div className={`absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7 ${
+              <div className={`pointer-events-none absolute inset-x-0 top-0 h-[40%] ${
                 card.darkGradientLower
-                  ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.45)_0%,rgba(7,20,38,0.32)_22%,rgba(7,20,38,0.16)_42%,rgba(7,20,38,0.06)_60%,rgba(7,20,38,0.02)_78%,transparent_95%)]"
+                  ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.62)_0%,rgba(7,20,38,0.45)_28%,rgba(7,20,38,0.24)_52%,rgba(7,20,38,0.08)_75%,transparent_100%)]"
                   : card.darkGradient
-                    ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.45)_0%,rgba(7,20,38,0.20)_18%,rgba(7,20,38,0.07)_35%,rgba(7,20,38,0.02)_55%,transparent_85%)]"
-                    : card.subtleGradient
-                      ? "bg-gradient-to-b from-white/75 via-white/60 via-25% via-white/40 via-55% via-white/15 via-80% to-transparent"
-                      : "bg-gradient-to-b from-white/55 via-white/45 via-25% via-white/28 via-55% via-white/10 via-80% to-transparent"
+                    ? "bg-[linear-gradient(180deg,rgba(7,20,38,0.62)_0%,rgba(7,20,38,0.40)_28%,rgba(7,20,38,0.18)_52%,rgba(7,20,38,0.06)_75%,transparent_100%)]"
+                    : "bg-[linear-gradient(180deg,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0.7)_28%,rgba(255,255,255,0.42)_52%,rgba(255,255,255,0.16)_75%,transparent_100%)]"
               }`} />
             )}
+
             <div className="absolute inset-x-0 top-0 px-6 pb-10 pt-6 md:px-7 md:pt-7">
               {card.eyebrow && (
                 <p className={`mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] ${card.lightText ? "text-white/70" : "text-[#071426]/60"}`}>{card.eyebrow}</p>

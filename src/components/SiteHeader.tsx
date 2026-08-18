@@ -137,8 +137,9 @@ function ModelsMenu({
                           <p className="whitespace-nowrap text-[17px] font-medium tracking-tight">{node.title}</p>
                           {hasPrice ? (
                             <span className="shrink-0 text-[15px] text-[#15110d]/60">
-                              {formatPrice(price.amount, price.currencyCode)}
+                              {formatPrice(price!.amount, price!.currencyCode)}
                             </span>
+
                           ) : (
                             <span className="shrink-0 text-[11px] font-bold uppercase tracking-wider text-[#ef7027]">
                               Samenstellen

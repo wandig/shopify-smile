@@ -45,7 +45,7 @@ export function CartDrawer() {
         </Button>
       </SheetTrigger>
       <SheetContent
-        className="w-full sm:max-w-[440px] flex flex-col gap-0 p-0 border-0 bg-[#faf3ea] rounded-l-[28px] overflow-hidden [&>button]:hidden"
+        className="w-full sm:max-w-[440px] flex flex-col gap-0 p-0 border-0 bg-[#faf8f5] rounded-l-[28px] overflow-hidden [&>button]:hidden"
       >
         <SheetHeader className="px-6 pt-6 pb-4 space-y-0">
           <div className="flex items-center justify-between gap-4">

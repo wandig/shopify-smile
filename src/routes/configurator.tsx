@@ -561,11 +561,12 @@ function ConfiguratorPage() {
                     <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
                       Van de eerste plank tot de laatste kabeldoorvoer: lokaal vakmanschap, precies passend rond jouw tv.
                     </p>
-                    <div className="pointer-events-none absolute bottom-5 right-5 flex items-end text-[#cdc0b5]" aria-hidden="true">
-                      <Puzzle className="h-10 w-10 -rotate-12 opacity-65" strokeWidth={1.5} />
-                      <Puzzle className="-ml-2 h-14 w-14 rotate-12 opacity-85" strokeWidth={1.5} />
-                      <Puzzle className="-ml-3 h-9 w-9 -rotate-6 opacity-55" strokeWidth={1.5} />
-                    </div>
+                    <img
+                      src={puzzlePiecesImg.url}
+                      alt=""
+                      aria-hidden="true"
+                      className="pointer-events-none absolute bottom-5 right-5 w-[84px] select-none"
+                    />
                   </div>
                 </div>
               </div>

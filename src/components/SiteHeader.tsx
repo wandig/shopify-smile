@@ -115,8 +115,8 @@ function ModelsMenu({
                 ? models.map((p) => {
                     const node = p.node;
                     const image = node.images.edges[0]?.node;
-                    const price = node.priceRange.minVariantPrice;
-                    const hasPrice = parseFloat(price.amount) > 0;
+                    const price = lowestPaidPrice(node);
+                    const hasPrice = price !== null;
                     return (
                       <Link
                         key={node.id}

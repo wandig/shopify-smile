@@ -91,7 +91,18 @@ export function SiteFooter() {
                 Contact
               </div>
               <ul className="space-y-2.5 text-sm text-white/70">
-                <li>info@wandig.nl</li>
+                <li>
+                  <a href="mailto:support@wandig.com" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+                    <Mail className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                    support@wandig.com
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+31853030990" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+                    <Phone className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                    +31 85 303 0990
+                  </a>
+                </li>
                 <li>
                   De Tongelreep 1 - 7
                   <br />
@@ -99,6 +110,7 @@ export function SiteFooter() {
                 </li>
                 <li>ma — vr · 09:00 – 17:00</li>
               </ul>
+
             </div>
           </div>
         </div>

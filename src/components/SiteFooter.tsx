@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
+import { Mail, Phone } from "lucide-react";
 import footerLogoAsset from "@/assets/Untitled_design_24.svg.asset.json";
+
 
 export function SiteFooter() {
   return (
@@ -113,11 +115,20 @@ export function SiteFooter() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-5 text-xs text-white/50 flex flex-wrap justify-between gap-2">
-          <span>© {new Date().getFullYear()} Wandig. Alle rechten voorbehouden.</span>
-          <span>Gemaakt in Nederland</span>
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10 py-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-white/70">
+          <a href="mailto:support@wandig.com" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+            <Mail className="h-4 w-4" strokeWidth={1.5} />
+            support@wandig.com
+          </a>
+          <a href="tel:+31853030990" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+            <Phone className="h-4 w-4" strokeWidth={1.5} />
+            +31 85 303 0990
+          </a>
+          <span className="text-white/50 ml-auto">© {new Date().getFullYear()} Wandig. Alle rechten voorbehouden.</span>
+          <span className="text-white/50">Gemaakt in Nederland</span>
         </div>
       </div>
+
     </footer>
   );
 }

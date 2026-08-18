@@ -270,7 +270,7 @@ const UNIQUE_CARDS: Array<{
     image: stijlvolleKleurenImg.url,
     variant: "light",
     lightText: true,
-    darkGradient: true,
+    noGradient: true,
   },
   {
     title: "Hoogwaardige kwaliteit",
@@ -278,7 +278,7 @@ const UNIQUE_CARDS: Array<{
     image: hoogwaardigeKwaliteitV4Img.url,
     variant: "light",
     lightText: true,
-    darkGradient: true,
+    noGradient: true,
   },
   {
     title: "Kabels uit het zicht",
@@ -286,8 +286,9 @@ const UNIQUE_CARDS: Array<{
     image: kabelsUitZichtV4Img.url,
     variant: "light",
     lightText: true,
-    darkGradient: true,
+    noGradient: true,
   },
+
 
   {
     title: "Push-to-open",
@@ -399,13 +400,16 @@ export function UniqueSection({ title = "Dit maakt Full House uniek" }: { title?
               loading="lazy"
               draggable={false}
             />
-            <div
-              className={`pointer-events-none absolute inset-x-0 top-0 h-[40%] ${card.blurBehind ? "backdrop-blur-lg" : "backdrop-blur-[3px]"}`}
-              style={{
-                maskImage: "linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)",
-              }}
-            />
+            {!card.noGradient && (
+              <div
+                className={`pointer-events-none absolute inset-x-0 top-0 h-[40%] ${card.blurBehind ? "backdrop-blur-lg" : "backdrop-blur-[3px]"}`}
+                style={{
+                  maskImage: "linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)",
+                  WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)",
+                }}
+              />
+            )}
+
             {!card.noGradient && (
               <div className={`pointer-events-none absolute inset-x-0 top-0 h-[40%] ${
                 card.darkGradientLower

@@ -93,12 +93,20 @@ function ModelsMenu({
                 Solo, Duo en Full House — plug &amp; play tv-wanden, samen te stellen in jouw kleur.
               </p>
               <Link
+                to="/configurator"
+                className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-[#0f1f2a] px-5 py-3 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-[#1a2d3a]"
+              >
+                <Puzzle className="h-4 w-4" strokeWidth={1.75} />
+                <span>Configureer jouw kast</span>
+              </Link>
+              <Link
                 to="/producten"
-                className="group/all mt-10 inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-[#15110d] transition-colors hover:text-[#ef7027]"
+                className="group/all mt-5 inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-[#15110d] transition-colors hover:text-[#ef7027]"
               >
                 Bekijk alle modellen
                 <ArrowRight className="h-4 w-4 transition-transform group-hover/all:translate-x-1" />
               </Link>
+
             </div>
 
             <div className="col-span-9 grid grid-cols-3 gap-6 lg:gap-10">

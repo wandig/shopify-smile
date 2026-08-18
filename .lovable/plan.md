@@ -37,3 +37,9 @@ Goed nieuws: de asset-hosting ondersteunt al on-the-fly verkleinen en moderne fo
 
 - Geen foto's of video's verwijderd of vervangen door andere beelden.
 - Geen wijzigingen aan teksten, layout, kleuren of functionaliteit.
+
+## "Kunnen we de foto's niet in de backend zetten?"
+
+Dat zou niet sneller zijn — waarschijnlijk zelfs langzamer. De foto's staan nu al op een wereldwijd CDN met permanente cache (`cache-control: immutable`), en dat CDN kan bovendien on-the-fly verkleinen en naar AVIF/WebP omzetten. Backend-storage (Lovable Cloud) levert de foto's op originele grootte, zonder verkleinen of formaatonderhandeling, en met een extra laag ervoor.
+
+De echte winst zit niet in de opslagplek maar in de geleverde bestandsgrootte: dezelfde foto van 1.716 KB naar 12 KB. Dat is precies wat dit plan doet, zonder de foto's te verplaatsen.

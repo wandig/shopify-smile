@@ -11,11 +11,12 @@ import swatchZandsteen from "@/assets/swatches/zandsteen.jpg";
 
 export const FULL_HOUSE_COLORS = [
   "Walnootbruin",
-  "Truffelbruin",
+  "Donkereiken",
   "Cashmeregrijs",
-  "Blush",
+  "Dofroze",
   "Kristalwit",
 ] as const;
+
 
 const COLOR_ORDER = new Map(
   FULL_HOUSE_COLORS.map((name, index) => [name.toLocaleLowerCase("nl-NL"), index]),

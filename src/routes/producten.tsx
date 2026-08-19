@@ -220,7 +220,41 @@ function Producten() {
       </section>
 
       <CollectionFaqSection />
+
+      <CollectionTrialSection />
     </div>
+  );
+}
+
+function CollectionTrialSection() {
+  return (
+    <section className="bg-[#faf8f5]">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-16 md:px-10 md:py-24">
+        <div className="overflow-hidden rounded-3xl bg-[#ede7e0]">
+          <Img
+            src={proefkijkenAsset.url}
+            w={900}
+            alt="Wandig cinewall in een woonkamer"
+            className="aspect-square h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-[42px]">
+            <span className="italic">100 dagen</span> <span className="font-semibold not-italic">proefkijken</span>
+          </h2>
+          <p className="mt-6 max-w-[460px] text-base leading-relaxed text-[#1f1915]/60">
+            Nog niet helemaal overtuigd? Geen probleem. Bij Wandig krijg je 100 dagen de tijd om je cinewall thuis uit te
+            proberen en zelf het verschil te ervaren. Kijk je favoriete films, test het uit en ontdek of het bij jouw
+            interieur past.
+          </p>
+          <p className="mt-5 max-w-[460px] text-base leading-relaxed text-[#1f1915]/60">
+            Toch niet helemaal wat je zoekt? Je kunt je cinewall eenvoudig retourneren. Bekijk onze retourvoorwaarden
+            voor de werkwijze, voorwaarden en kosten.
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 

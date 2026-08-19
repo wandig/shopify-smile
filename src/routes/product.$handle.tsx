@@ -1056,8 +1056,8 @@ function DeliveryInfoTooltip() {
       </button>
       <span
         role="tooltip"
-        className={`absolute bottom-[calc(100%+10px)] left-1/2 z-30 w-[266px] -translate-x-1/2 rounded-[16px] border border-[#eeeeee] bg-white p-3.5 text-left shadow-[0_18px_40px_rgba(42,31,22,0.14)] transition-all duration-200 ${
-          open ? "visible opacity-100 translate-y-0" : "invisible translate-y-1 opacity-0"
+        className={`fixed left-1/2 top-1/2 z-50 w-[min(320px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1/2 rounded-[16px] border border-[#eeeeee] bg-white p-3.5 text-left shadow-[0_18px_40px_rgba(42,31,22,0.14)] transition-all duration-200 sm:absolute sm:bottom-[calc(100%+10px)] sm:left-1/2 sm:top-auto sm:z-30 sm:w-[266px] sm:-translate-y-0 ${
+          open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         <span className="block text-[13px] font-bold text-[#071426]">Hoe wordt mijn tv kast geleverd?</span>
@@ -1066,7 +1066,8 @@ function DeliveryInfoTooltip() {
           personen bevestig je de verschillende onderdelen eenvoudig aan de muur, zodat je snel van je nieuwe tv kast kunt
           genieten.
         </span>
-        <span className="absolute left-1/2 top-full h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r border-[#eeeeee] bg-white" />
+        <span className="absolute left-1/2 top-full hidden h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r border-[#eeeeee] bg-white sm:block" />
+
       </span>
     </span>
   );

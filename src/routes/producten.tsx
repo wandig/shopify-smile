@@ -31,26 +31,37 @@ const SERIES_COPY: Record<string, {
   title: string;
   intro: string;
   specs: string[];
+  modules: number;
+  storage: string;
+  highlight?: boolean;
 }> = {
   solo: {
     eyebrow: "Compact en rustig",
     title: "Wandig Solo",
-    intro: "Voor wie een strak tv-meubel wil zonder dat de wand te vol wordt. Minimalistisch, zwevend en makkelijk te combineren.",
+    intro: "Strak tv-meubel zonder dat de wand te vol wordt. Minimalistisch en zwevend.",
     specs: ["Compact formaat", "Zwevend of staand", "Ideaal voor kleinere ruimtes"],
+    modules: 0,
+    storage: "Compact",
   },
   duo: {
     eyebrow: "De meest gekozen balans",
     title: "Wandig Duo",
-    intro: "Meer opbergruimte en een bredere uitstraling, zonder dat het zwaar oogt. Een rustige basis voor bijna elke woonkamer.",
+    intro: "Meer opbergruimte en een bredere uitstraling, zonder dat het zwaar oogt.",
     specs: ["Ruimte voor decoratie", "Strakke kabelafwerking", "Mooi in middelgrote woonkamers"],
+    modules: 1,
+    storage: "Ruim",
+    highlight: true,
   },
   "full-house": {
     eyebrow: "Volledige wand-look",
     title: "Wandig Full House",
-    intro: "De meest complete opstelling met een ingebouwde, luxe uitstraling. Gemaakt voor woonkamers waar de tv-wand echt het middelpunt mag zijn.",
+    intro: "De meest complete opstelling met een ingebouwde, luxe uitstraling.",
     specs: ["Maximale opbergruimte", "Wandvullende uitstraling", "Onze meest complete serie"],
+    modules: 2,
+    storage: "Maximaal",
   },
 };
+
 
 function CrossfadeImage({ src, alt }: { src: string; alt: string }) {
   const [shown, setShown] = useState(src);

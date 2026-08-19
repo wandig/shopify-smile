@@ -184,14 +184,10 @@ function Producten() {
       </section>
 
       <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-14 md:pt-20 pb-20 md:pb-28">
-        <div className="mb-10 max-w-[640px] md:mb-14">
-          <span className="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#ef7027]">Drie modellen</span>
-          <h2 className="mt-3 font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">
-            Welke Wandig past bij jouw wand?
-          </h2>
+        <div className="mb-10 max-w-[560px] md:mb-14">
+          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">Drie modellen</h2>
           <p className="mt-3 text-base leading-relaxed text-[#1f1915]/60">
-            Vergelijk de modellen op breedte, opbergruimte en prijs. Alle modellen zijn plug &amp; play en leverbaar in
-            meerdere kleuren.
+            Solo, Duo en Full House — plug &amp; play en leverbaar in meerdere kleuren.
           </p>
         </div>
 
@@ -295,26 +291,10 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
 
   const refSize = WANDIG_SIZES.find((s) => s.label === "58 - 65 inch") ?? WANDIG_SIZES[1];
   const shortName = copy.title.replace(/^Wandig\s+/i, "");
-  const specRows: Array<[string, string]> = [
-    ["Breedte", `${formatCm(wandigWidth(refSize, copy.modules))} cm`],
-    ["Modules", copy.modules === 0 ? "1 (basis)" : `${copy.modules + 1}`],
-    ["Opbergruimte", copy.storage],
-    ["Hoogte", `${formatCm(refSize.wallHeight)} cm`],
-    ["Kleuren", colorValues.length > 0 ? `${colorValues.length}` : "—"],
-  ];
+  const width = `${formatCm(wandigWidth(refSize, copy.modules))} cm breed`;
 
   return (
-    <article
-      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 transition ${
-        copy.highlight ? "ring-2 ring-[#ef7027]/35" : "ring-black/[0.06]"
-      }`}
-    >
-      {copy.highlight && (
-        <span className="absolute left-4 top-4 z-10 rounded-full bg-[#ef7027] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-white">
-          Meest gekozen
-        </span>
-      )}
-
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.06]">
       <Link
         to="/product/$handle"
         params={{ handle: product.handle }}
@@ -340,19 +320,10 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
           </span>
         </div>
 
-        <p className="mt-2.5 min-h-[44px] text-[13px] leading-relaxed text-[#1f1915]/60">{copy.intro}</p>
-
-        <dl className="mt-4 border-t border-[#1f1915]/8">
-          {specRows.map(([label, value]) => (
-            <div key={label} className="flex items-center justify-between border-b border-[#1f1915]/8 py-2.5">
-              <dt className="text-[13px] text-[#1f1915]/55">{label}</dt>
-              <dd className="text-[13px] font-semibold text-[#1f1915]">{value}</dd>
-            </div>
-          ))}
-        </dl>
+        <p className="mt-2 text-[13px] text-[#1f1915]/55">{width}</p>
 
         {colorValues.length > 0 && (
-          <div className="mt-4 flex flex-wrap items-center gap-2.5">
+          <div className="mt-5 flex flex-wrap items-center gap-2.5">
             {colorValues.map((color) => {
               const active = selectedColor === color;
               return (
@@ -371,25 +342,17 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
                 </button>
               );
             })}
-            
           </div>
         )}
 
-        <div className="mt-auto pt-5">
+        <div className="mt-auto pt-6">
           <Link
             to="/product/$handle"
             params={{ handle: product.handle }}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-[#ef7027] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#d95f1c]"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f1915] transition hover:text-[#ef7027]"
           >
             Bekijk {shortName}
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            to="/configurator"
-            className="mt-3 flex items-center justify-center gap-1.5 text-[13px] font-semibold text-[#1f1915]/70 transition hover:text-[#ef7027]"
-          >
-            Zelf samenstellen
-            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

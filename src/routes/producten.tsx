@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Star, Truck, RotateCcw, ShieldCheck } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
 import { wandigSwatchStyle } from "@/lib/wandig-colors";
+import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import lifestyleAsset from "@/assets/producten-hero-lifestyle.png.asset.json";
 
 
@@ -31,26 +32,37 @@ const SERIES_COPY: Record<string, {
   title: string;
   intro: string;
   specs: string[];
+  modules: number;
+  storage: string;
+  highlight?: boolean;
 }> = {
   solo: {
     eyebrow: "Compact en rustig",
     title: "Wandig Solo",
-    intro: "Voor wie een strak tv-meubel wil zonder dat de wand te vol wordt. Minimalistisch, zwevend en makkelijk te combineren.",
+    intro: "Strak tv-meubel zonder dat de wand te vol wordt. Minimalistisch en zwevend.",
     specs: ["Compact formaat", "Zwevend of staand", "Ideaal voor kleinere ruimtes"],
+    modules: 0,
+    storage: "Compact",
   },
   duo: {
     eyebrow: "De meest gekozen balans",
     title: "Wandig Duo",
-    intro: "Meer opbergruimte en een bredere uitstraling, zonder dat het zwaar oogt. Een rustige basis voor bijna elke woonkamer.",
+    intro: "Meer opbergruimte en een bredere uitstraling, zonder dat het zwaar oogt.",
     specs: ["Ruimte voor decoratie", "Strakke kabelafwerking", "Mooi in middelgrote woonkamers"],
+    modules: 1,
+    storage: "Ruim",
+    highlight: true,
   },
   "full-house": {
     eyebrow: "Volledige wand-look",
     title: "Wandig Full House",
-    intro: "De meest complete opstelling met een ingebouwde, luxe uitstraling. Gemaakt voor woonkamers waar de tv-wand echt het middelpunt mag zijn.",
+    intro: "De meest complete opstelling met een ingebouwde, luxe uitstraling.",
     specs: ["Maximale opbergruimte", "Wandvullende uitstraling", "Onze meest complete serie"],
+    modules: 2,
+    storage: "Maximaal",
   },
 };
+
 
 function CrossfadeImage({ src, alt }: { src: string; alt: string }) {
   const [shown, setShown] = useState(src);
@@ -172,6 +184,16 @@ function Producten() {
       </section>
 
       <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-14 md:pt-20 pb-20 md:pb-28">
+        <div className="mb-10 max-w-[640px] md:mb-14">
+          <span className="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#ef7027]">Drie modellen</span>
+          <h2 className="mt-3 font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">
+            Welke Wandig past bij jouw wand?
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-[#1f1915]/60">
+            Vergelijk de modellen op breedte, opbergruimte en prijs. Alle modellen zijn plug &amp; play en leverbaar in
+            meerdere kleuren.
+          </p>
+        </div>
 
         {isLoading ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -182,13 +204,23 @@ function Producten() {
         ) : filteredProducts.length === 0 ? (
           <p className="text-muted-foreground py-20 text-center">Geen producten gevonden</p>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map((p) => (
-              <CollectionSeriesCard key={p.node.id} product={p.node} />
-            ))}
-          </div>
+          <>
+            <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredProducts.map((p) => (
+                <CollectionSeriesCard key={p.node.id} product={p.node} />
+              ))}
+            </div>
+            <p className="mt-10 text-center text-sm text-[#1f1915]/60">
+              Twijfel je?{" "}
+              <Link to="/configurator" className="font-semibold text-[#ef7027] underline-offset-4 hover:underline">
+                Stel zelf je wand samen
+              </Link>
+              .
+            </p>
+          </>
         )}
       </section>
+
     </div>
   );
 }
@@ -255,12 +287,34 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     title: product.title,
     intro: product.description,
     specs: ["Plug & play", "Gratis levering", "5 jaar garantie"],
+    modules: 0,
+    storage: "Compact",
   };
   const price = lowestPaidPrice(product);
   const hasVisiblePrice = price !== null;
 
+  const refSize = WANDIG_SIZES.find((s) => s.label === "58 - 65 inch") ?? WANDIG_SIZES[1];
+  const shortName = copy.title.replace(/^Wandig\s+/i, "");
+  const specRows: Array<[string, string]> = [
+    ["Breedte", `${formatCm(wandigWidth(refSize, copy.modules))} cm`],
+    ["Modules", copy.modules === 0 ? "1 (basis)" : `${copy.modules + 1}`],
+    ["Opbergruimte", copy.storage],
+    ["Hoogte", `${formatCm(refSize.wallHeight)} cm`],
+    ["Kleuren", colorValues.length > 0 ? `${colorValues.length}` : "—"],
+  ];
+
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.06]">
+    <article
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 transition ${
+        copy.highlight ? "ring-2 ring-[#ef7027]/35" : "ring-black/[0.06]"
+      }`}
+    >
+      {copy.highlight && (
+        <span className="absolute left-4 top-4 z-10 rounded-full bg-[#ef7027] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-white">
+          Meest gekozen
+        </span>
+      )}
+
       <Link
         to="/product/$handle"
         params={{ handle: product.handle }}
@@ -271,14 +325,34 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h2>
-          <span className="shrink-0 text-sm font-semibold text-[#1f1915]">
-            {hasVisiblePrice ? formatPrice(price!.amount, price!.currencyCode) : "Samenstellen"}
+          <h3 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h3>
+          <span className="shrink-0 text-right text-sm font-semibold text-[#1f1915]">
+            {hasVisiblePrice ? (
+              <>
+                <span className="mr-1 text-[11px] font-normal uppercase tracking-[0.1em] text-[#1f1915]/45">
+                  vanaf
+                </span>
+                {formatPrice(price!.amount, price!.currencyCode)}
+              </>
+            ) : (
+              "Samenstellen"
+            )}
           </span>
         </div>
 
+        <p className="mt-2.5 min-h-[44px] text-[13px] leading-relaxed text-[#1f1915]/60">{copy.intro}</p>
+
+        <dl className="mt-4 border-t border-[#1f1915]/8">
+          {specRows.map(([label, value]) => (
+            <div key={label} className="flex items-center justify-between border-b border-[#1f1915]/8 py-2.5">
+              <dt className="text-[13px] text-[#1f1915]/55">{label}</dt>
+              <dd className="text-[13px] font-semibold text-[#1f1915]">{value}</dd>
+            </div>
+          ))}
+        </dl>
+
         {colorValues.length > 0 && (
-          <div className="mt-5 flex flex-wrap items-center gap-2.5">
+          <div className="mt-4 flex flex-wrap items-center gap-2.5">
             {colorValues.map((color) => {
               const active = selectedColor === color;
               return (
@@ -297,18 +371,29 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
                 </button>
               );
             })}
+            
           </div>
         )}
 
-        <Link
-          to="/product/$handle"
-          params={{ handle: product.handle }}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f1915] transition hover:text-[#f56e16]"
-        >
-          Zelf samenstellen
-          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-        </Link>
+        <div className="mt-auto pt-5">
+          <Link
+            to="/product/$handle"
+            params={{ handle: product.handle }}
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-[#ef7027] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#d95f1c]"
+          >
+            Bekijk {shortName}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/configurator"
+            className="mt-3 flex items-center justify-center gap-1.5 text-[13px] font-semibold text-[#1f1915]/70 transition hover:text-[#ef7027]"
+          >
+            Zelf samenstellen
+            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </article>
   );
 }
+

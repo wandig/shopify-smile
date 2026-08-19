@@ -300,6 +300,7 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     ["Modules", copy.modules === 0 ? "1 (basis)" : `${copy.modules + 1}`],
     ["Opbergruimte", copy.storage],
     ["Hoogte", `${formatCm(refSize.wallHeight)} cm`],
+    ["Kleuren", colorValues.length > 0 ? `${colorValues.length}` : "—"],
   ];
 
   return (

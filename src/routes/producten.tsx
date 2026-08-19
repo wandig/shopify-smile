@@ -3,7 +3,7 @@ import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Star, Truck, RotateCcw, ShieldCheck, Phone, MessageCircle, Plus } from "lucide-react";
+import { ArrowRight, Star, Truck, CalendarClock, ShieldCheck, Phone, MessageCircle, Plus } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
 import { wandigSwatchStyle } from "@/lib/wandig-colors";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
@@ -133,7 +133,7 @@ function Producten() {
               <ul key={dup} className="flex" aria-hidden={dup === 1}>
                 {[
                   { icon: Truck, label: "Gratis levering" },
-                  { icon: RotateCcw, label: "100 dagen proefkijken" },
+                  { icon: CalendarClock, label: "100 dagen proefkijken" },
                   { icon: ShieldCheck, label: "10 jaar garantie" },
                 ].map(({ icon: Icon, label }) => (
                   <li
@@ -150,7 +150,7 @@ function Producten() {
 
         <ul className="mx-auto hidden max-w-[1100px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-3 text-[13px] text-[#1f1915]/75 md:flex md:gap-x-[140px] md:px-10">
           <li className="inline-flex items-center gap-2"><Truck className="h-4 w-4 text-[#ef7027]" /> Gratis levering</li>
-          <li className="inline-flex items-center gap-2"><RotateCcw className="h-4 w-4 text-[#ef7027]" /> 100 dagen proefkijken</li>
+          <li className="inline-flex items-center gap-2"><CalendarClock className="h-4 w-4 text-[#ef7027]" /> 100 dagen proefkijken</li>
           <li className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[#ef7027]" /> 10 jaar garantie</li>
         </ul>
       </div>

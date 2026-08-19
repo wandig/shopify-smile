@@ -3,11 +3,13 @@ import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Star, Truck, RotateCcw, ShieldCheck } from "lucide-react";
+import { ArrowRight, Star, Truck, RotateCcw, ShieldCheck, Phone, MessageCircle, Plus } from "lucide-react";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
 import { wandigSwatchStyle } from "@/lib/wandig-colors";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import lifestyleAsset from "@/assets/producten-hero-lifestyle.png.asset.json";
+import { FAQ_ITEMS } from "@/components/ProductPageSections";
+import adviesAsset from "@/assets/persoonlijk-advies.png.asset.json";
 
 
 export const Route = createFileRoute("/producten")({
@@ -217,6 +219,7 @@ function Producten() {
         )}
       </section>
 
+      <CollectionFaqSection />
     </div>
   );
 }
@@ -360,3 +363,91 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
   );
 }
 
+
+function CollectionFaqSection() {
+  const [open, setOpen] = useState<number | null>(null);
+  const items = FAQ_ITEMS.slice(0, 5);
+
+  return (
+    <section className="bg-[#f7f3ef]">
+      <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-16 md:grid-cols-2 md:gap-16 md:px-10 md:py-24">
+        <div>
+          <div className="h-[136px] w-[136px] overflow-hidden rounded-full bg-[#ede7e0]">
+            <Img
+              src={adviesAsset.url}
+              w={300}
+              alt="Wandig adviseur helpt je met je tv-wand"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <h2 className="mt-7 font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">
+            Praat met een Wandig-expert
+          </h2>
+          <p className="mt-4 max-w-[420px] text-base leading-relaxed text-[#1f1915]/60">
+            Twijfel je over het formaat, de kleur of de montage? Onze experts helpen je graag bij het kiezen van de
+            juiste cinewall.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <a
+              href="tel:+31853030990"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f1915] transition hover:text-[#ef7027]"
+            >
+              <Phone className="h-4 w-4 text-[#ef7027]" />
+              +31 85 303 0990
+            </a>
+            <a
+              href="mailto:support@wandig.com"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0f1f2a] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1c3140]"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Stuur ons een bericht
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">Over Wandig</h2>
+
+          <div className="mt-8">
+            {items.map((item, i) => {
+              const isOpen = open === i;
+              return (
+                <div key={item.question} className="border-b border-[#1f1915]/10">
+                  <button
+                    type="button"
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left"
+                  >
+                    <span className="text-[15px] leading-snug text-[#1f1915]">{item.question}</span>
+                    <span
+                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[#1f1915] transition-transform duration-300 ease-out ${isOpen ? "rotate-45" : ""}`}
+                    >
+                      <Plus className="h-3.5 w-3.5" strokeWidth={2} />
+                    </span>
+                  </button>
+                  <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="pb-5 pr-10 text-[14px] leading-relaxed text-[#1f1915]/60">{item.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <Link
+            to="/klantenservice"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f1915] transition hover:text-[#ef7027]"
+          >
+            Bekijk alle veelgestelde vragen
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}

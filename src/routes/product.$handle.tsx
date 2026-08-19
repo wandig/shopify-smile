@@ -482,7 +482,7 @@ function ProductView({ product }: { product: ProductNode }) {
   return (
     <div className="bg-[#faf8f5]">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 pt-5 md:pt-8">
-      <nav className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-3 md:mb-5 flex items-center gap-1.5">
+      <nav className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-5 flex items-center gap-1.5">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-2.5 w-2.5" />
         <Link to="/producten" className="hover:text-foreground">Modellen</Link>
@@ -490,11 +490,11 @@ function ProductView({ product }: { product: ProductNode }) {
         <span className="text-foreground">{product.title}</span>
       </nav>
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
         {/* Gallery */}
-        <div className="contents lg:block lg:min-w-0">
+        <div className="min-w-0">
           {galleryItems[0] && (
-            <figure className={`order-1 -mx-5 overflow-hidden rounded-none md:mx-0 md:rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
+            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <Img
                 ref={mainGalleryImageRef}
                 w={1200}
@@ -508,7 +508,7 @@ function ProductView({ product }: { product: ProductNode }) {
             </figure>
           )}
 
-          <div ref={galleryContinuationRef} className="relative z-10 order-3 space-y-3 md:space-y-4 lg:mt-4">
+          <div ref={galleryContinuationRef} className="relative z-10 mt-3 space-y-3 md:mt-4 md:space-y-4">
             {subImageGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <figure className="overflow-hidden rounded-[6px]">
@@ -539,9 +539,9 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
 
         {/* Info */}
-        <div className="order-2 min-w-0 lg:sticky lg:top-3 lg:ml-auto lg:w-[490px] lg:self-start">
+        <div className="min-w-0 lg:sticky lg:top-3 lg:ml-auto lg:w-[490px] lg:self-start">
           <div className="space-y-3">
-            <section className="overflow-hidden rounded-[20px] max-md:-mt-6 max-md:rounded-t-[24px] border border-[#eeeeee] bg-[#fef9f5] shadow-[0_18px_45px_rgba(42,31,22,0.07)]">
+            <section className="overflow-hidden rounded-[20px] border border-[#eeeeee] bg-[#fef9f5] shadow-[0_18px_45px_rgba(42,31,22,0.07)]">
               <button
                 type="button"
                 onClick={() => setProductionDetailsOpen((open) => !open)}
@@ -586,7 +586,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
               <div className="rounded-t-[20px] bg-white p-4">
               <div>
-                <div className="mt-[15px] grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 sm:grid-cols-[minmax(0,1fr)_230px]">
+                <div className="mt-[15px] grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_230px]">
                   <div>
                     <h1 className="text-[24px] font-bold leading-none text-[#071426]">{displayTitle}</h1>
                     <p className="mt-2 text-[12px] text-[#071426]/45">Cinewall</p>

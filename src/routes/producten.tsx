@@ -159,15 +159,16 @@ function Producten() {
             </div>
           </div>
 
-          <div className="relative bg-[#f4f1ed]">
+          <div className="relative flex items-center justify-center bg-[#f4f1ed]">
             <Img
               src={lifestyleAsset.url}
               w={1100}
               priority
               alt="Woonkamer met een Wandig tv-wand in gebruik"
-              className="h-[200px] w-full object-cover sm:h-[300px] lg:h-full lg:min-h-[320px]"
+              className="h-[120px] w-full self-center object-cover object-center sm:h-[200px] lg:h-[calc(100%-200px)] lg:min-h-[220px]"
             />
           </div>
+
         </div>
       </section>
 

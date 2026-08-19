@@ -172,6 +172,16 @@ function Producten() {
       </section>
 
       <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-14 md:pt-20 pb-20 md:pb-28">
+        <div className="mb-10 max-w-[640px] md:mb-14">
+          <span className="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#ef7027]">Drie modellen</span>
+          <h2 className="mt-3 font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">
+            Welke Wandig past bij jouw wand?
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-[#1f1915]/60">
+            Vergelijk de modellen op breedte, opbergruimte en prijs. Alle modellen zijn plug &amp; play en leverbaar in
+            8 kleuren.
+          </p>
+        </div>
 
         {isLoading ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -182,13 +192,23 @@ function Producten() {
         ) : filteredProducts.length === 0 ? (
           <p className="text-muted-foreground py-20 text-center">Geen producten gevonden</p>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map((p) => (
-              <CollectionSeriesCard key={p.node.id} product={p.node} />
-            ))}
-          </div>
+          <>
+            <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredProducts.map((p) => (
+                <CollectionSeriesCard key={p.node.id} product={p.node} />
+              ))}
+            </div>
+            <p className="mt-10 text-center text-sm text-[#1f1915]/60">
+              Twijfel je?{" "}
+              <Link to="/configurator" className="font-semibold text-[#ef7027] underline-offset-4 hover:underline">
+                Stel zelf je wand samen
+              </Link>
+              .
+            </p>
+          </>
         )}
       </section>
+
     </div>
   );
 }

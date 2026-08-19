@@ -217,6 +217,7 @@ function Producten() {
         )}
       </section>
 
+      <CollectionFaqSection />
     </div>
   );
 }

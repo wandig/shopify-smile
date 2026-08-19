@@ -138,7 +138,7 @@ function Producten() {
                 ].map(({ icon: Icon, label }) => (
                   <li
                     key={label}
-                    className="flex w-screen shrink-0 items-center justify-center gap-2 text-[13px] text-[#1f1915]/75"
+                    className="flex w-[62vw] shrink-0 items-center justify-center gap-2 text-[13px] text-[#1f1915]/75"
                   >
                     <Icon className="h-4 w-4 text-[#ef7027]" /> {label}
                   </li>

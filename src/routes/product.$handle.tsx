@@ -565,8 +565,10 @@ function ProductView({ product }: { product: ProductNode }) {
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
         {/* Gallery */}
         <div className="min-w-0">
+          <MobileGallerySwipe items={galleryItems} handle={product.handle} />
+
           {galleryItems[0] && (
-            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
+            <figure className={`hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <Img
                 ref={mainGalleryImageRef}
                 w={1200}
@@ -580,7 +582,8 @@ function ProductView({ product }: { product: ProductNode }) {
             </figure>
           )}
 
-          <div ref={galleryContinuationRef} className="relative z-10 mt-3 space-y-3 md:mt-4 md:space-y-4">
+          <div ref={galleryContinuationRef} className="relative z-10 mt-3 hidden space-y-3 lg:block md:mt-4 md:space-y-4">
+
             {subImageGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <figure className="overflow-hidden rounded-[6px]">

@@ -191,7 +191,7 @@ function Producten() {
           </h2>
           <p className="mt-3 text-base leading-relaxed text-[#1f1915]/60">
             Vergelijk de modellen op breedte, opbergruimte en prijs. Alle modellen zijn plug &amp; play en leverbaar in
-            8 kleuren.
+            meerdere kleuren.
           </p>
         </div>
 

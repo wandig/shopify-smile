@@ -770,7 +770,7 @@ export function NewsletterContactSection() {
 
   return (
     <section className="bg-[#ede7e0]">
-      <div className="mx-auto max-w-[1400px] px-3 py-12 md:px-10 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-16">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="text-[22px] font-bold leading-[1.25] tracking-[0.01em] text-[#071426] md:text-[26px]">
@@ -883,7 +883,7 @@ export function TrustBannerSection() {
 
   return (
     <section className="bg-[#ffffff]">
-      <div className="mx-auto max-w-[1400px] px-3 py-6 md:px-10 md:py-8">
+      <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10 md:py-8">
         <div className="flex flex-col divide-y divide-[#e5e5e5] sm:flex-row sm:divide-y-0 sm:divide-x sm:divide-[#e5e5e5]">
           {items.map(({ icon: Icon, label }) => (
             <div

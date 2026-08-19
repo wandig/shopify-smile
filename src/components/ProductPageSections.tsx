@@ -368,7 +368,7 @@ export function BuiltToLastSection() {
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
           onPointerLeave={endDrag}
-          className={`-mx-5 flex gap-3 overflow-x-auto scrollbar-hide px-5 md:mx-0 md:gap-4 md:px-0 ${
+          className={`-mx-3 flex gap-3 overflow-x-auto scrollbar-hide px-3 md:mx-0 md:gap-4 md:px-0 ${
             isDragging ? "cursor-grabbing select-none" : "cursor-grab"
           }`}
           style={{ scrollSnapType: "x mandatory" }}

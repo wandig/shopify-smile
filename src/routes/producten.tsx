@@ -286,12 +286,33 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     title: product.title,
     intro: product.description,
     specs: ["Plug & play", "Gratis levering", "5 jaar garantie"],
+    modules: 0,
+    storage: "Compact",
   };
   const price = lowestPaidPrice(product);
   const hasVisiblePrice = price !== null;
 
+  const refSize = WANDIG_SIZES.find((s) => s.label === "58 - 65 inch") ?? WANDIG_SIZES[1];
+  const shortName = copy.title.replace(/^Wandig\s+/i, "");
+  const specRows: Array<[string, string]> = [
+    ["Breedte", `${formatCm(wandigWidth(refSize, copy.modules))} cm`],
+    ["Modules", copy.modules === 0 ? "1 (basis)" : `${copy.modules + 1}`],
+    ["Opbergruimte", copy.storage],
+    ["Hoogte", `${formatCm(refSize.wallHeight)} cm`],
+  ];
+
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.06]">
+    <article
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 transition ${
+        copy.highlight ? "ring-2 ring-[#ef7027]/35" : "ring-black/[0.06]"
+      }`}
+    >
+      {copy.highlight && (
+        <span className="absolute left-4 top-4 z-10 rounded-full bg-[#ef7027] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-white">
+          Meest gekozen
+        </span>
+      )}
+
       <Link
         to="/product/$handle"
         params={{ handle: product.handle }}
@@ -302,14 +323,34 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h2>
-          <span className="shrink-0 text-sm font-semibold text-[#1f1915]">
-            {hasVisiblePrice ? formatPrice(price!.amount, price!.currencyCode) : "Samenstellen"}
+          <h3 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h3>
+          <span className="shrink-0 text-right text-sm font-semibold text-[#1f1915]">
+            {hasVisiblePrice ? (
+              <>
+                <span className="mr-1 text-[11px] font-normal uppercase tracking-[0.1em] text-[#1f1915]/45">
+                  vanaf
+                </span>
+                {formatPrice(price!.amount, price!.currencyCode)}
+              </>
+            ) : (
+              "Samenstellen"
+            )}
           </span>
         </div>
 
+        <p className="mt-2.5 min-h-[44px] text-[13px] leading-relaxed text-[#1f1915]/60">{copy.intro}</p>
+
+        <dl className="mt-4 border-t border-[#1f1915]/8">
+          {specRows.map(([label, value]) => (
+            <div key={label} className="flex items-center justify-between border-b border-[#1f1915]/8 py-2.5">
+              <dt className="text-[13px] text-[#1f1915]/55">{label}</dt>
+              <dd className="text-[13px] font-semibold text-[#1f1915]">{value}</dd>
+            </div>
+          ))}
+        </dl>
+
         {colorValues.length > 0 && (
-          <div className="mt-5 flex flex-wrap items-center gap-2.5">
+          <div className="mt-4 flex flex-wrap items-center gap-2.5">
             {colorValues.map((color) => {
               const active = selectedColor === color;
               return (
@@ -328,18 +369,29 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
                 </button>
               );
             })}
+            <span className="ml-1 text-[12px] text-[#1f1915]/45">{colorValues.length} kleuren</span>
           </div>
         )}
 
-        <Link
-          to="/product/$handle"
-          params={{ handle: product.handle }}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#1f1915] transition hover:text-[#f56e16]"
-        >
-          Zelf samenstellen
-          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-        </Link>
+        <div className="mt-auto pt-5">
+          <Link
+            to="/product/$handle"
+            params={{ handle: product.handle }}
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-[#ef7027] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#d95f1c]"
+          >
+            Bekijk {shortName}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/configurator"
+            className="mt-3 flex items-center justify-center gap-1.5 text-[13px] font-semibold text-[#1f1915]/70 transition hover:text-[#ef7027]"
+          >
+            Zelf samenstellen
+            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </article>
   );
 }
+

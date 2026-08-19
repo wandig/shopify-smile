@@ -25,7 +25,7 @@ import {
   PuzzleCornerIcon,
 } from "@/components/ProductPageSections";
 
-import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock, SlidersHorizontal } from "lucide-react";
+import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock, SlidersHorizontal, Ruler, MoveHorizontal, MoveVertical } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
@@ -609,7 +609,7 @@ function ProductView({ product }: { product: ProductNode }) {
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
         {/* Gallery */}
         <div className="min-w-0">
-          <MobileGallerySwipe items={galleryItems} handle={product.handle} />
+          <MobileGallerySwipe items={galleryItems} handle={product.handle} widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
 
           {galleryItems[0] && (
             <figure className={`hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>

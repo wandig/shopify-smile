@@ -10,7 +10,7 @@ import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import lifestyleAsset from "@/assets/producten-hero-lifestyle.png.asset.json";
 import { FAQ_ITEMS } from "@/components/ProductPageSections";
 import adviesAsset from "@/assets/persoonlijk-advies.png.asset.json";
-import proefkijkenAsset from "@/assets/100-dagen-proefkijken-bg.jpg.asset.json";
+import proefkijkenAsset from "@/assets/proefkijken-familie.png.asset.json";
 
 
 export const Route = createFileRoute("/producten")({

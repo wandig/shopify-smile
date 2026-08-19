@@ -335,6 +335,7 @@ function ProductView({ product }: { product: ProductNode }) {
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
   const [showOrderWidget, setShowOrderWidget] = useState(false);
+  const [desktopRulerOpen, setDesktopRulerOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {

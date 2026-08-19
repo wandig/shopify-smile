@@ -187,15 +187,15 @@ function MobileGallerySwipe({
   if (items.length === 0) return null;
 
   return (
-    <div className="relative lg:hidden">
+    <div className="relative -mt-4 lg:hidden">
       <div
         ref={trackRef}
         className="scrollbar-hide -mx-5 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
       >
         {items.map((item, index) => (
-          <div key={`${item.src}-${index}`} className="w-full shrink-0 snap-center px-5">
+          <div key={`${item.src}-${index}`} className="w-full shrink-0 snap-center">
             <figure
-              className={`flex items-center justify-center overflow-hidden rounded-[14px] bg-[#faf8f5] ${
+              className={`flex items-center justify-center overflow-hidden bg-[#faf8f5] ${
                 handle === "full-house" && index === 0 ? "aspect-[5/4]" : "aspect-square"
               }`}
             >
@@ -206,7 +206,7 @@ function MobileGallerySwipe({
                 priority={index === 0}
                 className={
                   handle === "full-house" && index === 0
-                    ? "h-auto w-[86%] max-w-none object-contain"
+                    ? "h-auto w-[92%] max-w-none object-contain"
                     : "h-full w-full object-cover"
                 }
               />
@@ -215,12 +215,13 @@ function MobileGallerySwipe({
         ))}
       </div>
 
-      {/* Maatlint-knop met uitschuivende afmetingen */}
-      <DimensionRuler widthLabel={widthLabel} heightLabel={heightLabel} open={rulerOpen} onToggle={() => setRulerOpen((open) => !open)} />
-
+      {/* Maatlint-knop met uitschuivende afmetingen, over de foto */}
+      <div className="absolute inset-x-4 bottom-2">
+        <DimensionRuler widthLabel={widthLabel} heightLabel={heightLabel} open={rulerOpen} onToggle={() => setRulerOpen((open) => !open)} />
+      </div>
 
       {items.length > 1 && (
-        <div className="mt-3 flex items-center justify-center gap-1.5">
+        <div className="absolute bottom-[26px] right-4 flex items-center gap-1.5">
           {items.map((_, index) => (
             <button
               key={index}
@@ -240,6 +241,7 @@ function MobileGallerySwipe({
     </div>
   );
 }
+
 
 function ProductPage() {
   const { handle } = Route.useParams();
@@ -616,7 +618,7 @@ function ProductView({ product }: { product: ProductNode }) {
   return (
     <div className="bg-[#faf8f5]">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 pt-5 md:pt-8">
-      <nav className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-5 flex items-center gap-1.5">
+      <nav className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-3 lg:mb-5 flex items-center gap-1.5">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-2.5 w-2.5" />
         <Link to="/producten" className="hover:text-foreground">Modellen</Link>
@@ -624,7 +626,8 @@ function ProductView({ product }: { product: ProductNode }) {
         <span className="text-foreground">{product.title}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
+
         {/* Gallery */}
         <div className="min-w-0">
           <MobileGallerySwipe items={galleryItems} handle={product.handle} widthLabel={specWidthLabel} heightLabel={specHeightLabel} />

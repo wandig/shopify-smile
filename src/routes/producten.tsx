@@ -255,9 +255,8 @@ function CollectionTrialSection() {
             voor de werkwijze, voorwaarden en kosten.
           </p>
         </div>
-
-        </div>
       </div>
+
     </section>
   );
 }

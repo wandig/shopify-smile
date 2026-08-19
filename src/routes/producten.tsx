@@ -181,7 +181,7 @@ function Producten() {
               w={1100}
               priority
               alt="Woonkamer met een Wandig tv-wand in gebruik"
-              className="h-[200px] w-full object-cover sm:h-[300px] lg:h-[441px] lg:min-h-0"
+              className="h-[240px] w-full object-cover sm:h-[320px] lg:h-[441px] lg:min-h-0"
             />
           </div>
         </div>

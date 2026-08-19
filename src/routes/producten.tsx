@@ -136,33 +136,33 @@ function Producten() {
       {/* hero */}
       <section className="bg-[#f2eee7]">
         <div className="grid lg:grid-cols-2">
-          <div className="flex items-center px-5 py-2 md:px-10 md:py-0 lg:justify-end">
+          <div className="order-2 flex items-center px-5 py-8 md:px-10 md:py-0 lg:order-1 lg:justify-end">
             <div className="w-full lg:max-w-[520px]">
-              <h1 className="font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">
+              <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-5xl">
 
                 Cinewalls
               </h1>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-[#1f1915]/60">
+              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-4 md:text-base">
                 Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
               </p>
 
-              <div className="mt-7 flex flex-wrap items-center gap-3">
+              <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-7">
                 <Link
                   to="/configurator"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#ef7027] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#d95f1c]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ef7027] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#d95f1c] sm:py-3"
                 >
                   Configureer jouw kast
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to="/kleurstalen"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#1f1915]/15 bg-white px-6 py-3 text-sm font-semibold text-[#1f1915] transition hover:border-[#ef7027] hover:text-[#ef7027]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#1f1915]/15 bg-white px-6 py-3.5 text-sm font-semibold text-[#1f1915] transition hover:border-[#ef7027] hover:text-[#ef7027] sm:py-3"
                 >
                   Gratis kleurstalen
                 </Link>
               </div>
 
-              <div className="mt-7 flex flex-wrap items-center gap-2.5">
+              <div className="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 md:mt-7">
                 <div className="flex items-center gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" />
@@ -174,13 +174,14 @@ function Producten() {
             </div>
           </div>
 
-          <div className="relative bg-[#f4f1ed]">
+          <div className="relative order-1 bg-[#f4f1ed] lg:order-2">
+
             <Img
               src={lifestyleAsset.url}
               w={1100}
               priority
               alt="Woonkamer met een Wandig tv-wand in gebruik"
-              className="h-[200px] w-full object-cover sm:h-[300px] lg:h-[441px] lg:min-h-0"
+              className="h-[240px] w-full object-cover sm:h-[320px] lg:h-[441px] lg:min-h-0"
             />
           </div>
         </div>
@@ -230,31 +231,32 @@ function Producten() {
 function CollectionTrialSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-24 md:px-10 md:py-24 lg:gap-32">
-        <div className="overflow-hidden rounded-3xl bg-[#ede7e0]">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-7 px-5 py-14 md:grid-cols-2 md:gap-24 md:px-10 md:py-24 lg:gap-32">
+        <div className="overflow-hidden rounded-2xl bg-[#ede7e0] md:rounded-3xl">
           <Img
             src={proefkijkenAsset.url}
             w={900}
             alt="Wandig cinewall in een woonkamer"
-            className="aspect-square h-full w-full object-cover"
+            className="aspect-[4/3] h-full w-full object-cover md:aspect-square"
             loading="lazy"
           />
         </div>
         <div>
-          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-[42px]">
+          <h2 className="font-serif text-[28px] leading-[1.1] text-[#1f1915] md:text-[42px]">
             <span className="italic">100 dagen</span> <span className="font-semibold not-italic">proefkijken</span>
           </h2>
-          <p className="mt-6 max-w-[460px] text-base leading-relaxed text-[#1f1915]/60">
+          <p className="mt-4 max-w-[460px] text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-6 md:text-base">
             Nog niet helemaal overtuigd? Geen probleem. Bij Wandig krijg je 100 dagen de tijd om je cinewall thuis uit te
             proberen en zelf het verschil te ervaren. Kijk je favoriete films, test het uit en ontdek of het bij jouw
             interieur past.
           </p>
-          <p className="mt-5 max-w-[460px] text-base leading-relaxed text-[#1f1915]/60">
+          <p className="mt-4 max-w-[460px] text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-5 md:text-base">
             Toch niet helemaal wat je zoekt? Je kunt je cinewall eenvoudig retourneren. Bekijk onze retourvoorwaarden
             voor de werkwijze, voorwaarden en kosten.
           </p>
         </div>
       </div>
+
     </section>
   );
 }
@@ -405,9 +407,9 @@ function CollectionFaqSection() {
 
   return (
     <section className="bg-[#f7f3ef]">
-      <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-16 md:grid-cols-2 md:gap-16 md:px-10 md:py-24">
-        <div>
-          <div className="h-[136px] w-[136px] overflow-hidden rounded-full bg-[#ede7e0]">
+      <div className="mx-auto grid max-w-[1200px] gap-12 px-5 py-14 md:grid-cols-2 md:gap-16 md:px-10 md:py-24">
+        <div className="text-center md:text-left">
+          <div className="mx-auto h-[112px] w-[112px] overflow-hidden rounded-full bg-[#ede7e0] md:mx-0 md:h-[136px] md:w-[136px]">
             <Img
               src={adviesAsset.url}
               w={300}
@@ -416,24 +418,24 @@ function CollectionFaqSection() {
               loading="lazy"
             />
           </div>
-          <h2 className="mt-7 font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">
+          <h2 className="mt-6 font-serif text-[28px] leading-[1.1] text-[#1f1915] md:mt-7 md:text-4xl">
             Praat met een Wandig-expert
           </h2>
-          <p className="mt-4 max-w-[420px] text-base leading-relaxed text-[#1f1915]/60">
+          <p className="mx-auto mt-4 max-w-[420px] text-[15px] leading-relaxed text-[#1f1915]/60 md:mx-0 md:text-base">
             Twijfel je over het formaat, de kleur of de montage? Onze experts helpen je graag bij het kiezen van de
             juiste cinewall.
           </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-7">
             <a
               href="tel:+31853030990"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1f1915] transition hover:text-[#ef7027]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1f1915] transition hover:text-[#ef7027] sm:py-3"
             >
               <Phone className="h-4 w-4 text-[#ef7027]" />
               +31 85 303 0990
             </a>
             <a
               href="mailto:support@wandig.com"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0f1f2a] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1c3140]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0f1f2a] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#1c3140] sm:py-3"
             >
               <MessageCircle className="h-4 w-4" />
               Stuur ons een bericht
@@ -441,8 +443,9 @@ function CollectionFaqSection() {
           </div>
         </div>
 
+
         <div>
-          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">Over Wandig</h2>
+          <h2 className="font-serif text-[28px] leading-[1.1] text-[#1f1915] md:text-4xl">Over Wandig</h2>
 
           <div className="mt-8">
             {items.map((item, i) => {

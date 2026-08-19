@@ -184,14 +184,10 @@ function Producten() {
       </section>
 
       <section className="mx-auto max-w-[1200px] px-5 md:px-10 pt-14 md:pt-20 pb-20 md:pb-28">
-        <div className="mb-10 max-w-[640px] md:mb-14">
-          <span className="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#ef7027]">Drie modellen</span>
-          <h2 className="mt-3 font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">
-            Welke Wandig past bij jouw wand?
-          </h2>
+        <div className="mb-10 max-w-[560px] md:mb-14">
+          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">Drie modellen</h2>
           <p className="mt-3 text-base leading-relaxed text-[#1f1915]/60">
-            Vergelijk de modellen op breedte, opbergruimte en prijs. Alle modellen zijn plug &amp; play en leverbaar in
-            meerdere kleuren.
+            Solo, Duo en Full House — plug &amp; play en leverbaar in meerdere kleuren.
           </p>
         </div>
 

@@ -111,6 +111,52 @@ type ProductNode = ShopifyProduct["node"];
 type GalleryItem = { src: string; alt: string; full?: boolean; square?: boolean };
 
 /** Mobiele swipe-galerij met snap-scroll, puntjes-indicator en maatlint. */
+function DimensionRuler({
+  widthLabel,
+  heightLabel,
+  open,
+  onToggle,
+}: {
+  widthLabel: string;
+  heightLabel: string;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="pointer-events-none absolute bottom-3 left-0 z-20 flex items-center">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-label="Afmetingen bekijken"
+        className="pointer-events-auto relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#ef7027]/25 bg-white/95 text-[#ef7027] shadow-[0_6px_18px_rgba(7,20,38,0.14)] backdrop-blur transition-transform active:scale-95"
+      >
+        <Ruler className={`h-[18px] w-[18px] transition-transform duration-300 ${open ? "rotate-45" : ""}`} />
+      </button>
+
+      <div
+        className={`pointer-events-auto ml-[-20px] overflow-hidden rounded-r-full bg-white/95 shadow-[0_6px_18px_rgba(7,20,38,0.12)] backdrop-blur transition-all duration-400 ease-out ${
+          open ? "max-w-[280px] opacity-100" : "max-w-0 opacity-0"
+        }`}
+      >
+        <div className="flex items-center gap-4 whitespace-nowrap py-2.5 pl-7 pr-5 text-[12px] text-[#071426]">
+          <span className="flex items-center gap-1.5">
+            <MoveHorizontal className="h-3.5 w-3.5 text-[#ef7027]" />
+            <span className="text-[#071426]/55">Breedte</span>
+            <strong className="font-[500]">{widthLabel} cm</strong>
+          </span>
+          <span className="h-3 w-px bg-[#071426]/12" />
+          <span className="flex items-center gap-1.5">
+            <MoveVertical className="h-3.5 w-3.5 text-[#ef7027]" />
+            <span className="text-[#071426]/55">Hoogte</span>
+            <strong className="font-[500]">{heightLabel} cm</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MobileGallerySwipe({
   items,
   handle,
@@ -170,37 +216,8 @@ function MobileGallerySwipe({
       </div>
 
       {/* Maatlint-knop met uitschuivende afmetingen */}
-      <div className="pointer-events-none absolute bottom-3 left-0 flex items-center">
-        <button
-          type="button"
-          onClick={() => setRulerOpen((open) => !open)}
-          aria-expanded={rulerOpen}
-          aria-label="Afmetingen bekijken"
-          className="pointer-events-auto relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#ef7027]/25 bg-white/95 text-[#ef7027] shadow-[0_6px_18px_rgba(7,20,38,0.14)] backdrop-blur transition-transform active:scale-95"
-        >
-          <Ruler className={`h-[18px] w-[18px] transition-transform duration-300 ${rulerOpen ? "rotate-45" : ""}`} />
-        </button>
+      <DimensionRuler widthLabel={widthLabel} heightLabel={heightLabel} open={rulerOpen} onToggle={() => setRulerOpen((open) => !open)} />
 
-        <div
-          className={`pointer-events-auto ml-[-20px] overflow-hidden rounded-r-full bg-white/95 shadow-[0_6px_18px_rgba(7,20,38,0.12)] backdrop-blur transition-all duration-400 ease-out ${
-            rulerOpen ? "max-w-[280px] opacity-100" : "max-w-0 opacity-0"
-          }`}
-        >
-          <div className="flex items-center gap-4 whitespace-nowrap py-2.5 pl-7 pr-5 text-[12px] text-[#071426]">
-            <span className="flex items-center gap-1.5">
-              <MoveHorizontal className="h-3.5 w-3.5 text-[#ef7027]" />
-              <span className="text-[#071426]/55">Breedte</span>
-              <strong className="font-[500]">{widthLabel} cm</strong>
-            </span>
-            <span className="h-3 w-px bg-[#071426]/12" />
-            <span className="flex items-center gap-1.5">
-              <MoveVertical className="h-3.5 w-3.5 text-[#ef7027]" />
-              <span className="text-[#071426]/55">Hoogte</span>
-              <strong className="font-[500]">{heightLabel} cm</strong>
-            </span>
-          </div>
-        </div>
-      </div>
 
       {items.length > 1 && (
         <div className="mt-3 flex items-center justify-center gap-1.5">
@@ -318,6 +335,7 @@ function ProductView({ product }: { product: ProductNode }) {
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
   const [showOrderWidget, setShowOrderWidget] = useState(false);
+  const [desktopRulerOpen, setDesktopRulerOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -612,7 +630,7 @@ function ProductView({ product }: { product: ProductNode }) {
           <MobileGallerySwipe items={galleryItems} handle={product.handle} widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
 
           {galleryItems[0] && (
-            <figure className={`hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
+            <figure className={`relative hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <Img
                 ref={mainGalleryImageRef}
                 w={1200}
@@ -623,7 +641,16 @@ function ProductView({ product }: { product: ProductNode }) {
                 loading="eager"
                 fetchPriority="high"
               />
+              <div className="absolute inset-x-4 bottom-1">
+                <DimensionRuler
+                  widthLabel={specWidthLabel}
+                  heightLabel={specHeightLabel}
+                  open={desktopRulerOpen}
+                  onToggle={() => setDesktopRulerOpen((open) => !open)}
+                />
+              </div>
             </figure>
+
           )}
 
           <div ref={galleryContinuationRef} className="relative z-10 mt-3 hidden space-y-3 lg:block md:mt-4 md:space-y-4">

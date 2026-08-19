@@ -136,33 +136,33 @@ function Producten() {
       {/* hero */}
       <section className="bg-[#f2eee7]">
         <div className="grid lg:grid-cols-2">
-          <div className="flex items-center px-5 py-2 md:px-10 md:py-0 lg:justify-end">
+          <div className="order-2 flex items-center px-5 py-8 md:px-10 md:py-0 lg:order-1 lg:justify-end">
             <div className="w-full lg:max-w-[520px]">
-              <h1 className="font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">
+              <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-5xl">
 
                 Cinewalls
               </h1>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-[#1f1915]/60">
+              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-4 md:text-base">
                 Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
               </p>
 
-              <div className="mt-7 flex flex-wrap items-center gap-3">
+              <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-7">
                 <Link
                   to="/configurator"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#ef7027] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#d95f1c]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ef7027] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#d95f1c] sm:py-3"
                 >
                   Configureer jouw kast
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to="/kleurstalen"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#1f1915]/15 bg-white px-6 py-3 text-sm font-semibold text-[#1f1915] transition hover:border-[#ef7027] hover:text-[#ef7027]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#1f1915]/15 bg-white px-6 py-3.5 text-sm font-semibold text-[#1f1915] transition hover:border-[#ef7027] hover:text-[#ef7027] sm:py-3"
                 >
                   Gratis kleurstalen
                 </Link>
               </div>
 
-              <div className="mt-7 flex flex-wrap items-center gap-2.5">
+              <div className="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 md:mt-7">
                 <div className="flex items-center gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" />
@@ -174,7 +174,8 @@ function Producten() {
             </div>
           </div>
 
-          <div className="relative bg-[#f4f1ed]">
+          <div className="relative order-1 bg-[#f4f1ed] lg:order-2">
+
             <Img
               src={lifestyleAsset.url}
               w={1100}

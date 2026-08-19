@@ -155,7 +155,7 @@ export function CustomerGallerySection({
 
   return (
     <section className="mt-12 md:mt-20">
-      <div className="mb-6 px-1 md:mb-8 md:px-0">
+      <div className="mb-6 pl-3 pr-5 md:mb-8 md:px-0">
         <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
           Binnenkijken bij onze klanten
         </h2>

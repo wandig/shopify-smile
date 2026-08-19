@@ -256,7 +256,7 @@ function ProductPage() {
   if (isLoading) {
     return (
       <div className="bg-[#faf8f5]">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-16 grid md:grid-cols-2 gap-10">
+        <div className="mx-auto max-w-[1400px] px-3 md:px-10 py-16 grid md:grid-cols-2 gap-10">
           <div className="aspect-[4/5] bg-muted animate-pulse" />
           <div className="space-y-4">
             <div className="h-10 w-2/3 bg-muted animate-pulse" />
@@ -617,7 +617,7 @@ function ProductView({ product }: { product: ProductNode }) {
   };
   return (
     <div className="bg-[#faf8f5]">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10 pt-5 md:pt-8">
+      <div className="mx-auto max-w-[1400px] px-3 md:px-10 pt-5 md:pt-8">
       <nav className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-3 lg:mb-5 flex items-center gap-1.5">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-2.5 w-2.5" />

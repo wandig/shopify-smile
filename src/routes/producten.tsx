@@ -126,12 +126,35 @@ function Producten() {
     <div className="bg-[#fbfaf8]">
       {/* benefits bar */}
       <div className="border-y border-[#1f1915]/8 bg-[#f7f3ef]">
-        <ul className="mx-auto flex max-w-[1100px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-3 text-[13px] text-[#1f1915]/75 md:gap-x-[140px] md:px-10">
+        {/* mobiel: 1 per keer, marquee */}
+        <div className="overflow-hidden py-3 md:hidden">
+          <div className="flex w-max animate-usp-marquee">
+            {[0, 1].map((dup) => (
+              <ul key={dup} className="flex" aria-hidden={dup === 1}>
+                {[
+                  { icon: Truck, label: "Gratis levering" },
+                  { icon: RotateCcw, label: "100 dagen proefkijken" },
+                  { icon: ShieldCheck, label: "10 jaar garantie" },
+                ].map(({ icon: Icon, label }) => (
+                  <li
+                    key={label}
+                    className="flex w-screen shrink-0 items-center justify-center gap-2 text-[13px] text-[#1f1915]/75"
+                  >
+                    <Icon className="h-4 w-4 text-[#ef7027]" /> {label}
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
+
+        <ul className="mx-auto hidden max-w-[1100px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-3 text-[13px] text-[#1f1915]/75 md:flex md:gap-x-[140px] md:px-10">
           <li className="inline-flex items-center gap-2"><Truck className="h-4 w-4 text-[#ef7027]" /> Gratis levering</li>
           <li className="inline-flex items-center gap-2"><RotateCcw className="h-4 w-4 text-[#ef7027]" /> 100 dagen proefkijken</li>
           <li className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[#ef7027]" /> 10 jaar garantie</li>
         </ul>
       </div>
+
 
       {/* hero */}
       <section className="bg-[#f2eee7]">

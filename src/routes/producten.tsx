@@ -370,7 +370,7 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
                 </button>
               );
             })}
-            <span className="ml-1 text-[12px] text-[#1f1915]/45">{colorValues.length} kleuren</span>
+            
           </div>
         )}
 

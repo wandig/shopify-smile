@@ -120,7 +120,7 @@ function Producten() {
 
       {/* hero */}
       <section className="bg-[#f2eee7]">
-        <div className="grid lg:grid-cols-2">
+        <div className="grid sm:h-[430px] sm:grid-cols-2">
           <div className="flex items-center px-5 py-2 md:px-10 md:py-0 lg:justify-end">
             <div className="w-full lg:max-w-[520px]">
               <h1 className="font-serif text-4xl leading-[1.05] text-[#1f1915] md:text-5xl">

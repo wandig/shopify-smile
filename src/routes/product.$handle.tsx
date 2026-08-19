@@ -961,6 +961,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
+      <div className="px-5 md:px-0">
       <SpecificationsSection
         widthLabel={specWidthLabel}
         heightLabel={specHeightLabel}
@@ -986,6 +987,8 @@ function ProductView({ product }: { product: ProductNode }) {
           ? { beforeSrc: beforeSoloAsset.url, afterSrc: afterSoloAsset.url }
           : {})}
       />
+      </div>
+
 
       <CustomerGallerySection
         firstImageSrc={isSolo ? soloWoonkamerLampAsset.url : undefined}

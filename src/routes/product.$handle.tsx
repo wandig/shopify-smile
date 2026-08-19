@@ -108,6 +108,78 @@ export const Route = createFileRoute("/product/$handle")({
 
 type ProductNode = ShopifyProduct["node"];
 
+type GalleryItem = { src: string; alt: string; full?: boolean; square?: boolean };
+
+/** Mobiele swipe-galerij met snap-scroll en puntjes-indicator. */
+function MobileGallerySwipe({ items, handle }: { items: GalleryItem[]; handle: string }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const update = () => {
+      const width = el.clientWidth || 1;
+      setActive(Math.round(el.scrollLeft / width));
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    return () => el.removeEventListener("scroll", update);
+  }, [items.length]);
+
+  if (items.length === 0) return null;
+
+  return (
+    <div className="lg:hidden">
+      <div
+        ref={trackRef}
+        className="scrollbar-hide -mx-5 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
+      >
+        {items.map((item, index) => (
+          <div key={`${item.src}-${index}`} className="w-full shrink-0 snap-center px-5">
+            <figure
+              className={`flex items-center justify-center overflow-hidden rounded-[14px] bg-[#faf8f5] ${
+                handle === "full-house" && index === 0 ? "aspect-[5/4]" : "aspect-square"
+              }`}
+            >
+              <Img
+                src={item.src}
+                alt={item.alt}
+                w={900}
+                priority={index === 0}
+                className={
+                  handle === "full-house" && index === 0
+                    ? "h-auto w-[86%] max-w-none object-contain"
+                    : "h-full w-full object-cover"
+                }
+              />
+            </figure>
+          </div>
+        ))}
+      </div>
+
+      {items.length > 1 && (
+        <div className="mt-3 flex items-center justify-center gap-1.5">
+          {items.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Afbeelding ${index + 1}`}
+              onClick={() => {
+                const el = trackRef.current;
+                if (el) el.scrollTo({ left: index * el.clientWidth, behavior: "smooth" });
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                active === index ? "w-5 bg-[#ef7027]" : "w-1.5 bg-[#071426]/25"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ProductPage() {
   const { handle } = Route.useParams();
   const { data, isLoading, error } = useQuery({
@@ -493,8 +565,10 @@ function ProductView({ product }: { product: ProductNode }) {
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
         {/* Gallery */}
         <div className="min-w-0">
+          <MobileGallerySwipe items={galleryItems} handle={product.handle} />
+
           {galleryItems[0] && (
-            <figure className={`overflow-hidden rounded-[6px] lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
+            <figure className={`hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <Img
                 ref={mainGalleryImageRef}
                 w={1200}
@@ -508,7 +582,8 @@ function ProductView({ product }: { product: ProductNode }) {
             </figure>
           )}
 
-          <div ref={galleryContinuationRef} className="relative z-10 mt-3 space-y-3 md:mt-4 md:space-y-4">
+          <div ref={galleryContinuationRef} className="relative z-10 mt-3 hidden space-y-3 lg:block md:mt-4 md:space-y-4">
+
             {subImageGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <figure className="overflow-hidden rounded-[6px]">

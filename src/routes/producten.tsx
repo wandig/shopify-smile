@@ -445,7 +445,7 @@ function CollectionFaqSection() {
 
 
         <div>
-          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-4xl">Over Wandig</h2>
+          <h2 className="font-serif text-[28px] leading-[1.1] text-[#1f1915] md:text-4xl">Over Wandig</h2>
 
           <div className="mt-8">
             {items.map((item, i) => {

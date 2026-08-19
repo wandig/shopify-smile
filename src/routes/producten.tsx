@@ -231,29 +231,31 @@ function Producten() {
 function CollectionTrialSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-24 md:px-10 md:py-24 lg:gap-32">
-        <div className="overflow-hidden rounded-3xl bg-[#ede7e0]">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-7 px-5 py-14 md:grid-cols-2 md:gap-24 md:px-10 md:py-24 lg:gap-32">
+        <div className="overflow-hidden rounded-2xl bg-[#ede7e0] md:rounded-3xl">
           <Img
             src={proefkijkenAsset.url}
             w={900}
             alt="Wandig cinewall in een woonkamer"
-            className="aspect-square h-full w-full object-cover"
+            className="aspect-[4/3] h-full w-full object-cover md:aspect-square"
             loading="lazy"
           />
         </div>
         <div>
-          <h2 className="font-serif text-3xl leading-[1.1] text-[#1f1915] md:text-[42px]">
+          <h2 className="font-serif text-[28px] leading-[1.1] text-[#1f1915] md:text-[42px]">
             <span className="italic">100 dagen</span> <span className="font-semibold not-italic">proefkijken</span>
           </h2>
-          <p className="mt-6 max-w-[460px] text-base leading-relaxed text-[#1f1915]/60">
+          <p className="mt-4 max-w-[460px] text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-6 md:text-base">
             Nog niet helemaal overtuigd? Geen probleem. Bij Wandig krijg je 100 dagen de tijd om je cinewall thuis uit te
             proberen en zelf het verschil te ervaren. Kijk je favoriete films, test het uit en ontdek of het bij jouw
             interieur past.
           </p>
-          <p className="mt-5 max-w-[460px] text-base leading-relaxed text-[#1f1915]/60">
+          <p className="mt-4 max-w-[460px] text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-5 md:text-base">
             Toch niet helemaal wat je zoekt? Je kunt je cinewall eenvoudig retourneren. Bekijk onze retourvoorwaarden
             voor de werkwijze, voorwaarden en kosten.
           </p>
+        </div>
+
         </div>
       </div>
     </section>

@@ -230,7 +230,7 @@ function Producten() {
 function CollectionTrialSection() {
   return (
     <section className="bg-[#faf8f5]">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-16 md:px-10 md:py-24">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-24 md:px-10 md:py-24 lg:gap-32">
         <div className="overflow-hidden rounded-3xl bg-[#ede7e0]">
           <Img
             src={proefkijkenAsset.url}

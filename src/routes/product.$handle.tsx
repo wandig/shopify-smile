@@ -618,7 +618,7 @@ function ProductView({ product }: { product: ProductNode }) {
   return (
     <div className="bg-[#faf8f5]">
       <div className="mx-auto max-w-[1400px] px-5 md:px-10 pt-5 md:pt-8">
-      <nav className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-5 flex items-center gap-1.5">
+      <nav className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-3 lg:mb-5 flex items-center gap-1.5">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-2.5 w-2.5" />
         <Link to="/producten" className="hover:text-foreground">Modellen</Link>
@@ -626,7 +626,8 @@ function ProductView({ product }: { product: ProductNode }) {
         <span className="text-foreground">{product.title}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_490px] lg:gap-10 xl:gap-14">
+
         {/* Gallery */}
         <div className="min-w-0">
           <MobileGallerySwipe items={galleryItems} handle={product.handle} widthLabel={specWidthLabel} heightLabel={specHeightLabel} />

@@ -354,7 +354,7 @@ export function BuiltToLastSection() {
 
   return (
     <section className="bg-gradient-to-b from-[#faf8f5] to-white pt-12 md:pt-20 pb-12 md:pb-20">
-      <div className="mx-auto max-w-[1400px] px-3 md:px-10">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 text-center md:mb-10">
           <h2 className="text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
             Gebouwd om mee te gaan
@@ -368,7 +368,7 @@ export function BuiltToLastSection() {
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
           onPointerLeave={endDrag}
-          className={`-mx-3 flex gap-3 overflow-x-auto scrollbar-hide px-3 md:mx-0 md:gap-4 md:px-0 ${
+          className={`-mx-5 flex gap-3 overflow-x-auto scrollbar-hide px-5 md:mx-0 md:gap-4 md:px-0 ${
             isDragging ? "cursor-grabbing select-none" : "cursor-grab"
           }`}
           style={{ scrollSnapType: "x mandatory" }}
@@ -470,7 +470,7 @@ export function FaqSection() {
 
   return (
     <section className="bg-white pb-12 pt-0 md:pb-20">
-      <div className="mx-auto max-w-[1400px] px-3 md:px-10">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="mb-6 text-center md:mb-10">
           <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">FAQ</span>
           <h2 className="mt-2 text-[22px] md:text-[26px] font-bold leading-tight text-[#071426]">
@@ -577,7 +577,7 @@ export function ReviewsSection() {
 
   return (
     <section id="klantbeoordelingen" className="scroll-mt-24 bg-[#fff7ef] py-10 md:py-16">
-      <div className="mx-auto max-w-[1400px] px-3 md:px-10">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         {/* Score-overzicht */}
         <div className="text-center">
           <span className="text-[11px] font-[500] uppercase tracking-[0.14em] text-[#90949b]">Reviews</span>

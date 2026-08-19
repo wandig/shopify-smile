@@ -216,7 +216,7 @@ function MobileGallerySwipe({
       </div>
 
       {/* Maatlint-knop met uitschuivende afmetingen, over de foto */}
-      <div className="absolute inset-x-4 bottom-2">
+      <div className="absolute inset-x-4 bottom-8">
         <DimensionRuler widthLabel={widthLabel} heightLabel={heightLabel} open={rulerOpen} onToggle={() => setRulerOpen((open) => !open)} />
       </div>
 

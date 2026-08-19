@@ -629,7 +629,7 @@ function ProductView({ product }: { product: ProductNode }) {
           <MobileGallerySwipe items={galleryItems} handle={product.handle} widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
 
           {galleryItems[0] && (
-            <figure className={`hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
+            <figure className={`relative hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <Img
                 ref={mainGalleryImageRef}
                 w={1200}
@@ -640,7 +640,16 @@ function ProductView({ product }: { product: ProductNode }) {
                 loading="eager"
                 fetchPriority="high"
               />
+              <div className="absolute inset-x-4 bottom-1">
+                <DimensionRuler
+                  widthLabel={specWidthLabel}
+                  heightLabel={specHeightLabel}
+                  open={desktopRulerOpen}
+                  onToggle={() => setDesktopRulerOpen((open) => !open)}
+                />
+              </div>
             </figure>
+
           )}
 
           <div ref={galleryContinuationRef} className="relative z-10 mt-3 hidden space-y-3 lg:block md:mt-4 md:space-y-4">

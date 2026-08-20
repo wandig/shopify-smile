@@ -206,7 +206,7 @@ function MobileGallerySwipe({
                 priority={index === 0}
                 className={
                   handle === "full-house" && index === 0
-                    ? "h-auto w-[83%] max-w-none object-contain"
+                    ? "h-auto w-[95%] max-w-none object-contain"
                     : "h-full w-full object-cover"
                 }
               />
@@ -640,7 +640,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 priority
                 src={galleryItems[0].src}
                 alt={galleryItems[0].alt}
-                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${product.handle === "full-house" ? "h-auto w-[76.16%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
+                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${product.handle === "full-house" ? "h-auto w-[88%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
                 loading="eager"
                 fetchPriority="high"
               />

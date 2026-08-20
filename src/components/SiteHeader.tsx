@@ -223,7 +223,7 @@ export function SiteHeader() {
             </Sheet>
 
             <nav className="hidden h-full md:flex items-center gap-8 text-sm tracking-wide">
-              <ModelsMenu panelTopClass="top-[105px]" linkClassName="hover:opacity-60 transition" onOpenChange={setModelsMenuOpen} />
+              <ModelsMenu panelTopClass="top-[120px]" linkClassName="hover:opacity-60 transition" onOpenChange={setModelsMenuOpen} />
               <Link to="/bezoek" className="hover:opacity-60 transition">Bezoek ons</Link>
               <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>
             </nav>

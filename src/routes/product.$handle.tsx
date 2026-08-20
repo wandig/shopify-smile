@@ -29,7 +29,7 @@ import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, Sh
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
-import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v9.png.asset.json";
+import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v10.png.asset.json";
 const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
 const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;

@@ -529,9 +529,17 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
       const isDofroze5865 = isDofrozeColor && sizeIndex === 1;
       const isDofroze4055 = isDofrozeColor && sizeIndex === 0;
+      const isKristalwit = /kristalwit|kleibeige/i.test(selectedColor ?? "");
+      const isKristalwit7785 = isKristalwit && sizeIndex === 3;
 
 
-      const main = isDofroze7785
+      const main = isKristalwit7785
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseKristalwit7785,
+            alt: "Wandig Full House in kristalwit voor tv 77 - 85 inch",
+          }
+        : isDofroze7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDofroze7785,

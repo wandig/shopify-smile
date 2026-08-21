@@ -621,9 +621,14 @@ function ProductView({ product }: { product: ProductNode }) {
 
   const openGalleryItem = useMemo(() => {
     if (product.handle !== "full-house") return null;
-    if (!/cashmere/i.test(selectedColor ?? "")) return null;
-    const src =
-      sizeIndex === 3
+    const isDofroze = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
+    const isCashmereColor = /cashmere/i.test(selectedColor ?? "");
+    if (!isCashmereColor && !isDofroze) return null;
+    const src = isDofroze
+      ? sizeIndex === 3
+        ? fullHouseDofroze7785Open
+        : null
+      : sizeIndex === 3
         ? fullHouseCashmere7785Open
         : sizeIndex === 2
           ? fullHouseCashmere7075Open
@@ -636,7 +641,7 @@ function ProductView({ product }: { product: ProductNode }) {
     return {
       ...FULL_HOUSE_GALLERY[0],
       src,
-      alt: "Wandig Full House in cashmeregrijs met geopende deuren",
+      alt: `Wandig Full House in ${isDofroze ? "dofroze" : "cashmeregrijs"} met geopende deuren`,
     };
   }, [product.handle, selectedColor, sizeIndex]);
   const [mainDoorsOpen, setMainDoorsOpen] = useState(false);

@@ -1045,17 +1045,24 @@ function ProductView({ product }: { product: ProductNode }) {
     const colorMatch = (group: readonly string[]) =>
       group.some((url) => galleryItems.some((item) => item.src === url));
     const ordered = [...groups].sort((a, b) => Number(colorMatch(b)) - Number(colorMatch(a)));
+    const current = ordered.filter(colorMatch).flat();
+    const rest = ordered.filter((g) => !colorMatch(g)).flat();
 
     let cancelled = false;
-    const start = () => warmImageQueue(ordered.flat(), () => cancelled);
+    const isCancelled = () => cancelled;
+    // Maten van de huidige kleur bijna direct (kleine set), de rest rustig daarna.
+    const firstTimer = window.setTimeout(() => warmImageQueue(current, isCancelled), 300);
     const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
-    const timer = window.setTimeout(() => (idle ? idle(start) : start()), 1500);
+    const restStart = () => warmImageQueue(rest, isCancelled);
+    const restTimer = window.setTimeout(() => (idle ? idle(restStart) : restStart()), 1200);
 
     return () => {
       cancelled = true;
-      window.clearTimeout(timer);
+      window.clearTimeout(firstTimer);
+      window.clearTimeout(restTimer);
     };
   }, [product.handle, galleryItems]);
+
 
   // Track benefits carousel scroll position to dim disabled arrows.
   useEffect(() => {

@@ -309,14 +309,19 @@ function DimensionRuler({
   heightLabel,
   open,
   onToggle,
+  align = "left",
+  position = "bottom-3 left-0",
 }: {
   widthLabel: string;
   heightLabel: string;
   open: boolean;
   onToggle: () => void;
+  align?: "left" | "right";
+  position?: string;
 }) {
+  const isRight = align === "right";
   return (
-    <div className="pointer-events-none absolute bottom-3 left-0 z-20 flex items-center">
+    <div className={`pointer-events-none absolute z-20 flex items-center ${position} ${isRight ? "flex-row-reverse" : ""}`}>
       <button
         type="button"
         onClick={onToggle}
@@ -328,11 +333,15 @@ function DimensionRuler({
       </button>
 
       <div
-        className={`pointer-events-auto ml-[-20px] overflow-hidden rounded-r-full bg-white/95 shadow-[0_6px_18px_rgba(7,20,38,0.12)] backdrop-blur transition-all duration-400 ease-out ${
-          open ? "max-w-[280px] opacity-100" : "max-w-0 opacity-0"
-        }`}
+        className={`pointer-events-auto overflow-hidden bg-white/95 shadow-[0_6px_18px_rgba(7,20,38,0.12)] backdrop-blur transition-all duration-400 ease-out ${
+          isRight ? "mr-[-20px] rounded-l-full" : "ml-[-20px] rounded-r-full"
+        } ${open ? "max-w-[280px] opacity-100" : "max-w-0 opacity-0"}`}
       >
-        <div className="flex items-center gap-4 whitespace-nowrap py-2.5 pl-7 pr-5 text-[12px] text-[#071426]">
+        <div
+          className={`flex items-center gap-4 whitespace-nowrap py-2.5 text-[12px] text-[#071426] ${
+            isRight ? "pl-5 pr-7" : "pl-7 pr-5"
+          }`}
+        >
           <span className="flex items-center gap-1.5">
             <MoveHorizontal className="h-3.5 w-3.5 text-[#ef7027]" />
             <span className="text-[#071426]/55">Breedte</span>

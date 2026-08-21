@@ -57,6 +57,10 @@ import fullHouseCashmere5865Asset from "@/assets/full-house-cashmeregrijs-58-65.
 const fullHouseCashmere5865 = fullHouseCashmere5865Asset.url;
 import fullHouseCashmere5865OpenAsset from "@/assets/full-house-cashmeregrijs-58-65-open.png.asset.json";
 const fullHouseCashmere5865Open = fullHouseCashmere5865OpenAsset.url;
+import fullHouseCashmere4055Asset from "@/assets/full-house-cashmeregrijs-40-55.png.asset.json";
+const fullHouseCashmere4055 = fullHouseCashmere4055Asset.url;
+import fullHouseCashmere4055OpenAsset from "@/assets/full-house-cashmeregrijs-40-55-open.png.asset.json";
+const fullHouseCashmere4055Open = fullHouseCashmere4055OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -507,6 +511,7 @@ function ProductView({ product }: { product: ProductNode }) {
       const isCashmere7785 = isCashmere && sizeIndex === 3;
       const isCashmere7075 = isCashmere && sizeIndex === 2;
       const isCashmere5865 = isCashmere && sizeIndex === 1;
+      const isCashmere4055 = isCashmere && sizeIndex === 0;
 
       const main = isCashmere7785
         ? {
@@ -525,6 +530,12 @@ function ProductView({ product }: { product: ProductNode }) {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseCashmere5865,
             alt: "Wandig Full House in cashmeregrijs voor tv 58 - 65 inch",
+          }
+        : isCashmere4055
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere4055,
+            alt: "Wandig Full House in cashmeregrijs voor tv 40 - 55 inch",
           }
         : isDonkerEiken4055
         ? {
@@ -580,6 +591,7 @@ function ProductView({ product }: { product: ProductNode }) {
         fullHouseCashmere7785Open,
         fullHouseCashmere7075Open,
         fullHouseCashmere5865Open,
+        fullHouseCashmere4055Open,
       ];
       const rest = shopifyItems.filter(
         (item) => item.src !== main.src && !openSrcs.includes(item.src),
@@ -605,7 +617,9 @@ function ProductView({ product }: { product: ProductNode }) {
           ? fullHouseCashmere7075Open
           : sizeIndex === 1
             ? fullHouseCashmere5865Open
-            : null;
+            : sizeIndex === 0
+              ? fullHouseCashmere4055Open
+              : null;
     if (!src) return null;
     return {
       ...FULL_HOUSE_GALLERY[0],

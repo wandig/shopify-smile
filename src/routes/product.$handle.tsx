@@ -473,27 +473,11 @@ function ProductView({ product }: { product: ProductNode }) {
     }));
 
     if (product.handle === "full-house") {
-      const largestSizeIndex = sizeOption ? sizeOption.values.length - 1 : -1;
       const isWalnoot = /walnoot|noten/i.test(selectedColor ?? "");
-      const isWalnoot7785 =
-        isWalnoot &&
-        (/77|85/.test(selectedSize ?? "") ||
-          (sizeIndex >= 0 && sizeIndex === largestSizeIndex && largestSizeIndex >= 3));
-      const isWalnoot7075 =
-        isWalnoot &&
-        !isWalnoot7785 &&
-        (/70|75/.test(selectedSize ?? "") || sizeIndex === 2);
-      const isWalnoot4055 =
-        isWalnoot &&
-        !isWalnoot7785 &&
-        !isWalnoot7075 &&
-        (/40|55/.test(selectedSize ?? "") || sizeIndex === 0);
-      const isWalnoot5865 =
-        isWalnoot &&
-        !isWalnoot7785 &&
-        !isWalnoot7075 &&
-        !isWalnoot4055 &&
-        (/58|65/.test(selectedSize ?? "") || sizeIndex === 1);
+      const isWalnoot4055 = isWalnoot && sizeIndex === 0;
+      const isWalnoot5865 = isWalnoot && sizeIndex === 1;
+      const isWalnoot7075 = isWalnoot && sizeIndex === 2;
+      const isWalnoot7785 = isWalnoot && sizeIndex === 3;
 
       const main = isWalnoot7785
         ? {

@@ -489,7 +489,7 @@ function ProductView({ product }: { product: ProductNode }) {
       full: index === 0,
       square: index === 0,
     }));
-  }, [images, product.handle, product.title, selectedColor, selectedSize]);
+  }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
 
   const subImageGroups = useMemo(() => {
     const subs = galleryItems.slice(1);

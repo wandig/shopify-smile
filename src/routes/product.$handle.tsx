@@ -467,7 +467,15 @@ function ProductView({ product }: { product: ProductNode }) {
     }));
 
     if (product.handle === "full-house") {
-      const main = FULL_HOUSE_GALLERY[0];
+      const isWalnoot7785 =
+        /walnoot/i.test(selectedColor ?? "") && /77/.test(selectedSize ?? "");
+      const main = isWalnoot7785
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseWalnoot7785,
+            alt: "Wandig Full House in walnootbruin voor tv 77 - 85 inch",
+          }
+        : FULL_HOUSE_GALLERY[0];
       const rest = shopifyItems.filter((item) => item.src !== main.src);
       return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
     }

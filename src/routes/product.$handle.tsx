@@ -215,25 +215,51 @@ const SOLO_RENDER_GROUPS: readonly (readonly string[])[] = [
   SOLO_KRISTALWIT_BY_SIZE.map((s) => s.open),
 ];
 
-// Laadt varianten-afbeeldingen op de achtergrond met lage prioriteit, één voor één,
-// zodat het wisselen van kleur/maat direct uit cache komt zonder de pagina te vertragen.
+// Laadt varianten-afbeeldingen op de achtergrond voor. Belangrijk: we warmen exact
+// dezelfde geoptimaliseerde URL's als de <Img> straks opvraagt (zelfde w/q en dpr),
+// anders is de cache-hit nul en zie je alsnog vertraging bij het wisselen.
+const warmedUrls = new Set<string>();
+
+const warmVariantWidth = () => {
+  if (typeof window === "undefined") return 1200;
+  const dpr = window.devicePixelRatio || 1;
+  // Mobiel rendert de swipe-galerij op w=900, desktop de hoofdfoto op w=1200.
+  const base = window.innerWidth < 1024 ? 900 : 1200;
+  return dpr >= 1.5 ? base * 2 : base;
+};
+
+
 const warmImageQueue = (urls: string[], isCancelled: () => boolean) => {
-  const queue = urls.filter(Boolean);
+  const width = warmVariantWidth();
+  const queue = urls
+    .filter(Boolean)
+    .map((url) => optimizeImageUrl(url, width) ?? url)
+    .filter((url) => !warmedUrls.has(url));
   let index = 0;
   const next = () => {
     if (isCancelled() || index >= queue.length) return;
     const url = queue[index++]!;
+    warmedUrls.add(url);
     const img = new Image();
     (img as HTMLImageElement & { fetchPriority?: string }).fetchPriority = "low";
     img.decoding = "async";
-    img.onload = next;
+    const done = () => {
+      // Decodeer alvast, zodat het wisselen ook geen decode-hik geeft.
+      const decoded = (img as HTMLImageElement).decode?.();
+      if (decoded) decoded.then(next).catch(next);
+      else next();
+    };
+    img.onload = done;
     img.onerror = next;
     img.src = url;
   };
-  // twee parallelle streams: snel genoeg, maar bandbreedte blijft vrij
+  // vier parallelle streams: vult de cache snel, blijft lage prioriteit
+  next();
+  next();
   next();
   next();
 };
+
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
@@ -1019,17 +1045,24 @@ function ProductView({ product }: { product: ProductNode }) {
     const colorMatch = (group: readonly string[]) =>
       group.some((url) => galleryItems.some((item) => item.src === url));
     const ordered = [...groups].sort((a, b) => Number(colorMatch(b)) - Number(colorMatch(a)));
+    const current = ordered.filter(colorMatch).flat();
+    const rest = ordered.filter((g) => !colorMatch(g)).flat();
 
     let cancelled = false;
-    const start = () => warmImageQueue(ordered.flat(), () => cancelled);
+    const isCancelled = () => cancelled;
+    // Maten van de huidige kleur bijna direct (kleine set), de rest rustig daarna.
+    const firstTimer = window.setTimeout(() => warmImageQueue(current, isCancelled), 300);
     const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
-    const timer = window.setTimeout(() => (idle ? idle(start) : start()), 1500);
+    const restStart = () => warmImageQueue(rest, isCancelled);
+    const restTimer = window.setTimeout(() => (idle ? idle(restStart) : restStart()), 1200);
 
     return () => {
       cancelled = true;
-      window.clearTimeout(timer);
+      window.clearTimeout(firstTimer);
+      window.clearTimeout(restTimer);
     };
   }, [product.handle, galleryItems]);
+
 
   // Track benefits carousel scroll position to dim disabled arrows.
   useEffect(() => {

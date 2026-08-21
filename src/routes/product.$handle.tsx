@@ -41,6 +41,8 @@ import fullHouseDonkerEiken7785Asset from "@/assets/full-house-donkereiken-77-85
 const fullHouseDonkerEiken7785 = fullHouseDonkerEiken7785Asset.url;
 import fullHouseDonkerEiken7075Asset from "@/assets/full-house-donkereiken-70-75.png.asset.json";
 const fullHouseDonkerEiken7075 = fullHouseDonkerEiken7075Asset.url;
+import fullHouseDonkerEiken5865Asset from "@/assets/full-house-donkereiken-58-65.png.asset.json";
+const fullHouseDonkerEiken5865 = fullHouseDonkerEiken5865Asset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -485,8 +487,15 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDonkerEiken = /donker\s*eiken|eikenzwart|donkereiken/i.test(selectedColor ?? "");
       const isDonkerEiken7785 = isDonkerEiken && sizeIndex === 3;
       const isDonkerEiken7075 = isDonkerEiken && sizeIndex === 2;
+      const isDonkerEiken5865 = isDonkerEiken && sizeIndex === 1;
 
-      const main = isDonkerEiken7785
+      const main = isDonkerEiken5865
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDonkerEiken5865,
+            alt: "Wandig Full House in donkereiken voor tv 58 - 65 inch",
+          }
+        : isDonkerEiken7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDonkerEiken7785,

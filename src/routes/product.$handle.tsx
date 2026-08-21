@@ -1118,7 +1118,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 open={desktopRulerOpen}
                 onToggle={() => setDesktopRulerOpen((open) => !open)}
                 align="right"
-                position="top-4 right-6"
+                position="top-4 right-2"
               />
             </figure>
 

@@ -67,6 +67,10 @@ import fullHouseKristalwit7785 from "@/assets/full-house-kristalwit-77-85-nobg.p
 import fullHouseKristalwit7785Open from "@/assets/full-house-kristalwit-77-85-open-nobg.png";
 import fullHouseKristalwit7075 from "@/assets/full-house-kristalwit-70-75-nobg.png";
 import fullHouseKristalwit7075Open from "@/assets/full-house-kristalwit-70-75-open-nobg.png";
+import fullHouseKristalwit5865 from "@/assets/full-house-kristalwit-58-65-nobg.png";
+import fullHouseKristalwit5865Open from "@/assets/full-house-kristalwit-58-65-open-nobg.png";
+import fullHouseKristalwit4055 from "@/assets/full-house-kristalwit-40-55-nobg.png";
+import fullHouseKristalwit4055Open from "@/assets/full-house-kristalwit-40-55-open-nobg.png";
 import fullHouseDofroze7075 from "@/assets/full-house-dofroze-70-75-nobg.png";
 import fullHouseDofroze7075Open from "@/assets/full-house-dofroze-70-75-open-nobg.png";
 import fullHouseDofroze5865 from "@/assets/full-house-dofroze-58-65-nobg.png";
@@ -532,6 +536,8 @@ function ProductView({ product }: { product: ProductNode }) {
       const isKristalwit = /kristalwit|kleibeige/i.test(selectedColor ?? "");
       const isKristalwit7785 = isKristalwit && sizeIndex === 3;
       const isKristalwit7075 = isKristalwit && sizeIndex === 2;
+      const isKristalwit5865 = isKristalwit && sizeIndex === 1;
+      const isKristalwit4055 = isKristalwit && sizeIndex === 0;
 
 
       const main = isKristalwit7785
@@ -545,6 +551,18 @@ function ProductView({ product }: { product: ProductNode }) {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseKristalwit7075,
             alt: "Wandig Full House in kristalwit voor tv 70 - 75 inch",
+          }
+        : isKristalwit5865
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseKristalwit5865,
+            alt: "Wandig Full House in kristalwit voor tv 58 - 65 inch",
+          }
+        : isKristalwit4055
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseKristalwit4055,
+            alt: "Wandig Full House in kristalwit voor tv 40 - 55 inch",
           }
         : isDofroze7785
         ? {
@@ -680,7 +698,11 @@ function ProductView({ product }: { product: ProductNode }) {
         ? fullHouseKristalwit7785Open
         : sizeIndex === 2
           ? fullHouseKristalwit7075Open
-          : null
+          : sizeIndex === 1
+            ? fullHouseKristalwit5865Open
+            : sizeIndex === 0
+              ? fullHouseKristalwit4055Open
+              : null
       : isDofroze
       ? sizeIndex === 3
         ? fullHouseDofroze7785Open

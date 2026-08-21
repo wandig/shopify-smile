@@ -89,9 +89,9 @@ export function SiteFooter() {
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+31853030990" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+                  <a href="tel:+31853030997" className="inline-flex items-center gap-2 hover:text-white transition-colors">
                     <Phone className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                    +31 85 303 0990
+                    085 303 0997
                   </a>
                 </li>
                 <li>
@@ -123,9 +123,9 @@ export function SiteFooter() {
             <Mail className="h-4 w-4" strokeWidth={1.5} />
             support@wandig.com
           </a>
-          <a href="tel:+31853030990" className="inline-flex items-center gap-2 hover:text-white transition-colors">
+          <a href="tel:+31853030997" className="inline-flex items-center gap-2 hover:text-white transition-colors">
             <Phone className="h-4 w-4" strokeWidth={1.5} />
-            +31 85 303 0990
+            085 303 0997
           </a>
           <span className="text-white/50 ml-auto">© {new Date().getFullYear()} Wandig. Alle rechten voorbehouden.</span>
           <span className="text-white/50">Gemaakt in Nederland</span>

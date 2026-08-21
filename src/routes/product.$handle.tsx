@@ -150,7 +150,16 @@ const SOLO_DOFROZE_BY_SIZE = [
   { closed: soloDofroze7785Asset.url, open: soloDofroze7785OpenAsset.url, label: "77 - 85 inch" },
 ] as const;
 
+const SOLO_KRISTALWIT_BY_SIZE = [
+  { closed: soloKristalwit4055Asset.url, open: soloKristalwit4055OpenAsset.url, label: "40 - 55 inch" },
+  { closed: soloKristalwit5865Asset.url, open: soloKristalwit5865OpenAsset.url, label: "58 - 65 inch" },
+  { closed: soloKristalwit7075Asset.url, open: soloKristalwit7075OpenAsset.url, label: "70 - 75 inch" },
+  { closed: soloKristalwit7785Asset.url, open: soloKristalwit7785OpenAsset.url, label: "77 - 85 inch" },
+] as const;
+
 const soloSetForColor = (color: string | null | undefined, sizeIndex: number) => {
+  if (/kristalwit|wit/i.test(color ?? ""))
+    return { set: SOLO_KRISTALWIT_BY_SIZE[sizeIndex], colorLabel: "kristalwit" };
   if (/dofroze|roze/i.test(color ?? ""))
     return { set: SOLO_DOFROZE_BY_SIZE[sizeIndex], colorLabel: "dofroze" };
   if (/cashmere/i.test(color ?? ""))

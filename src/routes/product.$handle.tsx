@@ -574,6 +574,16 @@ function ProductView({ product }: { product: ProductNode }) {
     }));
   }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
 
+  const openGalleryItem = useMemo(
+    () => galleryItems.find((item) => item.src === fullHouseCashmere7785Open) ?? null,
+    [galleryItems],
+  );
+  const [mainDoorsOpen, setMainDoorsOpen] = useState(false);
+  useEffect(() => {
+    setMainDoorsOpen(false);
+  }, [openGalleryItem?.src, selectedColor, selectedSize]);
+
+
   const subImageGroups = useMemo(() => {
     const subs = galleryItems.slice(1);
     const groups: Array<typeof galleryItems> = [];

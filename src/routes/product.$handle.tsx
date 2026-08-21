@@ -65,6 +65,10 @@ import fullHouseDofroze7785Asset from "@/assets/full-house-dofroze-77-85.png.ass
 const fullHouseDofroze7785 = fullHouseDofroze7785Asset.url;
 import fullHouseDofroze7785OpenAsset from "@/assets/full-house-dofroze-77-85-open.png.asset.json";
 const fullHouseDofroze7785Open = fullHouseDofroze7785OpenAsset.url;
+import fullHouseDofroze7075Asset from "@/assets/full-house-dofroze-70-75.png.asset.json";
+const fullHouseDofroze7075 = fullHouseDofroze7075Asset.url;
+import fullHouseDofroze7075OpenAsset from "@/assets/full-house-dofroze-70-75-open.png.asset.json";
+const fullHouseDofroze7075Open = fullHouseDofroze7075OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";

@@ -63,10 +63,10 @@ import fullHouseCashmere4055OpenAsset from "@/assets/full-house-cashmeregrijs-40
 const fullHouseCashmere4055Open = fullHouseCashmere4055OpenAsset.url;
 import fullHouseDofroze7785 from "@/assets/full-house-dofroze-77-85-nobg.png";
 import fullHouseDofroze7785Open from "@/assets/full-house-dofroze-77-85-open-nobg.png";
-import fullHouseKristalwit7785Asset from "@/assets/full-house-kristalwit-77-85.png.asset.json";
-const fullHouseKristalwit7785 = fullHouseKristalwit7785Asset.url;
-import fullHouseKristalwit7785OpenAsset from "@/assets/full-house-kristalwit-77-85-open.png.asset.json";
-const fullHouseKristalwit7785Open = fullHouseKristalwit7785OpenAsset.url;
+import fullHouseKristalwit7785 from "@/assets/full-house-kristalwit-77-85-nobg.png";
+import fullHouseKristalwit7785Open from "@/assets/full-house-kristalwit-77-85-open-nobg.png";
+import fullHouseKristalwit7075 from "@/assets/full-house-kristalwit-70-75-nobg.png";
+import fullHouseKristalwit7075Open from "@/assets/full-house-kristalwit-70-75-open-nobg.png";
 import fullHouseDofroze7075 from "@/assets/full-house-dofroze-70-75-nobg.png";
 import fullHouseDofroze7075Open from "@/assets/full-house-dofroze-70-75-open-nobg.png";
 import fullHouseDofroze5865 from "@/assets/full-house-dofroze-58-65-nobg.png";

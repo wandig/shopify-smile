@@ -735,9 +735,10 @@ function ProductView({ product }: { product: ProductNode }) {
                 ref={mainGalleryImageRef}
                 w={1200}
                 priority
-                src={galleryItems[0].src}
-                alt={galleryItems[0].alt}
-                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${product.handle === "full-house" ? "h-auto w-[100%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
+                onClick={openGalleryItem ? () => setMainDoorsOpen((open) => !open) : undefined}
+                src={openGalleryItem && mainDoorsOpen ? openGalleryItem.src : galleryItems[0].src}
+                alt={openGalleryItem && mainDoorsOpen ? openGalleryItem.alt : galleryItems[0].alt}
+                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${openGalleryItem ? "cursor-pointer" : ""} ${product.handle === "full-house" ? "h-auto w-[100%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
                 loading="eager"
                 fetchPriority="high"
               />

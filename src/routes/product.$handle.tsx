@@ -653,6 +653,7 @@ function ProductView({ product }: { product: ProductNode }) {
         fullHouseDofroze7075Open,
         fullHouseDofroze5865Open,
         fullHouseKristalwit7785Open,
+        fullHouseKristalwit7075Open,
       ];
       const rest = shopifyItems.filter(
         (item) => item.src !== main.src && !openSrcs.includes(item.src),

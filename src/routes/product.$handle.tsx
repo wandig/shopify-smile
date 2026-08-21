@@ -640,7 +640,9 @@ function ProductView({ product }: { product: ProductNode }) {
     const src = isDofroze
       ? sizeIndex === 3
         ? fullHouseDofroze7785Open
-        : null
+        : sizeIndex === 2
+          ? fullHouseDofroze7075Open
+          : null
       : sizeIndex === 3
         ? fullHouseCashmere7785Open
         : sizeIndex === 2

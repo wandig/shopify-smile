@@ -31,6 +31,8 @@ import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-oran
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
 import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v10.png.asset.json";
 const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
+import fullHouseWalnoot7785Asset from "@/assets/full-house-walnoot-77-85.png.asset.json";
+const fullHouseWalnoot7785 = fullHouseWalnoot7785Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
 const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";

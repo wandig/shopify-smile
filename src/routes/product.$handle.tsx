@@ -33,6 +33,8 @@ import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v10.png.
 const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
 import fullHouseWalnoot7785Asset from "@/assets/full-house-walnoot-77-85.png.asset.json";
 const fullHouseWalnoot7785 = fullHouseWalnoot7785Asset.url;
+import fullHouseWalnoot7075Asset from "@/assets/full-house-walnoot-70-75.png.asset.json";
+const fullHouseWalnoot7075 = fullHouseWalnoot7075Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
 const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";

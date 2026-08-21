@@ -467,8 +467,12 @@ function ProductView({ product }: { product: ProductNode }) {
     }));
 
     if (product.handle === "full-house") {
+      const largestSizeIndex = sizeOption ? sizeOption.values.length - 1 : -1;
       const isWalnoot7785 =
-        /walnoot/i.test(selectedColor ?? "") && /77/.test(selectedSize ?? "");
+        /walnoot|noten/i.test(selectedColor ?? "") &&
+        (/77|85/.test(selectedSize ?? "") ||
+          (sizeIndex >= 0 && sizeIndex === largestSizeIndex && largestSizeIndex >= 3));
+
       const main = isWalnoot7785
         ? {
             ...FULL_HOUSE_GALLERY[0],

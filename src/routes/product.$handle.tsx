@@ -480,14 +480,21 @@ function ProductView({ product }: { product: ProductNode }) {
       const isWalnoot5865 = isWalnoot && sizeIndex === 1;
       const isWalnoot7075 = isWalnoot && sizeIndex === 2;
       const isWalnoot7785 = isWalnoot && sizeIndex === 3;
-      const isDonkerEiken7785 =
-        /donker\s*eiken|eikenzwart|donkereiken/i.test(selectedColor ?? "") && sizeIndex === 3;
+      const isDonkerEiken = /donker\s*eiken|eikenzwart|donkereiken/i.test(selectedColor ?? "");
+      const isDonkerEiken7785 = isDonkerEiken && sizeIndex === 3;
+      const isDonkerEiken7075 = isDonkerEiken && sizeIndex === 2;
 
       const main = isDonkerEiken7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDonkerEiken7785,
             alt: "Wandig Full House in donkereiken voor tv 77 - 85 inch",
+          }
+        : isDonkerEiken7075
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDonkerEiken7075,
+            alt: "Wandig Full House in donkereiken voor tv 70 - 75 inch",
           }
         : isWalnoot7785
         ? {

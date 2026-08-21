@@ -592,7 +592,10 @@ function ProductView({ product }: { product: ProductNode }) {
   }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
 
   const openGalleryItem = useMemo(
-    () => galleryItems.find((item) => item.src === fullHouseCashmere7785Open) ?? null,
+    () =>
+      galleryItems.find(
+        (item) => item.src === fullHouseCashmere7785Open || item.src === fullHouseCashmere7075Open,
+      ) ?? null,
     [galleryItems],
   );
   const [mainDoorsOpen, setMainDoorsOpen] = useState(false);

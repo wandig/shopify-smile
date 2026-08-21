@@ -27,11 +27,12 @@ export function CartDrawer() {
 
   const handleCheckout = () => {
     const url = getCheckoutUrl();
-    if (url) {
-      window.open(url, "_blank");
-      setOpen(false);
-    }
+    if (!url) return;
+    setOpen(false);
+    const win = window.open(url, "_blank");
+    if (!win) window.location.href = url;
   };
+
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { storefrontApiRequest, type ShopifyProduct } from "@/lib/shopify";
+import { storefrontApiRequest, SHOPIFY_STORE_PERMANENT_DOMAIN, type ShopifyProduct } from "@/lib/shopify";
 
 export interface CartItem {
   lineId: string | null;
@@ -49,12 +49,19 @@ const CART_LINES_REMOVE = `mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!
 function formatCheckoutUrl(url: string): string {
   try {
     const u = new URL(url);
+    // Shopify geeft checkout-links op het primaire winkeldomein (wandig.com).
+    // Zolang wandig.com naar deze site wijst, gebruiken we het myshopify-domein.
+    if (typeof window !== "undefined" && u.host === window.location.host) {
+      u.host = SHOPIFY_STORE_PERMANENT_DOMAIN;
+    }
     u.searchParams.set("channel", "online_store");
     return u.toString();
   } catch {
     return url;
   }
 }
+
+
 
 function isCartNotFound(errs: Array<{ message: string }>) {
   return errs.some((e) => e.message.toLowerCase().includes("cart not found") || e.message.toLowerCase().includes("does not exist"));
@@ -173,7 +180,10 @@ export const useCartStore = create<CartStore>()(
       },
 
       clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
-      getCheckoutUrl: () => get().checkoutUrl,
+      getCheckoutUrl: () => {
+        const url = get().checkoutUrl;
+        return url ? formatCheckoutUrl(url) : null;
+      },
 
       syncCart: async () => {
         const { cartId, isSyncing, clearCart } = get();

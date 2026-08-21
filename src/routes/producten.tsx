@@ -450,11 +450,11 @@ function CollectionFaqSection() {
           </p>
           <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-7">
             <a
-              href="tel:+31853030990"
+              href="tel:+31853030997"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1f1915] transition hover:text-[#ef7027] sm:py-3"
             >
               <Phone className="h-4 w-4 text-[#ef7027]" />
-              +31 85 303 0990
+              085 303 0997
             </a>
             <a
               href="mailto:support@wandig.com"

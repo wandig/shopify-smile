@@ -617,7 +617,9 @@ function ProductView({ product }: { product: ProductNode }) {
           ? fullHouseCashmere7075Open
           : sizeIndex === 1
             ? fullHouseCashmere5865Open
-            : null;
+            : sizeIndex === 0
+              ? fullHouseCashmere4055Open
+              : null;
     if (!src) return null;
     return {
       ...FULL_HOUSE_GALLERY[0],

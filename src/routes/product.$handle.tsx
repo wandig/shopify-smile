@@ -69,6 +69,10 @@ import fullHouseDofroze7075Asset from "@/assets/full-house-dofroze-70-75.png.ass
 const fullHouseDofroze7075 = fullHouseDofroze7075Asset.url;
 import fullHouseDofroze7075OpenAsset from "@/assets/full-house-dofroze-70-75-open.png.asset.json";
 const fullHouseDofroze7075Open = fullHouseDofroze7075OpenAsset.url;
+import fullHouseDofroze5865Asset from "@/assets/full-house-dofroze-58-65.png.asset.json";
+const fullHouseDofroze5865 = fullHouseDofroze5865Asset.url;
+import fullHouseDofroze5865OpenAsset from "@/assets/full-house-dofroze-58-65-open.png.asset.json";
+const fullHouseDofroze5865Open = fullHouseDofroze5865OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -523,6 +527,7 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDofrozeColor = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
       const isDofroze7785 = isDofrozeColor && sizeIndex === 3;
       const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
+      const isDofroze5865 = isDofrozeColor && sizeIndex === 1;
 
       const main = isDofroze7785
         ? {
@@ -535,6 +540,12 @@ function ProductView({ product }: { product: ProductNode }) {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDofroze7075,
             alt: "Wandig Full House in dofroze voor tv 70 - 75 inch",
+          }
+        : isDofroze5865
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDofroze5865,
+            alt: "Wandig Full House in dofroze voor tv 58 - 65 inch",
           }
         : isCashmere7785
         ? {
@@ -617,6 +628,7 @@ function ProductView({ product }: { product: ProductNode }) {
         fullHouseCashmere4055Open,
         fullHouseDofroze7785Open,
         fullHouseDofroze7075Open,
+        fullHouseDofroze5865Open,
       ];
       const rest = shopifyItems.filter(
         (item) => item.src !== main.src && !openSrcs.includes(item.src),
@@ -642,7 +654,9 @@ function ProductView({ product }: { product: ProductNode }) {
         ? fullHouseDofroze7785Open
         : sizeIndex === 2
           ? fullHouseDofroze7075Open
-          : null
+          : sizeIndex === 1
+            ? fullHouseDofroze5865Open
+            : null
       : sizeIndex === 3
         ? fullHouseCashmere7785Open
         : sizeIndex === 2

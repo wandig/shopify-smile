@@ -31,6 +31,8 @@ import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-oran
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
 import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v10.png.asset.json";
 const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
+import fullHouseWalnoot7785Asset from "@/assets/full-house-walnoot-77-85.png.asset.json";
+const fullHouseWalnoot7785 = fullHouseWalnoot7785Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
 const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";
@@ -465,7 +467,15 @@ function ProductView({ product }: { product: ProductNode }) {
     }));
 
     if (product.handle === "full-house") {
-      const main = FULL_HOUSE_GALLERY[0];
+      const isWalnoot7785 =
+        /walnoot/i.test(selectedColor ?? "") && /77/.test(selectedSize ?? "");
+      const main = isWalnoot7785
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseWalnoot7785,
+            alt: "Wandig Full House in walnootbruin voor tv 77 - 85 inch",
+          }
+        : FULL_HOUSE_GALLERY[0];
       const rest = shopifyItems.filter((item) => item.src !== main.src);
       return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
     }
@@ -475,7 +485,7 @@ function ProductView({ product }: { product: ProductNode }) {
       full: index === 0,
       square: index === 0,
     }));
-  }, [images, product.handle, product.title]);
+  }, [images, product.handle, product.title, selectedColor, selectedSize]);
 
   const subImageGroups = useMemo(() => {
     const subs = galleryItems.slice(1);

@@ -97,6 +97,14 @@ import soloWalnoot5865Asset from "@/assets/solo-walnoot-5865.png.asset.json";
 import soloWalnoot5865OpenAsset from "@/assets/solo-walnoot-5865-open.png.asset.json";
 import soloWalnoot4055Asset from "@/assets/solo-walnoot-4055.png.asset.json";
 import soloWalnoot4055OpenAsset from "@/assets/solo-walnoot-4055-open.png.asset.json";
+import soloDonkereiken7785Asset from "@/assets/solo-donkereiken-7785.png.asset.json";
+import soloDonkereiken7785OpenAsset from "@/assets/solo-donkereiken-7785-open.png.asset.json";
+import soloDonkereiken7075Asset from "@/assets/solo-donkereiken-7075.png.asset.json";
+import soloDonkereiken7075OpenAsset from "@/assets/solo-donkereiken-7075-open.png.asset.json";
+import soloDonkereiken5865Asset from "@/assets/solo-donkereiken-5865.png.asset.json";
+import soloDonkereiken5865OpenAsset from "@/assets/solo-donkereiken-5865-open.png.asset.json";
+import soloDonkereiken4055Asset from "@/assets/solo-donkereiken-4055.png.asset.json";
+import soloDonkereiken4055OpenAsset from "@/assets/solo-donkereiken-4055-open.png.asset.json";
 
 const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },
@@ -104,6 +112,26 @@ const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot7075Asset.url, open: soloWalnoot7075OpenAsset.url, label: "70 - 75 inch" },
   { closed: soloWalnoot7785Asset.url, open: soloWalnoot7785OpenAsset.url, label: "77 - 85 inch" },
 ] as const;
+
+const SOLO_DONKEREIKEN_BY_SIZE = [
+  { closed: soloDonkereiken4055Asset.url, open: soloDonkereiken4055OpenAsset.url, label: "40 - 55 inch" },
+  { closed: soloDonkereiken5865Asset.url, open: soloDonkereiken5865OpenAsset.url, label: "58 - 65 inch" },
+  { closed: soloDonkereiken7075Asset.url, open: soloDonkereiken7075OpenAsset.url, label: "70 - 75 inch" },
+  { closed: soloDonkereiken7785Asset.url, open: soloDonkereiken7785OpenAsset.url, label: "77 - 85 inch" },
+] as const;
+
+const soloSetForColor = (color: string | null | undefined, sizeIndex: number) => {
+  if (/donkereiken|eikenzwart/i.test(color ?? ""))
+    return { set: SOLO_DONKEREIKEN_BY_SIZE[sizeIndex], colorLabel: "donkereiken" };
+  if (/walnoot|noten/i.test(color ?? ""))
+    return { set: SOLO_WALNOOT_BY_SIZE[sizeIndex], colorLabel: "walnootbruin" };
+  return { set: undefined, colorLabel: "" };
+};
+
+const SOLO_ALL_RENDERS = new Set<string>([
+  ...SOLO_WALNOOT_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+  ...SOLO_DONKEREIKEN_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+]);
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
@@ -694,19 +722,16 @@ function ProductView({ product }: { product: ProductNode }) {
       return rest.length > 0 ? [main, ...rest] : [main, ...FULL_HOUSE_GALLERY.slice(1)];
     }
 
-    if (product.handle === "solo" && /walnoot|noten/i.test(selectedColor ?? "")) {
-      const set = SOLO_WALNOOT_BY_SIZE[sizeIndex];
+    if (product.handle === "solo") {
+      const { set, colorLabel } = soloSetForColor(selectedColor, sizeIndex);
       if (set) {
         const main = {
           src: set.closed,
-          alt: `Wandig Solo in walnootbruin voor tv ${set.label}`,
+          alt: `Wandig Solo in ${colorLabel} voor tv ${set.label}`,
           full: true,
           square: true,
         };
-        const excluded = new Set(
-          SOLO_WALNOOT_BY_SIZE.flatMap((s) => [s.closed, s.open] as string[]),
-        );
-        const rest = shopifyItems.filter((item) => !excluded.has(item.src));
+        const rest = shopifyItems.filter((item) => !SOLO_ALL_RENDERS.has(item.src));
         return [main, ...rest];
       }
     }
@@ -720,13 +745,12 @@ function ProductView({ product }: { product: ProductNode }) {
 
   const openGalleryItem = useMemo(() => {
     if (product.handle === "solo") {
-      if (!/walnoot|noten/i.test(selectedColor ?? "")) return null;
-      const set = SOLO_WALNOOT_BY_SIZE[sizeIndex];
+      const { set, colorLabel } = soloSetForColor(selectedColor, sizeIndex);
       if (!set) return null;
       return {
         ...FULL_HOUSE_GALLERY[0],
         src: set.open,
-        alt: `Wandig Solo in walnootbruin met geopende deuren`,
+        alt: `Wandig Solo in ${colorLabel} met geopende deuren`,
       };
     }
     if (product.handle !== "full-house") return null;

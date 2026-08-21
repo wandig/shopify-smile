@@ -49,6 +49,10 @@ import fullHouseCashmere7785Asset from "@/assets/full-house-cashmeregrijs-77-85.
 const fullHouseCashmere7785 = fullHouseCashmere7785Asset.url;
 import fullHouseCashmere7785OpenAsset from "@/assets/full-house-cashmeregrijs-77-85-open.png.asset.json";
 const fullHouseCashmere7785Open = fullHouseCashmere7785OpenAsset.url;
+import fullHouseCashmere7075Asset from "@/assets/full-house-cashmeregrijs-70-75.png.asset.json";
+const fullHouseCashmere7075 = fullHouseCashmere7075Asset.url;
+import fullHouseCashmere7075OpenAsset from "@/assets/full-house-cashmeregrijs-70-75-open.png.asset.json";
+const fullHouseCashmere7075Open = fullHouseCashmere7075OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";

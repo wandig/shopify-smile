@@ -53,6 +53,10 @@ import fullHouseCashmere7075Asset from "@/assets/full-house-cashmeregrijs-70-75.
 const fullHouseCashmere7075 = fullHouseCashmere7075Asset.url;
 import fullHouseCashmere7075OpenAsset from "@/assets/full-house-cashmeregrijs-70-75-open.png.asset.json";
 const fullHouseCashmere7075Open = fullHouseCashmere7075OpenAsset.url;
+import fullHouseCashmere5865Asset from "@/assets/full-house-cashmeregrijs-58-65.png.asset.json";
+const fullHouseCashmere5865 = fullHouseCashmere5865Asset.url;
+import fullHouseCashmere5865OpenAsset from "@/assets/full-house-cashmeregrijs-58-65-open.png.asset.json";
+const fullHouseCashmere5865Open = fullHouseCashmere5865OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -502,6 +506,7 @@ function ProductView({ product }: { product: ProductNode }) {
       const isCashmere = /cashmere/i.test(selectedColor ?? "");
       const isCashmere7785 = isCashmere && sizeIndex === 3;
       const isCashmere7075 = isCashmere && sizeIndex === 2;
+      const isCashmere5865 = isCashmere && sizeIndex === 1;
 
       const main = isCashmere7785
         ? {
@@ -514,6 +519,12 @@ function ProductView({ product }: { product: ProductNode }) {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseCashmere7075,
             alt: "Wandig Full House in cashmeregrijs voor tv 70 - 75 inch",
+          }
+        : isCashmere5865
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere5865,
+            alt: "Wandig Full House in cashmeregrijs voor tv 58 - 65 inch",
           }
         : isDonkerEiken4055
         ? {
@@ -565,22 +576,15 @@ function ProductView({ product }: { product: ProductNode }) {
                 }
               : FULL_HOUSE_GALLERY[0];
 
-      const openVariant = isCashmere7785
-        ? {
-            ...FULL_HOUSE_GALLERY[0],
-            src: fullHouseCashmere7785Open,
-            alt: "Wandig Full House in cashmeregrijs met geopende deuren",
-          }
-        : isCashmere7075
-        ? {
-            ...FULL_HOUSE_GALLERY[0],
-            src: fullHouseCashmere7075Open,
-            alt: "Wandig Full House in cashmeregrijs met geopende deuren",
-          }
-        : null;
-      const rest = shopifyItems.filter((item) => item.src !== main.src);
-      const base = rest.length > 0 ? [main, ...rest] : [main, ...FULL_HOUSE_GALLERY.slice(1)];
-      return openVariant ? [base[0], openVariant, ...base.slice(1)] : base;
+      const openSrcs = [
+        fullHouseCashmere7785Open,
+        fullHouseCashmere7075Open,
+        fullHouseCashmere5865Open,
+      ];
+      const rest = shopifyItems.filter(
+        (item) => item.src !== main.src && !openSrcs.includes(item.src),
+      );
+      return rest.length > 0 ? [main, ...rest] : [main, ...FULL_HOUSE_GALLERY.slice(1)];
     }
 
 
@@ -591,13 +595,24 @@ function ProductView({ product }: { product: ProductNode }) {
     }));
   }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
 
-  const openGalleryItem = useMemo(
-    () =>
-      galleryItems.find(
-        (item) => item.src === fullHouseCashmere7785Open || item.src === fullHouseCashmere7075Open,
-      ) ?? null,
-    [galleryItems],
-  );
+  const openGalleryItem = useMemo(() => {
+    if (product.handle !== "full-house") return null;
+    if (!/cashmere/i.test(selectedColor ?? "")) return null;
+    const src =
+      sizeIndex === 3
+        ? fullHouseCashmere7785Open
+        : sizeIndex === 2
+          ? fullHouseCashmere7075Open
+          : sizeIndex === 1
+            ? fullHouseCashmere5865Open
+            : null;
+    if (!src) return null;
+    return {
+      ...FULL_HOUSE_GALLERY[0],
+      src,
+      alt: "Wandig Full House in cashmeregrijs met geopende deuren",
+    };
+  }, [product.handle, selectedColor, sizeIndex]);
   const [mainDoorsOpen, setMainDoorsOpen] = useState(false);
   useEffect(() => {
     setMainDoorsOpen(false);

@@ -487,8 +487,15 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDonkerEiken = /donker\s*eiken|eikenzwart|donkereiken/i.test(selectedColor ?? "");
       const isDonkerEiken7785 = isDonkerEiken && sizeIndex === 3;
       const isDonkerEiken7075 = isDonkerEiken && sizeIndex === 2;
+      const isDonkerEiken5865 = isDonkerEiken && sizeIndex === 1;
 
-      const main = isDonkerEiken7785
+      const main = isDonkerEiken5865
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDonkerEiken5865,
+            alt: "Wandig Full House in donkereiken voor tv 58 - 65 inch",
+          }
+        : isDonkerEiken7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDonkerEiken7785,

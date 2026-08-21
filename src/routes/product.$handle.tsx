@@ -665,8 +665,13 @@ function ProductView({ product }: { product: ProductNode }) {
     if (product.handle !== "full-house") return null;
     const isDofroze = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
     const isCashmereColor = /cashmere/i.test(selectedColor ?? "");
-    if (!isCashmereColor && !isDofroze) return null;
-    const src = isDofroze
+    const isKristalwitColor = /kristalwit|kleibeige/i.test(selectedColor ?? "");
+    if (!isCashmereColor && !isDofroze && !isKristalwitColor) return null;
+    const src = isKristalwitColor
+      ? sizeIndex === 3
+        ? fullHouseKristalwit7785Open
+        : null
+      : isDofroze
       ? sizeIndex === 3
         ? fullHouseDofroze7785Open
         : sizeIndex === 2
@@ -689,7 +694,7 @@ function ProductView({ product }: { product: ProductNode }) {
     return {
       ...FULL_HOUSE_GALLERY[0],
       src,
-      alt: `Wandig Full House in ${isDofroze ? "dofroze" : "cashmeregrijs"} met geopende deuren`,
+      alt: `Wandig Full House in ${isKristalwitColor ? "kristalwit" : isDofroze ? "dofroze" : "cashmeregrijs"} met geopende deuren`,
     };
   }, [product.handle, selectedColor, sizeIndex]);
   const [mainDoorsOpen, setMainDoorsOpen] = useState(false);

@@ -516,13 +516,21 @@ function ProductView({ product }: { product: ProductNode }) {
       const isCashmere7075 = isCashmere && sizeIndex === 2;
       const isCashmere5865 = isCashmere && sizeIndex === 1;
       const isCashmere4055 = isCashmere && sizeIndex === 0;
-      const isDofroze7785 = /dofroze|dof\s*roze/i.test(selectedColor ?? "") && sizeIndex === 3;
+      const isDofrozeColor = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
+      const isDofroze7785 = isDofrozeColor && sizeIndex === 3;
+      const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
 
       const main = isDofroze7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDofroze7785,
             alt: "Wandig Full House in dofroze voor tv 77 - 85 inch",
+          }
+        : isDofroze7075
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDofroze7075,
+            alt: "Wandig Full House in dofroze voor tv 70 - 75 inch",
           }
         : isCashmere7785
         ? {

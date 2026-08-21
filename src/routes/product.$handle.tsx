@@ -989,6 +989,39 @@ function ProductView({ product }: { product: ProductNode }) {
     return () => window.clearTimeout(timer);
   }, [images]);
 
+  // Warm de renders van andere kleuren/maten voor, met lage prioriteit en pas als de
+  // pagina klaar is. Zo is wisselen direct, zonder de eerste load te vertragen.
+  useEffect(() => {
+    const groups =
+      product.handle === "full-house"
+        ? FULL_HOUSE_RENDER_GROUPS
+        : product.handle === "solo"
+        ? SOLO_RENDER_GROUPS
+        : null;
+    if (!groups) return;
+
+    const connection = (navigator as unknown as {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+    if (connection?.saveData) return;
+    if (connection?.effectiveType && /2g/.test(connection.effectiveType)) return;
+
+    // Huidige kleur eerst: die maten wisselt de klant het vaakst.
+    const colorMatch = (group: readonly string[]) =>
+      group.some((url) => galleryItems.some((item) => item.src === url));
+    const ordered = [...groups].sort((a, b) => Number(colorMatch(b)) - Number(colorMatch(a)));
+
+    let cancelled = false;
+    const start = () => warmImageQueue(ordered.flat(), () => cancelled);
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
+    const timer = window.setTimeout(() => (idle ? idle(start) : start()), 1500);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [product.handle, galleryItems]);
+
   // Track benefits carousel scroll position to dim disabled arrows.
   useEffect(() => {
     const carousel = benefitsScrollerRef.current;

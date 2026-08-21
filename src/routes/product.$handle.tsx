@@ -1100,7 +1100,7 @@ function ProductView({ product }: { product: ProductNode }) {
           <MobileGallerySwipe items={galleryItems} handle={product.handle} widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
 
           {galleryItems[0] && (
-            <figure className={`relative hidden overflow-hidden rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
+            <figure className={`relative hidden overflow-visible rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <Img
                 ref={mainGalleryImageRef}
                 w={1200}
@@ -1118,7 +1118,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 open={desktopRulerOpen}
                 onToggle={() => setDesktopRulerOpen((open) => !open)}
                 align="right"
-                position="top-4 right-[-12px]"
+                position="top-4 right-[-12px] z-30"
               />
             </figure>
 

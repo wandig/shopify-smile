@@ -49,12 +49,17 @@ const CART_LINES_REMOVE = `mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!
 function formatCheckoutUrl(url: string): string {
   try {
     const u = new URL(url);
+    // De Shopify-winkel gebruikt wandig.com als primair domein, maar dat domein
+    // wijst naar deze site. Checkout moet daarom via het myshopify-domein.
+    u.host = SHOPIFY_STORE_PERMANENT_DOMAIN;
+    u.protocol = "https:";
     u.searchParams.set("channel", "online_store");
     return u.toString();
   } catch {
     return url;
   }
 }
+
 
 function isCartNotFound(errs: Array<{ message: string }>) {
   return errs.some((e) => e.message.toLowerCase().includes("cart not found") || e.message.toLowerCase().includes("does not exist"));

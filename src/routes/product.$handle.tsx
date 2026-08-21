@@ -63,6 +63,10 @@ import fullHouseCashmere4055OpenAsset from "@/assets/full-house-cashmeregrijs-40
 const fullHouseCashmere4055Open = fullHouseCashmere4055OpenAsset.url;
 import fullHouseDofroze7785 from "@/assets/full-house-dofroze-77-85-nobg.png";
 import fullHouseDofroze7785Open from "@/assets/full-house-dofroze-77-85-open-nobg.png";
+import fullHouseKristalwit7785Asset from "@/assets/full-house-kristalwit-77-85.png.asset.json";
+const fullHouseKristalwit7785 = fullHouseKristalwit7785Asset.url;
+import fullHouseKristalwit7785OpenAsset from "@/assets/full-house-kristalwit-77-85-open.png.asset.json";
+const fullHouseKristalwit7785Open = fullHouseKristalwit7785OpenAsset.url;
 import fullHouseDofroze7075 from "@/assets/full-house-dofroze-70-75-nobg.png";
 import fullHouseDofroze7075Open from "@/assets/full-house-dofroze-70-75-open-nobg.png";
 import fullHouseDofroze5865 from "@/assets/full-house-dofroze-58-65-nobg.png";
@@ -525,9 +529,17 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
       const isDofroze5865 = isDofrozeColor && sizeIndex === 1;
       const isDofroze4055 = isDofrozeColor && sizeIndex === 0;
+      const isKristalwit = /kristalwit|kleibeige/i.test(selectedColor ?? "");
+      const isKristalwit7785 = isKristalwit && sizeIndex === 3;
 
 
-      const main = isDofroze7785
+      const main = isKristalwit7785
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseKristalwit7785,
+            alt: "Wandig Full House in kristalwit voor tv 77 - 85 inch",
+          }
+        : isDofroze7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDofroze7785,
@@ -633,6 +645,7 @@ function ProductView({ product }: { product: ProductNode }) {
         fullHouseDofroze7785Open,
         fullHouseDofroze7075Open,
         fullHouseDofroze5865Open,
+        fullHouseKristalwit7785Open,
       ];
       const rest = shopifyItems.filter(
         (item) => item.src !== main.src && !openSrcs.includes(item.src),
@@ -652,8 +665,13 @@ function ProductView({ product }: { product: ProductNode }) {
     if (product.handle !== "full-house") return null;
     const isDofroze = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
     const isCashmereColor = /cashmere/i.test(selectedColor ?? "");
-    if (!isCashmereColor && !isDofroze) return null;
-    const src = isDofroze
+    const isKristalwitColor = /kristalwit|kleibeige/i.test(selectedColor ?? "");
+    if (!isCashmereColor && !isDofroze && !isKristalwitColor) return null;
+    const src = isKristalwitColor
+      ? sizeIndex === 3
+        ? fullHouseKristalwit7785Open
+        : null
+      : isDofroze
       ? sizeIndex === 3
         ? fullHouseDofroze7785Open
         : sizeIndex === 2
@@ -676,7 +694,7 @@ function ProductView({ product }: { product: ProductNode }) {
     return {
       ...FULL_HOUSE_GALLERY[0],
       src,
-      alt: `Wandig Full House in ${isDofroze ? "dofroze" : "cashmeregrijs"} met geopende deuren`,
+      alt: `Wandig Full House in ${isKristalwitColor ? "kristalwit" : isDofroze ? "dofroze" : "cashmeregrijs"} met geopende deuren`,
     };
   }, [product.handle, selectedColor, sizeIndex]);
   const [mainDoorsOpen, setMainDoorsOpen] = useState(false);

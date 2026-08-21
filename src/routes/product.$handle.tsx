@@ -1112,15 +1112,16 @@ function ProductView({ product }: { product: ProductNode }) {
                 loading="eager"
                 fetchPriority="high"
               />
-              <div className="absolute inset-x-4 bottom-1">
-                <DimensionRuler
-                  widthLabel={specWidthLabel}
-                  heightLabel={specHeightLabel}
-                  open={desktopRulerOpen}
-                  onToggle={() => setDesktopRulerOpen((open) => !open)}
-                />
-              </div>
+              <DimensionRuler
+                widthLabel={specWidthLabel}
+                heightLabel={specHeightLabel}
+                open={desktopRulerOpen}
+                onToggle={() => setDesktopRulerOpen((open) => !open)}
+                align="right"
+                position="top-4 right-6"
+              />
             </figure>
+
 
           )}
 

@@ -37,6 +37,8 @@ import fullHouseWalnoot7075Asset from "@/assets/full-house-walnoot-70-75.png.ass
 const fullHouseWalnoot7075 = fullHouseWalnoot7075Asset.url;
 import fullHouseWalnoot4055Asset from "@/assets/full-house-walnoot-40-55.png.asset.json";
 const fullHouseWalnoot4055 = fullHouseWalnoot4055Asset.url;
+import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
+const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
 const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";
@@ -486,6 +488,12 @@ function ProductView({ product }: { product: ProductNode }) {
         !isWalnoot7785 &&
         !isWalnoot7075 &&
         (/40|55/.test(selectedSize ?? "") || sizeIndex === 0);
+      const isWalnoot5865 =
+        isWalnoot &&
+        !isWalnoot7785 &&
+        !isWalnoot7075 &&
+        !isWalnoot4055 &&
+        (/58|65/.test(selectedSize ?? "") || sizeIndex === 1);
 
       const main = isWalnoot7785
         ? {
@@ -505,7 +513,13 @@ function ProductView({ product }: { product: ProductNode }) {
                 src: fullHouseWalnoot4055,
                 alt: "Wandig Full House in walnootbruin voor tv 40 - 55 inch",
               }
-            : FULL_HOUSE_GALLERY[0];
+            : isWalnoot5865
+              ? {
+                  ...FULL_HOUSE_GALLERY[0],
+                  src: fullHouseWalnoot5865,
+                  alt: "Wandig Full House in walnootbruin voor tv 58 - 65 inch",
+                }
+              : FULL_HOUSE_GALLERY[0];
 
       const rest = shopifyItems.filter((item) => item.src !== main.src);
       return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;

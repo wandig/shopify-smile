@@ -121,6 +121,14 @@ import soloDofroze5865Asset from "@/assets/solo-dofroze-5865.png.asset.json";
 import soloDofroze5865OpenAsset from "@/assets/solo-dofroze-5865-open.png.asset.json";
 import soloDofroze4055Asset from "@/assets/solo-dofroze-4055.png.asset.json";
 import soloDofroze4055OpenAsset from "@/assets/solo-dofroze-4055-open.png.asset.json";
+import soloKristalwit7785Asset from "@/assets/solo-kristalwit-7785.png.asset.json";
+import soloKristalwit7785OpenAsset from "@/assets/solo-kristalwit-7785-open.png.asset.json";
+import soloKristalwit7075Asset from "@/assets/solo-kristalwit-7075.png.asset.json";
+import soloKristalwit7075OpenAsset from "@/assets/solo-kristalwit-7075-open.png.asset.json";
+import soloKristalwit5865Asset from "@/assets/solo-kristalwit-5865.png.asset.json";
+import soloKristalwit5865OpenAsset from "@/assets/solo-kristalwit-5865-open.png.asset.json";
+import soloKristalwit4055Asset from "@/assets/solo-kristalwit-4055.png.asset.json";
+import soloKristalwit4055OpenAsset from "@/assets/solo-kristalwit-4055-open.png.asset.json";
 
 const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },
@@ -150,7 +158,16 @@ const SOLO_DOFROZE_BY_SIZE = [
   { closed: soloDofroze7785Asset.url, open: soloDofroze7785OpenAsset.url, label: "77 - 85 inch" },
 ] as const;
 
+const SOLO_KRISTALWIT_BY_SIZE = [
+  { closed: soloKristalwit4055Asset.url, open: soloKristalwit4055OpenAsset.url, label: "40 - 55 inch" },
+  { closed: soloKristalwit5865Asset.url, open: soloKristalwit5865OpenAsset.url, label: "58 - 65 inch" },
+  { closed: soloKristalwit7075Asset.url, open: soloKristalwit7075OpenAsset.url, label: "70 - 75 inch" },
+  { closed: soloKristalwit7785Asset.url, open: soloKristalwit7785OpenAsset.url, label: "77 - 85 inch" },
+] as const;
+
 const soloSetForColor = (color: string | null | undefined, sizeIndex: number) => {
+  if (/kristalwit|wit/i.test(color ?? ""))
+    return { set: SOLO_KRISTALWIT_BY_SIZE[sizeIndex], colorLabel: "kristalwit" };
   if (/dofroze|roze/i.test(color ?? ""))
     return { set: SOLO_DOFROZE_BY_SIZE[sizeIndex], colorLabel: "dofroze" };
   if (/cashmere/i.test(color ?? ""))
@@ -167,6 +184,7 @@ const SOLO_ALL_RENDERS = new Set<string>([
   ...SOLO_DONKEREIKEN_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_CASHMERE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_DOFROZE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+  ...SOLO_KRISTALWIT_BY_SIZE.flatMap((s) => [s.closed, s.open]),
 ]);
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";

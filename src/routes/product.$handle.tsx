@@ -335,11 +335,11 @@ function DimensionRuler({
       <div
         className={`pointer-events-auto overflow-hidden bg-white/95 shadow-[0_6px_18px_rgba(7,20,38,0.12)] backdrop-blur transition-all duration-400 ease-out ${
           isRight ? "mr-[-20px] rounded-l-full" : "ml-[-20px] rounded-r-full"
-        } ${open ? "max-w-[280px] opacity-100" : "max-w-0 opacity-0"}`}
+        } ${open ? "max-w-[310px] opacity-100" : "max-w-0 opacity-0"}`}
       >
         <div
           className={`flex items-center gap-4 whitespace-nowrap py-2.5 text-[12px] text-[#071426] ${
-            isRight ? "pl-5 pr-[33px]" : "pl-7 pr-5"
+            isRight ? "pl-5 pr-[52px]" : "pl-7 pr-5"
           }`}
         >
           <span className="flex items-center gap-1.5">

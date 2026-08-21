@@ -221,10 +221,13 @@ const SOLO_RENDER_GROUPS: readonly (readonly string[])[] = [
 const warmedUrls = new Set<string>();
 
 const warmVariantWidth = () => {
-  const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
-  // Hoofdfoto rendert op w=1200 met 1x/2x srcset.
-  return dpr >= 1.5 ? 2400 : 1200;
+  if (typeof window === "undefined") return 1200;
+  const dpr = window.devicePixelRatio || 1;
+  // Mobiel rendert de swipe-galerij op w=900, desktop de hoofdfoto op w=1200.
+  const base = window.innerWidth < 1024 ? 900 : 1200;
+  return dpr >= 1.5 ? base * 2 : base;
 };
+
 
 const warmImageQueue = (urls: string[], isCancelled: () => boolean) => {
   const width = warmVariantWidth();

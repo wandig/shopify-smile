@@ -67,6 +67,10 @@ import fullHouseKristalwit7785 from "@/assets/full-house-kristalwit-77-85-nobg.p
 import fullHouseKristalwit7785Open from "@/assets/full-house-kristalwit-77-85-open-nobg.png";
 import fullHouseKristalwit7075 from "@/assets/full-house-kristalwit-70-75-nobg.png";
 import fullHouseKristalwit7075Open from "@/assets/full-house-kristalwit-70-75-open-nobg.png";
+import fullHouseKristalwit5865 from "@/assets/full-house-kristalwit-58-65-nobg.png";
+import fullHouseKristalwit5865Open from "@/assets/full-house-kristalwit-58-65-open-nobg.png";
+import fullHouseKristalwit4055 from "@/assets/full-house-kristalwit-40-55-nobg.png";
+import fullHouseKristalwit4055Open from "@/assets/full-house-kristalwit-40-55-open-nobg.png";
 import fullHouseDofroze7075 from "@/assets/full-house-dofroze-70-75-nobg.png";
 import fullHouseDofroze7075Open from "@/assets/full-house-dofroze-70-75-open-nobg.png";
 import fullHouseDofroze5865 from "@/assets/full-house-dofroze-58-65-nobg.png";

@@ -33,6 +33,8 @@ import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v10.png.
 const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
 import fullHouseWalnoot7785Asset from "@/assets/full-house-walnoot-77-85.png.asset.json";
 const fullHouseWalnoot7785 = fullHouseWalnoot7785Asset.url;
+import fullHouseWalnoot7075Asset from "@/assets/full-house-walnoot-70-75.png.asset.json";
+const fullHouseWalnoot7075 = fullHouseWalnoot7075Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
 const fullHouseGalleryRoom = fullHouseGalleryRoomAsset.url;
 import fullHouseGalleryStylingOne from "@/assets/full-house-gallery-styling-one.webp";
@@ -468,10 +470,15 @@ function ProductView({ product }: { product: ProductNode }) {
 
     if (product.handle === "full-house") {
       const largestSizeIndex = sizeOption ? sizeOption.values.length - 1 : -1;
+      const isWalnoot = /walnoot|noten/i.test(selectedColor ?? "");
       const isWalnoot7785 =
-        /walnoot|noten/i.test(selectedColor ?? "") &&
+        isWalnoot &&
         (/77|85/.test(selectedSize ?? "") ||
           (sizeIndex >= 0 && sizeIndex === largestSizeIndex && largestSizeIndex >= 3));
+      const isWalnoot7075 =
+        isWalnoot &&
+        !isWalnoot7785 &&
+        (/70|75/.test(selectedSize ?? "") || sizeIndex === 2);
 
       const main = isWalnoot7785
         ? {
@@ -479,10 +486,17 @@ function ProductView({ product }: { product: ProductNode }) {
             src: fullHouseWalnoot7785,
             alt: "Wandig Full House in walnootbruin voor tv 77 - 85 inch",
           }
-        : FULL_HOUSE_GALLERY[0];
+        : isWalnoot7075
+          ? {
+              ...FULL_HOUSE_GALLERY[0],
+              src: fullHouseWalnoot7075,
+              alt: "Wandig Full House in walnootbruin voor tv 70 - 75 inch",
+            }
+          : FULL_HOUSE_GALLERY[0];
       const rest = shopifyItems.filter((item) => item.src !== main.src);
       return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
     }
+
 
     return shopifyItems.map((item, index) => ({
       ...item,

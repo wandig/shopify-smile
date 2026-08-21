@@ -470,10 +470,15 @@ function ProductView({ product }: { product: ProductNode }) {
 
     if (product.handle === "full-house") {
       const largestSizeIndex = sizeOption ? sizeOption.values.length - 1 : -1;
+      const isWalnoot = /walnoot|noten/i.test(selectedColor ?? "");
       const isWalnoot7785 =
-        /walnoot|noten/i.test(selectedColor ?? "") &&
+        isWalnoot &&
         (/77|85/.test(selectedSize ?? "") ||
           (sizeIndex >= 0 && sizeIndex === largestSizeIndex && largestSizeIndex >= 3));
+      const isWalnoot7075 =
+        isWalnoot &&
+        !isWalnoot7785 &&
+        (/70|75/.test(selectedSize ?? "") || sizeIndex === 2);
 
       const main = isWalnoot7785
         ? {
@@ -481,10 +486,17 @@ function ProductView({ product }: { product: ProductNode }) {
             src: fullHouseWalnoot7785,
             alt: "Wandig Full House in walnootbruin voor tv 77 - 85 inch",
           }
-        : FULL_HOUSE_GALLERY[0];
+        : isWalnoot7075
+          ? {
+              ...FULL_HOUSE_GALLERY[0],
+              src: fullHouseWalnoot7075,
+              alt: "Wandig Full House in walnootbruin voor tv 70 - 75 inch",
+            }
+          : FULL_HOUSE_GALLERY[0];
       const rest = shopifyItems.filter((item) => item.src !== main.src);
       return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
     }
+
 
     return shopifyItems.map((item, index) => ({
       ...item,

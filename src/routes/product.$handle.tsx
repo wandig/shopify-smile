@@ -527,6 +527,7 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDofrozeColor = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
       const isDofroze7785 = isDofrozeColor && sizeIndex === 3;
       const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
+      const isDofroze5865 = isDofrozeColor && sizeIndex === 1;
 
       const main = isDofroze7785
         ? {
@@ -539,6 +540,12 @@ function ProductView({ product }: { product: ProductNode }) {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDofroze7075,
             alt: "Wandig Full House in dofroze voor tv 70 - 75 inch",
+          }
+        : isDofroze5865
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDofroze5865,
+            alt: "Wandig Full House in dofroze voor tv 58 - 65 inch",
           }
         : isCashmere7785
         ? {

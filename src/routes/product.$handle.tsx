@@ -522,6 +522,8 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDofroze7785 = isDofrozeColor && sizeIndex === 3;
       const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
       const isDofroze5865 = isDofrozeColor && sizeIndex === 1;
+      const isDofroze4055 = isDofrozeColor && sizeIndex === 0;
+
 
       const main = isDofroze7785
         ? {

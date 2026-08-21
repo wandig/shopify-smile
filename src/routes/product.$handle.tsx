@@ -490,8 +490,15 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDonkerEiken7785 = isDonkerEiken && sizeIndex === 3;
       const isDonkerEiken7075 = isDonkerEiken && sizeIndex === 2;
       const isDonkerEiken5865 = isDonkerEiken && sizeIndex === 1;
+      const isDonkerEiken4055 = isDonkerEiken && sizeIndex === 0;
 
-      const main = isDonkerEiken5865
+      const main = isDonkerEiken4055
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDonkerEiken4055,
+            alt: "Wandig Full House in donkereiken voor tv 40 - 55 inch",
+          }
+        : isDonkerEiken5865
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDonkerEiken5865,

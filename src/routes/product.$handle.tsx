@@ -694,6 +694,22 @@ function ProductView({ product }: { product: ProductNode }) {
       return rest.length > 0 ? [main, ...rest] : [main, ...FULL_HOUSE_GALLERY.slice(1)];
     }
 
+    if (product.handle === "solo" && /walnoot|noten/i.test(selectedColor ?? "")) {
+      const set = SOLO_WALNOOT_BY_SIZE[sizeIndex];
+      if (set) {
+        const main = {
+          src: set.closed,
+          alt: `Wandig Solo in walnootbruin voor tv ${set.label}`,
+          full: true,
+          square: true,
+        };
+        const excluded = new Set(
+          SOLO_WALNOOT_BY_SIZE.flatMap((s) => [s.closed, s.open] as string[]),
+        );
+        const rest = shopifyItems.filter((item) => !excluded.has(item.src));
+        return [main, ...rest];
+      }
+    }
 
     return shopifyItems.map((item, index) => ({
       ...item,
@@ -703,6 +719,16 @@ function ProductView({ product }: { product: ProductNode }) {
   }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
 
   const openGalleryItem = useMemo(() => {
+    if (product.handle === "solo") {
+      if (!/walnoot|noten/i.test(selectedColor ?? "")) return null;
+      const set = SOLO_WALNOOT_BY_SIZE[sizeIndex];
+      if (!set) return null;
+      return {
+        ...FULL_HOUSE_GALLERY[0],
+        src: set.open,
+        alt: `Wandig Solo in walnootbruin met geopende deuren`,
+      };
+    }
     if (product.handle !== "full-house") return null;
     const isDofroze = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
     const isCashmereColor = /cashmere/i.test(selectedColor ?? "");

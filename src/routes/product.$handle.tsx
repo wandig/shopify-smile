@@ -113,6 +113,14 @@ import soloCashmere5865Asset from "@/assets/solo-cashmeregrijs-5865.png.asset.js
 import soloCashmere5865OpenAsset from "@/assets/solo-cashmeregrijs-5865-open.png.asset.json";
 import soloCashmere4055Asset from "@/assets/solo-cashmeregrijs-4055.png.asset.json";
 import soloCashmere4055OpenAsset from "@/assets/solo-cashmeregrijs-4055-open.png.asset.json";
+import soloDofroze7785Asset from "@/assets/solo-dofroze-7785.png.asset.json";
+import soloDofroze7785OpenAsset from "@/assets/solo-dofroze-7785-open.png.asset.json";
+import soloDofroze7075Asset from "@/assets/solo-dofroze-7075.png.asset.json";
+import soloDofroze7075OpenAsset from "@/assets/solo-dofroze-7075-open.png.asset.json";
+import soloDofroze5865Asset from "@/assets/solo-dofroze-5865.png.asset.json";
+import soloDofroze5865OpenAsset from "@/assets/solo-dofroze-5865-open.png.asset.json";
+import soloDofroze4055Asset from "@/assets/solo-dofroze-4055.png.asset.json";
+import soloDofroze4055OpenAsset from "@/assets/solo-dofroze-4055-open.png.asset.json";
 
 const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },

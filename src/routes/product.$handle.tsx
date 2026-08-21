@@ -485,7 +485,7 @@ function ProductView({ product }: { product: ProductNode }) {
       full: index === 0,
       square: index === 0,
     }));
-  }, [images, product.handle, product.title]);
+  }, [images, product.handle, product.title, selectedColor, selectedSize]);
 
   const subImageGroups = useMemo(() => {
     const subs = galleryItems.slice(1);

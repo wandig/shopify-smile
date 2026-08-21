@@ -184,6 +184,7 @@ const SOLO_ALL_RENDERS = new Set<string>([
   ...SOLO_DONKEREIKEN_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_CASHMERE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_DOFROZE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+  ...SOLO_KRISTALWIT_BY_SIZE.flatMap((s) => [s.closed, s.open]),
 ]);
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";

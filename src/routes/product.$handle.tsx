@@ -143,7 +143,16 @@ const SOLO_CASHMERE_BY_SIZE = [
   { closed: soloCashmere7785Asset.url, open: soloCashmere7785OpenAsset.url, label: "77 - 85 inch" },
 ] as const;
 
+const SOLO_DOFROZE_BY_SIZE = [
+  { closed: soloDofroze4055Asset.url, open: soloDofroze4055OpenAsset.url, label: "40 - 55 inch" },
+  { closed: soloDofroze5865Asset.url, open: soloDofroze5865OpenAsset.url, label: "58 - 65 inch" },
+  { closed: soloDofroze7075Asset.url, open: soloDofroze7075OpenAsset.url, label: "70 - 75 inch" },
+  { closed: soloDofroze7785Asset.url, open: soloDofroze7785OpenAsset.url, label: "77 - 85 inch" },
+] as const;
+
 const soloSetForColor = (color: string | null | undefined, sizeIndex: number) => {
+  if (/dofroze|roze/i.test(color ?? ""))
+    return { set: SOLO_DOFROZE_BY_SIZE[sizeIndex], colorLabel: "dofroze" };
   if (/cashmere/i.test(color ?? ""))
     return { set: SOLO_CASHMERE_BY_SIZE[sizeIndex], colorLabel: "cashmeregrijs" };
   if (/donkereiken|eikenzwart/i.test(color ?? ""))
@@ -157,6 +166,7 @@ const SOLO_ALL_RENDERS = new Set<string>([
   ...SOLO_WALNOOT_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_DONKEREIKEN_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_CASHMERE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+  ...SOLO_DOFROZE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
 ]);
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";

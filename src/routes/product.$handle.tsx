@@ -49,6 +49,10 @@ import fullHouseCashmere7785Asset from "@/assets/full-house-cashmeregrijs-77-85.
 const fullHouseCashmere7785 = fullHouseCashmere7785Asset.url;
 import fullHouseCashmere7785OpenAsset from "@/assets/full-house-cashmeregrijs-77-85-open.png.asset.json";
 const fullHouseCashmere7785Open = fullHouseCashmere7785OpenAsset.url;
+import fullHouseCashmere7075Asset from "@/assets/full-house-cashmeregrijs-70-75.png.asset.json";
+const fullHouseCashmere7075 = fullHouseCashmere7075Asset.url;
+import fullHouseCashmere7075OpenAsset from "@/assets/full-house-cashmeregrijs-70-75-open.png.asset.json";
+const fullHouseCashmere7075Open = fullHouseCashmere7075OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -497,12 +501,19 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDonkerEiken4055 = isDonkerEiken && sizeIndex === 0;
       const isCashmere = /cashmere/i.test(selectedColor ?? "");
       const isCashmere7785 = isCashmere && sizeIndex === 3;
+      const isCashmere7075 = isCashmere && sizeIndex === 2;
 
       const main = isCashmere7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseCashmere7785,
             alt: "Wandig Full House in cashmeregrijs voor tv 77 - 85 inch",
+          }
+        : isCashmere7075
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere7075,
+            alt: "Wandig Full House in cashmeregrijs voor tv 70 - 75 inch",
           }
         : isDonkerEiken4055
         ? {
@@ -560,6 +571,12 @@ function ProductView({ product }: { product: ProductNode }) {
             src: fullHouseCashmere7785Open,
             alt: "Wandig Full House in cashmeregrijs met geopende deuren",
           }
+        : isCashmere7075
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere7075Open,
+            alt: "Wandig Full House in cashmeregrijs met geopende deuren",
+          }
         : null;
       const rest = shopifyItems.filter((item) => item.src !== main.src);
       const base = rest.length > 0 ? [main, ...rest] : [main, ...FULL_HOUSE_GALLERY.slice(1)];
@@ -575,7 +592,10 @@ function ProductView({ product }: { product: ProductNode }) {
   }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
 
   const openGalleryItem = useMemo(
-    () => galleryItems.find((item) => item.src === fullHouseCashmere7785Open) ?? null,
+    () =>
+      galleryItems.find(
+        (item) => item.src === fullHouseCashmere7785Open || item.src === fullHouseCashmere7075Open,
+      ) ?? null,
     [galleryItems],
   );
   const [mainDoorsOpen, setMainDoorsOpen] = useState(false);

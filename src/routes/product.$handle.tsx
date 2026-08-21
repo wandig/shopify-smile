@@ -97,6 +97,14 @@ import soloWalnoot5865Asset from "@/assets/solo-walnoot-5865.png.asset.json";
 import soloWalnoot5865OpenAsset from "@/assets/solo-walnoot-5865-open.png.asset.json";
 import soloWalnoot4055Asset from "@/assets/solo-walnoot-4055.png.asset.json";
 import soloWalnoot4055OpenAsset from "@/assets/solo-walnoot-4055-open.png.asset.json";
+import soloDonkereiken7785Asset from "@/assets/solo-donkereiken-7785.png.asset.json";
+import soloDonkereiken7785OpenAsset from "@/assets/solo-donkereiken-7785-open.png.asset.json";
+import soloDonkereiken7075Asset from "@/assets/solo-donkereiken-7075.png.asset.json";
+import soloDonkereiken7075OpenAsset from "@/assets/solo-donkereiken-7075-open.png.asset.json";
+import soloDonkereiken5865Asset from "@/assets/solo-donkereiken-5865.png.asset.json";
+import soloDonkereiken5865OpenAsset from "@/assets/solo-donkereiken-5865-open.png.asset.json";
+import soloDonkereiken4055Asset from "@/assets/solo-donkereiken-4055.png.asset.json";
+import soloDonkereiken4055OpenAsset from "@/assets/solo-donkereiken-4055-open.png.asset.json";
 
 const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },
@@ -104,6 +112,26 @@ const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot7075Asset.url, open: soloWalnoot7075OpenAsset.url, label: "70 - 75 inch" },
   { closed: soloWalnoot7785Asset.url, open: soloWalnoot7785OpenAsset.url, label: "77 - 85 inch" },
 ] as const;
+
+const SOLO_DONKEREIKEN_BY_SIZE = [
+  { closed: soloDonkereiken4055Asset.url, open: soloDonkereiken4055OpenAsset.url, label: "40 - 55 inch" },
+  { closed: soloDonkereiken5865Asset.url, open: soloDonkereiken5865OpenAsset.url, label: "58 - 65 inch" },
+  { closed: soloDonkereiken7075Asset.url, open: soloDonkereiken7075OpenAsset.url, label: "70 - 75 inch" },
+  { closed: soloDonkereiken7785Asset.url, open: soloDonkereiken7785OpenAsset.url, label: "77 - 85 inch" },
+] as const;
+
+const soloSetForColor = (color: string | null | undefined, sizeIndex: number) => {
+  if (/donkereiken|eikenzwart/i.test(color ?? ""))
+    return { set: SOLO_DONKEREIKEN_BY_SIZE[sizeIndex], colorLabel: "donkereiken" };
+  if (/walnoot|noten/i.test(color ?? ""))
+    return { set: SOLO_WALNOOT_BY_SIZE[sizeIndex], colorLabel: "walnootbruin" };
+  return { set: undefined, colorLabel: "" };
+};
+
+const SOLO_ALL_RENDERS = new Set<string>([
+  ...SOLO_WALNOOT_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+  ...SOLO_DONKEREIKEN_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+]);
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";

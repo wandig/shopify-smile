@@ -37,6 +37,8 @@ import fullHouseWalnoot7075Asset from "@/assets/full-house-walnoot-70-75.png.ass
 const fullHouseWalnoot7075 = fullHouseWalnoot7075Asset.url;
 import fullHouseWalnoot4055Asset from "@/assets/full-house-walnoot-40-55.png.asset.json";
 const fullHouseWalnoot4055 = fullHouseWalnoot4055Asset.url;
+import fullHouseDonkerEiken7785Asset from "@/assets/full-house-donkereiken-77-85.png.asset.json";
+const fullHouseDonkerEiken7785 = fullHouseDonkerEiken7785Asset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -478,8 +480,16 @@ function ProductView({ product }: { product: ProductNode }) {
       const isWalnoot5865 = isWalnoot && sizeIndex === 1;
       const isWalnoot7075 = isWalnoot && sizeIndex === 2;
       const isWalnoot7785 = isWalnoot && sizeIndex === 3;
+      const isDonkerEiken7785 =
+        /donker\s*eiken|eikenzwart|donkereiken/i.test(selectedColor ?? "") && sizeIndex === 3;
 
-      const main = isWalnoot7785
+      const main = isDonkerEiken7785
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDonkerEiken7785,
+            alt: "Wandig Full House in donkereiken voor tv 77 - 85 inch",
+          }
+        : isWalnoot7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseWalnoot7785,

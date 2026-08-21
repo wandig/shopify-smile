@@ -51,7 +51,9 @@ function formatCheckoutUrl(url: string): string {
     const u = new URL(url);
     // Shopify geeft checkout-links op het primaire winkeldomein (wandig.com).
     // Zolang wandig.com naar deze site wijst, gebruiken we het myshopify-domein.
-    if (u.host === window.location.host) u.host = SHOPIFY_STORE_PERMANENT_DOMAIN;
+    if (typeof window !== "undefined" && u.host === window.location.host) {
+      u.host = SHOPIFY_STORE_PERMANENT_DOMAIN;
+    }
     u.searchParams.set("channel", "online_store");
     return u.toString();
   } catch {

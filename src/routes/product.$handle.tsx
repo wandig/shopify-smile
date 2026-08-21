@@ -188,6 +188,52 @@ const SOLO_ALL_RENDERS = new Set<string>([
   ...SOLO_DOFROZE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_KRISTALWIT_BY_SIZE.flatMap((s) => [s.closed, s.open]),
 ]);
+
+// Alle Full House renders per kleur (dicht eerst, open daarna) zodat we ze rustig
+// kunnen voorladen nadat de pagina klaar is.
+const FULL_HOUSE_RENDER_GROUPS: readonly (readonly string[])[] = [
+  [fullHouseWalnoot4055, fullHouseWalnoot5865, fullHouseWalnoot7075, fullHouseWalnoot7785],
+  [fullHouseDonkerEiken4055, fullHouseDonkerEiken5865, fullHouseDonkerEiken7075, fullHouseDonkerEiken7785],
+  [fullHouseCashmere4055, fullHouseCashmere5865, fullHouseCashmere7075, fullHouseCashmere7785],
+  [fullHouseDofroze4055, fullHouseDofroze5865, fullHouseDofroze7075, fullHouseDofroze7785],
+  [fullHouseKristalwit4055, fullHouseKristalwit5865, fullHouseKristalwit7075, fullHouseKristalwit7785],
+  [fullHouseCashmere4055Open, fullHouseCashmere5865Open, fullHouseCashmere7075Open, fullHouseCashmere7785Open],
+  [fullHouseDofroze4055Open, fullHouseDofroze5865Open, fullHouseDofroze7075Open, fullHouseDofroze7785Open],
+  [fullHouseKristalwit4055Open, fullHouseKristalwit5865Open, fullHouseKristalwit7075Open, fullHouseKristalwit7785Open],
+];
+
+const SOLO_RENDER_GROUPS: readonly (readonly string[])[] = [
+  SOLO_WALNOOT_BY_SIZE.map((s) => s.closed),
+  SOLO_DONKEREIKEN_BY_SIZE.map((s) => s.closed),
+  SOLO_CASHMERE_BY_SIZE.map((s) => s.closed),
+  SOLO_DOFROZE_BY_SIZE.map((s) => s.closed),
+  SOLO_KRISTALWIT_BY_SIZE.map((s) => s.closed),
+  SOLO_WALNOOT_BY_SIZE.map((s) => s.open),
+  SOLO_DONKEREIKEN_BY_SIZE.map((s) => s.open),
+  SOLO_CASHMERE_BY_SIZE.map((s) => s.open),
+  SOLO_DOFROZE_BY_SIZE.map((s) => s.open),
+  SOLO_KRISTALWIT_BY_SIZE.map((s) => s.open),
+];
+
+// Laadt varianten-afbeeldingen op de achtergrond met lage prioriteit, één voor één,
+// zodat het wisselen van kleur/maat direct uit cache komt zonder de pagina te vertragen.
+const warmImageQueue = (urls: string[], isCancelled: () => boolean) => {
+  const queue = urls.filter(Boolean);
+  let index = 0;
+  const next = () => {
+    if (isCancelled() || index >= queue.length) return;
+    const url = queue[index++]!;
+    const img = new Image();
+    (img as HTMLImageElement & { fetchPriority?: string }).fetchPriority = "low";
+    img.decoding = "async";
+    img.onload = next;
+    img.onerror = next;
+    img.src = url;
+  };
+  // twee parallelle streams: snel genoeg, maar bandbreedte blijft vrij
+  next();
+  next();
+};
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";

@@ -698,7 +698,11 @@ function ProductView({ product }: { product: ProductNode }) {
         ? fullHouseKristalwit7785Open
         : sizeIndex === 2
           ? fullHouseKristalwit7075Open
-          : null
+          : sizeIndex === 1
+            ? fullHouseKristalwit5865Open
+            : sizeIndex === 0
+              ? fullHouseKristalwit4055Open
+              : null
       : isDofroze
       ? sizeIndex === 3
         ? fullHouseDofroze7785Open

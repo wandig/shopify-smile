@@ -511,6 +511,7 @@ function ProductView({ product }: { product: ProductNode }) {
       const isCashmere7785 = isCashmere && sizeIndex === 3;
       const isCashmere7075 = isCashmere && sizeIndex === 2;
       const isCashmere5865 = isCashmere && sizeIndex === 1;
+      const isCashmere4055 = isCashmere && sizeIndex === 0;
 
       const main = isCashmere7785
         ? {
@@ -529,6 +530,12 @@ function ProductView({ product }: { product: ProductNode }) {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseCashmere5865,
             alt: "Wandig Full House in cashmeregrijs voor tv 58 - 65 inch",
+          }
+        : isCashmere4055
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere4055,
+            alt: "Wandig Full House in cashmeregrijs voor tv 40 - 55 inch",
           }
         : isDonkerEiken4055
         ? {

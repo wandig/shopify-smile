@@ -339,7 +339,7 @@ function DimensionRuler({
       >
         <div
           className={`flex items-center gap-4 whitespace-nowrap py-2.5 text-[12px] text-[#071426] ${
-            isRight ? "pl-5 pr-7" : "pl-7 pr-5"
+            isRight ? "pl-5 pr-[33px]" : "pl-7 pr-5"
           }`}
         >
           <span className="flex items-center gap-1.5">

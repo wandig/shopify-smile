@@ -571,6 +571,12 @@ function ProductView({ product }: { product: ProductNode }) {
             src: fullHouseCashmere7785Open,
             alt: "Wandig Full House in cashmeregrijs met geopende deuren",
           }
+        : isCashmere7075
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere7075Open,
+            alt: "Wandig Full House in cashmeregrijs met geopende deuren",
+          }
         : null;
       const rest = shopifyItems.filter((item) => item.src !== main.src);
       const base = rest.length > 0 ? [main, ...rest] : [main, ...FULL_HOUSE_GALLERY.slice(1)];

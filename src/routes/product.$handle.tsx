@@ -628,6 +628,7 @@ function ProductView({ product }: { product: ProductNode }) {
         fullHouseCashmere4055Open,
         fullHouseDofroze7785Open,
         fullHouseDofroze7075Open,
+        fullHouseDofroze5865Open,
       ];
       const rest = shopifyItems.filter(
         (item) => item.src !== main.src && !openSrcs.includes(item.src),

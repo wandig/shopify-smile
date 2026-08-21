@@ -89,6 +89,21 @@ import fullHouseGalleryUse from "@/assets/full-house-gallery-use.webp";
 import beforeFullHouseAsset from "@/assets/before-livingroom.png.asset.json";
 import afterFullHouseAsset from "@/assets/after-livingroom.jpg.asset.json";
 import soloWoonkamerLampAsset from "@/assets/solo-woonkamer-lamp.jpeg.asset.json";
+import soloWalnoot7785Asset from "@/assets/solo-walnoot-7785.png.asset.json";
+import soloWalnoot7785OpenAsset from "@/assets/solo-walnoot-7785-open.png.asset.json";
+import soloWalnoot7075Asset from "@/assets/solo-walnoot-7075.png.asset.json";
+import soloWalnoot7075OpenAsset from "@/assets/solo-walnoot-7075-open.png.asset.json";
+import soloWalnoot5865Asset from "@/assets/solo-walnoot-5865.png.asset.json";
+import soloWalnoot5865OpenAsset from "@/assets/solo-walnoot-5865-open.png.asset.json";
+import soloWalnoot4055Asset from "@/assets/solo-walnoot-4055.png.asset.json";
+import soloWalnoot4055OpenAsset from "@/assets/solo-walnoot-4055-open.png.asset.json";
+
+const SOLO_WALNOOT_BY_SIZE = [
+  { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },
+  { closed: soloWalnoot5865Asset.url, open: soloWalnoot5865OpenAsset.url, label: "58 - 65 inch" },
+  { closed: soloWalnoot7075Asset.url, open: soloWalnoot7075OpenAsset.url, label: "70 - 75 inch" },
+  { closed: soloWalnoot7785Asset.url, open: soloWalnoot7785OpenAsset.url, label: "77 - 85 inch" },
+] as const;
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";

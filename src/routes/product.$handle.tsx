@@ -67,6 +67,8 @@ import fullHouseDofroze7075 from "@/assets/full-house-dofroze-70-75-nobg.png";
 import fullHouseDofroze7075Open from "@/assets/full-house-dofroze-70-75-open-nobg.png";
 import fullHouseDofroze5865 from "@/assets/full-house-dofroze-58-65-nobg.png";
 import fullHouseDofroze5865Open from "@/assets/full-house-dofroze-58-65-open-nobg.png";
+import fullHouseDofroze4055 from "@/assets/full-house-dofroze-40-55-nobg.png";
+import fullHouseDofroze4055Open from "@/assets/full-house-dofroze-40-55-open-nobg.png";
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -522,6 +524,8 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDofroze7785 = isDofrozeColor && sizeIndex === 3;
       const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
       const isDofroze5865 = isDofrozeColor && sizeIndex === 1;
+      const isDofroze4055 = isDofrozeColor && sizeIndex === 0;
+
 
       const main = isDofroze7785
         ? {
@@ -540,6 +544,12 @@ function ProductView({ product }: { product: ProductNode }) {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDofroze5865,
             alt: "Wandig Full House in dofroze voor tv 58 - 65 inch",
+          }
+        : isDofroze4055
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDofroze4055,
+            alt: "Wandig Full House in dofroze voor tv 40 - 55 inch",
           }
         : isCashmere7785
         ? {
@@ -650,7 +660,9 @@ function ProductView({ product }: { product: ProductNode }) {
           ? fullHouseDofroze7075Open
           : sizeIndex === 1
             ? fullHouseDofroze5865Open
-            : null
+            : sizeIndex === 0
+              ? fullHouseDofroze4055Open
+              : null
       : sizeIndex === 3
         ? fullHouseCashmere7785Open
         : sizeIndex === 2

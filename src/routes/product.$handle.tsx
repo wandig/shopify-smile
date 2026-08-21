@@ -65,6 +65,10 @@ import fullHouseDofroze7785Asset from "@/assets/full-house-dofroze-77-85.png.ass
 const fullHouseDofroze7785 = fullHouseDofroze7785Asset.url;
 import fullHouseDofroze7785OpenAsset from "@/assets/full-house-dofroze-77-85-open.png.asset.json";
 const fullHouseDofroze7785Open = fullHouseDofroze7785OpenAsset.url;
+import fullHouseDofroze7075Asset from "@/assets/full-house-dofroze-70-75.png.asset.json";
+const fullHouseDofroze7075 = fullHouseDofroze7075Asset.url;
+import fullHouseDofroze7075OpenAsset from "@/assets/full-house-dofroze-70-75-open.png.asset.json";
+const fullHouseDofroze7075Open = fullHouseDofroze7075OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -516,13 +520,21 @@ function ProductView({ product }: { product: ProductNode }) {
       const isCashmere7075 = isCashmere && sizeIndex === 2;
       const isCashmere5865 = isCashmere && sizeIndex === 1;
       const isCashmere4055 = isCashmere && sizeIndex === 0;
-      const isDofroze7785 = /dofroze|dof\s*roze/i.test(selectedColor ?? "") && sizeIndex === 3;
+      const isDofrozeColor = /dofroze|dof\s*roze/i.test(selectedColor ?? "");
+      const isDofroze7785 = isDofrozeColor && sizeIndex === 3;
+      const isDofroze7075 = isDofrozeColor && sizeIndex === 2;
 
       const main = isDofroze7785
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDofroze7785,
             alt: "Wandig Full House in dofroze voor tv 77 - 85 inch",
+          }
+        : isDofroze7075
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDofroze7075,
+            alt: "Wandig Full House in dofroze voor tv 70 - 75 inch",
           }
         : isCashmere7785
         ? {
@@ -604,6 +616,7 @@ function ProductView({ product }: { product: ProductNode }) {
         fullHouseCashmere5865Open,
         fullHouseCashmere4055Open,
         fullHouseDofroze7785Open,
+        fullHouseDofroze7075Open,
       ];
       const rest = shopifyItems.filter(
         (item) => item.src !== main.src && !openSrcs.includes(item.src),
@@ -627,7 +640,9 @@ function ProductView({ product }: { product: ProductNode }) {
     const src = isDofroze
       ? sizeIndex === 3
         ? fullHouseDofroze7785Open
-        : null
+        : sizeIndex === 2
+          ? fullHouseDofroze7075Open
+          : null
       : sizeIndex === 3
         ? fullHouseCashmere7785Open
         : sizeIndex === 2

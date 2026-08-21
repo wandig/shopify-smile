@@ -121,6 +121,14 @@ import soloDofroze5865Asset from "@/assets/solo-dofroze-5865.png.asset.json";
 import soloDofroze5865OpenAsset from "@/assets/solo-dofroze-5865-open.png.asset.json";
 import soloDofroze4055Asset from "@/assets/solo-dofroze-4055.png.asset.json";
 import soloDofroze4055OpenAsset from "@/assets/solo-dofroze-4055-open.png.asset.json";
+import soloKristalwit7785Asset from "@/assets/solo-kristalwit-7785.png.asset.json";
+import soloKristalwit7785OpenAsset from "@/assets/solo-kristalwit-7785-open.png.asset.json";
+import soloKristalwit7075Asset from "@/assets/solo-kristalwit-7075.png.asset.json";
+import soloKristalwit7075OpenAsset from "@/assets/solo-kristalwit-7075-open.png.asset.json";
+import soloKristalwit5865Asset from "@/assets/solo-kristalwit-5865.png.asset.json";
+import soloKristalwit5865OpenAsset from "@/assets/solo-kristalwit-5865-open.png.asset.json";
+import soloKristalwit4055Asset from "@/assets/solo-kristalwit-4055.png.asset.json";
+import soloKristalwit4055OpenAsset from "@/assets/solo-kristalwit-4055-open.png.asset.json";
 
 const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },

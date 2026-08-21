@@ -678,7 +678,9 @@ function ProductView({ product }: { product: ProductNode }) {
     const src = isKristalwitColor
       ? sizeIndex === 3
         ? fullHouseKristalwit7785Open
-        : null
+        : sizeIndex === 2
+          ? fullHouseKristalwit7075Open
+          : null
       : isDofroze
       ? sizeIndex === 3
         ? fullHouseDofroze7785Open

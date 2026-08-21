@@ -215,25 +215,48 @@ const SOLO_RENDER_GROUPS: readonly (readonly string[])[] = [
   SOLO_KRISTALWIT_BY_SIZE.map((s) => s.open),
 ];
 
-// Laadt varianten-afbeeldingen op de achtergrond met lage prioriteit, één voor één,
-// zodat het wisselen van kleur/maat direct uit cache komt zonder de pagina te vertragen.
+// Laadt varianten-afbeeldingen op de achtergrond voor. Belangrijk: we warmen exact
+// dezelfde geoptimaliseerde URL's als de <Img> straks opvraagt (zelfde w/q en dpr),
+// anders is de cache-hit nul en zie je alsnog vertraging bij het wisselen.
+const warmedUrls = new Set<string>();
+
+const warmVariantWidth = () => {
+  const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+  // Hoofdfoto rendert op w=1200 met 1x/2x srcset.
+  return dpr >= 1.5 ? 2400 : 1200;
+};
+
 const warmImageQueue = (urls: string[], isCancelled: () => boolean) => {
-  const queue = urls.filter(Boolean);
+  const width = warmVariantWidth();
+  const queue = urls
+    .filter(Boolean)
+    .map((url) => optimizeImageUrl(url, width) ?? url)
+    .filter((url) => !warmedUrls.has(url));
   let index = 0;
   const next = () => {
     if (isCancelled() || index >= queue.length) return;
     const url = queue[index++]!;
+    warmedUrls.add(url);
     const img = new Image();
     (img as HTMLImageElement & { fetchPriority?: string }).fetchPriority = "low";
     img.decoding = "async";
-    img.onload = next;
+    const done = () => {
+      // Decodeer alvast, zodat het wisselen ook geen decode-hik geeft.
+      const decoded = (img as HTMLImageElement).decode?.();
+      if (decoded) decoded.then(next).catch(next);
+      else next();
+    };
+    img.onload = done;
     img.onerror = next;
     img.src = url;
   };
-  // twee parallelle streams: snel genoeg, maar bandbreedte blijft vrij
+  // vier parallelle streams: vult de cache snel, blijft lage prioriteit
+  next();
+  next();
   next();
   next();
 };
+
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";

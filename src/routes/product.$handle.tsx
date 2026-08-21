@@ -105,6 +105,14 @@ import soloDonkereiken5865Asset from "@/assets/solo-donkereiken-5865.png.asset.j
 import soloDonkereiken5865OpenAsset from "@/assets/solo-donkereiken-5865-open.png.asset.json";
 import soloDonkereiken4055Asset from "@/assets/solo-donkereiken-4055.png.asset.json";
 import soloDonkereiken4055OpenAsset from "@/assets/solo-donkereiken-4055-open.png.asset.json";
+import soloCashmere7785Asset from "@/assets/solo-cashmeregrijs-7785.png.asset.json";
+import soloCashmere7785OpenAsset from "@/assets/solo-cashmeregrijs-7785-open.png.asset.json";
+import soloCashmere7075Asset from "@/assets/solo-cashmeregrijs-7075.png.asset.json";
+import soloCashmere7075OpenAsset from "@/assets/solo-cashmeregrijs-7075-open.png.asset.json";
+import soloCashmere5865Asset from "@/assets/solo-cashmeregrijs-5865.png.asset.json";
+import soloCashmere5865OpenAsset from "@/assets/solo-cashmeregrijs-5865-open.png.asset.json";
+import soloCashmere4055Asset from "@/assets/solo-cashmeregrijs-4055.png.asset.json";
+import soloCashmere4055OpenAsset from "@/assets/solo-cashmeregrijs-4055-open.png.asset.json";
 
 const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },
@@ -120,7 +128,16 @@ const SOLO_DONKEREIKEN_BY_SIZE = [
   { closed: soloDonkereiken7785Asset.url, open: soloDonkereiken7785OpenAsset.url, label: "77 - 85 inch" },
 ] as const;
 
+const SOLO_CASHMERE_BY_SIZE = [
+  { closed: soloCashmere4055Asset.url, open: soloCashmere4055OpenAsset.url, label: "40 - 55 inch" },
+  { closed: soloCashmere5865Asset.url, open: soloCashmere5865OpenAsset.url, label: "58 - 65 inch" },
+  { closed: soloCashmere7075Asset.url, open: soloCashmere7075OpenAsset.url, label: "70 - 75 inch" },
+  { closed: soloCashmere7785Asset.url, open: soloCashmere7785OpenAsset.url, label: "77 - 85 inch" },
+] as const;
+
 const soloSetForColor = (color: string | null | undefined, sizeIndex: number) => {
+  if (/cashmere/i.test(color ?? ""))
+    return { set: SOLO_CASHMERE_BY_SIZE[sizeIndex], colorLabel: "cashmeregrijs" };
   if (/donkereiken|eikenzwart/i.test(color ?? ""))
     return { set: SOLO_DONKEREIKEN_BY_SIZE[sizeIndex], colorLabel: "donkereiken" };
   if (/walnoot|noten/i.test(color ?? ""))
@@ -131,6 +148,7 @@ const soloSetForColor = (color: string | null | undefined, sizeIndex: number) =>
 const SOLO_ALL_RENDERS = new Set<string>([
   ...SOLO_WALNOOT_BY_SIZE.flatMap((s) => [s.closed, s.open]),
   ...SOLO_DONKEREIKEN_BY_SIZE.flatMap((s) => [s.closed, s.open]),
+  ...SOLO_CASHMERE_BY_SIZE.flatMap((s) => [s.closed, s.open]),
 ]);
 import basketIcon from "@/assets/basket-icon.svg.asset.json";
 import puzzleIcon from "@/assets/Untitled_design_23.svg.asset.json";

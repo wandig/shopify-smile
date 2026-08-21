@@ -543,6 +543,12 @@ function ProductView({ product }: { product: ProductNode }) {
             src: fullHouseDofroze5865,
             alt: "Wandig Full House in dofroze voor tv 58 - 65 inch",
           }
+        : isDofroze4055
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseDofroze4055,
+            alt: "Wandig Full House in dofroze voor tv 40 - 55 inch",
+          }
         : isCashmere7785
         ? {
             ...FULL_HOUSE_GALLERY[0],

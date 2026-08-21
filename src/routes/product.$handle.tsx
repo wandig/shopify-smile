@@ -654,7 +654,9 @@ function ProductView({ product }: { product: ProductNode }) {
         ? fullHouseDofroze7785Open
         : sizeIndex === 2
           ? fullHouseDofroze7075Open
-          : null
+          : sizeIndex === 1
+            ? fullHouseDofroze5865Open
+            : null
       : sizeIndex === 3
         ? fullHouseCashmere7785Open
         : sizeIndex === 2

@@ -45,6 +45,10 @@ import fullHouseDonkerEiken5865Asset from "@/assets/full-house-donkereiken-58-65
 const fullHouseDonkerEiken5865 = fullHouseDonkerEiken5865Asset.url;
 import fullHouseDonkerEiken4055Asset from "@/assets/full-house-donkereiken-40-55.png.asset.json";
 const fullHouseDonkerEiken4055 = fullHouseDonkerEiken4055Asset.url;
+import fullHouseCashmere7785Asset from "@/assets/full-house-cashmeregrijs-77-85.png.asset.json";
+const fullHouseCashmere7785 = fullHouseCashmere7785Asset.url;
+import fullHouseCashmere7785OpenAsset from "@/assets/full-house-cashmeregrijs-77-85-open.png.asset.json";
+const fullHouseCashmere7785Open = fullHouseCashmere7785OpenAsset.url;
 import fullHouseWalnoot5865Asset from "@/assets/full-house-walnoot-58-65.png.asset.json";
 const fullHouseWalnoot5865 = fullHouseWalnoot5865Asset.url;
 import fullHouseGalleryRoomAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
@@ -491,8 +495,16 @@ function ProductView({ product }: { product: ProductNode }) {
       const isDonkerEiken7075 = isDonkerEiken && sizeIndex === 2;
       const isDonkerEiken5865 = isDonkerEiken && sizeIndex === 1;
       const isDonkerEiken4055 = isDonkerEiken && sizeIndex === 0;
+      const isCashmere = /cashmere/i.test(selectedColor ?? "");
+      const isCashmere7785 = isCashmere && sizeIndex === 3;
 
-      const main = isDonkerEiken4055
+      const main = isCashmere7785
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere7785,
+            alt: "Wandig Full House in cashmeregrijs voor tv 77 - 85 inch",
+          }
+        : isDonkerEiken4055
         ? {
             ...FULL_HOUSE_GALLERY[0],
             src: fullHouseDonkerEiken4055,
@@ -542,8 +554,16 @@ function ProductView({ product }: { product: ProductNode }) {
                 }
               : FULL_HOUSE_GALLERY[0];
 
+      const openVariant = isCashmere7785
+        ? {
+            ...FULL_HOUSE_GALLERY[0],
+            src: fullHouseCashmere7785Open,
+            alt: "Wandig Full House in cashmeregrijs met geopende deuren",
+          }
+        : null;
       const rest = shopifyItems.filter((item) => item.src !== main.src);
-      return rest.length > 0 ? [main, ...rest] : FULL_HOUSE_GALLERY;
+      const base = rest.length > 0 ? [main, ...rest] : [main, ...FULL_HOUSE_GALLERY.slice(1)];
+      return openVariant ? [base[0], openVariant, ...base.slice(1)] : base;
     }
 
 
@@ -553,6 +573,16 @@ function ProductView({ product }: { product: ProductNode }) {
       square: index === 0,
     }));
   }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
+
+  const openGalleryItem = useMemo(
+    () => galleryItems.find((item) => item.src === fullHouseCashmere7785Open) ?? null,
+    [galleryItems],
+  );
+  const [mainDoorsOpen, setMainDoorsOpen] = useState(false);
+  useEffect(() => {
+    setMainDoorsOpen(false);
+  }, [openGalleryItem?.src, selectedColor, selectedSize]);
+
 
   const subImageGroups = useMemo(() => {
     const subs = galleryItems.slice(1);
@@ -715,9 +745,10 @@ function ProductView({ product }: { product: ProductNode }) {
                 ref={mainGalleryImageRef}
                 w={1200}
                 priority
-                src={galleryItems[0].src}
-                alt={galleryItems[0].alt}
-                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${product.handle === "full-house" ? "h-auto w-[100%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
+                onClick={openGalleryItem ? () => setMainDoorsOpen((open) => !open) : undefined}
+                src={openGalleryItem && mainDoorsOpen ? openGalleryItem.src : galleryItems[0].src}
+                alt={openGalleryItem && mainDoorsOpen ? openGalleryItem.alt : galleryItems[0].alt}
+                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${openGalleryItem ? "cursor-pointer" : ""} ${product.handle === "full-house" ? "h-auto w-[100%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
                 loading="eager"
                 fetchPriority="high"
               />

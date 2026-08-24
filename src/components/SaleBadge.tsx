@@ -44,16 +44,35 @@ export function SalePrice({
 }
 
 export function SaleAnnouncementBar() {
+  const badges = [
+    { left: "4%", rotate: "-12deg", top: "10%" },
+    { left: "18%", rotate: "8deg", top: "55%" },
+    { left: "35%", rotate: "-6deg", top: "15%" },
+    { left: "52%", rotate: "10deg", top: "50%" },
+    { left: "70%", rotate: "-8deg", top: "12%" },
+    { left: "86%", rotate: "6deg", top: "55%" },
+  ];
+
   return (
-    <div className="bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
-      <span className="inline-flex items-center justify-center gap-2">
+    <div className="relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
+      <span className="relative z-10 inline-flex items-center justify-center gap-2">
         <span>Verjaardagsale:</span>
-        <span className="inline-flex items-center justify-center rounded-md border border-[#ef7027] px-1.5 py-0.5 font-medium text-white -rotate-6">
+        <span className="relative z-10 inline-flex items-center justify-center rounded-lg border border-[#ef7027] px-1.5 py-0.5 font-medium text-white -rotate-6">
           -30%
         </span>
         <span>op alle Wandig cinewalls</span>
       </span>
+      {badges.map((badge, i) => (
+        <span
+          key={i}
+          className="pointer-events-none absolute inline-flex items-center justify-center rounded-lg border border-[#ef7027] px-1.5 py-0.5 text-[11px] font-medium text-white opacity-85"
+          style={{ left: badge.left, top: badge.top, transform: `rotate(${badge.rotate})` }}
+        >
+          -30%
+        </span>
+      ))}
     </div>
   );
 }
+
 

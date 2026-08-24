@@ -593,6 +593,8 @@ function ConfiguratorBannerSection() {
                 { id: "donkereiken", src: swatchDonkereikenAsset.url, alt: "Donkereiken" },
                 { id: "walnootbruin", src: swatchWalnootbruin, alt: "Walnootbruin" },
                 { id: "cashmeregrijs", src: cashmereAssetTmp.url, alt: "Cashmeregrijs" },
+                { id: "kristalwit", src: kristalwitAssetTmp.url, alt: "Kristalwit" },
+                { id: "dofroze", src: swatchDofroze, alt: "Dofroze" },
               ]}
             />
           </div>

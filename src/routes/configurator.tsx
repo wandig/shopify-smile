@@ -322,9 +322,12 @@ function ConfiguratorPage() {
       });
   }, [color, fullHouseProduct, hasLeft, hasRight, tv.shopifyValue]);
   const shopifyBasePrice = Number(selectedShopifyVariant?.price.amount ?? 0);
-  const configuredBasePrice = shopifyBasePrice > 0 ? shopifyBasePrice : BASE_PRICE;
-  const optionPriceAdjustment =
-    tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0);
+  const hasShopifyPrice = shopifyBasePrice > 0;
+  const configuredBasePrice = hasShopifyPrice ? shopifyBasePrice : BASE_PRICE;
+  // Shopify-variantprijzen zijn al compleet (opstelling + tv-maat), dus dan geen opslag optellen.
+  const optionPriceAdjustment = hasShopifyPrice
+    ? 0
+    : tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0);
   const total = useMemo(
     () => configuredBasePrice + optionPriceAdjustment,
     [configuredBasePrice, optionPriceAdjustment],

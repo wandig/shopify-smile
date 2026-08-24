@@ -241,7 +241,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-2 md:gap-3 shrink-0">
             <Link
               to="/configurator"
-              className="hidden sm:inline-flex group items-center justify-center gap-0 lg:gap-2 h-10 w-10 md:h-11 md:w-11 lg:h-11 lg:w-auto rounded-full bg-[#0f1f2a] hover:bg-[#1a2d3a] text-white text-sm font-medium transition-all duration-300 ease-out px-0 lg:px-5"
+              className="hidden sm:inline-flex group items-center justify-center gap-0 lg:gap-2 h-10 md:h-11 w-10 md:w-11 lg:w-auto rounded-full bg-[#0f1f2a] hover:bg-[#1a2d3a] hover:w-auto focus-visible:w-auto text-white text-sm font-medium transition-all duration-300 ease-out px-0 hover:px-4 focus-visible:px-4 lg:px-5"
               aria-label="Configureer jouw tv-kast"
             >
               <Puzzle className="h-4 w-4 shrink-0" strokeWidth={1.75} />

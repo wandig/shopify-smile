@@ -1146,6 +1146,14 @@ function ProductView({ product }: { product: ProductNode }) {
                 loading="eager"
                 fetchPriority="high"
               />
+              <div className="pointer-events-none absolute left-5 top-1/2 z-20 hidden w-24 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)] lg:block">
+                <Img
+                  src={dutchDesignWinner.url}
+                  w={200}
+                  alt="Dutch Design Winner"
+                  className="h-auto w-full object-contain"
+                />
+              </div>
               <DimensionRuler
                 widthLabel={specWidthLabel}
                 heightLabel={specHeightLabel}

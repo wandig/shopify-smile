@@ -28,6 +28,7 @@ import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, Sh
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
+import badgeLogo from "@/assets/dutch-design-winner-2026-v2.jpeg.asset.json";
 import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v10.png.asset.json";
 const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
 import fullHouseWalnoot7785Asset from "@/assets/full-house-walnoot-77-85.png.asset.json";
@@ -429,7 +430,7 @@ function MobileGallerySwipe({
         {items.map((item, index) => (
           <div key={`${item.src}-${index}`} className="w-full shrink-0 snap-center">
             <figure
-              className={`flex items-center justify-center overflow-hidden bg-[#faf8f5] ${
+              className={`relative flex items-center justify-center overflow-hidden bg-[#faf8f5] ${
                 handle === "full-house" && index === 0 ? "aspect-[5/4]" : "aspect-square"
               }`}
             >
@@ -444,6 +445,17 @@ function MobileGallerySwipe({
                     : "h-full w-full object-cover"
                 }
               />
+              {index === 0 && (
+                <div className="pointer-events-none absolute bottom-3 right-3 z-10 rounded-lg bg-white shadow-[0_6px_20px_rgba(31,25,21,0.10)]">
+                  <Img
+                    src={badgeLogo.url}
+                    alt="Dutch Design Winner 2026 - 10 jaar garantie"
+                    className="h-auto w-14 rounded-lg"
+                    w={160}
+                    loading="lazy"
+                  />
+                </div>
+              )}
             </figure>
           </div>
         ))}
@@ -1272,6 +1284,15 @@ function ProductView({ product }: { product: ProductNode }) {
                 loading="eager"
                 fetchPriority="high"
               />
+              <div className="pointer-events-none absolute bottom-4 right-4 z-10 rounded-lg bg-white shadow-[0_6px_20px_rgba(31,25,21,0.10)]">
+                <Img
+                  src={badgeLogo.url}
+                  alt="Dutch Design Winner 2026 - 10 jaar garantie"
+                  className="h-auto w-20 rounded-lg"
+                  w={220}
+                  loading="lazy"
+                />
+              </div>
               <DimensionRuler
                 widthLabel={specWidthLabel}
                 heightLabel={specHeightLabel}

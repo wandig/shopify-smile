@@ -173,7 +173,7 @@ export function SiteHeader() {
   const [modelsMenuOpen, setModelsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-[#faf8f5] text-[#15110d]">
+    <header className="bg-[#faf8f5] text-[#15110d]">
       {/* Top trust bar */}
       <div className="border-b border-[#ede7e0]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10 h-9 md:h-10 flex items-center justify-between text-[11px] md:text-xs tracking-wide">

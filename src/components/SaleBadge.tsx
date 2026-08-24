@@ -44,28 +44,43 @@ export function SalePrice({
 }
 
 export function SaleAnnouncementBar() {
-  const badges = [
+  const leftBadges = [
     { left: "2%", rotate: "-12deg", top: "12%" },
     { left: "10%", rotate: "8deg", top: "62%" },
     { left: "18%", rotate: "-6deg", top: "28%" },
-    { left: "80%", rotate: "-8deg", top: "18%" },
-    { left: "88%", rotate: "6deg", top: "68%" },
-    { left: "94%", rotate: "-10deg", top: "38%" },
+  ];
+
+  const rightBadges = [
+    { right: "20%", rotate: "-8deg", top: "18%" },
+    { right: "12%", rotate: "6deg", top: "68%" },
+    { right: "6%", rotate: "-10deg", top: "38%" },
+    { right: "24%", rotate: "14deg", top: "82%" },
+    { right: "4%", rotate: "-4deg", top: "4%" },
   ];
 
   return (
-    <div className="sticky top-0 z-50 relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
+    <div className="sticky top-0 z-50 relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-left md:text-center text-[13px] font-light tracking-[0.01em] text-white">
 
-      <span className="relative z-10 inline-flex items-center justify-center gap-2 bg-[#7f919b] px-6">
+      <span className="relative z-10 inline-flex w-full md:w-auto items-center justify-start md:justify-center gap-2 bg-[#7f919b] px-0 md:px-6">
         <span>Verjaardagsale: 30% korting op alle Wandig cinewalls</span>
       </span>
 
 
-      {badges.map((badge, i) => (
+      {leftBadges.map((badge, i) => (
         <span
-          key={i}
-          className="pointer-events-none absolute inline-flex items-center justify-center rounded-lg border border-[#ef7027] px-1.5 py-0.5 text-[11px] font-medium text-white opacity-85"
+          key={`l-${i}`}
+          className="pointer-events-none absolute hidden md:inline-flex items-center justify-center rounded-lg border border-[#ef7027] px-1.5 py-0.5 text-[11px] font-medium text-white opacity-85"
           style={{ left: badge.left, top: badge.top, transform: `rotate(${badge.rotate})` }}
+        >
+          -30%
+        </span>
+      ))}
+
+      {rightBadges.map((badge, i) => (
+        <span
+          key={`r-${i}`}
+          className="pointer-events-none absolute inline-flex items-center justify-center rounded-lg border border-[#ef7027] px-1.5 py-0.5 text-[11px] font-medium text-white opacity-85"
+          style={{ right: badge.right, top: badge.top, transform: `rotate(${badge.rotate})` }}
         >
           -30%
         </span>

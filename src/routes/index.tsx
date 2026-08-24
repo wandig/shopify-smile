@@ -9,7 +9,7 @@ import press5 from "@/assets/press/press5.svg";
 import press6 from "@/assets/press/press6.svg";
 import { useMemo, useRef, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
 import { displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
 
 import {

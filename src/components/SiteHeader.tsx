@@ -207,7 +207,7 @@ export function SiteHeader() {
                   <Menu className="h-5 w-5" strokeWidth={1.75} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[280px] pt-14">
+              <SheetContent side="left" className="w-[280px] pt-14 flex flex-col h-full">
                 <nav className="flex flex-col gap-6 text-lg">
                   <Link to="/producten" className="hover:opacity-60 transition">
                     Collectie
@@ -222,6 +222,15 @@ export function SiteHeader() {
                     Gratis kleurstalen ontvangen
                   </Link>
                 </nav>
+                <div className="mt-auto pb-8">
+                  <Link
+                    to="/configurator"
+                    className="inline-flex items-center justify-center gap-2 w-full h-12 rounded-full bg-[#0f1f2a] hover:bg-[#1a2d3a] text-white text-sm font-medium transition-colors duration-300 ease-out"
+                  >
+                    <Puzzle className="h-4 w-4" strokeWidth={1.75} />
+                    <span>Configureer jouw tv-kast</span>
+                  </Link>
+                </div>
               </SheetContent>
             </Sheet>
 

@@ -158,20 +158,21 @@ function Producten() {
 
 
       {/* hero */}
-      <section className="relative bg-[#f2eee7]">
-        <span
-          className="pointer-events-none absolute right-5 top-5 z-10 inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-[#7f919b]/90 px-2 py-1 text-[12px] font-medium text-white shadow-sm lg:left-1/2 lg:top-1/2 lg:right-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:px-3 lg:py-1.5 lg:text-[15px]"
-          style={{ transform: "rotate(6deg)" }}
-        >
-          -30%
-        </span>
+      <section className="bg-[#f2eee7]">
         <div className="grid lg:grid-cols-2">
           <div className="order-2 flex items-center px-5 py-8 md:px-10 md:py-0 lg:order-1 lg:justify-end">
             <div className="w-full lg:max-w-[520px]">
-              <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-5xl">
-
-                Cinewalls
-              </h1>
+              <div className="flex flex-wrap items-center gap-3">
+                <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-5xl">
+                  Cinewalls
+                </h1>
+                <span
+                  className="inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-[#7f919b] px-3 py-1.5 text-[18px] font-medium text-white shadow-sm"
+                  style={{ transform: "rotate(6deg)" }}
+                >
+                  -30%
+                </span>
+              </div>
               <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-4 md:text-base">
                 Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
               </p>

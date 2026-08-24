@@ -1427,7 +1427,7 @@ function ProductView({ product }: { product: ProductNode }) {
                   </div>
 
                   <div className="min-w-0 text-right">
-                    <p className="text-[23px] font-bold leading-none text-[#ff5a00]">{configuratorPrice}</p>
+                    <SalePrice price={activeVariant.price} compareAtPrice={activeVariant.compareAtPrice} size="md" />
                   </div>
                 </div>
 

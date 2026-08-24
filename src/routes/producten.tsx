@@ -199,7 +199,12 @@ function Producten() {
           </div>
 
           <div className="relative order-1 bg-[#f4f1ed] lg:order-2">
-
+            <span
+              className="pointer-events-none absolute right-5 top-5 z-10 inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-[#7f919b]/90 px-2 py-1 text-[12px] font-medium text-white shadow-sm"
+              style={{ transform: "rotate(6deg)" }}
+            >
+              -30%
+            </span>
             <Img
               src={lifestyleAsset.url}
               w={1100}

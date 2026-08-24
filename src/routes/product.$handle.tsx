@@ -1495,18 +1495,30 @@ function ProductView({ product }: { product: ProductNode }) {
                       <div className="flex items-center gap-2.5 overflow-x-auto pb-1 md:justify-end md:pb-0">
                         {opt.values.slice(0, 5).map((value) => {
                           const active = selected[opt.name] === value;
+                          const colorLabel = displayWandigColor(value);
+                          const showTooltip = colorTooltip?.value === value;
                           return (
-                            <button
-                              key={value}
-                              type="button"
-                              onClick={() => setSelected((current) => ({ ...current, [opt.name]: value }))}
-                              title={displayWandigColor(value)}
-                              aria-label={`Kleur ${displayWandigColor(value)}`}
-                              aria-pressed={active}
-                              className={`h-9 w-9 shrink-0 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
-                            >
-                              <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={wandigSwatchStyle(value)} />
-                            </button>
+                            <div key={value} className="relative flex shrink-0 flex-col items-center">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setSelected((current) => ({ ...current, [opt.name]: value }));
+                                  showColorTooltip(value, colorLabel);
+                                }}
+                                title={colorLabel}
+                                aria-label={`Kleur ${colorLabel}`}
+                                aria-pressed={active}
+                                className={`h-9 w-9 shrink-0 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
+                              >
+                                <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={wandigSwatchStyle(value)} />
+                              </button>
+                              <span
+                                className={`pointer-events-none absolute -top-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#071426] px-2 py-1 text-[10px] font-medium text-white shadow-md transition-all duration-200 md:hidden ${showTooltip ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}`}
+                                aria-hidden="true"
+                              >
+                                {colorLabel}
+                              </span>
+                            </div>
                           );
                         })}
                       </div>

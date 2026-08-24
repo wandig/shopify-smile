@@ -1386,7 +1386,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
               <div className="rounded-t-[20px] bg-white p-4">
               <div>
-                <div className="mt-[15px] grid grid-cols-1 items-start gap-4 sm:grid-cols-[minmax(0,1fr)_230px]">
+                <div className="mt-[15px] grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 sm:grid-cols-[minmax(0,1fr)_230px]">
                   <div>
                     <h1 className="text-[24px] font-bold leading-none text-[#071426]">{displayTitle}</h1>
                     <p className="mt-2 text-[12px] text-[#071426]/45">Cinewall</p>

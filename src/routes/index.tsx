@@ -24,10 +24,10 @@ import {
   User,
 } from "lucide-react";
 
-import heroHdMp4 from "@/assets/hero-hd.mp4.asset.json";
-import heroHdWebm from "@/assets/hero-hd.webm.asset.json";
-import heroMobileMp4 from "@/assets/hero-720.mp4.asset.json";
-import heroMobileWebm from "@/assets/hero-720.webm.asset.json";
+import heroHdMp4 from "@/assets/hero-hq.mp4.asset.json";
+import heroHdWebm from "@/assets/hero-hq.webm.asset.json";
+import heroMobileMp4 from "@/assets/hero-hq-720.mp4.asset.json";
+import heroMobileWebm from "@/assets/hero-hq-720.webm.asset.json";
 import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 import werkplaatsVideo from "@/assets/werkplaats-web.mp4.asset.json";
 import werkplaatsPoster from "@/assets/werkplaats-poster.jpg.asset.json";

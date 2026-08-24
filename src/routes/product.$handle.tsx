@@ -1240,8 +1240,9 @@ function ProductView({ product }: { product: ProductNode }) {
   const visibleOptions = product.options.filter((o) => !(o.name === "Title" && o.values.length === 1));
   const hasOptions = visibleOptions.length > 0;
   const numericPrice = activeVariant ? parseFloat(activeVariant.price.amount) : 0;
-  const fallbackPrice = product.handle === "full-house" ? 1699 : 0;
-  const displayedNumericPrice = numericPrice > 0 ? numericPrice : fallbackPrice;
+  // Altijd de prijs uit Shopify gebruiken, geen vaste fallback.
+  const shopifyRangePrice = parseFloat(product.priceRange?.minVariantPrice?.amount ?? "0");
+  const displayedNumericPrice = numericPrice > 0 ? numericPrice : shopifyRangePrice;
   const currencyCode = activeVariant?.price.currencyCode || "EUR";
   const configuratorPrice = displayedNumericPrice > 0
     ? new Intl.NumberFormat("nl-NL", {

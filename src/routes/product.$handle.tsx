@@ -504,6 +504,19 @@ const GALLERY_COLOR_ORDER: Record<string, string[]> = {
   solo: ["Kristalwit", "Dofroze", "Cashmeregrijs", "Donkereiken", "Walnootbruin"],
 };
 
+// Duo donkereiken: de 7 close-ups zijn maar één keer geüpload (bestandslimiet).
+// We hangen ze automatisch achter elke donkereiken-variantfoto.
+const DUO_SHARED_CLOSEUP_KEYS = [
+  "Close_Camera_01_0000_1614fac5",
+  "Close_Camera_02_0000_c412643a",
+  "Close_Camera_03_0000_4734a236",
+  "Close_Camera_04_0000_b1743949",
+  "Close_Camera_05_0000_3a9fe087",
+  "Close_Camera_06_0000_d31ac550",
+  "Close_Camera_07_0000_fab86129",
+];
+
+
 
 const FULL_HOUSE_GALLERY = [
   { src: fullHouseGalleryMain, alt: "Wandig Full House volledig vrijstaand in walnootbruin", full: true, square: true },

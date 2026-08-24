@@ -56,6 +56,7 @@ import waaromWijMontage from "@/assets/waarom-wij-montage.png.asset.json";
 import waaromWijService from "@/assets/waarom-wij-service.png.asset.json";
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { ScrollDots } from "@/components/ScrollDots";
+import { ConfiguratorColorSwatches } from "@/components/ConfiguratorColorSwatches";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -587,12 +588,13 @@ function ConfiguratorBannerSection() {
               className="h-full w-full object-cover object-center"
               loading="lazy"
             />
-            <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm">
-              <Img src={swatchDonkereikenAsset.url} alt="Donkereiken" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" w={96} />
-              <Img src={swatchWalnootbruin} alt="Walnootbruin" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" w={96} />
-              <Img src={cashmereAssetTmp.url} alt="Cashmeregrijs" className="h-8 w-8 rounded-full border-2 border-white object-cover shadow-sm" w={96} />
-              <span className="ml-1 text-[11px] font-[500] tracking-[0.08em] text-[#071426]/60">+ meer</span>
-            </div>
+            <ConfiguratorColorSwatches
+              swatches={[
+                { id: "donkereiken", src: swatchDonkereikenAsset.url, alt: "Donkereiken" },
+                { id: "walnootbruin", src: swatchWalnootbruin, alt: "Walnootbruin" },
+                { id: "cashmeregrijs", src: cashmereAssetTmp.url, alt: "Cashmeregrijs" },
+              ]}
+            />
           </div>
 
           {/* Floating content card */}

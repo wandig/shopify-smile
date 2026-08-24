@@ -763,7 +763,7 @@ export function NewsletterContactSection() {
   };
 
   const contactItems = [
-    { icon: Phone, label: "Bel ons, steun 9-5", sub: "9:00 - 18:00", value: "+31 085 107 1953" },
+    { icon: Phone, label: "Bel ons, steun 9-5", sub: "9:00 - 18:00", value: "+31 85 303 0997" },
     { icon: Headphones, label: "Chat live, agent 9-5", sub: "9:00 - 22:00", value: "Chat met ons" },
     { icon: Mail, label: "Stuur een mail", sub: "iedere werkdag", value: "support.nl@wandig.com" },
   ];

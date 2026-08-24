@@ -1,6 +1,6 @@
 import { Img } from "@/components/Img";
 import { useRouter } from "@tanstack/react-router";
-import badgeLogo from "@/assets/dutch-design-winner-2026.jpeg.asset.json";
+import badgeLogo from "@/assets/dutch-design-winner-2026-v2.jpeg.asset.json";
 
 /**
  * Vast, puur visueel keurmerk-embleem linksonder in beeld.

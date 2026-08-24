@@ -1131,11 +1131,11 @@ function ProductView({ product }: { product: ProductNode }) {
     };
   }, [product.handle, galleryItems]);
 
-  // Producten waarvan de foto's uit de backend komen (o.a. Duo) hebben geen lokale
-  // render-groepen. Warm daarom de variantfoto's voor: eerst de huidige kleur, dan
-  // de rest. Zo is de eerste kleur-/maatwisseling direct in beeld.
+  // Warm de foto's uit de backend voor (Full House, Solo, Duo — automatisch op basis
+  // van de varianten, dus zonder handmatige bestandsnamen): eerst de varianten van de
+  // huidige kleur, daarna de rest van de galerij. Zo is de eerste wissel direct in beeld.
   useEffect(() => {
-    if (product.handle === "full-house" || product.handle === "solo") return;
+
 
     const connection = (navigator as unknown as {
       connection?: { saveData?: boolean; effectiveType?: string };

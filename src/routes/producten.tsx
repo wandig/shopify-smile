@@ -11,6 +11,7 @@ import lifestyleAsset from "@/assets/producten-hero-lifestyle.png.asset.json";
 import { FAQ_ITEMS } from "@/components/ProductPageSections";
 import adviesAsset from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenAsset from "@/assets/proefkijken-familie.png.asset.json";
+import { SaleBadge, SalePrice } from "@/components/SaleBadge";
 
 
 export const Route = createFileRoute("/producten")({

@@ -1513,7 +1513,7 @@ function ProductView({ product }: { product: ProductNode }) {
                                 <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={wandigSwatchStyle(value)} />
                               </button>
                               <span
-                                className={`pointer-events-none absolute -top-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#071426] px-2 py-1 text-[10px] font-medium text-white shadow-md transition-all duration-200 md:hidden ${showTooltip ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}`}
+                                className={`pointer-events-none absolute top-full mt-1.5 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#071426] px-2 py-1 text-[10px] font-medium text-white shadow-md transition-all duration-200 md:hidden ${showTooltip ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"}`}
                                 aria-hidden="true"
                               >
                                 {colorLabel}

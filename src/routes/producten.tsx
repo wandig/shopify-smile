@@ -11,7 +11,7 @@ import lifestyleAsset from "@/assets/producten-hero-lifestyle.png.asset.json";
 import { FAQ_ITEMS } from "@/components/ProductPageSections";
 import adviesAsset from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenAsset from "@/assets/proefkijken-familie.png.asset.json";
-import { SaleBadge, SalePrice } from "@/components/SaleBadge";
+import { SalePrice } from "@/components/SaleBadge";
 
 
 export const Route = createFileRoute("/producten")({
@@ -368,9 +368,6 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
       </Link>
 
       <div className="flex flex-1 flex-col p-5">
-        <div className="mb-2">
-          <SaleBadge />
-        </div>
         <div className="flex items-baseline justify-between gap-3">
           <h3 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h3>
           <span className="shrink-0 text-right">

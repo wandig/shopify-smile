@@ -60,7 +60,7 @@ import waaromWijService from "@/assets/waarom-wij-service.png.asset.json";
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { ScrollDots } from "@/components/ScrollDots";
 import { ConfiguratorColorSwatches } from "@/components/ConfiguratorColorSwatches";
-import { SaleBadge, SalePrice } from "@/components/SaleBadge";
+import { SalePrice } from "@/components/SaleBadge";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -449,7 +449,6 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 
 
         <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
-          <SaleBadge className="mb-3" />
           <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
             {p.title}
           </h3>
@@ -501,7 +500,6 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <SaleBadge className="mb-2" />
             <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
               {p.title}
             </h3>

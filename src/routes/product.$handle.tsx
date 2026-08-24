@@ -23,7 +23,7 @@ import {
   TrustBannerSection,
   PuzzleCornerIcon,
 } from "@/components/ProductPageSections";
-import { SaleBadge, SalePrice } from "@/components/SaleBadge";
+import { SalePrice } from "@/components/SaleBadge";
 
 
 import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock, SlidersHorizontal, Ruler, MoveHorizontal, MoveVertical } from "lucide-react";
@@ -1401,9 +1401,6 @@ function ProductView({ product }: { product: ProductNode }) {
 
               <div className="rounded-t-[20px] bg-white p-4">
               <div>
-                <div className="mb-2">
-                  <SaleBadge />
-                </div>
                 <div className="mt-[15px] grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 sm:grid-cols-[minmax(0,1fr)_230px]">
                   <div>
                     <h1 className="text-[24px] font-bold leading-none text-[#071426]">{displayTitle}</h1>

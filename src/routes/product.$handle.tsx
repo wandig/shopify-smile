@@ -682,12 +682,21 @@ function ProductView({ product }: { product: ProductNode }) {
       ),
     ).sort((a, b) => a - b);
 
-    const match = variants.find((v) => {
-      if (!v.image?.url) return false;
-      const c = colorKey ? v.selectedOptions.find((o) => o.name === colorKey)?.value : undefined;
-      const s = sizeKey ? v.selectedOptions.find((o) => o.name === sizeKey)?.value : undefined;
-      return (!colorKey || c === selectedColor) && (!sizeKey || s === selectedSize);
-    });
+    // Eerst de exact geselecteerde variant (incl. opties als "Opstelling"),
+    // daarna pas de bredere kleur/maat-match als terugval.
+    const exactMatch = variants.find(
+      (v) => v.image?.url && v.selectedOptions.every((o) => selected[o.name] === o.value),
+    );
+
+    const match =
+      exactMatch ??
+      variants.find((v) => {
+        if (!v.image?.url) return false;
+        const c = colorKey ? v.selectedOptions.find((o) => o.name === colorKey)?.value : undefined;
+        const s = sizeKey ? v.selectedOptions.find((o) => o.name === sizeKey)?.value : undefined;
+        return (!colorKey || c === selectedColor) && (!sizeKey || s === selectedSize);
+      });
+
 
     const start = match?.image?.url ? urlIndex.get(match.image.url) : undefined;
     if (start === undefined) return allImages;
@@ -706,7 +715,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
     return group.length > 0 ? group : allImages;
 
-  }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
+  }, [allImages, variants, selected, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
 
   const galleryItems = useMemo(() => {
     const shopifyItems = images.map(({ node }) => ({

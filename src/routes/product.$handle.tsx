@@ -693,8 +693,19 @@ function ProductView({ product }: { product: ProductNode }) {
     if (start === undefined) return allImages;
 
     const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
-    const group = allImages.slice(start, end);
+    let group = allImages.slice(start, end);
+
+    // Duo: hang de gedeelde close-up serie achter elke donkereiken-variant.
+    if (product.handle === "duo" && /donker\s*eiken/i.test(selectedColor ?? "")) {
+      const closeups = DUO_SHARED_CLOSEUP_KEYS.map((key) =>
+        allImages.find((img) => img.node.url.includes(key)),
+      ).filter((img): img is (typeof allImages)[number] => Boolean(img));
+      const base = group.filter((img) => !/Close_Camera/i.test(img.node.url));
+      group = [...base, ...closeups.filter((c) => !base.some((b) => b.node.url === c.node.url))];
+    }
+
     return group.length > 0 ? group : allImages;
+
   }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
 
   const galleryItems = useMemo(() => {

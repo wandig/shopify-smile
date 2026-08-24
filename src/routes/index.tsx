@@ -56,6 +56,7 @@ import waaromWijMontage from "@/assets/waarom-wij-montage.png.asset.json";
 import waaromWijService from "@/assets/waarom-wij-service.png.asset.json";
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { ScrollDots } from "@/components/ScrollDots";
+import { ConfiguratorColorSwatches } from "@/components/ConfiguratorColorSwatches";
 
 export const Route = createFileRoute("/")({
   head: () => ({

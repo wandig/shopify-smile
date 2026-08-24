@@ -82,21 +82,23 @@ export function CustomerGallerySection({ backgroundClassName = "bg-[#ffc79d]" }:
 
   return (
     <section className={`${backgroundClassName} py-10 md:py-14`}>
-      <div className="mx-auto max-w-[1400px]">
-        <div className="px-5 md:px-10">
-          <div className="mb-6 md:mb-8">
-            <h2 className="text-[22px] font-bold leading-tight text-[#0e1f2a] md:text-[26px]">
-              Binnenkijken bij onze klanten
-            </h2>
-            <p className="mt-2 text-[13px] text-[#0e1f2a] md:text-[14px]">
-              Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
-            </p>
-          </div>
+      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-[22px] font-bold leading-tight text-[#0e1f2a] md:text-[26px]">
+            Binnenkijken bij onze klanten
+          </h2>
+          <p className="mt-2 text-[13px] text-[#0e1f2a] md:text-[14px]">
+            Echte interieurs, echte inspiratie. Gemaakt door onze klanten.
+          </p>
         </div>
       </div>
 
-      <div ref={scrollerRef} className="mx-auto max-w-[1400px] overflow-x-auto scrollbar-hide px-5 md:px-10">
-        <div className="flex h-[420px] w-max gap-3 md:h-[560px] md:gap-4">
+      <div className="mx-auto max-w-[1400px] pl-5 pr-0 md:pl-10 md:pr-0">
+        <div
+          ref={scrollerRef}
+          className="-mr-[calc((100vw-100%)/2)] overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <div className="flex h-[420px] w-max gap-3 pr-5 md:h-[560px] md:gap-4 md:pr-10">
           {CUSTOMER_GALLERY_COLUMNS.map((column, columnIndex) => (
             <div key={columnIndex} className={`flex h-full shrink-0 flex-col gap-3 md:gap-4 ${column.width}`}>
               {column.items.map((image, imageIndex) => (

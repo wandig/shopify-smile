@@ -1537,6 +1537,9 @@ function ProductView({ product }: { product: ProductNode }) {
                             <div className="flex min-w-0 items-center justify-between md:hidden">
                               <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
                               {colorSwatches}
+                              <span className="sr-only" aria-live="polite" aria-atomic="true">
+                                {colorTooltip ? `Gekozen kleur: ${colorTooltip.label}` : ""}
+                              </span>
                             </div>
                           </>
                         ) : (

@@ -51,17 +51,15 @@ export function SaleAnnouncementBar() {
   ];
 
   const rightBadges = [
-    { right: "20%", rotate: "-8deg", top: "18%" },
     { right: "12%", rotate: "6deg", top: "68%" },
     { right: "6%", rotate: "-10deg", top: "38%" },
-    { right: "24%", rotate: "14deg", top: "82%" },
     { right: "4%", rotate: "-4deg", top: "4%" },
   ];
 
   return (
     <div className="sticky top-0 z-50 relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-left md:text-center text-[13px] font-light tracking-[0.01em] text-white">
 
-      <span className="relative z-10 inline-flex w-full md:w-auto items-center justify-start md:justify-center gap-2 bg-[#7f919b] px-0 md:px-6">
+      <span className="relative z-10 inline-flex w-full md:w-auto items-center justify-start md:justify-center gap-2 px-0 md:px-6">
         <span>Verjaardagsale: 30% korting op alle Wandig cinewalls</span>
       </span>
 

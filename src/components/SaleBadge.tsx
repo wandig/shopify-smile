@@ -52,7 +52,8 @@ export function SaleAnnouncementBar() {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
+    <div className="sticky top-0 z-50 relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
+
       <span className="relative z-10 inline-flex items-center justify-center gap-2 bg-[#7f919b] px-4">
         <span>Verjaardagsale: 30% korting op alle Wandig cinewalls</span>
       </span>

@@ -368,18 +368,16 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
       </Link>
 
       <div className="flex flex-1 flex-col p-5">
+        <div className="mb-2">
+          <SaleBadge />
+        </div>
         <div className="flex items-baseline justify-between gap-3">
           <h3 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h3>
-          <span className="shrink-0 text-right text-sm font-semibold text-[#1f1915]">
-            {hasVisiblePrice ? (
-              <>
-                <span className="mr-1 text-[11px] font-normal uppercase tracking-[0.1em] text-[#1f1915]/45">
-                  vanaf
-                </span>
-                {formatPrice(price!.amount, price!.currencyCode)}
-              </>
+          <span className="shrink-0 text-right">
+            {hasVisiblePrice && priceInfo ? (
+              <SalePrice price={priceInfo.price} compareAtPrice={priceInfo.compareAtPrice} size="sm" />
             ) : (
-              "Samenstellen"
+              <span className="text-sm font-semibold text-[#1f1915]">Samenstellen</span>
             )}
           </span>
         </div>

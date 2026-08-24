@@ -46,18 +46,17 @@ export function SalePrice({
 export function SaleAnnouncementBar() {
   const badges = [
     { left: "4%", rotate: "-12deg", top: "10%" },
-    { left: "18%", rotate: "8deg", top: "55%" },
-    { left: "35%", rotate: "-6deg", top: "15%" },
-    { left: "52%", rotate: "10deg", top: "50%" },
-    { left: "70%", rotate: "-8deg", top: "12%" },
-    { left: "86%", rotate: "6deg", top: "55%" },
+    { left: "14%", rotate: "8deg", top: "55%" },
+    { left: "74%", rotate: "-8deg", top: "12%" },
+    { left: "88%", rotate: "6deg", top: "55%" },
   ];
 
   return (
     <div className="relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
-      <span className="relative z-10 inline-flex items-center justify-center gap-2">
+      <span className="relative z-10 inline-flex items-center justify-center gap-2 bg-[#7f919b] px-4">
         <span>Verjaardagsale: 30% korting op alle Wandig cinewalls</span>
       </span>
+
 
       {badges.map((badge, i) => (
         <span

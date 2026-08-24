@@ -422,7 +422,7 @@ function MobileGallerySwipe({
   if (items.length === 0) return null;
 
   return (
-    <div className="relative -mt-4 lg:hidden">
+    <div className="relative lg:hidden">
       <div
         ref={trackRef}
         className="scrollbar-hide -mx-5 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain"

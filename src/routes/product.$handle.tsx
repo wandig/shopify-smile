@@ -1492,7 +1492,7 @@ function ProductView({ product }: { product: ProductNode }) {
                     }
 
                     const colorSwatches = (
-                      <div className="flex items-center gap-2.5 overflow-x-auto pb-1 md:justify-end md:pb-0">
+                      <div className="flex items-center gap-2.5 md:justify-end">
                         {opt.values.slice(0, 5).map((value) => {
                           const active = selected[opt.name] === value;
                           const colorLabel = displayWandigColor(value);

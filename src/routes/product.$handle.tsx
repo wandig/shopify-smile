@@ -422,7 +422,7 @@ function MobileGallerySwipe({
   if (items.length === 0) return null;
 
   return (
-    <div className="relative -mt-4 lg:hidden">
+    <div className="relative lg:hidden">
       <div
         ref={trackRef}
         className="scrollbar-hide -mx-5 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
@@ -1257,8 +1257,8 @@ function ProductView({ product }: { product: ProductNode }) {
   };
   return (
     <div className="bg-[#faf8f5]">
-      <div className="mx-auto max-w-[1400px] px-0 md:px-10 pt-5 md:pt-8">
-      <nav className="px-3 md:px-0 text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-3 lg:mb-5 flex items-center gap-1.5">
+      <div className="mx-auto max-w-[1400px] px-0 md:px-10">
+      <nav className="hidden lg:flex px-3 md:px-0 text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-3 lg:mb-5 items-center gap-1.5">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <ChevronRight className="h-2.5 w-2.5" />
         <Link to="/producten" className="hover:text-foreground">Modellen</Link>

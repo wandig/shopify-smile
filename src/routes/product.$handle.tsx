@@ -1284,6 +1284,15 @@ function ProductView({ product }: { product: ProductNode }) {
                 loading="eager"
                 fetchPriority="high"
               />
+              <div className="pointer-events-none absolute bottom-4 right-4 z-10 rounded-lg bg-white shadow-[0_6px_20px_rgba(31,25,21,0.10)]">
+                <Img
+                  src={badgeLogo.url}
+                  alt="Dutch Design Winner 2026 - 10 jaar garantie"
+                  className="h-auto w-20 rounded-lg"
+                  w={220}
+                  loading="lazy"
+                />
+              </div>
               <DimensionRuler
                 widthLabel={specWidthLabel}
                 heightLabel={specHeightLabel}

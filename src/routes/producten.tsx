@@ -158,7 +158,13 @@ function Producten() {
 
 
       {/* hero */}
-      <section className="bg-[#f2eee7]">
+      <section className="relative bg-[#f2eee7]">
+        <span
+          className="pointer-events-none absolute right-5 top-5 z-10 inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-[#7f919b]/90 px-2 py-1 text-[12px] font-medium text-white shadow-sm lg:left-1/2 lg:top-1/2 lg:right-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:px-3 lg:py-1.5 lg:text-[15px]"
+          style={{ transform: "rotate(6deg)" }}
+        >
+          -30%
+        </span>
         <div className="grid lg:grid-cols-2">
           <div className="order-2 flex items-center px-5 py-8 md:px-10 md:py-0 lg:order-1 lg:justify-end">
             <div className="w-full lg:max-w-[520px]">
@@ -199,12 +205,6 @@ function Producten() {
           </div>
 
           <div className="relative order-1 bg-[#f4f1ed] lg:order-2">
-            <span
-              className="pointer-events-none absolute right-5 top-5 z-10 inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-[#7f919b]/90 px-2 py-1 text-[12px] font-medium text-white shadow-sm"
-              style={{ transform: "rotate(6deg)" }}
-            >
-              -30%
-            </span>
             <Img
               src={lifestyleAsset.url}
               w={1100}

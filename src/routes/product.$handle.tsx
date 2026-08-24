@@ -526,9 +526,20 @@ const DUO_KRISTALWIT_CLOSEUP_KEYS = [
   "Close_Camera_07_0000.jpg",
 ];
 
+const DUO_WALNOOTBRUIN_CLOSEUP_KEYS = [
+  "Close_Camera_01_0000_1e854e07-a545-4a01-a0e4-06ed0c0d7332",
+  "Close_Camera_02_0000_1b757fdd-fa33-4bba-abca-5ca20c4eab74",
+  "Close_Camera_03_0000_1aaf458f-c42f-4aa1-b125-832777a0752a",
+  "Close_Camera_04_0000_c5ba30d6-32d9-412b-b720-34cbec86108d",
+  "Close_Camera_05_0000_736abd18-b5bf-45a4-815f-2b0e144d7246",
+  "Close_Camera_06_0000_266e4c2c-329e-4df5-968f-3e09472a41a9",
+  "Close_Camera_07_0000_a3153997-e37c-4637-802f-d3a5e29e5a65",
+];
+
 const DUO_SHARED_CLOSEUP_KEYS: Record<string, string[]> = {
   Donkereiken: DUO_DONKEREIKEN_CLOSEUP_KEYS,
   Kristalwit: DUO_KRISTALWIT_CLOSEUP_KEYS,
+  Walnootbruin: DUO_WALNOOTBRUIN_CLOSEUP_KEYS,
 };
 
 

@@ -24,7 +24,10 @@ import {
   User,
 } from "lucide-react";
 
-import heroVideo from "@/assets/hero-reel-web.mp4.asset.json";
+import heroHdMp4 from "@/assets/hero-hd.mp4.asset.json";
+import heroHdWebm from "@/assets/hero-hd.webm.asset.json";
+import heroMobileMp4 from "@/assets/hero-720.mp4.asset.json";
+import heroMobileWebm from "@/assets/hero-720.webm.asset.json";
 import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 import werkplaatsVideo from "@/assets/werkplaats-web.mp4.asset.json";
 import werkplaatsPoster from "@/assets/werkplaats-poster.jpg.asset.json";
@@ -134,11 +137,17 @@ function HeroSection() {
   return (
     <section className="relative h-screen max-h-[780px] min-h-[560px] w-full overflow-hidden">
       <LazyVideo
-        src={heroVideo.url}
+        sources={[
+          { src: heroMobileWebm.url, type: "video/webm", media: "(max-width: 767px)" },
+          { src: heroMobileMp4.url, type: "video/mp4", media: "(max-width: 767px)" },
+          { src: heroHdWebm.url, type: "video/webm" },
+          { src: heroHdMp4.url, type: "video/mp4" },
+        ]}
         poster={heroPoster.url}
         eager
         className="absolute inset-0 h-full w-full object-cover"
       />
+
       <div className="absolute inset-0 bg-black/35" />
       <div className="relative flex h-full w-full flex-col items-center justify-center px-5 text-center text-white">
         <h1 className="text-[32px] font-[600] leading-[1.1] tracking-[0.01em] md:text-[52px]">

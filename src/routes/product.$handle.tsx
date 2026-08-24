@@ -542,6 +542,26 @@ const DUO_SHARED_CLOSEUP_KEYS: Record<string, string[]> = {
   Walnootbruin: DUO_WALNOOTBRUIN_CLOSEUP_KEYS,
 };
 
+// Full House: gedeelde close-up set per kleur (één upload voor alle varianten).
+const FULL_HOUSE_WALNOOTBRUIN_CLOSEUP_KEYS = [
+  "Close_Camera_007",
+  "Close_Camera_003",
+  "Close_Camera_002",
+  "Close_Camera_001",
+  "Close_Camera_006",
+  "Close_Camera_005",
+];
+
+const FULL_HOUSE_SHARED_CLOSEUP_KEYS: Record<string, string[]> = {
+  Walnootbruin: FULL_HOUSE_WALNOOTBRUIN_CLOSEUP_KEYS,
+};
+
+const SHARED_CLOSEUP_KEYS_BY_HANDLE: Record<string, Record<string, string[]>> = {
+  duo: DUO_SHARED_CLOSEUP_KEYS,
+  "full-house": FULL_HOUSE_SHARED_CLOSEUP_KEYS,
+};
+
+
 
 
 
@@ -731,21 +751,23 @@ function ProductView({ product }: { product: ProductNode }) {
     const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
     let group = allImages.slice(start, end);
 
-    // Duo: hang de gedeelde close-up serie achter elke variant van een kleur
-    // waarvoor we de 7 close-ups maar één keer hebben geüpload.
-    const sharedColor = product.handle === "duo"
-      ? Object.keys(DUO_SHARED_CLOSEUP_KEYS).find((color) =>
+    // Gedeelde close-up series: hang ze achter elke variant van die kleur,
+    // zodat we ze maar één keer in de backend hoeven te uploaden.
+    const sharedSets = SHARED_CLOSEUP_KEYS_BY_HANDLE[product.handle];
+    const sharedColor = sharedSets
+      ? Object.keys(sharedSets).find((color) =>
           new RegExp(color, "i").test(selectedColor ?? ""),
         )
       : undefined;
-    if (sharedColor) {
-      const keys = DUO_SHARED_CLOSEUP_KEYS[sharedColor];
+    if (sharedSets && sharedColor) {
+      const keys = sharedSets[sharedColor];
       const closeups = keys.map((key) =>
         allImages.find((img) => img.node.url.includes(key)),
       ).filter((img): img is (typeof allImages)[number] => Boolean(img));
       const base = group.filter((img) => !/Close_Camera/i.test(img.node.url));
       group = [...base, ...closeups.filter((c) => !base.some((b) => b.node.url === c.node.url))];
     }
+
 
 
     return group.length > 0 ? group : allImages;

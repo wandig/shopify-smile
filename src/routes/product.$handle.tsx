@@ -28,6 +28,7 @@ import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, Sh
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
 import productStoryBlackOakOrangeImg from "@/assets/product-story-black-oak-orange.jpg";
 import wandigLogoWhite from "@/assets/wandig-logo-white.png";
+import badgeLogo from "@/assets/dutch-design-winner-2026-v2.jpeg.asset.json";
 import fullHouseGalleryMainAsset from "@/assets/full-house-closed-front-v10.png.asset.json";
 const fullHouseGalleryMain = fullHouseGalleryMainAsset.url;
 import fullHouseWalnoot7785Asset from "@/assets/full-house-walnoot-77-85.png.asset.json";

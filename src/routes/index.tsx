@@ -449,11 +449,18 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 
 
         <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
+          <SaleBadge className="mb-3" />
           <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
             {p.title}
           </h3>
-          <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
-            {displayPrice}
+          <div className="mt-1">
+            {priceInfo ? (
+              <SalePrice price={priceInfo.price} compareAtPrice={priceInfo.compareAtPrice} size="lg" />
+            ) : (
+              <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[34px]">
+                {displayPrice}
+              </div>
+            )}
           </div>
           <PaymentInfo price={displayPrice} light />
         </div>

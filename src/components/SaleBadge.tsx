@@ -56,12 +56,9 @@ export function SaleAnnouncementBar() {
   return (
     <div className="relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
       <span className="relative z-10 inline-flex items-center justify-center gap-2">
-        <span>Verjaardagsale:</span>
-        <span className="relative z-10 inline-flex items-center justify-center rounded-lg border border-[#ef7027] px-1.5 py-0.5 font-medium text-white -rotate-6">
-          -30%
-        </span>
-        <span>op alle Wandig cinewalls</span>
+        <span>Verjaardagsale: 30% korting op alle Wandig cinewalls</span>
       </span>
+
       {badges.map((badge, i) => (
         <span
           key={i}

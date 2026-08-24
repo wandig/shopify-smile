@@ -1339,7 +1339,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
 
         {/* Info */}
-        <div className="relative z-10 -mt-[38px] min-w-0 lg:mt-0 lg:sticky lg:top-3 lg:ml-auto lg:w-[490px] lg:self-start">
+        <div className="relative z-10 -mt-[18px] min-w-0 lg:mt-0 lg:sticky lg:top-3 lg:ml-auto lg:w-[490px] lg:self-start">
           <div className="space-y-3">
             <section className="overflow-hidden rounded-[20px] border border-[#eeeeee] bg-[#fef9f5] shadow-[0_18px_45px_rgba(42,31,22,0.07)]">
               <button
@@ -1418,7 +1418,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
 
               {hasOptions && (
-                <div className="mt-4 space-y-2">
+                <div className="space-y-2">
                   {visibleOptions.map((opt) => {
                     const isColor = /kleur|color/i.test(opt.name);
                     const isPosition = /opstelling|position|richting|side/i.test(opt.name);

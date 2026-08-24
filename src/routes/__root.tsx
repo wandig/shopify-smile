@@ -141,6 +141,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
       </div>
+      <TrustBadge />
       <Toaster position="top-center" />
     </QueryClientProvider>
   );

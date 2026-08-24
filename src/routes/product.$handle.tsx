@@ -635,6 +635,14 @@ function ProductView({ product }: { product: ProductNode }) {
   const [benefitsScrollState, setBenefitsScrollState] = useState({ atStart: true, atEnd: false });
   const [showOrderWidget, setShowOrderWidget] = useState(false);
   const [desktopRulerOpen, setDesktopRulerOpen] = useState(false);
+  const [colorTooltip, setColorTooltip] = useState<{ value: string; label: string } | null>(null);
+  const colorTooltipTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const showColorTooltip = (value: string, label: string) => {
+    if (colorTooltipTimeoutRef.current) clearTimeout(colorTooltipTimeoutRef.current);
+    setColorTooltip({ value, label });
+    colorTooltipTimeoutRef.current = setTimeout(() => setColorTooltip(null), 1500);
+  };
 
   useEffect(() => {
     const onScroll = () => {

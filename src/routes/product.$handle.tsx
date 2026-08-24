@@ -542,6 +542,26 @@ const DUO_SHARED_CLOSEUP_KEYS: Record<string, string[]> = {
   Walnootbruin: DUO_WALNOOTBRUIN_CLOSEUP_KEYS,
 };
 
+// Full House: gedeelde close-up set per kleur (één upload voor alle varianten).
+const FULL_HOUSE_WALNOOTBRUIN_CLOSEUP_KEYS = [
+  "Close_Camera_007",
+  "Close_Camera_003",
+  "Close_Camera_002",
+  "Close_Camera_001",
+  "Close_Camera_006",
+  "Close_Camera_005",
+];
+
+const FULL_HOUSE_SHARED_CLOSEUP_KEYS: Record<string, string[]> = {
+  Walnootbruin: FULL_HOUSE_WALNOOTBRUIN_CLOSEUP_KEYS,
+};
+
+const SHARED_CLOSEUP_KEYS_BY_HANDLE: Record<string, Record<string, string[]>> = {
+  duo: DUO_SHARED_CLOSEUP_KEYS,
+  "full-house": FULL_HOUSE_SHARED_CLOSEUP_KEYS,
+};
+
+
 
 
 

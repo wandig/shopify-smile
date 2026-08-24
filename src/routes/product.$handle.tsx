@@ -1237,7 +1237,12 @@ function ProductView({ product }: { product: ProductNode }) {
     });
   };
 
-  const visibleOptions = product.options.filter((o) => !(o.name === "Title" && o.values.length === 1));
+  const visibleOptions = product.options.filter((o) => {
+    if (o.name === "Title" && o.values.length === 1) return false;
+    // Voor Full House is de "Opstelling"-optie niet zichtbaar in de UI.
+    if (product.handle === "full-house" && /opstelling|position|richting|side/i.test(o.name)) return false;
+    return true;
+  });
   const hasOptions = visibleOptions.length > 0;
   const numericPrice = activeVariant ? parseFloat(activeVariant.price.amount) : 0;
   // Altijd de prijs uit Shopify gebruiken, geen vaste fallback.

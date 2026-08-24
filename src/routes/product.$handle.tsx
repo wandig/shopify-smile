@@ -1479,14 +1479,14 @@ function ProductView({ product }: { product: ProductNode }) {
                     }
 
                     return (
-                      <div key={opt.name} className="grid min-h-[52px] grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-[12px] border border-[#eeeeee] px-3">
+                      <div key={opt.name} className="grid min-h-[52px] grid-cols-1 content-center gap-2 rounded-[12px] border border-[#eeeeee] px-3 py-2.5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-3 md:py-0">
                         {isColor ? (
                           <>
-                            <div className="grid min-w-0 grid-cols-[80px_minmax(0,1fr)] items-baseline gap-2">
+                            <div className="flex min-w-0 items-center justify-between md:grid md:grid-cols-[80px_minmax(0,1fr)] md:items-baseline md:gap-2">
                               <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
                               <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{displayWandigColor(selected[opt.name] || opt.values[0])}</span>
                             </div>
-                            <div className="flex items-center justify-end gap-2.5">
+                            <div className="flex items-center gap-2.5 overflow-x-auto pb-1 md:justify-end md:pb-0">
                               {opt.values.slice(0, 5).map((value) => {
                                 const active = selected[opt.name] === value;
                                 return (
@@ -1506,7 +1506,7 @@ function ProductView({ product }: { product: ProductNode }) {
                             </div>
                           </>
                         ) : (
-                          <label className="relative col-span-2 block min-w-0">
+                          <label className="relative col-span-1 block min-w-0 md:col-span-2">
                             <span className="sr-only">Kies {label.toLowerCase()}</span>
                             <select
                               value={selected[opt.name] || ""}

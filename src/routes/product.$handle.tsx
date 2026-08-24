@@ -504,9 +504,9 @@ const GALLERY_COLOR_ORDER: Record<string, string[]> = {
   solo: ["Kristalwit", "Dofroze", "Cashmeregrijs", "Donkereiken", "Walnootbruin"],
 };
 
-// Duo donkereiken: de 7 close-ups zijn maar één keer geüpload (bestandslimiet).
-// We hangen ze automatisch achter elke donkereiken-variantfoto.
-const DUO_SHARED_CLOSEUP_KEYS = [
+// Duo close-ups: gedeelde sets per kleur. De bestandslimiet in Shopify is 250,
+// dus hergebruiken we één set van 7 close-ups voor alle varianten van die kleur.
+const DUO_DONKEREIKEN_CLOSEUP_KEYS = [
   "Close_Camera_01_0000_1614fac5",
   "Close_Camera_02_0000_c412643a",
   "Close_Camera_03_0000_4734a236",
@@ -515,6 +515,22 @@ const DUO_SHARED_CLOSEUP_KEYS = [
   "Close_Camera_06_0000_d31ac550",
   "Close_Camera_07_0000_fab86129",
 ];
+
+const DUO_KRISTALWIT_CLOSEUP_KEYS = [
+  "Close_Camera_01_0000.jpg",
+  "Close_Camera_02_0000.jpg",
+  "Close_Camera_03_0000.jpg",
+  "Close_Camera_04_0000.jpg",
+  "Close_Camera_05_0000.jpg",
+  "Close_Camera_06_0000.jpg",
+  "Close_Camera_07_0000.jpg",
+];
+
+const DUO_SHARED_CLOSEUP_KEYS: Record<string, string[]> = {
+  Donkereiken: DUO_DONKEREIKEN_CLOSEUP_KEYS,
+  Kristalwit: DUO_KRISTALWIT_CLOSEUP_KEYS,
+};
+
 
 
 
@@ -704,14 +720,22 @@ function ProductView({ product }: { product: ProductNode }) {
     const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
     let group = allImages.slice(start, end);
 
-    // Duo: hang de gedeelde close-up serie achter elke donkereiken-variant.
-    if (product.handle === "duo" && /donker\s*eiken/i.test(selectedColor ?? "")) {
-      const closeups = DUO_SHARED_CLOSEUP_KEYS.map((key) =>
+    // Duo: hang de gedeelde close-up serie achter elke variant van een kleur
+    // waarvoor we de 7 close-ups maar één keer hebben geüpload.
+    const sharedColor = product.handle === "duo"
+      ? Object.keys(DUO_SHARED_CLOSEUP_KEYS).find((color) =>
+          new RegExp(color, "i").test(selectedColor ?? ""),
+        )
+      : undefined;
+    if (sharedColor) {
+      const keys = DUO_SHARED_CLOSEUP_KEYS[sharedColor];
+      const closeups = keys.map((key) =>
         allImages.find((img) => img.node.url.includes(key)),
       ).filter((img): img is (typeof allImages)[number] => Boolean(img));
       const base = group.filter((img) => !/Close_Camera/i.test(img.node.url));
       group = [...base, ...closeups.filter((c) => !base.some((b) => b.node.url === c.node.url))];
     }
+
 
     return group.length > 0 ? group : allImages;
 

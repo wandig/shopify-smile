@@ -1131,6 +1131,46 @@ function ProductView({ product }: { product: ProductNode }) {
     };
   }, [product.handle, galleryItems]);
 
+  // Producten waarvan de foto's uit de backend komen (o.a. Duo) hebben geen lokale
+  // render-groepen. Warm daarom de variantfoto's voor: eerst de huidige kleur, dan
+  // de rest. Zo is de eerste kleur-/maatwisseling direct in beeld.
+  useEffect(() => {
+    if (product.handle === "full-house" || product.handle === "solo") return;
+
+    const connection = (navigator as unknown as {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+    if (connection?.saveData) return;
+    if (connection?.effectiveType && /2g/.test(connection.effectiveType)) return;
+
+    const colorOf = (v: (typeof variants)[number]) =>
+      v.selectedOptions.find((o) => /kleur|color/i.test(o.name))?.value;
+    const variantUrls = variants.map((v) => v.image?.url).filter((u): u is string => Boolean(u));
+    const currentFirst = variants
+      .filter((v) => selectedColor && colorOf(v) === selectedColor)
+      .map((v) => v.image?.url)
+      .filter((u): u is string => Boolean(u));
+    const rest = [
+      ...variantUrls.filter((u) => !currentFirst.includes(u)),
+      ...allImages.map((img) => img.node.url).filter((u) => !variantUrls.includes(u)),
+    ];
+
+    let cancelled = false;
+    const isCancelled = () => cancelled;
+    const firstTimer = window.setTimeout(() => warmImageQueue(currentFirst, isCancelled), 300);
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
+    const restStart = () => warmImageQueue(rest, isCancelled);
+    const restTimer = window.setTimeout(() => (idle ? idle(restStart) : restStart()), 1400);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(firstTimer);
+      window.clearTimeout(restTimer);
+    };
+  }, [product.handle, variants, allImages, selectedColor]);
+
+
+
 
   // Track benefits carousel scroll position to dim disabled arrows.
   useEffect(() => {

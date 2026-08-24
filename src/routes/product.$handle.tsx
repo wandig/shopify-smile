@@ -23,6 +23,8 @@ import {
   TrustBannerSection,
   PuzzleCornerIcon,
 } from "@/components/ProductPageSections";
+import { SaleBadge, SalePrice } from "@/components/SaleBadge";
+
 
 import { Loader2, ChevronRight, ChevronLeft, ChevronDown, Plus, Star, Hammer, ShieldCheck, ShoppingBag, Truck, Plug, Phone, Headphones, Mail, Monitor, User, ArrowRight, Shield, Moon, CalendarClock, SlidersHorizontal, Ruler, MoveHorizontal, MoveVertical } from "lucide-react";
 import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";

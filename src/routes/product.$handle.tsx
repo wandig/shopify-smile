@@ -1460,7 +1460,7 @@ function ProductView({ product }: { product: ProductNode }) {
                             aria-expanded={optionExpanded}
                             className="flex min-h-[52px] w-full items-center gap-2 px-3 text-left"
                           >
-                            <span className="grid min-w-0 flex-1 grid-cols-[80px_minmax(0,1fr)] items-baseline gap-2">
+                            <span className="grid min-w-0 flex-1 grid-cols-[105px_minmax(0,1fr)] items-baseline gap-2 md:grid-cols-[80px_minmax(0,1fr)]">
                               <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
                               <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{selectedOptionLabel || optionChoices[0]?.label}</span>
                             </span>

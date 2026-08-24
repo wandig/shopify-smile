@@ -501,11 +501,18 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
         <div className="flex items-start justify-between gap-3">
           <div>
+            <SaleBadge className="mb-2" />
             <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
               {p.title}
             </h3>
-            <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
-              {displayPrice}
+            <div className="mt-0.5">
+              {priceInfo ? (
+                <SalePrice price={priceInfo.price} compareAtPrice={priceInfo.compareAtPrice} size="sm" />
+              ) : (
+                <div className="text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
+                  {displayPrice}
+                </div>
+              )}
             </div>
             <PaymentInfo price={displayPrice} />
           </div>

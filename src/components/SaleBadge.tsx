@@ -1,15 +1,5 @@
 import { formatPrice } from "@/lib/shopify";
 
-export function SaleBadge({ className = "" }: { className?: string }) {
-  return (
-    <span
-      className={`inline-flex items-center rounded-full bg-[#ef7027] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-white ${className}`}
-    >
-      Verjaardagsale -30%
-    </span>
-  );
-}
-
 export function SalePrice({
   price,
   compareAtPrice,

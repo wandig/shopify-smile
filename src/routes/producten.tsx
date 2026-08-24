@@ -350,8 +350,8 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     modules: 0,
     storage: "Compact",
   };
-  const price = lowestPaidPrice(product);
-  const hasVisiblePrice = price !== null;
+  const priceInfo = lowestPaidPriceWithCompare(product);
+  const hasVisiblePrice = priceInfo !== null;
 
   const refSize = WANDIG_SIZES.find((s) => s.label === "58 - 65 inch") ?? WANDIG_SIZES[1];
   const shortName = copy.title.replace(/^Wandig\s+/i, "");

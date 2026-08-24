@@ -199,7 +199,9 @@ function Producten() {
           </div>
 
           <div className="relative order-1 bg-[#f4f1ed] lg:order-2">
-
+            <span className="absolute right-4 top-4 z-10 inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-[#ef7027]/95 px-3 py-1.5 text-[13px] font-semibold text-white shadow-sm">
+              -30%
+            </span>
             <Img
               src={lifestyleAsset.url}
               w={1100}

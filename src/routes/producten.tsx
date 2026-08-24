@@ -454,7 +454,7 @@ function CollectionFaqSection() {
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1f1915] transition hover:text-[#ef7027] sm:py-3"
             >
               <Phone className="h-4 w-4 text-[#ef7027]" />
-              085 303 0997
+              +31 85 303 0997
             </a>
             <a
               href="mailto:support@wandig.com"

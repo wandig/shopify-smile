@@ -1483,31 +1483,41 @@ function ProductView({ product }: { product: ProductNode }) {
                       );
                     }
 
+                    const colorSwatches = (
+                      <div className="flex items-center gap-2.5 overflow-x-auto pb-1 md:justify-end md:pb-0">
+                        {opt.values.slice(0, 5).map((value) => {
+                          const active = selected[opt.name] === value;
+                          return (
+                            <button
+                              key={value}
+                              type="button"
+                              onClick={() => setSelected((current) => ({ ...current, [opt.name]: value }))}
+                              title={displayWandigColor(value)}
+                              aria-label={`Kleur ${displayWandigColor(value)}`}
+                              aria-pressed={active}
+                              className={`h-9 w-9 shrink-0 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
+                            >
+                              <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={wandigSwatchStyle(value)} />
+                            </button>
+                          );
+                        })}
+                      </div>
+                    );
+
                     return (
                       <div key={opt.name} className="grid min-h-[52px] grid-cols-1 content-center gap-2 rounded-[12px] border border-[#eeeeee] px-3 py-2.5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-3 md:py-0">
                         {isColor ? (
                           <>
-                            <div className="flex min-w-0 items-center justify-between md:grid md:grid-cols-[80px_minmax(0,1fr)] md:items-baseline md:gap-2">
+                            <div className="hidden min-w-0 items-center justify-between md:grid md:grid-cols-[80px_minmax(0,1fr)] md:items-baseline md:gap-2">
                               <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
                               <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{displayWandigColor(selected[opt.name] || opt.values[0])}</span>
                             </div>
-                            <div className="flex items-center gap-2.5 overflow-x-auto pb-1 md:justify-end md:pb-0">
-                              {opt.values.slice(0, 5).map((value) => {
-                                const active = selected[opt.name] === value;
-                                return (
-                                  <button
-                                    key={value}
-                                    type="button"
-                                    onClick={() => setSelected((current) => ({ ...current, [opt.name]: value }))}
-                                    title={displayWandigColor(value)}
-                                    aria-label={`Kleur ${displayWandigColor(value)}`}
-                                    aria-pressed={active}
-                                    className={`h-9 w-9 shrink-0 rounded-full border-2 p-[2px] transition-transform hover:scale-105 active:scale-95 ${active ? "border-[#ff5a00]" : "border-transparent"}`}
-                                  >
-                                    <span className="block h-full w-full rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.16)]" style={wandigSwatchStyle(value)} />
-                                  </button>
-                                );
-                              })}
+                            <div className="hidden md:block">{colorSwatches}</div>
+
+                            <div className="grid min-w-0 grid-cols-[1fr_auto_1fr] items-center gap-2 md:hidden">
+                              <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{displayWandigColor(selected[opt.name] || opt.values[0])}</span>
+                              <span className="text-center text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
+                              <div className="flex items-center justify-end">{colorSwatches}</div>
                             </div>
                           </>
                         ) : (

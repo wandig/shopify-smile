@@ -1516,10 +1516,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
                             <div className="flex min-w-0 items-center justify-between md:hidden">
                               <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
-                              <div className="flex flex-col items-end gap-1">
-                                <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{displayWandigColor(selected[opt.name] || opt.values[0])}</span>
-                                {colorSwatches}
-                              </div>
+                              {colorSwatches}
                             </div>
                           </>
                         ) : (

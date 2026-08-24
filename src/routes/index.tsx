@@ -9,7 +9,7 @@ import press5 from "@/assets/press/press5.svg";
 import press6 from "@/assets/press/press6.svg";
 import { useMemo, useRef, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
+import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, lowestPaidPriceWithCompare, type ShopifyProduct } from "@/lib/shopify";
 import { displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
 
 import {
@@ -60,6 +60,7 @@ import waaromWijService from "@/assets/waarom-wij-service.png.asset.json";
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { ScrollDots } from "@/components/ScrollDots";
 import { ConfiguratorColorSwatches } from "@/components/ConfiguratorColorSwatches";
+import { SaleBadge, SalePrice } from "@/components/SaleBadge";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -384,9 +385,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
   });
 
   const shopifyProduct = data?.find((edge) => edge.node.handle === p.handle)?.node;
-  const shopifyPrice = shopifyProduct ? lowestPaidPrice(shopifyProduct) : null;
-  const displayPrice = shopifyPrice
-    ? formatPrice(shopifyPrice.amount, shopifyPrice.currencyCode)
+  const priceInfo = shopifyProduct ? lowestPaidPriceWithCompare(shopifyProduct) : null;
+  const displayPrice = priceInfo
+    ? formatPrice(priceInfo.price.amount, priceInfo.price.currencyCode)
     : p.price;
   const colorOption = shopifyProduct?.options.find((option) => /kleur|color/i.test(option.name));
   const colors = useMemo(
@@ -448,11 +449,18 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 
 
         <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
+          <SaleBadge className="mb-3" />
           <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
             {p.title}
           </h3>
-          <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
-            {displayPrice}
+          <div className="mt-1">
+            {priceInfo ? (
+              <SalePrice price={priceInfo.price} compareAtPrice={priceInfo.compareAtPrice} size="lg" />
+            ) : (
+              <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[34px]">
+                {displayPrice}
+              </div>
+            )}
           </div>
           <PaymentInfo price={displayPrice} light />
         </div>
@@ -493,11 +501,18 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
         <div className="flex items-start justify-between gap-3">
           <div>
+            <SaleBadge className="mb-2" />
             <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
               {p.title}
             </h3>
-            <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
-              {displayPrice}
+            <div className="mt-0.5">
+              {priceInfo ? (
+                <SalePrice price={priceInfo.price} compareAtPrice={priceInfo.compareAtPrice} size="sm" />
+              ) : (
+                <div className="text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
+                  {displayPrice}
+                </div>
+              )}
             </div>
             <PaymentInfo price={displayPrice} />
           </div>

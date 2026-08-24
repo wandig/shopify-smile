@@ -4,13 +4,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Star, Truck, CalendarClock, ShieldCheck, Phone, MessageCircle, Plus } from "lucide-react";
-import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, type ShopifyProduct } from "@/lib/shopify";
+import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, lowestPaidPriceWithCompare, type ShopifyProduct } from "@/lib/shopify";
 import { wandigSwatchStyle } from "@/lib/wandig-colors";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import lifestyleAsset from "@/assets/producten-hero-lifestyle.png.asset.json";
 import { FAQ_ITEMS } from "@/components/ProductPageSections";
 import adviesAsset from "@/assets/persoonlijk-advies.png.asset.json";
 import proefkijkenAsset from "@/assets/proefkijken-familie.png.asset.json";
+import { SaleBadge, SalePrice } from "@/components/SaleBadge";
 
 
 export const Route = createFileRoute("/producten")({
@@ -349,8 +350,8 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
     modules: 0,
     storage: "Compact",
   };
-  const price = lowestPaidPrice(product);
-  const hasVisiblePrice = price !== null;
+  const priceInfo = lowestPaidPriceWithCompare(product);
+  const hasVisiblePrice = priceInfo !== null;
 
   const refSize = WANDIG_SIZES.find((s) => s.label === "58 - 65 inch") ?? WANDIG_SIZES[1];
   const shortName = copy.title.replace(/^Wandig\s+/i, "");
@@ -367,18 +368,16 @@ function CollectionSeriesCard({ product }: { product: ProductNode }) {
       </Link>
 
       <div className="flex flex-1 flex-col p-5">
+        <div className="mb-2">
+          <SaleBadge />
+        </div>
         <div className="flex items-baseline justify-between gap-3">
           <h3 className="font-serif text-2xl leading-none text-[#1f1915]">{copy.title}</h3>
-          <span className="shrink-0 text-right text-sm font-semibold text-[#1f1915]">
-            {hasVisiblePrice ? (
-              <>
-                <span className="mr-1 text-[11px] font-normal uppercase tracking-[0.1em] text-[#1f1915]/45">
-                  vanaf
-                </span>
-                {formatPrice(price!.amount, price!.currencyCode)}
-              </>
+          <span className="shrink-0 text-right">
+            {hasVisiblePrice && priceInfo ? (
+              <SalePrice price={priceInfo.price} compareAtPrice={priceInfo.compareAtPrice} size="sm" />
             ) : (
-              "Samenstellen"
+              <span className="text-sm font-semibold text-[#1f1915]">Samenstellen</span>
             )}
           </span>
         </div>

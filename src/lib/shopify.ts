@@ -130,3 +130,18 @@ export function lowestPaidPrice(product: ShopifyProduct["node"]): { amount: stri
 
   return paid[0] ?? null;
 }
+
+/** Laagste betaalde variantprijs inclusief eventuele compareAtPrice. */
+export function lowestPaidPriceWithCompare(product: ShopifyProduct["node"]): {
+  price: { amount: string; currencyCode: string };
+  compareAtPrice?: { amount: string; currencyCode: string } | null;
+} | null {
+  const paid = (product.variants?.edges ?? [])
+    .map((edge) => edge.node)
+    .filter((variant) => parseFloat(variant.price.amount) > 0)
+    .sort((a, b) => parseFloat(a.price.amount) - parseFloat(b.price.amount));
+
+  const first = paid[0];
+  if (!first) return null;
+  return { price: first.price, compareAtPrice: first.compareAtPrice };
+}

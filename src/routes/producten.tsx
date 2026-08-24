@@ -167,7 +167,7 @@ function Producten() {
                   Cinewalls
                 </h1>
                 <span
-                  className="inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-[#7f919b] px-3 py-1.5 text-[18px] font-medium text-white shadow-sm"
+                  className="inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-transparent px-3 py-1.5 text-[18px] font-medium text-[#ef7027] shadow-sm"
                   style={{ transform: "rotate(6deg)" }}
                 >
                   -30%

@@ -46,7 +46,14 @@ export function SalePrice({
 export function SaleAnnouncementBar() {
   return (
     <div className="bg-[#7f919b] px-4 py-2.5 text-center text-[13px] font-light tracking-[0.01em] text-white">
-      Verjaardagsale: 30% korting op alle Wandig cinewalls
+      <span className="inline-flex items-center justify-center gap-2">
+        <span>Verjaardagsale:</span>
+        <span className="inline-flex items-center justify-center rounded-md border border-[#ef7027] px-1.5 py-0.5 font-medium text-white -rotate-6">
+          -30%
+        </span>
+        <span>op alle Wandig cinewalls</span>
+      </span>
     </div>
   );
 }
+

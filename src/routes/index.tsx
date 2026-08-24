@@ -60,6 +60,7 @@ import waaromWijService from "@/assets/waarom-wij-service.png.asset.json";
 import { CustomerGallerySection } from "@/components/CustomerGallerySection";
 import { ScrollDots } from "@/components/ScrollDots";
 import { ConfiguratorColorSwatches } from "@/components/ConfiguratorColorSwatches";
+import { SaleBadge, SalePrice } from "@/components/SaleBadge";
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -1418,7 +1418,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
 
               {hasOptions && (
-                <div className="mt-4 space-y-2">
+                <div className="space-y-2">
                   {visibleOptions.map((opt) => {
                     const isColor = /kleur|color/i.test(opt.name);
                     const isPosition = /opstelling|position|richting|side/i.test(opt.name);

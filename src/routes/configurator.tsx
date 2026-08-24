@@ -20,9 +20,12 @@ import {
   TrustBannerSection,
 } from "@/components/ProductPageSections";
 import {
+  CONFIGURATOR_MODULE_ASSETS,
   ConfiguratorModuleImage,
   FULL_HOUSE_FRONT_IMAGES,
+  MODULE_CROPS,
   WandigSpecPreview,
+  getConfiguratorModuleAsset,
   type ModulePosition,
 } from "@/components/WandigModulePreview";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
@@ -82,6 +85,25 @@ const CONFIGURATOR_BENEFITS = [
 
 function euro(n: number) {
   return `${new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }).format(n)},-`;
+}
+
+function findModuleVariantImage(
+  product: ShopifyProduct["node"] | null | undefined,
+  color: string,
+  tvSize: string,
+) {
+  return product?.variants.edges
+    .map((edge) => edge.node)
+    .find((variant) => {
+      const selections = new Map(
+        variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
+      );
+      return (
+        selections.get("kleur") === color &&
+        selections.get("opstelling") === "Links" &&
+        selections.get("maat tv") === tvSize
+      );
+    })?.image?.url;
 }
 
 
@@ -198,6 +220,7 @@ function ConfiguratorPage() {
   const [color, setColor] = useState<string>(FULL_HOUSE_COLORS[0]);
   const [previewColor, setPreviewColor] = useState<string>(FULL_HOUSE_COLORS[0]);
   const [previousPreviewColor, setPreviousPreviewColor] = useState<string | null>(null);
+  const [previousPreviewTvValue, setPreviousPreviewTvValue] = useState<string | null>(null);
   const [tv, setTv] = useState(TV_OPTIONS[1]);
   const [hasLeft, setHasLeft] = useState(false);
   const [hasRight, setHasRight] = useState(false);
@@ -220,7 +243,11 @@ function ConfiguratorPage() {
   }, [color, colors]);
 
   useEffect(() => {
-    const images = Object.values(FULL_HOUSE_FRONT_IMAGES).map((source) => {
+    const configuredSources = Object.values(CONFIGURATOR_MODULE_ASSETS).flatMap((assetsBySize) =>
+      Object.values(assetsBySize).flatMap((asset) => (asset ? [asset.source] : [])),
+    );
+    const sources = [...new Set([...Object.values(FULL_HOUSE_FRONT_IMAGES), ...configuredSources])];
+    const images = sources.map((source) => {
       const image = new Image();
       image.src = optimizeImageUrl(source, 1200) ?? source;
       return image;
@@ -242,6 +269,7 @@ function ConfiguratorPage() {
     if (nextColor === color) return;
 
     setPreviousPreviewColor(previewColor);
+    setPreviousPreviewTvValue(tv.shopifyValue);
     setColor(nextColor);
     setPreviewColor(nextColor);
 
@@ -250,6 +278,23 @@ function ConfiguratorPage() {
     }
     previewCleanupTimerRef.current = window.setTimeout(() => {
       setPreviousPreviewColor(null);
+      setPreviousPreviewTvValue(null);
+    }, 320);
+  };
+
+  const selectTv = (nextTv: (typeof TV_OPTIONS)[number]) => {
+    if (nextTv.shopifyValue === tv.shopifyValue) return;
+
+    setPreviousPreviewColor(previewColor);
+    setPreviousPreviewTvValue(tv.shopifyValue);
+    setTv(nextTv);
+
+    if (previewCleanupTimerRef.current !== null) {
+      window.clearTimeout(previewCleanupTimerRef.current);
+    }
+    previewCleanupTimerRef.current = window.setTimeout(() => {
+      setPreviousPreviewColor(null);
+      setPreviousPreviewTvValue(null);
     }, 320);
   };
 
@@ -289,43 +334,36 @@ function ConfiguratorPage() {
     shopifyCompareAtPrice > configuredBasePrice
       ? shopifyCompareAtPrice + optionPriceAdjustment
       : null;
-  const usesWalnutModules = previewColor === FULL_HOUSE_COLORS[0];
-  const colorModuleSource = useMemo(() => {
-    if (usesWalnutModules) return null;
+  const colorModuleAsset = useMemo(() => {
+    const configuredAsset = getConfiguratorModuleAsset(previewColor, tv.shopifyValue);
+    if (configuredAsset) return configuredAsset;
+    if (previewColor === FULL_HOUSE_COLORS[0]) return { source: null, crops: MODULE_CROPS };
 
-    const matchingVariant = fullHouseProduct?.variants.edges
-      .map((edge) => edge.node)
-      .find((variant) => {
-        const selections = new Map(
-          variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
-        );
-        return (
-          selections.get("kleur") === previewColor &&
-          selections.get("opstelling") === "Links" &&
-          selections.get("maat tv") === "58 - 65 inch"
-        );
-      });
+    return {
+      source:
+        findModuleVariantImage(fullHouseProduct, previewColor, tv.shopifyValue) ??
+        FULL_HOUSE_FRONT_IMAGES[previewColor],
+      crops: MODULE_CROPS,
+    };
+  }, [fullHouseProduct, previewColor, tv.shopifyValue]);
+  const previousModuleAsset = useMemo(() => {
+    if (!previousPreviewColor) return null;
 
-    return matchingVariant?.image?.url ?? FULL_HOUSE_FRONT_IMAGES[previewColor];
-  }, [fullHouseProduct, previewColor, usesWalnutModules]);
-  const previousModuleSource = useMemo(() => {
-    if (!previousPreviewColor || previousPreviewColor === FULL_HOUSE_COLORS[0]) return null;
+    const previousTvSize = previousPreviewTvValue ?? tv.shopifyValue;
+    const configuredAsset = getConfiguratorModuleAsset(previousPreviewColor, previousTvSize);
+    if (configuredAsset) return configuredAsset;
+    if (previousPreviewColor === FULL_HOUSE_COLORS[0]) return { source: null, crops: MODULE_CROPS };
 
-    const matchingVariant = fullHouseProduct?.variants.edges
-      .map((edge) => edge.node)
-      .find((variant) => {
-        const selections = new Map(
-          variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
-        );
-        return (
-          selections.get("kleur") === previousPreviewColor &&
-          selections.get("opstelling") === "Links" &&
-          selections.get("maat tv") === "58 - 65 inch"
-        );
-      });
-
-    return matchingVariant?.image?.url ?? FULL_HOUSE_FRONT_IMAGES[previousPreviewColor];
-  }, [fullHouseProduct, previousPreviewColor]);
+    return {
+      source:
+        findModuleVariantImage(fullHouseProduct, previousPreviewColor, previousTvSize) ??
+        FULL_HOUSE_FRONT_IMAGES[previousPreviewColor],
+      crops: MODULE_CROPS,
+    };
+  }, [fullHouseProduct, previousPreviewColor, previousPreviewTvValue, tv.shopifyValue]);
+  const colorModuleSource = colorModuleAsset.source;
+  const previousModuleSource = previousModuleAsset?.source ?? null;
+  const usesWalnutModules = previewColor === FULL_HOUSE_COLORS[0] && colorModuleSource === null;
 
   return (
     <main className="min-h-screen bg-[#f8f6f3]">
@@ -431,14 +469,16 @@ function ConfiguratorPage() {
                         source={previousModuleSource}
                         animate={false}
                         testId={false}
+                        crops={previousModuleAsset?.crops}
                       />
                     </div>
                   )}
                   <ConfiguratorModuleImage
-                    key={`left-${previewColor}`}
+                    key={`left-${previewColor}-${tv.shopifyValue}`}
                     color={previewColor}
                     position="left"
                     source={colorModuleSource}
+                    crops={colorModuleAsset.crops}
                     className={`relative z-[1] origin-bottom-right transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       hasLeft ? "translate-x-0 scale-100" : "translate-x-6 scale-[95%]"
                     }`}
@@ -453,14 +493,16 @@ function ConfiguratorPage() {
                         source={previousModuleSource}
                         animate={false}
                         testId={false}
+                        crops={previousModuleAsset?.crops}
                       />
                     </div>
                   )}
                   <ConfiguratorModuleImage
-                    key={`center-${previewColor}`}
+                    key={`center-${previewColor}-${tv.shopifyValue}`}
                     color={previewColor}
                     position="center"
                     source={colorModuleSource}
+                    crops={colorModuleAsset.crops}
                     className="relative z-[1]"
                   />
                 </div>
@@ -485,14 +527,16 @@ function ConfiguratorPage() {
                         source={previousModuleSource}
                         animate={false}
                         testId={false}
+                        crops={previousModuleAsset?.crops}
                       />
                     </div>
                   )}
                   <ConfiguratorModuleImage
-                    key={`right-${previewColor}`}
+                    key={`right-${previewColor}-${tv.shopifyValue}`}
                     color={previewColor}
                     position="right"
                     source={colorModuleSource}
+                    crops={colorModuleAsset.crops}
                     className={`relative z-[1] origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                       hasRight ? "translate-x-0 scale-100" : "-translate-x-6 scale-[95%]"
                     }`}
@@ -660,7 +704,7 @@ function ConfiguratorPage() {
                       <button
                         key={option.value}
                         type="button"
-                        onClick={() => setTv(option)}
+                        onClick={() => selectTv(option)}
                         aria-pressed={option.value === tv.value}
                         className={`h-10 rounded-[8px] border bg-[#f8f6f4] px-2 text-[12px] font-medium text-[#071426] transition-[border-color,box-shadow,background-color,transform] duration-300 ease-out hover:bg-[#f3ece6] active:scale-[0.98] ${
                           option.value === tv.value
@@ -838,6 +882,7 @@ function ConfiguratorPage() {
             <WandigSpecPreview
               color={color}
               source={colorModuleSource}
+              crops={colorModuleAsset.crops}
               hasLeft={hasLeft}
               hasRight={hasRight}
             />

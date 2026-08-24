@@ -2,7 +2,6 @@ import { Img } from "@/components/Img";
 import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
-import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo, useEffect, useRef, type ReactNode } from "react";
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
@@ -316,12 +315,19 @@ import dutchDesignBgImg from "@/assets/dutch-design-voor-aan-de-muur-bg.png.asse
 
 
 export const Route = createFileRoute("/product/$handle")({
+  loader: async ({ params }) => {
+    const res = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle: params.handle });
+    const product = res?.data?.product as ProductNode | null;
+    if (!product) throw notFound();
+    return { product };
+  },
   head: ({ params }) => ({
     meta: [
       { title: `Wandig ${params.handle.charAt(0).toUpperCase() + params.handle.slice(1)} — Plug & play cinewall` },
       { name: "description", content: `Bekijk de Wandig ${params.handle} cinewall. Plug & play gemaakt in onze werkplaats.` },
     ],
   }),
+  pendingComponent: ProductPagePending,
   component: ProductPage,
 });
 
@@ -472,31 +478,22 @@ function MobileGallerySwipe({
 
 
 function ProductPage() {
-  const { handle } = Route.useParams();
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["product", handle],
-    queryFn: async () => {
-      const res = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle });
-      return res?.data?.product as ProductNode | null;
-    },
-  });
+  const { product } = Route.useLoaderData();
+  return <ProductView product={product} />;
+}
 
-  if (isLoading) {
-    return (
-      <div className="bg-[#faf8f5]">
-        <div className="mx-auto max-w-[1400px] px-3 md:px-10 py-16 grid md:grid-cols-2 gap-10">
-          <div className="aspect-[4/5] bg-muted animate-pulse" />
-          <div className="space-y-4">
-            <div className="h-10 w-2/3 bg-muted animate-pulse" />
-            <div className="h-6 w-1/3 bg-muted animate-pulse" />
-          </div>
+function ProductPagePending() {
+  return (
+    <div className="bg-[#faf8f5]">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-3 py-16 md:grid-cols-2 md:px-10">
+        <div className="aspect-[4/5] animate-pulse bg-muted" />
+        <div className="space-y-4">
+          <div className="h-10 w-2/3 animate-pulse bg-muted" />
+          <div className="h-6 w-1/3 animate-pulse bg-muted" />
         </div>
       </div>
-    );
-  }
-  if (error || !data) throw notFound();
-
-  return <ProductView product={data} />;
+    </div>
+  );
 }
 
 // Volgorde waarin de kleurblokken in de Shopify-galerij zijn geüpload (per handle).
@@ -746,7 +743,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
 
     const start = match?.image?.url ? urlIndex.get(match.image.url) : undefined;
-    if (start === undefined) return allImages;
+    if (start === undefined) return allImages.slice(0, 9);
 
     const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
     let group = allImages.slice(start, end);
@@ -1707,5 +1704,3 @@ function DeliveryInfoTooltip() {
     </span>
   );
 }
-
-

@@ -39,6 +39,7 @@ function ModelsMenu({
   panelTopClass: string;
   onOpenChange?: (open: boolean) => void;
 }) {
+  const [open, setOpen] = useState(false);
   const { data } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -46,6 +47,7 @@ function ModelsMenu({
       return (res?.data?.products?.edges ?? []) as ShopifyProduct[];
     },
     staleTime: 5 * 60 * 1000,
+    enabled: open,
   });
 
   const models = useMemo(
@@ -58,7 +60,6 @@ function ModelsMenu({
         ),
     [data],
   );
-  const [open, setOpen] = useState(false);
   const updateOpen = (nextOpen: boolean) => {
     setOpen(nextOpen);
     onOpenChange?.(nextOpen);
@@ -130,6 +131,8 @@ function ModelsMenu({
                             <Img
                               src={image.url}
                               alt={image.altText || node.title}
+                              loading="lazy"
+                              decoding="async"
                               className="h-full w-full object-cover transition duration-700 ease-out group-hover/card:scale-[1.04]"
                             />
                           )}

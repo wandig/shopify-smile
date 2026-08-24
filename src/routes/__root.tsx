@@ -95,6 +95,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       {
+        rel: "preconnect",
+        href: "https://hu0i4f-1k.myshopify.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://cdn.shopify.com",
+      },
+      {
         rel: "stylesheet",
         href: appCss,
       },

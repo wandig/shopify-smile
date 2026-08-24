@@ -60,14 +60,22 @@ export const PRODUCTS_QUERY = `
         node {
           id title description handle
           priceRange { minVariantPrice { amount currencyCode } }
-          images(first: 20) { edges { node { url altText } } }
+          images(first: 20) {
+            edges { node {
+              url(transform: { maxWidth: 1600, preferredContentType: WEBP })
+              altText
+            } }
+          }
           variants(first: 50) {
             edges { node {
               id title availableForSale
               price { amount currencyCode }
               compareAtPrice { amount currencyCode }
               selectedOptions { name value }
-              image { url altText }
+              image {
+                url(transform: { maxWidth: 1600, preferredContentType: WEBP })
+                altText
+              }
             } }
           }
           options { name values }
@@ -82,14 +90,22 @@ export const PRODUCT_BY_HANDLE_QUERY = `
     product(handle: $handle) {
       id title description handle
       priceRange { minVariantPrice { amount currencyCode } }
-      images(first: 250) { edges { node { url altText } } }
+      images(first: 250) {
+        edges { node {
+          url(transform: { maxWidth: 1600, preferredContentType: WEBP })
+          altText
+        } }
+      }
       variants(first: 100) {
         edges { node {
           id title availableForSale
           price { amount currencyCode }
           compareAtPrice { amount currencyCode }
           selectedOptions { name value }
-          image { url altText }
+          image {
+            url(transform: { maxWidth: 1600, preferredContentType: WEBP })
+            altText
+          }
         } }
       }
       options { name values }
@@ -114,4 +130,3 @@ export function lowestPaidPrice(product: ShopifyProduct["node"]): { amount: stri
 
   return paid[0] ?? null;
 }
-

@@ -205,7 +205,7 @@ function Producten() {
             </div>
           </div>
 
-          <div className="relative order-1 bg-[#f4f1ed] lg:order-2">
+          <div className="relative order-1 hidden bg-[#f4f1ed] lg:order-2 lg:block">
             <Img
               src={lifestyleAsset.url}
               w={1100}

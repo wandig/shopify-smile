@@ -442,9 +442,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             {p.title}
           </h3>
           <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[34px]">
-            {p.price}
+            {displayPrice}
           </div>
-          <PaymentInfo price={p.price} light />
+          <PaymentInfo price={displayPrice} light />
         </div>
 
         <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
@@ -487,9 +487,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
               {p.title}
             </h3>
             <div className="mt-0.5 text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
-              {p.price}
+              {displayPrice}
             </div>
-            <PaymentInfo price={p.price} />
+            <PaymentInfo price={displayPrice} />
           </div>
         </div>
         <div className="mt-auto flex items-end justify-between gap-3 pt-6">

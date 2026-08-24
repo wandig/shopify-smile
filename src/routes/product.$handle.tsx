@@ -715,7 +715,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
     return group.length > 0 ? group : allImages;
 
-  }, [allImages, variants, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
+  }, [allImages, variants, selected, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
 
   const galleryItems = useMemo(() => {
     const shopifyItems = images.map(({ node }) => ({

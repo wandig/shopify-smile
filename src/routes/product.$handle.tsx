@@ -720,14 +720,22 @@ function ProductView({ product }: { product: ProductNode }) {
     const end = anchorIndexes.find((i) => i > start) ?? allImages.length;
     let group = allImages.slice(start, end);
 
-    // Duo: hang de gedeelde close-up serie achter elke donkereiken-variant.
-    if (product.handle === "duo" && /donker\s*eiken/i.test(selectedColor ?? "")) {
-      const closeups = DUO_SHARED_CLOSEUP_KEYS.map((key) =>
+    // Duo: hang de gedeelde close-up serie achter elke variant van een kleur
+    // waarvoor we de 7 close-ups maar één keer hebben geüpload.
+    const sharedColor = product.handle === "duo"
+      ? Object.keys(DUO_SHARED_CLOSEUP_KEYS).find((color) =>
+          new RegExp(color, "i").test(selectedColor ?? ""),
+        )
+      : undefined;
+    if (sharedColor) {
+      const keys = DUO_SHARED_CLOSEUP_KEYS[sharedColor];
+      const closeups = keys.map((key) =>
         allImages.find((img) => img.node.url.includes(key)),
       ).filter((img): img is (typeof allImages)[number] => Boolean(img));
       const base = group.filter((img) => !/Close_Camera/i.test(img.node.url));
       group = [...base, ...closeups.filter((c) => !base.some((b) => b.node.url === c.node.url))];
     }
+
 
     return group.length > 0 ? group : allImages;
 

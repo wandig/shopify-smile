@@ -374,6 +374,10 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
   });
 
   const shopifyProduct = data?.find((edge) => edge.node.handle === p.handle)?.node;
+  const shopifyPrice = shopifyProduct ? lowestPaidPrice(shopifyProduct) : null;
+  const displayPrice = shopifyPrice
+    ? formatPrice(shopifyPrice.amount, shopifyPrice.currencyCode)
+    : p.price;
   const colorOption = shopifyProduct?.options.find((option) => /kleur|color/i.test(option.name));
   const colors = useMemo(
     () => (colorOption ? sortWandigColors(colorOption.values) : MODEL_COLORS.map((c) => c.name)),

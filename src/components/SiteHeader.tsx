@@ -201,7 +201,7 @@ export function SiteHeader() {
             <Sheet>
               <SheetTrigger asChild>
                 <button
-                  className="flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-[#d6cfc7]/60 hover:bg-[#d6cfc7] text-[#15110d] transition"
+                  className="lg:hidden flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-[#d6cfc7]/60 hover:bg-[#d6cfc7] text-[#15110d] transition"
                   aria-label="Menu openen"
                 >
                   <Menu className="h-5 w-5" strokeWidth={1.75} />
@@ -225,7 +225,7 @@ export function SiteHeader() {
               </SheetContent>
             </Sheet>
 
-            <nav className="hidden h-full md:flex items-center gap-8 text-sm tracking-wide">
+            <nav className="hidden h-full lg:flex items-center gap-8 text-sm tracking-wide">
               <ModelsMenu panelTopClass="top-[160px]" linkClassName="hover:opacity-60 transition" onOpenChange={setModelsMenuOpen} />
               <Link to="/bezoek" className="hover:opacity-60 transition">Bezoek ons</Link>
               <Link to="/klantenservice" className="hover:opacity-60 transition">Klantenservice</Link>

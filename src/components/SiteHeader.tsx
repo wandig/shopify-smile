@@ -12,10 +12,11 @@ import {
 import {
   storefrontApiRequest,
   PRODUCTS_QUERY,
-  formatPrice,
-  lowestPaidPrice,
+  lowestPaidPriceWithCompare,
   type ShopifyProduct,
 } from "@/lib/shopify";
+import { SalePrice } from "@/components/SaleBadge";
+
 import wandigLogo from "@/assets/wandig-logo-header.png.asset.json";
 
 const MODELS_ORDER = ["solo", "duo", "full-house"];

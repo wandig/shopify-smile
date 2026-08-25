@@ -163,6 +163,9 @@ function Producten() {
           <div className="order-2 flex items-center px-5 py-8 md:px-10 md:py-0 lg:order-1 lg:justify-end">
             <div className="w-full lg:max-w-[520px]">
               <div className="flex flex-wrap items-center gap-3">
+                <p className="w-full text-[13px] font-medium uppercase tracking-[0.12em] text-[#1f1915]/60">
+                  Cinewalls
+                </p>
                 <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-5xl">
                   Verjaardagssale
                 </h1>

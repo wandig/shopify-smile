@@ -12,10 +12,11 @@ import {
 import {
   storefrontApiRequest,
   PRODUCTS_QUERY,
-  formatPrice,
-  lowestPaidPrice,
+  lowestPaidPriceWithCompare,
   type ShopifyProduct,
 } from "@/lib/shopify";
+import { SalePrice } from "@/components/SaleBadge";
+
 import wandigLogo from "@/assets/wandig-logo-header.png.asset.json";
 
 const MODELS_ORDER = ["solo", "duo", "full-house"];
@@ -117,8 +118,8 @@ function ModelsMenu({
                 ? models.map((p) => {
                     const node = p.node;
                     const image = node.images.edges[0]?.node;
-                    const price = lowestPaidPrice(node);
-                    const hasPrice = price !== null;
+                    const priceInfo = lowestPaidPriceWithCompare(node);
+                    const hasPrice = priceInfo !== null;
                     return (
                       <Link
                         key={node.id}
@@ -140,10 +141,12 @@ function ModelsMenu({
                         <div className="mt-5 flex items-baseline justify-between gap-3 px-1 text-[#15110d]">
                           <p className="whitespace-nowrap text-[17px] font-medium tracking-tight">{node.title}</p>
                           {hasPrice ? (
-                            <span className="shrink-0 text-[15px] text-[#15110d]/60">
-                              {formatPrice(price!.amount, price!.currencyCode)}
-                            </span>
-
+                            <SalePrice
+                              price={priceInfo!.price}
+                              compareAtPrice={priceInfo!.compareAtPrice}
+                              currencyCode={priceInfo!.price.currencyCode}
+                              size="sm"
+                            />
                           ) : (
                             <span className="shrink-0 text-[11px] font-bold uppercase tracking-wider text-[#ef7027]">
                               Samenstellen
@@ -152,6 +155,7 @@ function ModelsMenu({
                         </div>
                       </Link>
                     );
+
                   })
                 : Array.from({ length: 3 }).map((_, i) => (
                     <div key={i}>

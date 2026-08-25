@@ -141,6 +141,10 @@ import duoDonkereikenLinks4055Asset from "@/assets/duo-donkereiken-links-40-55.p
 import duoDonkereikenLinks5865Asset from "@/assets/duo-donkereiken-links-58-65.png.asset.json";
 import duoDonkereikenLinks7075Asset from "@/assets/duo-donkereiken-links-70-75.png.asset.json";
 import duoDonkereikenLinks7785Asset from "@/assets/duo-donkereiken-links-77-85.png.asset.json";
+import duoCashmereLinks4055Asset from "@/assets/duo-cashmeregrijs-links-40-55.png.asset.json";
+import duoCashmereLinks5865Asset from "@/assets/duo-cashmeregrijs-links-58-65.png.asset.json";
+import duoCashmereLinks7075Asset from "@/assets/duo-cashmeregrijs-links-70-75.png.asset.json";
+import duoCashmereLinks7785Asset from "@/assets/duo-cashmeregrijs-links-77-85.png.asset.json";
 
 // Duo hoofdrenders per kleur en opstelling, in volgorde van klein naar groot.
 const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>>> = {
@@ -160,7 +164,20 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoDonkereikenLinks7785Asset.url,
     ],
   },
+  Cashmeregrijs: {
+    Links: [
+      duoCashmereLinks4055Asset.url,
+      duoCashmereLinks5865Asset.url,
+      duoCashmereLinks7075Asset.url,
+      duoCashmereLinks7785Asset.url,
+    ],
+  },
 };
+
+// Groepen per kleur/opstelling, gebruikt om maten vooraf te warmen.
+const DUO_RENDER_GROUPS: readonly (readonly string[])[] = Object.values(DUO_MAIN_RENDERS).flatMap(
+  (byLayout) => Object.values(byLayout).filter((urls): urls is readonly string[] => Boolean(urls)),
+);
 
 const DUO_ALL_MAIN_RENDERS = new Set<string>(
   Object.values(DUO_MAIN_RENDERS).flatMap((byLayout) =>
@@ -1212,6 +1229,8 @@ function ProductView({ product }: { product: ProductNode }) {
         ? FULL_HOUSE_RENDER_GROUPS
         : product.handle === "solo"
         ? SOLO_RENDER_GROUPS
+        : product.handle === "duo"
+        ? DUO_RENDER_GROUPS
         : null;
     if (!groups) return;
 
@@ -1230,11 +1249,12 @@ function ProductView({ product }: { product: ProductNode }) {
 
     let cancelled = false;
     const isCancelled = () => cancelled;
-    // Maten van de huidige kleur bijna direct (kleine set), de rest rustig daarna.
-    const firstTimer = window.setTimeout(() => warmImageQueue(current, isCancelled), 300);
+    // Maten van de huidige kleur meteen warmen: wisselen moet direct voelen.
+    warmImageQueue(current, isCancelled);
+    const firstTimer = 0;
     const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
     const restStart = () => warmImageQueue(rest, isCancelled);
-    const restTimer = window.setTimeout(() => (idle ? idle(restStart) : restStart()), 1200);
+    const restTimer = window.setTimeout(() => (idle ? idle(restStart) : restStart()), 600);
 
     return () => {
       cancelled = true;

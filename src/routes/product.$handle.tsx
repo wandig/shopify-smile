@@ -177,6 +177,14 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoCashmereLinks7785Asset.url,
     ],
   },
+  Dofroze: {
+    Links: [
+      duoDofrozeLinks4055Asset.url,
+      duoDofrozeLinks5865Asset.url,
+      duoDofrozeLinks7075Asset.url,
+      duoDofrozeLinks7785Asset.url,
+    ],
+  },
 };
 
 // Groepen per kleur/opstelling, gebruikt om maten vooraf te warmen.

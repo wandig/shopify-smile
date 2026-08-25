@@ -727,6 +727,9 @@ function ProductView({ product }: { product: ProductNode }) {
   const selectedColor = colorKey ? selected[colorKey] : undefined;
   const sizeKey = product.options.find((o) => /maat|size|inch/i.test(o.name))?.name;
   const selectedSize = sizeKey ? selected[sizeKey] : undefined;
+  const layoutKey = product.options.find((o) => /opstelling|layout/i.test(o.name))?.name;
+  const selectedLayout = layoutKey ? selected[layoutKey] : undefined;
+
 
   // Afmetingen volgen de gekozen tv-maat (midden module + twee zijmodules)
   const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));

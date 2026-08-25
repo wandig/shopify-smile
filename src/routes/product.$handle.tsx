@@ -137,6 +137,10 @@ import duoWalnootbruinLinks4055Asset from "@/assets/duo-walnootbruin-links-40-55
 import duoWalnootbruinLinks5865Asset from "@/assets/duo-walnootbruin-links-58-65.png.asset.json";
 import duoWalnootbruinLinks7075Asset from "@/assets/duo-walnootbruin-links-70-75.png.asset.json";
 import duoWalnootbruinLinks7785Asset from "@/assets/duo-walnootbruin-links-77-85.png.asset.json";
+import duoDonkereikenLinks4055Asset from "@/assets/duo-donkereiken-links-40-55.png.asset.json";
+import duoDonkereikenLinks5865Asset from "@/assets/duo-donkereiken-links-58-65.png.asset.json";
+import duoDonkereikenLinks7075Asset from "@/assets/duo-donkereiken-links-70-75.png.asset.json";
+import duoDonkereikenLinks7785Asset from "@/assets/duo-donkereiken-links-77-85.png.asset.json";
 
 // Duo hoofdrenders per kleur en opstelling, in volgorde van klein naar groot.
 const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>>> = {
@@ -146,6 +150,14 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoWalnootbruinLinks5865Asset.url,
       duoWalnootbruinLinks7075Asset.url,
       duoWalnootbruinLinks7785Asset.url,
+    ],
+  },
+  Donkereiken: {
+    Links: [
+      duoDonkereikenLinks4055Asset.url,
+      duoDonkereikenLinks5865Asset.url,
+      duoDonkereikenLinks7075Asset.url,
+      duoDonkereikenLinks7785Asset.url,
     ],
   },
 };

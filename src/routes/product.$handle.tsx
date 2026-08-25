@@ -1229,6 +1229,8 @@ function ProductView({ product }: { product: ProductNode }) {
         ? FULL_HOUSE_RENDER_GROUPS
         : product.handle === "solo"
         ? SOLO_RENDER_GROUPS
+        : product.handle === "duo"
+        ? DUO_RENDER_GROUPS
         : null;
     if (!groups) return;
 
@@ -1247,11 +1249,12 @@ function ProductView({ product }: { product: ProductNode }) {
 
     let cancelled = false;
     const isCancelled = () => cancelled;
-    // Maten van de huidige kleur bijna direct (kleine set), de rest rustig daarna.
-    const firstTimer = window.setTimeout(() => warmImageQueue(current, isCancelled), 300);
+    // Maten van de huidige kleur meteen warmen: wisselen moet direct voelen.
+    warmImageQueue(current, isCancelled);
+    const firstTimer = 0;
     const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
     const restStart = () => warmImageQueue(rest, isCancelled);
-    const restTimer = window.setTimeout(() => (idle ? idle(restStart) : restStart()), 1200);
+    const restTimer = window.setTimeout(() => (idle ? idle(restStart) : restStart()), 600);
 
     return () => {
       cancelled = true;

@@ -133,6 +133,47 @@ import soloKristalwit5865Asset from "@/assets/solo-kristalwit-5865.png.asset.jso
 import soloKristalwit5865OpenAsset from "@/assets/solo-kristalwit-5865-open.png.asset.json";
 import soloKristalwit4055Asset from "@/assets/solo-kristalwit-4055.png.asset.json";
 import soloKristalwit4055OpenAsset from "@/assets/solo-kristalwit-4055-open.png.asset.json";
+import duoWalnootbruinLinks4055Asset from "@/assets/duo-walnootbruin-links-40-55.png.asset.json";
+import duoWalnootbruinLinks5865Asset from "@/assets/duo-walnootbruin-links-58-65.png.asset.json";
+import duoWalnootbruinLinks7075Asset from "@/assets/duo-walnootbruin-links-70-75.png.asset.json";
+import duoWalnootbruinLinks7785Asset from "@/assets/duo-walnootbruin-links-77-85.png.asset.json";
+
+// Duo hoofdrenders per kleur en opstelling, in volgorde van klein naar groot.
+const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>>> = {
+  Walnootbruin: {
+    Links: [
+      duoWalnootbruinLinks4055Asset.url,
+      duoWalnootbruinLinks5865Asset.url,
+      duoWalnootbruinLinks7075Asset.url,
+      duoWalnootbruinLinks7785Asset.url,
+    ],
+  },
+};
+
+const DUO_ALL_MAIN_RENDERS = new Set<string>(
+  Object.values(DUO_MAIN_RENDERS).flatMap((byLayout) =>
+    Object.values(byLayout).flatMap((urls) => (urls ? [...urls] : [])),
+  ),
+);
+
+const duoMainRender = (
+  color: string | null | undefined,
+  layout: string | null | undefined,
+  sizeIndex: number,
+) => {
+  if (!color || !layout || sizeIndex < 0) return undefined;
+  const colorKeyMatch = Object.keys(DUO_MAIN_RENDERS).find((key) =>
+    new RegExp(key, "i").test(color),
+  );
+  if (!colorKeyMatch) return undefined;
+  const layoutKey = Object.keys(DUO_MAIN_RENDERS[colorKeyMatch]!).find((key) =>
+    new RegExp(key, "i").test(layout),
+  );
+  if (!layoutKey) return undefined;
+  const url = DUO_MAIN_RENDERS[colorKeyMatch]![layoutKey]?.[sizeIndex];
+  return url ? { src: url, colorLabel: colorKeyMatch.toLowerCase(), layoutLabel: layoutKey.toLowerCase() } : undefined;
+};
+
 
 const SOLO_WALNOOT_BY_SIZE = [
   { closed: soloWalnoot4055Asset.url, open: soloWalnoot4055OpenAsset.url, label: "40 - 55 inch" },
@@ -686,6 +727,9 @@ function ProductView({ product }: { product: ProductNode }) {
   const selectedColor = colorKey ? selected[colorKey] : undefined;
   const sizeKey = product.options.find((o) => /maat|size|inch/i.test(o.name))?.name;
   const selectedSize = sizeKey ? selected[sizeKey] : undefined;
+  const layoutKey = product.options.find((o) => /opstelling|layout/i.test(o.name))?.name;
+  const selectedLayout = layoutKey ? selected[layoutKey] : undefined;
+
 
   // Afmetingen volgen de gekozen tv-maat (midden module + twee zijmodules)
   const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
@@ -982,12 +1026,27 @@ function ProductView({ product }: { product: ProductNode }) {
       }
     }
 
+    if (product.handle === "duo") {
+      const duoMain = duoMainRender(selectedColor, selectedLayout, sizeIndex);
+      if (duoMain) {
+        const main = {
+          src: duoMain.src,
+          alt: `Wandig Duo ${duoMain.layoutLabel} in ${duoMain.colorLabel} voor tv ${WANDIG_SIZES[sizeIndex]?.label ?? ""}`.trim(),
+          full: true,
+          square: true,
+        };
+        const rest = shopifyItems.filter((item) => !DUO_ALL_MAIN_RENDERS.has(item.src));
+        return [main, ...rest];
+      }
+    }
+
     return shopifyItems.map((item, index) => ({
       ...item,
       full: index === 0,
       square: index === 0,
     }));
-  }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
+  }, [images, product.handle, product.title, selectedColor, selectedLayout, selectedSize, sizeOption, sizeIndex]);
+
 
   const openGalleryItem = useMemo(() => {
     if (product.handle === "solo") {

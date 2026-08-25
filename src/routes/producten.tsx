@@ -160,13 +160,13 @@ function Producten() {
       {/* hero */}
       <section className="bg-[#f2eee7]">
         <div className="grid lg:grid-cols-2">
-          <div className="order-2 flex items-center px-5 py-8 md:px-10 md:py-0 lg:order-1 lg:justify-end">
-            <div className="w-full lg:max-w-[520px]">
-              <div className="flex flex-wrap items-center gap-3">
+          <div className="order-2 flex items-center px-5 py-8 md:px-10 md:py-14 lg:order-1 lg:justify-end lg:py-0">
+            <div className="w-full md:text-center lg:max-w-[520px] lg:text-left">
+              <div className="flex flex-wrap items-center gap-3 md:justify-center lg:justify-start">
                 <p className="w-full text-[13px] font-medium uppercase tracking-[0.12em] text-[#1f1915]/60">
                   Cinewalls
                 </p>
-                <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-5xl">
+                <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-[44px] lg:text-5xl">
                   Verjaardagssale
                 </h1>
                 <span
@@ -176,11 +176,11 @@ function Producten() {
                   -30%
                 </span>
               </div>
-              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-4 md:text-base">
+              <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[#1f1915]/60 md:mt-4 md:text-base lg:mx-0">
                 Vergelijk Solo, Duo en Full House. Wissel tussen de kleurstalen en stel je favoriete serie samen.
               </p>
 
-              <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-7">
+              <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-3 md:mt-7 lg:justify-start">
                 <Link
                   to="/configurator"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ef7027] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#d95f1c] sm:py-3"
@@ -196,7 +196,7 @@ function Producten() {
                 </Link>
               </div>
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 md:mt-7">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 md:mt-7 lg:justify-start">
                 <div className="flex items-center gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" />

@@ -164,7 +164,7 @@ function Producten() {
             <div className="w-full lg:max-w-[520px]">
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="font-serif text-[34px] leading-[1.05] text-[#1f1915] sm:text-4xl md:text-5xl">
-                  Cinewalls
+                  Verjaardagssale
                 </h1>
                 <span
                   className="inline-flex items-center justify-center rounded-lg border border-[#ef7027] bg-transparent px-3 py-1.5 text-[18px] font-medium text-[#ef7027] shadow-sm"

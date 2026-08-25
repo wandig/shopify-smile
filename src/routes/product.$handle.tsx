@@ -1023,12 +1023,27 @@ function ProductView({ product }: { product: ProductNode }) {
       }
     }
 
+    if (product.handle === "duo") {
+      const duoMain = duoMainRender(selectedColor, selectedLayout, sizeIndex);
+      if (duoMain) {
+        const main = {
+          src: duoMain.src,
+          alt: `Wandig Duo ${duoMain.layoutLabel} in ${duoMain.colorLabel} voor tv ${WANDIG_SIZES[sizeIndex]?.label ?? ""}`.trim(),
+          full: true,
+          square: true,
+        };
+        const rest = shopifyItems.filter((item) => !DUO_ALL_MAIN_RENDERS.has(item.src));
+        return [main, ...rest];
+      }
+    }
+
     return shopifyItems.map((item, index) => ({
       ...item,
       full: index === 0,
       square: index === 0,
     }));
-  }, [images, product.handle, product.title, selectedColor, selectedSize, sizeOption, sizeIndex]);
+  }, [images, product.handle, product.title, selectedColor, selectedLayout, selectedSize, sizeOption, sizeIndex]);
+
 
   const openGalleryItem = useMemo(() => {
     if (product.handle === "solo") {

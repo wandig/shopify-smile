@@ -976,7 +976,9 @@ function ProductView({ product }: { product: ProductNode }) {
     if (sharedSets && sharedColor) {
       const keys = sharedSets[sharedColor];
       const closeups = keys.map((key) =>
+        allImages.find((img) => closeupFileName(img.node.url) === key) ??
         allImages.find((img) => img.node.url.includes(key)),
+
       ).filter((img): img is (typeof allImages)[number] => Boolean(img));
       const base = group.filter((img) => !/Close_Camera/i.test(img.node.url));
       group = [...base, ...closeups.filter((c) => !base.some((b) => b.node.url === c.node.url))];

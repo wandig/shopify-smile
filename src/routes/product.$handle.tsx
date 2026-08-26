@@ -182,6 +182,10 @@ import duoKristalwitLinks4055Asset from "@/assets/duo-kristalwit-links-40-55.png
 import duoKristalwitLinks5865Asset from "@/assets/duo-kristalwit-links-58-65.png.asset.json";
 import duoKristalwitLinks7075Asset from "@/assets/duo-kristalwit-links-70-75.png.asset.json";
 import duoKristalwitLinks7785Asset from "@/assets/duo-kristalwit-links-77-85.png.asset.json";
+import duoKristalwitRechts4055Asset from "@/assets/duo-kristalwit-rechts-40-55.png.asset.json";
+import duoKristalwitRechts5865Asset from "@/assets/duo-kristalwit-rechts-58-65.png.asset.json";
+import duoKristalwitRechts7075Asset from "@/assets/duo-kristalwit-rechts-70-75.png.asset.json";
+import duoKristalwitRechts7785Asset from "@/assets/duo-kristalwit-rechts-77-85.png.asset.json";
 
 
 // Duo hoofdrenders per kleur en opstelling, in volgorde van klein naar groot.
@@ -236,6 +240,12 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoKristalwitLinks5865Asset.url,
       duoKristalwitLinks7075Asset.url,
       duoKristalwitLinks7785Asset.url,
+    ],
+    Rechts: [
+      duoKristalwitRechts4055Asset.url,
+      duoKristalwitRechts5865Asset.url,
+      duoKristalwitRechts7075Asset.url,
+      duoKristalwitRechts7785Asset.url,
     ],
   },
 };

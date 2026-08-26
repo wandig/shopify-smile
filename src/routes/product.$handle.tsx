@@ -587,6 +587,16 @@ function MobileGallerySwipe({
     return () => el.removeEventListener("scroll", update);
   }, [items.length]);
 
+  // Bij een nieuwe selectie (kleur/maat/opstelling) altijd terug naar de eerste studiofoto.
+  const firstSrc = items[0]?.src;
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollTo({ left: 0, behavior: "auto" });
+    setActive(0);
+  }, [firstSrc]);
+
+
   if (items.length === 0) return null;
 
   return (

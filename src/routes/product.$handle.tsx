@@ -587,6 +587,16 @@ function MobileGallerySwipe({
     return () => el.removeEventListener("scroll", update);
   }, [items.length]);
 
+  // Bij een nieuwe selectie (kleur/maat/opstelling) altijd terug naar de eerste studiofoto.
+  const firstSrc = items[0]?.src;
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollTo({ left: 0, behavior: "auto" });
+    setActive(0);
+  }, [firstSrc]);
+
+
   if (items.length === 0) return null;
 
   return (
@@ -659,7 +669,10 @@ function MobileGallerySwipe({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
-  return <ProductView product={product} />;
+  // key op handle: bij wisselen van product altijd verse standaardselectie
+  // (walnootbruin, 58 - 65 inch, en bij duo Links) in plaats van de vorige keuze.
+  return <ProductView key={product.handle} product={product} />;
+
 }
 
 function ProductPagePending() {

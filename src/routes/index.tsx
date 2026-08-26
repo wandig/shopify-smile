@@ -453,7 +453,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
               {p.title}
             </h3>
-            <div className="mt-0.5 flex flex-col items-start">
+            <div className="mt-2 flex flex-col items-start">
               {priceInfo ? (
                 <SalePrice
                   price={priceInfo.price}
@@ -470,7 +470,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
                 </div>
               )}
             </div>
-            <PaymentInfo price={displayPrice} light />
+            <div className="mt-3">
+              <PaymentInfo price={displayPrice} light />
+            </div>
           </div>
         </div>
 

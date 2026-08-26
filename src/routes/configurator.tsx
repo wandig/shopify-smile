@@ -30,13 +30,18 @@ import {
 } from "@/components/WandigModulePreview";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
-import werkplaatsImg from "@/assets/werkplaats.jpg";
-import fullHouseFinishImg from "@/assets/full-house-gallery-finish.webp";
-import fullHouseUseImg from "@/assets/full-house-gallery-use.webp";
-import detailMaatwerkImg from "@/assets/detail-maatwerk.jpg";
+import werkplaatsImgAsset from "@/assets/werkplaats.jpg.asset.json";
+const werkplaatsImg = werkplaatsImgAsset.url;
+import fullHouseFinishImgAsset from "@/assets/full-house-gallery-finish.webp.asset.json";
+const fullHouseFinishImg = fullHouseFinishImgAsset.url;
+import fullHouseUseImgAsset from "@/assets/full-house-gallery-use.webp.asset.json";
+const fullHouseUseImg = fullHouseUseImgAsset.url;
+import detailMaatwerkImgAsset from "@/assets/detail-maatwerk.jpg.asset.json";
+const detailMaatwerkImg = detailMaatwerkImgAsset.url;
 import fullHouseRoomImgAsset from "@/assets/full-house-gallery-room.jpg.asset.json";
 const fullHouseRoomImg = fullHouseRoomImgAsset.url;
-import detailDesignImg from "@/assets/detail-design.jpg";
+import detailDesignImgAsset from "@/assets/detail-design.jpg.asset.json";
+const detailDesignImg = detailDesignImgAsset.url;
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
 import { FULL_HOUSE_COLORS, displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
 

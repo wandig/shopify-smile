@@ -3,9 +3,12 @@ import { FULL_HOUSE_COLORS } from "@/lib/wandig-colors";
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
 import rightModuleUrlAsset from "@/assets/right-module-trim-tight-cropped.png.asset.json";
-import dofroze4055Front from "@/assets/configurator/dofroze-40-55-front.webp";
-import dofroze5865Front from "@/assets/configurator/dofroze-58-65-front.webp";
-import dofroze7075Front from "@/assets/configurator/dofroze-70-75-front.webp";
+import dofroze4055FrontAsset from "@/assets/configurator/dofroze-40-55-front.webp.asset.json";
+const dofroze4055Front = dofroze4055FrontAsset.url;
+import dofroze5865FrontAsset from "@/assets/configurator/dofroze-58-65-front.webp.asset.json";
+const dofroze5865Front = dofroze5865FrontAsset.url;
+import dofroze7075FrontAsset from "@/assets/configurator/dofroze-70-75-front.webp.asset.json";
+const dofroze7075Front = dofroze7075FrontAsset.url;
 const rightModuleUrl = rightModuleUrlAsset.url;
 
 export const MODULE_REVEAL = "moduleColorReveal 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both";

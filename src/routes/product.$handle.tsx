@@ -241,6 +241,12 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoKristalwitLinks7075Asset.url,
       duoKristalwitLinks7785Asset.url,
     ],
+    Rechts: [
+      duoKristalwitRechts4055Asset.url,
+      duoKristalwitRechts5865Asset.url,
+      duoKristalwitRechts7075Asset.url,
+      duoKristalwitRechts7785Asset.url,
+    ],
   },
 };
 

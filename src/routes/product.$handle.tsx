@@ -158,6 +158,10 @@ import duoWalnootbruinLinks4055Asset from "@/assets/duo-walnootbruin-links-40-55
 import duoWalnootbruinLinks5865Asset from "@/assets/duo-walnootbruin-links-58-65.png.asset.json";
 import duoWalnootbruinLinks7075Asset from "@/assets/duo-walnootbruin-links-70-75.png.asset.json";
 import duoWalnootbruinLinks7785Asset from "@/assets/duo-walnootbruin-links-77-85.png.asset.json";
+import duoWalnootbruinRechts4055Asset from "@/assets/duo-walnootbruin-rechts-40-55.png.asset.json";
+import duoWalnootbruinRechts5865Asset from "@/assets/duo-walnootbruin-rechts-58-65.png.asset.json";
+import duoWalnootbruinRechts7075Asset from "@/assets/duo-walnootbruin-rechts-70-75.png.asset.json";
+import duoWalnootbruinRechts7785Asset from "@/assets/duo-walnootbruin-rechts-77-85.png.asset.json";
 import duoDonkereikenLinks4055Asset from "@/assets/duo-donkereiken-links-40-55.png.asset.json";
 import duoDonkereikenLinks5865Asset from "@/assets/duo-donkereiken-links-58-65.png.asset.json";
 import duoDonkereikenLinks7075Asset from "@/assets/duo-donkereiken-links-70-75.png.asset.json";

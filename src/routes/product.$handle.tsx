@@ -738,11 +738,17 @@ function ProductView({ product }: { product: ProductNode }) {
     const preferredColorValue = colorOption
       ? colorOption.values.find((v) => /walnoot|noten/i.test(v))
       : undefined;
+    // De opstelling: Duo altijd starten op Links.
+    const layoutOption = product.options.find((o) => /opstelling|layout/i.test(o.name));
+    const preferredLayoutValue = layoutOption
+      ? layoutOption.values.find((v) => /links|left/i.test(v))
+      : undefined;
     const matches = (v: (typeof variants)[number], name?: string, value?: string) =>
       !name || !value || v.selectedOptions.some((o) => o.name === name && o.value === value);
     const isPreferred = (v: (typeof variants)[number]) =>
       matches(v, sizeOption?.name, preferredSizeValue) &&
-      matches(v, colorOption?.name, preferredColorValue);
+      matches(v, colorOption?.name, preferredColorValue) &&
+      matches(v, layoutOption?.name, preferredLayoutValue);
     const first =
       variants.find((v) => v.availableForSale && isPreferred(v)) ||
       variants.find(isPreferred) ||
@@ -751,6 +757,7 @@ function ProductView({ product }: { product: ProductNode }) {
     first?.selectedOptions.forEach((o) => { init[o.name] = o.value; });
     if (sizeOption && preferredSizeValue) init[sizeOption.name] = preferredSizeValue;
     if (colorOption && preferredColorValue) init[colorOption.name] = preferredColorValue;
+    if (layoutOption && preferredLayoutValue) init[layoutOption.name] = preferredLayoutValue;
     return init;
   });
 

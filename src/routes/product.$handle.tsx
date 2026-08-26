@@ -162,6 +162,10 @@ import duoDonkereikenLinks4055Asset from "@/assets/duo-donkereiken-links-40-55.p
 import duoDonkereikenLinks5865Asset from "@/assets/duo-donkereiken-links-58-65.png.asset.json";
 import duoDonkereikenLinks7075Asset from "@/assets/duo-donkereiken-links-70-75.png.asset.json";
 import duoDonkereikenLinks7785Asset from "@/assets/duo-donkereiken-links-77-85.png.asset.json";
+import duoDonkereikenRechts4055Asset from "@/assets/duo-donkereiken-rechts-40-55.png.asset.json";
+import duoDonkereikenRechts5865Asset from "@/assets/duo-donkereiken-rechts-58-65.png.asset.json";
+import duoDonkereikenRechts7075Asset from "@/assets/duo-donkereiken-rechts-70-75.png.asset.json";
+import duoDonkereikenRechts7785Asset from "@/assets/duo-donkereiken-rechts-77-85.png.asset.json";
 import duoCashmereLinks4055Asset from "@/assets/duo-cashmeregrijs-links-40-55.png.asset.json";
 import duoCashmereLinks5865Asset from "@/assets/duo-cashmeregrijs-links-58-65.png.asset.json";
 import duoCashmereLinks7075Asset from "@/assets/duo-cashmeregrijs-links-70-75.png.asset.json";
@@ -192,6 +196,12 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoDonkereikenLinks5865Asset.url,
       duoDonkereikenLinks7075Asset.url,
       duoDonkereikenLinks7785Asset.url,
+    ],
+    Rechts: [
+      duoDonkereikenRechts4055Asset.url,
+      duoDonkereikenRechts5865Asset.url,
+      duoDonkereikenRechts7075Asset.url,
+      duoDonkereikenRechts7785Asset.url,
     ],
   },
   Cashmeregrijs: {

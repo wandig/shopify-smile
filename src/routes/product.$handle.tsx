@@ -158,6 +158,10 @@ import duoWalnootbruinLinks4055Asset from "@/assets/duo-walnootbruin-links-40-55
 import duoWalnootbruinLinks5865Asset from "@/assets/duo-walnootbruin-links-58-65.png.asset.json";
 import duoWalnootbruinLinks7075Asset from "@/assets/duo-walnootbruin-links-70-75.png.asset.json";
 import duoWalnootbruinLinks7785Asset from "@/assets/duo-walnootbruin-links-77-85.png.asset.json";
+import duoWalnootbruinRechts4055Asset from "@/assets/duo-walnootbruin-rechts-40-55.png.asset.json";
+import duoWalnootbruinRechts5865Asset from "@/assets/duo-walnootbruin-rechts-58-65.png.asset.json";
+import duoWalnootbruinRechts7075Asset from "@/assets/duo-walnootbruin-rechts-70-75.png.asset.json";
+import duoWalnootbruinRechts7785Asset from "@/assets/duo-walnootbruin-rechts-77-85.png.asset.json";
 import duoDonkereikenLinks4055Asset from "@/assets/duo-donkereiken-links-40-55.png.asset.json";
 import duoDonkereikenLinks5865Asset from "@/assets/duo-donkereiken-links-58-65.png.asset.json";
 import duoDonkereikenLinks7075Asset from "@/assets/duo-donkereiken-links-70-75.png.asset.json";
@@ -178,6 +182,10 @@ import duoDofrozeLinks4055Asset from "@/assets/duo-dofroze-links-40-55.png.asset
 import duoDofrozeLinks5865Asset from "@/assets/duo-dofroze-links-58-65.png.asset.json";
 import duoDofrozeLinks7075Asset from "@/assets/duo-dofroze-links-70-75.png.asset.json";
 import duoDofrozeLinks7785Asset from "@/assets/duo-dofroze-links-77-85.png.asset.json";
+import duoDofrozeRechts4055Asset from "@/assets/duo-dofroze-rechts-40-55.png.asset.json";
+import duoDofrozeRechts5865Asset from "@/assets/duo-dofroze-rechts-58-65.png.asset.json";
+import duoDofrozeRechts7075Asset from "@/assets/duo-dofroze-rechts-70-75.png.asset.json";
+import duoDofrozeRechts7785Asset from "@/assets/duo-dofroze-rechts-77-85.png.asset.json";
 import duoKristalwitLinks4055Asset from "@/assets/duo-kristalwit-links-40-55.png.asset.json";
 import duoKristalwitLinks5865Asset from "@/assets/duo-kristalwit-links-58-65.png.asset.json";
 import duoKristalwitLinks7075Asset from "@/assets/duo-kristalwit-links-70-75.png.asset.json";
@@ -196,6 +204,12 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoWalnootbruinLinks5865Asset.url,
       duoWalnootbruinLinks7075Asset.url,
       duoWalnootbruinLinks7785Asset.url,
+    ],
+    Rechts: [
+      duoWalnootbruinRechts4055Asset.url,
+      duoWalnootbruinRechts5865Asset.url,
+      duoWalnootbruinRechts7075Asset.url,
+      duoWalnootbruinRechts7785Asset.url,
     ],
   },
   Donkereiken: {
@@ -232,6 +246,12 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoDofrozeLinks5865Asset.url,
       duoDofrozeLinks7075Asset.url,
       duoDofrozeLinks7785Asset.url,
+    ],
+    Rechts: [
+      duoDofrozeRechts4055Asset.url,
+      duoDofrozeRechts5865Asset.url,
+      duoDofrozeRechts7075Asset.url,
+      duoDofrozeRechts7785Asset.url,
     ],
   },
   Kristalwit: {

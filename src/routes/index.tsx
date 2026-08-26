@@ -452,7 +452,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
             {p.title}
           </h3>
-          <div className="mt-1 flex flex-col items-start">
+          <div className="mt-0.5 flex flex-col items-start">
             {priceInfo ? (
               <SalePrice
                 price={priceInfo.price}
@@ -462,7 +462,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
               />
             ) : (
 
-              <div className="text-[26px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[34px]">
+              <div className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[40px]">
                 {displayPrice}
               </div>
             )}
@@ -509,17 +509,17 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
               {p.title}
             </h3>
-            <div className="mt-1 flex flex-col items-start">
+            <div className="mt-0.5 flex flex-col items-start">
               {priceInfo ? (
                 <SalePrice
                   price={priceInfo.price}
                   compareAtPrice={priceInfo.compareAtPrice}
-                  size="sm"
+                  size="md"
                   align="left"
                 />
               ) : (
 
-                <div className="text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
+                <div className="text-[22px] font-[400] tracking-[0.01em] text-[#071426] md:text-[28px]">
                   {displayPrice}
                 </div>
               )}

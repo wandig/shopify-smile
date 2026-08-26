@@ -197,6 +197,12 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoDonkereikenLinks7075Asset.url,
       duoDonkereikenLinks7785Asset.url,
     ],
+    Rechts: [
+      duoDonkereikenRechts4055Asset.url,
+      duoDonkereikenRechts5865Asset.url,
+      duoDonkereikenRechts7075Asset.url,
+      duoDonkereikenRechts7785Asset.url,
+    ],
   },
   Cashmeregrijs: {
     Links: [

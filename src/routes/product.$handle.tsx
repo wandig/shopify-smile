@@ -215,6 +215,12 @@ const DUO_MAIN_RENDERS: Record<string, Partial<Record<string, readonly string[]>
       duoCashmereLinks7075Asset.url,
       duoCashmereLinks7785Asset.url,
     ],
+    Rechts: [
+      duoCashmereRechts4055Asset.url,
+      duoCashmereRechts5865Asset.url,
+      duoCashmereRechts7075Asset.url,
+      duoCashmereRechts7785Asset.url,
+    ],
   },
   Dofroze: {
     Links: [

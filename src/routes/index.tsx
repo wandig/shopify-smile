@@ -509,10 +509,16 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
               {p.title}
             </h3>
-            <div className="mt-0.5">
+            <div className="mt-1 flex flex-col items-start">
               {priceInfo ? (
-                <SalePrice price={priceInfo.price} compareAtPrice={priceInfo.compareAtPrice} size="sm" />
+                <SalePrice
+                  price={priceInfo.price}
+                  compareAtPrice={priceInfo.compareAtPrice}
+                  size="sm"
+                  align="left"
+                />
               ) : (
+
                 <div className="text-[18px] font-[400] tracking-[0.01em] text-[#071426] md:text-[24px]">
                   {displayPrice}
                 </div>

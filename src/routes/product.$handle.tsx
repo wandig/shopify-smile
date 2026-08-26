@@ -733,19 +733,27 @@ function ProductView({ product }: { product: ProductNode }) {
     const preferredSizeValue = sizeOption
       ? sizeOption.values.find((v) => /58/.test(v)) || sizeOption.values[1]
       : undefined;
-    const isPreferredSize = (v: (typeof variants)[number]) =>
-      !sizeOption ||
-      !preferredSizeValue ||
-      v.selectedOptions.some((o) => o.name === sizeOption.name && o.value === preferredSizeValue);
+    // De kleur: standaard walnootbruin zodat de klant altijd de juiste foto ziet.
+    const colorOption = product.options.find((o) => /kleur|color/i.test(o.name));
+    const preferredColorValue = colorOption
+      ? colorOption.values.find((v) => /walnoot|noten/i.test(v))
+      : undefined;
+    const matches = (v: (typeof variants)[number], name?: string, value?: string) =>
+      !name || !value || v.selectedOptions.some((o) => o.name === name && o.value === value);
+    const isPreferred = (v: (typeof variants)[number]) =>
+      matches(v, sizeOption?.name, preferredSizeValue) &&
+      matches(v, colorOption?.name, preferredColorValue);
     const first =
-      variants.find((v) => v.availableForSale && isPreferredSize(v)) ||
-      variants.find(isPreferredSize) ||
+      variants.find((v) => v.availableForSale && isPreferred(v)) ||
+      variants.find(isPreferred) ||
       variants.find((v) => v.availableForSale) ||
       variants[0];
     first?.selectedOptions.forEach((o) => { init[o.name] = o.value; });
     if (sizeOption && preferredSizeValue) init[sizeOption.name] = preferredSizeValue;
+    if (colorOption && preferredColorValue) init[colorOption.name] = preferredColorValue;
     return init;
   });
+
 
 
   const [expandedVariantOption, setExpandedVariantOption] = useState<string | null>(null);

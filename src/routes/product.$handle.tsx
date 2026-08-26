@@ -182,6 +182,10 @@ import duoDofrozeLinks4055Asset from "@/assets/duo-dofroze-links-40-55.png.asset
 import duoDofrozeLinks5865Asset from "@/assets/duo-dofroze-links-58-65.png.asset.json";
 import duoDofrozeLinks7075Asset from "@/assets/duo-dofroze-links-70-75.png.asset.json";
 import duoDofrozeLinks7785Asset from "@/assets/duo-dofroze-links-77-85.png.asset.json";
+import duoDofrozeRechts4055Asset from "@/assets/duo-dofroze-rechts-40-55.png.asset.json";
+import duoDofrozeRechts5865Asset from "@/assets/duo-dofroze-rechts-58-65.png.asset.json";
+import duoDofrozeRechts7075Asset from "@/assets/duo-dofroze-rechts-70-75.png.asset.json";
+import duoDofrozeRechts7785Asset from "@/assets/duo-dofroze-rechts-77-85.png.asset.json";
 import duoKristalwitLinks4055Asset from "@/assets/duo-kristalwit-links-40-55.png.asset.json";
 import duoKristalwitLinks5865Asset from "@/assets/duo-kristalwit-links-58-65.png.asset.json";
 import duoKristalwitLinks7075Asset from "@/assets/duo-kristalwit-links-70-75.png.asset.json";

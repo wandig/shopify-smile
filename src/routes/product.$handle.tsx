@@ -694,14 +694,25 @@ const DUO_DONKEREIKEN_CLOSEUP_KEYS = [
 ];
 
 const DUO_KRISTALWIT_CLOSEUP_KEYS = [
-  "Close_Camera_01_0000.jpg",
-  "Close_Camera_02_0000.jpg",
-  "Close_Camera_03_0000.jpg",
-  "Close_Camera_04_0000.jpg",
-  "Close_Camera_05_0000.jpg",
-  "Close_Camera_06_0000.jpg",
-  "Close_Camera_07_0000.jpg",
+  "Close_Camera_01_0000",
+  "Close_Camera_02_0000",
+  "Close_Camera_03_0000",
+  "Close_Camera_04_0000",
+  "Close_Camera_05_0000",
+  "Close_Camera_06_0000",
+  "Close_Camera_07_0000",
 ];
+
+/**
+ * Shopify levert URL's soms met een transform-suffix (`_1600x.jpg.webp`).
+ * We vergelijken daarom op de genormaliseerde bestandsnaam, met voorkeur voor
+ * een exacte match zodat een bare key niet per ongeluk een variant-set pakt.
+ */
+function closeupFileName(url: string): string {
+  const file = url.split("/").pop()?.split("?")[0] ?? "";
+  return file.replace(/(_\d+x)?(\.(jpg|jpeg|png|webp|avif))+$/i, "");
+}
+
 
 const DUO_WALNOOTBRUIN_CLOSEUP_KEYS = [
   "Close_Camera_01_0000_1e854e07-a545-4a01-a0e4-06ed0c0d7332",
@@ -965,7 +976,9 @@ function ProductView({ product }: { product: ProductNode }) {
     if (sharedSets && sharedColor) {
       const keys = sharedSets[sharedColor];
       const closeups = keys.map((key) =>
+        allImages.find((img) => closeupFileName(img.node.url) === key) ??
         allImages.find((img) => img.node.url.includes(key)),
+
       ).filter((img): img is (typeof allImages)[number] => Boolean(img));
       const base = group.filter((img) => !/Close_Camera/i.test(img.node.url));
       group = [...base, ...closeups.filter((c) => !base.some((b) => b.node.url === c.node.url))];

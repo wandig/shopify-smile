@@ -21,9 +21,9 @@ export function SalePrice({
     compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
 
   const sizeClasses = {
-    sm: { sale: "text-[16px]", compare: "text-[12px]" },
-    md: { sale: "text-[23px]", compare: "text-[14px]" },
-    lg: { sale: "text-[26px]", compare: "text-[15px]" },
+    sm: { sale: "text-[22px]", compare: "text-[15px]" },
+    md: { sale: "text-[26px]", compare: "text-[16px]" },
+    lg: { sale: "text-[32px]", compare: "text-[18px]" },
   };
 
   const cc = currencyCode ?? price.currencyCode;

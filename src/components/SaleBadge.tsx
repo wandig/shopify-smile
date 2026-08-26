@@ -5,11 +5,13 @@ export function SalePrice({
   compareAtPrice,
   currencyCode,
   size = "md",
+  align = "right",
 }: {
   price: { amount: string; currencyCode: string } | null;
   compareAtPrice?: { amount: string; currencyCode: string } | null;
   currencyCode?: string;
   size?: "sm" | "md" | "lg";
+  align?: "left" | "right";
 }) {
   if (!price || parseFloat(price.amount) <= 0) {
     return <span className="text-[#071426]/55">Samenstellen</span>;
@@ -27,7 +29,10 @@ export function SalePrice({
   const cc = currencyCode ?? price.currencyCode;
 
   return (
-    <div className="flex flex-col items-end leading-none">
+    <div
+      className={`flex flex-col leading-none ${align === "left" ? "items-start" : "items-end"}`}
+    >
+
       {hasCompare && (
         <span
           className={`${sizeClasses[size].compare} font-normal text-[#071426]/40 line-through`}

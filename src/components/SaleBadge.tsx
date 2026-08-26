@@ -6,12 +6,16 @@ export function SalePrice({
   currencyCode,
   size = "md",
   align = "right",
+  saleClassName,
+  compareClassName,
 }: {
   price: { amount: string; currencyCode: string } | null;
   compareAtPrice?: { amount: string; currencyCode: string } | null;
   currencyCode?: string;
   size?: "sm" | "md" | "lg";
   align?: "left" | "right";
+  saleClassName?: string;
+  compareClassName?: string;
 }) {
   if (!price || parseFloat(price.amount) <= 0) {
     return <span className="text-[#071426]/55">Samenstellen</span>;
@@ -32,16 +36,15 @@ export function SalePrice({
     <div
       className={`flex flex-col leading-none ${align === "left" ? "items-start" : "items-end"}`}
     >
-
       {hasCompare && (
         <span
-          className={`${sizeClasses[size].compare} font-normal text-[#071426]/40 line-through`}
+          className={`${sizeClasses[size].compare} font-normal line-through ${compareClassName ?? "text-[#071426]/40"}`}
           aria-label={`Oorspronkelijke prijs ${formatPrice(compareAtPrice!.amount, cc)}`}
         >
           {formatPrice(compareAtPrice!.amount, cc)}
         </span>
       )}
-      <span className={`${sizeClasses[size].sale} font-bold text-[#ff5a00]`}>
+      <span className={`${sizeClasses[size].sale} font-bold ${saleClassName ?? "text-[#ff5a00]"}`}>
         {formatPrice(price.amount, cc)}
       </span>
     </div>
@@ -63,11 +66,9 @@ export function SaleAnnouncementBar() {
 
   return (
     <div className="sticky top-0 z-50 relative overflow-hidden bg-[#7f919b] px-4 py-2.5 text-left md:text-center text-[13px] font-light tracking-[0.01em] text-white">
-
       <span className="relative z-10 inline-flex w-full md:w-auto items-center justify-start md:justify-center gap-2 px-0 md:px-6">
         <span><strong className="font-medium">Verjaardagssale</strong>: 30% korting op alle Wandig cinewalls</span>
       </span>
-
 
       {leftBadges.map((badge, i) => (
         <span
@@ -91,5 +92,3 @@ export function SaleAnnouncementBar() {
     </div>
   );
 }
-
-

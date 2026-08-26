@@ -460,6 +460,8 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
                   compareAtPrice={priceInfo.compareAtPrice}
                   size="lg"
                   align="left"
+                  saleClassName="text-white"
+                  compareClassName="text-white/70"
                 />
               ) : (
 
@@ -518,6 +520,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
                   compareAtPrice={priceInfo.compareAtPrice}
                   size="md"
                   align="left"
+                  saleClassName="text-[#071426]"
                 />
               ) : (
 

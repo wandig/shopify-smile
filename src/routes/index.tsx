@@ -448,6 +448,31 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         </picture>
 
 
+        <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white">
+          <div className="inline-flex flex-col items-start rounded-xl bg-gradient-to-r from-[#071426]/60 via-[#071426]/35 to-transparent px-4 py-3 [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">
+            <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
+              {p.title}
+            </h3>
+            <div className="mt-0.5 flex flex-col items-start">
+              {priceInfo ? (
+                <SalePrice
+                  price={priceInfo.price}
+                  compareAtPrice={priceInfo.compareAtPrice}
+                  size="lg"
+                  align="left"
+                  saleClassName="text-white"
+                  compareClassName="text-white/70"
+                />
+              ) : (
+
+                <div className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[40px]">
+                  {displayPrice}
+                </div>
+              )}
+            </div>
+            <PaymentInfo price={displayPrice} light />
+          </div>
+        </div>
 
         <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
           <div>

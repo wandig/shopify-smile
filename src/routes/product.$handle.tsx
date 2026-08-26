@@ -669,7 +669,10 @@ function MobileGallerySwipe({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
-  return <ProductView product={product} />;
+  // key op handle: bij wisselen van product altijd verse standaardselectie
+  // (walnootbruin, 58 - 65 inch, en bij duo Links) in plaats van de vorige keuze.
+  return <ProductView key={product.handle} product={product} />;
+
 }
 
 function ProductPagePending() {

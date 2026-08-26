@@ -182,6 +182,10 @@ import duoKristalwitLinks4055Asset from "@/assets/duo-kristalwit-links-40-55.png
 import duoKristalwitLinks5865Asset from "@/assets/duo-kristalwit-links-58-65.png.asset.json";
 import duoKristalwitLinks7075Asset from "@/assets/duo-kristalwit-links-70-75.png.asset.json";
 import duoKristalwitLinks7785Asset from "@/assets/duo-kristalwit-links-77-85.png.asset.json";
+import duoKristalwitRechts4055Asset from "@/assets/duo-kristalwit-rechts-40-55.png.asset.json";
+import duoKristalwitRechts5865Asset from "@/assets/duo-kristalwit-rechts-58-65.png.asset.json";
+import duoKristalwitRechts7075Asset from "@/assets/duo-kristalwit-rechts-70-75.png.asset.json";
+import duoKristalwitRechts7785Asset from "@/assets/duo-kristalwit-rechts-77-85.png.asset.json";
 
 
 // Duo hoofdrenders per kleur en opstelling, in volgorde van klein naar groot.

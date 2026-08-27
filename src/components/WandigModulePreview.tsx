@@ -227,19 +227,19 @@ export const CONFIGURATOR_MODULE_ASSETS: Record<
   Cashmeregrijs: {
     "40 - 55 inch": {
       source: cashmere4055Front,
-      crops: CASHMERE_40_55_CROPS,
+      crops: CASHMERE_TRIM_40_55_CROPS,
     },
     "58 - 65 inch": {
       source: cashmere5865Front,
-      crops: CASHMERE_58_65_CROPS,
+      crops: CASHMERE_TRIM_58_65_CROPS,
     },
     "70 - 75 inch": {
       source: cashmere7075Front,
-      crops: CASHMERE_70_75_CROPS,
+      crops: CASHMERE_TRIM_70_75_CROPS,
     },
     "77 - 85 inch": {
       source: cashmere7785Front,
-      crops: CASHMERE_77_85_CROPS,
+      crops: CASHMERE_TRIM_77_85_CROPS,
     },
   },
   Kristalwit: {

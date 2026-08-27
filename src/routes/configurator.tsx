@@ -26,6 +26,7 @@ import {
   MODULE_CROPS,
   WandigSpecPreview,
   getConfiguratorModuleAsset,
+  type ModuleCropSet,
   type ModulePosition,
 } from "@/components/WandigModulePreview";
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
@@ -76,6 +77,85 @@ const TV_OPTIONS = [
 const BASE_PRICE = 1699;
 const LEFT_MODULE_PRICE = 475;
 const RIGHT_MODULE_PRICE = 475;
+
+function ConfiguratorPreviewAssembly({
+  color,
+  source,
+  crops,
+  hasLeft,
+  hasRight,
+  animateSides,
+}: {
+  color: string;
+  source: string | null;
+  crops: ModuleCropSet;
+  hasLeft: boolean;
+  hasRight: boolean;
+  animateSides: boolean;
+}) {
+  const usesLegacyWalnutModules = color === FULL_HOUSE_COLORS[0] && source === null;
+  const sideTransition = animateSides
+    ? {
+        transitionProperty: "max-width, opacity, transform",
+        transitionDuration: "520ms, 320ms, 520ms",
+        transitionTimingFunction:
+          "cubic-bezier(0.22,1,0.36,1), ease-out, cubic-bezier(0.22,1,0.36,1)",
+      }
+    : undefined;
+
+  return (
+    <div className="flex h-full items-end justify-center">
+      <div
+        className={`relative z-[1] mr-[-3px] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
+          hasLeft
+            ? "max-w-[600px] translate-x-0 opacity-100"
+            : "max-w-0 translate-x-5 opacity-0"
+        }`}
+        style={sideTransition}
+      >
+        <ConfiguratorModuleImage
+          color={color}
+          position="left"
+          source={source}
+          animate={false}
+          testId={animateSides}
+          crops={crops}
+        />
+      </div>
+
+      <div className="relative z-[2] h-full">
+        <ConfiguratorModuleImage
+          color={color}
+          position="center"
+          source={source}
+          animate={false}
+          testId={animateSides}
+          crops={crops}
+        />
+      </div>
+
+      <div
+        className={`relative z-[1] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
+          usesLegacyWalnutModules ? "ml-[-11px]" : "ml-[-3px]"
+        } ${
+          hasRight
+            ? "max-w-[600px] translate-x-0 opacity-100"
+            : "max-w-0 -translate-x-5 opacity-0"
+        }`}
+        style={sideTransition}
+      >
+        <ConfiguratorModuleImage
+          color={color}
+          position="right"
+          source={source}
+          animate={false}
+          testId={animateSides}
+          crops={crops}
+        />
+      </div>
+    </div>
+  );
+}
 
 
 const CONFIGURATOR_BENEFITS = [
@@ -284,7 +364,7 @@ function ConfiguratorPage() {
     previewCleanupTimerRef.current = window.setTimeout(() => {
       setPreviousPreviewColor(null);
       setPreviousPreviewTvValue(null);
-    }, 320);
+    }, 520);
   };
 
   const selectTv = (nextTv: (typeof TV_OPTIONS)[number]) => {
@@ -300,7 +380,7 @@ function ConfiguratorPage() {
     previewCleanupTimerRef.current = window.setTimeout(() => {
       setPreviousPreviewColor(null);
       setPreviousPreviewTvValue(null);
-    }, 320);
+    }, 520);
   };
 
   const widthCm =
@@ -371,7 +451,6 @@ function ConfiguratorPage() {
   }, [fullHouseProduct, previousPreviewColor, previousPreviewTvValue, tv.shopifyValue]);
   const colorModuleSource = colorModuleAsset.source;
   const previousModuleSource = previousModuleAsset?.source ?? null;
-  const usesWalnutModules = previewColor === FULL_HOUSE_COLORS[0] && colorModuleSource === null;
 
   return (
     <main className="min-h-screen bg-[#f8f6f3]">
@@ -398,7 +477,7 @@ function ConfiguratorPage() {
           {/* Scene */}
           <div
             ref={stageRef}
-            className="relative flex min-h-[620px] items-center justify-center overflow-hidden px-3 py-16 md:min-h-[760px] md:px-8 md:pb-[78px] md:pt-[76px] lg:h-full lg:min-h-0"
+            className="relative flex h-[422px] items-start justify-center overflow-hidden px-3 pb-0 pt-[90px] md:h-auto md:min-h-[760px] md:items-center md:px-8 md:pb-[78px] md:pt-[76px] lg:h-full lg:min-h-0"
           >
             <button
               type="button"
@@ -416,7 +495,7 @@ function ConfiguratorPage() {
             </button>
 
             {/* Configuration */}
-            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-[10%] scale-[0.603] items-end justify-center sm:scale-[0.707] lg:scale-[0.644] xl:scale-[0.811] 2xl:scale-[0.873]">
+            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-0 scale-[0.513] items-end justify-center md:translate-y-[10%] md:scale-[0.707] lg:scale-[0.644] xl:scale-[0.811] 2xl:scale-[0.873]">
               {/* Wall unit — modules sit flush against each other */}
               <div className="relative flex h-[420px] items-end lg:h-[520px]">
                 {showMeasurements && (
@@ -442,12 +521,12 @@ function ConfiguratorPage() {
                   type="button"
                   onClick={() => setHasLeft(!hasLeft)}
                   aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
-                  className="absolute left-0 top-1/2 z-[6] flex h-11 w-11 -translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
+                  className="absolute left-0 top-1/2 z-[6] flex h-[48.4px] w-[48.4px] -translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027] md:h-11 md:w-11"
                 >
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 24 24"
-                    className="h-5 w-5"
+                    className="h-[22px] w-[22px] md:h-5 md:w-5"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -458,96 +537,34 @@ function ConfiguratorPage() {
                   </svg>
                 </button>
 
+                {previousPreviewColor && previousModuleAsset && (
+                  <div
+                    key={`previous-${previousPreviewColor}-${previousPreviewTvValue}`}
+                    className="configurator-preview-exit pointer-events-none absolute bottom-0 left-1/2 z-0 h-full -translate-x-1/2"
+                    aria-hidden="true"
+                  >
+                    <ConfiguratorPreviewAssembly
+                      color={previousPreviewColor}
+                      source={previousModuleSource}
+                      crops={previousModuleAsset.crops}
+                      hasLeft={hasLeft}
+                      hasRight={hasRight}
+                      animateSides={false}
+                    />
+                  </div>
+                )}
+
                 <div
-                  className={`relative z-[1] mr-[-3px] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
-                    hasLeft ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
-                  }`}
-                  style={{
-                    transitionProperty: "max-width, opacity",
-                    transitionDuration: "650ms, 650ms",
-                    transitionTimingFunction:
-                      "cubic-bezier(0.22,1,0.36,1), cubic-bezier(0.22,1,0.36,1)",
-                  }}
+                  key={`current-${previewColor}-${tv.shopifyValue}`}
+                  className={`relative z-[1] h-full ${previousPreviewColor ? "configurator-preview-enter" : ""}`}
                 >
-                  {previousPreviewColor && (
-                    <div className="pointer-events-none absolute inset-y-0 left-0 z-0" aria-hidden="true">
-                      <ConfiguratorModuleImage
-                        color={previousPreviewColor}
-                        position="left"
-                        source={previousModuleSource}
-                        animate={false}
-                        testId={false}
-                        crops={previousModuleAsset?.crops}
-                      />
-                    </div>
-                  )}
-                  <ConfiguratorModuleImage
-                    key={`left-${previewColor}-${tv.shopifyValue}`}
+                  <ConfiguratorPreviewAssembly
                     color={previewColor}
-                    position="left"
                     source={colorModuleSource}
                     crops={colorModuleAsset.crops}
-                    className={`relative z-[1] origin-bottom-right transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      hasLeft ? "translate-x-0 scale-100" : "translate-x-6 scale-[95%]"
-                    }`}
-                  />
-                </div>
-                <div className="relative z-[2] h-full">
-                  {previousPreviewColor && (
-                    <div className="pointer-events-none absolute inset-y-0 left-0 z-0" aria-hidden="true">
-                      <ConfiguratorModuleImage
-                        color={previousPreviewColor}
-                        position="center"
-                        source={previousModuleSource}
-                        animate={false}
-                        testId={false}
-                        crops={previousModuleAsset?.crops}
-                      />
-                    </div>
-                  )}
-                  <ConfiguratorModuleImage
-                    key={`center-${previewColor}-${tv.shopifyValue}`}
-                    color={previewColor}
-                    position="center"
-                    source={colorModuleSource}
-                    crops={colorModuleAsset.crops}
-                    className="relative z-[1]"
-                  />
-                </div>
-                <div
-                  className={`relative z-[1] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
-                    usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"
-                  } ${
-                    hasRight ? "max-w-[600px] opacity-100" : "max-w-0 opacity-0"
-                  }`}
-                  style={{
-                    transitionProperty: "max-width, opacity",
-                    transitionDuration: "650ms, 650ms",
-                    transitionTimingFunction:
-                      "cubic-bezier(0.22,1,0.36,1), cubic-bezier(0.22,1,0.36,1)",
-                  }}
-                >
-                  {previousPreviewColor && (
-                    <div className="pointer-events-none absolute inset-y-0 left-0 z-0" aria-hidden="true">
-                      <ConfiguratorModuleImage
-                        color={previousPreviewColor}
-                        position="right"
-                        source={previousModuleSource}
-                        animate={false}
-                        testId={false}
-                        crops={previousModuleAsset?.crops}
-                      />
-                    </div>
-                  )}
-                  <ConfiguratorModuleImage
-                    key={`right-${previewColor}-${tv.shopifyValue}`}
-                    color={previewColor}
-                    position="right"
-                    source={colorModuleSource}
-                    crops={colorModuleAsset.crops}
-                    className={`relative z-[1] origin-bottom-left transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      hasRight ? "translate-x-0 scale-100" : "-translate-x-6 scale-[95%]"
-                    }`}
+                    hasLeft={hasLeft}
+                    hasRight={hasRight}
+                    animateSides
                   />
                 </div>
 
@@ -556,12 +573,12 @@ function ConfiguratorPage() {
                   type="button"
                   onClick={() => setHasRight(!hasRight)}
                   aria-label={hasRight ? "Rechter module verwijderen" : "Rechter module toevoegen"}
-                  className="absolute right-0 top-1/2 z-[6] flex h-11 w-11 translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027]"
+                  className="absolute right-0 top-1/2 z-[6] flex h-[48.4px] w-[48.4px] translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027] md:h-11 md:w-11"
                 >
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 24 24"
-                    className="h-5 w-5"
+                    className="h-[22px] w-[22px] md:h-5 md:w-5"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2.5"
@@ -577,8 +594,8 @@ function ConfiguratorPage() {
           </div>
           </section>
 
-          <aside className="relative z-[2] mx-4 my-5 overflow-hidden rounded-[22px] border border-[#e8e2dc] bg-white p-5 shadow-[0_18px_48px_rgba(3,12,26,0.09)] lg:mx-0 lg:my-0 lg:h-full lg:w-[492px] lg:justify-self-start lg:px-4 lg:pb-3 lg:pt-0">
-            <section className="-mx-4 mb-3 overflow-hidden bg-[#fef9f5]">
+          <aside className="relative z-[2] mx-4 -mt-[92px] mb-5 overflow-hidden rounded-[22px] border border-[#e8e2dc] bg-[#fef9f5] p-0 shadow-[0_18px_48px_rgba(3,12,26,0.09)] lg:mx-0 lg:my-0 lg:h-full lg:w-[492px] lg:justify-self-start lg:px-4 lg:pb-3 lg:pt-0">
+            <section className="overflow-hidden bg-[#fef9f5] lg:-mx-4 lg:mb-3">
               <button
                 type="button"
                 onClick={() => setProductionDetailsOpen((open) => !open)}
@@ -630,6 +647,8 @@ function ConfiguratorPage() {
               </div>
             </section>
 
+            <div className="rounded-t-[20px] bg-white p-4 lg:rounded-none lg:p-0">
+
             <div className="border-b border-[#eeeeee] pb-3">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-5 gap-y-1">
                 <span className="text-[11.5px] font-bold uppercase tracking-[0.12em] text-[#ef7027]">
@@ -660,9 +679,9 @@ function ConfiguratorPage() {
               <PaymentOptionsBadges price={total} />
             </div>
 
-            <div className="mt-3 grid min-h-[52px] grid-cols-[80px_minmax(0,1fr)_auto] items-center gap-2 rounded-[12px] border border-[#eeeeee] px-3">
+            <div className="mt-3 grid min-h-[52px] grid-cols-[80px_minmax(0,1fr)] items-center gap-2 rounded-[12px] border border-[#eeeeee] px-3 lg:grid-cols-[80px_minmax(0,1fr)_auto]">
               <strong className="text-[15px] font-[750] leading-none text-[#071426]">Kleur</strong>
-              <div className="flex min-w-0 items-center justify-start gap-2">
+              <div className="flex min-w-0 items-center justify-end gap-2 lg:justify-start">
                 {colors.map((colorName) => (
                   <button
                     key={colorName}
@@ -680,7 +699,7 @@ function ConfiguratorPage() {
                   />
                 ))}
               </div>
-              <span className="whitespace-nowrap text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">{displayWandigColor(color)}</span>
+              <span className="hidden whitespace-nowrap text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93] lg:inline">{displayWandigColor(color)}</span>
             </div>
 
             <div className="mb-3 mt-2 overflow-hidden rounded-[12px] border border-[#eeeeee]">
@@ -802,6 +821,7 @@ function ConfiguratorPage() {
                   ))}
                 </div>
               </section>
+            </div>
             </div>
           </aside>
         </div>

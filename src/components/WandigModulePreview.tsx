@@ -278,6 +278,7 @@ export function CroppedModuleImage({
   testId = true,
   className = "",
   crops = MODULE_CROPS,
+  translateY = 0,
 }: {
   color: string;
   position: ModulePosition;
@@ -286,6 +287,7 @@ export function CroppedModuleImage({
   testId?: boolean;
   className?: string;
   crops?: ModuleCropSet;
+  translateY?: number;
 }) {
   const crop = crops[position];
 
@@ -298,6 +300,7 @@ export function CroppedModuleImage({
         animation: animate ? MODULE_REVEAL : undefined,
         backfaceVisibility: "hidden",
         contain: "paint",
+        transform: translateY ? `translateY(${translateY}px)` : undefined,
         willChange: animate ? "opacity" : undefined,
       }}
     >
@@ -324,6 +327,7 @@ export function ConfiguratorModuleImage({
   testId = true,
   className = "",
   crops = MODULE_CROPS,
+  walnutSideOffsetY = -0.5,
 }: {
   color: string;
   position: ModulePosition;
@@ -332,10 +336,11 @@ export function ConfiguratorModuleImage({
   testId?: boolean;
   className?: string;
   crops?: ModuleCropSet;
+  walnutSideOffsetY?: number;
 }) {
   const usesWalnutAsset = color === FULL_HOUSE_COLORS[0] && source === null;
-  const raiseWalnutSide = color === FULL_HOUSE_COLORS[0] && position !== "center";
-  const positionedClassName = `${className} ${raiseWalnutSide ? "-translate-y-px" : ""}`;
+  const walnutSideTranslateY =
+    color === FULL_HOUSE_COLORS[0] && position !== "center" ? walnutSideOffsetY : 0;
 
   if (!usesWalnutAsset) {
     if (!source) return null;
@@ -347,8 +352,9 @@ export function ConfiguratorModuleImage({
         source={source}
         animate={animate}
         testId={testId}
-        className={positionedClassName}
+        className={className}
         crops={crops}
+        translateY={walnutSideTranslateY}
       />
     );
   }
@@ -365,10 +371,13 @@ export function ConfiguratorModuleImage({
       src={walnutSource}
       alt={`Wandig ${moduleLabel(position)} in ${color}`}
       data-testid={testId ? `configurator-${position}-module` : undefined}
-      className={`block h-full w-auto select-none ${positionedClassName}`}
+      className={`block h-full w-auto select-none ${className}`}
       style={{
         animation: animate ? MODULE_REVEAL : undefined,
         backfaceVisibility: "hidden",
+        transform: walnutSideTranslateY
+          ? `translateY(${walnutSideTranslateY}px)`
+          : undefined,
         willChange: animate ? "opacity" : undefined,
       }}
     />
@@ -404,6 +413,7 @@ export function WandigSpecPreview({
               testId={false}
               className="relative z-[1] mr-[-3px]"
               crops={crops}
+              walnutSideOffsetY={0.3}
             />
           )}
           <ConfiguratorModuleImage
@@ -424,6 +434,7 @@ export function WandigSpecPreview({
               testId={false}
               className={`relative z-[1] ${usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"}`}
               crops={crops}
+              walnutSideOffsetY={0.3}
             />
           )}
         </div>

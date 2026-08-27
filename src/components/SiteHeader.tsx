@@ -66,6 +66,11 @@ function ModelsMenu({
     onOpenChange?.(nextOpen);
   };
 
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => {
+    updateOpen(false);
+  }, [pathname]);
+
   useEffect(() => {
     if (!open) return;
     const handleScroll = () => updateOpen(false);
@@ -80,10 +85,12 @@ function ModelsMenu({
       onFocus={() => updateOpen(true)}
       onMouseEnter={() => updateOpen(true)}
       onMouseLeave={() => updateOpen(false)}
+      onClickCapture={() => updateOpen(false)}
     >
       <Link to="/producten" className={linkClassName} aria-expanded={open}>
         Alle modellen
       </Link>
+
 
       <div
         className={`fixed inset-x-0 ${panelTopClass} z-50 transition-[opacity,visibility] duration-200 ease-out ${open ? "visible opacity-100" : "invisible opacity-0"}`}
@@ -175,6 +182,12 @@ export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
   const [modelsMenuOpen, setModelsMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
 
   return (
     <header className="bg-[#faf8f5] text-[#15110d]">
@@ -202,7 +215,7 @@ export function SiteHeader() {
         <div className="mx-auto max-w-[1600px] px-4 md:px-10 h-16 md:h-20 flex items-center justify-between gap-4">
           {/* Left: mobile hamburger + desktop nav */}
           <div className="flex items-center gap-3 md:gap-6 shrink-0">
-            <Sheet>
+            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
                 <button
                   className="lg:hidden flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-[#d6cfc7]/60 hover:bg-[#d6cfc7] text-[#15110d] transition"
@@ -211,7 +224,8 @@ export function SiteHeader() {
                   <Menu className="h-5 w-5" strokeWidth={1.75} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[280px] pt-14 flex flex-col h-full">
+              <SheetContent side="left" className="w-[280px] pt-14 flex flex-col h-full" onClickCapture={() => setMenuOpen(false)}>
+
                 <nav className="flex flex-col gap-6 text-lg">
                   <Link to="/producten" className="hover:opacity-60 transition">
                     Collectie

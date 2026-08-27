@@ -1604,7 +1604,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
 
         {/* Info */}
-        <div className="relative z-10 -mt-[42px] min-w-0 lg:mt-0 lg:sticky lg:top-3 lg:ml-auto lg:w-[490px] lg:self-start">
+        <div className="relative z-10 -mt-[42px] min-w-0 px-4 lg:px-0 lg:mt-0 lg:sticky lg:top-3 lg:ml-auto lg:w-[490px] lg:self-start">
           <div className="space-y-3">
             <section className="overflow-hidden rounded-[20px] border border-[#eeeeee] bg-[#fef9f5] shadow-[0_18px_45px_rgba(42,31,22,0.07)]">
               <button
@@ -1901,7 +1901,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <div className="px-5 md:px-0">
+      <div className="px-4 md:px-0">
       <SpecificationsSection
         widthLabel={specWidthLabel}
         heightLabel={specHeightLabel}

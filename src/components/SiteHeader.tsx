@@ -215,7 +215,7 @@ export function SiteHeader() {
         <div className="mx-auto max-w-[1600px] px-4 md:px-10 h-16 md:h-20 flex items-center justify-between gap-4">
           {/* Left: mobile hamburger + desktop nav */}
           <div className="flex items-center gap-3 md:gap-6 shrink-0">
-            <Sheet>
+            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
                 <button
                   className="lg:hidden flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-full bg-[#d6cfc7]/60 hover:bg-[#d6cfc7] text-[#15110d] transition"
@@ -224,7 +224,8 @@ export function SiteHeader() {
                   <Menu className="h-5 w-5" strokeWidth={1.75} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[280px] pt-14 flex flex-col h-full">
+              <SheetContent side="left" className="w-[280px] pt-14 flex flex-col h-full" onClickCapture={() => setMenuOpen(false)}>
+
                 <nav className="flex flex-col gap-6 text-lg">
                   <Link to="/producten" className="hover:opacity-60 transition">
                     Collectie

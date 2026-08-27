@@ -448,7 +448,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         </picture>
 
 
-        <div className="absolute inset-x-4 top-4 text-white md:top-1/2 md:-translate-y-1/2">
+        <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white">
           <div className="inline-flex flex-col items-start px-4 py-3 [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">
             <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
               {p.title}
@@ -465,28 +465,25 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
                 />
               ) : (
 
-                <div className="text-[27px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[40px]">
+                <div className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[40px]">
                   {displayPrice}
                 </div>
               )}
             </div>
-            <div className="mt-3 hidden md:block">
+            <div className="mt-3">
               <PaymentInfo price={displayPrice} light />
             </div>
           </div>
         </div>
 
         <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
-          <div className="flex flex-col">
-            <div className="order-1 mb-2 md:hidden">
-              <PaymentInfo price={displayPrice} light />
-            </div>
-            <div className="order-3 mt-2 flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95 md:order-1 md:mt-0">
+          <div>
+            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
               <Stars />
               <span>{p.reviews}</span>
             </div>
-            <div className="order-4 mt-1 text-[13px] tracking-[0.01em] text-white/90 md:order-2">{p.meta}</div>
-            <div className="order-2 mt-2 md:order-3">
+            <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
+            <div className="mt-2">
               <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} light />
             </div>
           </div>

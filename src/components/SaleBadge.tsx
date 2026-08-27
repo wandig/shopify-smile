@@ -27,7 +27,7 @@ export function SalePrice({
   const sizeClasses = {
     sm: { sale: "text-[22px]", compare: "text-[15px]" },
     md: { sale: "text-[26px]", compare: "text-[16px]" },
-    lg: { sale: "text-[27px] md:text-[32px]", compare: "text-[15px] md:text-[18px]" },
+    lg: { sale: "text-[32px]", compare: "text-[18px]" },
   };
 
   const cc = currencyCode ?? price.currencyCode;

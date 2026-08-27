@@ -591,14 +591,18 @@ function MobileGallerySwipe({
     return () => el.removeEventListener("scroll", update);
   }, [items.length]);
 
-  // Bij een nieuwe selectie (kleur/maat/opstelling) altijd terug naar de eerste studiofoto.
+  // Bij een nieuwe selectie (kleur/maat/opstelling) op dezelfde fotopositie blijven.
   const firstSrc = items[0]?.src;
+  const activeRef = useRef(0);
+  activeRef.current = active;
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollTo({ left: 0, behavior: "auto" });
-    setActive(0);
+    const target = Math.min(activeRef.current, items.length - 1);
+    el.scrollTo({ left: target * (el.clientWidth || 0), behavior: "auto" });
+    setActive(target < 0 ? 0 : target);
   }, [firstSrc]);
+
 
 
   if (items.length === 0) return null;

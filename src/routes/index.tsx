@@ -726,7 +726,7 @@ const WHY_US_CARDS = [
     image: waaromWijCraft.url,
   },
   {
-    badge: "Eenvoudige klikmontage",
+    badge: "In een handomdraai",
     title: "KLIK. HANG. KLAAR.",
     subtitle: "Dankzij het slimme kliksysteem staat jouw tv-meubel zo op zijn plek.",
     bg: "bg-gradient-to-br from-[#e8a87c] to-[#c4654a]",

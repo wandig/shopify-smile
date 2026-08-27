@@ -785,7 +785,7 @@ const FULL_HOUSE_GALLERY = [
 const PRODUCT_BENEFITS = [
   { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url },
   { title: "Kabels uit het zicht", image: kabelsUitZichtVoordelenUploadImg.url },
-  { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageUploadImg.url },
+  { title: "In een handomdraai", image: eenvoudigeKlikmontageUploadImg.url },
   { title: "Persoonlijk advies", image: persoonlijkAdviesUploadImg.url },
   { title: "100 dagen proefkijken", image: proefkijkenUploadImg.url },
   { title: "10 jaar garantie", image: garantieUploadImg.url },

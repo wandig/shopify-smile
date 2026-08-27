@@ -358,7 +358,7 @@ function ColorSwatches({
               e.stopPropagation();
               onSelect(name);
             }}
-            className={`h-6 w-6 shrink-0 overflow-hidden rounded-full border ${
+            className={`h-6 w-6 shrink-0 overflow-hidden rounded-full border transition-all duration-200 ${
               light ? "border-white/70" : "border-[#071426]/15"
             } ${
               isActive

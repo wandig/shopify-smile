@@ -7,7 +7,7 @@ import press3 from "@/assets/press/press3.svg";
 import press4 from "@/assets/press/press4.svg";
 import press5 from "@/assets/press/press5.svg";
 import press6 from "@/assets/press/press6.svg";
-import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { storefrontApiRequest, PRODUCTS_QUERY, formatPrice, lowestPaidPrice, lowestPaidPriceWithCompare, type ShopifyProduct } from "@/lib/shopify";
 import { displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
@@ -374,6 +374,68 @@ function ColorSwatches({
   );
 }
 
+function CrossfadeModelImage({
+  src,
+  alt,
+  mobileSrc,
+}: {
+  src: string;
+  alt: string;
+  mobileSrc?: string;
+}) {
+  const [currentSrc, setCurrentSrc] = useState(src);
+  const [incomingSrc, setIncomingSrc] = useState<string | null>(null);
+  const [showIncoming, setShowIncoming] = useState(false);
+
+  useEffect(() => {
+    if (src === currentSrc) return;
+    setShowIncoming(false);
+    setIncomingSrc(src);
+  }, [src, currentSrc]);
+
+  const revealIncoming = (loadedSrc: string) => {
+    if (loadedSrc !== incomingSrc) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setShowIncoming(true));
+    });
+  };
+
+  const finishTransition = () => {
+    if (!incomingSrc || !showIncoming) return;
+    setCurrentSrc(incomingSrc);
+    setIncomingSrc(null);
+    setShowIncoming(false);
+  };
+
+  const imageLayer = (layerSrc: string, isIncoming: boolean) => (
+    <picture
+      key={layerSrc}
+      className={`absolute inset-0 block h-full w-full transition-opacity duration-500 ease-out ${
+        isIncoming && !showIncoming ? "opacity-0" : "opacity-100"
+      }`}
+      onTransitionEnd={isIncoming ? finishTransition : undefined}
+    >
+      {mobileSrc && layerSrc === currentSrc && !incomingSrc && (
+        <source media="(max-width: 767px)" srcSet={optimizeImageUrl(mobileSrc, 800)} />
+      )}
+      <Img
+        src={layerSrc}
+        alt={alt}
+        className="h-full w-full object-cover"
+        loading="lazy"
+        onLoad={isIncoming ? () => revealIncoming(layerSrc) : undefined}
+      />
+    </picture>
+  );
+
+  return (
+    <div className="absolute inset-0 transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]">
+      {imageLayer(currentSrc, false)}
+      {incomingSrc && imageLayer(incomingSrc, true)}
+    </div>
+  );
+}
+
 function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
   const { data } = useQuery({
     queryKey: ["products"],
@@ -433,18 +495,11 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         params={{ handle: p.handle }}
         className="group relative min-h-[440px] w-[360px] shrink-0 snap-start self-stretch overflow-hidden rounded-[16px] md:min-h-0 md:w-[41.4%]"
       >
-        <picture className="absolute inset-0 block h-full w-full">
-          {p.mobileImg && !variantImage && (
-            <source media="(max-width: 767px)" srcSet={optimizeImageUrl(p.mobileImg, 800)} />
-          )}
-
-          <Img
-            src={img}
-            alt={`${p.title} in ${activeColor}`}
-            className="h-full w-full object-cover transition-[opacity,transform] duration-300 ease-out group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        </picture>
+        <CrossfadeModelImage
+          src={img}
+          alt={`${p.title} in ${activeColor}`}
+          mobileSrc={!variantImage ? p.mobileImg : undefined}
+        />
 
 
         <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white">
@@ -499,12 +554,10 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       params={{ handle: p.handle }}
       className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%]"
     >
-      <div className="min-h-[180px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-0">
-        <Img
+      <div className="relative min-h-[180px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-0">
+        <CrossfadeModelImage
           src={img}
           alt={`${p.title} in ${activeColor}`}
-          className="h-full w-full object-cover transition-[opacity,transform] duration-300 ease-out group-hover:scale-[1.03]"
-          loading="lazy"
         />
       </div>
       <div className="flex flex-1 flex-col px-2 pb-1 pt-4">

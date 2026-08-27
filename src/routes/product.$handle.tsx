@@ -1901,7 +1901,7 @@ function ProductView({ product }: { product: ProductNode }) {
         </div>
       </div>
 
-      <div className="px-5 md:px-0">
+      <div className="px-4 md:px-0">
       <SpecificationsSection
         widthLabel={specWidthLabel}
         heightLabel={specHeightLabel}

@@ -62,7 +62,7 @@ function BadgeButton({
         </span>
       </span>
       <span className="hidden shrink-0 sm:block">{logo}</span>
-      <span className="min-w-0 flex-1 text-[11px] leading-snug text-[#071426] sm:text-[12.5px]">{children}</span>
+      <span className="w-full text-justify text-[12.5px] leading-snug text-[#071426] [text-align-last:right] sm:min-w-0 sm:flex-1 sm:text-left sm:[text-align-last:auto]">{children}</span>
       <span className="hidden h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[11px] font-bold italic text-[#071426]/60 sm:flex">
         i
       </span>

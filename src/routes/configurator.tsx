@@ -594,7 +594,7 @@ function ConfiguratorPage() {
           </div>
           </section>
 
-          <aside className="relative z-[2] mx-4 -mt-[92px] mb-5 overflow-hidden rounded-[22px] border border-[#e8e2dc] bg-[#fef9f5] p-0 shadow-[0_18px_48px_rgba(3,12,26,0.09)] lg:mx-0 lg:my-0 lg:h-full lg:w-[492px] lg:justify-self-start lg:px-4 lg:pb-3 lg:pt-0">
+          <aside className="relative z-[2] mx-0 -mt-[92px] mb-0 overflow-hidden rounded-none border-0 bg-white p-0 shadow-none lg:mx-0 lg:my-0 lg:mb-5 lg:h-full lg:w-[492px] lg:justify-self-start lg:rounded-[22px] lg:border lg:border-[#e8e2dc] lg:bg-white lg:px-4 lg:pb-3 lg:pt-0 lg:shadow-[0_18px_48px_rgba(3,12,26,0.09)]">
             <section className="overflow-hidden bg-[#fef9f5] lg:-mx-4 lg:mb-3">
               <button
                 type="button"
@@ -647,7 +647,7 @@ function ConfiguratorPage() {
               </div>
             </section>
 
-            <div className="rounded-t-[20px] bg-white p-4 lg:rounded-none lg:p-0">
+            <div className="rounded-none bg-white p-4 lg:rounded-none lg:p-0">
 
             <div className="border-b border-[#eeeeee] pb-3">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-5 gap-y-1">

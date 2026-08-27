@@ -1322,11 +1322,13 @@ function ProductView({ product }: { product: ProductNode }) {
 
       if (!desktopQuery.matches) {
         image.style.filter = "none";
+        image.style.opacity = "1";
         image.style.transform = "none";
         image.style.transitionDuration = "0ms";
         lastGalleryScrollYRef.current = window.scrollY;
         return;
       }
+
 
       const scrollY = window.scrollY;
       const continuationTop = continuation.getBoundingClientRect().top;

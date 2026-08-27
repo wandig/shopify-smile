@@ -53,11 +53,17 @@ function BadgeButton({
       type="button"
       onClick={onClick}
       aria-label={ariaLabel}
-      className="flex w-full flex-col items-center justify-center gap-2 rounded-[14px] border border-[#eeeeee] bg-white px-2 py-3 text-center transition hover:border-[#ef7027]/45 hover:shadow-[0_10px_24px_rgba(42,31,22,0.07)] sm:flex-row sm:items-center sm:justify-start sm:gap-3 sm:px-3 sm:text-left"
+      className="flex w-full flex-col items-start gap-1 rounded-[14px] border border-[#eeeeee] bg-white px-2 py-2.5 text-left transition hover:border-[#ef7027]/45 hover:shadow-[0_10px_24px_rgba(42,31,22,0.07)] sm:flex-row sm:items-center sm:justify-start sm:gap-3 sm:px-3 sm:py-3"
     >
-      <span className="shrink-0">{logo}</span>
+      <span className="flex w-full shrink-0 items-center justify-between sm:hidden">
+        <span className="shrink-0">{logo}</span>
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[11px] font-bold italic text-[#071426]/60">
+          i
+        </span>
+      </span>
+      <span className="hidden shrink-0 sm:block">{logo}</span>
       <span className="min-w-0 flex-1 text-[11px] leading-snug text-[#071426] sm:text-[12.5px]">{children}</span>
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[11px] font-bold italic text-[#071426]/60">
+      <span className="hidden h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[11px] font-bold italic text-[#071426]/60 sm:flex">
         i
       </span>
     </button>

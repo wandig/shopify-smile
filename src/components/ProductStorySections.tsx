@@ -46,7 +46,7 @@ const buildSpecSections = (
         )}
         <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">{widthLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">{heightLabel} cm</span></li>
-        <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">32 cm</span></li>
+        <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">22 cm</span></li>
         <li className="flex justify-between gap-4"><span>Tv-uitsparing</span><span className="text-[#071426]">40–85 inch</span></li>
       </ul>
     ),
@@ -151,7 +151,7 @@ export function SpecificationsSection({
                   {/* Depth dimension (bottom) */}
                   <div className="absolute bottom-[2px] right-[32px] flex items-center gap-2">
                     <span className="h-px w-6 bg-[#071426]/25" />
-                    <span className="text-[10px] font-medium text-[#071426]/60">32 cm diep</span>
+                    <span className="text-[10px] font-medium text-[#071426]/60">22 cm diep</span>
                   </div>
 
                   {preview ? (

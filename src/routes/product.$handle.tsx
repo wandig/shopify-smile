@@ -608,9 +608,7 @@ function MobileGallerySwipe({
         {items.map((item, index) => (
           <div key={`${item.src}-${index}`} className="w-full shrink-0 snap-center">
             <figure
-              className={`relative flex items-center justify-center overflow-hidden bg-[#faf8f5] ${
-                handle === "full-house" && index === 0 ? "aspect-[5/4]" : "aspect-square"
-              }`}
+              className={`relative flex items-center justify-center overflow-hidden bg-[#faf8f5] aspect-[4/3]`}
             >
               <Img
                 src={item.src}
@@ -1516,7 +1514,7 @@ function ProductView({ product }: { product: ProductNode }) {
           <MobileGallerySwipe items={galleryItems} handle={product.handle} widthLabel={specWidthLabel} heightLabel={specHeightLabel} />
 
           {galleryItems[0] && (
-            <figure className={`relative hidden overflow-visible rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[5/4] items-center justify-center bg-[#faf8f5]" : ""}`}>
+            <figure className={`relative hidden overflow-visible rounded-[6px] lg:block lg:sticky lg:top-0 lg:z-0 ${product.handle === "full-house" ? "lg:flex aspect-[4/3] items-center justify-center bg-[#faf8f5]" : ""}`}>
               <Img
                 ref={mainGalleryImageRef}
                 w={1200}
@@ -1524,7 +1522,7 @@ function ProductView({ product }: { product: ProductNode }) {
                 onClick={openGalleryItem ? () => setMainDoorsOpen((open) => !open) : undefined}
                 src={openGalleryItem && mainDoorsOpen ? openGalleryItem.src : galleryItems[0].src}
                 alt={openGalleryItem && mainDoorsOpen ? openGalleryItem.alt : galleryItems[0].alt}
-                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${openGalleryItem ? "cursor-pointer" : ""} ${product.handle === "full-house" ? "h-auto w-[100%] max-w-none object-contain" : galleryItems[0].square ? "aspect-square w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
+                className={`block origin-center transition-[filter,transform] ease-out [will-change:filter,transform] ${openGalleryItem ? "cursor-pointer" : ""} ${product.handle === "full-house" ? "h-auto w-[100%] max-w-none object-contain" : galleryItems[0].square ? "aspect-[4/3] w-full object-contain" : "aspect-[4/3] w-full object-cover"}`}
                 loading="eager"
                 fetchPriority="high"
               />

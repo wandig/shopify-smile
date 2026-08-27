@@ -133,7 +133,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
 
   return (
     <>
-      <div className="mt-2 mb-2 grid gap-2.5 sm:grid-cols-2">
+      <div className="mt-2 mb-2 grid grid-cols-2 gap-2.5">
         <BadgeButton onClick={() => setOpenIn3(true)} logo={<In3Logo />} ariaLabel="Meer over betalen in 3 delen">
           Betaal in 3 delen van <strong className="font-bold">{euro(third)},-</strong>
         </BadgeButton>

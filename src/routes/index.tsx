@@ -500,7 +500,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       params={{ handle: p.handle }}
       className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[32%]"
     >
-      <div className="min-h-[180px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-0 md:min-h-0">
+      <div className="min-h-[180px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-0">
         <Img
           key={img}
           src={img}

@@ -108,7 +108,7 @@ function ModelsMenu({
                 className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-[#0f1f2a] px-5 py-3 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-[#1a2d3a]"
               >
                 <Puzzle className="h-4 w-4" strokeWidth={1.75} />
-                <span>Configureer jouw kast</span>
+                <span>Stel zelf samen</span>
               </Link>
               <Link
                 to="/producten"
@@ -246,7 +246,7 @@ export function SiteHeader() {
                     className="inline-flex items-center justify-center gap-2 w-full h-12 rounded-full bg-[#0f1f2a] hover:bg-[#1a2d3a] text-white text-sm font-medium transition-colors duration-300 ease-out"
                   >
                     <Puzzle className="h-4 w-4" strokeWidth={1.75} />
-                    <span>Configureer jouw tv-kast</span>
+                    <span>Stel zelf samen</span>
                   </Link>
                 </div>
               </SheetContent>
@@ -269,11 +269,11 @@ export function SiteHeader() {
             <Link
               to="/configurator"
               className="hidden sm:inline-flex group items-center justify-center gap-0 hover:gap-2 lg:gap-2 h-10 md:h-11 min-w-10 md:min-w-11 max-w-10 md:max-w-11 lg:max-w-none rounded-full bg-[#0f1f2a] hover:bg-[#1a2d3a] hover:max-w-[260px] focus-visible:max-w-[260px] lg:hover:max-w-none text-white text-sm font-medium transition-all duration-300 ease-out px-0 hover:px-4 lg:px-5"
-              aria-label="Configureer jouw tv-kast"
+              aria-label="Stel zelf samen"
             >
               <Puzzle className="h-4 w-4 shrink-0" strokeWidth={1.75} />
               <span className="max-w-0 opacity-0 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out group-hover:max-w-[200px] group-hover:opacity-100 group-active:max-w-[200px] group-active:opacity-100 group-focus-visible:max-w-[200px] group-focus-visible:opacity-100 lg:max-w-none lg:opacity-100">
-                Configureer jouw tv-kast
+                Stel zelf samen
               </span>
             </Link>
 

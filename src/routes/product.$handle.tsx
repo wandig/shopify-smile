@@ -1330,18 +1330,26 @@ function ProductView({ product }: { product: ProductNode }) {
 
       const scrollY = window.scrollY;
       const continuationTop = continuation.getBoundingClientRect().top;
-      const blurStart = window.innerHeight * 0.98;
-      const blurEnd = window.innerHeight * 0.58;
+      const imageRect = image.getBoundingClientRect();
+      // Blur starts the moment the next (Dutch design) photo touches the bottom
+      // of the first image, then intensifies as you keep scrolling.
+      const blurStart = imageRect.bottom;
+      const blurEnd = imageRect.top + imageRect.height * 0.2;
+      const span = Math.max(blurStart - blurEnd, 1);
       const progress = scrollY <= 2
         ? 0
-        : Math.min(Math.max((blurStart - continuationTop) / (blurStart - blurEnd), 0), 1);
+        : Math.min(Math.max((blurStart - continuationTop) / span, 0), 1);
       const scrollingUp = scrollY < lastGalleryScrollYRef.current;
-      const blur = progress * 10;
+      const blur = progress * 12;
+      const brightness = 1 + progress * 0.28;
+      const opacity = 1 - progress * 0.45;
       const scale = 1;
 
       image.style.transitionDuration = reducedMotionQuery.matches ? "0ms" : progress === 0 || scrollingUp ? "90ms" : "280ms";
-      image.style.filter = `blur(${blur.toFixed(1)}px)`;
+      image.style.filter = `blur(${blur.toFixed(1)}px) brightness(${brightness.toFixed(3)}) saturate(${(1 - progress * 0.4).toFixed(3)})`;
+      image.style.opacity = opacity.toFixed(3);
       image.style.transform = `scale(${scale.toFixed(4)})`;
+
       lastGalleryScrollYRef.current = scrollY;
     };
 

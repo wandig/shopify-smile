@@ -647,7 +647,7 @@ function ConfiguratorPage() {
               </div>
             </section>
 
-            <div className="rounded-t-[20px] bg-white p-4 lg:rounded-none lg:p-0">
+            <div className="rounded-none bg-white p-4 lg:rounded-none lg:p-0">
 
             <div className="border-b border-[#eeeeee] pb-3">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-5 gap-y-1">

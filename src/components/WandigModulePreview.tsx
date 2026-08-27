@@ -163,6 +163,23 @@ const CASHMERE_77_85_CROPS: ModuleCropSet = {
   right: { left: 1658 / 2046, top: 137 / 1535, width: 336 / 2046, height: 1255 / 1535 },
 };
 
+/** Cashmeregrijs needs 1px extra trimmed from the left edge of the center module. */
+const trimCenterLeft = (crops: ModuleCropSet, px: number): ModuleCropSet => ({
+  ...crops,
+  center: {
+    ...crops.center,
+    left: crops.center.left + px / 2046,
+    width: crops.center.width - px / 2046,
+  },
+});
+
+const CASHMERE_TRIM_40_55_CROPS = trimCenterLeft(CASHMERE_40_55_CROPS, 1);
+const CASHMERE_TRIM_58_65_CROPS = trimCenterLeft(CASHMERE_58_65_CROPS, 1);
+const CASHMERE_TRIM_70_75_CROPS = trimCenterLeft(CASHMERE_70_75_CROPS, 1);
+const CASHMERE_TRIM_77_85_CROPS = trimCenterLeft(CASHMERE_77_85_CROPS, 1);
+
+
+
 /**
  * Front views supplied for a specific finish and TV size. New photography can
  * be added here without changing the configurator rendering logic.

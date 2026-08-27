@@ -114,13 +114,13 @@ function ModalShell({
 }
 
 const In3Logo = () => (
-  <span className="flex h-7 w-11 items-center justify-center overflow-hidden rounded-[6px] bg-white">
+  <span className="flex h-7 items-center justify-start overflow-hidden rounded-[6px] bg-white">
     <Img src={in3Logo.url} alt="in3" className="h-3.5 w-auto object-contain" w={64} />
   </span>
 );
 
 const SpreadLogo = () => (
-  <span className="flex h-7 w-11 items-center justify-center overflow-hidden rounded-[6px] bg-white">
+  <span className="flex h-7 items-center justify-start overflow-hidden rounded-[6px] bg-white">
     <Img src={sprayPayLogo} alt="SprayPay" className="h-5 w-auto object-contain" w={64} />
   </span>
 );

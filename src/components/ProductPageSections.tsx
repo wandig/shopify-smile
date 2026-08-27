@@ -401,7 +401,14 @@ export function BuiltToLastSection() {
                       ? "text-[#071426]"
                       : "text-white"
                 }`}
-                style={{ color: card.textColor }}
+                style={{
+                  color: card.textColor,
+                  textShadow: card.imageUrl
+                    ? card.tone === "dark"
+                      ? "0 1px 10px rgba(7,20,38,0.55), 0 2px 18px rgba(7,20,38,0.35)"
+                      : "0 1px 10px rgba(255,255,255,0.55), 0 2px 18px rgba(255,255,255,0.35)"
+                    : undefined,
+                }}
               >
                 <div
                   className="text-[12px] md:text-[13px] font-normal"
@@ -413,7 +420,7 @@ export function BuiltToLastSection() {
                   {card.title}
                 </h3>
                 <p
-                  className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed font-light"
+                  className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed font-light tracking-[0.015em]"
                   style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined, maxWidth: card.bodyMaxWidth }}
                 >
                   {card.body}

@@ -420,7 +420,7 @@ export function BuiltToLastSection() {
                   {card.title}
                 </h3>
                 <p
-                  className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-relaxed font-light tracking-[0.015em]"
+                  className="mt-3 max-w-[240px] text-[13px] md:text-[14px] leading-[1.45] font-light tracking-[0.015em]"
                   style={{ color: card.textColor, opacity: card.textColor ? 1 : undefined, maxWidth: card.bodyMaxWidth, fontWeight: card.tone === "light" ? 330 : undefined }}
                 >
                   {card.body}

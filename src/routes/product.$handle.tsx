@@ -591,14 +591,18 @@ function MobileGallerySwipe({
     return () => el.removeEventListener("scroll", update);
   }, [items.length]);
 
-  // Bij een nieuwe selectie (kleur/maat/opstelling) altijd terug naar de eerste studiofoto.
+  // Bij een nieuwe selectie (kleur/maat/opstelling) op dezelfde fotopositie blijven.
   const firstSrc = items[0]?.src;
+  const activeRef = useRef(0);
+  activeRef.current = active;
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollTo({ left: 0, behavior: "auto" });
-    setActive(0);
+    const target = Math.min(activeRef.current, items.length - 1);
+    el.scrollTo({ left: target * (el.clientWidth || 0), behavior: "auto" });
+    setActive(target < 0 ? 0 : target);
   }, [firstSrc]);
+
 
 
   if (items.length === 0) return null;
@@ -781,7 +785,7 @@ const FULL_HOUSE_GALLERY = [
 const PRODUCT_BENEFITS = [
   { title: "Ontworpen in Nederland", image: ontworpenInNederlandImg.url },
   { title: "Kabels uit het zicht", image: kabelsUitZichtVoordelenUploadImg.url },
-  { title: "Eenvoudige klikmontage", image: eenvoudigeKlikmontageUploadImg.url },
+  { title: "In een handomdraai", image: eenvoudigeKlikmontageUploadImg.url },
   { title: "Persoonlijk advies", image: persoonlijkAdviesUploadImg.url },
   { title: "100 dagen proefkijken", image: proefkijkenUploadImg.url },
   { title: "10 jaar garantie", image: garantieUploadImg.url },
@@ -1683,7 +1687,8 @@ function ProductView({ product }: { product: ProductNode }) {
 
 
               {hasOptions && (
-                <div className="space-y-2">
+                <div className="-mx-4 space-y-2 lg:mx-0">
+
                   {visibleOptions.map((opt) => {
                     const isColor = /kleur|color/i.test(opt.name);
                     const isPosition = /opstelling|position|richting|side/i.test(opt.name);

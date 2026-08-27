@@ -281,7 +281,7 @@ export const BUILT_TO_LAST_CARDS: Array<{
 export const FAQ_ITEMS: Array<{ question: string; answer: string }> = [
   {
     question: "Wat zijn de afmetingen van de cinewall?",
-    answer: "De Wandig Full House is 240 cm breed, 180 cm hoog en 32 cm diep. Het centrale tv-vlak is geschikt voor televisies tot 80 inch.",
+    answer: "De Wandig Full House is 240 cm breed, 180 cm hoog en 22 cm diep. Het centrale tv-vlak is geschikt voor televisies tot 80 inch.",
   },
   {
     question: "Past mijn soundbar in de cinewall?",

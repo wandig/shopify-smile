@@ -161,7 +161,7 @@ function ConfiguratorPreviewAssembly({
 const CONFIGURATOR_BENEFITS = [
   { title: "Ontworpen in Nederland", image: werkplaatsImg },
   { title: "Kabels uit het zicht", image: fullHouseFinishImg },
-  { title: "Eenvoudige klikmontage", image: fullHouseUseImg },
+  { title: "In een handomdraai", image: fullHouseUseImg },
   { title: "Persoonlijk advies", image: detailMaatwerkImg },
   { title: "100 dagen proefkijken", image: fullHouseRoomImg },
   { title: "10 jaar garantie", image: detailDesignImg },

@@ -66,6 +66,11 @@ function ModelsMenu({
     onOpenChange?.(nextOpen);
   };
 
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => {
+    updateOpen(false);
+  }, [pathname]);
+
   useEffect(() => {
     if (!open) return;
     const handleScroll = () => updateOpen(false);
@@ -80,10 +85,12 @@ function ModelsMenu({
       onFocus={() => updateOpen(true)}
       onMouseEnter={() => updateOpen(true)}
       onMouseLeave={() => updateOpen(false)}
+      onClickCapture={() => updateOpen(false)}
     >
       <Link to="/producten" className={linkClassName} aria-expanded={open}>
         Alle modellen
       </Link>
+
 
       <div
         className={`fixed inset-x-0 ${panelTopClass} z-50 transition-[opacity,visibility] duration-200 ease-out ${open ? "visible opacity-100" : "invisible opacity-0"}`}

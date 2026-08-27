@@ -53,10 +53,10 @@ function BadgeButton({
       type="button"
       onClick={onClick}
       aria-label={ariaLabel}
-      className="flex w-full items-center gap-3 rounded-[14px] border border-[#eeeeee] bg-white px-3 py-3 text-left transition hover:border-[#ef7027]/45 hover:shadow-[0_10px_24px_rgba(42,31,22,0.07)]"
+      className="flex w-full flex-col items-center justify-center gap-2 rounded-[14px] border border-[#eeeeee] bg-white px-2 py-3 text-center transition hover:border-[#ef7027]/45 hover:shadow-[0_10px_24px_rgba(42,31,22,0.07)] sm:flex-row sm:items-center sm:justify-start sm:gap-3 sm:px-3 sm:text-left"
     >
       <span className="shrink-0">{logo}</span>
-      <span className="min-w-0 flex-1 text-[12.5px] leading-snug text-[#071426]">{children}</span>
+      <span className="min-w-0 flex-1 text-[11px] leading-snug text-[#071426] sm:text-[12.5px]">{children}</span>
       <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[11px] font-bold italic text-[#071426]/60">
         i
       </span>
@@ -133,7 +133,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
 
   return (
     <>
-      <div className="mt-2 mb-2 grid gap-2.5 sm:grid-cols-2">
+      <div className="mt-2 mb-2 grid grid-cols-2 gap-2.5">
         <BadgeButton onClick={() => setOpenIn3(true)} logo={<In3Logo />} ariaLabel="Meer over betalen in 3 delen">
           Betaal in 3 delen van <strong className="font-bold">{euro(third)},-</strong>
         </BadgeButton>

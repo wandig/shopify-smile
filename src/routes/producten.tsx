@@ -185,7 +185,7 @@ function Producten() {
                   to="/configurator"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ef7027] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#d95f1c] sm:py-3"
                 >
-                  Configureer jouw kast
+                  Stel zelf samen
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
@@ -246,7 +246,7 @@ function Producten() {
             <p className="mt-10 text-center text-sm text-[#1f1915]/60">
               Twijfel je?{" "}
               <Link to="/configurator" className="font-semibold text-[#ef7027] underline-offset-4 hover:underline">
-                Stel zelf je wand samen
+                Stel zelf samen
               </Link>
               .
             </p>

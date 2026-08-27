@@ -69,12 +69,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Tijdloze plug & play tv-wanden op maat. Kies je formaat, indeling en kleur. Gratis levering, 100 dagen proefkijken en 10 jaar garantie.",
+          "Tijdloze plug & play tv-wanden op maat. Kies je formaat, samenstelling en kleur. Gratis levering, 100 dagen proefkijken en 10 jaar garantie.",
       },
       { property: "og:title", content: "Wandig — Plug & play tv-wanden op maat" },
       {
         property: "og:description",
-        content: "Tijdloze plug & play tv-wanden op maat. Kies je formaat, indeling en kleur.",
+        content: "Tijdloze plug & play tv-wanden op maat. Kies je formaat, samenstelling en kleur.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -155,7 +155,7 @@ function HeroSection() {
           Jouw tv-wand, op maat gemaakt
         </h1>
         <p className="mt-4 max-w-[520px] text-[14px] leading-relaxed tracking-[0.01em] text-white/85 md:text-[15px]">
-          Plug &amp; play geleverd uit eigen werkplaats. Kies je formaat, indeling en kleur.
+          Plug &amp; play geleverd uit eigen werkplaats. Kies je formaat, samenstelling en kleur.
         </p>
         <div className="mt-8">
           <PrimaryButton to="/configurator">Stel zelf samen</PrimaryButton>

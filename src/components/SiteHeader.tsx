@@ -182,6 +182,12 @@ export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
   const [modelsMenuOpen, setModelsMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
 
   return (
     <header className="bg-[#faf8f5] text-[#15110d]">

@@ -140,25 +140,25 @@ const DARK_OAK_77_85_CROPS: ModuleCropSet = {
 };
 
 const CASHMERE_40_55_CROPS: ModuleCropSet = {
-  left: { left: 169 / 2046, top: 176 / 1535, width: 398 / 2046, height: 1177 / 1535 },
+  left: { left: 169 / 2046, top: 176 / 1535, width: 397 / 2046, height: 1177 / 1535 },
   center: { left: 567 / 2046, top: 176 / 1535, width: 912 / 2046, height: 1177 / 1535 },
   right: { left: 1479 / 2046, top: 176 / 1535, width: 398 / 2046, height: 1177 / 1535 },
 };
 
 const CASHMERE_58_65_CROPS: ModuleCropSet = {
-  left: { left: 160 / 2046, top: 171 / 1535, width: 336 / 2046, height: 1177 / 1535 },
+  left: { left: 160 / 2046, top: 171 / 1535, width: 335 / 2046, height: 1177 / 1535 },
   center: { left: 496 / 2046, top: 171 / 1535, width: 1055 / 2046, height: 1177 / 1535 },
   right: { left: 1551 / 2046, top: 171 / 1535, width: 336 / 2046, height: 1177 / 1535 },
 };
 
 const CASHMERE_70_75_CROPS: ModuleCropSet = {
-  left: { left: 88 / 2046, top: 157 / 1535, width: 336 / 2046, height: 1217 / 1535 },
+  left: { left: 88 / 2046, top: 157 / 1535, width: 335 / 2046, height: 1217 / 1535 },
   center: { left: 424 / 2046, top: 157 / 1535, width: 1198 / 2046, height: 1217 / 1535 },
   right: { left: 1622 / 2046, top: 157 / 1535, width: 336 / 2046, height: 1217 / 1535 },
 };
 
 const CASHMERE_77_85_CROPS: ModuleCropSet = {
-  left: { left: 52 / 2046, top: 137 / 1535, width: 336 / 2046, height: 1255 / 1535 },
+  left: { left: 52 / 2046, top: 137 / 1535, width: 335 / 2046, height: 1255 / 1535 },
   center: { left: 388 / 2046, top: 137 / 1535, width: 1270 / 2046, height: 1255 / 1535 },
   right: { left: 1658 / 2046, top: 137 / 1535, width: 336 / 2046, height: 1255 / 1535 },
 };

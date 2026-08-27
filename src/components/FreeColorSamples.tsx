@@ -74,7 +74,7 @@ export function FreeColorSamples() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="mt-2 h-12 w-full rounded-full border border-[#eeeeee] bg-white text-[14px] font-[300] tracking-[0.02em] text-[#071426] transition-colors hover:bg-[#faf8f5]"
+          className="mt-2 h-12 w-full rounded-full border border-[#eeeeee] bg-white text-[14px] font-[300] tracking-[0.03em] text-[#071426] transition-colors hover:bg-[#faf8f5]"
         >
           Ontvang gratis kleurstalen
         </button>

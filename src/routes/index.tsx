@@ -439,10 +439,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           )}
 
           <Img
-            key={img}
             src={img}
             alt={`${p.title} in ${activeColor}`}
-            className="h-full w-full animate-[fadeIn_.4s_ease] object-cover transition duration-700 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-opacity duration-300 group-hover:scale-[1.03]"
             loading="lazy"
           />
         </picture>

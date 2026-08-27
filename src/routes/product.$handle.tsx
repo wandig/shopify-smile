@@ -608,9 +608,7 @@ function MobileGallerySwipe({
         {items.map((item, index) => (
           <div key={`${item.src}-${index}`} className="w-full shrink-0 snap-center">
             <figure
-              className={`relative flex items-center justify-center overflow-hidden bg-[#faf8f5] ${
-                handle === "full-house" && index === 0 ? "aspect-[5/4]" : "aspect-square"
-              }`}
+              className={`relative flex items-center justify-center overflow-hidden bg-[#faf8f5] aspect-[4/3]`}
             >
               <Img
                 src={item.src}

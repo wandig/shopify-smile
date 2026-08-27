@@ -144,7 +144,7 @@ export function PaymentOptionsBadges({ price }: { price: number }) {
           Betaal in 3 delen van <strong className="font-bold">{euro(third)},-</strong>
         </BadgeButton>
         <BadgeButton onClick={() => setOpenSpread(true)} logo={<SpreadLogo />} ariaLabel="Meer over gespreid betalen">
-          Vanaf slechts <strong className="font-bold">{euro(minMonthly)},-</strong> per maand
+          Vanaf <strong className="font-bold">{euro(minMonthly)},-</strong> per maand
         </BadgeButton>
       </div>
 

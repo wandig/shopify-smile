@@ -158,7 +158,7 @@ function HeroSection() {
           Plug &amp; play geleverd uit eigen werkplaats. Kies je formaat, indeling en kleur.
         </p>
         <div className="mt-8">
-          <PrimaryButton to="/configurator">Configureer jouw tv-wand</PrimaryButton>
+          <PrimaryButton to="/configurator">Stel zelf samen</PrimaryButton>
         </div>
         <div className="mt-6 flex items-center gap-2 text-[12px] tracking-[0.01em]">
           <span className="flex items-center gap-0.5">
@@ -614,7 +614,7 @@ function ConfiguratorBannerSection() {
             Kies formaat, indeling en kleur en zie direct wat het kost. In een paar minuten klaar.
           </p>
           <div className="mt-8">
-            <PrimaryButton to="/configurator">Start de configurator</PrimaryButton>
+            <PrimaryButton to="/configurator">Stel zelf samen</PrimaryButton>
           </div>
         </div>
       </section>
@@ -662,7 +662,7 @@ function ConfiguratorBannerSection() {
               </p>
 
               <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <PrimaryButton to="/configurator">Start de configurator</PrimaryButton>
+                <PrimaryButton to="/configurator">Stel zelf samen</PrimaryButton>
                 <Link
                   to="/producten"
                   className="group flex items-center gap-1.5 text-[13px] font-[500] tracking-[0.01em] text-[#071426]/80 transition hover:text-[#071426]"

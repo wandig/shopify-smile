@@ -1715,7 +1715,7 @@ function ProductView({ product }: { product: ProductNode }) {
                             type="button"
                             onClick={() => setExpandedVariantOption((current) => current === opt.name ? null : opt.name)}
                             aria-expanded={optionExpanded}
-                            className="flex min-h-[52px] w-full items-center gap-2 px-3 text-left"
+                            className="flex min-h-[52px] w-full items-center gap-2 px-0 text-left md:px-3"
                           >
                             <span className="grid min-w-0 flex-1 grid-cols-[105px_minmax(0,1fr)] items-baseline gap-2 md:grid-cols-[80px_minmax(0,1fr)]">
                               <span className="text-[15px] font-[750] leading-none text-[#071426]">{label}</span>
@@ -1726,7 +1726,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
                           <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${optionExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                             <div className="overflow-hidden">
-                              <div className={`grid gap-2 px-3 pb-3 pt-1 ${isTvSize ? "grid-cols-2" : "grid-cols-2"}`}>
+                              <div className={`grid gap-2 px-0 pb-3 pt-1 md:px-3 ${isTvSize ? "grid-cols-2" : "grid-cols-2"}`}>
                                 {optionChoices.map((choice) => {
                                   const active = selected[opt.name] === choice.value;
                                   return (
@@ -1782,7 +1782,7 @@ function ProductView({ product }: { product: ProductNode }) {
                     );
 
                     return (
-                      <div key={opt.name} className="grid min-h-[52px] grid-cols-1 content-center gap-2 rounded-[12px] border border-[#eeeeee] px-3 py-2.5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-3 md:py-0">
+                      <div key={opt.name} className="grid min-h-[52px] grid-cols-1 content-center gap-2 rounded-[12px] border border-[#eeeeee] px-0 py-2.5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-3 md:px-3 md:py-0">
                         {isColor ? (
                           <>
                             <div className="hidden min-w-0 items-center justify-between md:grid md:grid-cols-[80px_minmax(0,1fr)] md:items-baseline md:gap-2">

@@ -17,20 +17,29 @@ import onderhoudsvriendelijkV2Img from "@/assets/onderhoudsvriendelijk-v2.png.as
 const buildSpecSections = (
   widthLabel: string,
   heightLabel: string,
-  configSummary?: { colorLabel?: string; modulesLabel?: string },
+  modelLabel: string,
+  configSummary?: {
+    colorLabel?: string;
+    modulesLabel?: string;
+    tvSizeLabel?: string;
+  },
 ): Array<{ title: string; body: ReactNode }> => [
   {
     title: "Algemeen",
     body: (
-      <p>Wandig Full House is een complete cinewall met open vakken, gesloten kastruimte en een centraal tv-vlak. Ontworpen in Nederland, met de hand gebouwd in onze eigen werkplaats en plug &amp; play voorbereid voor jouw woonkamer.</p>
+      <p>Wandig {modelLabel} is een modulaire cinewall met een centraal tv-vlak. Ontworpen in Nederland, met de hand gebouwd in onze eigen werkplaats en plug &amp; play voorbereid voor jouw woonkamer.</p>
     ),
   },
   {
     title: "Afmetingen",
     body: (
       <ul className="space-y-1.5">
+        <li className="flex justify-between gap-4"><span>Model</span><span className="text-[#071426]">{modelLabel}</span></li>
         {configSummary?.colorLabel && (
           <li className="flex justify-between gap-4"><span>Kleur</span><span className="text-[#071426]">{configSummary.colorLabel}</span></li>
+        )}
+        {configSummary?.tvSizeLabel && (
+          <li className="flex justify-between gap-4"><span>Tv-maat</span><span className="text-[#071426]">{configSummary.tvSizeLabel}</span></li>
         )}
         {configSummary?.modulesLabel && (
           <li className="flex justify-between gap-4"><span>Modules</span><span className="text-[#071426]">{configSummary.modulesLabel}</span></li>
@@ -38,7 +47,7 @@ const buildSpecSections = (
         <li className="flex justify-between gap-4"><span>Breedte</span><span className="text-[#071426]">{widthLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Hoogte</span><span className="text-[#071426]">{heightLabel} cm</span></li>
         <li className="flex justify-between gap-4"><span>Diepte</span><span className="text-[#071426]">32 cm</span></li>
-        <li className="flex justify-between gap-4"><span>Tv-uitsparing</span><span className="text-[#071426]">tot 80 inch</span></li>
+        <li className="flex justify-between gap-4"><span>Tv-uitsparing</span><span className="text-[#071426]">40–85 inch</span></li>
       </ul>
     ),
   },
@@ -50,7 +59,7 @@ const buildSpecSections = (
   },
   {
     title: "Tv-formaat",
-    body: <p>Geschikt voor tv&apos;s van 40 tot en met 80 inch. De tv wordt centraal gemonteerd met een VESA-compatibele wandsteun (niet inbegrepen). Kabels lopen onzichtbaar door de kabeldoorvoer in de achterwand.</p>,
+    body: <p>Geschikt voor tv&apos;s van 40 tot en met 85 inch. De tv wordt centraal gemonteerd met een VESA-compatibele wandsteun (niet inbegrepen). Kabels lopen onzichtbaar door de kabeldoorvoer in de achterwand.</p>,
   },
   {
     title: "Kleuren",
@@ -73,16 +82,22 @@ const buildSpecSections = (
 export function SpecificationsSection({
   widthLabel = "240",
   heightLabel = "180",
+  modelLabel = "Full House",
   preview,
   configSummary,
 }: {
   widthLabel?: string;
   heightLabel?: string;
+  modelLabel?: string;
   preview?: ReactNode;
-  configSummary?: { colorLabel?: string; modulesLabel?: string };
+  configSummary?: {
+    colorLabel?: string;
+    modulesLabel?: string;
+    tvSizeLabel?: string;
+  };
 } = {}) {
   const [openSpecs, setOpenSpecs] = useState<Record<string, boolean>>({});
-  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel, configSummary);
+  const SPEC_SECTIONS = buildSpecSections(widthLabel, heightLabel, modelLabel, configSummary);
 
 
   return (
@@ -162,7 +177,7 @@ export function SpecificationsSection({
                 Specificaties
               </h2>
               <p className="mt-3 max-w-md text-[14px] leading-relaxed text-[#071426]/55">
-                Alles wat je moet weten over de Wandig Full House cinewall, van afmetingen tot onderhoud.
+                Alles wat je moet weten over de Wandig {modelLabel} cinewall, van afmetingen tot onderhoud.
               </p>
             </header>
 

@@ -875,8 +875,10 @@ function ConfiguratorPage() {
         <SpecificationsSection
           widthLabel={width}
           heightLabel={String(tv.wallHeight)}
+          modelLabel={hasLeft && hasRight ? "Full House" : hasLeft || hasRight ? "Duo" : "Solo"}
           configSummary={{
             colorLabel: displayWandigColor(color),
+            tvSizeLabel: tv.shopifyValue,
             modulesLabel:
               hasLeft && hasRight
                 ? "Midden + links en rechts (3)"

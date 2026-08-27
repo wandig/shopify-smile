@@ -7,7 +7,11 @@ import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, formatPrice, type Shopif
 import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
 import { FreeColorSamples } from "@/components/FreeColorSamples";
 import { FULL_HOUSE_COLORS, displayWandigColor, wandigSwatchStyle } from "@/lib/wandig-colors";
-import { FULL_HOUSE_FRONT_IMAGES, WandigSpecPreview } from "@/components/WandigModulePreview";
+import {
+  FULL_HOUSE_FRONT_IMAGES,
+  WandigSpecPreview,
+  getConfiguratorModuleAsset,
+} from "@/components/WandigModulePreview";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
@@ -893,17 +897,25 @@ function ProductView({ product }: { product: ProductNode }) {
   const selectedLayout = layoutKey ? selected[layoutKey] : undefined;
 
 
-  // Afmetingen volgen de gekozen tv-maat (midden module + twee zijmodules)
+  // Afmetingen volgen de gekozen tv-maat én het gekozen model.
   const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
   const sizeIndex = sizeOption && selectedSize ? sizeOption.values.indexOf(selectedSize) : -1;
   const dimensionSize = WANDIG_SIZES[sizeIndex >= 0 ? sizeIndex : 0];
   const isSolo = product.handle === "solo";
-  const specWidthLabel = formatCm(wandigWidth(dimensionSize, isSolo ? 0 : 2));
+  const isDuo = product.handle === "duo";
+  const isFullHouse = product.handle === "full-house";
+  const sideModuleCount = isFullHouse ? 2 : isDuo ? 1 : 0;
+  const specWidthLabel = formatCm(wandigWidth(dimensionSize, sideModuleCount));
   const specHeightLabel = String(dimensionSize.wallHeight);
 
-  // Kleurpreview in de specificaties: alle modules in de gekozen kleur
-  const specPreviewColor = selectedColor ?? FULL_HOUSE_COLORS[0];
-  const specPreviewSource = useMemo(() => {
+  // De specificatiepreview gebruikt exact dezelfde foto en uitsneden als de
+  // configurator, gekoppeld aan kleur + tv-maat.
+  const specPreviewColor = displayWandigColor(selectedColor ?? FULL_HOUSE_COLORS[0]);
+  const specModuleAsset = getConfiguratorModuleAsset(
+    specPreviewColor,
+    dimensionSize.label,
+  );
+  const fallbackSpecPreviewSource = useMemo(() => {
     if (specPreviewColor === FULL_HOUSE_COLORS[0]) return null;
     const matchingVariant = variants.find((v) => {
       const selections = new Map(
@@ -917,6 +929,18 @@ function ProductView({ product }: { product: ProductNode }) {
     });
     return matchingVariant?.image?.url ?? FULL_HOUSE_FRONT_IMAGES[specPreviewColor] ?? null;
   }, [variants, specPreviewColor]);
+  const specPreviewSource = specModuleAsset?.source ?? fallbackSpecPreviewSource;
+  const duoIsRight = /rechts|right/i.test(selectedLayout ?? "");
+  const specHasLeft = isFullHouse || (isDuo && !duoIsRight);
+  const specHasRight = isFullHouse || (isDuo && duoIsRight);
+  const specModelLabel = isFullHouse ? "Full House" : isDuo ? "Duo" : "Solo";
+  const specModulesLabel = isFullHouse
+    ? "Links + midden + rechts"
+    : isDuo
+      ? duoIsRight
+        ? "Midden + rechts"
+        : "Links + midden"
+      : "Midden";
 
   // Shopify uploads the photos per variant as one consecutive block, starting at
   // the variant's own image. So we slice from that anchor up to the next anchor.
@@ -1881,18 +1905,20 @@ function ProductView({ product }: { product: ProductNode }) {
       <SpecificationsSection
         widthLabel={specWidthLabel}
         heightLabel={specHeightLabel}
+        modelLabel={specModelLabel}
+        configSummary={{
+          colorLabel: specPreviewColor,
+          tvSizeLabel: dimensionSize.label,
+          modulesLabel: specModulesLabel,
+        }}
         preview={
-          isSolo ? (
-            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
-              <Img
-                src={galleryItems[0]?.src}
-                alt={`Wandig Solo in ${specPreviewColor}`}
-                className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"
-              />
-            </div>
-          ) : (
-            <WandigSpecPreview color={specPreviewColor} source={specPreviewSource} />
-          )
+          <WandigSpecPreview
+            color={specPreviewColor}
+            source={specPreviewSource}
+            crops={specModuleAsset?.crops}
+            hasLeft={specHasLeft}
+            hasRight={specHasRight}
+          />
         }
       />
 

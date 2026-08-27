@@ -163,6 +163,23 @@ const CASHMERE_77_85_CROPS: ModuleCropSet = {
   right: { left: 1658 / 2046, top: 137 / 1535, width: 336 / 2046, height: 1255 / 1535 },
 };
 
+/** Cashmeregrijs needs 1px extra trimmed from the left edge of the center module. */
+const trimCenterLeft = (crops: ModuleCropSet, px: number): ModuleCropSet => ({
+  ...crops,
+  center: {
+    ...crops.center,
+    left: crops.center.left + px / 2046,
+    width: crops.center.width - px / 2046,
+  },
+});
+
+const CASHMERE_TRIM_40_55_CROPS = trimCenterLeft(CASHMERE_40_55_CROPS, 1);
+const CASHMERE_TRIM_58_65_CROPS = trimCenterLeft(CASHMERE_58_65_CROPS, 1);
+const CASHMERE_TRIM_70_75_CROPS = trimCenterLeft(CASHMERE_70_75_CROPS, 1);
+const CASHMERE_TRIM_77_85_CROPS = trimCenterLeft(CASHMERE_77_85_CROPS, 1);
+
+
+
 /**
  * Front views supplied for a specific finish and TV size. New photography can
  * be added here without changing the configurator rendering logic.
@@ -210,19 +227,19 @@ export const CONFIGURATOR_MODULE_ASSETS: Record<
   Cashmeregrijs: {
     "40 - 55 inch": {
       source: cashmere4055Front,
-      crops: CASHMERE_40_55_CROPS,
+      crops: CASHMERE_TRIM_40_55_CROPS,
     },
     "58 - 65 inch": {
       source: cashmere5865Front,
-      crops: CASHMERE_58_65_CROPS,
+      crops: CASHMERE_TRIM_58_65_CROPS,
     },
     "70 - 75 inch": {
       source: cashmere7075Front,
-      crops: CASHMERE_70_75_CROPS,
+      crops: CASHMERE_TRIM_70_75_CROPS,
     },
     "77 - 85 inch": {
       source: cashmere7785Front,
-      crops: CASHMERE_77_85_CROPS,
+      crops: CASHMERE_TRIM_77_85_CROPS,
     },
   },
   Kristalwit: {

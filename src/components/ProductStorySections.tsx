@@ -2,7 +2,7 @@ import { Img } from "@/components/Img";
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import cinewallSchema from "@/assets/cinewall-schema-fullhouse.png.asset.json";
-import beforeFullHouseAsset from "@/assets/before-livingroom.png.asset.json";
+import beforeFullHouseAsset from "@/assets/before-full-house-v2.png.asset.json";
 import afterFullHouseAsset from "@/assets/after-livingroom.jpg.asset.json";
 import plugAndPlayIcon from "@/assets/plug-and-play-icon.svg.asset.json";
 import warrantyIcon from "@/assets/warranty-icon.svg.asset.json";

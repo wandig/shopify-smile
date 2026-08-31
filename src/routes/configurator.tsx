@@ -809,13 +809,11 @@ function ConfiguratorPage() {
             <div className="pt-3">
               <Button
                 type="button"
-                onClick={() =>
-                  toast.success("Samenstelling opgeslagen", {
-                    description: `Tv ${tv.value} · ${color} · ${width} cm · ${euro(total)}`,
-                  })
-                }
+                onClick={handleAddToCart}
+                disabled={cartLoading}
                 className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] px-6 text-sm font-bold text-white shadow-none transition hover:translate-y-0 hover:from-[#e36820] hover:to-[#d8601b] hover:shadow-none active:translate-y-0 active:scale-100"
               >
+
                 <span className="relative block h-full w-full overflow-hidden">
                   <span className="absolute inset-0 flex items-center justify-center gap-1.5 font-[200] tracking-[0.03em] transition-transform duration-300 ease-out group-hover:-translate-y-full">
                     <ShoppingBag className="h-5 w-5" strokeWidth={1.6} />Voeg samenstelling toe

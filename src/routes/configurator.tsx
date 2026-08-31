@@ -445,10 +445,8 @@ function ConfiguratorPage() {
   const hasShopifyPrice = shopifyBasePrice > 0;
   const fallbackBasePrice = model === "solo" ? 980 : model === "duo" ? BASE_PRICE : 1995;
   const configuredBasePrice = hasShopifyPrice ? shopifyBasePrice : fallbackBasePrice;
-  // Shopify-variantprijzen zijn al compleet (opstelling + tv-maat), dus dan geen opslag optellen.
-  const optionPriceAdjustment = hasShopifyPrice
-    ? 0
-    : tv.price + (hasLeft && hasRight ? RIGHT_MODULE_PRICE : 0) + (model === "duo" ? 0 : 0);
+  const optionPriceAdjustment = hasShopifyPrice ? 0 : tv.price;
+
 
   const total = useMemo(
     () => configuredBasePrice + optionPriceAdjustment,

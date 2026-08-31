@@ -594,10 +594,12 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         </div>
         <div className="mt-auto flex items-end justify-between gap-3 pt-6">
           <div>
-            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
-              <Stars />
-              <span>{p.reviews}</span>
-            </div>
+            {showReviews && (
+              <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
+                <Stars />
+                <span>{p.reviews}</span>
+              </div>
+            )}
             <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
             <div className="mt-2">
               <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} />

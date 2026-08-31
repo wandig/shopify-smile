@@ -423,29 +423,33 @@ function ConfiguratorPage() {
   const width = Number.isInteger(widthCm)
     ? String(widthCm)
     : widthCm.toFixed(1).replace(".", ",");
-  const selectedShopifyVariant = useMemo(() => {
-    const shopifyArrangement = hasRight && !hasLeft ? "Rechts" : "Links";
+  // Welk Wandig-model hoort bij deze samenstelling?
+  const moduleCount = (hasLeft ? 1 : 0) + (hasRight ? 1 : 0);
+  const model = moduleCount === 2 ? "full-house" : moduleCount === 1 ? "duo" : "solo";
+  const arrangement: "Links" | "Rechts" | null =
+    model === "solo" ? null : hasRight && !hasLeft ? "Rechts" : "Links";
+  const modelLabel =
+    model === "full-house"
+      ? "Wandig Full House"
+      : model === "duo"
+        ? `Wandig Duo ${arrangement === "Rechts" ? "Rechts" : "Links"}`
+        : "Wandig Solo";
+  const activeProduct = model === "solo" ? soloProduct : model === "duo" ? duoProduct : fullHouseProduct;
+  const activeTvSize = model === "duo" ? tv.shopifyValue : tv.soloShopifyValue;
 
-    return fullHouseProduct?.variants.edges
-      .map((edge) => edge.node)
-      .find((variant) => {
-        const selections = new Map(
-          variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
-        );
-        return (
-          selections.get("kleur") === color &&
-          selections.get("opstelling") === shopifyArrangement &&
-          selections.get("maat tv") === tv.shopifyValue
-        );
-      });
-  }, [color, fullHouseProduct, hasLeft, hasRight, tv.shopifyValue]);
+  const selectedShopifyVariant = useMemo(
+    () => findWandigVariant(activeProduct, color, arrangement, activeTvSize),
+    [activeProduct, arrangement, color, activeTvSize],
+  );
   const shopifyBasePrice = Number(selectedShopifyVariant?.price.amount ?? 0);
   const hasShopifyPrice = shopifyBasePrice > 0;
-  const configuredBasePrice = hasShopifyPrice ? shopifyBasePrice : BASE_PRICE;
+  const fallbackBasePrice = model === "solo" ? 980 : model === "duo" ? BASE_PRICE : 1995;
+  const configuredBasePrice = hasShopifyPrice ? shopifyBasePrice : fallbackBasePrice;
   // Shopify-variantprijzen zijn al compleet (opstelling + tv-maat), dus dan geen opslag optellen.
   const optionPriceAdjustment = hasShopifyPrice
     ? 0
-    : tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0);
+    : tv.price + (hasLeft && hasRight ? RIGHT_MODULE_PRICE : 0) + (model === "duo" ? 0 : 0);
+
   const total = useMemo(
     () => configuredBasePrice + optionPriceAdjustment,
     [configuredBasePrice, optionPriceAdjustment],

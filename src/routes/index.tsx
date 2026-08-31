@@ -161,14 +161,16 @@ function HeroSection() {
         <div className="mt-8">
           <PrimaryButton to="/configurator">Stel zelf samen</PrimaryButton>
         </div>
-        <div className="mt-6 flex items-center gap-2 text-[12px] tracking-[0.01em]">
-          <span className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
-            ))}
-          </span>
-          <span className="opacity-95">1000+ beoordelingen</span>
-        </div>
+        {showReviews && (
+          <div className="mt-6 flex items-center gap-2 text-[12px] tracking-[0.01em]">
+            <span className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
+              ))}
+            </span>
+            <span className="opacity-95">1000+ beoordelingen</span>
+          </div>
+        )}
       </div>
     </section>
   );

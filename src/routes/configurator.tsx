@@ -486,6 +486,31 @@ function ConfiguratorPage() {
   const colorModuleSource = colorModuleAsset.source;
   const previousModuleSource = previousModuleAsset?.source ?? null;
 
+  const handleAddToCart = async () => {
+    if (!activeProduct || !selectedShopifyVariant) {
+      toast.error("Deze samenstelling is nu niet beschikbaar", {
+        description: `${modelLabel} · ${displayWandigColor(color)} · ${activeTvSize}`,
+        position: "top-center",
+      });
+      return;
+    }
+
+    await addItem({
+      product: { node: activeProduct },
+      variantId: selectedShopifyVariant.id,
+      variantTitle: selectedShopifyVariant.title,
+      price: selectedShopifyVariant.price,
+      quantity: 1,
+      selectedOptions: selectedShopifyVariant.selectedOptions,
+    });
+
+    toast.success(`${modelLabel} toegevoegd`, {
+      description: `${displayWandigColor(color)} · ${activeTvSize} · ${width} cm · ${euro(total)}`,
+      position: "top-center",
+    });
+  };
+
+
   return (
     <main className="min-h-screen bg-[#f8f6f3]">
       <div className="w-full">

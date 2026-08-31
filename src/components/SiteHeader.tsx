@@ -1,4 +1,5 @@
 import { Img } from "@/components/Img";
+import { showReviews } from "@/lib/features";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
@@ -199,10 +200,12 @@ export function SiteHeader() {
             <span>Gratis levering &amp; retourneren</span>
             <span>10 jaar garantie</span>
           </div>
-          <div className="flex items-center gap-1.5 md:mx-auto md:absolute md:left-1/2 md:-translate-x-1/2">
-            <StarRating />
-            <span className="font-medium">1000+ beoordelingen</span>
-          </div>
+          {showReviews && (
+            <div className="flex items-center gap-1.5 md:mx-auto md:absolute md:left-1/2 md:-translate-x-1/2">
+              <StarRating />
+              <span className="font-medium">1000+ beoordelingen</span>
+            </div>
+          )}
           <div className="hidden md:flex items-center gap-1 opacity-80">
             <span>NL | Dutch</span>
             <Globe className="h-3 w-3" />

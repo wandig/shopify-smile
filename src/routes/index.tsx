@@ -1,4 +1,5 @@
 import { Img } from "@/components/Img";
+import { showReviews } from "@/lib/features";
 import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import press1 from "@/assets/press/press1.svg";
@@ -160,14 +161,16 @@ function HeroSection() {
         <div className="mt-8">
           <PrimaryButton to="/configurator">Stel zelf samen</PrimaryButton>
         </div>
-        <div className="mt-6 flex items-center gap-2 text-[12px] tracking-[0.01em]">
-          <span className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
-            ))}
-          </span>
-          <span className="opacity-95">1000+ beoordelingen</span>
-        </div>
+        {showReviews && (
+          <div className="mt-6 flex items-center gap-2 text-[12px] tracking-[0.01em]">
+            <span className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-3.5 w-3.5 fill-[#ef7027] text-[#ef7027]" />
+              ))}
+            </span>
+            <span className="opacity-95">1000+ beoordelingen</span>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -532,10 +535,12 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 
         <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
           <div>
-            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
-              <Stars />
-              <span>{p.reviews}</span>
-            </div>
+            {showReviews && (
+              <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
+                <Stars />
+                <span>{p.reviews}</span>
+              </div>
+            )}
             <div className="mt-1 text-[13px] tracking-[0.01em] text-white/90">{p.meta}</div>
             <div className="mt-2">
               <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} light />
@@ -589,10 +594,12 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         </div>
         <div className="mt-auto flex items-end justify-between gap-3 pt-6">
           <div>
-            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
-              <Stars />
-              <span>{p.reviews}</span>
-            </div>
+            {showReviews && (
+              <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
+                <Stars />
+                <span>{p.reviews}</span>
+              </div>
+            )}
             <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
             <div className="mt-2">
               <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} />
@@ -1118,7 +1125,7 @@ function PuzzleImgIcon({ className }: { className?: string }) {
 
 function TrustBannerSection() {
   const items = [
-    { icon: Shield, label: "4,7/5 klantbeoordeling" },
+    ...(showReviews ? [{ icon: Shield, label: "4,7/5 klantbeoordeling" }] : []),
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 dagen proefkijken" },
     { icon: PuzzleImgIcon, label: "10 jaar garantie" },
@@ -1174,7 +1181,7 @@ function Home() {
       <PressMarqueeSection />
       <CustomerGallerySection />
 
-      <ReviewsSection />
+      {showReviews && <ReviewsSection />}
       <ColorSamplesSection />
       <FaqContactSection />
       <QuoteVideoSection />

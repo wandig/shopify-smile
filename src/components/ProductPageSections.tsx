@@ -1,4 +1,5 @@
 import { Img } from "@/components/Img";
+import { showReviews } from "@/lib/features";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";
@@ -889,7 +890,7 @@ export function PuzzleIcon({ className }: { className?: string; strokeWidth?: nu
 
 export function TrustBannerSection() {
   const items = [
-    { icon: ShieldOnlyIcon, label: "4,7/5 klantbeoordeling" },
+    ...(showReviews ? [{ icon: ShieldOnlyIcon, label: "4,7/5 klantbeoordeling" }] : []),
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 dagen proefkijken" },
     { icon: PuzzleIcon, label: "10 jaar garantie" },

@@ -68,15 +68,16 @@ export const Route = createFileRoute("/configurator")({
 });
 
 const TV_OPTIONS = [
-  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", price: 0, wallHeight: 180, centerWidth: 137, leftWidth: 61.3, rightWidth: 41.7 },
-  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", price: 150, wallHeight: 180, centerWidth: 158, leftWidth: 54.7, rightWidth: 37.3 },
-  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 180, leftWidth: 47.5, rightWidth: 32.5 },
-  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", price: 350, wallHeight: 190, centerWidth: 202, leftWidth: 40.3, rightWidth: 27.7 },
+  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", soloShopifyValue: "40 - 50 inch", price: 0, wallHeight: 180, centerWidth: 137, leftWidth: 61.3, rightWidth: 41.7 },
+  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", soloShopifyValue: "55 - 65 inch", price: 150, wallHeight: 180, centerWidth: 158, leftWidth: 54.7, rightWidth: 37.3 },
+  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", soloShopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 180, leftWidth: 47.5, rightWidth: 32.5 },
+  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", soloShopifyValue: "80 - 85 inch", price: 350, wallHeight: 190, centerWidth: 202, leftWidth: 40.3, rightWidth: 27.7 },
 ];
 
 const BASE_PRICE = 1699;
 const LEFT_MODULE_PRICE = 475;
 const RIGHT_MODULE_PRICE = 475;
+
 
 function ConfiguratorPreviewAssembly({
   color,

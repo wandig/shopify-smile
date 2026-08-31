@@ -196,15 +196,17 @@ function Producten() {
                 </Link>
               </div>
 
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 md:mt-7 lg:justify-start">
-                <div className="flex items-center gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" />
-                  ))}
+              {showReviews && (
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 md:mt-7 lg:justify-start">
+                  <div className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-[#ef7027] text-[#ef7027]" />
+                    ))}
+                  </div>
+                  <span className="text-sm font-semibold text-[#1f1915]">4,8/5</span>
+                  <span className="text-sm text-[#1f1915]/55">uit 1.000+ beoordelingen</span>
                 </div>
-                <span className="text-sm font-semibold text-[#1f1915]">4,8/5</span>
-                <span className="text-sm text-[#1f1915]/55">uit 1.000+ beoordelingen</span>
-              </div>
+              )}
             </div>
           </div>
 

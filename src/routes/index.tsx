@@ -1125,7 +1125,7 @@ function PuzzleImgIcon({ className }: { className?: string }) {
 
 function TrustBannerSection() {
   const items = [
-    { icon: Shield, label: "4,7/5 klantbeoordeling" },
+    ...(showReviews ? [{ icon: Shield, label: "4,7/5 klantbeoordeling" }] : []),
     { icon: Truck, label: "Gratis levering & retourneren" },
     { icon: CalendarClock, label: "100 dagen proefkijken" },
     { icon: PuzzleImgIcon, label: "10 jaar garantie" },

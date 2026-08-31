@@ -127,6 +127,8 @@ export function SiteFooter() {
             <Phone className="h-4 w-4" strokeWidth={1.5} />
             +31 85 303 0997
           </a>
+          <span className="text-white/50">KvK 97718092</span>
+          <span className="text-white/50">BTW NL868199795B01</span>
           <span className="text-white/50 ml-auto">© {new Date().getFullYear()} Wandig. Alle rechten voorbehouden.</span>
           <span className="text-white/50">Gemaakt in Nederland</span>
         </div>

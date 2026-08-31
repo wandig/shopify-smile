@@ -1181,7 +1181,7 @@ function Home() {
       <PressMarqueeSection />
       <CustomerGallerySection />
 
-      <ReviewsSection />
+      {showReviews && <ReviewsSection />}
       <ColorSamplesSection />
       <FaqContactSection />
       <QuoteVideoSection />

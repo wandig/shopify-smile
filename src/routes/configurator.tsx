@@ -44,6 +44,8 @@ const fullHouseRoomImg = fullHouseRoomImgAsset.url;
 import detailDesignImgAsset from "@/assets/detail-design.jpg.asset.json";
 const detailDesignImg = detailDesignImgAsset.url;
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import { useCartStore } from "@/stores/cartStore";
+
 import { FULL_HOUSE_COLORS, displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
 
 export const Route = createFileRoute("/configurator")({

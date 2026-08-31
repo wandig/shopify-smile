@@ -1,4 +1,5 @@
 import { Img } from "@/components/Img";
+import { showReviews } from "@/lib/features";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { subscribeNewsletter } from "@/lib/api/newsletter.functions";
 import { useQuery } from "@tanstack/react-query";

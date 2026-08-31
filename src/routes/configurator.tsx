@@ -285,15 +285,45 @@ function InfoDrawerLink({ topic, className }: { topic: InfoTopicKey; className?:
 }
 
 
-function ConfiguratorPage() {
-  const { data: fullHouseProduct } = useQuery({
-    queryKey: ["product", "full-house"],
+function useWandigProduct(handle: string) {
+  return useQuery({
+    queryKey: ["product", handle],
     queryFn: async () => {
-      const response = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle: "full-house" });
+      const response = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle });
       return (response?.data?.product ?? null) as ShopifyProduct["node"] | null;
     },
     staleTime: 5 * 60 * 1000,
   });
+}
+
+/** Vindt de variant die hoort bij kleur / opstelling / tv-maat. */
+function findWandigVariant(
+  product: ShopifyProduct["node"] | null | undefined,
+  color: string,
+  arrangement: "Links" | "Rechts" | null,
+  tvSize: string,
+) {
+  return product?.variants.edges
+    .map((edge) => edge.node)
+    .find((variant) => {
+      const selections = new Map(
+        variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
+      );
+      return (
+        selections.get("kleur") === color &&
+        selections.get("maat tv") === tvSize &&
+        (arrangement === null || selections.get("opstelling") === arrangement)
+      );
+    });
+}
+
+function ConfiguratorPage() {
+  const { data: fullHouseProduct } = useWandigProduct("full-house");
+  const { data: soloProduct } = useWandigProduct("solo");
+  const { data: duoProduct } = useWandigProduct("duo");
+  const addItem = useCartStore((state) => state.addItem);
+  const cartLoading = useCartStore((state) => state.isLoading);
+
 
   const colors = useMemo(() => {
     const liveColors = fullHouseProduct?.options

@@ -1962,7 +1962,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
       <FaqSection />
 
-      <ReviewsSection />
+      {showReviews && <ReviewsSection />}
 
       <NewsletterContactSection />
 

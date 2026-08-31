@@ -988,7 +988,7 @@ function ConfiguratorPage() {
 
       <FaqSection />
 
-      <ReviewsSection />
+      {showReviews && <ReviewsSection />}
 
       <NewsletterContactSection />
 

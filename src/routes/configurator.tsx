@@ -889,19 +889,21 @@ function ConfiguratorPage() {
           className="mx-auto grid min-h-[198px] max-w-[1500px] grid-cols-1 gap-8 px-7 py-10 text-[#1b1d20] sm:grid-cols-2 lg:grid-cols-[1.05fr_repeat(4,1fr)] lg:items-start lg:gap-7 lg:px-12 lg:py-[52px] xl:px-16"
           style={{ fontFamily: '"Circular-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif' }}
         >
-          <div>
-            <p className="max-w-[225px] text-[11px] leading-[1.45] text-[#474b50]">
-              Gebaseerd op meer dan 1000 beoordelingen van onze klanten
-            </p>
-            <div className="mt-3 flex items-center gap-2">
-              <strong className="text-[22px] font-semibold leading-none tracking-0">4,9/5</strong>
-              <span className="flex items-center gap-0.5" aria-label="5 van 5 sterren">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star key={index} className="h-[17px] w-[17px] fill-current" strokeWidth={0} />
-                ))}
-              </span>
+          {showReviews && (
+            <div>
+              <p className="max-w-[225px] text-[11px] leading-[1.45] text-[#474b50]">
+                Gebaseerd op meer dan 1000 beoordelingen van onze klanten
+              </p>
+              <div className="mt-3 flex items-center gap-2">
+                <strong className="text-[22px] font-semibold leading-none tracking-0">4,9/5</strong>
+                <span className="flex items-center gap-0.5" aria-label="5 van 5 sterren">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star key={index} className="h-[17px] w-[17px] fill-current" strokeWidth={0} />
+                  ))}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
 
           <article className="grid grid-cols-[22px_minmax(0,1fr)] items-start gap-3">
             <Hammer className="mt-0.5 h-[19px] w-[19px]" strokeWidth={1.5} />

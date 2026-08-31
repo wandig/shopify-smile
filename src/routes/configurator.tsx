@@ -44,6 +44,8 @@ const fullHouseRoomImg = fullHouseRoomImgAsset.url;
 import detailDesignImgAsset from "@/assets/detail-design.jpg.asset.json";
 const detailDesignImg = detailDesignImgAsset.url;
 import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import { useCartStore } from "@/stores/cartStore";
+
 import { FULL_HOUSE_COLORS, displayWandigColor, sortWandigColors, wandigSwatchStyle } from "@/lib/wandig-colors";
 
 export const Route = createFileRoute("/configurator")({
@@ -68,15 +70,15 @@ export const Route = createFileRoute("/configurator")({
 });
 
 const TV_OPTIONS = [
-  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", price: 0, wallHeight: 180, centerWidth: 137, leftWidth: 61.3, rightWidth: 41.7 },
-  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", price: 150, wallHeight: 180, centerWidth: 158, leftWidth: 54.7, rightWidth: 37.3 },
-  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 180, leftWidth: 47.5, rightWidth: 32.5 },
-  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", price: 350, wallHeight: 190, centerWidth: 202, leftWidth: 40.3, rightWidth: 27.7 },
+  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", soloShopifyValue: "40 - 50 inch", price: 0, wallHeight: 180, centerWidth: 137, leftWidth: 61.3, rightWidth: 41.7 },
+  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", soloShopifyValue: "55 - 65 inch", price: 150, wallHeight: 180, centerWidth: 158, leftWidth: 54.7, rightWidth: 37.3 },
+  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", soloShopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 180, leftWidth: 47.5, rightWidth: 32.5 },
+  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", soloShopifyValue: "80 - 85 inch", price: 350, wallHeight: 190, centerWidth: 202, leftWidth: 40.3, rightWidth: 27.7 },
 ];
 
-const BASE_PRICE = 1699;
-const LEFT_MODULE_PRICE = 475;
-const RIGHT_MODULE_PRICE = 475;
+const BASE_PRICE = 1690;
+
+
 
 function ConfiguratorPreviewAssembly({
   color,
@@ -284,15 +286,45 @@ function InfoDrawerLink({ topic, className }: { topic: InfoTopicKey; className?:
 }
 
 
-function ConfiguratorPage() {
-  const { data: fullHouseProduct } = useQuery({
-    queryKey: ["product", "full-house"],
+function useWandigProduct(handle: string) {
+  return useQuery({
+    queryKey: ["product", handle],
     queryFn: async () => {
-      const response = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle: "full-house" });
+      const response = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle });
       return (response?.data?.product ?? null) as ShopifyProduct["node"] | null;
     },
     staleTime: 5 * 60 * 1000,
   });
+}
+
+/** Vindt de variant die hoort bij kleur / opstelling / tv-maat. */
+function findWandigVariant(
+  product: ShopifyProduct["node"] | null | undefined,
+  color: string,
+  arrangement: "Links" | "Rechts" | null,
+  tvSize: string,
+) {
+  return product?.variants.edges
+    .map((edge) => edge.node)
+    .find((variant) => {
+      const selections = new Map(
+        variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
+      );
+      return (
+        selections.get("kleur") === color &&
+        selections.get("maat tv") === tvSize &&
+        (arrangement === null || selections.get("opstelling") === arrangement)
+      );
+    });
+}
+
+function ConfiguratorPage() {
+  const { data: fullHouseProduct } = useWandigProduct("full-house");
+  const { data: soloProduct } = useWandigProduct("solo");
+  const { data: duoProduct } = useWandigProduct("duo");
+  const addItem = useCartStore((state) => state.addItem);
+  const cartLoading = useCartStore((state) => state.isLoading);
+
 
   const colors = useMemo(() => {
     const liveColors = fullHouseProduct?.options
@@ -390,29 +422,31 @@ function ConfiguratorPage() {
   const width = Number.isInteger(widthCm)
     ? String(widthCm)
     : widthCm.toFixed(1).replace(".", ",");
-  const selectedShopifyVariant = useMemo(() => {
-    const shopifyArrangement = hasRight && !hasLeft ? "Rechts" : "Links";
+  // Welk Wandig-model hoort bij deze samenstelling?
+  const moduleCount = (hasLeft ? 1 : 0) + (hasRight ? 1 : 0);
+  const model = moduleCount === 2 ? "full-house" : moduleCount === 1 ? "duo" : "solo";
+  const arrangement: "Links" | "Rechts" | null =
+    model === "solo" ? null : hasRight && !hasLeft ? "Rechts" : "Links";
+  const modelLabel =
+    model === "full-house"
+      ? "Wandig Full House"
+      : model === "duo"
+        ? `Wandig Duo ${arrangement === "Rechts" ? "Rechts" : "Links"}`
+        : "Wandig Solo";
+  const activeProduct = model === "solo" ? soloProduct : model === "duo" ? duoProduct : fullHouseProduct;
+  const activeTvSize = model === "duo" ? tv.shopifyValue : tv.soloShopifyValue;
 
-    return fullHouseProduct?.variants.edges
-      .map((edge) => edge.node)
-      .find((variant) => {
-        const selections = new Map(
-          variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
-        );
-        return (
-          selections.get("kleur") === color &&
-          selections.get("opstelling") === shopifyArrangement &&
-          selections.get("maat tv") === tv.shopifyValue
-        );
-      });
-  }, [color, fullHouseProduct, hasLeft, hasRight, tv.shopifyValue]);
+  const selectedShopifyVariant = useMemo(
+    () => findWandigVariant(activeProduct, color, arrangement, activeTvSize),
+    [activeProduct, arrangement, color, activeTvSize],
+  );
   const shopifyBasePrice = Number(selectedShopifyVariant?.price.amount ?? 0);
   const hasShopifyPrice = shopifyBasePrice > 0;
-  const configuredBasePrice = hasShopifyPrice ? shopifyBasePrice : BASE_PRICE;
-  // Shopify-variantprijzen zijn al compleet (opstelling + tv-maat), dus dan geen opslag optellen.
-  const optionPriceAdjustment = hasShopifyPrice
-    ? 0
-    : tv.price + (hasLeft ? LEFT_MODULE_PRICE : 0) + (hasRight ? RIGHT_MODULE_PRICE : 0);
+  const fallbackBasePrice = model === "solo" ? 980 : model === "duo" ? BASE_PRICE : 1995;
+  const configuredBasePrice = hasShopifyPrice ? shopifyBasePrice : fallbackBasePrice;
+  const optionPriceAdjustment = hasShopifyPrice ? 0 : tv.price;
+
+
   const total = useMemo(
     () => configuredBasePrice + optionPriceAdjustment,
     [configuredBasePrice, optionPriceAdjustment],
@@ -451,6 +485,31 @@ function ConfiguratorPage() {
   }, [fullHouseProduct, previousPreviewColor, previousPreviewTvValue, tv.shopifyValue]);
   const colorModuleSource = colorModuleAsset.source;
   const previousModuleSource = previousModuleAsset?.source ?? null;
+
+  const handleAddToCart = async () => {
+    if (!activeProduct || !selectedShopifyVariant) {
+      toast.error("Deze samenstelling is nu niet beschikbaar", {
+        description: `${modelLabel} · ${displayWandigColor(color)} · ${activeTvSize}`,
+        position: "top-center",
+      });
+      return;
+    }
+
+    await addItem({
+      product: { node: activeProduct },
+      variantId: selectedShopifyVariant.id,
+      variantTitle: selectedShopifyVariant.title,
+      price: selectedShopifyVariant.price,
+      quantity: 1,
+      selectedOptions: selectedShopifyVariant.selectedOptions,
+    });
+
+    toast.success(`${modelLabel} toegevoegd`, {
+      description: `${displayWandigColor(color)} · ${activeTvSize} · ${width} cm · ${euro(total)}`,
+      position: "top-center",
+    });
+  };
+
 
   return (
     <main className="min-h-screen bg-[#f8f6f3]">
@@ -750,13 +809,11 @@ function ConfiguratorPage() {
             <div className="pt-3">
               <Button
                 type="button"
-                onClick={() =>
-                  toast.success("Samenstelling opgeslagen", {
-                    description: `Tv ${tv.value} · ${color} · ${width} cm · ${euro(total)}`,
-                  })
-                }
+                onClick={handleAddToCart}
+                disabled={cartLoading}
                 className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] px-6 text-sm font-bold text-white shadow-none transition hover:translate-y-0 hover:from-[#e36820] hover:to-[#d8601b] hover:shadow-none active:translate-y-0 active:scale-100"
               >
+
                 <span className="relative block h-full w-full overflow-hidden">
                   <span className="absolute inset-0 flex items-center justify-center gap-1.5 font-[200] tracking-[0.03em] transition-transform duration-300 ease-out group-hover:-translate-y-full">
                     <ShoppingBag className="h-5 w-5" strokeWidth={1.6} />Voeg samenstelling toe

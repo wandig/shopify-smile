@@ -37,7 +37,7 @@ const CUSTOMER_GALLERY_COLUMNS = [
   {
     width: "w-[200px] md:w-[280px]",
     items: [
-      { src: resolveAssetUrl(klantWoonkamer2Img.url), alt: "Roze cinewall met tv in woonkamer" },
+      { src: resolveAssetUrl(klantWoonkamer2Img.url), alt: "Roze Full House cinewall met tv en decoratie in woonkamer" },
       { src: resolveAssetUrl(klantWoonkamer3Img.url), alt: "Kinderen spelen voor houten cinewall" },
     ],
   },

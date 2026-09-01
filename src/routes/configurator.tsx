@@ -8,6 +8,7 @@ import { CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Hammer, P
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";

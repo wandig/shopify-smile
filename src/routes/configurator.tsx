@@ -81,6 +81,15 @@ const BASE_PRICE = 1690;
 
 
 
+export type LeftModuleVariant = "dicht" | "open";
+
+/** Crop of the open (shelf) left module render, measured on the 1920x1440 source. */
+export const OPEN_LEFT_CROPS: ModuleCropSet = {
+  left: { left: 840 / 1920, top: 170 / 1440, width: 239 / 1920, height: 1100 / 1440 },
+  center: MODULE_CROPS.center,
+  right: MODULE_CROPS.right,
+};
+
 function ConfiguratorPreviewAssembly({
   color,
   source,
@@ -88,6 +97,7 @@ function ConfiguratorPreviewAssembly({
   hasLeft,
   hasRight,
   animateSides,
+  leftVariant = "dicht",
 }: {
   color: string;
   source: string | null;
@@ -95,6 +105,7 @@ function ConfiguratorPreviewAssembly({
   hasLeft: boolean;
   hasRight: boolean;
   animateSides: boolean;
+  leftVariant?: LeftModuleVariant;
 }) {
   const usesLegacyWalnutModules = color === FULL_HOUSE_COLORS[0] && source === null;
   const sideTransition = animateSides
@@ -116,15 +127,27 @@ function ConfiguratorPreviewAssembly({
         }`}
         style={sideTransition}
       >
-        <ConfiguratorModuleImage
-          color={color}
-          position="left"
-          source={source}
-          animate={false}
-          testId={animateSides}
-          crops={crops}
-        />
+        {leftVariant === "open" ? (
+          <CroppedModuleImage
+            color={color}
+            position="left"
+            source={openLeftModule.url}
+            animate={false}
+            testId={animateSides}
+            crops={OPEN_LEFT_CROPS}
+          />
+        ) : (
+          <ConfiguratorModuleImage
+            color={color}
+            position="left"
+            source={source}
+            animate={false}
+            testId={animateSides}
+            crops={crops}
+          />
+        )}
       </div>
+
 
       <div className="relative z-[2] h-full">
         <ConfiguratorModuleImage

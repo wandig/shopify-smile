@@ -367,6 +367,9 @@ function ConfiguratorPage() {
   const [previousPreviewTvValue, setPreviousPreviewTvValue] = useState<string | null>(null);
   const [tv, setTv] = useState(TV_OPTIONS[1]);
   const [hasLeft, setHasLeft] = useState(false);
+  const [leftVariant, setLeftVariant] = useState<LeftModuleVariant>("dicht");
+  const [leftPickerOpen, setLeftPickerOpen] = useState(false);
+
   const [hasRight, setHasRight] = useState(false);
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);

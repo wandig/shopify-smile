@@ -608,7 +608,18 @@ function ConfiguratorPage() {
                 {/* Add / remove left module */}
                 <button
                   type="button"
-                  onClick={() => setHasLeft(!hasLeft)}
+                  onClick={() => {
+                    if (hasLeft) {
+                      setHasLeft(false);
+                      return;
+                    }
+                    if (previewColor === FULL_HOUSE_COLORS[0]) {
+                      setLeftPickerOpen(true);
+                      return;
+                    }
+                    setLeftVariant("dicht");
+                    setHasLeft(true);
+                  }}
                   aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
                   className="absolute left-0 top-1/2 z-[6] flex h-[48.4px] w-[48.4px] -translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027] md:h-11 md:w-11"
                 >
@@ -639,6 +650,9 @@ function ConfiguratorPage() {
                       hasLeft={hasLeft}
                       hasRight={hasRight}
                       animateSides={false}
+                      leftVariant={
+                        previousPreviewColor === FULL_HOUSE_COLORS[0] ? leftVariant : "dicht"
+                      }
                     />
                   </div>
                 )}
@@ -654,8 +668,10 @@ function ConfiguratorPage() {
                     hasLeft={hasLeft}
                     hasRight={hasRight}
                     animateSides
+                    leftVariant={previewColor === FULL_HOUSE_COLORS[0] ? leftVariant : "dicht"}
                   />
                 </div>
+
 
                 {/* Add / remove right module */}
                 <button

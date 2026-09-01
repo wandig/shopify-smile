@@ -637,6 +637,62 @@ function ConfiguratorPage() {
                   </svg>
                 </button>
 
+                <Dialog open={leftPickerOpen} onOpenChange={setLeftPickerOpen}>
+                  <DialogContent className="max-w-[560px] rounded-[20px] border-[#eee7e0] bg-white">
+                    <DialogHeader>
+                      <DialogTitle className="text-[20px] font-semibold text-[#071426]">
+                        Kies je linker module
+                      </DialogTitle>
+                      <DialogDescription className="text-[14px] text-[#5a6472]">
+                        Beide modules klikken naadloos tegen de middenmodule.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid grid-cols-2 gap-3">
+                      {([
+                        { variant: "dicht" as LeftModuleVariant, label: "Met deuren" },
+                        { variant: "open" as LeftModuleVariant, label: "Open vakken" },
+                      ]).map((option) => (
+                        <button
+                          key={option.variant}
+                          type="button"
+                          onClick={() => {
+                            setLeftVariant(option.variant);
+                            setHasLeft(true);
+                            setLeftPickerOpen(false);
+                          }}
+                          className={`group flex flex-col items-center gap-3 rounded-[12px] border-2 bg-[#f7f7f7] p-4 transition-colors ${
+                            leftVariant === option.variant
+                              ? "border-[#ef8874]"
+                              : "border-transparent hover:border-[#e8e2dc]"
+                          }`}
+                        >
+                          <div className="flex h-[180px] items-end justify-center">
+                            <CroppedModuleImage
+                              color={FULL_HOUSE_COLORS[0]}
+                              position="left"
+                              source={
+                                option.variant === "open"
+                                  ? openLeftModule.url
+                                  : (colorModuleSource ?? openLeftModule.url)
+                              }
+                              animate={false}
+                              testId={false}
+                              crops={
+                                option.variant === "open" ? OPEN_LEFT_CROPS : colorModuleAsset.crops
+                              }
+                            />
+                          </div>
+                          <span className="text-[14px] font-semibold text-[#071426]">
+                            {option.label}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+
+
                 {previousPreviewColor && previousModuleAsset && (
                   <div
                     key={`previous-${previousPreviewColor}-${previousPreviewTvValue}`}

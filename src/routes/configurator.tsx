@@ -124,9 +124,11 @@ function ConfiguratorPreviewAssembly({
   return (
     <div className="flex h-full items-end justify-center">
       <div
-        className={`relative z-[1] mr-[-3px] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
+        className={`relative z-[1] mr-[-3px] translate-y-[0.25px] overflow-hidden ${
+          leftVariant === "open" ? "h-full" : "h-[calc(100%_+_0.4px)]"
+        } ${
           hasLeft
-            ? "max-w-[600px] translate-x-0 opacity-100"
+            ? `max-w-[600px] opacity-100 ${leftVariant === "open" ? "translate-x-[1px]" : "translate-x-0"}`
             : "max-w-0 translate-x-5 opacity-0"
         }`}
         style={sideTransition}

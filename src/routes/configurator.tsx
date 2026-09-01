@@ -8,6 +8,7 @@ import { CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Hammer, P
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 import { PaymentOptionsBadges } from "@/components/PaymentOptionsBadges";
@@ -23,6 +24,7 @@ import {
 import {
   CONFIGURATOR_MODULE_ASSETS,
   ConfiguratorModuleImage,
+  CroppedModuleImage,
   FULL_HOUSE_FRONT_IMAGES,
   MODULE_CROPS,
   WandigSpecPreview,
@@ -30,6 +32,8 @@ import {
   type ModuleCropSet,
   type ModulePosition,
 } from "@/components/WandigModulePreview";
+import openLeftModule from "@/assets/configurator/walnootbruin-links-open.png.asset.json";
+
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";
 import werkplaatsImgAsset from "@/assets/werkplaats.jpg.asset.json";
@@ -81,6 +85,15 @@ const BASE_PRICE = 1690;
 
 
 
+export type LeftModuleVariant = "dicht" | "open";
+
+/** Crop of the open (shelf) left module render, measured on the 1920x1440 source. */
+export const OPEN_LEFT_CROPS: ModuleCropSet = {
+  left: { left: 840 / 1920, top: 170 / 1440, width: 239 / 1920, height: 1100 / 1440 },
+  center: MODULE_CROPS.center,
+  right: MODULE_CROPS.right,
+};
+
 function ConfiguratorPreviewAssembly({
   color,
   source,
@@ -88,6 +101,7 @@ function ConfiguratorPreviewAssembly({
   hasLeft,
   hasRight,
   animateSides,
+  leftVariant = "dicht",
 }: {
   color: string;
   source: string | null;
@@ -95,6 +109,7 @@ function ConfiguratorPreviewAssembly({
   hasLeft: boolean;
   hasRight: boolean;
   animateSides: boolean;
+  leftVariant?: LeftModuleVariant;
 }) {
   const usesLegacyWalnutModules = color === FULL_HOUSE_COLORS[0] && source === null;
   const sideTransition = animateSides
@@ -116,15 +131,27 @@ function ConfiguratorPreviewAssembly({
         }`}
         style={sideTransition}
       >
-        <ConfiguratorModuleImage
-          color={color}
-          position="left"
-          source={source}
-          animate={false}
-          testId={animateSides}
-          crops={crops}
-        />
+        {leftVariant === "open" ? (
+          <CroppedModuleImage
+            color={color}
+            position="left"
+            source={openLeftModule.url}
+            animate={false}
+            testId={animateSides}
+            crops={OPEN_LEFT_CROPS}
+          />
+        ) : (
+          <ConfiguratorModuleImage
+            color={color}
+            position="left"
+            source={source}
+            animate={false}
+            testId={animateSides}
+            crops={crops}
+          />
+        )}
       </div>
+
 
       <div className="relative z-[2] h-full">
         <ConfiguratorModuleImage
@@ -341,6 +368,9 @@ function ConfiguratorPage() {
   const [previousPreviewTvValue, setPreviousPreviewTvValue] = useState<string | null>(null);
   const [tv, setTv] = useState(TV_OPTIONS[1]);
   const [hasLeft, setHasLeft] = useState(false);
+  const [leftVariant, setLeftVariant] = useState<LeftModuleVariant>("dicht");
+  const [leftPickerOpen, setLeftPickerOpen] = useState(false);
+
   const [hasRight, setHasRight] = useState(false);
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
@@ -579,7 +609,18 @@ function ConfiguratorPage() {
                 {/* Add / remove left module */}
                 <button
                   type="button"
-                  onClick={() => setHasLeft(!hasLeft)}
+                  onClick={() => {
+                    if (hasLeft) {
+                      setHasLeft(false);
+                      return;
+                    }
+                    if (previewColor === FULL_HOUSE_COLORS[0]) {
+                      setLeftPickerOpen(true);
+                      return;
+                    }
+                    setLeftVariant("dicht");
+                    setHasLeft(true);
+                  }}
                   aria-label={hasLeft ? "Linker module verwijderen" : "Linker module toevoegen"}
                   className="absolute left-0 top-1/2 z-[6] flex h-[48.4px] w-[48.4px] -translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027] md:h-11 md:w-11"
                 >
@@ -597,6 +638,62 @@ function ConfiguratorPage() {
                   </svg>
                 </button>
 
+                <Dialog open={leftPickerOpen} onOpenChange={setLeftPickerOpen}>
+                  <DialogContent className="max-w-[560px] rounded-[20px] border-[#eee7e0] bg-white">
+                    <DialogHeader>
+                      <DialogTitle className="text-[20px] font-semibold text-[#071426]">
+                        Kies je linker module
+                      </DialogTitle>
+                      <DialogDescription className="text-[14px] text-[#5a6472]">
+                        Beide modules klikken naadloos tegen de middenmodule.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid grid-cols-2 gap-3">
+                      {([
+                        { variant: "dicht" as LeftModuleVariant, label: "Met deuren" },
+                        { variant: "open" as LeftModuleVariant, label: "Open vakken" },
+                      ]).map((option) => (
+                        <button
+                          key={option.variant}
+                          type="button"
+                          onClick={() => {
+                            setLeftVariant(option.variant);
+                            setHasLeft(true);
+                            setLeftPickerOpen(false);
+                          }}
+                          className={`group flex flex-col items-center gap-3 rounded-[12px] border-2 bg-[#f7f7f7] p-4 transition-colors ${
+                            leftVariant === option.variant
+                              ? "border-[#ef8874]"
+                              : "border-transparent hover:border-[#e8e2dc]"
+                          }`}
+                        >
+                          <div className="flex h-[180px] items-end justify-center">
+                            <CroppedModuleImage
+                              color={FULL_HOUSE_COLORS[0]}
+                              position="left"
+                              source={
+                                option.variant === "open"
+                                  ? openLeftModule.url
+                                  : (colorModuleSource ?? openLeftModule.url)
+                              }
+                              animate={false}
+                              testId={false}
+                              crops={
+                                option.variant === "open" ? OPEN_LEFT_CROPS : colorModuleAsset.crops
+                              }
+                            />
+                          </div>
+                          <span className="text-[14px] font-semibold text-[#071426]">
+                            {option.label}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+
+
                 {previousPreviewColor && previousModuleAsset && (
                   <div
                     key={`previous-${previousPreviewColor}-${previousPreviewTvValue}`}
@@ -610,6 +707,9 @@ function ConfiguratorPage() {
                       hasLeft={hasLeft}
                       hasRight={hasRight}
                       animateSides={false}
+                      leftVariant={
+                        previousPreviewColor === FULL_HOUSE_COLORS[0] ? leftVariant : "dicht"
+                      }
                     />
                   </div>
                 )}
@@ -625,8 +725,10 @@ function ConfiguratorPage() {
                     hasLeft={hasLeft}
                     hasRight={hasRight}
                     animateSides
+                    leftVariant={previewColor === FULL_HOUSE_COLORS[0] ? leftVariant : "dicht"}
                   />
                 </div>
+
 
                 {/* Add / remove right module */}
                 <button

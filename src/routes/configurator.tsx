@@ -32,7 +32,7 @@ import {
   type ModuleCropSet,
   type ModulePosition,
 } from "@/components/WandigModulePreview";
-import openLeftModule from "@/assets/configurator/walnootbruin-links-open.png.asset.json";
+import openLeftModule from "@/assets/configurator/walnootbruin-links-open-v2.png.asset.json";
 
 import dutchDesignIcon from "@/assets/dutch-design-icon.svg.asset.json";
 import puzzlePiecesImg from "@/assets/puzzle-pieces.png.asset.json";

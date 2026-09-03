@@ -381,10 +381,12 @@ function CrossfadeModelImage({
   src,
   alt,
   mobileSrc,
+  imageClassName,
 }: {
   src: string;
   alt: string;
   mobileSrc?: string;
+  imageClassName?: string;
 }) {
   const [currentSrc, setCurrentSrc] = useState(src);
   const [incomingSrc, setIncomingSrc] = useState<string | null>(null);
@@ -424,7 +426,7 @@ function CrossfadeModelImage({
       <Img
         src={layerSrc}
         alt={alt}
-        className="h-full w-full object-cover"
+        className={imageClassName ?? "h-full w-full object-cover"}
         loading="lazy"
         onLoad={isIncoming ? () => revealIncoming(layerSrc) : undefined}
       />
@@ -557,12 +559,13 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
     <Link
       to="/product/$handle"
       params={{ handle: p.handle }}
-      className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%]"
+      className="group flex w-[280px] shrink-0 snap-start self-stretch max-h-[500px] flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:max-h-none md:w-[28.8%]"
     >
-      <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[280px]">
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[280px] md:aspect-auto md:flex-1">
         <CrossfadeModelImage
           src={img}
           alt={`${p.title} in ${activeColor}`}
+          imageClassName="block h-full w-[80%] object-contain mx-auto md:w-full md:object-cover"
         />
       </div>
       <div className="flex flex-1 flex-col px-2 pb-1 pt-4">

@@ -1587,7 +1587,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
           )}
 
-          <div ref={galleryContinuationRef} className="relative z-10 mt-3 hidden space-y-3 lg:block md:mt-4 md:space-y-4">
+          <div className="relative z-10 mt-3 hidden space-y-3 lg:block md:mt-4 md:space-y-4">
 
             {subImageGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
@@ -1616,6 +1616,7 @@ function ProductView({ product }: { product: ProductNode }) {
               </div>
             ))}
           </div>
+          <div ref={galleryContinuationRef} className="h-0 w-full" aria-hidden="true" />
         </div>
 
         {/* Info */}

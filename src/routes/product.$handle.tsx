@@ -631,7 +631,7 @@ function MobileGallerySwipe({
                 }
               />
               {index === 0 && (
-                <div className="pointer-events-none absolute bottom-3 right-3 z-10 rounded-lg bg-white shadow-[0_6px_20px_rgba(31,25,21,0.10)]">
+                <div className="pointer-events-none absolute right-3 top-3 z-10 rounded-lg bg-white shadow-[0_6px_20px_rgba(31,25,21,0.10)]">
                   <Img
                     src={badgeLogo.url}
                     alt="Dutch Design Winner 2026 - 10 jaar garantie"

@@ -56,7 +56,7 @@ function BadgeButton({
       className="flex w-full flex-row items-center gap-3 rounded-[14px] border border-[#eeeeee] bg-white px-3 py-3 text-left transition hover:border-[#ef7027]/45 hover:shadow-[0_10px_24px_rgba(42,31,22,0.07)]"
     >
       <span className="shrink-0">{logo}</span>
-      <span className="min-w-0 flex-1 text-[12.5px] leading-snug text-[#071426]">
+      <span className="min-w-0 flex-1 text-[11px] leading-snug text-[#071426] sm:text-[12.5px]">
         {children}
       </span>
       <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[11px] font-bold italic text-[#071426]/60">

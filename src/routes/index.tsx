@@ -38,7 +38,9 @@ import fullHouseClosedFrontV5 from "@/assets/full-house-closed-front-v5.png.asse
 import fullHouseSelectedV7 from "@/assets/full-house-selected-v7.png.asset.json";
 import fullHouseMobile from "@/assets/full-house-mobile.png.asset.json";
 import fullHouseCard from "@/assets/full-house-card.png.asset.json";
-import fullHouseRoomImage from "@/assets/full-house-gallery-room.jpg.asset.json";
+
+import fullHouseClosedFront55 from "@/assets/Wandig_55in_Full_House_Closed_Front.jpg.asset.json";
+
 
 
 
@@ -257,8 +259,8 @@ const PRODUCTS: {
     title: "Full House",
     tagline: "Volledige wand-look",
     price: "1.699,-",
-    img: fullHouseRoomImage.url,
-    mobileImg: fullHouseRoomImage.url,
+    img: fullHouseClosedFront55.url,
+    mobileImg: fullHouseClosedFront55.url,
     reviews: "(2.526)",
     meta: "240 cm · Full House",
     featured: true,

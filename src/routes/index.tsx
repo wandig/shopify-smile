@@ -592,8 +592,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           <CrossfadeModelImage
             src={img}
             alt={`${p.title} in ${activeColor}`}
-            mobileSrc={p.mobileImg}
+            mobileSrc={useStudioMain ? p.mobileImg : undefined}
           />
+
         </div>
 
         {/* Desktop overlay text */}

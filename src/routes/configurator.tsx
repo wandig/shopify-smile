@@ -728,6 +728,7 @@ function ConfiguratorPage() {
       variantId: selectedShopifyVariant.id,
       variantTitle: selectedShopifyVariant.title,
       price: selectedShopifyVariant.price,
+      compareAtPrice: selectedShopifyVariant.compareAtPrice,
       quantity: 1,
       selectedOptions: selectedShopifyVariant.selectedOptions,
     });
@@ -740,6 +741,7 @@ function ConfiguratorPage() {
           variantId: entry.variant.id,
           variantTitle: entry.variant.title,
           price: entry.variant.price,
+          compareAtPrice: entry.variant.compareAtPrice,
           quantity: 1,
           selectedOptions: entry.variant.selectedOptions,
         });

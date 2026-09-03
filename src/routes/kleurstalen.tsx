@@ -67,6 +67,7 @@ function KleurstalenPage() {
           variantId: variant.id,
           variantTitle: variant.title,
           price: variant.price,
+          compareAtPrice: variant.compareAtPrice,
           quantity: 1,
           selectedOptions: [{ name: "Kleurstaal", value: product.node.title }],
         });

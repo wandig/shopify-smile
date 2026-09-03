@@ -571,7 +571,10 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
     return match?.image?.url;
   }, [shopifyProduct, colorOption, activeColor]);
 
-  const img = variantImage ?? p.colorImages?.[activeColor] ?? p.img;
+  const useStudioMain = p.featured && /walnoot|noten/i.test(activeColor);
+  const img = useStudioMain
+    ? p.img
+    : (variantImage ?? p.colorImages?.[activeColor] ?? p.img);
 
   if (p.featured) {
     return (

@@ -59,7 +59,7 @@ function BadgeButton({
       <span className="min-w-0 flex-1 text-[11px] leading-snug text-[#071426] sm:text-[12.5px]">
         {children}
       </span>
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[11px] font-bold italic text-[#071426]/60">
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f2efec] text-[10px] font-bold italic text-[#071426]/60">
         i
       </span>
     </button>

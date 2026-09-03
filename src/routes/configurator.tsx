@@ -82,7 +82,6 @@ const TV_OPTIONS = [
   { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", soloShopifyValue: "80 - 85 inch", price: 350, wallHeight: 190, centerWidth: 200, originalModuleWidth: 42, newModuleWidth: 29 },
 ];
 
-const BASE_PRICE = 1690;
 
 
 

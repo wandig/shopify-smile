@@ -4,7 +4,7 @@ import { optimizeImageUrl } from "@/lib/asset-image";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Hammer, Plug, Plus, Ruler, ShieldCheck, ShoppingBag, Star, Truck } from "lucide-react";
+import { CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Hammer, MoveHorizontal, MoveVertical, Plug, Plus, Ruler, ShieldCheck, ShoppingBag, Star, Truck } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";

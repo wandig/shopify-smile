@@ -80,9 +80,10 @@ const sections = [
   {
     title: "10. Contact",
     body: [
-      "Voor vragen over deze voorwaarden kun je contact opnemen via info@wandig.nl.",
+      "Voor vragen over deze voorwaarden kun je contact opnemen via support@wandig.com.",
       "Adres: De Tongelreep 1 - 7, 5684 PZ Best.",
     ],
+
   },
 ];
 

@@ -595,7 +595,7 @@ function ConfiguratorPage() {
   const colorModuleAsset = useMemo(() => {
     const configuredAsset = getConfiguratorModuleAsset(previewColor, tv.shopifyValue);
     if (configuredAsset) return configuredAsset;
-    if (previewColor === FULL_HOUSE_COLORS[0]) return { source: null, crops: MODULE_CROPS };
+    if (previewColor === FULL_HOUSE_COLORS[0]) return { source: null, crops: MODULE_CROPS, positionAssets: undefined };
 
     return {
       source:

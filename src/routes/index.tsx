@@ -418,8 +418,8 @@ function CrossfadeModelImage({
       }`}
       onTransitionEnd={isIncoming ? finishTransition : undefined}
     >
-      {mobileSrc && layerSrc === currentSrc && !incomingSrc && (
-        <source media="(max-width: 767px)" srcSet={optimizeImageUrl(mobileSrc, 800)} />
+      {mobileSrc && (
+        <source media="(max-width: 1023px)" srcSet={optimizeImageUrl(mobileSrc, 800)} />
       )}
       <Img
         src={layerSrc}

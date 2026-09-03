@@ -1646,7 +1646,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
               <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${productionDetailsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                 <div className="overflow-hidden">
-                  <div className="relative min-h-[270px] px-4 pb-8 pt-3 text-[#cdc0b5] md:min-h-[210px]">
+                  <div className="relative min-h-[360px] px-4 pb-8 pt-3 text-[#cdc0b5] md:min-h-[210px]">
                     <p className="text-[17px] font-semibold text-[#071426]">Nederlands gemaakt. Met aandacht.</p>
                     <p className="mt-4 max-w-[340px] text-[13px] leading-relaxed text-[#071426]">
                       Elke Wandig cinewall wordt in onze Nederlandse werkplaats gebouwd, gecontroleerd en plug &amp; play voorbereid voor jouw woonkamer.
@@ -1659,7 +1659,7 @@ function ProductView({ product }: { product: ProductNode }) {
                       w={220}
                       alt=""
                       aria-hidden="true"
-                      className="pointer-events-none absolute bottom-5 right-5 w-[84px] translate-y-[40%] select-none md:translate-y-0"
+                      className="pointer-events-none absolute bottom-5 right-5 w-[105px] translate-y-[40%] select-none md:w-[84px] md:translate-y-0"
                     />
                   </div>
                 </div>

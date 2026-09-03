@@ -1104,8 +1104,10 @@ function QuoteVideoSection() {
           <LazyVideo
             src={werkplaatsVideo.url}
             poster={werkplaatsPoster.url}
+            unmuteInView
             className="aspect-[16/9] w-full object-cover"
           />
+
         </div>
       </div>
     </section>

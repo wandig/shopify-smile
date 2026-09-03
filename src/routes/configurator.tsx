@@ -786,7 +786,7 @@ function ConfiguratorPage() {
           >
 
             {/* Mobiel: uitschuivend maatlint, onderaan boven de Dutch Design-tekst */}
-            <div className="pointer-events-none absolute bottom-3 left-4 z-[9] flex max-w-[calc(100%-32px)] items-center md:hidden">
+            <div className="pointer-events-none absolute bottom-[104px] left-4 z-[9] flex max-w-[calc(100%-32px)] items-center md:hidden">
               <button
                 type="button"
                 onClick={() => setShowMeasurements((visible) => !visible)}

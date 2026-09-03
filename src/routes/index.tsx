@@ -590,8 +590,8 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           <CrossfadeModelImage
             src={img}
             alt={`${p.title} in ${activeColor}`}
-            mobileSrc={useStudioMain ? p.mobileImg : undefined}
           />
+
 
         </div>
 

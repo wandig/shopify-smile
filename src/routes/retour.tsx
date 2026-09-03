@@ -54,9 +54,10 @@ function Retour() {
           <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Contact</div>
           <p className="mt-3 text-sm leading-relaxed text-foreground/76">
             Mail je retouraanvraag naar{" "}
-            <a href="mailto:info@wandig.nl" className="underline underline-offset-4">
-              info@wandig.nl
+            <a href="mailto:support@wandig.com" className="underline underline-offset-4">
+              support@wandig.com
             </a>
+
             . Vermeld altijd je ordernummer.
           </p>
         </div>

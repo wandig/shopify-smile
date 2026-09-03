@@ -1659,7 +1659,7 @@ function ProductView({ product }: { product: ProductNode }) {
                       w={220}
                       alt=""
                       aria-hidden="true"
-                      className="pointer-events-none absolute bottom-5 right-5 w-[84px] select-none"
+                      className="pointer-events-none absolute bottom-5 right-5 w-[84px] translate-y-[15%] select-none md:translate-y-0"
                     />
                   </div>
                 </div>

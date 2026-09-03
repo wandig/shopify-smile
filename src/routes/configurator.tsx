@@ -558,10 +558,18 @@ function ConfiguratorPage() {
     ? String(widthCm)
     : widthCm.toFixed(1).replace(".", ",");
   // Welk Wandig-model hoort bij deze samenstelling?
-  const moduleCount = (hasLeft ? 1 : 0) + (hasRight ? 1 : 0);
-  const model = moduleCount === 2 ? "full-house" : moduleCount === 1 ? "duo" : "solo";
+  // Het basisproduct (Solo/Duo/Full House) dekt de middenmodule + de originele zijmodules.
+  // Elke nieuwe module wordt als los product ("Wandig Nieuwe Module") toegevoegd.
+  const hasLeftOriginal = hasLeft && leftVariant !== "nieuw";
+  const hasRightOriginal = hasRight && rightVariant !== "nieuw";
+  const originalCount = (hasLeftOriginal ? 1 : 0) + (hasRightOriginal ? 1 : 0);
+  const newModuleSides: Array<"Links" | "Rechts"> = [
+    ...(hasLeft && leftVariant === "nieuw" ? (["Links"] as const) : []),
+    ...(hasRight && rightVariant === "nieuw" ? (["Rechts"] as const) : []),
+  ];
+  const model = originalCount === 2 ? "full-house" : originalCount === 1 ? "duo" : "solo";
   const arrangement: "Links" | "Rechts" | null =
-    model === "solo" ? null : hasRight && !hasLeft ? "Rechts" : "Links";
+    model === "duo" ? (hasRightOriginal ? "Rechts" : "Links") : null;
   const modelLabel =
     model === "full-house"
       ? "Wandig Full House"
@@ -575,6 +583,15 @@ function ConfiguratorPage() {
     () => findWandigVariant(activeProduct, color, arrangement, activeTvSize),
     [activeProduct, arrangement, color, activeTvSize],
   );
+  const newModuleVariants = useMemo(
+    () =>
+      newModuleSides.map((side) => ({
+        side,
+        variant: findNewModuleVariant(newModuleProduct, color, side),
+      })),
+    [newModuleProduct, color, newModuleSides.join("|")],
+  );
+
   // Vaste configuratorprijzen (actieprijs / doorgestreepte prijs)
   const CENTER_PRICE = 1196;
   const CENTER_COMPARE_PRICE = 1709;

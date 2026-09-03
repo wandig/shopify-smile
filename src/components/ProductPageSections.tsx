@@ -404,10 +404,8 @@ export function BuiltToLastSection() {
                 }`}
                 style={{
                   color: card.textColor,
-                  textShadow: card.imageUrl
-                    ? card.tone === "dark"
-                      ? "0 1px 10px rgba(7,20,38,0.55), 0 2px 18px rgba(7,20,38,0.35)"
-                      : "0 1px 10px rgba(255,255,255,0.55), 0 2px 18px rgba(255,255,255,0.35)"
+                  textShadow: card.imageUrl && card.tone !== "dark"
+                    ? "0 1px 10px rgba(255,255,255,0.55), 0 2px 18px rgba(255,255,255,0.35)"
                     : undefined,
                 }}
               >

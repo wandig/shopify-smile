@@ -778,10 +778,11 @@ export function NewsletterContactSection() {
   };
 
   const contactItems = [
-    { icon: Phone, label: "Bel ons, steun 9-5", sub: "9:00 - 18:00", value: "+31 85 303 0997" },
+    { icon: Phone, label: "Bel ons, steun 9-5", sub: "9:00 - 18:00", value: "+31 85 303 0997", href: "tel:+31853030997" },
     { icon: Headphones, label: "Chat live, agent 9-5", sub: "9:00 - 22:00", value: "Chat met ons" },
     { icon: Mail, label: "Stuur een mail", sub: "iedere werkdag", value: "support.nl@wandig.com" },
   ];
+
 
   return (
     <section className="bg-[#ede7e0]">
@@ -842,22 +843,41 @@ export function NewsletterContactSection() {
           </div>
 
           <div className="grid gap-8 sm:grid-cols-3 sm:gap-6">
-            {contactItems.map(({ icon: Icon, label, sub, value }) => (
+            {contactItems.map(({ icon: Icon, label, sub, value, href }) => (
               <div key={label}>
                 <div className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#ef7027]/10">
-                    <Icon className="h-[17px] w-[17px] text-[#ef7027]" strokeWidth={1.5} />
-                  </div>
+                  {href ? (
+                    <a
+                      href={href}
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#ef7027]/10"
+                    >
+                      <Icon className="h-[17px] w-[17px] text-[#ef7027]" strokeWidth={1.5} />
+                    </a>
+                  ) : (
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#ef7027]/10">
+                      <Icon className="h-[17px] w-[17px] text-[#ef7027]" strokeWidth={1.5} />
+                    </div>
+                  )}
                   <div className="min-w-0">
                     <p className="text-[12px] leading-snug tracking-[0.01em] text-[#071426]/75">{label}</p>
                     <p className="text-[12px] leading-snug tracking-[0.01em] text-[#071426]/75">{sub}</p>
                   </div>
                 </div>
-                <p className="mt-4 break-words text-[15px] font-bold leading-tight tracking-[0.01em] text-[#071426]">{value}</p>
+                {href ? (
+                  <a
+                    href={href}
+                    className="mt-4 block break-words text-[15px] font-bold leading-tight tracking-[0.01em] text-[#071426] no-underline"
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <p className="mt-4 break-words text-[15px] font-bold leading-tight tracking-[0.01em] text-[#071426]">{value}</p>
+                )}
                 <div className="mt-3 h-px w-full bg-[#071426]/60" />
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>

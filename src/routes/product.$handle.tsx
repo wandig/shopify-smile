@@ -609,10 +609,10 @@ function MobileGallerySwipe({
   if (items.length === 0) return null;
 
   return (
-    <div className="relative lg:hidden">
+    <div className="relative overflow-hidden lg:hidden">
       <div
         ref={trackRef}
-        className="scrollbar-hide -mx-5 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
+        className="scrollbar-hide flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
       >
         {items.map((item, index) => (
           <div key={`${item.src}-${index}`} className="w-full shrink-0 snap-center">

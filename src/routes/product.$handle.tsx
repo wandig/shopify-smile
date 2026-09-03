@@ -626,8 +626,8 @@ function MobileGallerySwipe({
                 priority={index === 0}
                 className={
                   handle === "full-house" && index === 0
-                    ? "h-auto w-[100%] max-w-none object-contain"
-                    : "h-full w-full object-cover"
+                    ? "h-auto w-[102%] max-w-none shrink-0 object-contain"
+                    : "h-full w-[102%] max-w-none shrink-0 object-cover"
                 }
               />
               {index === 0 && (

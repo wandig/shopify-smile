@@ -6,7 +6,7 @@ export const Route = createFileRoute("/retour")({
       { title: "Retourneren — Wandig" },
       {
         name: "description",
-        content: "Lees hoe retourneren, herroepen, schade melden en garantie werkt bij Wandig.",
+        content: "Bij Wandig heb je 100 dagen proefkijken. Lees hoe retourneren, herroepen, schade melden en garantie werkt.",
       },
     ],
   }),
@@ -15,13 +15,12 @@ export const Route = createFileRoute("/retour")({
 
 const returnSteps = [
   {
-    title: "1. Meld je retour aan",
-    body: "Mail binnen 14 dagen na ontvangst naar support@wandig.com met je ordernummer, naam en de reden van retour. Voeg bij schade altijd duidelijke foto's toe.",
-
+    title: "1. Probeer 100 dagen uit",
+    body: "Bij Wandig krijg je 100 dagen proefkijken. Bekijk en test je tv-meubel in je eigen woonkamer. Niet tevreden? Mail ons dan binnen die termijn.",
   },
   {
-    title: "2. Wacht op instructies",
-    body: "Wij controleren je aanvraag en sturen je de retourinstructies. Stuur een product niet terug zonder bevestiging, zodat we schade en vertraging kunnen voorkomen.",
+    title: "2. Meld je retour aan",
+    body: "Mail naar support@wandig.com met je ordernummer, naam en de reden van retour. Wij controleren je aanvraag en sturen de retourinstructies. Stuur een product niet terug zonder bevestiging.",
   },
   {
     title: "3. Verpak het product goed",
@@ -39,27 +38,35 @@ function Retour() {
       <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Service</span>
       <h1 className="mt-4 font-serif text-5xl leading-[0.95] md:text-7xl">Retourneren</h1>
       <p className="mt-8 max-w-2xl text-lg leading-relaxed text-foreground/78">
-        We willen dat je zeker bent van je Wandig. Op deze pagina lees je hoe retourneren, herroepen en schade melden
-        werkt. Heb je twijfel? Mail ons voordat je iets terugstuurt, dan kijken we met je mee.
+        Bij Wandig mag je 100 dagen proefkijken. We willen dat je zeker bent van je tv-meubel, zonder gedoe. Niet helemaal
+        het juiste? Dan regelen we het samen.
       </p>
 
-      <div className="mt-14 grid gap-5 md:grid-cols-2">
+      <div className="mt-10 rounded-2xl bg-[#ef7027] p-6 text-white md:p-8">
+        <div className="text-xs uppercase tracking-[0.18em] text-white/80">100 dagen proefkijken</div>
+        <p className="mt-3 text-sm leading-relaxed text-white/90 md:text-base">
+          Je hebt 100 dagen de tijd om je Wandig thuis uit te proberen. Past het niet, ben je niet tevreden of wil je een
+          andere kleur? Mail je retouraanvraag binnen die termijn. Na onze bevestiging heb je nog 14 dagen om het product
+          terug te sturen.
+        </p>
+      </div>
+
+      <div className="mt-5 grid gap-5 md:grid-cols-2">
         <div className="rounded-[16px] bg-[#f4f1ed] p-6">
-          <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Retourtermijn</div>
+          <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Aanmelden</div>
           <p className="mt-3 text-sm leading-relaxed text-foreground/76">
-            Voor standaardproducten kun je je bestelling binnen 14 dagen na ontvangst aanmelden voor retour. Daarna heb
-            je nog 14 dagen om het product daadwerkelijk terug te sturen.
+            Mail binnen 100 dagen na ontvangst naar{" "}
+            <a href="mailto:support@wandig.com" className="underline underline-offset-4">
+              support@wandig.com
+            </a>{" "}
+            met je ordernummer, naam en reden van retour. Voeg bij schade altijd duidelijke foto's toe.
           </p>
         </div>
         <div className="rounded-[16px] bg-[#f4f1ed] p-6">
           <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Contact</div>
           <p className="mt-3 text-sm leading-relaxed text-foreground/76">
-            Mail je retouraanvraag naar{" "}
-            <a href="mailto:support@wandig.com" className="underline underline-offset-4">
-              support@wandig.com
-            </a>
-
-            . Vermeld altijd je ordernummer.
+            Heb je twijfel voordat je retourneert? Mail ons, dan kijken we met je mee naar een passende oplossing. Vermeld
+            altijd je ordernummer.
           </p>
         </div>
       </div>
@@ -80,9 +87,9 @@ function Retour() {
         <div>
           <h2 className="font-serif text-3xl leading-tight">Wat kan retour?</h2>
           <ul className="mt-5 space-y-3 text-sm leading-relaxed text-foreground/74 md:text-base">
-            <li>Standaardproducten die compleet, schoon en onbeschadigd zijn.</li>
+            <li>Standaardproducten die binnen 100 dagen worden aangemeld.</li>
+            <li>Producten die compleet, schoon en onbeschadigd zijn.</li>
             <li>Producten die niet verder zijn gebruikt dan nodig is om ze te bekijken.</li>
-            <li>Accessoires of onderdelen in originele staat en verpakking.</li>
           </ul>
         </div>
         <div>

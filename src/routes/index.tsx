@@ -586,17 +586,13 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group flex w-[300px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[45%] lg:relative lg:min-h-[630px] lg:w-[41.4%] lg:self-stretch lg:overflow-hidden lg:rounded-[16px] lg:bg-transparent lg:p-0 lg:shadow-none"
+        className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%] lg:relative lg:min-h-[630px] lg:w-[41.4%] lg:overflow-hidden lg:rounded-[16px] lg:bg-transparent lg:p-0 lg:shadow-none"
       >
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] bg-[#f7f7f7] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:rounded-none">
-          <div className="absolute left-3 top-3 z-10 rounded-full bg-[#ef7027] px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white lg:hidden">
-            Uitgelicht
-          </div>
+        <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[320px] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:rounded-none">
           <CrossfadeModelImage
             src={img}
             alt={`${p.title} in ${activeColor}`}
             mobileSrc={p.mobileImg}
-            fit="contain"
           />
         </div>
 
@@ -644,7 +640,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           <BasketButton />
         </div>
 
-        {/* Mobile / tablet compact body */}
+        {/* Mobile / tablet body matching Duo */}
         <div className="lg:hidden">
           <CardInfo
             p={p}
@@ -653,7 +649,6 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
             activeColor={activeColor}
             colors={colors}
             onSelectColor={setColor}
-            featured
           />
         </div>
       </Link>

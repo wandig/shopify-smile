@@ -582,7 +582,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:relative md:min-h-[630px] md:w-[41.4%] md:overflow-hidden md:rounded-[16px] md:bg-transparent md:p-0 md:shadow-none lg:w-[41.4%]"
+        className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:relative md:min-h-[630px] md:w-[53.8%] md:overflow-hidden md:rounded-[16px] md:bg-transparent md:p-0 md:shadow-none lg:w-[41.4%]"
       >
         <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:absolute md:inset-0 md:aspect-auto md:h-full md:rounded-none">
           <CrossfadeModelImage
@@ -656,7 +656,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
     <Link
       to="/product/$handle"
       params={{ handle: p.handle }}
-      className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%]"
+      className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[37.4%] lg:w-[28.8%]"
     >
       <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[320px]">
         <CrossfadeModelImage src={img} alt={`${p.title} in ${activeColor}`} />

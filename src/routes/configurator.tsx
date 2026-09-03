@@ -805,7 +805,7 @@ function ConfiguratorPage() {
               {/* Wall unit — modules sit flush against each other */}
               <div className="relative flex h-[420px] items-end lg:h-[520px]">
                 {showMeasurements && (
-                  <div className="pointer-events-none absolute inset-0 z-[8] text-[#303640]">
+                  <div className="pointer-events-none absolute inset-0 z-[8] hidden text-[#303640] md:block">
                     <div className="absolute -top-[46px] inset-x-0 flex items-center gap-3">
                       <span className="h-px flex-1 bg-[#303640]/55" />
                       <span className="rounded-full border border-[#303640]/15 bg-white/92 px-3 py-1.5 text-[12px] font-semibold shadow-sm backdrop-blur">

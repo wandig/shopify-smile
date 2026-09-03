@@ -82,7 +82,6 @@ const TV_OPTIONS = [
   { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", soloShopifyValue: "80 - 85 inch", price: 350, wallHeight: 190, centerWidth: 200, originalModuleWidth: 42, newModuleWidth: 29 },
 ];
 
-const BASE_PRICE = 1690;
 
 
 
@@ -576,22 +575,34 @@ function ConfiguratorPage() {
     () => findWandigVariant(activeProduct, color, arrangement, activeTvSize),
     [activeProduct, arrangement, color, activeTvSize],
   );
-  const shopifyBasePrice = Number(selectedShopifyVariant?.price.amount ?? 0);
-  const hasShopifyPrice = shopifyBasePrice > 0;
-  const fallbackBasePrice = model === "solo" ? 980 : model === "duo" ? BASE_PRICE : 1995;
-  const configuredBasePrice = hasShopifyPrice ? shopifyBasePrice : fallbackBasePrice;
-  const optionPriceAdjustment = hasShopifyPrice ? 0 : tv.price;
+  // Vaste configuratorprijzen (actieprijs / doorgestreepte prijs)
+  const CENTER_PRICE = 1196;
+  const CENTER_COMPARE_PRICE = 1709;
+  const ORIGINAL_MODULE_PRICE = 396;
+  const ORIGINAL_MODULE_COMPARE_PRICE = 566;
+  const NEW_MODULE_PRICE = 297;
+  const NEW_MODULE_COMPARE_PRICE = 424;
 
+  const modulePrice = (variant: LeftModuleVariant | RightModuleVariant) =>
+    variant === "nieuw" ? NEW_MODULE_PRICE : ORIGINAL_MODULE_PRICE;
+  const moduleComparePrice = (variant: LeftModuleVariant | RightModuleVariant) =>
+    variant === "nieuw" ? NEW_MODULE_COMPARE_PRICE : ORIGINAL_MODULE_COMPARE_PRICE;
 
   const total = useMemo(
-    () => configuredBasePrice + optionPriceAdjustment,
-    [configuredBasePrice, optionPriceAdjustment],
+    () =>
+      CENTER_PRICE +
+      (hasLeft ? modulePrice(leftVariant) : 0) +
+      (hasRight ? modulePrice(rightVariant) : 0),
+    [hasLeft, hasRight, leftVariant, rightVariant],
   );
-  const shopifyCompareAtPrice = Number(selectedShopifyVariant?.compareAtPrice?.amount ?? 0);
-  const beforeTotal =
-    shopifyCompareAtPrice > configuredBasePrice
-      ? shopifyCompareAtPrice + optionPriceAdjustment
-      : null;
+  const beforeTotal = useMemo(
+    () =>
+      CENTER_COMPARE_PRICE +
+      (hasLeft ? moduleComparePrice(leftVariant) : 0) +
+      (hasRight ? moduleComparePrice(rightVariant) : 0),
+    [hasLeft, hasRight, leftVariant, rightVariant],
+  );
+
   const colorModuleAsset = useMemo(() => {
     const configuredAsset = getConfiguratorModuleAsset(previewColor, tv.shopifyValue);
     if (configuredAsset) return configuredAsset;

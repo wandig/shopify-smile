@@ -442,7 +442,7 @@ function CrossfadeModelImage({
       <Img
         src={layerSrc}
         alt={alt}
-        className="h-full w-full object-cover md:object-contain lg:object-cover"
+        className="h-full w-full object-cover"
         loading="lazy"
         onLoad={isIncoming ? () => revealIncoming(layerSrc) : undefined}
       />
@@ -582,9 +582,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%] lg:relative lg:min-h-[630px] lg:w-[41.4%] lg:overflow-hidden lg:rounded-[16px] lg:bg-transparent lg:p-0 lg:shadow-none"
+        className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:relative md:min-h-[630px] md:w-[41.4%] md:overflow-hidden md:rounded-[16px] md:bg-transparent md:p-0 md:shadow-none lg:w-[41.4%]"
       >
-        <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[320px] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:rounded-none">
+        <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:absolute md:inset-0 md:aspect-auto md:h-full md:rounded-none">
           <CrossfadeModelImage
             src={img}
             alt={`${p.title} in ${activeColor}`}
@@ -593,8 +593,8 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 
         </div>
 
-        {/* Desktop overlay text */}
-        <div className="hidden lg:absolute lg:inset-x-4 lg:top-1/2 lg:block lg:-translate-y-1/2 lg:text-white">
+        {/* Desktop + tablet overlay text */}
+        <div className="hidden md:absolute md:inset-x-4 md:top-1/2 md:block md:-translate-y-1/2 md:text-white">
           <div className="inline-flex flex-col items-start px-4 py-3 [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">
             <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
               {p.title}
@@ -621,7 +621,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           </div>
         </div>
 
-        <div className="absolute inset-x-4 bottom-4 hidden items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)] lg:flex">
+        <div className="absolute inset-x-4 bottom-4 hidden items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)] md:flex">
           <div>
             {showReviews && (
               <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
@@ -637,8 +637,8 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           <BasketButton />
         </div>
 
-        {/* Mobile / tablet body matching Duo */}
-        <div className="lg:hidden">
+        {/* Mobile body */}
+        <div className="md:hidden">
           <CardInfo
             p={p}
             priceInfo={priceInfo}

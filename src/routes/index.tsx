@@ -418,8 +418,8 @@ function CrossfadeModelImage({
       }`}
       onTransitionEnd={isIncoming ? finishTransition : undefined}
     >
-      {mobileSrc && layerSrc === currentSrc && !incomingSrc && (
-        <source media="(max-width: 767px)" srcSet={optimizeImageUrl(mobileSrc, 800)} />
+      {mobileSrc && (
+        <source media="(max-width: 1023px)" srcSet={optimizeImageUrl(mobileSrc, 800)} />
       )}
       <Img
         src={layerSrc}
@@ -498,11 +498,11 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
         params={{ handle: p.handle }}
         className="group relative min-h-[630px] w-[360px] shrink-0 snap-start self-stretch overflow-hidden rounded-[16px] md:min-h-[600px] md:w-[41.4%]"
       >
-        <CrossfadeModelImage
-          src={img}
-          alt={`${p.title} in ${activeColor}`}
-          mobileSrc={!variantImage ? p.mobileImg : undefined}
-        />
+              <CrossfadeModelImage
+                src={img}
+                alt={`${p.title} in ${activeColor}`}
+                mobileSrc={p.mobileImg}
+              />
 
 
         <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white">

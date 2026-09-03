@@ -19,7 +19,7 @@ export function CartDrawer() {
   const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
   const totalItems = items.reduce((s, i) => s + i.quantity, 0);
   const totalAmount = items.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0);
-  const vat = totalAmount - totalAmount / 1.21;
+  
 
   useEffect(() => {
     if (open) syncCart();
@@ -143,9 +143,16 @@ export function CartDrawer() {
                           <Plus className="h-3.5 w-3.5" />
                         </button>
                       </div>
-                      <span className="text-[19px] text-[#ef7027]">
-                        {formatEuro(parseFloat(item.price.amount) * item.quantity)},-
-                      </span>
+                      <div className="text-right">
+                        {item.compareAtPrice && parseFloat(item.compareAtPrice.amount) > parseFloat(item.price.amount) && (
+                          <div className="text-[13px] text-[#9b938c] line-through">
+                            {formatEuro(parseFloat(item.compareAtPrice.amount) * item.quantity)},-
+                          </div>
+                        )}
+                        <span className="text-[19px] text-[#ef7027]">
+                          {formatEuro(parseFloat(item.price.amount) * item.quantity)},-
+                        </span>
+                      </div>
                     </div>
                   </div>
                 );
@@ -194,7 +201,6 @@ export function CartDrawer() {
                 <span className="text-[19px] font-semibold text-[#1c1c1c]">Totaalprijs</span>
                 <div className="text-right">
                   <div className="text-[24px] font-semibold text-[#ef7027]">{formatEuro(totalAmount)},-</div>
-                  <div className="text-xs text-[#9b938c]">Btw {formatEuro(vat)},-</div>
                 </div>
               </div>
               <Button

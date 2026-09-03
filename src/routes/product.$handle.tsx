@@ -1507,6 +1507,7 @@ function ProductView({ product }: { product: ProductNode }) {
       variantId: activeVariant.id,
       variantTitle: activeVariant.title,
       price: activeVariant.price,
+      compareAtPrice: activeVariant.compareAtPrice,
       quantity: 1,
       selectedOptions: activeVariant.selectedOptions,
     });

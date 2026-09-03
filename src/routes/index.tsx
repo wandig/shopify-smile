@@ -615,9 +615,9 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
 function ProductCarouselSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   return (
-    <section className="bg-[#faf8f5] py-10 md:py-14">
+    <section className="bg-[#faf8f5] py-12 md:py-[70px]">
       <div className="mx-auto max-w-[1456px] xl:max-w-[1720px] 2xl:max-w-none pl-5 md:pl-10 2xl:pl-16 pr-0 -mr-[calc((100vw-100%)/2)]">
-        <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-4 pl-4 pr-0 md:py-6 md:pl-6">
+        <div className="overflow-hidden rounded-l-[20px] bg-[#ede7e0] py-5 pl-4 pr-0 md:py-[30px] md:pl-6">
           <div
             ref={scrollerRef}
             className="flex min-w-0 flex-1 items-stretch snap-x snap-proximity gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"

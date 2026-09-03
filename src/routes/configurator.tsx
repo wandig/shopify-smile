@@ -709,7 +709,8 @@ function ConfiguratorPage() {
         ];
 
   const handleAddToCart = async () => {
-    if (!activeProduct || !selectedShopifyVariant) {
+    const missingNewModule = newModuleVariants.some((entry) => !entry.variant);
+    if (!activeProduct || !selectedShopifyVariant || (newModuleProduct && missingNewModule)) {
       toast.error("Deze samenstelling is nu niet beschikbaar", {
         description: `${modelLabel} · ${displayWandigColor(color)} · ${activeTvSize}`,
         position: "top-center",
@@ -726,11 +727,29 @@ function ConfiguratorPage() {
       selectedOptions: selectedShopifyVariant.selectedOptions,
     });
 
-    toast.success(`${modelLabel} toegevoegd`, {
+    if (newModuleProduct) {
+      for (const entry of newModuleVariants) {
+        if (!entry.variant) continue;
+        await addItem({
+          product: { node: newModuleProduct },
+          variantId: entry.variant.id,
+          variantTitle: entry.variant.title,
+          price: entry.variant.price,
+          quantity: 1,
+          selectedOptions: entry.variant.selectedOptions,
+        });
+      }
+    }
+
+    const extra = newModuleVariants.length
+      ? ` + nieuwe module ${newModuleVariants.map((e) => e.side.toLowerCase()).join(" & ")}`
+      : "";
+    toast.success(`${modelLabel}${extra} toegevoegd`, {
       description: `${displayWandigColor(color)} · ${activeTvSize} · ${width} cm · ${euro(total)}`,
       position: "top-center",
     });
   };
+
 
 
   return (

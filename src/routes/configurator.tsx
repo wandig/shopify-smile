@@ -437,10 +437,28 @@ function findWandigVariant(
     });
 }
 
+/** Vindt de variant van het losse "Wandig Nieuwe Module"-product. */
+function findNewModuleVariant(
+  product: ShopifyProduct["node"] | null | undefined,
+  color: string,
+  side: "Links" | "Rechts",
+) {
+  return product?.variants.edges
+    .map((edge) => edge.node)
+    .find((variant) => {
+      const selections = new Map(
+        variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
+      );
+      return selections.get("kleur") === color && selections.get("positie") === side;
+    });
+}
+
 function ConfiguratorPage() {
   const { data: fullHouseProduct } = useWandigProduct("full-house");
   const { data: soloProduct } = useWandigProduct("solo");
   const { data: duoProduct } = useWandigProduct("duo");
+  const { data: newModuleProduct } = useWandigProduct("wandig-nieuwe-module");
+
   const addItem = useCartStore((state) => state.addItem);
   const cartLoading = useCartStore((state) => state.isLoading);
 
@@ -558,10 +576,18 @@ function ConfiguratorPage() {
     ? String(widthCm)
     : widthCm.toFixed(1).replace(".", ",");
   // Welk Wandig-model hoort bij deze samenstelling?
-  const moduleCount = (hasLeft ? 1 : 0) + (hasRight ? 1 : 0);
-  const model = moduleCount === 2 ? "full-house" : moduleCount === 1 ? "duo" : "solo";
+  // Het basisproduct (Solo/Duo/Full House) dekt de middenmodule + de originele zijmodules.
+  // Elke nieuwe module wordt als los product ("Wandig Nieuwe Module") toegevoegd.
+  const hasLeftOriginal = hasLeft && leftVariant !== "nieuw";
+  const hasRightOriginal = hasRight && rightVariant !== "nieuw";
+  const originalCount = (hasLeftOriginal ? 1 : 0) + (hasRightOriginal ? 1 : 0);
+  const newModuleSides: Array<"Links" | "Rechts"> = [
+    ...(hasLeft && leftVariant === "nieuw" ? (["Links"] as const) : []),
+    ...(hasRight && rightVariant === "nieuw" ? (["Rechts"] as const) : []),
+  ];
+  const model = originalCount === 2 ? "full-house" : originalCount === 1 ? "duo" : "solo";
   const arrangement: "Links" | "Rechts" | null =
-    model === "solo" ? null : hasRight && !hasLeft ? "Rechts" : "Links";
+    model === "duo" ? (hasRightOriginal ? "Rechts" : "Links") : null;
   const modelLabel =
     model === "full-house"
       ? "Wandig Full House"
@@ -575,6 +601,15 @@ function ConfiguratorPage() {
     () => findWandigVariant(activeProduct, color, arrangement, activeTvSize),
     [activeProduct, arrangement, color, activeTvSize],
   );
+  const newModuleVariants = useMemo(
+    () =>
+      newModuleSides.map((side) => ({
+        side,
+        variant: findNewModuleVariant(newModuleProduct, color, side),
+      })),
+    [newModuleProduct, color, newModuleSides.join("|")],
+  );
+
   // Vaste configuratorprijzen (actieprijs / doorgestreepte prijs)
   const CENTER_PRICE = 1196;
   const CENTER_COMPARE_PRICE = 1709;
@@ -674,7 +709,8 @@ function ConfiguratorPage() {
         ];
 
   const handleAddToCart = async () => {
-    if (!activeProduct || !selectedShopifyVariant) {
+    const missingNewModule = newModuleVariants.some((entry) => !entry.variant);
+    if (!activeProduct || !selectedShopifyVariant || (newModuleProduct && missingNewModule)) {
       toast.error("Deze samenstelling is nu niet beschikbaar", {
         description: `${modelLabel} · ${displayWandigColor(color)} · ${activeTvSize}`,
         position: "top-center",
@@ -691,11 +727,29 @@ function ConfiguratorPage() {
       selectedOptions: selectedShopifyVariant.selectedOptions,
     });
 
-    toast.success(`${modelLabel} toegevoegd`, {
+    if (newModuleProduct) {
+      for (const entry of newModuleVariants) {
+        if (!entry.variant) continue;
+        await addItem({
+          product: { node: newModuleProduct },
+          variantId: entry.variant.id,
+          variantTitle: entry.variant.title,
+          price: entry.variant.price,
+          quantity: 1,
+          selectedOptions: entry.variant.selectedOptions,
+        });
+      }
+    }
+
+    const extra = newModuleVariants.length
+      ? ` + nieuwe module ${newModuleVariants.map((e) => e.side.toLowerCase()).join(" & ")}`
+      : "";
+    toast.success(`${modelLabel}${extra} toegevoegd`, {
       description: `${displayWandigColor(color)} · ${activeTvSize} · ${width} cm · ${euro(total)}`,
       position: "top-center",
     });
   };
+
 
 
   return (

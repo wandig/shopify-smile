@@ -1933,8 +1933,7 @@ function ProductView({ product }: { product: ProductNode }) {
           <WandigSpecPreview
             color={specPreviewColor}
             source={specPreviewSource}
-            crops={specModuleAsset?.crops}
-            positionAssets={specModuleAsset?.positionAssets}
+            crops={specModuleAsset?.specCrops ?? specModuleAsset?.crops}
             hasLeft={specHasLeft}
             hasRight={specHasRight}
           />

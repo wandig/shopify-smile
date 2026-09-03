@@ -76,6 +76,7 @@ export type ModuleCropSet = Record<ModulePosition, ModuleCrop>;
 export type ConfiguratorModuleAsset = {
   source: string;
   crops: ModuleCropSet;
+  specCrops?: ModuleCropSet;
   positionAssets?: Partial<
     Record<
       ModulePosition,
@@ -101,7 +102,7 @@ export const MODULE_CROPS: ModuleCropSet = {
 
 const DOFROZE_40_55_CROPS: ModuleCropSet = {
   left: { left: 330 / 4000, top: 354 / 3000, width: 797 / 4000, height: 2292 / 3000 },
-  center: { left: 1126 / 4000, top: 354 / 3000, width: 1747 / 4000, height: 2292 / 3000 },
+  center: { left: 1121.5 / 4000, top: 354 / 3000, width: 1756 / 4000, height: 2292 / 3000 },
   right: { left: 2872 / 4000, top: 354 / 3000, width: 797 / 4000, height: 2292 / 3000 },
 };
 
@@ -118,7 +119,7 @@ const DOFROZE_40_55_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAs
 
 const DOFROZE_58_65_CROPS: ModuleCropSet = {
   left: { left: 312 / 4000, top: 345 / 3000, width: 675 / 4000, height: 2292 / 3000 },
-  center: { left: 975 / 4000, top: 345 / 3000, width: 2049 / 4000, height: 2292 / 3000 },
+  center: { left: 973.5 / 4000, top: 345 / 3000, width: 2052 / 4000, height: 2292 / 3000 },
   right: { left: 3012 / 4000, top: 345 / 3000, width: 675 / 4000, height: 2292 / 3000 },
 };
 
@@ -137,7 +138,7 @@ const DOFROZE_58_65_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAs
 
 const DOFROZE_70_75_CROPS: ModuleCropSet = {
   left: { left: 172 / 4000, top: 316 / 3000, width: 675 / 4000, height: 2369 / 3000 },
-  center: { left: 835 / 4000, top: 316 / 3000, width: 2329.5 / 4000, height: 2369 / 3000 },
+  center: { left: 833.5 / 4000, top: 316 / 3000, width: 2332.5 / 4000, height: 2369 / 3000 },
   right: { left: 3152 / 4000, top: 316 / 3000, width: 675 / 4000, height: 2369 / 3000 },
 };
 
@@ -154,7 +155,7 @@ const DOFROZE_70_75_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAs
 
 const DOFROZE_77_85_CROPS: ModuleCropSet = {
   left: { left: 50 / 2046, top: 140 / 1535, width: 340 / 2046, height: 1256 / 1535 },
-  center: { left: 388 / 2046, top: 140 / 1535, width: 1271 / 2046, height: 1256 / 1535 },
+  center: { left: 386.5 / 2046, top: 140 / 1535, width: 1274 / 2046, height: 1256 / 1535 },
   right: { left: 1658 / 2046, top: 140 / 1535, width: 338 / 2046, height: 1256 / 1535 },
 };
 
@@ -162,12 +163,19 @@ const DOFROZE_77_85_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAs
   left: {
     source: dofroze7785SingleClosed,
     crop: { left: 174 / 2048, top: 137 / 1536, width: 216 / 2048, height: 1255 / 1536 },
-    specOffsetYPx: -1,
   },
   right: {
     source: dofroze7785SingleClosed,
     crop: { left: 1662 / 2048, top: 137 / 1536, width: 217 / 2048, height: 1255 / 1536 },
-    specOffsetYPx: -1,
+  },
+};
+
+const DOFROZE_77_85_SPEC_CROPS: ModuleCropSet = {
+  ...DOFROZE_77_85_CROPS,
+  center: {
+    ...DOFROZE_77_85_CROPS.center,
+    left: 384.5 / 2046,
+    width: 1278 / 2046,
   },
 };
 
@@ -263,13 +271,17 @@ const DARK_OAK_40_55_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionA
     source: darkOak4055SingleClosed,
     crop: { left: 315 / 2048, top: 176 / 1536, width: 254 / 2048, height: 1177 / 1536 },
     heightAdjustmentPx: 1.4,
-    specHeightAdjustmentPx: 1,
+    offsetYPx: 0.4,
+    specHeightAdjustmentPx: 0.4,
+    specOffsetYPx: 0.2,
   },
   right: {
     source: darkOak4055SingleClosed,
     crop: { left: 1482 / 2048, top: 176 / 1536, width: 256 / 2048, height: 1177 / 1536 },
     heightAdjustmentPx: 1.6,
-    specHeightAdjustmentPx: 1,
+    offsetYPx: 0.4,
+    specHeightAdjustmentPx: 0.4,
+    specOffsetYPx: 0.2,
   },
 };
 
@@ -285,12 +297,14 @@ const DARK_OAK_58_65_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionA
     crop: { left: 282 / 2048, top: 172 / 1536, width: 216 / 2048, height: 1175 / 1536 },
     heightAdjustmentPx: 1.4,
     specHeightAdjustmentPx: 0.5,
+    specOffsetYPx: 0.5,
   },
   right: {
     source: darkOak5865SingleClosed,
     crop: { left: 1555 / 2048, top: 172 / 1536, width: 216 / 2048, height: 1175 / 1536 },
     heightAdjustmentPx: 1.6,
     specHeightAdjustmentPx: 0.5,
+    specOffsetYPx: 0.5,
   },
 };
 
@@ -305,11 +319,17 @@ const DARK_OAK_70_75_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionA
     source: darkOak7075SingleClosed,
     crop: { left: 211 / 2048, top: 157 / 1536, width: 216 / 2048, height: 1215 / 1536 },
     heightAdjustmentPx: 1.4,
+    offsetYPx: 0.3,
+    specHeightAdjustmentPx: 0.5,
+    specOffsetYPx: 0.5,
   },
   right: {
     source: darkOak7075SingleClosed,
     crop: { left: 1626 / 2048, top: 157 / 1536, width: 217 / 2048, height: 1215 / 1536 },
     heightAdjustmentPx: 1.6,
+    offsetYPx: 0.3,
+    specHeightAdjustmentPx: 0.5,
+    specOffsetYPx: 0.5,
   },
 };
 
@@ -324,13 +344,17 @@ const DARK_OAK_77_85_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionA
     source: darkOak7785SingleClosed,
     crop: { left: 174 / 2048, top: 137 / 1536, width: 216 / 2048, height: 1255 / 1536 },
     heightAdjustmentPx: 1.4,
-    specHeightAdjustmentPx: 1,
+    offsetYPx: 0.3,
+    specHeightAdjustmentPx: 0.5,
+    specOffsetYPx: 1,
   },
   right: {
     source: darkOak7785SingleClosed,
     crop: { left: 1662 / 2048, top: 137 / 1536, width: 217 / 2048, height: 1255 / 1536 },
     heightAdjustmentPx: 1.6,
-    specHeightAdjustmentPx: 1,
+    offsetYPx: 0.3,
+    specHeightAdjustmentPx: 0.5,
+    specOffsetYPx: 1,
   },
 };
 
@@ -578,6 +602,7 @@ export const CONFIGURATOR_MODULE_ASSETS: Record<
     "77 - 85 inch": {
       source: dofroze7785Front,
       crops: DOFROZE_77_85_CROPS,
+      specCrops: DOFROZE_77_85_SPEC_CROPS,
       positionAssets: DOFROZE_77_85_SIDE_ASSETS,
     },
   },

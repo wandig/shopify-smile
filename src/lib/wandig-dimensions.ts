@@ -7,15 +7,17 @@ export type WandigSize = {
   leftWidth: number;
   /** Width of the right module in cm */
   rightWidth: number;
+  /** Width of one compact/new side module in cm */
+  newModuleWidth: number;
   /** Wall height in cm */
   wallHeight: number;
 };
 
 export const WANDIG_SIZES: WandigSize[] = [
-  { label: "40 - 55 inch", centerWidth: 137, leftWidth: 61.3, rightWidth: 41.7, wallHeight: 180 },
-  { label: "58 - 65 inch", centerWidth: 158, leftWidth: 54.7, rightWidth: 37.3, wallHeight: 180 },
-  { label: "70 - 75 inch", centerWidth: 180, leftWidth: 47.5, rightWidth: 32.5, wallHeight: 185 },
-  { label: "77 - 85 inch", centerWidth: 202, leftWidth: 40.3, rightWidth: 27.7, wallHeight: 190 },
+  { label: "40 - 55 inch", centerWidth: 134, leftWidth: 62, rightWidth: 62, newModuleWidth: 44, wallHeight: 180 },
+  { label: "58 - 65 inch", centerWidth: 156, leftWidth: 56, rightWidth: 56, newModuleWidth: 38, wallHeight: 180 },
+  { label: "70 - 75 inch", centerWidth: 177, leftWidth: 49, rightWidth: 49, newModuleWidth: 34, wallHeight: 185 },
+  { label: "77 - 85 inch", centerWidth: 200, leftWidth: 42, rightWidth: 42, newModuleWidth: 29, wallHeight: 190 },
 ];
 
 /** Formats a cm value the Dutch way: 137 -> "137", 259.6 -> "259,6" */

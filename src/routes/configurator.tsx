@@ -76,10 +76,10 @@ export const Route = createFileRoute("/configurator")({
 });
 
 const TV_OPTIONS = [
-  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", soloShopifyValue: "40 - 50 inch", price: 0, wallHeight: 180, centerWidth: 137, leftWidth: 61.3, rightWidth: 41.7 },
-  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", soloShopifyValue: "55 - 65 inch", price: 150, wallHeight: 180, centerWidth: 158, leftWidth: 54.7, rightWidth: 37.3 },
-  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", soloShopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 180, leftWidth: 47.5, rightWidth: 32.5 },
-  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", soloShopifyValue: "80 - 85 inch", price: 350, wallHeight: 190, centerWidth: 202, leftWidth: 40.3, rightWidth: 27.7 },
+  { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", soloShopifyValue: "40 - 50 inch", price: 0, wallHeight: 180, centerWidth: 134, originalModuleWidth: 62, newModuleWidth: 44 },
+  { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", soloShopifyValue: "55 - 65 inch", price: 150, wallHeight: 180, centerWidth: 156, originalModuleWidth: 56, newModuleWidth: 38 },
+  { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", soloShopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 177, originalModuleWidth: 49, newModuleWidth: 34 },
+  { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", soloShopifyValue: "80 - 85 inch", price: 350, wallHeight: 190, centerWidth: 200, originalModuleWidth: 42, newModuleWidth: 29 },
 ];
 
 const BASE_PRICE = 1690;
@@ -521,11 +521,6 @@ function ConfiguratorPage() {
     setPreviousPreviewTvValue(tv.shopifyValue);
     setColor(nextColor);
     setPreviewColor(nextColor);
-    const nextSideVariant = hasSingleModuleAssetPicker(nextColor, tv.shopifyValue)
-      ? "nieuw"
-      : "dicht";
-    setLeftVariant(nextSideVariant);
-    setRightVariant(nextSideVariant);
 
     if (previewCleanupTimerRef.current !== null) {
       window.clearTimeout(previewCleanupTimerRef.current);
@@ -542,11 +537,6 @@ function ConfiguratorPage() {
     setPreviousPreviewColor(previewColor);
     setPreviousPreviewTvValue(tv.shopifyValue);
     setTv(nextTv);
-    const nextSideVariant = hasSingleModuleAssetPicker(previewColor, nextTv.shopifyValue)
-      ? "nieuw"
-      : "dicht";
-    setLeftVariant(nextSideVariant);
-    setRightVariant(nextSideVariant);
 
     if (previewCleanupTimerRef.current !== null) {
       window.clearTimeout(previewCleanupTimerRef.current);
@@ -557,10 +547,14 @@ function ConfiguratorPage() {
     }, 520);
   };
 
+  const moduleWidth = (variant: LeftModuleVariant | RightModuleVariant) =>
+    variant === "nieuw" ? tv.newModuleWidth : tv.originalModuleWidth;
+  const moduleVariantLabel = (variant: LeftModuleVariant | RightModuleVariant) =>
+    variant === "nieuw" ? "nieuw" : "origineel";
   const widthCm =
     tv.centerWidth +
-    (hasLeft ? tv.leftWidth : 0) +
-    (hasRight ? tv.rightWidth : 0);
+    (hasLeft ? moduleWidth(leftVariant) : 0) +
+    (hasRight ? moduleWidth(rightVariant) : 0);
   const width = Number.isInteger(widthCm)
     ? String(widthCm)
     : widthCm.toFixed(1).replace(".", ",");
@@ -1332,11 +1326,11 @@ function ConfiguratorPage() {
             tvSizeLabel: tv.shopifyValue,
             modulesLabel:
               hasLeft && hasRight
-                ? "Midden + links en rechts (3)"
+                ? `Midden + links (${moduleVariantLabel(leftVariant)}) + rechts (${moduleVariantLabel(rightVariant)})`
                 : hasLeft
-                  ? "Midden + links (2)"
+                  ? `Midden + links (${moduleVariantLabel(leftVariant)})`
                   : hasRight
-                    ? "Midden + rechts (2)"
+                    ? `Midden + rechts (${moduleVariantLabel(rightVariant)})`
                     : "Alleen midden (1)",
           }}
           preview={

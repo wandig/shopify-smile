@@ -786,21 +786,22 @@ function ConfiguratorPage() {
           >
             {/* Muur + vloer voor mobiel en tablet */}
             <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-[79%] border-b border-black/[0.08] lg:hidden"
+              className="pointer-events-none absolute inset-x-0 top-0 h-[66%] border-b border-black/[0.08] md:h-[79%] lg:hidden"
               style={{
                 backgroundImage:
                   "radial-gradient(ellipse at 52% 34%, rgba(255,255,255,0.98) 0%, rgba(249,246,242,0.82) 34%, rgba(232,225,217,0.2) 72%), linear-gradient(180deg, #f3efea 0%, #e8e1d9 100%)",
               }}
             />
             <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-[21%] lg:hidden"
+              className="pointer-events-none absolute inset-x-0 top-[66%] bottom-0 md:top-[79%] lg:hidden"
               style={{
                 backgroundImage:
                   "linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 22%), linear-gradient(180deg, #ded6cd 0%, #cfc4b9 100%)",
                 boxShadow: "inset 0 18px 30px rgba(76,61,48,0.045)",
               }}
             />
-            <div className="pointer-events-none absolute bottom-[18.5%] left-1/2 h-6 w-[52%] -translate-x-1/2 rounded-[50%] bg-black/[0.13] blur-xl lg:hidden" />
+            <div className="pointer-events-none absolute bottom-[32%] left-1/2 h-5 w-[52%] -translate-x-1/2 rounded-[50%] bg-black/[0.13] blur-xl md:bottom-[18.5%] md:h-6 lg:hidden" />
+
 
 
             {/* Mobiel: uitschuivend maatlint, onderaan boven de Dutch Design-tekst */}

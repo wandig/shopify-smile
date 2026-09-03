@@ -31,6 +31,7 @@ import {
   getConfiguratorModuleAsset,
   type ModuleCropSet,
   type ModulePosition,
+  type ConfiguratorModuleAsset,
 } from "@/components/WandigModulePreview";
 import openLeftModule from "@/assets/configurator/walnootbruin-links-open-v2.png.asset.json";
 
@@ -85,13 +86,59 @@ const BASE_PRICE = 1690;
 
 
 
-export type LeftModuleVariant = "dicht" | "open";
+export type LeftModuleVariant = "dicht" | "open" | "original" | "nieuw";
+export type RightModuleVariant = LeftModuleVariant;
+
+const SINGLE_MODULE_ASSET_SIZES = [
+  "40 - 55 inch",
+  "58 - 65 inch",
+  "70 - 75 inch",
+  "77 - 85 inch",
+];
+const SINGLE_MODULE_ASSET_COLORS = new Set<string>([
+  FULL_HOUSE_COLORS[0],
+  FULL_HOUSE_COLORS[1],
+  FULL_HOUSE_COLORS[2],
+  FULL_HOUSE_COLORS[3],
+  FULL_HOUSE_COLORS[4],
+]);
+
+const hasSingleModuleAssetPicker = (color: string, tvSize: string) =>
+  SINGLE_MODULE_ASSET_COLORS.has(color) && SINGLE_MODULE_ASSET_SIZES.includes(tvSize);
 
 /** Crop of the open (shelf) left module render, measured on the 1920x1440 source. */
 export const OPEN_LEFT_CROPS: ModuleCropSet = {
   left: { left: 840 / 1920, top: 170 / 1440, width: 239 / 1920, height: 1100 / 1440 },
   center: MODULE_CROPS.center,
   right: MODULE_CROPS.right,
+};
+
+/** The open left render mirrored into a right-side module. */
+export const OPEN_RIGHT_CROPS: ModuleCropSet = {
+  left: MODULE_CROPS.left,
+  center: MODULE_CROPS.center,
+  right: OPEN_LEFT_CROPS.left,
+};
+
+const selectSingleSideAssets = (
+  positionAssets: ConfiguratorModuleAsset["positionAssets"],
+  color: string,
+  tvSize: string,
+  leftVariant: LeftModuleVariant,
+  rightVariant: RightModuleVariant,
+) => {
+  if (
+    !hasSingleModuleAssetPicker(color, tvSize) ||
+    !positionAssets
+  ) {
+    return positionAssets;
+  }
+
+  return {
+    ...positionAssets,
+    left: leftVariant === "original" ? undefined : positionAssets.left,
+    right: rightVariant === "original" ? undefined : positionAssets.right,
+  };
 };
 
 function ConfiguratorPreviewAssembly({
@@ -102,6 +149,8 @@ function ConfiguratorPreviewAssembly({
   hasRight,
   animateSides,
   leftVariant = "dicht",
+  rightVariant = "dicht",
+  positionAssets,
 }: {
   color: string;
   source: string | null;
@@ -110,6 +159,8 @@ function ConfiguratorPreviewAssembly({
   hasRight: boolean;
   animateSides: boolean;
   leftVariant?: LeftModuleVariant;
+  rightVariant?: RightModuleVariant;
+  positionAssets?: ConfiguratorModuleAsset["positionAssets"];
 }) {
   const usesLegacyWalnutModules = color === FULL_HOUSE_COLORS[0] && source === null;
   const sideTransition = animateSides
@@ -120,6 +171,11 @@ function ConfiguratorPreviewAssembly({
           "cubic-bezier(0.22,1,0.36,1), ease-out, cubic-bezier(0.22,1,0.36,1)",
       }
     : undefined;
+  const moduleSource = (position: ModulePosition) => positionAssets?.[position]?.source ?? source;
+  const moduleCrops = (position: ModulePosition): ModuleCropSet =>
+    positionAssets?.[position]
+      ? { ...crops, [position]: positionAssets[position]!.crop }
+      : crops;
 
   return (
     <div className="flex h-full items-end justify-center">
@@ -131,7 +187,14 @@ function ConfiguratorPreviewAssembly({
             ? `max-w-[600px] opacity-100 ${leftVariant === "open" ? "translate-x-[1px]" : "translate-x-0"}`
             : "max-w-0 translate-x-5 opacity-0"
         }`}
-        style={sideTransition}
+        style={{
+          ...sideTransition,
+          height:
+            (leftVariant === "dicht" || leftVariant === "nieuw") &&
+            positionAssets?.left?.heightAdjustmentPx
+              ? `calc(100% + ${0.4 + positionAssets.left.heightAdjustmentPx}px)`
+              : undefined,
+        }}
       >
         {leftVariant === "open" ? (
           <CroppedModuleImage
@@ -146,10 +209,13 @@ function ConfiguratorPreviewAssembly({
           <ConfiguratorModuleImage
             color={color}
             position="left"
-            source={source}
+            source={moduleSource("left")}
             animate={false}
             testId={animateSides}
-            crops={crops}
+            crops={moduleCrops("left")}
+            bottomTrimPx={positionAssets?.left?.bottomTrimPx}
+            walnutSideOffsetY={-0.5 + (positionAssets?.left?.offsetYPx ?? 0)}
+            sideOffsetY={positionAssets?.left?.offsetYPx ?? 0}
           />
         )}
       </div>
@@ -159,31 +225,55 @@ function ConfiguratorPreviewAssembly({
         <ConfiguratorModuleImage
           color={color}
           position="center"
-          source={source}
+          source={moduleSource("center")}
           animate={false}
           testId={animateSides}
-          crops={crops}
+          crops={moduleCrops("center")}
         />
       </div>
 
       <div
-        className={`relative z-[1] h-[calc(100%_+_0.4px)] translate-y-[0.25px] overflow-hidden ${
+        className={`relative z-[1] translate-y-[0.25px] overflow-hidden ${
+          rightVariant === "open" ? "h-full" : "h-[calc(100%_+_0.4px)]"
+        } ${
           usesLegacyWalnutModules ? "ml-[-11px]" : "ml-[-3px]"
         } ${
           hasRight
-            ? "max-w-[600px] translate-x-0 opacity-100"
+            ? `max-w-[600px] opacity-100 ${rightVariant === "open" ? "-translate-x-[1px]" : "translate-x-0"}`
             : "max-w-0 -translate-x-5 opacity-0"
         }`}
-        style={sideTransition}
+        style={{
+          ...sideTransition,
+          height:
+            (rightVariant === "dicht" || rightVariant === "nieuw") &&
+            positionAssets?.right?.heightAdjustmentPx
+              ? `calc(100% + ${0.4 + positionAssets.right.heightAdjustmentPx}px)`
+              : undefined,
+        }}
       >
-        <ConfiguratorModuleImage
-          color={color}
-          position="right"
-          source={source}
-          animate={false}
-          testId={animateSides}
-          crops={crops}
-        />
+        {rightVariant === "open" ? (
+          <CroppedModuleImage
+            color={color}
+            position="right"
+            source={openLeftModule.url}
+            animate={false}
+            testId={animateSides}
+            crops={OPEN_RIGHT_CROPS}
+            className="-scale-x-100"
+          />
+        ) : (
+          <ConfiguratorModuleImage
+            color={color}
+            position="right"
+            source={moduleSource("right")}
+            animate={false}
+            testId={animateSides}
+            crops={moduleCrops("right")}
+            bottomTrimPx={positionAssets?.right?.bottomTrimPx}
+            walnutSideOffsetY={-0.5 + (positionAssets?.right?.offsetYPx ?? 0)}
+            sideOffsetY={positionAssets?.right?.offsetYPx ?? 0}
+          />
+        )}
       </div>
     </div>
   );
@@ -370,10 +460,12 @@ function ConfiguratorPage() {
   const [previousPreviewTvValue, setPreviousPreviewTvValue] = useState<string | null>(null);
   const [tv, setTv] = useState(TV_OPTIONS[1]);
   const [hasLeft, setHasLeft] = useState(false);
-  const [leftVariant, setLeftVariant] = useState<LeftModuleVariant>("dicht");
+  const [leftVariant, setLeftVariant] = useState<LeftModuleVariant>("nieuw");
   const [leftPickerOpen, setLeftPickerOpen] = useState(false);
 
   const [hasRight, setHasRight] = useState(false);
+  const [rightVariant, setRightVariant] = useState<RightModuleVariant>("nieuw");
+  const [rightPickerOpen, setRightPickerOpen] = useState(false);
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [tvSizeOpen, setTvSizeOpen] = useState(false);
@@ -394,7 +486,14 @@ function ConfiguratorPage() {
 
   useEffect(() => {
     const configuredSources = Object.values(CONFIGURATOR_MODULE_ASSETS).flatMap((assetsBySize) =>
-      Object.values(assetsBySize).flatMap((asset) => (asset ? [asset.source] : [])),
+      Object.values(assetsBySize).flatMap((asset) =>
+        asset
+          ? [
+              asset.source,
+              ...Object.values(asset.positionAssets ?? {}).map((positionAsset) => positionAsset.source),
+            ]
+          : [],
+      ),
     );
     const sources = [...new Set([...Object.values(FULL_HOUSE_FRONT_IMAGES), ...configuredSources])];
     const images = sources.map((source) => {
@@ -422,6 +521,11 @@ function ConfiguratorPage() {
     setPreviousPreviewTvValue(tv.shopifyValue);
     setColor(nextColor);
     setPreviewColor(nextColor);
+    const nextSideVariant = hasSingleModuleAssetPicker(nextColor, tv.shopifyValue)
+      ? "nieuw"
+      : "dicht";
+    setLeftVariant(nextSideVariant);
+    setRightVariant(nextSideVariant);
 
     if (previewCleanupTimerRef.current !== null) {
       window.clearTimeout(previewCleanupTimerRef.current);
@@ -438,6 +542,11 @@ function ConfiguratorPage() {
     setPreviousPreviewColor(previewColor);
     setPreviousPreviewTvValue(tv.shopifyValue);
     setTv(nextTv);
+    const nextSideVariant = hasSingleModuleAssetPicker(previewColor, nextTv.shopifyValue)
+      ? "nieuw"
+      : "dicht";
+    setLeftVariant(nextSideVariant);
+    setRightVariant(nextSideVariant);
 
     if (previewCleanupTimerRef.current !== null) {
       window.clearTimeout(previewCleanupTimerRef.current);
@@ -518,6 +627,46 @@ function ConfiguratorPage() {
   }, [fullHouseProduct, previousPreviewColor, previousPreviewTvValue, tv.shopifyValue]);
   const colorModuleSource = colorModuleAsset.source;
   const previousModuleSource = previousModuleAsset?.source ?? null;
+  const isSingleModuleAssetPicker = hasSingleModuleAssetPicker(
+    previewColor,
+    tv.shopifyValue,
+  );
+  const selectedPositionAssets = selectSingleSideAssets(
+    colorModuleAsset.positionAssets,
+    previewColor,
+    tv.shopifyValue,
+    leftVariant,
+    rightVariant,
+  );
+  const previousSelectedPositionAssets = previousModuleAsset
+    ? selectSingleSideAssets(
+        previousModuleAsset.positionAssets,
+        previousPreviewColor ?? previewColor,
+        previousPreviewTvValue ?? tv.shopifyValue,
+        leftVariant,
+        rightVariant,
+      )
+    : undefined;
+  const leftModuleOptions: Array<{ variant: LeftModuleVariant; label: string }> =
+    isSingleModuleAssetPicker
+      ? [
+          { variant: "original", label: "Originele module" },
+          { variant: "nieuw", label: "Nieuwe module" },
+        ]
+      : [
+          { variant: "dicht", label: "Met deuren" },
+          { variant: "open", label: "Open vakken" },
+        ];
+  const rightModuleOptions: Array<{ variant: RightModuleVariant; label: string }> =
+    isSingleModuleAssetPicker
+      ? [
+          { variant: "original", label: "Originele module" },
+          { variant: "nieuw", label: "Nieuwe module" },
+        ]
+      : [
+          { variant: "dicht", label: "Met deuren" },
+          { variant: "open", label: "Open vakken" },
+        ];
 
   const handleAddToCart = async () => {
     if (!activeProduct || !selectedShopifyVariant) {
@@ -616,7 +765,7 @@ function ConfiguratorPage() {
                       setHasLeft(false);
                       return;
                     }
-                    if (previewColor === FULL_HOUSE_COLORS[0]) {
+                    if (isSingleModuleAssetPicker) {
                       setLeftPickerOpen(true);
                       return;
                     }
@@ -651,10 +800,7 @@ function ConfiguratorPage() {
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid grid-cols-2 gap-3">
-                      {([
-                        { variant: "dicht" as LeftModuleVariant, label: "Met deuren" },
-                        { variant: "open" as LeftModuleVariant, label: "Open vakken" },
-                      ]).map((option) => (
+                      {leftModuleOptions.map((option) => (
                         <button
                           key={option.variant}
                           type="button"
@@ -671,17 +817,45 @@ function ConfiguratorPage() {
                         >
                           <div className="flex h-[180px] items-end justify-center">
                             <CroppedModuleImage
-                              color={FULL_HOUSE_COLORS[0]}
+                              color={previewColor}
                               position="left"
                               source={
                                 option.variant === "open"
                                   ? openLeftModule.url
-                                  : (colorModuleSource ?? openLeftModule.url)
+                                  : option.variant === "original"
+                                    ? (colorModuleSource ?? openLeftModule.url)
+                                    : (colorModuleAsset.positionAssets?.left?.source ??
+                                      colorModuleSource ??
+                                      openLeftModule.url)
                               }
                               animate={false}
                               testId={false}
                               crops={
-                                option.variant === "open" ? OPEN_LEFT_CROPS : colorModuleAsset.crops
+                                option.variant === "open"
+                                  ? OPEN_LEFT_CROPS
+                                  : option.variant === "original"
+                                    ? colorModuleAsset.crops
+                                    : colorModuleAsset.positionAssets?.left
+                                    ? {
+                                        ...colorModuleAsset.crops,
+                                        left: colorModuleAsset.positionAssets.left.crop,
+                                      }
+                                    : colorModuleAsset.crops
+                              }
+                              heightAdjustmentPx={
+                                option.variant === "dicht" || option.variant === "nieuw"
+                                  ? colorModuleAsset.positionAssets?.left?.heightAdjustmentPx
+                                  : undefined
+                              }
+                              bottomTrimPx={
+                                option.variant === "dicht" || option.variant === "nieuw"
+                                  ? colorModuleAsset.positionAssets?.left?.bottomTrimPx
+                                  : undefined
+                              }
+                              translateY={
+                                option.variant === "dicht" || option.variant === "nieuw"
+                                  ? (colorModuleAsset.positionAssets?.left?.offsetYPx ?? 0)
+                                  : 0
                               }
                             />
                           </div>
@@ -709,9 +883,9 @@ function ConfiguratorPage() {
                       hasLeft={hasLeft}
                       hasRight={hasRight}
                       animateSides={false}
-                      leftVariant={
-                        previousPreviewColor === FULL_HOUSE_COLORS[0] ? leftVariant : "dicht"
-                      }
+                      positionAssets={previousSelectedPositionAssets}
+                      leftVariant={leftVariant}
+                      rightVariant={rightVariant}
                     />
                   </div>
                 )}
@@ -727,7 +901,9 @@ function ConfiguratorPage() {
                     hasLeft={hasLeft}
                     hasRight={hasRight}
                     animateSides
-                    leftVariant={previewColor === FULL_HOUSE_COLORS[0] ? leftVariant : "dicht"}
+                    positionAssets={selectedPositionAssets}
+                    leftVariant={leftVariant}
+                    rightVariant={rightVariant}
                   />
                 </div>
 
@@ -735,7 +911,18 @@ function ConfiguratorPage() {
                 {/* Add / remove right module */}
                 <button
                   type="button"
-                  onClick={() => setHasRight(!hasRight)}
+                  onClick={() => {
+                    if (hasRight) {
+                      setHasRight(false);
+                      return;
+                    }
+                    if (isSingleModuleAssetPicker) {
+                      setRightPickerOpen(true);
+                      return;
+                    }
+                    setRightVariant("dicht");
+                    setHasRight(true);
+                  }}
                   aria-label={hasRight ? "Rechter module verwijderen" : "Rechter module toevoegen"}
                   className="absolute right-0 top-1/2 z-[6] flex h-[48.4px] w-[48.4px] translate-x-[calc(100%+16px)] -translate-y-1/2 items-center justify-center rounded-full border border-[#e8e2dc] bg-white text-[20px] font-bold leading-none text-[#ef7027] shadow-[0_10px_24px_rgba(3,12,26,0.10)] transition-colors hover:border-[#ef7027] md:h-11 md:w-11"
                 >
@@ -752,6 +939,86 @@ function ConfiguratorPage() {
                     {!hasRight && <path d="M12 5v14" />}
                   </svg>
                 </button>
+
+                <Dialog open={rightPickerOpen} onOpenChange={setRightPickerOpen}>
+                  <DialogContent className="max-w-[560px] rounded-[20px] border-[#eee7e0] bg-white">
+                    <DialogHeader>
+                      <DialogTitle className="text-[20px] font-semibold text-[#071426]">
+                        Kies je rechter module
+                      </DialogTitle>
+                      <DialogDescription className="text-[14px] text-[#5a6472]">
+                        Beide modules klikken naadloos tegen de middenmodule.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid grid-cols-2 gap-3">
+                      {rightModuleOptions.map((option) => (
+                        <button
+                          key={option.variant}
+                          type="button"
+                          onClick={() => {
+                            setRightVariant(option.variant);
+                            setHasRight(true);
+                            setRightPickerOpen(false);
+                          }}
+                          className={`group flex flex-col items-center gap-3 rounded-[12px] border-2 bg-[#f7f7f7] p-4 transition-colors ${
+                            rightVariant === option.variant
+                              ? "border-[#ef8874]"
+                              : "border-transparent hover:border-[#e8e2dc]"
+                          }`}
+                        >
+                          <div className="flex h-[180px] items-end justify-center">
+                            <CroppedModuleImage
+                              color={previewColor}
+                              position="right"
+                              source={
+                                option.variant === "open"
+                                  ? openLeftModule.url
+                                  : option.variant === "original"
+                                    ? (colorModuleSource ?? openLeftModule.url)
+                                    : (colorModuleAsset.positionAssets?.right?.source ??
+                                      colorModuleSource ??
+                                      openLeftModule.url)
+                              }
+                              animate={false}
+                              testId={false}
+                              className={option.variant === "open" ? "-scale-x-100" : ""}
+                              crops={
+                                option.variant === "open"
+                                  ? OPEN_RIGHT_CROPS
+                                  : option.variant === "original"
+                                    ? colorModuleAsset.crops
+                                    : colorModuleAsset.positionAssets?.right
+                                    ? {
+                                        ...colorModuleAsset.crops,
+                                        right: colorModuleAsset.positionAssets.right.crop,
+                                      }
+                                    : colorModuleAsset.crops
+                              }
+                              heightAdjustmentPx={
+                                option.variant === "dicht" || option.variant === "nieuw"
+                                  ? colorModuleAsset.positionAssets?.right?.heightAdjustmentPx
+                                  : undefined
+                              }
+                              bottomTrimPx={
+                                option.variant === "dicht" || option.variant === "nieuw"
+                                  ? colorModuleAsset.positionAssets?.right?.bottomTrimPx
+                                  : undefined
+                              }
+                              translateY={
+                                option.variant === "dicht" || option.variant === "nieuw"
+                                  ? (colorModuleAsset.positionAssets?.right?.offsetYPx ?? 0)
+                                  : 0
+                              }
+                            />
+                          </div>
+                          <span className="text-[14px] font-semibold text-[#071426]">
+                            {option.label}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
 
             </div>
@@ -1077,6 +1344,7 @@ function ConfiguratorPage() {
               color={color}
               source={colorModuleSource}
               crops={colorModuleAsset.crops}
+              positionAssets={selectedPositionAssets}
               hasLeft={hasLeft}
               hasRight={hasRight}
             />

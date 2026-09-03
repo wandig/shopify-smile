@@ -3,29 +3,46 @@ import { FULL_HOUSE_COLORS } from "@/lib/wandig-colors";
 import centerModule from "@/assets/center-module-trim.png.asset.json";
 import leftModule from "@/assets/left-module-trim.png.asset.json";
 import rightModuleUrlAsset from "@/assets/right-module-trim-tight-cropped.png.asset.json";
-import dofroze4055FrontAsset from "@/assets/configurator/dofroze-40-55-front.webp.asset.json";
-const dofroze4055Front = dofroze4055FrontAsset.url;
-import dofroze5865FrontAsset from "@/assets/configurator/dofroze-58-65-front.webp.asset.json";
-const dofroze5865Front = dofroze5865FrontAsset.url;
-import dofroze7075FrontAsset from "@/assets/configurator/dofroze-70-75-front.webp.asset.json";
-const dofroze7075Front = dofroze7075FrontAsset.url;
+import dofroze4055Front from "@/assets/configurator/dofroze-40-55-front.webp";
+import dofroze4055SingleClosed from "@/assets/configurator/dofroze-40-55-single-closed.png";
+import dofroze5865Front from "@/assets/configurator/dofroze-58-65-front.webp";
+import dofroze5865SingleClosed from "@/assets/configurator/dofroze-58-65-single-closed.png";
+import dofroze7075Front from "@/assets/configurator/dofroze-70-75-front.webp";
+import dofroze7075SingleClosed from "@/assets/configurator/dofroze-70-75-single-closed.png";
 import dofroze7785Front from "@/assets/configurator/dofroze-77-85-front.png";
+import dofroze7785SingleClosed from "@/assets/configurator/dofroze-77-85-single-closed.png";
 import walnut4055Front from "@/assets/configurator/walnootbruin-40-55-front.png";
+import walnut4055SingleClosed from "@/assets/configurator/walnootbruin-40-55-single-closed.jpg";
 import walnut5865Front from "@/assets/configurator/walnootbruin-58-65-front.png";
+import walnut5865SingleClosed from "@/assets/configurator/walnootbruin-58-65-single-closed.png";
 import walnut7075Front from "@/assets/configurator/walnootbruin-70-75-front.png";
+import walnut7075SingleClosed from "@/assets/configurator/walnootbruin-70-75-single-closed.png";
 import walnut7785Front from "@/assets/configurator/walnootbruin-77-85-front.png";
+import walnut7785SingleClosed from "@/assets/configurator/walnootbruin-77-85-single-closed.png";
 import darkOak4055Front from "@/assets/configurator/donkereiken-40-55-front.png";
+import darkOak4055SingleClosed from "@/assets/configurator/donkereiken-40-55-single-closed.png";
 import darkOak5865Front from "@/assets/configurator/donkereiken-58-65-front.png";
+import darkOak5865SingleClosed from "@/assets/configurator/donkereiken-58-65-single-closed.png";
 import darkOak7075Front from "@/assets/configurator/donkereiken-70-75-front.png";
+import darkOak7075SingleClosed from "@/assets/configurator/donkereiken-70-75-single-closed.png";
 import darkOak7785Front from "@/assets/configurator/donkereiken-77-85-front.png";
+import darkOak7785SingleClosed from "@/assets/configurator/donkereiken-77-85-single-closed.png";
 import cashmere4055Front from "@/assets/configurator/cashmeregrijs-40-55-front.png";
+import cashmere4055SingleClosed from "@/assets/configurator/cashmeregrijs-40-55-single-closed.png";
 import cashmere5865Front from "@/assets/configurator/cashmeregrijs-58-65-front.png";
+import cashmere5865SingleClosed from "@/assets/configurator/cashmeregrijs-58-65-single-closed.png";
 import cashmere7075Front from "@/assets/configurator/cashmeregrijs-70-75-front.png";
+import cashmere7075SingleClosed from "@/assets/configurator/cashmeregrijs-70-75-single-closed.png";
 import cashmere7785Front from "@/assets/configurator/cashmeregrijs-77-85-front.png";
+import cashmere7785SingleClosed from "@/assets/configurator/cashmeregrijs-77-85-single-closed.png";
 import crystalWhite4055Front from "@/assets/configurator/kristalwit-40-55-front.png";
+import crystalWhite4055SingleClosed from "@/assets/configurator/kristalwit-40-55-single-closed.png";
 import crystalWhite5865Front from "@/assets/configurator/kristalwit-58-65-front.png";
+import crystalWhite5865SingleClosed from "@/assets/configurator/kristalwit-58-65-single-closed.png";
 import crystalWhite7075Front from "@/assets/configurator/kristalwit-70-75-front.png";
+import crystalWhite7075SingleClosed from "@/assets/configurator/kristalwit-70-75-single-closed.png";
 import crystalWhite7785Front from "@/assets/configurator/kristalwit-77-85-front.png";
+import crystalWhite7785SingleClosed from "@/assets/configurator/kristalwit-77-85-single-closed.png";
 const rightModuleUrl = rightModuleUrlAsset.url;
 
 export const MODULE_REVEAL = "moduleColorReveal 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both";
@@ -59,6 +76,21 @@ export type ModuleCropSet = Record<ModulePosition, ModuleCrop>;
 export type ConfiguratorModuleAsset = {
   source: string;
   crops: ModuleCropSet;
+  positionAssets?: Partial<
+    Record<
+      ModulePosition,
+      {
+        source: string;
+        crop: ModuleCrop;
+        heightAdjustmentPx?: number;
+        bottomTrimPx?: number;
+        offsetYPx?: number;
+        specHeightAdjustmentPx?: number;
+        specBottomTrimPx?: number;
+        specOffsetYPx?: number;
+      }
+    >
+  >;
 };
 
 export const MODULE_CROPS: ModuleCropSet = {
@@ -69,8 +101,19 @@ export const MODULE_CROPS: ModuleCropSet = {
 
 const DOFROZE_40_55_CROPS: ModuleCropSet = {
   left: { left: 330 / 4000, top: 354 / 3000, width: 797 / 4000, height: 2292 / 3000 },
-  center: { left: 1127 / 4000, top: 354 / 3000, width: 1745 / 4000, height: 2292 / 3000 },
+  center: { left: 1126 / 4000, top: 354 / 3000, width: 1747 / 4000, height: 2292 / 3000 },
   right: { left: 2872 / 4000, top: 354 / 3000, width: 797 / 4000, height: 2292 / 3000 },
+};
+
+const DOFROZE_40_55_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: dofroze4055SingleClosed,
+    crop: { left: 315 / 2048, top: 176 / 1536, width: 254 / 2048, height: 1176 / 1536 },
+  },
+  right: {
+    source: dofroze4055SingleClosed,
+    crop: { left: 1482 / 2048, top: 176 / 1536, width: 256 / 2048, height: 1176 / 1536 },
+  },
 };
 
 const DOFROZE_58_65_CROPS: ModuleCropSet = {
@@ -79,16 +122,53 @@ const DOFROZE_58_65_CROPS: ModuleCropSet = {
   right: { left: 3012 / 4000, top: 345 / 3000, width: 675 / 4000, height: 2292 / 3000 },
 };
 
+const DOFROZE_58_65_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: dofroze5865SingleClosed,
+    crop: { left: 282 / 2048, top: 172 / 1536, width: 216 / 2048, height: 1176 / 1536 },
+    offsetYPx: -1,
+  },
+  right: {
+    source: dofroze5865SingleClosed,
+    crop: { left: 1555 / 2048, top: 172 / 1536, width: 217 / 2048, height: 1176 / 1536 },
+    offsetYPx: -1,
+  },
+};
+
 const DOFROZE_70_75_CROPS: ModuleCropSet = {
   left: { left: 172 / 4000, top: 316 / 3000, width: 675 / 4000, height: 2369 / 3000 },
-  center: { left: 835 / 4000, top: 316 / 3000, width: 2329 / 4000, height: 2369 / 3000 },
+  center: { left: 835 / 4000, top: 316 / 3000, width: 2329.5 / 4000, height: 2369 / 3000 },
   right: { left: 3152 / 4000, top: 316 / 3000, width: 675 / 4000, height: 2369 / 3000 },
+};
+
+const DOFROZE_70_75_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: dofroze7075SingleClosed,
+    crop: { left: 210 / 2048, top: 157 / 1536, width: 216 / 2048, height: 1215 / 1536 },
+  },
+  right: {
+    source: dofroze7075SingleClosed,
+    crop: { left: 1626 / 2048, top: 157 / 1536, width: 217 / 2048, height: 1215 / 1536 },
+  },
 };
 
 const DOFROZE_77_85_CROPS: ModuleCropSet = {
   left: { left: 50 / 2046, top: 140 / 1535, width: 340 / 2046, height: 1256 / 1535 },
-  center: { left: 388 / 2046, top: 140 / 1535, width: 1272 / 2046, height: 1256 / 1535 },
+  center: { left: 388 / 2046, top: 140 / 1535, width: 1271 / 2046, height: 1256 / 1535 },
   right: { left: 1658 / 2046, top: 140 / 1535, width: 338 / 2046, height: 1256 / 1535 },
+};
+
+const DOFROZE_77_85_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: dofroze7785SingleClosed,
+    crop: { left: 174 / 2048, top: 137 / 1536, width: 216 / 2048, height: 1255 / 1536 },
+    specOffsetYPx: -1,
+  },
+  right: {
+    source: dofroze7785SingleClosed,
+    crop: { left: 1662 / 2048, top: 137 / 1536, width: 217 / 2048, height: 1255 / 1536 },
+    specOffsetYPx: -1,
+  },
 };
 
 const WALNUT_40_55_CROPS: ModuleCropSet = {
@@ -97,10 +177,45 @@ const WALNUT_40_55_CROPS: ModuleCropSet = {
   right: { left: 1482 / 2046, top: 176 / 1535, width: 400 / 2046, height: 1177 / 1535 },
 };
 
+/**
+ * The supplied 40–55 inch photo is used only for the side modules. The inner
+ * vertical posts are excluded because those already belong to the existing
+ * center module.
+ */
+const WALNUT_40_55_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: walnut4055SingleClosed,
+    crop: { left: 612 / 4000, top: 354 / 3000, width: 502 / 4000, height: 2292 / 3000 },
+    heightAdjustmentPx: -1.5,
+    bottomTrimPx: 1,
+    offsetYPx: -0.2,
+    specHeightAdjustmentPx: -1.5,
+  },
+  right: {
+    source: walnut4055SingleClosed,
+    crop: { left: 2886 / 4000, top: 354 / 3000, width: 502 / 4000, height: 2292 / 3000 },
+    heightAdjustmentPx: -1.5,
+    bottomTrimPx: 1,
+    offsetYPx: -0.2,
+    specHeightAdjustmentPx: -1.5,
+  },
+};
+
 const WALNUT_58_65_CROPS: ModuleCropSet = {
   left: { left: 160 / 2046, top: 172 / 1535, width: 338 / 2046, height: 1176 / 1535 },
   center: { left: 498 / 2046, top: 172 / 1535, width: 1055 / 2046, height: 1176 / 1535 },
   right: { left: 1553 / 2046, top: 172 / 1535, width: 338 / 2046, height: 1176 / 1535 },
+};
+
+const WALNUT_58_65_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: walnut5865SingleClosed,
+    crop: { left: 282 / 2048, top: 172 / 1536, width: 217 / 2048, height: 1175 / 1536 },
+  },
+  right: {
+    source: walnut5865SingleClosed,
+    crop: { left: 1555 / 2048, top: 172 / 1536, width: 217 / 2048, height: 1175 / 1536 },
+  },
 };
 
 const WALNUT_70_75_CROPS: ModuleCropSet = {
@@ -109,10 +224,32 @@ const WALNUT_70_75_CROPS: ModuleCropSet = {
   right: { left: 1625 / 2046, top: 157 / 1535, width: 338 / 2046, height: 1217 / 1535 },
 };
 
+const WALNUT_70_75_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: walnut7075SingleClosed,
+    crop: { left: 211 / 2048, top: 157 / 1536, width: 216 / 2048, height: 1215 / 1536 },
+  },
+  right: {
+    source: walnut7075SingleClosed,
+    crop: { left: 1626 / 2048, top: 157 / 1536, width: 217 / 2048, height: 1215 / 1536 },
+  },
+};
+
 const WALNUT_77_85_CROPS: ModuleCropSet = {
   left: { left: 53 / 2046, top: 137 / 1535, width: 337 / 2046, height: 1255 / 1535 },
   center: { left: 390 / 2046, top: 137 / 1535, width: 1271 / 2046, height: 1255 / 1535 },
   right: { left: 1661 / 2046, top: 137 / 1535, width: 337 / 2046, height: 1255 / 1535 },
+};
+
+const WALNUT_77_85_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: walnut7785SingleClosed,
+    crop: { left: 174 / 2048, top: 137 / 1536, width: 216 / 2048, height: 1255 / 1536 },
+  },
+  right: {
+    source: walnut7785SingleClosed,
+    crop: { left: 1662 / 2048, top: 137 / 1536, width: 217 / 2048, height: 1255 / 1536 },
+  },
 };
 
 const DARK_OAK_40_55_CROPS: ModuleCropSet = {
@@ -121,10 +258,40 @@ const DARK_OAK_40_55_CROPS: ModuleCropSet = {
   right: { left: 1479 / 2046, top: 182 / 1535, width: 398 / 2046, height: 1171 / 1535 },
 };
 
+const DARK_OAK_40_55_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: darkOak4055SingleClosed,
+    crop: { left: 315 / 2048, top: 176 / 1536, width: 254 / 2048, height: 1177 / 1536 },
+    heightAdjustmentPx: 1.4,
+    specHeightAdjustmentPx: 1,
+  },
+  right: {
+    source: darkOak4055SingleClosed,
+    crop: { left: 1482 / 2048, top: 176 / 1536, width: 256 / 2048, height: 1177 / 1536 },
+    heightAdjustmentPx: 1.6,
+    specHeightAdjustmentPx: 1,
+  },
+};
+
 const DARK_OAK_58_65_CROPS: ModuleCropSet = {
   left: { left: 160 / 2046, top: 177 / 1535, width: 336 / 2046, height: 1171 / 1535 },
   center: { left: 496 / 2046, top: 177 / 1535, width: 1055 / 2046, height: 1171 / 1535 },
   right: { left: 1551 / 2046, top: 177 / 1535, width: 336 / 2046, height: 1171 / 1535 },
+};
+
+const DARK_OAK_58_65_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: darkOak5865SingleClosed,
+    crop: { left: 282 / 2048, top: 172 / 1536, width: 216 / 2048, height: 1175 / 1536 },
+    heightAdjustmentPx: 1.4,
+    specHeightAdjustmentPx: 0.5,
+  },
+  right: {
+    source: darkOak5865SingleClosed,
+    crop: { left: 1555 / 2048, top: 172 / 1536, width: 216 / 2048, height: 1175 / 1536 },
+    heightAdjustmentPx: 1.6,
+    specHeightAdjustmentPx: 0.5,
+  },
 };
 
 const DARK_OAK_70_75_CROPS: ModuleCropSet = {
@@ -133,10 +300,38 @@ const DARK_OAK_70_75_CROPS: ModuleCropSet = {
   right: { left: 1622 / 2046, top: 162 / 1535, width: 336 / 2046, height: 1211 / 1535 },
 };
 
+const DARK_OAK_70_75_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: darkOak7075SingleClosed,
+    crop: { left: 211 / 2048, top: 157 / 1536, width: 216 / 2048, height: 1215 / 1536 },
+    heightAdjustmentPx: 1.4,
+  },
+  right: {
+    source: darkOak7075SingleClosed,
+    crop: { left: 1626 / 2048, top: 157 / 1536, width: 217 / 2048, height: 1215 / 1536 },
+    heightAdjustmentPx: 1.6,
+  },
+};
+
 const DARK_OAK_77_85_CROPS: ModuleCropSet = {
   left: { left: 52 / 2046, top: 143 / 1535, width: 336 / 2046, height: 1249 / 1535 },
   center: { left: 388 / 2046, top: 143 / 1535, width: 1270 / 2046, height: 1249 / 1535 },
   right: { left: 1658 / 2046, top: 143 / 1535, width: 336 / 2046, height: 1249 / 1535 },
+};
+
+const DARK_OAK_77_85_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: darkOak7785SingleClosed,
+    crop: { left: 174 / 2048, top: 137 / 1536, width: 216 / 2048, height: 1255 / 1536 },
+    heightAdjustmentPx: 1.4,
+    specHeightAdjustmentPx: 1,
+  },
+  right: {
+    source: darkOak7785SingleClosed,
+    crop: { left: 1662 / 2048, top: 137 / 1536, width: 217 / 2048, height: 1255 / 1536 },
+    heightAdjustmentPx: 1.6,
+    specHeightAdjustmentPx: 1,
+  },
 };
 
 const CASHMERE_40_55_CROPS: ModuleCropSet = {
@@ -145,10 +340,32 @@ const CASHMERE_40_55_CROPS: ModuleCropSet = {
   right: { left: 1479 / 2046, top: 176 / 1535, width: 398 / 2046, height: 1177 / 1535 },
 };
 
+const CASHMERE_40_55_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: cashmere4055SingleClosed,
+    crop: { left: 314 / 2048, top: 176 / 1536, width: 255 / 2048, height: 1177 / 1536 },
+  },
+  right: {
+    source: cashmere4055SingleClosed,
+    crop: { left: 1482 / 2048, top: 176 / 1536, width: 256 / 2048, height: 1177 / 1536 },
+  },
+};
+
 const CASHMERE_58_65_CROPS: ModuleCropSet = {
   left: { left: 160 / 2046, top: 171 / 1535, width: 336 / 2046, height: 1177 / 1535 },
   center: { left: 496 / 2046, top: 171 / 1535, width: 1055 / 2046, height: 1177 / 1535 },
   right: { left: 1551 / 2046, top: 171 / 1535, width: 336 / 2046, height: 1177 / 1535 },
+};
+
+const CASHMERE_58_65_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: cashmere5865SingleClosed,
+    crop: { left: 281 / 2048, top: 171 / 1536, width: 217 / 2048, height: 1177 / 1536 },
+  },
+  right: {
+    source: cashmere5865SingleClosed,
+    crop: { left: 1555 / 2048, top: 171 / 1536, width: 217 / 2048, height: 1177 / 1536 },
+  },
 };
 
 const CASHMERE_70_75_CROPS: ModuleCropSet = {
@@ -157,13 +374,35 @@ const CASHMERE_70_75_CROPS: ModuleCropSet = {
   right: { left: 1622 / 2046, top: 157 / 1535, width: 336 / 2046, height: 1217 / 1535 },
 };
 
+const CASHMERE_70_75_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: cashmere7075SingleClosed,
+    crop: { left: 209 / 2048, top: 157 / 1536, width: 217 / 2048, height: 1216 / 1536 },
+  },
+  right: {
+    source: cashmere7075SingleClosed,
+    crop: { left: 1626 / 2048, top: 157 / 1536, width: 218 / 2048, height: 1216 / 1536 },
+  },
+};
+
 const CASHMERE_77_85_CROPS: ModuleCropSet = {
   left: { left: 52 / 2046, top: 137 / 1535, width: 336 / 2046, height: 1255 / 1535 },
   center: { left: 388 / 2046, top: 137 / 1535, width: 1270 / 2046, height: 1255 / 1535 },
   right: { left: 1658 / 2046, top: 137 / 1535, width: 336 / 2046, height: 1255 / 1535 },
 };
 
-/** Cashmeregrijs needs 2px trimmed from the left edge of the center module. */
+const CASHMERE_77_85_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: cashmere7785SingleClosed,
+    crop: { left: 173 / 2048, top: 137 / 1536, width: 217 / 2048, height: 1255 / 1536 },
+  },
+  right: {
+    source: cashmere7785SingleClosed,
+    crop: { left: 1662 / 2048, top: 137 / 1536, width: 218 / 2048, height: 1255 / 1536 },
+  },
+};
+
+/** Cashmeregrijs needs 3px trimmed from the left edge of the center module. */
 const trimCenterLeft = (crops: ModuleCropSet, px: number): ModuleCropSet => ({
   ...crops,
   center: {
@@ -173,10 +412,54 @@ const trimCenterLeft = (crops: ModuleCropSet, px: number): ModuleCropSet => ({
   },
 });
 
-const CASHMERE_TRIM_40_55_CROPS = trimCenterLeft(CASHMERE_40_55_CROPS, 2);
-const CASHMERE_TRIM_58_65_CROPS = trimCenterLeft(CASHMERE_58_65_CROPS, 2);
-const CASHMERE_TRIM_70_75_CROPS = trimCenterLeft(CASHMERE_70_75_CROPS, 2);
-const CASHMERE_TRIM_77_85_CROPS = trimCenterLeft(CASHMERE_77_85_CROPS, 2);
+const CASHMERE_TRIM_40_55_CROPS = trimCenterLeft(CASHMERE_40_55_CROPS, 3);
+const CASHMERE_TRIM_58_65_CROPS = trimCenterLeft(CASHMERE_58_65_CROPS, 3);
+const CASHMERE_TRIM_70_75_CROPS = trimCenterLeft(CASHMERE_70_75_CROPS, 3);
+const CASHMERE_TRIM_77_85_CROPS = trimCenterLeft(CASHMERE_77_85_CROPS, 3);
+
+const CRYSTAL_WHITE_40_55_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: crystalWhite4055SingleClosed,
+    crop: { left: 312 / 2048, top: 176 / 1536, width: 257 / 2048, height: 1179 / 1536 },
+  },
+  right: {
+    source: crystalWhite4055SingleClosed,
+    crop: { left: 1482 / 2048, top: 176 / 1536, width: 256 / 2048, height: 1179 / 1536 },
+  },
+};
+
+const CRYSTAL_WHITE_58_65_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: crystalWhite5865SingleClosed,
+    crop: { left: 278 / 2048, top: 171 / 1536, width: 220 / 2048, height: 1179 / 1536 },
+  },
+  right: {
+    source: crystalWhite5865SingleClosed,
+    crop: { left: 1555 / 2048, top: 171 / 1536, width: 218 / 2048, height: 1179 / 1536 },
+  },
+};
+
+const CRYSTAL_WHITE_70_75_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: crystalWhite7075SingleClosed,
+    crop: { left: 207 / 2048, top: 156 / 1536, width: 219 / 2048, height: 1218 / 1536 },
+  },
+  right: {
+    source: crystalWhite7075SingleClosed,
+    crop: { left: 1626 / 2048, top: 156 / 1536, width: 219 / 2048, height: 1218 / 1536 },
+  },
+};
+
+const CRYSTAL_WHITE_77_85_SIDE_ASSETS: NonNullable<ConfiguratorModuleAsset["positionAssets"]> = {
+  left: {
+    source: crystalWhite7785SingleClosed,
+    crop: { left: 171 / 2048, top: 137 / 1536, width: 219 / 2048, height: 1257 / 1536 },
+  },
+  right: {
+    source: crystalWhite7785SingleClosed,
+    crop: { left: 1662 / 2048, top: 137 / 1536, width: 221 / 2048, height: 1257 / 1536 },
+  },
+};
 
 
 
@@ -192,90 +475,110 @@ export const CONFIGURATOR_MODULE_ASSETS: Record<
     "40 - 55 inch": {
       source: walnut4055Front,
       crops: WALNUT_40_55_CROPS,
+      positionAssets: WALNUT_40_55_SIDE_ASSETS,
     },
     "58 - 65 inch": {
       source: walnut5865Front,
       crops: WALNUT_58_65_CROPS,
+      positionAssets: WALNUT_58_65_SIDE_ASSETS,
     },
     "70 - 75 inch": {
       source: walnut7075Front,
       crops: WALNUT_70_75_CROPS,
+      positionAssets: WALNUT_70_75_SIDE_ASSETS,
     },
     "77 - 85 inch": {
       source: walnut7785Front,
       crops: WALNUT_77_85_CROPS,
+      positionAssets: WALNUT_77_85_SIDE_ASSETS,
     },
   },
   Donkereiken: {
     "40 - 55 inch": {
       source: darkOak4055Front,
       crops: DARK_OAK_40_55_CROPS,
+      positionAssets: DARK_OAK_40_55_SIDE_ASSETS,
     },
     "58 - 65 inch": {
       source: darkOak5865Front,
       crops: DARK_OAK_58_65_CROPS,
+      positionAssets: DARK_OAK_58_65_SIDE_ASSETS,
     },
     "70 - 75 inch": {
       source: darkOak7075Front,
       crops: DARK_OAK_70_75_CROPS,
+      positionAssets: DARK_OAK_70_75_SIDE_ASSETS,
     },
     "77 - 85 inch": {
       source: darkOak7785Front,
       crops: DARK_OAK_77_85_CROPS,
+      positionAssets: DARK_OAK_77_85_SIDE_ASSETS,
     },
   },
   Cashmeregrijs: {
     "40 - 55 inch": {
       source: cashmere4055Front,
       crops: CASHMERE_TRIM_40_55_CROPS,
+      positionAssets: CASHMERE_40_55_SIDE_ASSETS,
     },
     "58 - 65 inch": {
       source: cashmere5865Front,
       crops: CASHMERE_TRIM_58_65_CROPS,
+      positionAssets: CASHMERE_58_65_SIDE_ASSETS,
     },
     "70 - 75 inch": {
       source: cashmere7075Front,
       crops: CASHMERE_TRIM_70_75_CROPS,
+      positionAssets: CASHMERE_70_75_SIDE_ASSETS,
     },
     "77 - 85 inch": {
       source: cashmere7785Front,
       crops: CASHMERE_TRIM_77_85_CROPS,
+      positionAssets: CASHMERE_77_85_SIDE_ASSETS,
     },
   },
   Kristalwit: {
     "40 - 55 inch": {
       source: crystalWhite4055Front,
       crops: CASHMERE_40_55_CROPS,
+      positionAssets: CRYSTAL_WHITE_40_55_SIDE_ASSETS,
     },
     "58 - 65 inch": {
       source: crystalWhite5865Front,
       crops: CASHMERE_58_65_CROPS,
+      positionAssets: CRYSTAL_WHITE_58_65_SIDE_ASSETS,
     },
     "70 - 75 inch": {
       source: crystalWhite7075Front,
       crops: CASHMERE_70_75_CROPS,
+      positionAssets: CRYSTAL_WHITE_70_75_SIDE_ASSETS,
     },
     "77 - 85 inch": {
       source: crystalWhite7785Front,
       crops: CASHMERE_77_85_CROPS,
+      positionAssets: CRYSTAL_WHITE_77_85_SIDE_ASSETS,
     },
   },
   Dofroze: {
     "40 - 55 inch": {
       source: dofroze4055Front,
       crops: DOFROZE_40_55_CROPS,
+      positionAssets: DOFROZE_40_55_SIDE_ASSETS,
     },
     "58 - 65 inch": {
       source: dofroze5865Front,
       crops: DOFROZE_58_65_CROPS,
+      positionAssets: DOFROZE_58_65_SIDE_ASSETS,
     },
     "70 - 75 inch": {
       source: dofroze7075Front,
       crops: DOFROZE_70_75_CROPS,
+      positionAssets: DOFROZE_70_75_SIDE_ASSETS,
     },
     "77 - 85 inch": {
       source: dofroze7785Front,
       crops: DOFROZE_77_85_CROPS,
+      positionAssets: DOFROZE_77_85_SIDE_ASSETS,
     },
   },
 };
@@ -296,6 +599,8 @@ export function CroppedModuleImage({
   className = "",
   crops = MODULE_CROPS,
   translateY = 0,
+  heightAdjustmentPx = 0,
+  bottomTrimPx = 0,
 }: {
   color: string;
   position: ModulePosition;
@@ -305,6 +610,8 @@ export function CroppedModuleImage({
   className?: string;
   crops?: ModuleCropSet;
   translateY?: number;
+  heightAdjustmentPx?: number;
+  bottomTrimPx?: number;
 }) {
   const crop = crops[position];
 
@@ -314,6 +621,8 @@ export function CroppedModuleImage({
       className={`relative h-full shrink-0 overflow-hidden ${className}`}
       style={{
         aspectRatio: `${(crop.width * 4) / (crop.height * 3)}`,
+        height: heightAdjustmentPx ? `calc(100% + ${heightAdjustmentPx}px)` : undefined,
+        clipPath: bottomTrimPx ? `inset(0 0 ${bottomTrimPx}px 0)` : undefined,
         animation: animate ? MODULE_REVEAL : undefined,
         backfaceVisibility: "hidden",
         contain: "paint",
@@ -345,6 +654,9 @@ export function ConfiguratorModuleImage({
   className = "",
   crops = MODULE_CROPS,
   walnutSideOffsetY = -0.5,
+  sideOffsetY = 0,
+  heightAdjustmentPx = 0,
+  bottomTrimPx = 0,
 }: {
   color: string;
   position: ModulePosition;
@@ -354,10 +666,17 @@ export function ConfiguratorModuleImage({
   className?: string;
   crops?: ModuleCropSet;
   walnutSideOffsetY?: number;
+  sideOffsetY?: number;
+  heightAdjustmentPx?: number;
+  bottomTrimPx?: number;
 }) {
   const usesWalnutAsset = color === FULL_HOUSE_COLORS[0] && source === null;
-  const walnutSideTranslateY =
-    color === FULL_HOUSE_COLORS[0] && position !== "center" ? walnutSideOffsetY : 0;
+  const sideTranslateY =
+    position === "center"
+      ? 0
+      : color === FULL_HOUSE_COLORS[0]
+        ? walnutSideOffsetY
+        : sideOffsetY;
 
   if (!usesWalnutAsset) {
     if (!source) return null;
@@ -371,7 +690,9 @@ export function ConfiguratorModuleImage({
         testId={testId}
         className={className}
         crops={crops}
-        translateY={walnutSideTranslateY}
+        translateY={sideTranslateY}
+        heightAdjustmentPx={heightAdjustmentPx}
+        bottomTrimPx={bottomTrimPx}
       />
     );
   }
@@ -392,8 +713,8 @@ export function ConfiguratorModuleImage({
       style={{
         animation: animate ? MODULE_REVEAL : undefined,
         backfaceVisibility: "hidden",
-        transform: walnutSideTranslateY
-          ? `translateY(${walnutSideTranslateY}px)`
+        transform: sideTranslateY
+          ? `translateY(${sideTranslateY}px)`
           : undefined,
         willChange: animate ? "opacity" : undefined,
       }}
@@ -408,14 +729,21 @@ export function WandigSpecPreview({
   hasLeft = true,
   hasRight = true,
   crops = MODULE_CROPS,
+  positionAssets,
 }: {
   color: string;
   source: string | null;
   hasLeft?: boolean;
   hasRight?: boolean;
   crops?: ModuleCropSet;
+  positionAssets?: ConfiguratorModuleAsset["positionAssets"];
 }) {
   const usesWalnutModules = color === FULL_HOUSE_COLORS[0] && source === null;
+  const moduleSource = (position: ModulePosition) => positionAssets?.[position]?.source ?? source;
+  const moduleCrops = (position: ModulePosition): ModuleCropSet =>
+    positionAssets?.[position]
+      ? { ...crops, [position]: positionAssets[position]!.crop }
+      : crops;
 
   return (
     <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
@@ -425,33 +753,39 @@ export function WandigSpecPreview({
             <ConfiguratorModuleImage
               color={color}
               position="left"
-              source={source}
+              source={moduleSource("left")}
               animate={false}
               testId={false}
               className="relative z-[1] mr-[-3px]"
-              crops={crops}
-              walnutSideOffsetY={0.3}
+              crops={moduleCrops("left")}
+              heightAdjustmentPx={positionAssets?.left?.specHeightAdjustmentPx}
+              bottomTrimPx={positionAssets?.left?.specBottomTrimPx}
+              walnutSideOffsetY={positionAssets?.left?.specOffsetYPx ?? 0}
+              sideOffsetY={positionAssets?.left?.specOffsetYPx ?? 0}
             />
           )}
           <ConfiguratorModuleImage
             color={color}
             position="center"
-            source={source}
+            source={moduleSource("center")}
             animate={false}
             testId={false}
             className="relative z-[2]"
-            crops={crops}
+            crops={moduleCrops("center")}
           />
           {hasRight && (
             <ConfiguratorModuleImage
               color={color}
               position="right"
-              source={source}
+              source={moduleSource("right")}
               animate={false}
               testId={false}
               className={`relative z-[1] ${usesWalnutModules ? "ml-[-11px]" : "ml-[-3px]"}`}
-              crops={crops}
-              walnutSideOffsetY={0.3}
+              crops={moduleCrops("right")}
+              heightAdjustmentPx={positionAssets?.right?.specHeightAdjustmentPx}
+              bottomTrimPx={positionAssets?.right?.specBottomTrimPx}
+              walnutSideOffsetY={positionAssets?.right?.specOffsetYPx ?? 0}
+              sideOffsetY={positionAssets?.right?.specOffsetYPx ?? 0}
             />
           )}
         </div>

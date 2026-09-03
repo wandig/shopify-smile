@@ -1934,6 +1934,7 @@ function ProductView({ product }: { product: ProductNode }) {
             color={specPreviewColor}
             source={specPreviewSource}
             crops={specModuleAsset?.crops}
+            positionAssets={specModuleAsset?.positionAssets}
             hasLeft={specHasLeft}
             hasRight={specHasRight}
           />

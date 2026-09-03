@@ -200,8 +200,19 @@ export function SiteHeader() {
             <span>Gratis levering &amp; retourneren</span>
             <span>10 jaar garantie</span>
           </div>
+          {/* Mobile marquee benefits */}
+          <div className="flex md:hidden w-full overflow-hidden">
+            <div className="flex shrink-0 animate-usp-marquee items-center gap-8">
+              <span>100 dagen proefkijken</span>
+              <span>Gratis levering &amp; retourneren</span>
+              <span>10 jaar garantie</span>
+              <span>100 dagen proefkijken</span>
+              <span>Gratis levering &amp; retourneren</span>
+              <span>10 jaar garantie</span>
+            </div>
+          </div>
           {showReviews && (
-            <div className="flex items-center gap-1.5 md:mx-auto md:absolute md:left-1/2 md:-translate-x-1/2">
+            <div className="hidden md:flex items-center gap-1.5 md:mx-auto md:absolute md:left-1/2 md:-translate-x-1/2">
               <StarRating />
               <span className="font-medium">1000+ beoordelingen</span>
             </div>

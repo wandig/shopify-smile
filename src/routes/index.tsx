@@ -399,12 +399,10 @@ function CrossfadeModelImage({
   src,
   alt,
   mobileSrc,
-  fit = "cover",
 }: {
   src: string;
   alt: string;
   mobileSrc?: string;
-  fit?: "cover" | "contain";
 }) {
   const [currentSrc, setCurrentSrc] = useState(src);
   const [incomingSrc, setIncomingSrc] = useState<string | null>(null);
@@ -444,7 +442,7 @@ function CrossfadeModelImage({
       <Img
         src={layerSrc}
         alt={alt}
-        className={`h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
+        className="h-full w-full object-cover md:object-contain lg:object-cover"
         loading="lazy"
         onLoad={isIncoming ? () => revealIncoming(layerSrc) : undefined}
       />
@@ -584,7 +582,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%] lg:relative lg:min-h-[630px] lg:w-[41.4%] lg:overflow-hidden lg:rounded-[16px] lg:bg-transparent lg:p-0 lg:shadow-none"
+        className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%] lg:relative lg:min-h-[630px] lg:w-[41.4%] lg:overflow-hidden lg:rounded-[16px] lg:bg-transparent lg:p-0 lg:shadow-none"
       >
         <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[320px] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:rounded-none">
           <CrossfadeModelImage
@@ -658,7 +656,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
     <Link
       to="/product/$handle"
       params={{ handle: p.handle }}
-      className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%]"
+      className="group flex w-[336px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%]"
     >
       <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[320px]">
         <CrossfadeModelImage src={img} alt={`${p.title} in ${activeColor}`} />

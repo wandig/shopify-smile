@@ -442,6 +442,7 @@ function findNewModuleVariant(
   product: ShopifyProduct["node"] | null | undefined,
   color: string,
   side: "Links" | "Rechts",
+  tvSize: string,
 ) {
   return product?.variants.edges
     .map((edge) => edge.node)
@@ -449,7 +450,11 @@ function findNewModuleVariant(
       const selections = new Map(
         variant.selectedOptions.map((option) => [option.name.toLocaleLowerCase("nl-NL"), option.value]),
       );
-      return selections.get("kleur") === color && selections.get("positie") === side;
+      return (
+        selections.get("kleur") === color &&
+        selections.get("positie") === side &&
+        selections.get("maat tv") === tvSize
+      );
     });
 }
 
@@ -605,9 +610,9 @@ function ConfiguratorPage() {
     () =>
       newModuleSides.map((side) => ({
         side,
-        variant: findNewModuleVariant(newModuleProduct, color, side),
+        variant: findNewModuleVariant(newModuleProduct, color, side, tv.shopifyValue),
       })),
-    [newModuleProduct, color, newModuleSides.join("|")],
+    [newModuleProduct, color, tv.shopifyValue, newModuleSides.join("|")],
   );
 
   // Vaste configuratorprijzen (actieprijs / doorgestreepte prijs)

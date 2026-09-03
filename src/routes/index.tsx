@@ -326,10 +326,22 @@ function Stars({ count = 5, className = "" }: { count?: number; className?: stri
   );
 }
 
-function BasketButton() {
+function BasketButton({ size = "md" }: { size?: "sm" | "md" | "lg" } = {}) {
+  const sizeClasses = {
+    sm: "h-10 w-10",
+    md: "h-11 w-11",
+    lg: "h-12 w-12",
+  };
+  const iconSizes = {
+    sm: "h-[18px] w-[18px]",
+    md: "h-5 w-5",
+    lg: "h-6 w-6",
+  };
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] text-white transition group-hover:brightness-95">
-      <ShoppingBasket className="h-[18px] w-[18px]" strokeWidth={1.5} />
+    <span
+      className={`flex ${sizeClasses[size]} shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] text-white transition group-hover:brightness-95`}
+    >
+      <ShoppingBasket className={`${iconSizes[size]}`} strokeWidth={1.5} />
     </span>
   );
 }

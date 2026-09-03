@@ -23,7 +23,8 @@ function Klantenservice() {
       <h1 className="font-serif text-5xl md:text-7xl mt-4 leading-[0.95]">Klantenservice</h1>
       <p className="mt-8 text-foreground/80 leading-relaxed text-lg">
         Vragen over onze cinewalls, plug & play modellen of bezorging? Stuur ons een bericht via{" "}
-        <a href="mailto:info@wandig.nl" className="underline">info@wandig.nl</a>.
+        <a href="mailto:support@wandig.com" className="underline">support@wandig.com</a>.
+
       </p>
       <div className="mt-16 divide-y divide-border/60 border-y border-border/60">
         {faq.map((f) => (

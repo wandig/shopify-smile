@@ -16,7 +16,8 @@ export const Route = createFileRoute("/retour")({
 const returnSteps = [
   {
     title: "1. Meld je retour aan",
-    body: "Mail binnen 14 dagen na ontvangst naar info@wandig.nl met je ordernummer, naam en de reden van retour. Voeg bij schade altijd duidelijke foto's toe.",
+    body: "Mail binnen 14 dagen na ontvangst naar support@wandig.com met je ordernummer, naam en de reden van retour. Voeg bij schade altijd duidelijke foto's toe.",
+
   },
   {
     title: "2. Wacht op instructies",
@@ -54,9 +55,10 @@ function Retour() {
           <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Contact</div>
           <p className="mt-3 text-sm leading-relaxed text-foreground/76">
             Mail je retouraanvraag naar{" "}
-            <a href="mailto:info@wandig.nl" className="underline underline-offset-4">
-              info@wandig.nl
+            <a href="mailto:support@wandig.com" className="underline underline-offset-4">
+              support@wandig.com
             </a>
+
             . Vermeld altijd je ordernummer.
           </p>
         </div>

@@ -762,21 +762,21 @@ function ConfiguratorPage() {
       <div className="w-full">
         <div className="relative grid w-full items-start overflow-hidden bg-[#e9e3dc] lg:min-h-[calc(85vh-39px)] lg:grid-cols-[minmax(0,1fr)_528px] lg:py-[30px]">
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-[79%] border-b border-black/[0.08]"
+            className="pointer-events-none absolute inset-x-0 top-0 hidden h-[79%] border-b border-black/[0.08] lg:block"
             style={{
               backgroundImage:
                 "radial-gradient(ellipse at 52% 34%, rgba(255,255,255,0.98) 0%, rgba(249,246,242,0.82) 34%, rgba(232,225,217,0.2) 72%), linear-gradient(180deg, #f3efea 0%, #e8e1d9 100%)",
             }}
           />
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-[21%]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[21%] lg:block"
             style={{
               backgroundImage:
                 "linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 22%), linear-gradient(180deg, #ded6cd 0%, #cfc4b9 100%)",
               boxShadow: "inset 0 18px 30px rgba(76,61,48,0.045)",
             }}
           />
-          <div className="pointer-events-none absolute bottom-[18.5%] left-[37.5%] h-6 w-[44%] -translate-x-1/2 rounded-[50%] bg-black/[0.13] blur-xl" />
+          <div className="pointer-events-none absolute bottom-[18.5%] left-[37.5%] hidden h-6 w-[44%] -translate-x-1/2 rounded-[50%] bg-black/[0.13] blur-xl lg:block" />
 
           <section className="relative z-[1] min-w-0 overflow-hidden lg:h-full">
           {/* Scene */}
@@ -784,6 +784,24 @@ function ConfiguratorPage() {
             ref={stageRef}
             className="relative flex h-[422px] items-start justify-center overflow-hidden px-3 pb-0 pt-[90px] md:h-auto md:min-h-[760px] md:items-center md:px-8 md:pb-[78px] md:pt-[76px] lg:h-full lg:min-h-0"
           >
+            {/* Muur + vloer voor mobiel en tablet */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-[79%] border-b border-black/[0.08] lg:hidden"
+              style={{
+                backgroundImage:
+                  "radial-gradient(ellipse at 52% 34%, rgba(255,255,255,0.98) 0%, rgba(249,246,242,0.82) 34%, rgba(232,225,217,0.2) 72%), linear-gradient(180deg, #f3efea 0%, #e8e1d9 100%)",
+              }}
+            />
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-[21%] lg:hidden"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 22%), linear-gradient(180deg, #ded6cd 0%, #cfc4b9 100%)",
+                boxShadow: "inset 0 18px 30px rgba(76,61,48,0.045)",
+              }}
+            />
+            <div className="pointer-events-none absolute bottom-[18.5%] left-1/2 h-6 w-[52%] -translate-x-1/2 rounded-[50%] bg-black/[0.13] blur-xl lg:hidden" />
+
 
             {/* Mobiel: uitschuivend maatlint, onderaan boven de Dutch Design-tekst */}
             <div className="pointer-events-none absolute bottom-[104px] left-4 z-[9] flex max-w-[calc(100%-32px)] items-center md:hidden">

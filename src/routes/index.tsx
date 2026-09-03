@@ -38,7 +38,7 @@ import fullHouseClosedFrontV5 from "@/assets/full-house-closed-front-v5.png.asse
 import fullHouseSelectedV7 from "@/assets/full-house-selected-v7.png.asset.json";
 import fullHouseMobile from "@/assets/full-house-mobile.png.asset.json";
 import fullHouseCard from "@/assets/full-house-card.png.asset.json";
-import fullHouseRoomImage from "@/assets/full-house-gallery-room.jpg.asset.json";
+
 import fullHouseClosedFront55 from "@/assets/Wandig_55in_Full_House_Closed_Front.jpg.asset.json";
 
 

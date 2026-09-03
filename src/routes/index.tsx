@@ -559,7 +559,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
     <Link
       to="/product/$handle"
       params={{ handle: p.handle }}
-      className="group flex w-[280px] shrink-0 snap-start self-stretch max-h-[500px] flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:max-h-none md:w-[28.8%]"
+      className="group flex w-[280px] shrink-0 snap-start self-stretch max-h-[499px] flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:max-h-none md:w-[28.8%]"
     >
       <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[280px] md:aspect-auto md:flex-1">
         <CrossfadeModelImage

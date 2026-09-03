@@ -63,15 +63,8 @@ export function LazyVideo({ src, sources, poster, className, eager = false, unmu
       }
     };
 
-    // Bij een enkele bron expliciet laden; bij meerdere <source>-elementen
-    // laat de browser de bron selecteren en proberen we pas afspelen zodra
-    // er voldoende data beschikbaar is.
-    if (src) {
-      el.load();
-      tryPlay();
-    } else {
-      tryPlay();
-    }
+    el.load();
+    tryPlay();
 
     el.addEventListener("canplay", tryPlay);
     const id = window.setTimeout(tryPlay, 100);

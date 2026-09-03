@@ -326,10 +326,22 @@ function Stars({ count = 5, className = "" }: { count?: number; className?: stri
   );
 }
 
-function BasketButton() {
+function BasketButton({ size = "md" }: { size?: "sm" | "md" | "lg" } = {}) {
+  const sizeClasses = {
+    sm: "h-10 w-10",
+    md: "h-11 w-11",
+    lg: "h-12 w-12",
+  };
+  const iconSizes = {
+    sm: "h-[18px] w-[18px]",
+    md: "h-5 w-5",
+    lg: "h-6 w-6",
+  };
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] text-white transition group-hover:brightness-95">
-      <ShoppingBasket className="h-[18px] w-[18px]" strokeWidth={1.5} />
+    <span
+      className={`flex ${sizeClasses[size]} shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] text-white transition group-hover:brightness-95`}
+    >
+      <ShoppingBasket className={`${iconSizes[size]}`} strokeWidth={1.5} />
     </span>
   );
 }
@@ -439,6 +451,76 @@ function CrossfadeModelImage({
   );
 }
 
+function CardInfo({
+  p,
+  priceInfo,
+  displayPrice,
+  activeColor,
+  colors,
+  onSelectColor,
+  featured = false,
+}: {
+  p: (typeof PRODUCTS)[number];
+  priceInfo: ReturnType<typeof lowestPaidPriceWithCompare> | null;
+  displayPrice: string;
+  activeColor: string;
+  colors: string[];
+  onSelectColor: (name: string) => void;
+  featured?: boolean;
+}) {
+  return (
+    <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3
+            className={`font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] ${
+              featured ? "text-[24px] md:text-[30px]" : "text-[22px] md:text-[28px]"
+            }`}
+          >
+            {p.title}
+          </h3>
+          <div className="mt-2 flex flex-col items-start">
+            {priceInfo ? (
+              <SalePrice
+                price={priceInfo.price}
+                compareAtPrice={priceInfo.compareAtPrice}
+                size={featured ? "lg" : "md"}
+                align="left"
+              />
+            ) : (
+              <div
+                className={`font-[400] tracking-[0.01em] text-[#071426] ${
+                  featured ? "text-[24px] md:text-[30px]" : "text-[22px] md:text-[28px]"
+                }`}
+              >
+                {displayPrice}
+              </div>
+            )}
+          </div>
+          <div className="mt-3">
+            <PaymentInfo price={displayPrice} />
+          </div>
+        </div>
+      </div>
+      <div className="mt-auto flex items-end justify-between gap-3 pt-6">
+        <div>
+          {showReviews && (
+            <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
+              <Stars />
+              <span>{p.reviews}</span>
+            </div>
+          )}
+          <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
+          <div className="mt-2">
+            <ColorSwatches colors={colors} selected={activeColor} onSelect={onSelectColor} />
+          </div>
+        </div>
+        <BasketButton size="lg" />
+      </div>
+    </div>
+  );
+}
+
 function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
   const { data } = useQuery({
     queryKey: ["products"],
@@ -486,26 +568,28 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
     return match?.image?.url;
   }, [shopifyProduct, colorOption, activeColor]);
 
-
-
   const img = variantImage ?? p.colorImages?.[activeColor] ?? p.img;
-
 
   if (p.featured) {
     return (
       <Link
         to="/product/$handle"
         params={{ handle: p.handle }}
-        className="group relative min-h-[630px] w-[360px] shrink-0 snap-start self-stretch overflow-hidden rounded-[16px] md:min-h-[600px] md:w-[41.4%]"
+        className="group flex w-[300px] shrink-0 snap-start flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[45%] lg:relative lg:min-h-[630px] lg:w-[41.4%] lg:self-stretch lg:overflow-hidden lg:rounded-[16px] lg:bg-transparent lg:p-0 lg:shadow-none"
       >
-              <CrossfadeModelImage
-                src={img}
-                alt={`${p.title} in ${activeColor}`}
-                mobileSrc={p.mobileImg}
-              />
+        <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[320px] lg:absolute lg:inset-0 lg:min-h-0 lg:rounded-none">
+          <div className="absolute left-3 top-3 z-10 rounded-full bg-[#ef7027] px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white lg:hidden">
+            Uitgelicht
+          </div>
+          <CrossfadeModelImage
+            src={img}
+            alt={`${p.title} in ${activeColor}`}
+            mobileSrc={p.mobileImg}
+          />
+        </div>
 
-
-        <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 text-white">
+        {/* Desktop overlay text */}
+        <div className="hidden lg:absolute lg:inset-x-4 lg:top-1/2 lg:block lg:-translate-y-1/2 lg:text-white">
           <div className="inline-flex flex-col items-start px-4 py-3 [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">
             <h3 className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] md:text-[42px]">
               {p.title}
@@ -521,7 +605,6 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
                   compareClassName="text-white/70"
                 />
               ) : (
-
                 <div className="text-[32px] font-[400] leading-[1.05] tracking-[0.01em] text-white md:text-[40px]">
                   {displayPrice}
                 </div>
@@ -533,7 +616,7 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           </div>
         </div>
 
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)]">
+        <div className="absolute inset-x-4 bottom-4 hidden items-end justify-between gap-4 text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.55)] lg:flex">
           <div>
             {showReviews && (
               <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-white/95">
@@ -548,10 +631,22 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
           </div>
           <BasketButton />
         </div>
+
+        {/* Mobile / tablet compact body */}
+        <div className="lg:hidden">
+          <CardInfo
+            p={p}
+            priceInfo={priceInfo}
+            displayPrice={displayPrice}
+            activeColor={activeColor}
+            colors={colors}
+            onSelectColor={setColor}
+            featured
+          />
+        </div>
       </Link>
     );
   }
-
 
   return (
     <Link
@@ -559,55 +654,17 @@ function ModelCard({ p }: { p: (typeof PRODUCTS)[number] }) {
       params={{ handle: p.handle }}
       className="group flex w-[280px] shrink-0 snap-start self-stretch flex-col overflow-hidden rounded-[16px] bg-[#faf8f6] p-3 shadow-[0_2px_10px_rgba(42,31,22,0.06)] md:w-[28.8%]"
     >
-      <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[280px]">
-        <CrossfadeModelImage
-          src={img}
-          alt={`${p.title} in ${activeColor}`}
-        />
+      <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[12px] bg-[#f7f7f7] md:min-h-[320px]">
+        <CrossfadeModelImage src={img} alt={`${p.title} in ${activeColor}`} />
       </div>
-      <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="text-[22px] font-[400] leading-[1.1] tracking-[0.01em] text-[#071426] md:text-[28px]">
-              {p.title}
-            </h3>
-            <div className="mt-2 flex flex-col items-start">
-              {priceInfo ? (
-                <SalePrice
-                  price={priceInfo.price}
-                  compareAtPrice={priceInfo.compareAtPrice}
-                  size="md"
-                  align="left"
-                  saleClassName="text-[#071426]"
-                />
-              ) : (
-
-                <div className="text-[22px] font-[400] tracking-[0.01em] text-[#071426] md:text-[28px]">
-                  {displayPrice}
-                </div>
-              )}
-            </div>
-            <div className="mt-3">
-              <PaymentInfo price={displayPrice} />
-            </div>
-          </div>
-        </div>
-        <div className="mt-auto flex items-end justify-between gap-3 pt-6">
-          <div>
-            {showReviews && (
-              <div className="flex items-center gap-2 text-[13px] tracking-[0.01em] text-[#071426]/60">
-                <Stars />
-                <span>{p.reviews}</span>
-              </div>
-            )}
-            <div className="mt-1 text-[13px] tracking-[0.01em] text-[#071426]/60">{p.meta}</div>
-            <div className="mt-2">
-              <ColorSwatches colors={colors} selected={activeColor} onSelect={setColor} />
-            </div>
-          </div>
-          <BasketButton />
-        </div>
-      </div>
+      <CardInfo
+        p={p}
+        priceInfo={priceInfo}
+        displayPrice={displayPrice}
+        activeColor={activeColor}
+        colors={colors}
+        onSelectColor={setColor}
+      />
     </Link>
   );
 }

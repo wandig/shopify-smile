@@ -784,13 +784,45 @@ function ConfiguratorPage() {
             ref={stageRef}
             className="relative flex h-[422px] items-start justify-center overflow-hidden px-3 pb-0 pt-[90px] md:h-auto md:min-h-[760px] md:items-center md:px-8 md:pb-[78px] md:pt-[76px] lg:h-full lg:min-h-0"
           >
+            {/* Mobiel: uitschuivend maatlint zoals op de productpagina */}
+            <div className="pointer-events-none absolute left-4 top-4 z-[9] flex items-center md:hidden">
+              <button
+                type="button"
+                onClick={() => setShowMeasurements((visible) => !visible)}
+                aria-expanded={showMeasurements}
+                aria-label="Afmetingen bekijken"
+                className="pointer-events-auto relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#ef7027]/25 bg-white/95 text-[#ef7027] shadow-[0_6px_18px_rgba(7,20,38,0.14)] backdrop-blur transition-transform active:scale-95"
+              >
+                <Ruler className={`h-[18px] w-[18px] transition-transform duration-300 ${showMeasurements ? "rotate-45" : ""}`} />
+              </button>
+              <div
+                className={`pointer-events-auto ml-[-20px] overflow-hidden rounded-r-full bg-white/95 shadow-[0_6px_18px_rgba(7,20,38,0.12)] backdrop-blur transition-all duration-400 ease-out ${
+                  showMeasurements ? "max-w-[310px] opacity-100" : "max-w-0 opacity-0"
+                }`}
+              >
+                <div className="flex items-center gap-4 whitespace-nowrap py-2.5 pl-7 pr-5 text-[12px] text-[#071426]">
+                  <span className="flex items-center gap-1.5">
+                    <MoveHorizontal className="h-3.5 w-3.5 text-[#ef7027]" />
+                    <span className="text-[#071426]/55">Breedte</span>
+                    <strong className="font-[500]">{width} cm</strong>
+                  </span>
+                  <span className="h-3 w-px bg-[#071426]/12" />
+                  <span className="flex items-center gap-1.5">
+                    <MoveVertical className="h-3.5 w-3.5 text-[#ef7027]" />
+                    <span className="text-[#071426]/55">Hoogte</span>
+                    <strong className="font-[500]">{tv.wallHeight} cm</strong>
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <button
               type="button"
               onClick={() => setShowMeasurements((visible) => !visible)}
               aria-label={showMeasurements ? "Afmetingen verbergen" : "Afmetingen tonen"}
               aria-pressed={showMeasurements}
               title={showMeasurements ? "Afmetingen verbergen" : "Afmetingen tonen"}
-              className={`absolute left-4 top-4 z-[9] flex h-11 w-11 items-center justify-center rounded-full border shadow-[0_10px_24px_rgba(3,12,26,0.11)] transition-all duration-300 hover:-translate-y-px md:left-6 md:top-6 lg:left-auto lg:right-3 lg:top-2 ${
+              className={`absolute left-4 top-4 z-[9] hidden h-11 w-11 items-center justify-center rounded-full border shadow-[0_10px_24px_rgba(3,12,26,0.11)] transition-all duration-300 hover:-translate-y-px md:left-6 md:top-6 md:flex lg:left-auto lg:right-3 lg:top-2 ${
                 showMeasurements
                   ? "border-[#ef7027] bg-[#ef7027] text-white"
                   : "border-[#ded7d0] bg-white/92 text-[#303640] backdrop-blur"
@@ -800,7 +832,7 @@ function ConfiguratorPage() {
             </button>
 
             {/* Configuration */}
-            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-[-7.62%] scale-[0.513] items-end justify-center md:translate-y-[10%] md:scale-[0.707] lg:translate-y-[-4.37%] lg:scale-[0.644] xl:scale-[0.811] 2xl:scale-[0.873]">
+            <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-[-9.62%] scale-[0.513] items-end justify-center md:translate-y-[10%] md:scale-[0.707] lg:translate-y-[-4.37%] lg:scale-[0.644] xl:scale-[0.811] 2xl:scale-[0.873]">
               {/* Wall unit — modules sit flush against each other */}
               <div className="relative flex h-[420px] items-end lg:h-[520px]">
                 {showMeasurements && (

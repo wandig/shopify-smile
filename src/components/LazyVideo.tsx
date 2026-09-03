@@ -52,9 +52,33 @@ export function LazyVideo({ src, sources, poster, className, eager = false, unmu
     if (!active) return;
     const el = ref.current;
     if (!el) return;
-    if (src && el.getAttribute("src") !== src) el.setAttribute("src", src);
-    el.load();
-    void el.play().catch(() => {});
+
+    if (src && el.getAttribute("src") !== src) {
+      el.setAttribute("src", src);
+    }
+
+    const tryPlay = () => {
+      if (el.paused && el.readyState >= 1) {
+        void el.play().catch(() => {});
+      }
+    };
+
+    // Bij een enkele bron expliciet laden; bij meerdere <source>-elementen
+    // laat de browser de bron selecteren en proberen we pas afspelen zodra
+    // er voldoende data beschikbaar is.
+    if (src) {
+      el.load();
+      tryPlay();
+    } else {
+      tryPlay();
+    }
+
+    el.addEventListener("canplay", tryPlay);
+    const id = window.setTimeout(tryPlay, 100);
+    return () => {
+      el.removeEventListener("canplay", tryPlay);
+      window.clearTimeout(id);
+    };
   }, [active, src]);
 
   /* Houdt bij of de video echt in beeld staat (voor geluid aan/uit). */

@@ -682,7 +682,7 @@ function ActieBlokkenPage() {
                 ["Truck", "Gratis verzending", "Door heel Nederland"],
                 ["ShieldCheck", "10 jaar garantie", "Kwaliteit waar je op kunt vertrouwen"],
                 ["Sparkles", "Nederlands design", "Ontworpen en gemaakt in Nederland"],
-                ["MonitorPlay", "Geschikt voor alle tv's", "Van 43 tot 75 inch"],
+                ["MonitorPlay", "Geschikt voor alle tv's", "Van 40 tot 85 inch"],
               ] as const
             ).map(([icon, title, sub]) => (
               <Item key={title} label={`USP / Light / ${title}`}>

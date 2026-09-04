@@ -318,14 +318,36 @@ export function UspBlock({
   title,
   sub,
   tone = "light",
+  size = "md",
 }: {
   icon?: keyof typeof USP_ICONS;
   title: string;
   sub?: string;
   tone?: Tone;
+  size?: "sm" | "md";
 }) {
   const t = TONES[tone];
   const Icon = USP_ICONS[icon];
+
+  if (size === "sm") {
+    return (
+      <div
+        className={`${T.card} inline-flex w-full items-center gap-2.5 border px-4 py-3`}
+        style={{ background: t.bg, borderColor: t.line }}
+      >
+        <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} style={{ color: T.orange }} />
+        <span className="text-[13px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
+          {title}
+        </span>
+        {sub && (
+          <span className="text-[12px]" style={{ color: t.sub }}>
+            · {sub}
+          </span>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className={`${T.card} border p-6`} style={{ background: t.bg, borderColor: t.line }}>
       <Icon className="h-4 w-4" strokeWidth={1.5} style={{ color: T.orange }} />
@@ -340,6 +362,7 @@ export function UspBlock({
     </div>
   );
 }
+
 
 /* ---------------- 5. Cinewall editorial ---------------- */
 

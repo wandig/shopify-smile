@@ -77,6 +77,33 @@ export function ArrowCircle({
   );
 }
 
+function PuzzlePieceBlock({
+  size = 96,
+  tone = "light",
+}: {
+  size?: number;
+  tone?: "light" | "dark" | "orange";
+}) {
+  const bg = tone === "dark" ? T.navy : tone === "orange" ? T.orange : "#faf8f5";
+  const line = tone === "dark" ? "rgba(247,244,239,0.14)" : tone === "orange" ? "rgba(255,250,245,0.28)" : "rgba(31,25,21,0.10)";
+  const filter =
+    tone === "orange"
+      ? "brightness(0) saturate(100%) invert(100%)"
+      : "brightness(0) saturate(100%) invert(54%) sepia(93%) saturate(1300%) hue-rotate(350deg) brightness(101%) contrast(101%)";
+  return (
+    <div
+      className={`${T.card} inline-flex w-fit items-center justify-center border`}
+      style={{ background: bg, borderColor: line, padding: size * 0.28 }}
+    >
+      <img
+        src={puzzleIconAsset.url}
+        alt="Puzzelstuk"
+        style={{ width: size, height: size, filter }}
+      />
+    </div>
+  );
+}
+
 /* ---------------- 1. Sale blocks ---------------- */
 
 export function SaleEditorialCard({

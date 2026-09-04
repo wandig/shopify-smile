@@ -318,14 +318,36 @@ export function UspBlock({
   title,
   sub,
   tone = "light",
+  size = "md",
 }: {
   icon?: keyof typeof USP_ICONS;
   title: string;
   sub?: string;
   tone?: Tone;
+  size?: "sm" | "md";
 }) {
   const t = TONES[tone];
   const Icon = USP_ICONS[icon];
+
+  if (size === "sm") {
+    return (
+      <div
+        className={`${T.card} inline-flex w-full items-center gap-2.5 border px-4 py-3`}
+        style={{ background: t.bg, borderColor: t.line }}
+      >
+        <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} style={{ color: T.orange }} />
+        <span className="text-[13px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
+          {title}
+        </span>
+        {sub && (
+          <span className="text-[12px]" style={{ color: t.sub }}>
+            · {sub}
+          </span>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className={`${T.card} border p-6`} style={{ background: t.bg, borderColor: t.line }}>
       <Icon className="h-4 w-4" strokeWidth={1.5} style={{ color: T.orange }} />
@@ -340,6 +362,7 @@ export function UspBlock({
     </div>
   );
 }
+
 
 /* ---------------- 5. Cinewall editorial ---------------- */
 
@@ -651,16 +674,49 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="04" title="USP's" sub="Kleine line-icons, tekst blijft leidend.">
+        <Section index="04" title="USP's" sub="Kleine line-icons, tekst blijft leidend. Alles los te downloaden als PNG.">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {(
+              [
+                ["CalendarClock", "100 dagen proefkijken", "Kijk rustig of het bij je past"],
+                ["Truck", "Gratis verzending", "Door heel Nederland"],
+                ["ShieldCheck", "10 jaar garantie", "Kwaliteit waar je op kunt vertrouwen"],
+                ["Sparkles", "Nederlands design", "Ontworpen en gemaakt in Nederland"],
+                ["MonitorPlay", "Geschikt voor alle tv's", "Van 43 tot 75 inch"],
+              ] as const
+            ).map(([icon, title, sub]) => (
+              <Item key={title} label={`USP / Light / ${title}`}>
+                <UspBlock icon={icon} title={title} sub={sub} />
+              </Item>
+            ))}
+            <Item label="USP / Dark / 10 jaar garantie">
+              <UspBlock tone="dark" icon="ShieldCheck" title="10 jaar garantie" sub="Kwaliteit waar je op kunt vertrouwen" />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Compacte USP's
+          </p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <UspBlock icon="CalendarClock" title="100 dagen proefkijken" sub="Kijk rustig of het bij je past" />
-            <UspBlock icon="Truck" title="Gratis verzending" sub="Door heel Nederland" />
-            <UspBlock icon="ShieldCheck" title="10 jaar garantie" sub="Kwaliteit waar je op kunt vertrouwen" />
-            <UspBlock icon="Sparkles" title="Nederlands design" sub="Ontworpen en gemaakt in Nederland" />
-            <UspBlock icon="MonitorPlay" title="Geschikt voor alle tv's" sub="Van 43 tot 75 inch" />
-            <UspBlock tone="dark" icon="ShieldCheck" title="10 jaar garantie" sub="Dark variant" />
+            {(
+              [
+                ["CalendarClock", "100 dagen proefkijken", "light"],
+                ["Truck", "Gratis verzending", "light"],
+                ["ShieldCheck", "10 jaar garantie", "light"],
+                ["Sparkles", "Nederlands design", "light"],
+                ["MonitorPlay", "Geschikt voor alle tv's", "light"],
+                ["CalendarClock", "100 dagen proefkijken", "dark"],
+                ["Truck", "Gratis verzending", "dark"],
+                ["ShieldCheck", "10 jaar garantie", "dark"],
+              ] as const
+            ).map(([icon, title, tone]) => (
+              <Item key={`${title}-${tone}`} label={`USP / ${tone === "dark" ? "Dark" : "Light"} / Compact / ${title}`}>
+                <UspBlock size="sm" tone={tone} icon={icon} title={title} />
+              </Item>
+            ))}
           </div>
         </Section>
+
 
         <Section index="05" title="Cinewall">
           <div className="grid gap-6 md:grid-cols-3">
@@ -678,33 +734,38 @@ function ActieBlokkenPage() {
 
         <Section index="06" title="Voorbeeldcombinaties" sub="Twee of drie blokken samen, zoals in een advertentie.">
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-7">
-              <SaleLabel text="Verjaardagsale" />
-              <div className="mt-8 text-[76px] font-medium leading-[0.82] tracking-[-0.05em] text-[#ff7d2f]">30%</div>
-              <div className="mt-2 text-[22px] text-[#1f1915]">korting</div>
-              <div className="mt-10">
-                <CtaButton label="Bekijk tv-meubels" variant="navy" to="/producten" />
+            <Item label="Ad / Light / 1080 × 1080">
+              <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-7">
+                <SaleLabel text="Verjaardagsale" />
+                <div className="mt-8 text-[76px] font-medium leading-[0.82] tracking-[-0.05em] text-[#ff7d2f]">30%</div>
+                <div className="mt-2 text-[22px] text-[#1f1915]">korting</div>
+                <div className="mt-10">
+                  <CtaButton label="Bekijk tv-meubels" variant="navy" to="/producten" />
+                </div>
               </div>
-              <Label>Ad / 1080 × 1080</Label>
-            </div>
-            <div className="rounded-[22px] border border-[#0e1f2a] bg-[#0e1f2a] p-7">
-              <Kicker color="rgba(247,244,239,0.6)">We zijn jarig</Kicker>
-              <h3 className="mt-8 text-[34px] font-normal leading-[1.05] tracking-[-0.02em] text-[#f7f4ef]">
-                30% korting op
-                <br />
-                alle tv-meubels
-              </h3>
-              <div className="mt-10">
-                <CtaTextArrow label="Shop nu" tone="dark" />
+            </Item>
+            <Item label="Ad / Dark / Story">
+              <div className="rounded-[22px] border border-[#0e1f2a] bg-[#0e1f2a] p-7">
+                <Kicker color="rgba(247,244,239,0.6)">We zijn jarig</Kicker>
+                <h3 className="mt-8 text-[34px] font-normal leading-[1.05] tracking-[-0.02em] text-[#f7f4ef]">
+                  30% korting op
+                  <br />
+                  alle tv-meubels
+                </h3>
+                <div className="mt-10">
+                  <CtaTextArrow label="Shop nu" tone="dark" />
+                </div>
               </div>
-              <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-[#f7f4ef]/40">Ad / Dark / Story</p>
-            </div>
-            <div className="flex flex-col gap-5">
-              <SalePill />
-              <CinewallMinimal />
-              <UspBlock icon="CalendarClock" title="100 dagen proefkijken" />
-            </div>
+            </Item>
+            <Item label="Ad / Stack / Cinewall">
+              <div className="flex flex-col gap-5">
+                <SalePill />
+                <CinewallMinimal />
+                <UspBlock size="sm" icon="CalendarClock" title="100 dagen proefkijken" />
+              </div>
+            </Item>
           </div>
+
         </Section>
 
         <Section

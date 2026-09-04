@@ -871,7 +871,7 @@ export function DiscountThirtyOutlinedBlock({
       <span
         className="inline-flex items-center justify-center border px-4 py-1.5 text-[24px] font-medium leading-none tracking-[-0.03em]"
         style={{
-          background: tone === "light" ? "#faf8f5" : t.bg,
+          background: "#faf8f5",
           borderColor: outlineColor,
           color: outlineColor,
           borderRadius: 10,

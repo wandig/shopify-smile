@@ -776,16 +776,18 @@ export function BalloonVerticalBlock({
   amount = "30%",
   sub = "korting",
   tone = "light",
+  bare = false,
 }: {
   amount?: string;
   sub?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} inline-flex w-fit flex-col items-center border px-6 py-6`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.card} border`} inline-flex w-fit flex-col items-center px-6 py-6`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <BalloonCluster tone={tone} size={52} />
       <div className="mt-4 text-center">
@@ -796,6 +798,53 @@ export function BalloonVerticalBlock({
           {sub}
         </div>
       </div>
+    </div>
+  );
+}
+
+export function BalloonSingleBlock({
+  tone = "light",
+  size = 96,
+  bare = false,
+}: {
+  tone?: Tone;
+  size?: number;
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} inline-flex items-center justify-center`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line, padding: size * 0.45 }}
+    >
+      <BalloonShape color={tone === "orange" ? "#fffaf5" : T.orange} size={size} />
+    </div>
+  );
+}
+
+export function DiscountThirtyBlock({
+  tone = "light",
+  label,
+  bare = false,
+}: {
+  tone?: Tone;
+  label?: string;
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} inline-flex w-fit flex-col items-start gap-1 pl-6 pr-5 py-5`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
+    >
+      <span className="text-[56px] font-medium leading-none tracking-[-0.05em]" style={{ color: T.orange }}>
+        -30%
+      </span>
+      {label && (
+        <span className="text-[14px]" style={{ color: t.sub }}>
+          {label}
+        </span>
+      )}
     </div>
   );
 }

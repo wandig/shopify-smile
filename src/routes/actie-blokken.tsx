@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarClock, Download, MonitorPlay, ShieldCheck, Truck, Sparkles } from "lucide-react";
 import { useRef, useState, type ReactNode } from "react";
 import { FULL_HOUSE_COLORS, wandigSwatchStyle, displayWandigColor } from "@/lib/wandig-colors";
+import puzzleIconAsset from "@/assets/Untitled_design_23.svg.asset.json";
 
 
 export const Route = createFileRoute("/actie-blokken")({

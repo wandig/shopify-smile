@@ -94,28 +94,29 @@ export function SaleEditorialCard({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[220px] flex-col justify-between border`}
+      className={`${T.card} ${T.pad} flex flex-col border`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-start justify-between">
         <Kicker color={t.sub}>{kicker}</Kicker>
         <span className="mt-1 h-1.5 w-1.5 rounded-full" style={{ background: t.accent }} />
       </div>
-      <div className="mt-6">
+      <div className="mt-4">
         <div
-          className="text-[92px] font-medium leading-[0.82] tracking-[-0.05em] md:text-[128px]"
+          className="text-[80px] font-medium leading-[0.82] tracking-[-0.05em] md:text-[104px]"
           style={{ color: t.accent === "#fffaf5" ? t.fg : T.orange }}
         >
           {amount}
         </div>
-        <div className="mt-2 text-[26px] font-normal leading-none tracking-[-0.01em]" style={{ color: t.fg }}>
+        <div className="mt-1.5 text-[24px] font-normal leading-none tracking-[-0.01em]" style={{ color: t.fg }}>
           {amountSuffix}
         </div>
       </div>
-      <div className="mt-6 border-t pt-3 text-[13px]" style={{ borderColor: t.line, color: t.sub }}>
+      <div className="mt-4 border-t pt-3 text-[13px]" style={{ borderColor: t.line, color: t.sub }}>
         {footnote}
       </div>
     </div>
+
   );
 }
 

@@ -849,6 +849,42 @@ export function DiscountThirtyBlock({
   );
 }
 
+export function DiscountThirtyOutlinedBlock({
+  tone = "light",
+  outline = "orange",
+  bare = false,
+  rotate = true,
+}: {
+  tone?: Tone;
+  outline?: "orange" | "navy" | "bluegrey" | "dark";
+  bare?: boolean;
+  rotate?: boolean;
+}) {
+  const t = TONES[tone];
+  const outlineColor =
+    outline === "orange" ? T.orange : outline === "navy" ? T.navy : outline === "bluegrey" ? T.bluegrey : T.ink;
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} inline-flex items-center justify-center`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line, padding: 28 }}
+    >
+      <span
+        className="inline-flex items-center justify-center border px-4 py-1.5 text-[24px] font-medium leading-none tracking-[-0.03em]"
+        style={{
+          background: "#faf8f5",
+          borderColor: outlineColor,
+          color: outlineColor,
+          borderRadius: 10,
+          borderWidth: 1.5,
+          transform: rotate ? "rotate(-5deg)" : undefined,
+        }}
+      >
+        -30%
+      </span>
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
 
 
@@ -1464,6 +1500,36 @@ function ActieBlokkenPage() {
             </Item>
             <Item label="Ballon / Los / Bare / Blue grey">
               <BalloonSingleBlock tone="bluegrey" bare />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Outlined -30% blokjes
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Item label="Outlined / Oranje">
+              <DiscountThirtyOutlinedBlock />
+            </Item>
+            <Item label="Outlined / Navy">
+              <DiscountThirtyOutlinedBlock outline="navy" />
+            </Item>
+            <Item label="Outlined / Blue grey">
+              <DiscountThirtyOutlinedBlock outline="bluegrey" />
+            </Item>
+            <Item label="Outlined / Donker bg">
+              <DiscountThirtyOutlinedBlock tone="dark" outline="dark" />
+            </Item>
+            <Item label="Outlined / Bare / Oranje">
+              <DiscountThirtyOutlinedBlock bare />
+            </Item>
+            <Item label="Outlined / Bare / Navy">
+              <DiscountThirtyOutlinedBlock outline="navy" bare />
+            </Item>
+            <Item label="Outlined / Bare / Blue grey">
+              <DiscountThirtyOutlinedBlock outline="bluegrey" bare />
+            </Item>
+            <Item label="Outlined / Bare / Donker">
+              <DiscountThirtyOutlinedBlock tone="dark" outline="dark" bare />
             </Item>
           </div>
 

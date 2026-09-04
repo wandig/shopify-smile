@@ -674,16 +674,49 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="04" title="USP's" sub="Kleine line-icons, tekst blijft leidend.">
+        <Section index="04" title="USP's" sub="Kleine line-icons, tekst blijft leidend. Alles los te downloaden als PNG.">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {(
+              [
+                ["CalendarClock", "100 dagen proefkijken", "Kijk rustig of het bij je past"],
+                ["Truck", "Gratis verzending", "Door heel Nederland"],
+                ["ShieldCheck", "10 jaar garantie", "Kwaliteit waar je op kunt vertrouwen"],
+                ["Sparkles", "Nederlands design", "Ontworpen en gemaakt in Nederland"],
+                ["MonitorPlay", "Geschikt voor alle tv's", "Van 43 tot 75 inch"],
+              ] as const
+            ).map(([icon, title, sub]) => (
+              <Item key={title} label={`USP / Light / ${title}`}>
+                <UspBlock icon={icon} title={title} sub={sub} />
+              </Item>
+            ))}
+            <Item label="USP / Dark / 10 jaar garantie">
+              <UspBlock tone="dark" icon="ShieldCheck" title="10 jaar garantie" sub="Kwaliteit waar je op kunt vertrouwen" />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.blueGrey }}>
+            Compacte USP's
+          </p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <UspBlock icon="CalendarClock" title="100 dagen proefkijken" sub="Kijk rustig of het bij je past" />
-            <UspBlock icon="Truck" title="Gratis verzending" sub="Door heel Nederland" />
-            <UspBlock icon="ShieldCheck" title="10 jaar garantie" sub="Kwaliteit waar je op kunt vertrouwen" />
-            <UspBlock icon="Sparkles" title="Nederlands design" sub="Ontworpen en gemaakt in Nederland" />
-            <UspBlock icon="MonitorPlay" title="Geschikt voor alle tv's" sub="Van 43 tot 75 inch" />
-            <UspBlock tone="dark" icon="ShieldCheck" title="10 jaar garantie" sub="Dark variant" />
+            {(
+              [
+                ["CalendarClock", "100 dagen proefkijken", "light"],
+                ["Truck", "Gratis verzending", "light"],
+                ["ShieldCheck", "10 jaar garantie", "light"],
+                ["Sparkles", "Nederlands design", "light"],
+                ["MonitorPlay", "Geschikt voor alle tv's", "light"],
+                ["CalendarClock", "100 dagen proefkijken", "dark"],
+                ["Truck", "Gratis verzending", "dark"],
+                ["ShieldCheck", "10 jaar garantie", "dark"],
+              ] as const
+            ).map(([icon, title, tone]) => (
+              <Item key={`${title}-${tone}`} label={`USP / ${tone === "dark" ? "Dark" : "Light"} / Compact / ${title}`}>
+                <UspBlock size="sm" tone={tone} icon={icon} title={title} />
+              </Item>
+            ))}
           </div>
         </Section>
+
 
         <Section index="05" title="Cinewall">
           <div className="grid gap-6 md:grid-cols-3">

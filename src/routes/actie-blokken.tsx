@@ -554,24 +554,36 @@ function slugify(value: string) {
 
 function Item({ label, children }: { label: string; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState<null | "png" | "svg">(null);
 
-  const download = async () => {
-    if (!ref.current) return;
-    setBusy(true);
+  const download = async (format: "png" | "svg") => {
+    const node = ref.current;
+    if (!node) return;
+    setBusy(format);
     try {
-      const { toPng } = await import("html-to-image");
-      const dataUrl = await toPng(ref.current, {
-        pixelRatio: 3,
-        backgroundColor: "transparent",
+      const { toPng, toSvg } = await import("html-to-image");
+      const rect = node.getBoundingClientRect();
+      const options = {
+        backgroundColor: undefined,
         cacheBust: true,
-      });
+        width: Math.ceil(rect.width),
+        height: Math.ceil(rect.height),
+        skipFonts: false,
+      } as const;
+      const dataUrl =
+        format === "svg"
+          ? await toSvg(node, options)
+          : await toPng(node, {
+              ...options,
+              // 8x pixel ratio => razor sharp for 1080x1080 / 1080x1920 ads
+              pixelRatio: 8,
+            });
       const link = document.createElement("a");
-      link.download = `wandig-${slugify(label)}.png`;
+      link.download = `wandig-${slugify(label)}.${format}`;
       link.href = dataUrl;
       link.click();
     } finally {
-      setBusy(false);
+      setBusy(null);
     }
   };
 
@@ -582,19 +594,31 @@ function Item({ label, children }: { label: string; children: ReactNode }) {
       </div>
       <div className="mt-3 flex items-center justify-between gap-3">
         <Label>{label}</Label>
-        <button
-          type="button"
-          onClick={download}
-          disabled={busy}
-          className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#1f1915]/15 px-3 py-1 text-[11px] text-[#1f1915]/55 transition hover:border-[#ff7d2f] hover:text-[#ff7d2f] disabled:opacity-50"
-        >
-          <Download className="h-3 w-3" strokeWidth={1.6} />
-          {busy ? "..." : "PNG"}
-        </button>
+        <div className="mt-3 flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={() => download("png")}
+            disabled={busy !== null}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[#1f1915]/15 px-3 py-1 text-[11px] text-[#1f1915]/55 transition hover:border-[#ff7d2f] hover:text-[#ff7d2f] disabled:opacity-50"
+          >
+            <Download className="h-3 w-3" strokeWidth={1.6} />
+            {busy === "png" ? "..." : "PNG"}
+          </button>
+          <button
+            type="button"
+            onClick={() => download("svg")}
+            disabled={busy !== null}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[#1f1915]/15 px-3 py-1 text-[11px] text-[#1f1915]/55 transition hover:border-[#ff7d2f] hover:text-[#ff7d2f] disabled:opacity-50"
+          >
+            <Download className="h-3 w-3" strokeWidth={1.6} />
+            {busy === "svg" ? "..." : "SVG"}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
+
 
 
 function ActieBlokkenPage() {

@@ -94,7 +94,7 @@ export function SaleEditorialCard({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex flex-col border`}
+      className={`${T.card} flex flex-col border pl-5 pr-4 py-5 md:pl-6 md:pr-5 md:py-6`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-start justify-between">
@@ -116,7 +116,6 @@ export function SaleEditorialCard({
         {footnote}
       </div>
     </div>
-
   );
 }
 
@@ -133,7 +132,7 @@ export function SaleCompactCard({
 }) {
   const t = TONES[tone];
   return (
-    <div className={`${T.card} border p-5`} style={{ background: t.bg, borderColor: t.line }}>
+    <div className={`${T.card} border pl-5 pr-4 py-5`} style={{ background: t.bg, borderColor: t.line }}>
       <Kicker color={t.sub}>{title}</Kicker>
       <div className="mt-3 flex items-baseline gap-3">
         <span className="text-[52px] font-medium leading-none tracking-[-0.04em]" style={{ color: T.orange }}>
@@ -224,7 +223,7 @@ export function CtaWide({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} flex items-center justify-between gap-6 border px-5 py-4`}
+      className={`${T.card} flex min-w-[240px] items-center justify-between gap-6 border pl-5 pr-4 py-4`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <span>
@@ -272,7 +271,7 @@ export function DiscoveryCard({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex flex-col border`}
+      className={`${T.card} flex min-w-[280px] flex-col border pl-5 pr-4 py-5 md:pl-6 md:pr-5 md:py-6`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       {kicker && <Kicker color={t.sub}>{kicker}</Kicker>}
@@ -333,7 +332,7 @@ export function UspBlock({
   if (size === "sm") {
     return (
       <div
-        className={`${T.card} inline-flex w-full items-center gap-2.5 border px-4 py-3`}
+        className={`${T.card} inline-flex w-fit items-center gap-2.5 border pl-4 pr-3 py-3`}
         style={{ background: t.bg, borderColor: t.line }}
       >
         <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} style={{ color: T.orange }} />
@@ -350,7 +349,7 @@ export function UspBlock({
   }
 
   return (
-    <div className={`${T.card} border p-6`} style={{ background: t.bg, borderColor: t.line }}>
+    <div className={`${T.card} min-w-[220px] border pl-6 pr-5 py-6`} style={{ background: t.bg, borderColor: t.line }}>
       <Icon className="h-4 w-4" strokeWidth={1.5} style={{ color: T.orange }} />
       <p className="mt-3 text-[16px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
         {title}
@@ -381,7 +380,7 @@ export function CinewallEditorial({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex flex-col justify-between border`}
+      className={`${T.card} flex flex-col justify-between border pl-5 pr-4 py-5 md:pl-6 md:pr-5 md:py-6`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div>
@@ -403,7 +402,7 @@ export function CinewallMinimal({ tone = "light" }: { tone?: Tone }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[160px] items-end border`}
+      className={`${T.card} flex min-h-[160px] items-end border pl-5 pr-4 py-5 md:pl-6 md:pr-5 md:py-6`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <h3 className="text-[40px] font-normal leading-[0.98] tracking-[-0.03em] md:text-[52px]" style={{ color: t.fg }}>
@@ -431,13 +430,13 @@ export function MiniBlock({
 }) {
   const t = TONES[tone];
   const s = {
-    sm: { pad: "px-4 py-3", text: "text-[13px]" },
-    md: { pad: "px-4 py-3", text: "text-[15px]" },
-    lg: { pad: "px-5 py-4", text: "text-[19px]" },
+    sm: { pad: "pl-4 pr-3 py-3", text: "text-[13px]" },
+    md: { pad: "pl-4 pr-3 py-3", text: "text-[15px]" },
+    lg: { pad: "pl-5 pr-4 py-4", text: "text-[19px]" },
   }[size];
   return (
     <div
-      className={`${T.card} border ${s.pad} inline-flex w-full items-center gap-2.5`}
+      className={`${T.card} border ${s.pad} inline-flex w-fit items-center gap-2.5`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       {accentDot && <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: T.orange }} />}
@@ -460,7 +459,7 @@ export function MiniStatBlock({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} border px-5 py-4`}
+      className={`${T.card} inline-block min-w-[140px] border pl-5 pr-4 py-4`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-baseline gap-2">
@@ -479,7 +478,7 @@ export function SwatchOnlyBlock({ tone = "light", size = 40 }: { tone?: Tone; si
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} border px-5 py-4`}
+      className={`${T.card} inline-block border pl-5 pr-4 py-4`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-center justify-center gap-3">
@@ -550,7 +549,7 @@ function Item({ label, children }: { label: string; children: ReactNode }) {
 
   return (
     <div className="group/item">
-      <div ref={ref} className="inline-block w-full">
+      <div ref={ref} className="inline-block w-fit">
         {children}
       </div>
       <div className="mt-3 flex items-center justify-between gap-3">

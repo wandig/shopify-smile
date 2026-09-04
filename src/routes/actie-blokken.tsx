@@ -856,6 +856,18 @@ function ActieBlokkenPage() {
             <Item label="Kleurstalen / Dark / Alleen kleuren">
               <SwatchOnlyBlock tone="dark" />
             </Item>
+            <Item label="Puzzelstuk / Oranje / Klein">
+              <PuzzlePieceBlock size={72} />
+            </Item>
+            <Item label="Puzzelstuk / Oranje / Groot">
+              <PuzzlePieceBlock size={120} />
+            </Item>
+            <Item label="Puzzelstuk / Dark / Oranje">
+              <PuzzlePieceBlock size={96} tone="dark" />
+            </Item>
+            <Item label="Puzzelstuk / Orange bg / Wit">
+              <PuzzlePieceBlock size={96} tone="orange" />
+            </Item>
           </div>
         </Section>
       </div>

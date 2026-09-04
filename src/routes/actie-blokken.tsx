@@ -36,7 +36,7 @@ const T = {
   orange: "#ff7d2f",
   bluegrey: "#7f919b",
   cream: "#f2eee7",
-  pad: "p-7 md:p-9",
+  pad: "p-5 md:p-6",
 } as const;
 
 type Tone = "light" | "dark" | "orange" | "bluegrey";
@@ -94,28 +94,29 @@ export function SaleEditorialCard({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[320px] flex-col justify-between border`}
+      className={`${T.card} ${T.pad} flex flex-col border`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-start justify-between">
         <Kicker color={t.sub}>{kicker}</Kicker>
         <span className="mt-1 h-1.5 w-1.5 rounded-full" style={{ background: t.accent }} />
       </div>
-      <div className="mt-10">
+      <div className="mt-4">
         <div
-          className="text-[92px] font-medium leading-[0.82] tracking-[-0.05em] md:text-[128px]"
+          className="text-[80px] font-medium leading-[0.82] tracking-[-0.05em] md:text-[104px]"
           style={{ color: t.accent === "#fffaf5" ? t.fg : T.orange }}
         >
           {amount}
         </div>
-        <div className="mt-2 text-[26px] font-normal leading-none tracking-[-0.01em]" style={{ color: t.fg }}>
+        <div className="mt-1.5 text-[24px] font-normal leading-none tracking-[-0.01em]" style={{ color: t.fg }}>
           {amountSuffix}
         </div>
       </div>
-      <div className="mt-10 border-t pt-4 text-[13px]" style={{ borderColor: t.line, color: t.sub }}>
+      <div className="mt-4 border-t pt-3 text-[13px]" style={{ borderColor: t.line, color: t.sub }}>
         {footnote}
       </div>
     </div>
+
   );
 }
 
@@ -132,9 +133,9 @@ export function SaleCompactCard({
 }) {
   const t = TONES[tone];
   return (
-    <div className={`${T.card} border p-7`} style={{ background: t.bg, borderColor: t.line }}>
+    <div className={`${T.card} border p-5`} style={{ background: t.bg, borderColor: t.line }}>
       <Kicker color={t.sub}>{title}</Kicker>
-      <div className="mt-5 flex items-baseline gap-3">
+      <div className="mt-3 flex items-baseline gap-3">
         <span className="text-[52px] font-medium leading-none tracking-[-0.04em]" style={{ color: T.orange }}>
           {amount}
         </span>
@@ -142,7 +143,7 @@ export function SaleCompactCard({
           korting
         </span>
       </div>
-      <p className="mt-4 text-[13px] leading-relaxed" style={{ color: t.sub }}>
+      <p className="mt-3 text-[13px] leading-relaxed" style={{ color: t.sub }}>
         {sub}
       </p>
     </div>
@@ -201,7 +202,7 @@ export function CtaButton({
   const s = styles[variant];
   const inner = (
     <span
-      className={`${T.pill} inline-flex items-center gap-2 border px-6 py-3 text-sm font-medium transition hover:opacity-90`}
+      className={`${T.pill} inline-flex items-center gap-2 border px-5 py-2.5 text-sm font-medium transition hover:opacity-90`}
       style={{ background: s.bg, color: s.fg, borderColor: s.border }}
     >
       {label}
@@ -223,7 +224,7 @@ export function CtaWide({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} flex items-center justify-between gap-6 border px-7 py-5`}
+      className={`${T.card} flex items-center justify-between gap-6 border px-5 py-4`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <span>
@@ -271,17 +272,17 @@ export function DiscoveryCard({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[260px] flex-col border`}
+      className={`${T.card} ${T.pad} flex flex-col border`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       {kicker && <Kicker color={t.sub}>{kicker}</Kicker>}
-      <h3 className="mt-5 text-[26px] font-normal leading-[1.15] tracking-[-0.015em]" style={{ color: t.fg }}>
+      <h3 className="mt-3 text-[26px] font-normal leading-[1.15] tracking-[-0.015em]" style={{ color: t.fg }}>
         {title}
       </h3>
       <p className="mt-3 max-w-[320px] text-[14px] leading-relaxed" style={{ color: t.sub }}>
         {sub}
       </p>
-      {children && <div className="mt-6">{children}</div>}
+      {children && <div className="mt-4">{children}</div>}
       <div className="mt-auto flex items-center justify-between pt-8">
         <span className="text-[13px]" style={{ color: t.sub }}>
           {cta}
@@ -351,7 +352,7 @@ export function UspBlock({
   return (
     <div className={`${T.card} border p-6`} style={{ background: t.bg, borderColor: t.line }}>
       <Icon className="h-4 w-4" strokeWidth={1.5} style={{ color: T.orange }} />
-      <p className="mt-4 text-[16px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
+      <p className="mt-3 text-[16px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
         {title}
       </p>
       {sub && (
@@ -380,18 +381,18 @@ export function CinewallEditorial({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[300px] flex-col justify-between border`}
+      className={`${T.card} ${T.pad} flex flex-col justify-between border`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div>
         <h3 className="text-[44px] font-normal leading-[0.95] tracking-[-0.03em] md:text-[56px]" style={{ color: t.fg }}>
           {title}
         </h3>
-        <p className="mt-4 text-[16px]" style={{ color: t.sub }}>
+        <p className="mt-3 text-[16px]" style={{ color: t.sub }}>
           {line}
         </p>
       </div>
-      <div className="mt-10 border-t pt-5" style={{ borderColor: t.line }}>
+      <div className="mt-6 border-t pt-3" style={{ borderColor: t.line }}>
         <CtaTextArrow label={cta} tone={tone} />
       </div>
     </div>
@@ -402,7 +403,7 @@ export function CinewallMinimal({ tone = "light" }: { tone?: Tone }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[300px] items-end border`}
+      className={`${T.card} ${T.pad} flex min-h-[160px] items-end border`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <h3 className="text-[40px] font-normal leading-[0.98] tracking-[-0.03em] md:text-[52px]" style={{ color: t.fg }}>
@@ -431,8 +432,8 @@ export function MiniBlock({
   const t = TONES[tone];
   const s = {
     sm: { pad: "px-4 py-3", text: "text-[13px]" },
-    md: { pad: "px-5 py-4", text: "text-[15px]" },
-    lg: { pad: "px-6 py-5", text: "text-[19px]" },
+    md: { pad: "px-4 py-3", text: "text-[15px]" },
+    lg: { pad: "px-5 py-4", text: "text-[19px]" },
   }[size];
   return (
     <div
@@ -459,7 +460,7 @@ export function MiniStatBlock({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} border px-6 py-5`}
+      className={`${T.card} border px-5 py-4`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-baseline gap-2">
@@ -478,7 +479,7 @@ export function SwatchOnlyBlock({ tone = "light", size = 40 }: { tone?: Tone; si
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} border px-6 py-5`}
+      className={`${T.card} border px-5 py-4`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-center justify-center gap-3">
@@ -735,24 +736,24 @@ function ActieBlokkenPage() {
         <Section index="06" title="Voorbeeldcombinaties" sub="Twee of drie blokken samen, zoals in een advertentie.">
           <div className="grid gap-6 md:grid-cols-3">
             <Item label="Ad / Light / 1080 × 1080">
-              <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-7">
+              <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-5">
                 <SaleLabel text="Verjaardagsale" />
-                <div className="mt-8 text-[76px] font-medium leading-[0.82] tracking-[-0.05em] text-[#ff7d2f]">30%</div>
+                <div className="mt-5 text-[76px] font-medium leading-[0.82] tracking-[-0.05em] text-[#ff7d2f]">30%</div>
                 <div className="mt-2 text-[22px] text-[#1f1915]">korting</div>
-                <div className="mt-10">
+                <div className="mt-6">
                   <CtaButton label="Bekijk tv-meubels" variant="navy" to="/producten" />
                 </div>
               </div>
             </Item>
             <Item label="Ad / Dark / Story">
-              <div className="rounded-[22px] border border-[#0e1f2a] bg-[#0e1f2a] p-7">
+              <div className="rounded-[22px] border border-[#0e1f2a] bg-[#0e1f2a] p-5">
                 <Kicker color="rgba(247,244,239,0.6)">We zijn jarig</Kicker>
-                <h3 className="mt-8 text-[34px] font-normal leading-[1.05] tracking-[-0.02em] text-[#f7f4ef]">
+                <h3 className="mt-5 text-[34px] font-normal leading-[1.05] tracking-[-0.02em] text-[#f7f4ef]">
                   30% korting op
                   <br />
                   alle tv-meubels
                 </h3>
-                <div className="mt-10">
+                <div className="mt-6">
                   <CtaTextArrow label="Shop nu" tone="dark" />
                 </div>
               </div>

@@ -1307,6 +1307,48 @@ function ActieBlokkenPage() {
             </Item>
           </div>
         </Section>
+
+        <Section
+          index="09"
+          title="Ballonnen"
+          sub="Lichte, feestelijke accenten voor de verjaardagsale. Geen cartoon-stijl, alleen subtiele lijnballonnen in de Wandig-kleuren."
+        >
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Ballon / Verjaardagsale / Light">
+              <BalloonBlock />
+            </Item>
+            <Item label="Ballon / Verjaardagsale / Dark">
+              <BalloonBlock tone="dark" />
+            </Item>
+            <Item label="Ballon / Verjaardagsale / Orange">
+              <BalloonBlock tone="orange" kicker="Tijdelijk" title="30% korting" />
+            </Item>
+            <Item label="Ballon / Verticaal / Light">
+              <BalloonVerticalBlock />
+            </Item>
+            <Item label="Ballon / Verticaal / Dark">
+              <BalloonVerticalBlock tone="dark" />
+            </Item>
+            <Item label="Ballon / Verticaal / Blue grey">
+              <BalloonVerticalBlock tone="bluegrey" />
+            </Item>
+            <Item label="Ballon / Mini / Light">
+              <BalloonMini />
+            </Item>
+            <Item label="Ballon / Mini / Dark">
+              <BalloonMini tone="dark" />
+            </Item>
+            <Item label="Ballon / Pill / Light">
+              <BalloonDiscountPill />
+            </Item>
+            <Item label="Ballon / Pill / Dark">
+              <BalloonDiscountPill tone="dark" />
+            </Item>
+            <Item label="Ballon / Pill / Orange">
+              <BalloonDiscountPill tone="orange" />
+            </Item>
+          </div>
+        </Section>
       </div>
 
 

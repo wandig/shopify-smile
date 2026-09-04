@@ -412,14 +412,57 @@ function Label({ children }: { children: ReactNode }) {
   );
 }
 
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 function Item({ label, children }: { label: string; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [busy, setBusy] = useState(false);
+
+  const download = async () => {
+    if (!ref.current) return;
+    setBusy(true);
+    try {
+      const { toPng } = await import("html-to-image");
+      const dataUrl = await toPng(ref.current, {
+        pixelRatio: 3,
+        backgroundColor: "transparent",
+        cacheBust: true,
+      });
+      const link = document.createElement("a");
+      link.download = `wandig-${slugify(label)}.png`;
+      link.href = dataUrl;
+      link.click();
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
-    <div>
-      {children}
-      <Label>{label}</Label>
+    <div className="group/item">
+      <div ref={ref} className="inline-block w-full">
+        {children}
+      </div>
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <Label>{label}</Label>
+        <button
+          type="button"
+          onClick={download}
+          disabled={busy}
+          className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#1f1915]/15 px-3 py-1 text-[11px] text-[#1f1915]/55 transition hover:border-[#ff7d2f] hover:text-[#ff7d2f] disabled:opacity-50"
+        >
+          <Download className="h-3 w-3" strokeWidth={1.6} />
+          {busy ? "..." : "PNG"}
+        </button>
+      </div>
     </div>
   );
 }
+
 
 function ActieBlokkenPage() {
   return (

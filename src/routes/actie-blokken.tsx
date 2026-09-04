@@ -966,7 +966,47 @@ function ActieBlokkenPage() {
             </Item>
           </div>
         </Section>
+
+        <Section
+          index="08"
+          title="Hero-lockup"
+          sub="Het kopblok van de collectiepagina: kicker, serif titel en schuin kortingslabel. Alles los te downloaden."
+        >
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Hero / Light / Medium">
+              <HeroLockupBlock />
+            </Item>
+            <Item label="Hero / Dark / Medium">
+              <HeroLockupBlock tone="dark" />
+            </Item>
+            <Item label="Hero / Light / Groot">
+              <HeroLockupBlock size="lg" />
+            </Item>
+            <Item label="Hero / Light / Compact">
+              <HeroLockupBlock size="sm" />
+            </Item>
+            <Item label="Hero / Center / Met subtekst">
+              <HeroLockupBlock
+                align="center"
+                sub="Op alle tv-meubels. Tijdelijk, zolang de voorraad strekt."
+              />
+            </Item>
+            <Item label="Hero / Blue grey / We zijn jarig">
+              <HeroLockupBlock tone="bluegrey" eyebrow="Wandig" title="We zijn jarig" badge="-30%" />
+            </Item>
+            <Item label="Hero / Orange / Zonder label">
+              <HeroLockupBlock tone="orange" eyebrow="Tijdelijk" title="30% korting" badge={null} />
+            </Item>
+            <Item label="Hero / Cinewall / Dark">
+              <HeroLockupBlock tone="dark" eyebrow="Cinewall" title="Van muur naar blikvanger" badge={null} />
+            </Item>
+            <Item label="Hero / Zonder kader (transparant)">
+              <HeroLockupBlock bare />
+            </Item>
+          </div>
+        </Section>
       </div>
+
 
     </main>
   );

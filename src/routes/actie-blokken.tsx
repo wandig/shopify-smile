@@ -634,13 +634,36 @@ function Item({ label, children }: { label: string; children: ReactNode }) {
     setBusy(format);
     try {
       const { toPng, toSvg } = await import("html-to-image");
-      const rect = node.getBoundingClientRect();
+      // Measure the true visual bounds, including children that overflow the
+      // wrapper (rotated badges, shadows, rings) so nothing gets clipped.
+      const base = node.getBoundingClientRect();
+      let left = base.left;
+      let top = base.top;
+      let right = base.right;
+      let bottom = base.bottom;
+      node.querySelectorAll<HTMLElement>("*").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.width === 0 && r.height === 0) return;
+        left = Math.min(left, r.left);
+        top = Math.min(top, r.top);
+        right = Math.max(right, r.right);
+        bottom = Math.max(bottom, r.bottom);
+      });
+      const pad = 2;
+      const offsetX = base.left - left + pad;
+      const offsetY = base.top - top + pad;
+      const width = Math.ceil(right - left) + pad * 2;
+      const height = Math.ceil(bottom - top) + pad * 2;
       const options = {
         backgroundColor: undefined,
         cacheBust: true,
-        width: Math.ceil(rect.width),
-        height: Math.ceil(rect.height),
+        width,
+        height,
         skipFonts: false,
+        style: {
+          transform: `translate(${offsetX}px, ${offsetY}px)`,
+          transformOrigin: "top left",
+        },
       } as const;
       const dataUrl =
         format === "svg"
@@ -658,6 +681,7 @@ function Item({ label, children }: { label: string; children: ReactNode }) {
       setBusy(null);
     }
   };
+
 
   return (
     <div className="group/item">

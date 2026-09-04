@@ -16,6 +16,7 @@ import { Route as KlantenserviceRouteImport } from './routes/klantenservice'
 import { Route as ConfiguratorRouteImport } from './routes/configurator'
 import { Route as BezoekRouteImport } from './routes/bezoek'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
+import { Route as ActieBlokkenRouteImport } from './routes/actie-blokken'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
@@ -54,6 +55,11 @@ const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
   path: '/algemene-voorwaarden',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActieBlokkenRoute = ActieBlokkenRouteImport.update({
+  id: '/actie-blokken',
+  path: '/actie-blokken',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -67,6 +73,7 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/actie-blokken': typeof ActieBlokkenRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/bezoek': typeof BezoekRoute
   '/configurator': typeof ConfiguratorRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/actie-blokken': typeof ActieBlokkenRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/bezoek': typeof BezoekRoute
   '/configurator': typeof ConfiguratorRoute
@@ -90,6 +98,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/actie-blokken': typeof ActieBlokkenRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/bezoek': typeof BezoekRoute
   '/configurator': typeof ConfiguratorRoute
@@ -103,6 +112,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/actie-blokken'
     | '/algemene-voorwaarden'
     | '/bezoek'
     | '/configurator'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/actie-blokken'
     | '/algemene-voorwaarden'
     | '/bezoek'
     | '/configurator'
@@ -125,6 +136,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/actie-blokken'
     | '/algemene-voorwaarden'
     | '/bezoek'
     | '/configurator'
@@ -137,6 +149,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActieBlokkenRoute: typeof ActieBlokkenRoute
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
   BezoekRoute: typeof BezoekRoute
   ConfiguratorRoute: typeof ConfiguratorRoute
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlgemeneVoorwaardenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/actie-blokken': {
+      id: '/actie-blokken'
+      path: '/actie-blokken'
+      fullPath: '/actie-blokken'
+      preLoaderRoute: typeof ActieBlokkenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -217,6 +237,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActieBlokkenRoute: ActieBlokkenRoute,
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
   BezoekRoute: BezoekRoute,
   ConfiguratorRoute: ConfiguratorRoute,

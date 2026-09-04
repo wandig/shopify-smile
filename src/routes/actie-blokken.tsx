@@ -970,7 +970,7 @@ function ActieBlokkenPage() {
         <Section
           index="08"
           title="Hero-lockup"
-          sub="Het kopblok van de collectiepagina: kicker, serif titel en schuin kortingslabel. Alles los te downloaden."
+          sub="Het kopblok van de collectiepagina: kicker, serif titel en schuin kortingslabel. Met en zonder achtergrond, allemaal los te downloaden."
         >
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <Item label="Hero / Light / Medium">
@@ -1002,6 +1002,43 @@ function ActieBlokkenPage() {
             </Item>
             <Item label="Hero / Zonder kader (transparant)">
               <HeroLockupBlock bare />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Zonder achtergrond
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Hero / Bare / Light / Medium">
+              <HeroLockupBlock bare />
+            </Item>
+            <Item label="Hero / Bare / Dark / Medium">
+              <HeroLockupBlock bare tone="dark" />
+            </Item>
+            <Item label="Hero / Bare / Light / Groot">
+              <HeroLockupBlock bare size="lg" />
+            </Item>
+            <Item label="Hero / Bare / Light / Compact">
+              <HeroLockupBlock bare size="sm" />
+            </Item>
+            <Item label="Hero / Bare / Center / Met subtekst">
+              <HeroLockupBlock
+                bare
+                align="center"
+                sub="Op alle tv-meubels. Tijdelijk, zolang de voorraad strekt."
+              />
+            </Item>
+            <Item label="Hero / Bare / Blue grey / We zijn jarig">
+              <HeroLockupBlock bare tone="bluegrey" eyebrow="Wandig" title="We zijn jarig" badge="-30%" />
+            </Item>
+            <Item label="Hero / Bare / Orange / Zonder label">
+              <HeroLockupBlock bare tone="orange" eyebrow="Tijdelijk" title="30% korting" badge={null} />
+            </Item>
+            <Item label="Hero / Bare / Cinewall / Dark">
+              <HeroLockupBlock bare tone="dark" eyebrow="Cinewall" title="Van muur naar blikvanger" badge={null} />
+            </Item>
+            <Item label="Hero / Bare / Light / Zonder label">
+              <HeroLockupBlock bare eyebrow="Verjaardagsale" title="30% korting" badge={null} />
             </Item>
           </div>
         </Section>

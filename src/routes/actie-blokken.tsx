@@ -706,7 +706,71 @@ function ActieBlokkenPage() {
             </div>
           </div>
         </Section>
+
+        <Section
+          index="07"
+          title="Losse blokken"
+          sub="Kleine blokken met één regel tekst, los te downloaden als PNG."
+        >
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Mini / 30% korting">
+              <MiniBlock text="30% korting" accentDot />
+            </Item>
+            <Item label="Mini / Stat / 30%">
+              <MiniStatBlock />
+            </Item>
+            <Item label="Mini / Verjaardagsale">
+              <MiniBlock text="Verjaardagsale" accentDot />
+            </Item>
+            <Item label="Mini / Dark / 30% korting">
+              <MiniBlock tone="dark" text="30% korting op alle tv-meubels" accentDot />
+            </Item>
+            <Item label="Mini / Gratis kleurstalen">
+              <MiniBlock text="Gratis kleurstalen" accentDot />
+            </Item>
+            <Item label="Kleurstalen / Alleen kleuren">
+              <SwatchOnlyBlock />
+            </Item>
+            <Item label="Mini / Shop nu / Large">
+              <MiniBlock size="lg" text="Shop nu" />
+            </Item>
+            <Item label="Mini / Small / Tijdelijk">
+              <MiniBlock size="sm" text="Tijdelijk" accentDot />
+            </Item>
+            <Item label="Mini / We zijn jarig">
+              <MiniBlock text="We zijn jarig" accentDot />
+            </Item>
+            <Item label="Mini / 100 dagen proefkijken">
+              <MiniBlock size="sm" text="100 dagen proefkijken" />
+            </Item>
+            <Item label="Mini / Gratis verzending">
+              <MiniBlock size="sm" text="Gratis verzending" />
+            </Item>
+            <Item label="Mini / 10 jaar garantie">
+              <MiniBlock size="sm" text="10 jaar garantie" />
+            </Item>
+            <Item label="Mini / Nederlands design">
+              <MiniBlock size="sm" text="Nederlands design" />
+            </Item>
+            <Item label="Mini / Geschikt voor alle tv's">
+              <MiniBlock size="sm" text="Geschikt voor alle tv's" />
+            </Item>
+            <Item label="Mini / Blue grey / Stel zelf samen">
+              <MiniBlock tone="bluegrey" text="Stel zelf samen" />
+            </Item>
+            <Item label="Mini / Orange / 30% korting">
+              <MiniBlock tone="orange" text="30% korting" />
+            </Item>
+            <Item label="Mini / Bekijk collectie">
+              <MiniBlock text="Bekijk collectie" />
+            </Item>
+            <Item label="Kleurstalen / Dark / Alleen kleuren">
+              <SwatchOnlyBlock tone="dark" />
+            </Item>
+          </div>
+        </Section>
       </div>
+
     </main>
   );
 }

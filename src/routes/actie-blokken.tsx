@@ -595,6 +595,205 @@ export function HeroLockupBlock({
   );
 }
 
+/* ---------------- 9. balloons (verjaardagsale) ---------------- */
+
+function BalloonShape({
+  color,
+  size = 48,
+  string = true,
+  rotation = 0,
+}: {
+  color: string;
+  size?: number;
+  string?: boolean;
+  rotation?: number;
+}) {
+  const w = size;
+  const h = size * 1.18;
+  const knot = size * 0.12;
+  return (
+    <svg
+      width={w}
+      height={h + (string ? size * 0.7 : 0)}
+      viewBox={`0 0 ${w} ${h + (string ? size * 0.7 : 0)}`}
+      style={{ transform: `rotate(${rotation}deg)`, transformOrigin: "center top" }}
+    >
+      <ellipse
+        cx={w / 2}
+        cy={h / 2 - knot / 2}
+        rx={w / 2 - 1}
+        ry={h / 2 - knot / 2 - 1}
+        fill="none"
+        stroke={color}
+        strokeWidth={1.5}
+      />
+      <path
+        d={`M${w / 2} ${h - knot} L${w / 2 - knot * 0.4} ${h} L${w / 2 + knot * 0.4} ${h} Z`}
+        fill={color}
+      />
+      {string && (
+        <path
+          d={`M${w / 2} ${h} Q${w / 2 + size * 0.12} ${h + size * 0.22} ${w / 2 - size * 0.06} ${h + size * 0.46} T${w / 2 + size * 0.08} ${h + size * 0.7}`}
+          fill="none"
+          stroke={color}
+          strokeWidth={1.2}
+          strokeLinecap="round"
+        />
+      )}
+      <ellipse
+        cx={w / 2 - size * 0.16}
+        cy={h / 2 - size * 0.22}
+        rx={size * 0.06}
+        ry={size * 0.1}
+        fill={color}
+        opacity={0.35}
+      />
+    </svg>
+  );
+}
+
+function BalloonCluster({
+  tone = "light",
+  size = 64,
+}: {
+  tone?: Tone;
+  size?: number;
+}) {
+  const t = TONES[tone];
+  const accent = tone === "orange" ? "#fffaf5" : T.orange;
+  const secondary = tone === "orange" ? "rgba(255,250,245,0.55)" : t.sub;
+  return (
+    <div className="relative inline-flex h-[120px] w-[120px] items-start justify-center">
+      <div className="absolute" style={{ left: 6, top: 22 }}>
+        <BalloonShape color={secondary} size={size * 0.72} rotation={-14} />
+      </div>
+      <div className="absolute" style={{ right: 8, top: 18 }}>
+        <BalloonShape color={secondary} size={size * 0.68} rotation={16} />
+      </div>
+      <div className="absolute" style={{ left: "50%", top: 0, transform: "translateX(-50%)" }}>
+        <BalloonShape color={accent} size={size} rotation={0} />
+      </div>
+    </div>
+  );
+}
+
+export function BalloonBlock({
+  kicker = "Verjaardagsale",
+  title = "We zijn jarig",
+  amount = "30%",
+  sub = "korting op alle tv-meubels",
+  tone = "light",
+}: {
+  kicker?: string;
+  title?: string;
+  amount?: string;
+  sub?: string;
+  tone?: Tone;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.card} inline-block w-fit border pl-6 pr-5 py-6`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <div className="flex items-start gap-5">
+        <BalloonCluster tone={tone} size={56} />
+        <div className="flex min-w-[180px] flex-col justify-center pt-2">
+          <Kicker color={t.sub}>{kicker}</Kicker>
+          <p className="mt-2 text-[22px] font-normal leading-[1.1] tracking-[-0.015em]" style={{ color: t.fg }}>
+            {title}
+          </p>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-[44px] font-medium leading-none tracking-[-0.04em]" style={{ color: T.orange }}>
+              {amount}
+            </span>
+            <span className="text-[15px]" style={{ color: t.sub }}>
+              {sub}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function BalloonMini({
+  text = "Verjaardagsale",
+  tone = "light",
+}: {
+  text?: string;
+  tone?: Tone;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.card} inline-flex w-fit items-center gap-2.5 border pl-4 pr-3 py-3`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <BalloonShape color={T.orange} size={22} string={false} />
+      <span className="text-[13px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
+        {text}
+      </span>
+    </div>
+  );
+}
+
+export function BalloonDiscountPill({
+  amount = "30%",
+  label = "Verjaardagskorting",
+  tone = "light",
+}: {
+  amount?: string;
+  label?: string;
+  tone?: Tone;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.pill} inline-flex w-fit items-center gap-3 border pl-2 pr-5 py-2`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <span
+        className="inline-flex h-9 w-9 items-center justify-center rounded-full"
+        style={{ background: T.orange }}
+      >
+        <BalloonShape color="#fffaf5" size={18} string={false} />
+      </span>
+      <span className="text-[17px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
+        <strong className="font-medium" style={{ color: T.orange }}>{amount}</strong> {label}
+      </span>
+    </div>
+  );
+}
+
+export function BalloonVerticalBlock({
+  amount = "30%",
+  sub = "korting",
+  tone = "light",
+}: {
+  amount?: string;
+  sub?: string;
+  tone?: Tone;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.card} inline-flex w-fit flex-col items-center border px-6 py-6`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <BalloonCluster tone={tone} size={52} />
+      <div className="mt-4 text-center">
+        <div className="text-[56px] font-medium leading-[0.85] tracking-[-0.05em]" style={{ color: T.orange }}>
+          {amount}
+        </div>
+        <div className="mt-1 text-[17px]" style={{ color: t.sub }}>
+          {sub}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
 
 
@@ -1105,6 +1304,48 @@ function ActieBlokkenPage() {
             </Item>
             <Item label="Hero / Bare / Zonder boventitel / Center">
               <HeroLockupBlock bare align="center" eyebrow="" title="Verjaardagssale" badge="-30%" sub="Op alle tv-meubels. Tijdelijk, zolang de voorraad strekt." />
+            </Item>
+          </div>
+        </Section>
+
+        <Section
+          index="09"
+          title="Ballonnen"
+          sub="Lichte, feestelijke accenten voor de verjaardagsale. Geen cartoon-stijl, alleen subtiele lijnballonnen in de Wandig-kleuren."
+        >
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Ballon / Verjaardagsale / Light">
+              <BalloonBlock />
+            </Item>
+            <Item label="Ballon / Verjaardagsale / Dark">
+              <BalloonBlock tone="dark" />
+            </Item>
+            <Item label="Ballon / Verjaardagsale / Orange">
+              <BalloonBlock tone="orange" kicker="Tijdelijk" title="30% korting" />
+            </Item>
+            <Item label="Ballon / Verticaal / Light">
+              <BalloonVerticalBlock />
+            </Item>
+            <Item label="Ballon / Verticaal / Dark">
+              <BalloonVerticalBlock tone="dark" />
+            </Item>
+            <Item label="Ballon / Verticaal / Blue grey">
+              <BalloonVerticalBlock tone="bluegrey" />
+            </Item>
+            <Item label="Ballon / Mini / Light">
+              <BalloonMini />
+            </Item>
+            <Item label="Ballon / Mini / Dark">
+              <BalloonMini tone="dark" />
+            </Item>
+            <Item label="Ballon / Pill / Light">
+              <BalloonDiscountPill />
+            </Item>
+            <Item label="Ballon / Pill / Dark">
+              <BalloonDiscountPill tone="dark" />
+            </Item>
+            <Item label="Ballon / Pill / Orange">
+              <BalloonDiscountPill tone="orange" />
             </Item>
           </div>
         </Section>

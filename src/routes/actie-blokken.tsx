@@ -1504,6 +1504,36 @@ function ActieBlokkenPage() {
           </div>
 
           <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Outlined -30% blokjes
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Item label="Outlined / Oranje">
+              <DiscountThirtyOutlinedBlock />
+            </Item>
+            <Item label="Outlined / Navy">
+              <DiscountThirtyOutlinedBlock outline="navy" />
+            </Item>
+            <Item label="Outlined / Blue grey">
+              <DiscountThirtyOutlinedBlock outline="bluegrey" />
+            </Item>
+            <Item label="Outlined / Donker bg">
+              <DiscountThirtyOutlinedBlock tone="dark" outline="light" />
+            </Item>
+            <Item label="Outlined / Bare / Oranje">
+              <DiscountThirtyOutlinedBlock bare />
+            </Item>
+            <Item label="Outlined / Bare / Navy">
+              <DiscountThirtyOutlinedBlock outline="navy" bare />
+            </Item>
+            <Item label="Outlined / Bare / Blue grey">
+              <DiscountThirtyOutlinedBlock outline="bluegrey" bare />
+            </Item>
+            <Item label="Outlined / Bare / Donker">
+              <DiscountThirtyOutlinedBlock tone="dark" outline="light" bare />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
             -30% blokjes
           </p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

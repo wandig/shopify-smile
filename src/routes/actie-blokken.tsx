@@ -683,18 +683,20 @@ export function BalloonBlock({
   amount = "30%",
   sub = "korting op alle tv-meubels",
   tone = "light",
+  bare = false,
 }: {
   kicker?: string;
   title?: string;
   amount?: string;
   sub?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} inline-block w-fit border pl-6 pr-5 py-6`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.card} border`} inline-block w-fit pl-6 pr-5 py-6`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-start gap-5">
         <BalloonCluster tone={tone} size={56} />
@@ -720,15 +722,17 @@ export function BalloonBlock({
 export function BalloonMini({
   text = "Verjaardagsale",
   tone = "light",
+  bare = false,
 }: {
   text?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} inline-flex w-fit items-center gap-2.5 border pl-4 pr-3 py-3`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.card} border`} inline-flex w-fit items-center gap-2.5 pl-4 pr-3 py-3`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <BalloonShape color={T.orange} size={22} string={false} />
       <span className="text-[13px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
@@ -742,16 +746,18 @@ export function BalloonDiscountPill({
   amount = "30%",
   label = "Verjaardagskorting",
   tone = "light",
+  bare = false,
 }: {
   amount?: string;
   label?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.pill} inline-flex w-fit items-center gap-3 border pl-2 pr-5 py-2`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.pill} border`} inline-flex w-fit items-center gap-3 pl-2 pr-5 py-2`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <span
         className="inline-flex h-9 w-9 items-center justify-center rounded-full"
@@ -770,16 +776,18 @@ export function BalloonVerticalBlock({
   amount = "30%",
   sub = "korting",
   tone = "light",
+  bare = false,
 }: {
   amount?: string;
   sub?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} inline-flex w-fit flex-col items-center border px-6 py-6`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.card} border`} inline-flex w-fit flex-col items-center px-6 py-6`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <BalloonCluster tone={tone} size={52} />
       <div className="mt-4 text-center">
@@ -790,6 +798,53 @@ export function BalloonVerticalBlock({
           {sub}
         </div>
       </div>
+    </div>
+  );
+}
+
+export function BalloonSingleBlock({
+  tone = "light",
+  size = 96,
+  bare = false,
+}: {
+  tone?: Tone;
+  size?: number;
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} inline-flex items-center justify-center`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line, padding: size * 0.45 }}
+    >
+      <BalloonShape color={tone === "orange" ? "#fffaf5" : T.orange} size={size} />
+    </div>
+  );
+}
+
+export function DiscountThirtyBlock({
+  tone = "light",
+  label,
+  bare = false,
+}: {
+  tone?: Tone;
+  label?: string;
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} inline-flex w-fit flex-col items-start gap-1 pl-6 pr-5 py-5`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
+    >
+      <span className="text-[56px] font-medium leading-none tracking-[-0.05em]" style={{ color: T.orange }}>
+        -30%
+      </span>
+      {label && (
+        <span className="text-[14px]" style={{ color: t.sub }}>
+          {label}
+        </span>
+      )}
     </div>
   );
 }
@@ -1346,6 +1401,111 @@ function ActieBlokkenPage() {
             </Item>
             <Item label="Ballon / Pill / Orange">
               <BalloonDiscountPill tone="orange" />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Zonder achtergrond
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Ballon / Bare / Verjaardagsale / Light">
+              <BalloonBlock bare />
+            </Item>
+            <Item label="Ballon / Bare / Verjaardagsale / Dark">
+              <BalloonBlock bare tone="dark" />
+            </Item>
+            <Item label="Ballon / Bare / Verjaardagsale / Orange">
+              <BalloonBlock bare tone="orange" kicker="Tijdelijk" title="30% korting" />
+            </Item>
+            <Item label="Ballon / Bare / Verticaal / Light">
+              <BalloonVerticalBlock bare />
+            </Item>
+            <Item label="Ballon / Bare / Verticaal / Dark">
+              <BalloonVerticalBlock bare tone="dark" />
+            </Item>
+            <Item label="Ballon / Bare / Verticaal / Blue grey">
+              <BalloonVerticalBlock bare tone="bluegrey" />
+            </Item>
+            <Item label="Ballon / Bare / Mini / Light">
+              <BalloonMini bare />
+            </Item>
+            <Item label="Ballon / Bare / Mini / Dark">
+              <BalloonMini bare tone="dark" />
+            </Item>
+            <Item label="Ballon / Bare / Pill / Light">
+              <BalloonDiscountPill bare />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Losse items
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Item label="Ballon / Los / Oranje">
+              <BalloonSingleBlock />
+            </Item>
+            <Item label="Ballon / Los / Donker">
+              <BalloonSingleBlock tone="dark" />
+            </Item>
+            <Item label="Ballon / Los / Oranje bg">
+              <BalloonSingleBlock tone="orange" />
+            </Item>
+            <Item label="Ballon / Los / Blue grey">
+              <BalloonSingleBlock tone="bluegrey" />
+            </Item>
+            <Item label="Ballon / Los / Bare / Oranje">
+              <BalloonSingleBlock bare />
+            </Item>
+            <Item label="Ballon / Los / Bare / Donker">
+              <BalloonSingleBlock tone="dark" bare />
+            </Item>
+            <Item label="Ballon / Los / Bare / Oranje bg">
+              <BalloonSingleBlock tone="orange" bare />
+            </Item>
+            <Item label="Ballon / Los / Bare / Blue grey">
+              <BalloonSingleBlock tone="bluegrey" bare />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            -30% blokjes
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Item label="-30% / Light">
+              <DiscountThirtyBlock />
+            </Item>
+            <Item label="-30% / Dark">
+              <DiscountThirtyBlock tone="dark" />
+            </Item>
+            <Item label="-30% / Orange">
+              <DiscountThirtyBlock tone="orange" />
+            </Item>
+            <Item label="-30% / Blue grey">
+              <DiscountThirtyBlock tone="bluegrey" />
+            </Item>
+            <Item label="-30% / Bare / Light">
+              <DiscountThirtyBlock bare />
+            </Item>
+            <Item label="-30% / Bare / Dark">
+              <DiscountThirtyBlock tone="dark" bare />
+            </Item>
+            <Item label="-30% / Bare / Orange">
+              <DiscountThirtyBlock tone="orange" bare />
+            </Item>
+            <Item label="-30% / Bare / Blue grey">
+              <DiscountThirtyBlock tone="bluegrey" bare />
+            </Item>
+            <Item label="-30% / Met label / Light">
+              <DiscountThirtyBlock label="Op alle tv-meubels" />
+            </Item>
+            <Item label="-30% / Met label / Dark">
+              <DiscountThirtyBlock tone="dark" label="Op alle tv-meubels" />
+            </Item>
+            <Item label="-30% / Met label / Orange">
+              <DiscountThirtyBlock tone="orange" label="Op alle tv-meubels" />
+            </Item>
+            <Item label="-30% / Met label / Blue grey">
+              <DiscountThirtyBlock tone="bluegrey" label="Op alle tv-meubels" />
             </Item>
           </div>
         </Section>

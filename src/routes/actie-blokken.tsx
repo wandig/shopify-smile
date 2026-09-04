@@ -392,6 +392,87 @@ export function CinewallMinimal({ tone = "light" }: { tone?: Tone }) {
   );
 }
 
+/* ---------------- 6. losse kleine blokken ---------------- */
+
+export function MiniBlock({
+  text,
+  tone = "light",
+  accentDot = false,
+  size = "md",
+}: {
+  text: string;
+  tone?: Tone;
+  accentDot?: boolean;
+  size?: "sm" | "md" | "lg";
+}) {
+  const t = TONES[tone];
+  const s = {
+    sm: { pad: "px-4 py-3", text: "text-[13px]" },
+    md: { pad: "px-5 py-4", text: "text-[15px]" },
+    lg: { pad: "px-6 py-5", text: "text-[19px]" },
+  }[size];
+  return (
+    <div
+      className={`${T.card} border ${s.pad} inline-flex w-full items-center gap-2.5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      {accentDot && <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: T.orange }} />}
+      <span className={`${s.text} font-normal tracking-[-0.01em]`} style={{ color: t.fg }}>
+        {text}
+      </span>
+    </div>
+  );
+}
+
+export function MiniStatBlock({
+  amount = "30%",
+  label = "korting",
+  tone = "light",
+}: {
+  amount?: string;
+  label?: string;
+  tone?: Tone;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.card} border px-6 py-5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <div className="flex items-baseline gap-2">
+        <span className="text-[40px] font-medium leading-none tracking-[-0.04em]" style={{ color: T.orange }}>
+          {amount}
+        </span>
+        <span className="text-[15px]" style={{ color: t.fg }}>
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export function SwatchOnlyBlock({ tone = "light", size = 40 }: { tone?: Tone; size?: number }) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.card} border px-6 py-5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <div className="flex items-center justify-center gap-3">
+        {FULL_HOUSE_COLORS.map((name) => (
+          <span
+            key={name}
+            title={displayWandigColor(name)}
+            aria-label={displayWandigColor(name)}
+            className="rounded-full border"
+            style={{ ...wandigSwatchStyle(name), borderColor: t.line, width: size, height: size }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
 
 function Section({ index, title, sub, children }: { index: string; title: string; sub?: string; children: ReactNode }) {

@@ -722,15 +722,17 @@ export function BalloonBlock({
 export function BalloonMini({
   text = "Verjaardagsale",
   tone = "light",
+  bare = false,
 }: {
   text?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} inline-flex w-fit items-center gap-2.5 border pl-4 pr-3 py-3`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.card} border`} inline-flex w-fit items-center gap-2.5 pl-4 pr-3 py-3`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <BalloonShape color={T.orange} size={22} string={false} />
       <span className="text-[13px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>

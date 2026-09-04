@@ -1517,7 +1517,7 @@ function ActieBlokkenPage() {
               <DiscountThirtyOutlinedBlock outline="bluegrey" />
             </Item>
             <Item label="Outlined / Donker bg">
-              <DiscountThirtyOutlinedBlock tone="dark" outline="light" />
+              <DiscountThirtyOutlinedBlock tone="dark" outline="dark" />
             </Item>
             <Item label="Outlined / Bare / Oranje">
               <DiscountThirtyOutlinedBlock bare />
@@ -1529,7 +1529,7 @@ function ActieBlokkenPage() {
               <DiscountThirtyOutlinedBlock outline="bluegrey" bare />
             </Item>
             <Item label="Outlined / Bare / Donker">
-              <DiscountThirtyOutlinedBlock tone="dark" outline="light" bare />
+              <DiscountThirtyOutlinedBlock tone="dark" outline="dark" bare />
             </Item>
           </div>
 

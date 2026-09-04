@@ -734,33 +734,38 @@ function ActieBlokkenPage() {
 
         <Section index="06" title="Voorbeeldcombinaties" sub="Twee of drie blokken samen, zoals in een advertentie.">
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-7">
-              <SaleLabel text="Verjaardagsale" />
-              <div className="mt-8 text-[76px] font-medium leading-[0.82] tracking-[-0.05em] text-[#ff7d2f]">30%</div>
-              <div className="mt-2 text-[22px] text-[#1f1915]">korting</div>
-              <div className="mt-10">
-                <CtaButton label="Bekijk tv-meubels" variant="navy" to="/producten" />
+            <Item label="Ad / Light / 1080 × 1080">
+              <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-7">
+                <SaleLabel text="Verjaardagsale" />
+                <div className="mt-8 text-[76px] font-medium leading-[0.82] tracking-[-0.05em] text-[#ff7d2f]">30%</div>
+                <div className="mt-2 text-[22px] text-[#1f1915]">korting</div>
+                <div className="mt-10">
+                  <CtaButton label="Bekijk tv-meubels" variant="navy" to="/producten" />
+                </div>
               </div>
-              <Label>Ad / 1080 × 1080</Label>
-            </div>
-            <div className="rounded-[22px] border border-[#0e1f2a] bg-[#0e1f2a] p-7">
-              <Kicker color="rgba(247,244,239,0.6)">We zijn jarig</Kicker>
-              <h3 className="mt-8 text-[34px] font-normal leading-[1.05] tracking-[-0.02em] text-[#f7f4ef]">
-                30% korting op
-                <br />
-                alle tv-meubels
-              </h3>
-              <div className="mt-10">
-                <CtaTextArrow label="Shop nu" tone="dark" />
+            </Item>
+            <Item label="Ad / Dark / Story">
+              <div className="rounded-[22px] border border-[#0e1f2a] bg-[#0e1f2a] p-7">
+                <Kicker color="rgba(247,244,239,0.6)">We zijn jarig</Kicker>
+                <h3 className="mt-8 text-[34px] font-normal leading-[1.05] tracking-[-0.02em] text-[#f7f4ef]">
+                  30% korting op
+                  <br />
+                  alle tv-meubels
+                </h3>
+                <div className="mt-10">
+                  <CtaTextArrow label="Shop nu" tone="dark" />
+                </div>
               </div>
-              <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-[#f7f4ef]/40">Ad / Dark / Story</p>
-            </div>
-            <div className="flex flex-col gap-5">
-              <SalePill />
-              <CinewallMinimal />
-              <UspBlock icon="CalendarClock" title="100 dagen proefkijken" />
-            </div>
+            </Item>
+            <Item label="Ad / Stack / Cinewall">
+              <div className="flex flex-col gap-5">
+                <SalePill />
+                <CinewallMinimal />
+                <UspBlock size="sm" icon="CalendarClock" title="100 dagen proefkijken" />
+              </div>
+            </Item>
           </div>
+
         </Section>
 
         <Section

@@ -349,7 +349,7 @@ export function UspBlock({
   }
 
   return (
-    <div className={`${T.card} min-w-[220px] border pl-6 pr-5 py-6`} style={{ background: t.bg, borderColor: t.line }}>
+    <div className={`${T.card} inline-block w-fit border pl-6 pr-5 py-6`} style={{ background: t.bg, borderColor: t.line }}>
       <Icon className="h-4 w-4" strokeWidth={1.5} style={{ color: T.orange }} />
       <p className="mt-3 text-[16px] font-normal tracking-[-0.01em]" style={{ color: t.fg }}>
         {title}

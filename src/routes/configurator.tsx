@@ -437,7 +437,7 @@ function findWandigVariant(
     });
 }
 
-/** Vindt de variant van het losse "Wandig Nieuwe Module"-product. */
+/** Vindt de variant van het losse "Wandig Zijkast B"-product. */
 function findNewModuleVariant(
   product: ShopifyProduct["node"] | null | undefined,
   color: string,
@@ -581,8 +581,8 @@ function ConfiguratorPage() {
     ? String(widthCm)
     : widthCm.toFixed(1).replace(".", ",");
   // Welk Wandig-model hoort bij deze samenstelling?
-  // Het basisproduct (Solo/Duo/Full House) dekt de middenmodule + de originele zijmodules.
-  // Elke nieuwe module wordt als los product ("Wandig Nieuwe Module") toegevoegd.
+  // Het basisproduct (Solo/Duo/Full House) dekt de middenmodule + Zijkast A.
+  // Elke Zijkast B wordt als los product ("Wandig Zijkast B") toegevoegd.
   const hasLeftOriginal = hasLeft && leftVariant !== "nieuw";
   const hasRightOriginal = hasRight && rightVariant !== "nieuw";
   const originalCount = (hasLeftOriginal ? 1 : 0) + (hasRightOriginal ? 1 : 0);
@@ -695,8 +695,8 @@ function ConfiguratorPage() {
   const leftModuleOptions: Array<{ variant: LeftModuleVariant; label: string }> =
     isSingleModuleAssetPicker
       ? [
-          { variant: "original", label: "Originele module" },
-          { variant: "nieuw", label: "Nieuwe module" },
+          { variant: "original", label: "Zijkast A" },
+          { variant: "nieuw", label: "Zijkast B" },
         ]
       : [
           { variant: "dicht", label: "Met deuren" },
@@ -705,8 +705,8 @@ function ConfiguratorPage() {
   const rightModuleOptions: Array<{ variant: RightModuleVariant; label: string }> =
     isSingleModuleAssetPicker
       ? [
-          { variant: "original", label: "Originele module" },
-          { variant: "nieuw", label: "Nieuwe module" },
+          { variant: "original", label: "Zijkast A" },
+          { variant: "nieuw", label: "Zijkast B" },
         ]
       : [
           { variant: "dicht", label: "Met deuren" },

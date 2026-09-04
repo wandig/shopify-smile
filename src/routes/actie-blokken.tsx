@@ -381,7 +381,7 @@ export function CinewallEditorial({
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[200px] flex-col justify-between border`}
+      className={`${T.card} ${T.pad} flex flex-col justify-between border`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <div>
@@ -403,7 +403,7 @@ export function CinewallMinimal({ tone = "light" }: { tone?: Tone }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} ${T.pad} flex min-h-[200px] items-end border`}
+      className={`${T.card} ${T.pad} flex min-h-[160px] items-end border`}
       style={{ background: t.bg, borderColor: t.line }}
     >
       <h3 className="text-[40px] font-normal leading-[0.98] tracking-[-0.03em] md:text-[52px]" style={{ color: t.fg }}>

@@ -746,16 +746,18 @@ export function BalloonDiscountPill({
   amount = "30%",
   label = "Verjaardagskorting",
   tone = "light",
+  bare = false,
 }: {
   amount?: string;
   label?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.pill} inline-flex w-fit items-center gap-3 border pl-2 pr-5 py-2`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.pill} border`} inline-flex w-fit items-center gap-3 pl-2 pr-5 py-2`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <span
         className="inline-flex h-9 w-9 items-center justify-center rounded-full"

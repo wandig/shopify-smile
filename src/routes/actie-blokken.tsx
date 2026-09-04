@@ -683,18 +683,20 @@ export function BalloonBlock({
   amount = "30%",
   sub = "korting op alle tv-meubels",
   tone = "light",
+  bare = false,
 }: {
   kicker?: string;
   title?: string;
   amount?: string;
   sub?: string;
   tone?: Tone;
+  bare?: boolean;
 }) {
   const t = TONES[tone];
   return (
     <div
-      className={`${T.card} inline-block w-fit border pl-6 pr-5 py-6`}
-      style={{ background: t.bg, borderColor: t.line }}
+      className={`${bare ? "" : `${T.card} border`} inline-block w-fit pl-6 pr-5 py-6`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       <div className="flex items-start gap-5">
         <BalloonCluster tone={tone} size={56} />

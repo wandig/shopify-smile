@@ -856,13 +856,13 @@ export function DiscountThirtyOutlinedBlock({
   rotate = true,
 }: {
   tone?: Tone;
-  outline?: "orange" | "navy" | "bluegrey" | "light";
+  outline?: "orange" | "navy" | "bluegrey" | "dark";
   bare?: boolean;
   rotate?: boolean;
 }) {
   const t = TONES[tone];
   const outlineColor =
-    outline === "orange" ? T.orange : outline === "navy" ? T.navy : outline === "bluegrey" ? T.bluegrey : "#fffaf5";
+    outline === "orange" ? T.orange : outline === "navy" ? T.navy : outline === "bluegrey" ? T.bluegrey : T.ink;
   return (
     <div
       className={`${bare ? "" : `${T.card} border`} inline-flex items-center justify-center`}

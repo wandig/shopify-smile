@@ -849,6 +849,42 @@ export function DiscountThirtyBlock({
   );
 }
 
+export function DiscountThirtyOutlinedBlock({
+  tone = "light",
+  outline = "orange",
+  bare = false,
+  rotate = true,
+}: {
+  tone?: Tone;
+  outline?: "orange" | "navy" | "bluegrey" | "light";
+  bare?: boolean;
+  rotate?: boolean;
+}) {
+  const t = TONES[tone];
+  const outlineColor =
+    outline === "orange" ? T.orange : outline === "navy" ? T.navy : outline === "bluegrey" ? T.bluegrey : "#fffaf5";
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} inline-flex items-center justify-center`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line, padding: 28 }}
+    >
+      <span
+        className="inline-flex items-center justify-center border px-4 py-1.5 text-[24px] font-medium leading-none tracking-[-0.03em]"
+        style={{
+          background: tone === "light" ? "#faf8f5" : t.bg,
+          borderColor: outlineColor,
+          color: outlineColor,
+          borderRadius: 10,
+          borderWidth: 1.5,
+          transform: rotate ? "rotate(-5deg)" : undefined,
+        }}
+      >
+        -30%
+      </span>
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
 
 

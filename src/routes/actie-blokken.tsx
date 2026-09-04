@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarClock, MonitorPlay, ShieldCheck, Truck, Sparkles } from "lucide-react";
-import type { ReactNode } from "react";
+import { ArrowRight, CalendarClock, Download, MonitorPlay, ShieldCheck, Truck, Sparkles } from "lucide-react";
+import { useRef, useState, type ReactNode } from "react";
 import { FULL_HOUSE_COLORS, wandigSwatchStyle, displayWandigColor } from "@/lib/wandig-colors";
+
 
 export const Route = createFileRoute("/actie-blokken")({
   head: () => ({
@@ -391,6 +392,87 @@ export function CinewallMinimal({ tone = "light" }: { tone?: Tone }) {
   );
 }
 
+/* ---------------- 6. losse kleine blokken ---------------- */
+
+export function MiniBlock({
+  text,
+  tone = "light",
+  accentDot = false,
+  size = "md",
+}: {
+  text: string;
+  tone?: Tone;
+  accentDot?: boolean;
+  size?: "sm" | "md" | "lg";
+}) {
+  const t = TONES[tone];
+  const s = {
+    sm: { pad: "px-4 py-3", text: "text-[13px]" },
+    md: { pad: "px-5 py-4", text: "text-[15px]" },
+    lg: { pad: "px-6 py-5", text: "text-[19px]" },
+  }[size];
+  return (
+    <div
+      className={`${T.card} border ${s.pad} inline-flex w-full items-center gap-2.5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      {accentDot && <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: T.orange }} />}
+      <span className={`${s.text} font-normal tracking-[-0.01em]`} style={{ color: t.fg }}>
+        {text}
+      </span>
+    </div>
+  );
+}
+
+export function MiniStatBlock({
+  amount = "30%",
+  label = "korting",
+  tone = "light",
+}: {
+  amount?: string;
+  label?: string;
+  tone?: Tone;
+}) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.card} border px-6 py-5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <div className="flex items-baseline gap-2">
+        <span className="text-[40px] font-medium leading-none tracking-[-0.04em]" style={{ color: T.orange }}>
+          {amount}
+        </span>
+        <span className="text-[15px]" style={{ color: t.fg }}>
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export function SwatchOnlyBlock({ tone = "light", size = 40 }: { tone?: Tone; size?: number }) {
+  const t = TONES[tone];
+  return (
+    <div
+      className={`${T.card} border px-6 py-5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <div className="flex items-center justify-center gap-3">
+        {FULL_HOUSE_COLORS.map((name) => (
+          <span
+            key={name}
+            title={displayWandigColor(name)}
+            aria-label={displayWandigColor(name)}
+            className="rounded-full border"
+            style={{ ...wandigSwatchStyle(name), borderColor: t.line, width: size, height: size }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
 
 function Section({ index, title, sub, children }: { index: string; title: string; sub?: string; children: ReactNode }) {
@@ -412,14 +494,57 @@ function Label({ children }: { children: ReactNode }) {
   );
 }
 
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 function Item({ label, children }: { label: string; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [busy, setBusy] = useState(false);
+
+  const download = async () => {
+    if (!ref.current) return;
+    setBusy(true);
+    try {
+      const { toPng } = await import("html-to-image");
+      const dataUrl = await toPng(ref.current, {
+        pixelRatio: 3,
+        backgroundColor: "transparent",
+        cacheBust: true,
+      });
+      const link = document.createElement("a");
+      link.download = `wandig-${slugify(label)}.png`;
+      link.href = dataUrl;
+      link.click();
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
-    <div>
-      {children}
-      <Label>{label}</Label>
+    <div className="group/item">
+      <div ref={ref} className="inline-block w-full">
+        {children}
+      </div>
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <Label>{label}</Label>
+        <button
+          type="button"
+          onClick={download}
+          disabled={busy}
+          className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#1f1915]/15 px-3 py-1 text-[11px] text-[#1f1915]/55 transition hover:border-[#ff7d2f] hover:text-[#ff7d2f] disabled:opacity-50"
+        >
+          <Download className="h-3 w-3" strokeWidth={1.6} />
+          {busy ? "..." : "PNG"}
+        </button>
+      </div>
     </div>
   );
 }
+
 
 function ActieBlokkenPage() {
   return (
@@ -581,7 +706,71 @@ function ActieBlokkenPage() {
             </div>
           </div>
         </Section>
+
+        <Section
+          index="07"
+          title="Losse blokken"
+          sub="Kleine blokken met één regel tekst, los te downloaden als PNG."
+        >
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Mini / 30% korting">
+              <MiniBlock text="30% korting" accentDot />
+            </Item>
+            <Item label="Mini / Stat / 30%">
+              <MiniStatBlock />
+            </Item>
+            <Item label="Mini / Verjaardagsale">
+              <MiniBlock text="Verjaardagsale" accentDot />
+            </Item>
+            <Item label="Mini / Dark / 30% korting">
+              <MiniBlock tone="dark" text="30% korting op alle tv-meubels" accentDot />
+            </Item>
+            <Item label="Mini / Gratis kleurstalen">
+              <MiniBlock text="Gratis kleurstalen" accentDot />
+            </Item>
+            <Item label="Kleurstalen / Alleen kleuren">
+              <SwatchOnlyBlock />
+            </Item>
+            <Item label="Mini / Shop nu / Large">
+              <MiniBlock size="lg" text="Shop nu" />
+            </Item>
+            <Item label="Mini / Small / Tijdelijk">
+              <MiniBlock size="sm" text="Tijdelijk" accentDot />
+            </Item>
+            <Item label="Mini / We zijn jarig">
+              <MiniBlock text="We zijn jarig" accentDot />
+            </Item>
+            <Item label="Mini / 100 dagen proefkijken">
+              <MiniBlock size="sm" text="100 dagen proefkijken" />
+            </Item>
+            <Item label="Mini / Gratis verzending">
+              <MiniBlock size="sm" text="Gratis verzending" />
+            </Item>
+            <Item label="Mini / 10 jaar garantie">
+              <MiniBlock size="sm" text="10 jaar garantie" />
+            </Item>
+            <Item label="Mini / Nederlands design">
+              <MiniBlock size="sm" text="Nederlands design" />
+            </Item>
+            <Item label="Mini / Geschikt voor alle tv's">
+              <MiniBlock size="sm" text="Geschikt voor alle tv's" />
+            </Item>
+            <Item label="Mini / Blue grey / Stel zelf samen">
+              <MiniBlock tone="bluegrey" text="Stel zelf samen" />
+            </Item>
+            <Item label="Mini / Orange / 30% korting">
+              <MiniBlock tone="orange" text="30% korting" />
+            </Item>
+            <Item label="Mini / Bekijk collectie">
+              <MiniBlock text="Bekijk collectie" />
+            </Item>
+            <Item label="Kleurstalen / Dark / Alleen kleuren">
+              <SwatchOnlyBlock tone="dark" />
+            </Item>
+          </div>
+        </Section>
       </div>
+
     </main>
   );
 }

@@ -694,7 +694,7 @@ function ActieBlokkenPage() {
             </Item>
           </div>
 
-          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.blueGrey }}>
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
             Compacte USP's
           </p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

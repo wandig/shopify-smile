@@ -524,7 +524,79 @@ export function SwatchOnlyBlock({ tone = "light", size = 40 }: { tone?: Tone; si
   );
 }
 
+/* ---------------- 7. hero lockup (zoals /producten) ---------------- */
+
+export function HeroLockupBlock({
+  eyebrow = "Cinewalls",
+  title = "Verjaardagssale",
+  badge = "-30%",
+  sub,
+  tone = "light",
+  align = "left",
+  size = "md",
+  bare = false,
+}: {
+  eyebrow?: string;
+  title?: string;
+  badge?: string | null;
+  sub?: string;
+  tone?: Tone;
+  align?: "left" | "center";
+  size?: "sm" | "md" | "lg";
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  const s = {
+    sm: { title: "text-[26px]", badge: "text-[14px] px-2.5 py-1", pad: "pl-5 pr-4 py-5" },
+    md: { title: "text-[36px] md:text-[44px]", badge: "text-[18px] px-3 py-1.5", pad: "pl-6 pr-5 py-6" },
+    lg: { title: "text-[52px] md:text-[68px]", badge: "text-[22px] px-3.5 py-2", pad: "pl-7 pr-6 py-8" },
+  }[size];
+
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border ${s.pad}`} inline-block w-fit`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
+    >
+      <div
+        className={`flex flex-wrap items-center gap-3 ${align === "center" ? "justify-center text-center" : ""}`}
+      >
+        {eyebrow && (
+          <p
+            className="w-full text-[13px] font-medium uppercase tracking-[0.12em]"
+            style={{ color: t.sub }}
+          >
+            {eyebrow}
+          </p>
+        )}
+        <h3
+          className={`font-serif ${s.title} leading-[1.05]`}
+          style={{ color: t.fg }}
+        >
+          {title}
+        </h3>
+        {badge && (
+          <span
+            className={`inline-flex items-center justify-center rounded-lg border bg-transparent ${s.badge} font-medium shadow-sm`}
+            style={{ borderColor: t.accent, color: t.accent, transform: "rotate(6deg)" }}
+          >
+            {badge}
+          </span>
+        )}
+      </div>
+      {sub && (
+        <p
+          className={`mt-3 max-w-[420px] text-[15px] leading-relaxed ${align === "center" ? "mx-auto text-center" : ""}`}
+          style={{ color: t.sub }}
+        >
+          {sub}
+        </p>
+      )}
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
+
 
 function Section({ index, title, sub, children }: { index: string; title: string; sub?: string; children: ReactNode }) {
   return (
@@ -894,7 +966,47 @@ function ActieBlokkenPage() {
             </Item>
           </div>
         </Section>
+
+        <Section
+          index="08"
+          title="Hero-lockup"
+          sub="Het kopblok van de collectiepagina: kicker, serif titel en schuin kortingslabel. Alles los te downloaden."
+        >
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Item label="Hero / Light / Medium">
+              <HeroLockupBlock />
+            </Item>
+            <Item label="Hero / Dark / Medium">
+              <HeroLockupBlock tone="dark" />
+            </Item>
+            <Item label="Hero / Light / Groot">
+              <HeroLockupBlock size="lg" />
+            </Item>
+            <Item label="Hero / Light / Compact">
+              <HeroLockupBlock size="sm" />
+            </Item>
+            <Item label="Hero / Center / Met subtekst">
+              <HeroLockupBlock
+                align="center"
+                sub="Op alle tv-meubels. Tijdelijk, zolang de voorraad strekt."
+              />
+            </Item>
+            <Item label="Hero / Blue grey / We zijn jarig">
+              <HeroLockupBlock tone="bluegrey" eyebrow="Wandig" title="We zijn jarig" badge="-30%" />
+            </Item>
+            <Item label="Hero / Orange / Zonder label">
+              <HeroLockupBlock tone="orange" eyebrow="Tijdelijk" title="30% korting" badge={null} />
+            </Item>
+            <Item label="Hero / Cinewall / Dark">
+              <HeroLockupBlock tone="dark" eyebrow="Cinewall" title="Van muur naar blikvanger" badge={null} />
+            </Item>
+            <Item label="Hero / Zonder kader (transparant)">
+              <HeroLockupBlock bare />
+            </Item>
+          </div>
+        </Section>
       </div>
+
 
     </main>
   );

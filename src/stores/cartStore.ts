@@ -195,7 +195,7 @@ export const useCartStore = create<CartStore>()(
         }
       },
 
-      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
+      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null, configSummary: null }),
       getCheckoutUrl: () => {
         const url = get().checkoutUrl;
         return url ? formatCheckoutUrl(url) : null;

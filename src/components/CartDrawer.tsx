@@ -150,8 +150,14 @@ export function CartDrawer() {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[17px] leading-snug text-[#1c1c1c]">{item.product.node.title}</p>
+                        <p className="text-[17px] leading-snug text-[#1c1c1c]">
+                          {item.displayTitle ?? item.product.node.title}
+                        </p>
+                        {item.displaySubtitle && (
+                          <p className="mt-0.5 text-[12px] leading-snug text-[#9b938c]">{item.displaySubtitle}</p>
+                        )}
                       </div>
+
                       <button
                         onClick={() => removeItem(item.variantId)}
                         aria-label="Verwijderen"

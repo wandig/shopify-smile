@@ -16,7 +16,8 @@ export function CartDrawer() {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [showCode, setShowCode] = useState(false);
-  const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
+  const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart, configSummary } =
+    useCartStore();
   const totalItems = items.reduce((s, i) => s + i.quantity, 0);
   const totalAmount = items.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0);
   

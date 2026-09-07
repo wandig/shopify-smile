@@ -1493,6 +1493,75 @@ function ActieBlokkenPage() {
         </header>
 
         <Section index="01" title="Sale en campagne" sub="Groot cijfer, rustige omgeving. Oranje blijft accent.">
+          <p className="mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Nieuwe Verjaardagsale — zonder achtergrond
+          </p>
+          <div className="grid gap-6 md:grid-cols-2">
+            <Item label="Verjaardagsale / Groot / Oranje / Transparant">
+              <BirthdaySaleLockup />
+            </Item>
+            <Item label="Verjaardagsale / Groot / Navy / Transparant">
+              <BirthdaySaleLockup tone="navy" />
+            </Item>
+            <Item label="Verjaardagsale / Center / Blue grey / Transparant">
+              <BirthdaySaleLockup tone="bluegrey" layout="stacked" />
+            </Item>
+            <Item label="Verjaardagsale / Center / Oranje / Transparant">
+              <BirthdaySaleLockup layout="stacked" />
+            </Item>
+            <Item label="Verjaardagsale / Ribbon / Oranje / Transparant">
+              <BirthdaySaleRibbon />
+            </Item>
+            <Item label="Verjaardagsale / Ribbon / Navy / Transparant">
+              <BirthdaySaleRibbon tone="navy" />
+            </Item>
+            <Item label="Verjaardagsale / Compact / Oranje / Transparant">
+              <BirthdaySaleLockup layout="compact" />
+            </Item>
+            <Item label="Verjaardagsale / Compact / Blue grey / Transparant">
+              <BirthdaySaleLockup tone="bluegrey" layout="compact" />
+            </Item>
+            <Item label="Verjaardagsale / Badge line / Oranje / Transparant">
+              <BirthdaySaleBadgeLine />
+            </Item>
+            <Item label="Verjaardagsale / Badge line / Navy / Transparant">
+              <BirthdaySaleBadgeLine tone="navy" />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Losse -30% emblemen
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Item label="Embleem / Oranje / Solid">
+              <SaleThirtyEmblem />
+            </Item>
+            <Item label="Embleem / Navy / Solid">
+              <SaleThirtyEmblem tone="navy" />
+            </Item>
+            <Item label="Embleem / Blue grey / Solid">
+              <SaleThirtyEmblem tone="bluegrey" />
+            </Item>
+            <Item label="Embleem / Cream / Solid">
+              <SaleThirtyEmblem tone="cream" />
+            </Item>
+            <Item label="Embleem / Oranje / Outline">
+              <SaleThirtyEmblem variant="outline" />
+            </Item>
+            <Item label="Embleem / Navy / Outline">
+              <SaleThirtyEmblem tone="navy" variant="outline" />
+            </Item>
+            <Item label="Embleem / Blue grey / Outline">
+              <SaleThirtyEmblem tone="bluegrey" variant="outline" />
+            </Item>
+            <Item label="Embleem / Oranje / Seal">
+              <SaleThirtyEmblem variant="seal" />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Bestaande blokken met achtergrond
+          </p>
           <div className="grid gap-6 md:grid-cols-3">
             <Item label="Sale / Light / Large">
               <SaleEditorialCard />

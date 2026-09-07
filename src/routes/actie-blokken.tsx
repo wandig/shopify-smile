@@ -1366,12 +1366,28 @@ function ActieBlokkenPage() {
         <Section
           index="02"
           title="Before / after prijzen"
-          sub="Prijsblokken voor Solo, Duo en Full House met een subtiel Wandig-puzzelstukje verwerkt."
+          sub="Compacte prijs-signalen voor Solo, Duo en Full House met Wandig-puzzelstukjes verwerkt."
         >
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {PRICE_MODELS.map((product) => (
-              <Item key={product.name} label={`Prijs / ${product.name} / Light`}>
-                <BeforeAfterPriceBlock product={product} />
+              <Item key={product.name} label={`Prijs-signaal / ${product.name} / Light`}>
+                <PriceSignal product={product} />
+              </Item>
+            ))}
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Ribbons en stamps
+          </p>
+          <div className="flex flex-wrap items-start gap-5">
+            {PRICE_MODELS.map((product) => (
+              <Item key={`${product.name}-ribbon`} label={`Prijs-ribbon / ${product.name}`}>
+                <PriceSignal product={product} shape="ribbon" />
+              </Item>
+            ))}
+            {PRICE_MODELS.map((product) => (
+              <Item key={`${product.name}-stamp`} label={`Prijs-stamp / ${product.name}`}>
+                <PriceSignal product={product} shape="stamp" bare />
               </Item>
             ))}
           </div>
@@ -1379,10 +1395,10 @@ function ActieBlokkenPage() {
           <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
             Donkere varianten
           </p>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {PRICE_MODELS.map((product) => (
-              <Item key={`${product.name}-dark`} label={`Prijs / ${product.name} / Dark`}>
-                <BeforeAfterPriceBlock product={product} tone="dark" />
+              <Item key={`${product.name}-dark`} label={`Prijs-signaal / ${product.name} / Dark`}>
+                <PriceSignal product={product} tone="dark" />
               </Item>
             ))}
           </div>
@@ -1390,7 +1406,7 @@ function ActieBlokkenPage() {
           <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
             Compact en horizontaal
           </p>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             <div className="md:col-span-2">
               <Item label="Prijs / Alle modellen / Overzicht">
                 <BeforeAfterPriceTriptych />
@@ -1409,10 +1425,10 @@ function ActieBlokkenPage() {
           <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
             Zonder achtergrond
           </p>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="flex flex-wrap items-start gap-6">
             {PRICE_MODELS.map((product) => (
-              <Item key={`${product.name}-bare`} label={`Prijs / ${product.name} / Bare`}>
-                <BeforeAfterPriceBlock product={product} bare />
+              <Item key={`${product.name}-bare`} label={`Prijs-signaal / ${product.name} / Bare`}>
+                <PriceSignal product={product} bare />
               </Item>
             ))}
           </div>

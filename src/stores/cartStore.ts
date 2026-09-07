@@ -128,6 +128,9 @@ export const useCartStore = create<CartStore>()(
       checkoutUrl: null,
       isLoading: false,
       isSyncing: false,
+      configSummary: null,
+      setConfigSummary: (summary) => set({ configSummary: summary }),
+
 
       addItem: async (item) => {
         const { items, cartId, clearCart } = get();

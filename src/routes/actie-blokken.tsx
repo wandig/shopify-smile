@@ -1122,8 +1122,8 @@ type PriceModel = {
 const SOLO_PRICE_MODEL: PriceModel = {
   name: "Solo",
   model: "Middenmodule",
-  before: "1.070,-",
-  after: "749,-",
+  before: "1.709,-",
+  after: "1.196,-",
   modules: 1,
   note: "Vanafprijs",
 };
@@ -1131,8 +1131,8 @@ const SOLO_PRICE_MODEL: PriceModel = {
 const DUO_PRICE_MODEL: PriceModel = {
   name: "Duo",
   model: "Middenmodule + zijkast",
-  before: "1.713,-",
-  after: "1.199,-",
+  before: "2.275,-",
+  after: "1.592,-",
   modules: 2,
   note: "Vanafprijs",
 };
@@ -1140,8 +1140,8 @@ const DUO_PRICE_MODEL: PriceModel = {
 const FULL_HOUSE_PRICE_MODEL: PriceModel = {
   name: "Full House",
   model: "Complete cinewall",
-  before: "2.427,-",
-  after: "1.699,-",
+  before: "2.841,-",
+  after: "1.988,-",
   modules: 3,
   note: "Vanafprijs",
 };

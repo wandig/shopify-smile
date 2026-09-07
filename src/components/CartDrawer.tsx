@@ -106,7 +106,7 @@ export function CartDrawer() {
                 const options = item.selectedOptions.filter((o) => o.value !== "Default Title");
                 const isOpenRow = expanded[item.variantId];
                 const visible = isOpenRow ? options : options.slice(0, 3);
-                const image = item.product.node.images?.edges?.[0]?.node;
+                const image = cartItemImage(item);
 
                 return (
                   <div key={item.variantId} className="rounded-2xl bg-white p-4">

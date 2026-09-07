@@ -42,11 +42,20 @@ const T = {
 
 type Tone = "light" | "dark" | "orange" | "bluegrey";
 
+type EmblemTone = "orange" | "navy" | "bluegrey" | "cream";
+
 const TONES: Record<Tone, { bg: string; fg: string; sub: string; line: string; accent: string }> = {
   light: { bg: "#faf8f5", fg: T.ink, sub: "rgba(31,25,21,0.55)", line: "rgba(31,25,21,0.10)", accent: T.orange },
   dark: { bg: T.navy, fg: "#f7f4ef", sub: "rgba(247,244,239,0.60)", line: "rgba(247,244,239,0.14)", accent: T.orange },
   orange: { bg: T.orange, fg: "#fffaf5", sub: "rgba(255,250,245,0.75)", line: "rgba(255,250,245,0.28)", accent: "#fffaf5" },
   bluegrey: { bg: T.bluegrey, fg: "#ffffff", sub: "rgba(255,255,255,0.72)", line: "rgba(255,255,255,0.24)", accent: "#fffaf5" },
+};
+
+const EMBLEM_TONES: Record<EmblemTone, { main: string; soft: string; contrast: string; muted: string }> = {
+  orange: { main: T.orange, soft: "rgba(255,125,47,0.16)", contrast: "#fffaf5", muted: "rgba(255,125,47,0.56)" },
+  navy: { main: T.navy, soft: "rgba(14,31,42,0.12)", contrast: "#f7f4ef", muted: "rgba(14,31,42,0.52)" },
+  bluegrey: { main: T.bluegrey, soft: "rgba(127,145,155,0.15)", contrast: "#ffffff", muted: "rgba(127,145,155,0.6)" },
+  cream: { main: T.cream, soft: "rgba(31,25,21,0.08)", contrast: T.ink, muted: "rgba(31,25,21,0.45)" },
 };
 
 /* ---------------- primitives ---------------- */

@@ -465,6 +465,7 @@ function ConfiguratorPage() {
   const { data: newModuleProduct } = useWandigProduct("wandig-nieuwe-module");
 
   const addItem = useCartStore((state) => state.addItem);
+  const setConfigSummary = useCartStore((state) => state.setConfigSummary);
   const cartLoading = useCartStore((state) => state.isLoading);
 
 

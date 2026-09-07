@@ -1870,7 +1870,7 @@ function ActieBlokkenPage() {
                 ["MonitorPlay", "Geschikt voor alle tv's"],
               ] as const
             ).map(([icon, title]) => (
-              <Item key={`${title}-bare-white`} label={`USP / Zonder achtergrond / Wit / ${title}`}>
+              <Item key={`${title}-bare-white`} label={`USP / Zonder achtergrond / Wit / ${title}`} previewDark>
                 <UspCompactBlock icon={icon} title={title} textColor="white" />
               </Item>
             ))}

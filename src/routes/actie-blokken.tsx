@@ -1251,7 +1251,60 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="02" title="CTA's" sub="Één primaire actie per creative.">
+        <Section
+          index="02"
+          title="Before / after prijzen"
+          sub="Prijsblokken voor Solo, Duo en Full House met een subtiel Wandig-puzzelstukje verwerkt."
+        >
+          <div className="grid gap-6 md:grid-cols-3">
+            {PRICE_MODELS.map((product) => (
+              <Item key={product.name} label={`Prijs / ${product.name} / Light`}>
+                <BeforeAfterPriceBlock product={product} />
+              </Item>
+            ))}
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Donkere varianten
+          </p>
+          <div className="grid gap-6 md:grid-cols-3">
+            {PRICE_MODELS.map((product) => (
+              <Item key={`${product.name}-dark`} label={`Prijs / ${product.name} / Dark`}>
+                <BeforeAfterPriceBlock product={product} tone="dark" />
+              </Item>
+            ))}
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Compact en horizontaal
+          </p>
+          <div className="grid gap-6 md:grid-cols-2">
+            <Item label="Prijs / Alle modellen / Overzicht">
+              <BeforeAfterPriceTriptych />
+            </Item>
+            <div className="flex flex-col gap-6">
+              <Item label="Prijs / Full House / Horizontaal">
+                <BeforeAfterPriceBlock product={PRICE_MODELS[2]} orientation="horizontal" />
+              </Item>
+              <Item label="Prijs / Duo / Compact / Blue grey">
+                <BeforeAfterPriceBlock product={PRICE_MODELS[1]} tone="bluegrey" orientation="compact" />
+              </Item>
+            </div>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Zonder achtergrond
+          </p>
+          <div className="grid gap-6 md:grid-cols-3">
+            {PRICE_MODELS.map((product) => (
+              <Item key={`${product.name}-bare`} label={`Prijs / ${product.name} / Bare`}>
+                <BeforeAfterPriceBlock product={product} bare />
+              </Item>
+            ))}
+          </div>
+        </Section>
+
+        <Section index="03" title="CTA's" sub="Één primaire actie per creative.">
           <div className="flex flex-wrap items-start gap-5">
             <Item label="CTA / Orange">
               <CtaButton label="Shop nu" variant="orange" to="/producten" />
@@ -1276,7 +1329,7 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="03" title="Configurator en kleurstalen">
+        <Section index="04" title="Configurator en kleurstalen">
           <div className="grid gap-6 md:grid-cols-2">
             <Item label="Discovery / Light">
               <DiscoveryCard
@@ -1299,7 +1352,7 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="04" title="USP's" sub="Kleine line-icons, tekst blijft leidend. Alles los te downloaden als PNG.">
+        <Section index="05" title="USP's" sub="Kleine line-icons, tekst blijft leidend. Alles los te downloaden als PNG.">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(
               [
@@ -1343,7 +1396,7 @@ function ActieBlokkenPage() {
         </Section>
 
 
-        <Section index="05" title="Cinewall">
+        <Section index="06" title="Cinewall">
           <div className="grid gap-6 md:grid-cols-3">
             <Item label="Cinewall / Dark / Editorial">
               <CinewallEditorial />
@@ -1357,7 +1410,7 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="06" title="Voorbeeldcombinaties" sub="Twee of drie blokken samen, zoals in een advertentie.">
+        <Section index="07" title="Voorbeeldcombinaties" sub="Twee of drie blokken samen, zoals in een advertentie.">
           <div className="grid gap-6 md:grid-cols-3">
             <Item label="Ad / Light / 1080 × 1080">
               <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-5">
@@ -1469,7 +1522,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="08"
+          index="09"
           title="Hero-lockup"
           sub="Het kopblok van de collectiepagina: serif titel en schuin kortingslabel. Met of zonder boventitel en achtergrond, allemaal los te downloaden."
         >

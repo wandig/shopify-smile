@@ -943,20 +943,118 @@ function PuzzleMark({ tone = "light", size = 34, opacity = 1 }: { tone?: Tone; s
 
 function PuzzleModuleRow({ modules, tone = "light" }: { modules: number; tone?: Tone }) {
   return (
-    <div className="flex items-center gap-1.5" aria-hidden="true">
+    <div className="flex items-center gap-1" aria-hidden="true">
       {Array.from({ length: modules }).map((_, i) => (
         <span
           key={i}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border"
+          className="inline-flex h-7 w-7 items-center justify-center rounded-[8px] border"
           style={{
             background: tone === "orange" ? "rgba(255,250,245,0.16)" : tone === "dark" ? "rgba(247,244,239,0.06)" : "rgba(255,255,255,0.55)",
             borderColor: tone === "light" ? "rgba(31,25,21,0.10)" : "rgba(255,250,245,0.20)",
-            transform: `translateY(${i % 2 === 0 ? 0 : 4}px) rotate(${i === 1 ? -4 : 3}deg)`,
+            transform: `translateY(${i % 2 === 0 ? 0 : 3}px) rotate(${i === 1 ? -4 : 3}deg)`,
           }}
         >
-          <PuzzleMark tone={tone} size={18} opacity={tone === "light" ? 0.95 : 0.82} />
+          <PuzzleMark tone={tone} size={14} opacity={tone === "light" ? 0.95 : 0.82} />
         </span>
       ))}
+    </div>
+  );
+}
+
+export function PriceSignal({
+  product,
+  tone = "light",
+  shape = "stacked",
+  bare = false,
+}: {
+  product: PriceModel;
+  tone?: Tone;
+  shape?: "stacked" | "ribbon" | "stamp";
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  const accent = tone === "orange" ? "#fffaf5" : T.orange;
+  const surface = bare ? "transparent" : t.bg;
+  const border = bare ? "transparent" : t.line;
+
+  if (shape === "ribbon") {
+    return (
+      <div
+        className={`${bare ? "" : "border"} inline-flex w-fit items-center gap-3 rounded-full px-4 py-2.5`}
+        style={{ background: surface, borderColor: border, color: t.fg }}
+      >
+        <PuzzleModuleRow modules={product.modules} tone={tone} />
+        <span className="text-[15px] font-medium leading-none">{product.name}</span>
+        <span className="h-5 w-px" style={{ background: t.line }} />
+        <span className="text-[16px] leading-none line-through" style={{ color: t.sub, textDecorationThickness: 1.4 }}>
+          €{product.before}
+        </span>
+        <span className="text-[30px] font-medium leading-none tracking-[-0.04em]" style={{ color: accent }}>
+          €{product.after}
+        </span>
+      </div>
+    );
+  }
+
+  if (shape === "stamp") {
+    return (
+      <div className="inline-flex w-fit items-center gap-3">
+        <span
+          className="inline-flex h-14 w-14 rotate-[-6deg] items-center justify-center rounded-[14px] border text-[18px] font-medium leading-none"
+          style={{ background: bare ? "transparent" : t.bg, borderColor: accent, color: accent }}
+        >
+          -30%
+        </span>
+        <div className="leading-none">
+          <span className="mb-1.5 flex items-center gap-2 text-[13px] font-medium" style={{ color: t.fg }}>
+            <PuzzleMark tone={tone} size={18} opacity={0.95} />
+            {product.name}
+          </span>
+          <span className="mr-2 text-[18px] line-through" style={{ color: t.sub, textDecorationThickness: 1.4 }}>
+            €{product.before}
+          </span>
+          <span className="text-[36px] font-medium tracking-[-0.045em]" style={{ color: accent }}>
+            €{product.after}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`${bare ? "" : "rounded-[18px] border"} relative inline-flex w-fit min-w-[224px] items-center gap-3 overflow-hidden px-4 py-3`}
+      style={{ background: surface, borderColor: border, color: t.fg }}
+    >
+      {!bare && (
+        <div className="pointer-events-none absolute -right-7 -top-9 -z-0 rotate-[-12deg]">
+          <PuzzleMark tone={tone} size={112} opacity={tone === "light" ? 0.06 : 0.1} />
+        </div>
+      )}
+      <div className="relative z-10">
+        <PuzzleModuleRow modules={product.modules} tone={tone} />
+      </div>
+      <div className="relative z-10 min-w-0">
+        <div className="flex items-center gap-2">
+          <span className="text-[14px] font-medium leading-none" style={{ color: t.fg }}>
+            {product.name}
+          </span>
+          <span
+            className="rounded-full border px-2 py-0.5 text-[10px] font-medium leading-none"
+            style={{ borderColor: accent, color: accent }}
+          >
+            -30%
+          </span>
+        </div>
+        <div className="mt-1.5 flex items-end gap-2.5 whitespace-nowrap">
+          <span className="pb-1 text-[17px] line-through" style={{ color: t.sub, textDecorationThickness: 1.4 }}>
+            €{product.before}
+          </span>
+          <span className="text-[38px] font-medium leading-[0.9] tracking-[-0.045em]" style={{ color: accent }}>
+            €{product.after}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -980,22 +1078,22 @@ export function BeforeAfterPriceBlock({
   return (
     <div
       className={`${bare ? "" : `${T.card} border`} relative isolate inline-flex w-fit overflow-hidden ${
-        isHorizontal ? "min-w-[520px] items-center gap-8 px-7 py-6" : isCompact ? "min-w-[230px] flex-col px-5 py-5" : "min-w-[310px] flex-col px-6 py-6"
+        isHorizontal ? "min-w-[420px] items-center gap-5 px-5 py-4" : isCompact ? "min-w-[208px] flex-col px-4 py-4" : "min-w-[248px] flex-col px-4 py-4"
       }`}
       style={bare ? undefined : { background: t.bg, borderColor: t.line }}
     >
       {!bare && (
-        <div className="pointer-events-none absolute -right-7 -top-8 -z-10" style={{ transform: "rotate(-12deg)" }}>
-          <PuzzleMark tone={tone} size={isCompact ? 120 : 168} opacity={tone === "light" ? 0.07 : 0.11} />
+        <div className="pointer-events-none absolute -right-8 -top-10 -z-10" style={{ transform: "rotate(-12deg)" }}>
+          <PuzzleMark tone={tone} size={isCompact ? 96 : 128} opacity={tone === "light" ? 0.06 : 0.1} />
         </div>
       )}
 
       <div className={`${isHorizontal ? "min-w-[160px]" : ""}`}>
         <div className="flex items-start justify-between gap-5">
           <div>
-            <Kicker color={t.sub}>{product.note}</Kicker>
+            <Kicker color={t.sub}>Vanaf</Kicker>
             <h3
-              className={`${isCompact ? "mt-2 text-[30px]" : "mt-3 text-[40px]"} font-normal leading-none tracking-[-0.025em]`}
+              className={`${isCompact ? "mt-1.5 text-[24px]" : "mt-2 text-[30px]"} font-normal leading-none tracking-[-0.02em]`}
               style={{ color: t.fg }}
             >
               {product.name}
@@ -1003,43 +1101,37 @@ export function BeforeAfterPriceBlock({
           </div>
           {!isHorizontal && <PuzzleModuleRow modules={product.modules} tone={tone} />}
         </div>
-        <p className={`${isCompact ? "mt-2 text-[12px]" : "mt-3 text-[13px]"} leading-relaxed`} style={{ color: t.sub }}>
+        <p className={`${isCompact ? "mt-1.5 text-[11px]" : "mt-2 text-[12px]"} leading-relaxed`} style={{ color: t.sub }}>
           {product.model}
         </p>
       </div>
 
       <div
-        className={`${isHorizontal ? "ml-auto min-w-[210px] border-l pl-8" : isCompact ? "mt-5 border-t pt-4" : "mt-7 border-t pt-5"}`}
+        className={`${isHorizontal ? "ml-auto min-w-[186px] border-l pl-5" : isCompact ? "mt-3 border-t pt-3" : "mt-4 border-t pt-3"}`}
         style={{ borderColor: t.line }}
       >
-        <div className="flex items-end justify-between gap-8">
+        <div className="flex items-end justify-between gap-5">
           <div>
-            <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
-              van
-            </span>
             <span
-              className={`${isCompact ? "text-[25px]" : "text-[30px]"} font-normal leading-none line-through`}
+              className={`${isCompact ? "text-[19px]" : "text-[22px]"} font-normal leading-none line-through`}
               style={{ color: t.sub, textDecorationThickness: 1.5 }}
             >
-              {product.before}
+              €{product.before}
             </span>
           </div>
           <span
-            className="inline-flex items-center justify-center rounded-[10px] border px-3 py-1 text-[18px] font-medium leading-none"
+            className="inline-flex items-center justify-center rounded-[9px] border px-2.5 py-1 text-[15px] font-medium leading-none"
             style={{ borderColor: accent, color: accent, transform: "rotate(-5deg)" }}
           >
             -30%
           </span>
         </div>
-        <div className={isCompact ? "mt-4" : "mt-5"}>
-          <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
-            nu
-          </span>
+        <div className={isCompact ? "mt-2" : "mt-2.5"}>
           <span
-            className={`${isCompact ? "text-[48px]" : "text-[64px]"} font-medium leading-[0.88] tracking-[-0.055em]`}
+            className={`${isCompact ? "text-[40px]" : "text-[50px]"} font-medium leading-[0.88] tracking-[-0.05em]`}
             style={{ color: accent }}
           >
-            {product.after}
+            €{product.after}
           </span>
         </div>
       </div>
@@ -1054,40 +1146,34 @@ export function BeforeAfterPriceTriptych({ tone = "light" }: { tone?: Tone }) {
   const accent = tone === "orange" ? "#fffaf5" : T.orange;
   return (
     <div
-      className={`${T.card} inline-block w-[860px] max-w-full border p-5`}
+      className={`${T.card} inline-block w-[720px] max-w-full border p-4`}
       style={{ background: t.bg, borderColor: t.line }}
     >
-      <div className="flex items-center justify-between gap-8 border-b pb-4" style={{ borderColor: t.line }}>
+      <div className="flex items-center justify-between gap-8 border-b pb-3" style={{ borderColor: t.line }}>
         <Kicker color={t.sub}>Verjaardagsale</Kicker>
         <span className="inline-flex items-center gap-2 text-[13px]" style={{ color: t.sub }}>
-          <PuzzleMark tone={tone} size={22} opacity={0.9} />
+          <PuzzleMark tone={tone} size={18} opacity={0.9} />
           30% korting
         </span>
       </div>
-      <div className="mt-5 grid gap-5 md:grid-cols-3">
+      <div className="mt-4 grid gap-4 md:grid-cols-3">
         {PRICE_MODELS.map((product) => (
-          <div key={product.name} className="border-b pb-5 last:border-b-0 last:pb-0 md:border-b-0 md:border-r md:pb-0 md:pr-5 md:last:border-r-0 md:last:pr-0" style={{ borderColor: t.line }}>
-            <div className="flex min-h-[58px] flex-col items-start gap-3">
-              <h3 className="text-[24px] font-normal leading-none tracking-[-0.02em]" style={{ color: t.fg }}>
+          <div key={product.name} className="border-b pb-4 last:border-b-0 last:pb-0 md:border-b-0 md:border-r md:pb-0 md:pr-4 md:last:border-r-0 md:last:pr-0" style={{ borderColor: t.line }}>
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-[20px] font-normal leading-none tracking-[-0.01em]" style={{ color: t.fg }}>
                 {product.name}
               </h3>
               <PuzzleModuleRow modules={product.modules} tone={tone} />
             </div>
-            <div className="mt-6 grid grid-cols-[1fr_auto] items-end gap-4">
+            <div className="mt-4 grid grid-cols-[1fr_auto] items-end gap-3">
               <div>
-                <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
-                  van
-                </span>
-                <span className="text-[20px] line-through" style={{ color: t.sub }}>
-                  {product.before}
+                <span className="text-[17px] line-through" style={{ color: t.sub, textDecorationThickness: 1.4 }}>
+                  €{product.before}
                 </span>
               </div>
               <div className="text-right">
-                <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
-                  nu
-                </span>
-                <span className="text-[30px] font-medium leading-none tracking-[-0.045em] lg:text-[34px]" style={{ color: accent }}>
-                  {product.after}
+                <span className="text-[30px] font-medium leading-none tracking-[-0.045em]" style={{ color: accent }}>
+                  €{product.after}
                 </span>
               </div>
             </div>

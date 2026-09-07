@@ -42,11 +42,20 @@ const T = {
 
 type Tone = "light" | "dark" | "orange" | "bluegrey";
 
+type EmblemTone = "orange" | "navy" | "bluegrey" | "cream";
+
 const TONES: Record<Tone, { bg: string; fg: string; sub: string; line: string; accent: string }> = {
   light: { bg: "#faf8f5", fg: T.ink, sub: "rgba(31,25,21,0.55)", line: "rgba(31,25,21,0.10)", accent: T.orange },
   dark: { bg: T.navy, fg: "#f7f4ef", sub: "rgba(247,244,239,0.60)", line: "rgba(247,244,239,0.14)", accent: T.orange },
   orange: { bg: T.orange, fg: "#fffaf5", sub: "rgba(255,250,245,0.75)", line: "rgba(255,250,245,0.28)", accent: "#fffaf5" },
   bluegrey: { bg: T.bluegrey, fg: "#ffffff", sub: "rgba(255,255,255,0.72)", line: "rgba(255,255,255,0.24)", accent: "#fffaf5" },
+};
+
+const EMBLEM_TONES: Record<EmblemTone, { main: string; soft: string; contrast: string; muted: string }> = {
+  orange: { main: T.orange, soft: "rgba(255,125,47,0.16)", contrast: "#fffaf5", muted: "rgba(255,125,47,0.56)" },
+  navy: { main: T.navy, soft: "rgba(14,31,42,0.12)", contrast: "#f7f4ef", muted: "rgba(14,31,42,0.52)" },
+  bluegrey: { main: T.bluegrey, soft: "rgba(127,145,155,0.15)", contrast: "#ffffff", muted: "rgba(127,145,155,0.6)" },
+  cream: { main: T.cream, soft: "rgba(31,25,21,0.08)", contrast: T.ink, muted: "rgba(31,25,21,0.45)" },
 };
 
 /* ---------------- primitives ---------------- */
@@ -885,6 +894,168 @@ export function DiscountThirtyOutlinedBlock({
   );
 }
 
+function PuzzleGlyph({
+  color,
+  size = 42,
+  opacity = 1,
+  filled = false,
+  rotate = 0,
+}: {
+  color: string;
+  size?: number;
+  opacity?: number;
+  filled?: boolean;
+  rotate?: number;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      aria-hidden="true"
+      style={{ color, opacity, transform: `rotate(${rotate}deg)` }}
+    >
+      <path
+        d="M10 14h16c0-5.4 4.1-9.5 9.2-9.5 5.2 0 9.2 4.1 9.2 9.5H54v15.4c-5.2 0-9.2 4-9.2 9.1s4 9.1 9.2 9.1V58H37.8c0-5.1-4-9.1-9.1-9.1s-9.1 4-9.1 9.1H10V42c5.3 0 9.4-4 9.4-9.2S15.3 23.6 10 23.6V14Z"
+        fill={filled ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth={filled ? 0 : 4.2}
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function FloatingPuzzlePieces({ tone = "orange" }: { tone?: EmblemTone }) {
+  const e = EMBLEM_TONES[tone];
+  const secondary = tone === "orange" ? T.navy : T.orange;
+  return (
+    <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+      <span className="absolute -left-8 top-2">
+        <PuzzleGlyph color={e.main} size={58} opacity={0.18} rotate={-18} />
+      </span>
+      <span className="absolute -right-7 -top-5">
+        <PuzzleGlyph color={secondary} size={48} opacity={0.22} rotate={14} filled />
+      </span>
+      <span className="absolute bottom-0 right-6">
+        <PuzzleGlyph color={e.main} size={34} opacity={0.28} rotate={8} />
+      </span>
+    </div>
+  );
+}
+
+export function SaleThirtyEmblem({
+  tone = "orange",
+  variant = "solid",
+  size = "md",
+  label = "-30%",
+}: {
+  tone?: EmblemTone;
+  variant?: "solid" | "outline" | "seal";
+  size?: "sm" | "md" | "lg";
+  label?: string;
+}) {
+  const e = EMBLEM_TONES[tone];
+  const s = {
+    sm: { box: 86, text: "text-[31px]", sub: "text-[9px]" },
+    md: { box: 118, text: "text-[46px]", sub: "text-[10px]" },
+    lg: { box: 154, text: "text-[62px]", sub: "text-[11px]" },
+  }[size];
+  const isSolid = variant === "solid";
+  const isSeal = variant === "seal";
+
+  return (
+    <span
+      className="relative isolate inline-flex shrink-0 rotate-[-7deg] flex-col items-center justify-center overflow-hidden border-[3px] leading-none"
+      style={{
+        width: s.box,
+        height: s.box,
+        borderRadius: isSeal ? "42% 58% 48% 52% / 54% 44% 56% 46%" : 24,
+        background: isSolid ? e.main : "transparent",
+        borderColor: e.main,
+        color: isSolid ? e.contrast : e.main,
+        boxShadow: isSolid ? `0 14px 34px ${e.soft}` : "none",
+      }}
+    >
+      <span className="absolute -left-3 -top-2 opacity-20">
+        <PuzzleGlyph color={isSolid ? e.contrast : e.main} size={46} filled rotate={-18} />
+      </span>
+      <span className={`font-black ${s.text} tracking-normal`}>{label}</span>
+      <span className={`mt-1 font-bold uppercase tracking-[0.18em] ${s.sub}`}>sale</span>
+    </span>
+  );
+}
+
+export function BirthdaySaleLockup({
+  tone = "orange",
+  layout = "wide",
+}: {
+  tone?: EmblemTone;
+  layout?: "wide" | "stacked" | "compact";
+}) {
+  const e = EMBLEM_TONES[tone];
+  const headingColor = tone === "cream" ? T.ink : e.main;
+  const darkText = tone === "navy" ? T.navy : T.ink;
+  const stacked = layout === "stacked";
+  const compact = layout === "compact";
+
+  return (
+    <div
+      className={`relative isolate inline-flex w-fit ${stacked ? "flex-col items-center text-center" : "items-center"} ${compact ? "gap-3 px-1 py-2" : "gap-5 px-3 py-4"}`}
+    >
+      <FloatingPuzzlePieces tone={tone} />
+      <SaleThirtyEmblem tone={tone} variant={stacked ? "seal" : "solid"} size={compact ? "sm" : stacked ? "lg" : "md"} />
+      <div className={stacked ? "mt-2" : "min-w-0"}>
+        <div
+          className={`${compact ? "text-[38px]" : stacked ? "text-[62px] md:text-[78px]" : "text-[54px] md:text-[68px]"} font-black leading-[0.9] tracking-normal`}
+          style={{ color: headingColor }}
+        >
+          Verjaardagsale
+        </div>
+        <div className={`${compact ? "mt-1 text-[17px]" : "mt-2 text-[24px]"} font-bold leading-none tracking-normal`} style={{ color: darkText }}>
+          30% korting op alle tv-meubels
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function BirthdaySaleRibbon({ tone = "orange" }: { tone?: EmblemTone }) {
+  const e = EMBLEM_TONES[tone];
+  const textColor = tone === "cream" ? T.ink : e.main;
+  return (
+    <div className="relative isolate inline-flex w-fit items-center gap-3 px-2 py-2">
+      <FloatingPuzzlePieces tone={tone} />
+      <PuzzleGlyph color={e.main} size={38} rotate={-8} filled />
+      <span className="text-[34px] font-black leading-none tracking-normal" style={{ color: textColor }}>
+        Verjaardagsale
+      </span>
+      <SaleThirtyEmblem tone={tone} variant="outline" size="sm" />
+    </div>
+  );
+}
+
+export function BirthdaySaleBadgeLine({ tone = "orange" }: { tone?: EmblemTone }) {
+  const e = EMBLEM_TONES[tone];
+  return (
+    <div className="inline-flex w-fit items-center gap-2.5 py-1">
+      <span className="inline-flex items-center gap-1.5">
+        <PuzzleGlyph color={e.main} size={24} filled rotate={-8} />
+        <PuzzleGlyph color={tone === "orange" ? T.navy : T.orange} size={24} rotate={10} />
+      </span>
+      <span className="text-[22px] font-black leading-none tracking-normal" style={{ color: tone === "cream" ? T.ink : e.main }}>
+        Verjaardagsale
+      </span>
+      <span
+        className="inline-flex rotate-[-4deg] items-center justify-center rounded-[10px] border-2 px-2.5 py-1 text-[20px] font-black leading-none tracking-normal"
+        style={{ borderColor: e.main, color: e.main }}
+      >
+        -30%
+      </span>
+    </div>
+  );
+}
+
 type PriceModel = {
   name: string;
   model: string;
@@ -1322,6 +1493,75 @@ function ActieBlokkenPage() {
         </header>
 
         <Section index="01" title="Sale en campagne" sub="Groot cijfer, rustige omgeving. Oranje blijft accent.">
+          <p className="mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Nieuwe Verjaardagsale — zonder achtergrond
+          </p>
+          <div className="grid gap-6 md:grid-cols-2">
+            <Item label="Verjaardagsale / Groot / Oranje / Transparant">
+              <BirthdaySaleLockup />
+            </Item>
+            <Item label="Verjaardagsale / Groot / Navy / Transparant">
+              <BirthdaySaleLockup tone="navy" />
+            </Item>
+            <Item label="Verjaardagsale / Center / Blue grey / Transparant">
+              <BirthdaySaleLockup tone="bluegrey" layout="stacked" />
+            </Item>
+            <Item label="Verjaardagsale / Center / Oranje / Transparant">
+              <BirthdaySaleLockup layout="stacked" />
+            </Item>
+            <Item label="Verjaardagsale / Ribbon / Oranje / Transparant">
+              <BirthdaySaleRibbon />
+            </Item>
+            <Item label="Verjaardagsale / Ribbon / Navy / Transparant">
+              <BirthdaySaleRibbon tone="navy" />
+            </Item>
+            <Item label="Verjaardagsale / Compact / Oranje / Transparant">
+              <BirthdaySaleLockup layout="compact" />
+            </Item>
+            <Item label="Verjaardagsale / Compact / Blue grey / Transparant">
+              <BirthdaySaleLockup tone="bluegrey" layout="compact" />
+            </Item>
+            <Item label="Verjaardagsale / Badge line / Oranje / Transparant">
+              <BirthdaySaleBadgeLine />
+            </Item>
+            <Item label="Verjaardagsale / Badge line / Navy / Transparant">
+              <BirthdaySaleBadgeLine tone="navy" />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Losse -30% emblemen
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Item label="Embleem / Oranje / Solid">
+              <SaleThirtyEmblem />
+            </Item>
+            <Item label="Embleem / Navy / Solid">
+              <SaleThirtyEmblem tone="navy" />
+            </Item>
+            <Item label="Embleem / Blue grey / Solid">
+              <SaleThirtyEmblem tone="bluegrey" />
+            </Item>
+            <Item label="Embleem / Cream / Solid">
+              <SaleThirtyEmblem tone="cream" />
+            </Item>
+            <Item label="Embleem / Oranje / Outline">
+              <SaleThirtyEmblem variant="outline" />
+            </Item>
+            <Item label="Embleem / Navy / Outline">
+              <SaleThirtyEmblem tone="navy" variant="outline" />
+            </Item>
+            <Item label="Embleem / Blue grey / Outline">
+              <SaleThirtyEmblem tone="bluegrey" variant="outline" />
+            </Item>
+            <Item label="Embleem / Oranje / Seal">
+              <SaleThirtyEmblem variant="seal" />
+            </Item>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Bestaande blokken met achtergrond
+          </p>
           <div className="grid gap-6 md:grid-cols-3">
             <Item label="Sale / Light / Large">
               <SaleEditorialCard />

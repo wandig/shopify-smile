@@ -724,6 +724,8 @@ function ConfiguratorPage() {
       return;
     }
 
+    const configDetails = `${displayWandigColor(color)} · ${activeTvSize}`;
+
     await addItem({
       product: { node: activeProduct },
       variantId: selectedShopifyVariant.id,
@@ -732,6 +734,8 @@ function ConfiguratorPage() {
       compareAtPrice: selectedShopifyVariant.compareAtPrice,
       quantity: 1,
       selectedOptions: selectedShopifyVariant.selectedOptions,
+      displayTitle: modelLabel,
+      displaySubtitle: `${originalCount === 0 ? "Middenmodule" : "Middenmodule + zijkast"} · ${configDetails}`,
     });
 
     if (newModuleProduct) {
@@ -745,9 +749,14 @@ function ConfiguratorPage() {
           compareAtPrice: entry.variant.compareAtPrice,
           quantity: 1,
           selectedOptions: entry.variant.selectedOptions,
+          displayTitle: `Zijkast ${entry.side === "Links" ? "links" : "rechts"}`,
+          displaySubtitle: configDetails,
         });
       }
     }
+
+    const stage = stageRef.current;
+    const image = stage ? await captureConfiguratorImage(stage) : null;
 
     setConfigSummary({
       modelLabel: hasLeft && hasRight ? "Full House" : hasLeft || hasRight ? "Duo" : "Solo",
@@ -759,7 +768,9 @@ function ConfiguratorPage() {
         ...(hasLeft ? [`Links · ${moduleVariantLabel(leftVariant)}`] : []),
         ...(hasRight ? [`Rechts · ${moduleVariantLabel(rightVariant)}`] : []),
       ],
+      image,
     });
+
 
     const extra = newModuleVariants.length
       ? ` + nieuwe module ${newModuleVariants.map((e) => e.side.toLowerCase()).join(" & ")}`

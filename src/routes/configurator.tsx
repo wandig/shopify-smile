@@ -749,6 +749,18 @@ function ConfiguratorPage() {
       }
     }
 
+    setConfigSummary({
+      modelLabel: hasLeft && hasRight ? "Full House" : hasLeft || hasRight ? "Duo" : "Solo",
+      color: displayWandigColor(color),
+      tvSize: activeTvSize,
+      width: `${width} cm`,
+      modules: [
+        "Middenmodule",
+        ...(hasLeft ? [`Links · ${moduleVariantLabel(leftVariant)}`] : []),
+        ...(hasRight ? [`Rechts · ${moduleVariantLabel(rightVariant)}`] : []),
+      ],
+    });
+
     const extra = newModuleVariants.length
       ? ` + nieuwe module ${newModuleVariants.map((e) => e.side.toLowerCase()).join(" & ")}`
       : "";

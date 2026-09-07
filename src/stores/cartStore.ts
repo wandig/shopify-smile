@@ -13,12 +13,23 @@ export interface CartItem {
   selectedOptions: Array<{ name: string; value: string }>;
 }
 
+export interface CartConfigSummary {
+  modelLabel: string;
+  color: string;
+  tvSize: string;
+  width: string;
+  modules: string[];
+  image?: string | null;
+}
+
 interface CartStore {
   items: CartItem[];
   cartId: string | null;
   checkoutUrl: string | null;
   isLoading: boolean;
   isSyncing: boolean;
+  configSummary: CartConfigSummary | null;
+  setConfigSummary: (summary: CartConfigSummary | null) => void;
   addItem: (item: Omit<CartItem, "lineId">) => Promise<void>;
   updateQuantity: (variantId: string, quantity: number) => Promise<void>;
   removeItem: (variantId: string) => Promise<void>;
@@ -26,6 +37,7 @@ interface CartStore {
   syncCart: () => Promise<void>;
   getCheckoutUrl: () => string | null;
 }
+
 
 const CART_QUERY = `query cart($id: ID!) { cart(id: $id) { id totalQuantity } }`;
 const CART_CREATE = `mutation cartCreate($input: CartInput!) {
@@ -116,6 +128,9 @@ export const useCartStore = create<CartStore>()(
       checkoutUrl: null,
       isLoading: false,
       isSyncing: false,
+      configSummary: null,
+      setConfigSummary: (summary) => set({ configSummary: summary }),
+
 
       addItem: async (item) => {
         const { items, cartId, clearCart } = get();
@@ -180,7 +195,7 @@ export const useCartStore = create<CartStore>()(
         }
       },
 
-      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
+      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null, configSummary: null }),
       getCheckoutUrl: () => {
         const url = get().checkoutUrl;
         return url ? formatCheckoutUrl(url) : null;
@@ -203,7 +218,7 @@ export const useCartStore = create<CartStore>()(
     {
       name: "wandig-cart",
       storage: createJSONStorage(() => localStorage),
-      partialize: (s) => ({ items: s.items, cartId: s.cartId, checkoutUrl: s.checkoutUrl }),
+      partialize: (s) => ({ items: s.items, cartId: s.cartId, checkoutUrl: s.checkoutUrl, configSummary: s.configSummary }),
     },
   ),
 );

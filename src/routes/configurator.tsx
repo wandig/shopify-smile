@@ -465,6 +465,7 @@ function ConfiguratorPage() {
   const { data: newModuleProduct } = useWandigProduct("wandig-nieuwe-module");
 
   const addItem = useCartStore((state) => state.addItem);
+  const setConfigSummary = useCartStore((state) => state.setConfigSummary);
   const cartLoading = useCartStore((state) => state.isLoading);
 
 
@@ -747,6 +748,18 @@ function ConfiguratorPage() {
         });
       }
     }
+
+    setConfigSummary({
+      modelLabel: hasLeft && hasRight ? "Full House" : hasLeft || hasRight ? "Duo" : "Solo",
+      color: displayWandigColor(color),
+      tvSize: activeTvSize,
+      width: `${width} cm`,
+      modules: [
+        "Middenmodule",
+        ...(hasLeft ? [`Links · ${moduleVariantLabel(leftVariant)}`] : []),
+        ...(hasRight ? [`Rechts · ${moduleVariantLabel(rightVariant)}`] : []),
+      ],
+    });
 
     const extra = newModuleVariants.length
       ? ` + nieuwe module ${newModuleVariants.map((e) => e.side.toLowerCase()).join(" & ")}`

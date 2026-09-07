@@ -400,8 +400,27 @@ export function UspBlock({
   );
 }
 
+export function UspCompactBlock({
+  icon = "CalendarClock",
+  title,
+  textColor = "black",
+}: {
+  icon?: keyof typeof USP_ICONS;
+  title: string;
+  textColor?: "black" | "white";
+}) {
+  const Icon = USP_ICONS[icon];
+  const color = textColor === "white" ? "#ffffff" : "#1f1915";
+  return (
+    <div className="inline-flex w-fit items-center gap-2.5">
+      <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} style={{ color: T.orange }} />
+      <span className="text-[13px] font-normal tracking-[-0.01em]" style={{ color }}>
+        {title}
+      </span>
+    </div>
+  );
+}
 
-/* ---------------- 5. Cinewall editorial ---------------- */
 
 export function CinewallEditorial({
   title = "Cinewall",

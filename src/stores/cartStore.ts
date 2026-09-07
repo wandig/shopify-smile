@@ -11,7 +11,11 @@ export interface CartItem {
   compareAtPrice?: { amount: string; currencyCode: string } | null;
   quantity: number;
   selectedOptions: Array<{ name: string; value: string }>;
+  // Naam zoals in de configurator (valt terug op de Shopify-titel)
+  displayTitle?: string;
+  displaySubtitle?: string;
 }
+
 
 export interface CartConfigSummary {
   modelLabel: string;

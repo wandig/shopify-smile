@@ -894,11 +894,34 @@ type PriceModel = {
   note: string;
 };
 
-const PRICE_MODELS: PriceModel[] = [
-  { name: "Solo", model: "Middenmodule", before: "1.070,-", after: "749,-", modules: 1, note: "Vanafprijs" },
-  { name: "Duo", model: "Middenmodule + zijkast", before: "1.713,-", after: "1.199,-", modules: 2, note: "Vanafprijs" },
-  { name: "Full House", model: "Complete cinewall", before: "2.427,-", after: "1.699,-", modules: 3, note: "Vanafprijs" },
-];
+const SOLO_PRICE_MODEL: PriceModel = {
+  name: "Solo",
+  model: "Middenmodule",
+  before: "1.070,-",
+  after: "749,-",
+  modules: 1,
+  note: "Vanafprijs",
+};
+
+const DUO_PRICE_MODEL: PriceModel = {
+  name: "Duo",
+  model: "Middenmodule + zijkast",
+  before: "1.713,-",
+  after: "1.199,-",
+  modules: 2,
+  note: "Vanafprijs",
+};
+
+const FULL_HOUSE_PRICE_MODEL: PriceModel = {
+  name: "Full House",
+  model: "Complete cinewall",
+  before: "2.427,-",
+  after: "1.699,-",
+  modules: 3,
+  note: "Vanafprijs",
+};
+
+const PRICE_MODELS: PriceModel[] = [SOLO_PRICE_MODEL, DUO_PRICE_MODEL, FULL_HOUSE_PRICE_MODEL];
 
 function PuzzleMark({ tone = "light", size = 34, opacity = 1 }: { tone?: Tone; size?: number; opacity?: number }) {
   const filter =
@@ -1284,10 +1307,10 @@ function ActieBlokkenPage() {
             </Item>
             <div className="flex flex-col gap-6">
               <Item label="Prijs / Full House / Horizontaal">
-                <BeforeAfterPriceBlock product={PRICE_MODELS[2]} orientation="horizontal" />
+                <BeforeAfterPriceBlock product={FULL_HOUSE_PRICE_MODEL} orientation="horizontal" />
               </Item>
               <Item label="Prijs / Duo / Compact / Blue grey">
-                <BeforeAfterPriceBlock product={PRICE_MODELS[1]} tone="bluegrey" orientation="compact" />
+                <BeforeAfterPriceBlock product={DUO_PRICE_MODEL} tone="bluegrey" orientation="compact" />
               </Item>
             </div>
           </div>
@@ -1522,7 +1545,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="10"
+          index="09"
           title="Hero-lockup"
           sub="Het kopblok van de collectiepagina: serif titel en schuin kortingslabel. Met of zonder boventitel en achtergrond, allemaal los te downloaden."
         >
@@ -1640,7 +1663,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="09"
+          index="10"
           title="Ballonnen"
           sub="Lichte, feestelijke accenten voor de verjaardagsale. Geen cartoon-stijl, alleen subtiele lijnballonnen in de Wandig-kleuren."
         >

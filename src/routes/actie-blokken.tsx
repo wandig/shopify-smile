@@ -46,7 +46,7 @@ type EmblemTone = "orange" | "navy" | "bluegrey" | "cream";
 
 const TONES: Record<Tone, { bg: string; fg: string; sub: string; line: string; accent: string }> = {
   light: { bg: "#faf8f5", fg: T.ink, sub: "rgba(31,25,21,0.55)", line: "rgba(31,25,21,0.10)", accent: T.orange },
-  dark: { bg: T.navy, fg: "#f7f4ef", sub: "rgba(247,244,239,0.60)", line: "rgba(247,244,239,0.14)", accent: T.orange },
+  dark: { bg: T.navy, fg: "#ffffff", sub: "rgba(255,255,255,0.72)", line: "rgba(255,255,255,0.24)", accent: T.orange },
   orange: { bg: T.orange, fg: "#fffaf5", sub: "rgba(255,250,245,0.75)", line: "rgba(255,250,245,0.28)", accent: "#fffaf5" },
   bluegrey: { bg: T.bluegrey, fg: "#ffffff", sub: "rgba(255,255,255,0.72)", line: "rgba(255,255,255,0.24)", accent: "#fffaf5" },
 };

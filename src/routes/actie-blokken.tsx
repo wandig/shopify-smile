@@ -1438,7 +1438,7 @@ function slugify(value: string) {
     .replace(/(^-|-$)/g, "");
 }
 
-function Item({ label, children }: { label: string; children: ReactNode }) {
+function Item({ label, children, previewDark }: { label: string; children: ReactNode; previewDark?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState<null | "png" | "svg">(null);
 
@@ -1499,9 +1499,17 @@ function Item({ label, children }: { label: string; children: ReactNode }) {
 
   return (
     <div className="group/item">
-      <div ref={ref} className="inline-block w-fit">
-        {children}
-      </div>
+      {previewDark ? (
+        <div className="inline-block w-fit rounded-[22px] bg-[#0e1f2a] p-4">
+          <div ref={ref} className="inline-block w-fit">
+            {children}
+          </div>
+        </div>
+      ) : (
+        <div ref={ref} className="inline-block w-fit">
+          {children}
+        </div>
+      )}
       <div className="mt-3 flex items-center justify-between gap-3">
         <Label>{label}</Label>
         <div className="mt-3 flex items-center gap-1.5">

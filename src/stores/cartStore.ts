@@ -13,12 +13,23 @@ export interface CartItem {
   selectedOptions: Array<{ name: string; value: string }>;
 }
 
+export interface CartConfigSummary {
+  modelLabel: string;
+  color: string;
+  tvSize: string;
+  width: string;
+  modules: string[];
+  image?: string | null;
+}
+
 interface CartStore {
   items: CartItem[];
   cartId: string | null;
   checkoutUrl: string | null;
   isLoading: boolean;
   isSyncing: boolean;
+  configSummary: CartConfigSummary | null;
+  setConfigSummary: (summary: CartConfigSummary | null) => void;
   addItem: (item: Omit<CartItem, "lineId">) => Promise<void>;
   updateQuantity: (variantId: string, quantity: number) => Promise<void>;
   removeItem: (variantId: string) => Promise<void>;
@@ -26,6 +37,7 @@ interface CartStore {
   syncCart: () => Promise<void>;
   getCheckoutUrl: () => string | null;
 }
+
 
 const CART_QUERY = `query cart($id: ID!) { cart(id: $id) { id totalQuantity } }`;
 const CART_CREATE = `mutation cartCreate($input: CartInput!) {

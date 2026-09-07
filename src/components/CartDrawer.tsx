@@ -4,13 +4,36 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ShoppingBag, Minus, Plus, X, Loader2, ChevronDown, Truck, ShieldCheck } from "lucide-react";
-import { useCartStore } from "@/stores/cartStore";
+import { useCartStore, type CartItem } from "@/stores/cartStore";
 
 function formatEuro(amount: number) {
   return new Intl.NumberFormat("nl-NL", { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(
     Math.round(amount),
   );
 }
+
+// Gebruik de foto van de gekozen variant (juiste kleur), anders een variant met
+// dezelfde kleur, anders de eerste productfoto.
+function cartItemImage(item: CartItem): { url: string; altText?: string | null } | undefined {
+  const variants = item.product.node.variants?.edges?.map((edge) => edge.node) ?? [];
+  const exact = variants.find((variant) => variant.id === item.variantId);
+  const exactImage = (exact as { image?: { url: string; altText?: string | null } } | undefined)?.image;
+  if (exactImage?.url) return exactImage;
+
+  const color = item.selectedOptions.find((option) => option.name.toLocaleLowerCase("nl-NL") === "kleur")?.value;
+  if (color) {
+    for (const variant of variants) {
+      const matches = variant.selectedOptions?.some(
+        (option) => option.name.toLocaleLowerCase("nl-NL") === "kleur" && option.value === color,
+      );
+      const image = (variant as { image?: { url: string; altText?: string | null } }).image;
+      if (matches && image?.url) return image;
+    }
+  }
+
+  return item.product.node.images?.edges?.[0]?.node;
+}
+
 
 export function CartDrawer() {
   const [open, setOpen] = useState(false);

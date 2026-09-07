@@ -533,6 +533,41 @@ export function SwatchOnlyBlock({ tone = "light", size = 40 }: { tone?: Tone; si
   );
 }
 
+export function WhiteRingSwatchDot({
+  color,
+  size = 86,
+  ring = 10,
+}: {
+  color: (typeof FULL_HOUSE_COLORS)[number];
+  size?: number;
+  ring?: number;
+}) {
+  const innerSize = size - ring * 2;
+  return (
+    <span
+      title={displayWandigColor(color)}
+      aria-label={displayWandigColor(color)}
+      className="inline-flex items-center justify-center rounded-full shadow-[0_14px_34px_rgba(31,25,21,0.16)]"
+      style={{ width: size, height: size, background: "#ffffff" }}
+    >
+      <span
+        className="rounded-full border border-[#1f1915]/10"
+        style={{ ...wandigSwatchStyle(color), width: innerSize, height: innerSize }}
+      />
+    </span>
+  );
+}
+
+export function WhiteRingSwatchSet({ size = 74 }: { size?: number }) {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      {FULL_HOUSE_COLORS.map((color) => (
+        <WhiteRingSwatchDot key={color} color={color} size={size} ring={8} />
+      ))}
+    </div>
+  );
+}
+
 /* ---------------- 7. hero lockup (zoals /producten) ---------------- */
 
 export function HeroLockupBlock({
@@ -1718,6 +1753,24 @@ function ActieBlokkenPage() {
               >
                 <ColorSwatchRow />
               </DiscoveryCard>
+            </Item>
+          </div>
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Losse kleurstaal bolletjes
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {FULL_HOUSE_COLORS.map((color) => (
+              <Item key={color} label={`Kleurstaal / Los / ${displayWandigColor(color)}`}>
+                <WhiteRingSwatchDot color={color} />
+              </Item>
+            ))}
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            <Item label="Kleurstalen / Losse bolletjes / Set">
+              <WhiteRingSwatchSet />
+            </Item>
+            <Item label="Kleurstalen / Losse bolletjes / Groot">
+              <WhiteRingSwatchSet size={96} />
             </Item>
           </div>
         </Section>

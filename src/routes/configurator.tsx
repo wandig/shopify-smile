@@ -1,6 +1,8 @@
 import { Img } from "@/components/Img";
 import { showReviews } from "@/lib/features";
 import { optimizeImageUrl } from "@/lib/asset-image";
+import { captureConfiguratorImage } from "@/lib/configurator-snapshot";
+
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";

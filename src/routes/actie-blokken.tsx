@@ -1053,7 +1053,10 @@ export function BeforeAfterPriceTriptych({ tone = "light" }: { tone?: Tone }) {
   const t = TONES[tone];
   const accent = tone === "orange" ? "#fffaf5" : T.orange;
   return (
-    <div className={`${T.card} inline-block w-fit border p-5`} style={{ background: t.bg, borderColor: t.line }}>
+    <div
+      className={`${T.card} inline-block w-[860px] max-w-full border p-5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
       <div className="flex items-center justify-between gap-8 border-b pb-4" style={{ borderColor: t.line }}>
         <Kicker color={t.sub}>Verjaardagsale</Kicker>
         <span className="inline-flex items-center gap-2 text-[13px]" style={{ color: t.sub }}>
@@ -1061,16 +1064,16 @@ export function BeforeAfterPriceTriptych({ tone = "light" }: { tone?: Tone }) {
           30% korting
         </span>
       </div>
-      <div className="mt-5 grid gap-4 md:grid-cols-3">
+      <div className="mt-5 grid gap-5 md:grid-cols-3">
         {PRICE_MODELS.map((product) => (
-          <div key={product.name} className="min-w-[190px] border-r pr-4 last:border-r-0 last:pr-0" style={{ borderColor: t.line }}>
-            <div className="flex items-start justify-between gap-3">
+          <div key={product.name} className="border-b pb-5 last:border-b-0 last:pb-0 md:border-b-0 md:border-r md:pb-0 md:pr-5 md:last:border-r-0 md:last:pr-0" style={{ borderColor: t.line }}>
+            <div className="flex min-h-[58px] flex-col items-start gap-3">
               <h3 className="text-[24px] font-normal leading-none tracking-[-0.02em]" style={{ color: t.fg }}>
                 {product.name}
               </h3>
               <PuzzleModuleRow modules={product.modules} tone={tone} />
             </div>
-            <div className="mt-6 flex items-end justify-between gap-5">
+            <div className="mt-6 grid grid-cols-[1fr_auto] items-end gap-4">
               <div>
                 <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
                   van
@@ -1083,7 +1086,7 @@ export function BeforeAfterPriceTriptych({ tone = "light" }: { tone?: Tone }) {
                 <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
                   nu
                 </span>
-                <span className="text-[34px] font-medium leading-none tracking-[-0.045em]" style={{ color: accent }}>
+                <span className="text-[30px] font-medium leading-none tracking-[-0.045em] lg:text-[34px]" style={{ color: accent }}>
                   {product.after}
                 </span>
               </div>
@@ -1302,9 +1305,11 @@ function ActieBlokkenPage() {
             Compact en horizontaal
           </p>
           <div className="grid gap-6 md:grid-cols-2">
-            <Item label="Prijs / Alle modellen / Overzicht">
-              <BeforeAfterPriceTriptych />
-            </Item>
+            <div className="md:col-span-2">
+              <Item label="Prijs / Alle modellen / Overzicht">
+                <BeforeAfterPriceTriptych />
+              </Item>
+            </div>
             <div className="flex flex-col gap-6">
               <Item label="Prijs / Full House / Horizontaal">
                 <BeforeAfterPriceBlock product={FULL_HOUSE_PRICE_MODEL} orientation="horizontal" />

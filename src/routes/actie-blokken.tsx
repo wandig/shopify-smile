@@ -1447,7 +1447,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="07"
+          index="08"
           title="Losse blokken"
           sub="Kleine blokken met één regel tekst, los te downloaden als PNG."
         >
@@ -1522,7 +1522,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="09"
+          index="10"
           title="Hero-lockup"
           sub="Het kopblok van de collectiepagina: serif titel en schuin kortingslabel. Met of zonder boventitel en achtergrond, allemaal los te downloaden."
         >

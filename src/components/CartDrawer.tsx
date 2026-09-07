@@ -99,7 +99,17 @@ export function CartDrawer() {
               {configSummary && (
                 <div className="rounded-2xl bg-white p-5">
                   <p className="text-[11px] uppercase tracking-[0.14em] text-[#9b938c]">Jouw samenstelling</p>
-                  <p className="mt-1 text-[19px] font-semibold text-[#1c1c1c]">
+                  {configSummary.image && (
+                    <div className="mt-3 aspect-[16/9] w-full overflow-hidden rounded-xl bg-[#f3efea]">
+                      <img
+                        src={configSummary.image}
+                        alt={`Jouw Wandig ${configSummary.modelLabel} samenstelling`}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <p className="mt-3 text-[19px] font-semibold text-[#1c1c1c]">
+
                     Wandig {configSummary.modelLabel}
                   </p>
                   <div className="mt-3 space-y-0">
@@ -140,8 +150,14 @@ export function CartDrawer() {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[17px] leading-snug text-[#1c1c1c]">{item.product.node.title}</p>
+                        <p className="text-[17px] leading-snug text-[#1c1c1c]">
+                          {item.displayTitle ?? item.product.node.title}
+                        </p>
+                        {item.displaySubtitle && (
+                          <p className="mt-0.5 text-[12px] leading-snug text-[#9b938c]">{item.displaySubtitle}</p>
+                        )}
                       </div>
+
                       <button
                         onClick={() => removeItem(item.variantId)}
                         aria-label="Verwijderen"

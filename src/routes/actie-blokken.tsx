@@ -885,6 +885,219 @@ export function DiscountThirtyOutlinedBlock({
   );
 }
 
+type PriceModel = {
+  name: string;
+  model: string;
+  before: string;
+  after: string;
+  modules: number;
+  note: string;
+};
+
+const SOLO_PRICE_MODEL: PriceModel = {
+  name: "Solo",
+  model: "Middenmodule",
+  before: "1.070,-",
+  after: "749,-",
+  modules: 1,
+  note: "Vanafprijs",
+};
+
+const DUO_PRICE_MODEL: PriceModel = {
+  name: "Duo",
+  model: "Middenmodule + zijkast",
+  before: "1.713,-",
+  after: "1.199,-",
+  modules: 2,
+  note: "Vanafprijs",
+};
+
+const FULL_HOUSE_PRICE_MODEL: PriceModel = {
+  name: "Full House",
+  model: "Complete cinewall",
+  before: "2.427,-",
+  after: "1.699,-",
+  modules: 3,
+  note: "Vanafprijs",
+};
+
+const PRICE_MODELS: PriceModel[] = [SOLO_PRICE_MODEL, DUO_PRICE_MODEL, FULL_HOUSE_PRICE_MODEL];
+
+function PuzzleMark({ tone = "light", size = 34, opacity = 1 }: { tone?: Tone; size?: number; opacity?: number }) {
+  const filter =
+    tone === "orange"
+      ? "brightness(0) saturate(100%) invert(100%)"
+      : tone === "dark"
+        ? "brightness(0) saturate(100%) invert(89%) sepia(7%) saturate(291%) hue-rotate(349deg) brightness(106%) contrast(94%)"
+        : "brightness(0) saturate(100%) invert(54%) sepia(93%) saturate(1300%) hue-rotate(350deg) brightness(101%) contrast(101%)";
+
+  return (
+    <img
+      src={puzzleIconAsset.url}
+      alt=""
+      aria-hidden="true"
+      style={{ width: size, height: size, filter, opacity }}
+    />
+  );
+}
+
+function PuzzleModuleRow({ modules, tone = "light" }: { modules: number; tone?: Tone }) {
+  return (
+    <div className="flex items-center gap-1.5" aria-hidden="true">
+      {Array.from({ length: modules }).map((_, i) => (
+        <span
+          key={i}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border"
+          style={{
+            background: tone === "orange" ? "rgba(255,250,245,0.16)" : tone === "dark" ? "rgba(247,244,239,0.06)" : "rgba(255,255,255,0.55)",
+            borderColor: tone === "light" ? "rgba(31,25,21,0.10)" : "rgba(255,250,245,0.20)",
+            transform: `translateY(${i % 2 === 0 ? 0 : 4}px) rotate(${i === 1 ? -4 : 3}deg)`,
+          }}
+        >
+          <PuzzleMark tone={tone} size={18} opacity={tone === "light" ? 0.95 : 0.82} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export function BeforeAfterPriceBlock({
+  product,
+  tone = "light",
+  orientation = "vertical",
+  bare = false,
+}: {
+  product: PriceModel;
+  tone?: Tone;
+  orientation?: "vertical" | "horizontal" | "compact";
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  const accent = tone === "orange" ? "#fffaf5" : T.orange;
+  const isHorizontal = orientation === "horizontal";
+  const isCompact = orientation === "compact";
+
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} relative isolate inline-flex w-fit overflow-hidden ${
+        isHorizontal ? "min-w-[520px] items-center gap-8 px-7 py-6" : isCompact ? "min-w-[230px] flex-col px-5 py-5" : "min-w-[310px] flex-col px-6 py-6"
+      }`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
+    >
+      {!bare && (
+        <div className="pointer-events-none absolute -right-7 -top-8 -z-10" style={{ transform: "rotate(-12deg)" }}>
+          <PuzzleMark tone={tone} size={isCompact ? 120 : 168} opacity={tone === "light" ? 0.07 : 0.11} />
+        </div>
+      )}
+
+      <div className={`${isHorizontal ? "min-w-[160px]" : ""}`}>
+        <div className="flex items-start justify-between gap-5">
+          <div>
+            <Kicker color={t.sub}>{product.note}</Kicker>
+            <h3
+              className={`${isCompact ? "mt-2 text-[30px]" : "mt-3 text-[40px]"} font-normal leading-none tracking-[-0.025em]`}
+              style={{ color: t.fg }}
+            >
+              {product.name}
+            </h3>
+          </div>
+          {!isHorizontal && <PuzzleModuleRow modules={product.modules} tone={tone} />}
+        </div>
+        <p className={`${isCompact ? "mt-2 text-[12px]" : "mt-3 text-[13px]"} leading-relaxed`} style={{ color: t.sub }}>
+          {product.model}
+        </p>
+      </div>
+
+      <div
+        className={`${isHorizontal ? "ml-auto min-w-[210px] border-l pl-8" : isCompact ? "mt-5 border-t pt-4" : "mt-7 border-t pt-5"}`}
+        style={{ borderColor: t.line }}
+      >
+        <div className="flex items-end justify-between gap-8">
+          <div>
+            <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+              van
+            </span>
+            <span
+              className={`${isCompact ? "text-[25px]" : "text-[30px]"} font-normal leading-none line-through`}
+              style={{ color: t.sub, textDecorationThickness: 1.5 }}
+            >
+              {product.before}
+            </span>
+          </div>
+          <span
+            className="inline-flex items-center justify-center rounded-[10px] border px-3 py-1 text-[18px] font-medium leading-none"
+            style={{ borderColor: accent, color: accent, transform: "rotate(-5deg)" }}
+          >
+            -30%
+          </span>
+        </div>
+        <div className={isCompact ? "mt-4" : "mt-5"}>
+          <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+            nu
+          </span>
+          <span
+            className={`${isCompact ? "text-[48px]" : "text-[64px]"} font-medium leading-[0.88] tracking-[-0.055em]`}
+            style={{ color: accent }}
+          >
+            {product.after}
+          </span>
+        </div>
+      </div>
+
+      {isHorizontal && <PuzzleModuleRow modules={product.modules} tone={tone} />}
+    </div>
+  );
+}
+
+export function BeforeAfterPriceTriptych({ tone = "light" }: { tone?: Tone }) {
+  const t = TONES[tone];
+  const accent = tone === "orange" ? "#fffaf5" : T.orange;
+  return (
+    <div
+      className={`${T.card} inline-block w-[860px] max-w-full border p-5`}
+      style={{ background: t.bg, borderColor: t.line }}
+    >
+      <div className="flex items-center justify-between gap-8 border-b pb-4" style={{ borderColor: t.line }}>
+        <Kicker color={t.sub}>Verjaardagsale</Kicker>
+        <span className="inline-flex items-center gap-2 text-[13px]" style={{ color: t.sub }}>
+          <PuzzleMark tone={tone} size={22} opacity={0.9} />
+          30% korting
+        </span>
+      </div>
+      <div className="mt-5 grid gap-5 md:grid-cols-3">
+        {PRICE_MODELS.map((product) => (
+          <div key={product.name} className="border-b pb-5 last:border-b-0 last:pb-0 md:border-b-0 md:border-r md:pb-0 md:pr-5 md:last:border-r-0 md:last:pr-0" style={{ borderColor: t.line }}>
+            <div className="flex min-h-[58px] flex-col items-start gap-3">
+              <h3 className="text-[24px] font-normal leading-none tracking-[-0.02em]" style={{ color: t.fg }}>
+                {product.name}
+              </h3>
+              <PuzzleModuleRow modules={product.modules} tone={tone} />
+            </div>
+            <div className="mt-6 grid grid-cols-[1fr_auto] items-end gap-4">
+              <div>
+                <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+                  van
+                </span>
+                <span className="text-[20px] line-through" style={{ color: t.sub }}>
+                  {product.before}
+                </span>
+              </div>
+              <div className="text-right">
+                <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+                  nu
+                </span>
+                <span className="text-[30px] font-medium leading-none tracking-[-0.045em] lg:text-[34px]" style={{ color: accent }}>
+                  {product.after}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
 
 
@@ -1064,7 +1277,62 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="02" title="CTA's" sub="Één primaire actie per creative.">
+        <Section
+          index="02"
+          title="Before / after prijzen"
+          sub="Prijsblokken voor Solo, Duo en Full House met een subtiel Wandig-puzzelstukje verwerkt."
+        >
+          <div className="grid gap-6 md:grid-cols-3">
+            {PRICE_MODELS.map((product) => (
+              <Item key={product.name} label={`Prijs / ${product.name} / Light`}>
+                <BeforeAfterPriceBlock product={product} />
+              </Item>
+            ))}
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Donkere varianten
+          </p>
+          <div className="grid gap-6 md:grid-cols-3">
+            {PRICE_MODELS.map((product) => (
+              <Item key={`${product.name}-dark`} label={`Prijs / ${product.name} / Dark`}>
+                <BeforeAfterPriceBlock product={product} tone="dark" />
+              </Item>
+            ))}
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Compact en horizontaal
+          </p>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="md:col-span-2">
+              <Item label="Prijs / Alle modellen / Overzicht">
+                <BeforeAfterPriceTriptych />
+              </Item>
+            </div>
+            <div className="flex flex-col gap-6">
+              <Item label="Prijs / Full House / Horizontaal">
+                <BeforeAfterPriceBlock product={FULL_HOUSE_PRICE_MODEL} orientation="horizontal" />
+              </Item>
+              <Item label="Prijs / Duo / Compact / Blue grey">
+                <BeforeAfterPriceBlock product={DUO_PRICE_MODEL} tone="bluegrey" orientation="compact" />
+              </Item>
+            </div>
+          </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Zonder achtergrond
+          </p>
+          <div className="grid gap-6 md:grid-cols-3">
+            {PRICE_MODELS.map((product) => (
+              <Item key={`${product.name}-bare`} label={`Prijs / ${product.name} / Bare`}>
+                <BeforeAfterPriceBlock product={product} bare />
+              </Item>
+            ))}
+          </div>
+        </Section>
+
+        <Section index="03" title="CTA's" sub="Één primaire actie per creative.">
           <div className="flex flex-wrap items-start gap-5">
             <Item label="CTA / Orange">
               <CtaButton label="Shop nu" variant="orange" to="/producten" />
@@ -1089,7 +1357,7 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="03" title="Configurator en kleurstalen">
+        <Section index="04" title="Configurator en kleurstalen">
           <div className="grid gap-6 md:grid-cols-2">
             <Item label="Discovery / Light">
               <DiscoveryCard
@@ -1112,7 +1380,7 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="04" title="USP's" sub="Kleine line-icons, tekst blijft leidend. Alles los te downloaden als PNG.">
+        <Section index="05" title="USP's" sub="Kleine line-icons, tekst blijft leidend. Alles los te downloaden als PNG.">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(
               [
@@ -1156,7 +1424,7 @@ function ActieBlokkenPage() {
         </Section>
 
 
-        <Section index="05" title="Cinewall">
+        <Section index="06" title="Cinewall">
           <div className="grid gap-6 md:grid-cols-3">
             <Item label="Cinewall / Dark / Editorial">
               <CinewallEditorial />
@@ -1170,7 +1438,7 @@ function ActieBlokkenPage() {
           </div>
         </Section>
 
-        <Section index="06" title="Voorbeeldcombinaties" sub="Twee of drie blokken samen, zoals in een advertentie.">
+        <Section index="07" title="Voorbeeldcombinaties" sub="Twee of drie blokken samen, zoals in een advertentie.">
           <div className="grid gap-6 md:grid-cols-3">
             <Item label="Ad / Light / 1080 × 1080">
               <div className="rounded-[22px] border border-[#1f1915]/10 bg-[#faf8f5] p-5">
@@ -1207,7 +1475,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="07"
+          index="08"
           title="Losse blokken"
           sub="Kleine blokken met één regel tekst, los te downloaden als PNG."
         >
@@ -1282,7 +1550,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="08"
+          index="09"
           title="Hero-lockup"
           sub="Het kopblok van de collectiepagina: serif titel en schuin kortingslabel. Met of zonder boventitel en achtergrond, allemaal los te downloaden."
         >
@@ -1400,7 +1668,7 @@ function ActieBlokkenPage() {
         </Section>
 
         <Section
-          index="09"
+          index="10"
           title="Ballonnen"
           sub="Lichte, feestelijke accenten voor de verjaardagsale. Geen cartoon-stijl, alleen subtiele lijnballonnen in de Wandig-kleuren."
         >

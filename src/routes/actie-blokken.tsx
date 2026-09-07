@@ -885,6 +885,193 @@ export function DiscountThirtyOutlinedBlock({
   );
 }
 
+type PriceModel = {
+  name: string;
+  model: string;
+  before: string;
+  after: string;
+  modules: number;
+  note: string;
+};
+
+const PRICE_MODELS: PriceModel[] = [
+  { name: "Solo", model: "Middenmodule", before: "1.070,-", after: "749,-", modules: 1, note: "Vanafprijs" },
+  { name: "Duo", model: "Middenmodule + zijkast", before: "1.713,-", after: "1.199,-", modules: 2, note: "Vanafprijs" },
+  { name: "Full House", model: "Complete cinewall", before: "2.427,-", after: "1.699,-", modules: 3, note: "Vanafprijs" },
+];
+
+function PuzzleMark({ tone = "light", size = 34, opacity = 1 }: { tone?: Tone; size?: number; opacity?: number }) {
+  const filter =
+    tone === "orange"
+      ? "brightness(0) saturate(100%) invert(100%)"
+      : tone === "dark"
+        ? "brightness(0) saturate(100%) invert(89%) sepia(7%) saturate(291%) hue-rotate(349deg) brightness(106%) contrast(94%)"
+        : "brightness(0) saturate(100%) invert(54%) sepia(93%) saturate(1300%) hue-rotate(350deg) brightness(101%) contrast(101%)";
+
+  return (
+    <img
+      src={puzzleIconAsset.url}
+      alt=""
+      aria-hidden="true"
+      style={{ width: size, height: size, filter, opacity }}
+    />
+  );
+}
+
+function PuzzleModuleRow({ modules, tone = "light" }: { modules: number; tone?: Tone }) {
+  return (
+    <div className="flex items-center gap-1.5" aria-hidden="true">
+      {Array.from({ length: modules }).map((_, i) => (
+        <span
+          key={i}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border"
+          style={{
+            background: tone === "orange" ? "rgba(255,250,245,0.16)" : tone === "dark" ? "rgba(247,244,239,0.06)" : "rgba(255,255,255,0.55)",
+            borderColor: tone === "light" ? "rgba(31,25,21,0.10)" : "rgba(255,250,245,0.20)",
+            transform: `translateY(${i % 2 === 0 ? 0 : 4}px) rotate(${i === 1 ? -4 : 3}deg)`,
+          }}
+        >
+          <PuzzleMark tone={tone} size={18} opacity={tone === "light" ? 0.95 : 0.82} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export function BeforeAfterPriceBlock({
+  product,
+  tone = "light",
+  orientation = "vertical",
+  bare = false,
+}: {
+  product: PriceModel;
+  tone?: Tone;
+  orientation?: "vertical" | "horizontal" | "compact";
+  bare?: boolean;
+}) {
+  const t = TONES[tone];
+  const accent = tone === "orange" ? "#fffaf5" : T.orange;
+  const isHorizontal = orientation === "horizontal";
+  const isCompact = orientation === "compact";
+
+  return (
+    <div
+      className={`${bare ? "" : `${T.card} border`} relative isolate inline-flex w-fit overflow-hidden ${
+        isHorizontal ? "min-w-[520px] items-center gap-8 px-7 py-6" : isCompact ? "min-w-[230px] flex-col px-5 py-5" : "min-w-[310px] flex-col px-6 py-6"
+      }`}
+      style={bare ? undefined : { background: t.bg, borderColor: t.line }}
+    >
+      {!bare && (
+        <div className="pointer-events-none absolute -right-7 -top-8 -z-10" style={{ transform: "rotate(-12deg)" }}>
+          <PuzzleMark tone={tone} size={isCompact ? 120 : 168} opacity={tone === "light" ? 0.07 : 0.11} />
+        </div>
+      )}
+
+      <div className={`${isHorizontal ? "min-w-[160px]" : ""}`}>
+        <div className="flex items-start justify-between gap-5">
+          <div>
+            <Kicker color={t.sub}>{product.note}</Kicker>
+            <h3
+              className={`${isCompact ? "mt-2 text-[30px]" : "mt-3 text-[40px]"} font-normal leading-none tracking-[-0.025em]`}
+              style={{ color: t.fg }}
+            >
+              {product.name}
+            </h3>
+          </div>
+          {!isHorizontal && <PuzzleModuleRow modules={product.modules} tone={tone} />}
+        </div>
+        <p className={`${isCompact ? "mt-2 text-[12px]" : "mt-3 text-[13px]"} leading-relaxed`} style={{ color: t.sub }}>
+          {product.model}
+        </p>
+      </div>
+
+      <div
+        className={`${isHorizontal ? "ml-auto min-w-[210px] border-l pl-8" : isCompact ? "mt-5 border-t pt-4" : "mt-7 border-t pt-5"}`}
+        style={{ borderColor: t.line }}
+      >
+        <div className="flex items-end justify-between gap-8">
+          <div>
+            <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+              van
+            </span>
+            <span
+              className={`${isCompact ? "text-[25px]" : "text-[30px]"} font-normal leading-none line-through`}
+              style={{ color: t.sub, textDecorationThickness: 1.5 }}
+            >
+              {product.before}
+            </span>
+          </div>
+          <span
+            className="inline-flex items-center justify-center rounded-[10px] border px-3 py-1 text-[18px] font-medium leading-none"
+            style={{ borderColor: accent, color: accent, transform: "rotate(-5deg)" }}
+          >
+            -30%
+          </span>
+        </div>
+        <div className={isCompact ? "mt-4" : "mt-5"}>
+          <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+            nu
+          </span>
+          <span
+            className={`${isCompact ? "text-[48px]" : "text-[64px]"} font-medium leading-[0.88] tracking-[-0.055em]`}
+            style={{ color: accent }}
+          >
+            {product.after}
+          </span>
+        </div>
+      </div>
+
+      {isHorizontal && <PuzzleModuleRow modules={product.modules} tone={tone} />}
+    </div>
+  );
+}
+
+export function BeforeAfterPriceTriptych({ tone = "light" }: { tone?: Tone }) {
+  const t = TONES[tone];
+  const accent = tone === "orange" ? "#fffaf5" : T.orange;
+  return (
+    <div className={`${T.card} inline-block w-fit border p-5`} style={{ background: t.bg, borderColor: t.line }}>
+      <div className="flex items-center justify-between gap-8 border-b pb-4" style={{ borderColor: t.line }}>
+        <Kicker color={t.sub}>Verjaardagsale</Kicker>
+        <span className="inline-flex items-center gap-2 text-[13px]" style={{ color: t.sub }}>
+          <PuzzleMark tone={tone} size={22} opacity={0.9} />
+          30% korting
+        </span>
+      </div>
+      <div className="mt-5 grid gap-4 md:grid-cols-3">
+        {PRICE_MODELS.map((product) => (
+          <div key={product.name} className="min-w-[190px] border-r pr-4 last:border-r-0 last:pr-0" style={{ borderColor: t.line }}>
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="text-[24px] font-normal leading-none tracking-[-0.02em]" style={{ color: t.fg }}>
+                {product.name}
+              </h3>
+              <PuzzleModuleRow modules={product.modules} tone={tone} />
+            </div>
+            <div className="mt-6 flex items-end justify-between gap-5">
+              <div>
+                <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+                  van
+                </span>
+                <span className="text-[20px] line-through" style={{ color: t.sub }}>
+                  {product.before}
+                </span>
+              </div>
+              <div className="text-right">
+                <span className="block text-[11px] uppercase tracking-[0.14em]" style={{ color: t.sub }}>
+                  nu
+                </span>
+                <span className="text-[34px] font-medium leading-none tracking-[-0.045em]" style={{ color: accent }}>
+                  {product.after}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------------- page shell ---------------- */
 
 

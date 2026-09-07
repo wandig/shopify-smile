@@ -218,7 +218,7 @@ export const useCartStore = create<CartStore>()(
     {
       name: "wandig-cart",
       storage: createJSONStorage(() => localStorage),
-      partialize: (s) => ({ items: s.items, cartId: s.cartId, checkoutUrl: s.checkoutUrl }),
+      partialize: (s) => ({ items: s.items, cartId: s.cartId, checkoutUrl: s.checkoutUrl, configSummary: s.configSummary }),
     },
   ),
 );

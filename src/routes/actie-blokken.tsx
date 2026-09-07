@@ -1835,6 +1835,38 @@ function ActieBlokkenPage() {
               </Item>
             ))}
           </div>
+
+          <p className="mt-10 mb-4 text-[12px] uppercase tracking-[0.14em]" style={{ color: T.bluegrey }}>
+            Compacte USP's — zonder achtergrond
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {(
+              [
+                ["CalendarClock", "100 dagen proefkijken"],
+                ["Truck", "Gratis verzending"],
+                ["ShieldCheck", "10 jaar garantie"],
+                ["Sparkles", "Nederlands design"],
+                ["MonitorPlay", "Geschikt voor alle tv's"],
+              ] as const
+            ).map(([icon, title]) => (
+              <Item key={`${title}-bare-black`} label={`USP / Zonder achtergrond / Zwart / ${title}`}>
+                <UspCompactBlock icon={icon} title={title} textColor="black" />
+              </Item>
+            ))}
+            {(
+              [
+                ["CalendarClock", "100 dagen proefkijken"],
+                ["Truck", "Gratis verzending"],
+                ["ShieldCheck", "10 jaar garantie"],
+                ["Sparkles", "Nederlands design"],
+                ["MonitorPlay", "Geschikt voor alle tv's"],
+              ] as const
+            ).map(([icon, title]) => (
+              <Item key={`${title}-bare-white`} label={`USP / Zonder achtergrond / Wit / ${title}`}>
+                <UspCompactBlock icon={icon} title={title} textColor="white" />
+              </Item>
+            ))}
+          </div>
         </Section>
 
 

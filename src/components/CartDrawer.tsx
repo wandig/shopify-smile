@@ -72,6 +72,35 @@ export function CartDrawer() {
             </div>
           ) : (
             <>
+              {configSummary && (
+                <div className="rounded-2xl bg-white p-5">
+                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#9b938c]">Jouw samenstelling</p>
+                  <p className="mt-1 text-[19px] font-semibold text-[#1c1c1c]">
+                    Wandig {configSummary.modelLabel}
+                  </p>
+                  <div className="mt-3 space-y-0">
+                    {[
+                      { label: "Kleur", value: configSummary.color },
+                      { label: "Tv-maat", value: configSummary.tvSize },
+                      { label: "Breedte", value: configSummary.width },
+                      { label: "Modules", value: configSummary.modules.join(" + ") },
+                    ].map((row) => (
+                      <div
+                        key={row.label}
+                        className="flex items-start justify-between gap-4 border-t border-[#efeae4] py-2.5 text-sm"
+                      >
+                        <span className="text-[#1c1c1c]">{row.label}</span>
+                        <span className="text-right text-[#9b938c]">{row.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <p className="pt-1 text-[11px] uppercase tracking-[0.14em] text-[#9b938c]">
+                Producten in je mandje
+              </p>
+
               {items.map((item) => {
                 const options = item.selectedOptions.filter((o) => o.value !== "Default Title");
                 const isOpenRow = expanded[item.variantId];

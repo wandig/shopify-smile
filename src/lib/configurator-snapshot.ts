@@ -55,8 +55,9 @@ async function cropAroundFocus(
     cropWidth = cropHeight * (4 / 3);
   }
 
+  // Kast ~30% lager in beeld: uitsnede schuift omhoog ten opzichte van de kast.
   let x = cabLeft + cabWidth / 2 - cropWidth / 2;
-  let y = cabTop + cabHeight / 2 - cropHeight / 2;
+  let y = cabTop + cabHeight / 2 - cropHeight / 2 - cabHeight * 0.3;
 
   // Binnen de foto houden.
   x = Math.min(Math.max(x, 0), Math.max(0, image.width - cropWidth));

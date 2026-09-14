@@ -102,17 +102,16 @@ export function CartDrawer() {
                 <div className="rounded-2xl bg-white p-5">
                   <p className="text-[11px] uppercase tracking-[0.14em] text-[#9b938c]">Jouw samenstelling</p>
                   {configSummary.image && (
-                    <div className="mt-3 aspect-[16/9] w-full overflow-hidden rounded-xl bg-[#f3efea]">
+                    <div className="mx-auto mt-3 w-[78%] aspect-[16/9] overflow-hidden rounded-xl bg-[#f3efea]">
                       <img
                         src={configSummary.image}
                         alt={`Jouw Wandig ${configSummary.modelLabel} samenstelling`}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-contain"
                       />
                     </div>
                   )}
                   <p className="mt-3 text-[19px] font-semibold text-[#1c1c1c]">
-
-                    Wandig {configSummary.modelLabel}
+                    Jouw samenstelling
                   </p>
                   <div className="mt-3 space-y-0">
                     {[

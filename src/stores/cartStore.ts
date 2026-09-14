@@ -19,6 +19,12 @@ export interface CartItem {
 }
 
 
+export interface CartConfigPart {
+  title: string;
+  subtitle?: string;
+  image?: string | null;
+}
+
 export interface CartConfigSummary {
   modelLabel: string;
   color: string;
@@ -26,6 +32,7 @@ export interface CartConfigSummary {
   width: string;
   modules: string[];
   image?: string | null;
+  parts?: CartConfigPart[];
 }
 
 interface CartStore {

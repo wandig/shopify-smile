@@ -745,6 +745,7 @@ function ConfiguratorPage() {
       selectedOptions: selectedShopifyVariant.selectedOptions,
       displayTitle: modelLabel,
       displaySubtitle: `${originalCount === 0 ? "Middenmodule" : "Middenmodule + zijkast"} · ${configDetails}`,
+      ...(centerThumb ? { displayImage: centerThumb } : {}),
     });
 
     if (newModuleProduct) {

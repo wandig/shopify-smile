@@ -466,6 +466,7 @@ function ConfiguratorPage() {
   const { data: soloProduct } = useWandigProduct("solo");
   const { data: duoProduct } = useWandigProduct("duo");
   const { data: newModuleProduct } = useWandigProduct("wandig-nieuwe-module");
+  const { data: originalModuleProduct } = useWandigProduct("wandig-originele-module");
 
   const addItem = useCartStore((state) => state.addItem);
   const setConfigSummary = useCartStore((state) => state.setConfigSummary);
@@ -604,20 +605,36 @@ function ConfiguratorPage() {
       : model === "duo"
         ? `Wandig Duo ${arrangement === "Rechts" ? "Rechts" : "Links"}`
         : "Wandig Solo";
-  const activeProduct = model === "solo" ? soloProduct : model === "duo" ? duoProduct : fullHouseProduct;
-  const activeTvSize = model === "duo" ? tv.shopifyValue : tv.soloShopifyValue;
+  // De basiskast is altijd de Wandig Solo; elke zijkast is een los product.
+  const activeProduct = soloProduct;
+  const activeTvSize = tv.soloShopifyValue;
 
   const selectedShopifyVariant = useMemo(
-    () => findWandigVariant(activeProduct, color, arrangement, activeTvSize),
-    [activeProduct, arrangement, color, activeTvSize],
+    () => findWandigVariant(soloProduct, color, null, tv.soloShopifyValue),
+    [soloProduct, color, tv.soloShopifyValue],
   );
-  const newModuleVariants = useMemo(
+
+  const sideSelections: Array<{ side: "Links" | "Rechts"; kind: "nieuw" | "origineel" }> = [
+    ...(hasLeft
+      ? [{ side: "Links" as const, kind: (leftVariant === "nieuw" ? "nieuw" : "origineel") as "nieuw" | "origineel" }]
+      : []),
+    ...(hasRight
+      ? [{ side: "Rechts" as const, kind: (rightVariant === "nieuw" ? "nieuw" : "origineel") as "nieuw" | "origineel" }]
+      : []),
+  ];
+  const sideKey = sideSelections.map((s) => `${s.side}:${s.kind}`).join("|");
+  const sideModuleVariants = useMemo(
     () =>
-      newModuleSides.map((side) => ({
-        side,
-        variant: findNewModuleVariant(newModuleProduct, color, side, tv.shopifyValue),
-      })),
-    [newModuleProduct, color, tv.shopifyValue, newModuleSides.join("|")],
+      sideSelections.map((entry) => {
+        const product = entry.kind === "nieuw" ? newModuleProduct : originalModuleProduct;
+        return {
+          ...entry,
+          product,
+          label: entry.kind === "nieuw" ? "Zijkast B" : "Zijkast A",
+          variant: findNewModuleVariant(product, color, entry.side, tv.shopifyValue),
+        };
+      }),
+    [newModuleProduct, originalModuleProduct, color, tv.shopifyValue, sideKey],
   );
 
   // Vaste configuratorprijzen (actieprijs / doorgestreepte prijs)
@@ -719,8 +736,8 @@ function ConfiguratorPage() {
         ];
 
   const handleAddToCart = async () => {
-    const missingNewModule = newModuleVariants.some((entry) => !entry.variant);
-    if (!activeProduct || !selectedShopifyVariant || (newModuleProduct && missingNewModule)) {
+    const missingSideModule = sideModuleVariants.some((entry) => !entry.variant);
+    if (!activeProduct || !selectedShopifyVariant || missingSideModule) {
       toast.error("Deze samenstelling is nu niet beschikbaar", {
         description: `${modelLabel} · ${displayWandigColor(color)} · ${activeTvSize}`,
         position: "top-center",
@@ -745,28 +762,26 @@ function ConfiguratorPage() {
       quantity: 1,
       selectedOptions: selectedShopifyVariant.selectedOptions,
       displayTitle: "Wandig Solo",
-      displaySubtitle: `Basiskast${originalCount === 0 ? "" : " incl. Zijkast A"} · ${configDetails}`,
+      displaySubtitle: `Basiskast · ${configDetails}`,
       ...(centerThumb ? { displayImage: centerThumb } : {}),
     });
 
-    if (newModuleProduct) {
-      for (const entry of newModuleVariants) {
-        if (!entry.variant) continue;
-        await addItem({
-          product: { node: newModuleProduct },
-          variantId: entry.variant.id,
-          variantTitle: entry.variant.title,
-          price: entry.variant.price,
-          compareAtPrice: entry.variant.compareAtPrice,
-          quantity: 1,
-          selectedOptions: entry.variant.selectedOptions,
-          displayTitle: `Zijkast ${entry.side === "Links" ? "links" : "rechts"}`,
-          displaySubtitle: configDetails,
-          ...((entry.side === "Links" ? leftThumb : rightThumb)
-            ? { displayImage: (entry.side === "Links" ? leftThumb : rightThumb) as string }
-            : {}),
-        });
-      }
+    for (const entry of sideModuleVariants) {
+      if (!entry.variant || !entry.product) continue;
+      await addItem({
+        product: { node: entry.product },
+        variantId: entry.variant.id,
+        variantTitle: entry.variant.title,
+        price: entry.variant.price,
+        compareAtPrice: entry.variant.compareAtPrice,
+        quantity: 1,
+        selectedOptions: entry.variant.selectedOptions,
+        displayTitle: `${entry.label} ${entry.side === "Links" ? "links" : "rechts"}`,
+        displaySubtitle: configDetails,
+        ...((entry.side === "Links" ? leftThumb : rightThumb)
+          ? { displayImage: (entry.side === "Links" ? leftThumb : rightThumb) as string }
+          : {}),
+      });
     }
 
     const stage = stageRef.current;
@@ -807,8 +822,8 @@ function ConfiguratorPage() {
     });
 
 
-    const extra = newModuleVariants.length
-      ? ` + nieuwe module ${newModuleVariants.map((e) => e.side.toLowerCase()).join(" & ")}`
+    const extra = sideModuleVariants.length
+      ? ` + ${sideModuleVariants.map((e) => `${e.label} ${e.side.toLowerCase()}`).join(" & ")}`
       : "";
     toast.success(`${modelLabel}${extra} toegevoegd`, {
       description: `${displayWandigColor(color)} · ${activeTvSize} · ${width} cm · ${euro(total)}`,

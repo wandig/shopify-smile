@@ -2,6 +2,7 @@ import { Img } from "@/components/Img";
 import { showReviews } from "@/lib/features";
 import { optimizeImageUrl } from "@/lib/asset-image";
 import { captureConfiguratorImage } from "@/lib/configurator-snapshot";
+import { captureModuleThumbnail } from "@/lib/module-thumbnail";
 
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -728,6 +729,12 @@ function ConfiguratorPage() {
 
     const configDetails = `${displayWandigColor(color)} · ${activeTvSize}`;
 
+    const [centerThumb, leftThumb, rightThumb] = await Promise.all([
+      captureModuleThumbnail(color, activeTvSize, "center"),
+      captureModuleThumbnail(color, activeTvSize, "left"),
+      captureModuleThumbnail(color, activeTvSize, "right"),
+    ]);
+
     await addItem({
       product: { node: activeProduct },
       variantId: selectedShopifyVariant.id,
@@ -738,6 +745,7 @@ function ConfiguratorPage() {
       selectedOptions: selectedShopifyVariant.selectedOptions,
       displayTitle: modelLabel,
       displaySubtitle: `${originalCount === 0 ? "Middenmodule" : "Middenmodule + zijkast"} · ${configDetails}`,
+      ...(centerThumb ? { displayImage: centerThumb } : {}),
     });
 
     if (newModuleProduct) {
@@ -753,6 +761,9 @@ function ConfiguratorPage() {
           selectedOptions: entry.variant.selectedOptions,
           displayTitle: `Zijkast ${entry.side === "Links" ? "links" : "rechts"}`,
           displaySubtitle: configDetails,
+          ...((entry.side === "Links" ? leftThumb : rightThumb)
+            ? { displayImage: (entry.side === "Links" ? leftThumb : rightThumb) as string }
+            : {}),
         });
       }
     }

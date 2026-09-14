@@ -15,6 +15,8 @@ function formatEuro(amount: number) {
 // Gebruik de foto van de gekozen variant (juiste kleur), anders een variant met
 // dezelfde kleur, anders de eerste productfoto.
 function cartItemImage(item: CartItem): { url: string; altText?: string | null } | undefined {
+  if (item.displayImage) return { url: item.displayImage };
+
   const variants = item.product.node.variants?.edges?.map((edge) => edge.node) ?? [];
   const exact = variants.find((variant) => variant.id === item.variantId);
   const exactImage = (exact as { image?: { url: string; altText?: string | null } } | undefined)?.image;

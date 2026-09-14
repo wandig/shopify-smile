@@ -728,6 +728,12 @@ function ConfiguratorPage() {
 
     const configDetails = `${displayWandigColor(color)} · ${activeTvSize}`;
 
+    const [centerThumb, leftThumb, rightThumb] = await Promise.all([
+      captureModuleThumbnail(color, activeTvSize, "center"),
+      captureModuleThumbnail(color, activeTvSize, "left"),
+      captureModuleThumbnail(color, activeTvSize, "right"),
+    ]);
+
     await addItem({
       product: { node: activeProduct },
       variantId: selectedShopifyVariant.id,

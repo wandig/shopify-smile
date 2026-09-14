@@ -761,6 +761,9 @@ function ConfiguratorPage() {
           selectedOptions: entry.variant.selectedOptions,
           displayTitle: `Zijkast ${entry.side === "Links" ? "links" : "rechts"}`,
           displaySubtitle: configDetails,
+          ...((entry.side === "Links" ? leftThumb : rightThumb)
+            ? { displayImage: (entry.side === "Links" ? leftThumb : rightThumb) as string }
+            : {}),
         });
       }
     }

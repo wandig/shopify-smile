@@ -785,21 +785,21 @@ function ConfiguratorPage() {
       image,
       parts: [
         {
-          title: "Middenmodule",
-          subtitle: `Middenmodule · ${configDetails}`,
+          title: `Middenmodule — ${displayWandigColor(color)}`,
+          subtitle: `Tv-maat ${activeTvSize}`,
           image: centerThumb ?? null,
         },
         ...(hasLeft
           ? [{
-              title: leftVariant === "nieuw" ? "Zijkast B" : "Zijkast A",
-              subtitle: `Links · ${configDetails}`,
+              title: `${leftVariant === "nieuw" ? "Zijkast B" : "Zijkast A"} links — ${displayWandigColor(color)}`,
+              subtitle: `Tv-maat ${activeTvSize}`,
               image: leftThumb ?? null,
             }]
           : []),
         ...(hasRight
           ? [{
-              title: rightVariant === "nieuw" ? "Zijkast B" : "Zijkast A",
-              subtitle: `Rechts · ${configDetails}`,
+              title: `${rightVariant === "nieuw" ? "Zijkast B" : "Zijkast A"} rechts — ${displayWandigColor(color)}`,
+              subtitle: `Tv-maat ${activeTvSize}`,
               image: rightThumb ?? null,
             }]
           : []),

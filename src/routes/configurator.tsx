@@ -736,8 +736,8 @@ function ConfiguratorPage() {
         ];
 
   const handleAddToCart = async () => {
-    const missingNewModule = newModuleVariants.some((entry) => !entry.variant);
-    if (!activeProduct || !selectedShopifyVariant || (newModuleProduct && missingNewModule)) {
+    const missingSideModule = sideModuleVariants.some((entry) => !entry.variant);
+    if (!activeProduct || !selectedShopifyVariant || missingSideModule) {
       toast.error("Deze samenstelling is nu niet beschikbaar", {
         description: `${modelLabel} · ${displayWandigColor(color)} · ${activeTvSize}`,
         position: "top-center",

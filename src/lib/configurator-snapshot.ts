@@ -48,12 +48,12 @@ async function cropAroundFocus(
 
   // Kast vult ~80% van de breedte van de uitsnede, en staat lager in beeld.
   // Daartoe is het kader in de hoogte ruim genoeg (kast + 2x verschuiving + marge).
-  const cropHeight = Math.max((cabWidth / 0.8) * (3 / 4), cabHeight * 2.12, cabHeight / 0.86);
+  const cropHeight = Math.max((cabWidth / 0.8) * (3 / 4), cabHeight * 1.9, cabHeight / 0.86);
   const cropWidth = cropHeight * (4 / 3);
 
   // Uitsnede schuift omhoog ten opzichte van de kast, zodat de kast lager staat.
   let x = cabLeft + cabWidth / 2 - cropWidth / 2;
-  let y = cabTop + cabHeight / 2 - cropHeight / 2 - cabHeight * 0.42;
+  let y = cabTop + cabHeight / 2 - cropHeight / 2 - cabHeight * 0.335;
 
   // Binnen de foto houden.
   const drawWidth = Math.min(cropWidth, image.width);

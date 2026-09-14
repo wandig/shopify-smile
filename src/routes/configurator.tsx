@@ -496,6 +496,7 @@ function ConfiguratorPage() {
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
   const [tvSizeOpen, setTvSizeOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
+  const cabinetRef = useRef<HTMLDivElement>(null);
   const benefitsScrollerRef = useRef<HTMLDivElement>(null);
   const previewCleanupTimerRef = useRef<number | null>(null);
 
@@ -769,7 +770,7 @@ function ConfiguratorPage() {
     }
 
     const stage = stageRef.current;
-    const image = stage ? await captureConfiguratorImage(stage) : null;
+    const image = stage ? await captureConfiguratorImage(stage, cabinetRef.current) : null;
 
     setConfigSummary({
       modelLabel: hasLeft && hasRight ? "Full House" : hasLeft || hasRight ? "Duo" : "Solo",
@@ -893,7 +894,7 @@ function ConfiguratorPage() {
             {/* Configuration */}
             <div className="relative z-[3] flex w-full max-w-[1200px] origin-top translate-y-[-9.62%] scale-[0.513] items-end justify-center md:translate-y-[-5%] md:scale-[0.848] lg:translate-y-[-4.37%] lg:scale-[0.644] xl:scale-[0.811] 2xl:scale-[0.873]">
               {/* Wall unit — modules sit flush against each other */}
-              <div className="relative flex h-[420px] items-end lg:h-[520px]">
+              <div ref={cabinetRef} className="relative flex h-[420px] items-end lg:h-[520px]">
                 {showMeasurements && (
                   <div className="pointer-events-none absolute inset-0 z-[8] hidden text-[#303640] md:block">
                     <div className="absolute -top-[46px] inset-x-0 flex items-center gap-3">

@@ -785,7 +785,7 @@ function ConfiguratorPage() {
       image,
       parts: [
         {
-          title: `Middenmodule — ${displayWandigColor(color)}`,
+          title: `Wandig Solo — ${displayWandigColor(color)}`,
           subtitle: `Tv-maat ${activeTvSize}`,
           image: centerThumb ?? null,
         },

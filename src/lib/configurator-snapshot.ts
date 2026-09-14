@@ -62,13 +62,13 @@ async function cropAroundFocus(
   y = Math.min(Math.max(y, 0), Math.max(0, image.height - drawHeight));
 
   const canvas = document.createElement("canvas");
-  canvas.width = Math.round(cropWidth);
-  canvas.height = Math.round(cropHeight);
+  canvas.width = Math.round(drawWidth);
+  canvas.height = Math.round(drawHeight);
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
   ctx.fillStyle = "#f3efea";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, x, y, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, x, y, drawWidth, drawHeight, 0, 0, canvas.width, canvas.height);
   try {
     return canvas.toDataURL("image/jpeg", 0.88);
   } catch {

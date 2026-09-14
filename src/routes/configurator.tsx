@@ -762,28 +762,26 @@ function ConfiguratorPage() {
       quantity: 1,
       selectedOptions: selectedShopifyVariant.selectedOptions,
       displayTitle: "Wandig Solo",
-      displaySubtitle: `Basiskast${originalCount === 0 ? "" : " incl. Zijkast A"} · ${configDetails}`,
+      displaySubtitle: `Basiskast · ${configDetails}`,
       ...(centerThumb ? { displayImage: centerThumb } : {}),
     });
 
-    if (newModuleProduct) {
-      for (const entry of newModuleVariants) {
-        if (!entry.variant) continue;
-        await addItem({
-          product: { node: newModuleProduct },
-          variantId: entry.variant.id,
-          variantTitle: entry.variant.title,
-          price: entry.variant.price,
-          compareAtPrice: entry.variant.compareAtPrice,
-          quantity: 1,
-          selectedOptions: entry.variant.selectedOptions,
-          displayTitle: `Zijkast ${entry.side === "Links" ? "links" : "rechts"}`,
-          displaySubtitle: configDetails,
-          ...((entry.side === "Links" ? leftThumb : rightThumb)
-            ? { displayImage: (entry.side === "Links" ? leftThumb : rightThumb) as string }
-            : {}),
-        });
-      }
+    for (const entry of sideModuleVariants) {
+      if (!entry.variant || !entry.product) continue;
+      await addItem({
+        product: { node: entry.product },
+        variantId: entry.variant.id,
+        variantTitle: entry.variant.title,
+        price: entry.variant.price,
+        compareAtPrice: entry.variant.compareAtPrice,
+        quantity: 1,
+        selectedOptions: entry.variant.selectedOptions,
+        displayTitle: `${entry.label} ${entry.side === "Links" ? "links" : "rechts"}`,
+        displaySubtitle: configDetails,
+        ...((entry.side === "Links" ? leftThumb : rightThumb)
+          ? { displayImage: (entry.side === "Links" ? leftThumb : rightThumb) as string }
+          : {}),
+      });
     }
 
     const stage = stageRef.current;

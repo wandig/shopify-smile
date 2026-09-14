@@ -14,6 +14,8 @@ export interface CartItem {
   // Naam zoals in de configurator (valt terug op de Shopify-titel)
   displayTitle?: string;
   displaySubtitle?: string;
+  // Foto van dit losse item in de gekozen kleur (uit de configurator)
+  displayImage?: string;
 }
 
 

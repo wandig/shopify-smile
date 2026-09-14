@@ -47,21 +47,13 @@ async function cropAroundFocus(
   const cabHeight = Math.max(1, focusRect.height * pixelRatio);
 
   // Kast vult ~80% van de breedte van de uitsnede, en staat lager in beeld.
-  console.log("[snapshot]", JSON.stringify({
-    imgW: image.width, imgH: image.height,
-    cabLeft, cabTop, cabWidth, cabHeight, pixelRatio,
-    stageW: stageRect.width, stageH: stageRect.height,
-  }));
-
-  // Kast vult ~80% van de breedte van de uitsnede, en staat ~30% lager in beeld.
   // Daartoe is het kader in de hoogte ruim genoeg (kast + 2x verschuiving + marge).
-  const cropHeight = Math.max((cabWidth / 0.8) * (3 / 4), cabHeight * 1.95, cabHeight / 0.86);
+  const cropHeight = Math.max((cabWidth / 0.8) * (3 / 4), cabHeight * 2.12, cabHeight / 0.86);
   const cropWidth = cropHeight * (4 / 3);
 
   // Uitsnede schuift omhoog ten opzichte van de kast, zodat de kast lager staat.
   let x = cabLeft + cabWidth / 2 - cropWidth / 2;
   let y = cabTop + cabHeight / 2 - cropHeight / 2 - cabHeight * 0.42;
-  console.log("[snapshot] crop", JSON.stringify({ cropWidth, cropHeight, x, y }));
 
   // Binnen de foto houden.
   const drawWidth = Math.min(cropWidth, image.width);

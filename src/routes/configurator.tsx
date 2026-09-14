@@ -822,8 +822,8 @@ function ConfiguratorPage() {
     });
 
 
-    const extra = newModuleVariants.length
-      ? ` + nieuwe module ${newModuleVariants.map((e) => e.side.toLowerCase()).join(" & ")}`
+    const extra = sideModuleVariants.length
+      ? ` + ${sideModuleVariants.map((e) => `${e.label} ${e.side.toLowerCase()}`).join(" & ")}`
       : "";
     toast.success(`${modelLabel}${extra} toegevoegd`, {
       description: `${displayWandigColor(color)} · ${activeTvSize} · ${width} cm · ${euro(total)}`,

@@ -56,10 +56,10 @@ async function cropAroundFocus(
   let y = cabTop + cabHeight / 2 - cropHeight / 2 - cabHeight * 0.3;
 
   // Binnen de foto houden.
-  x = Math.min(Math.max(x, 0), Math.max(0, image.width - cropWidth));
-  y = Math.min(Math.max(y, 0), Math.max(0, image.height - cropHeight));
-  cropWidth = Math.min(cropWidth, image.width);
-  cropHeight = Math.min(cropHeight, image.height);
+  const drawWidth = Math.min(cropWidth, image.width);
+  const drawHeight = Math.min(cropHeight, image.height);
+  x = Math.min(Math.max(x, 0), Math.max(0, image.width - drawWidth));
+  y = Math.min(Math.max(y, 0), Math.max(0, image.height - drawHeight));
 
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(cropWidth);

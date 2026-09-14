@@ -605,20 +605,36 @@ function ConfiguratorPage() {
       : model === "duo"
         ? `Wandig Duo ${arrangement === "Rechts" ? "Rechts" : "Links"}`
         : "Wandig Solo";
-  const activeProduct = model === "solo" ? soloProduct : model === "duo" ? duoProduct : fullHouseProduct;
-  const activeTvSize = model === "duo" ? tv.shopifyValue : tv.soloShopifyValue;
+  // De basiskast is altijd de Wandig Solo; elke zijkast is een los product.
+  const activeProduct = soloProduct;
+  const activeTvSize = tv.soloShopifyValue;
 
   const selectedShopifyVariant = useMemo(
-    () => findWandigVariant(activeProduct, color, arrangement, activeTvSize),
-    [activeProduct, arrangement, color, activeTvSize],
+    () => findWandigVariant(soloProduct, color, null, tv.soloShopifyValue),
+    [soloProduct, color, tv.soloShopifyValue],
   );
-  const newModuleVariants = useMemo(
+
+  const sideSelections: Array<{ side: "Links" | "Rechts"; kind: "nieuw" | "origineel" }> = [
+    ...(hasLeft
+      ? [{ side: "Links" as const, kind: (leftVariant === "nieuw" ? "nieuw" : "origineel") as "nieuw" | "origineel" }]
+      : []),
+    ...(hasRight
+      ? [{ side: "Rechts" as const, kind: (rightVariant === "nieuw" ? "nieuw" : "origineel") as "nieuw" | "origineel" }]
+      : []),
+  ];
+  const sideKey = sideSelections.map((s) => `${s.side}:${s.kind}`).join("|");
+  const sideModuleVariants = useMemo(
     () =>
-      newModuleSides.map((side) => ({
-        side,
-        variant: findNewModuleVariant(newModuleProduct, color, side, tv.shopifyValue),
-      })),
-    [newModuleProduct, color, tv.shopifyValue, newModuleSides.join("|")],
+      sideSelections.map((entry) => {
+        const product = entry.kind === "nieuw" ? newModuleProduct : originalModuleProduct;
+        return {
+          ...entry,
+          product,
+          label: entry.kind === "nieuw" ? "Zijkast B" : "Zijkast A",
+          variant: findNewModuleVariant(product, color, entry.side, tv.shopifyValue),
+        };
+      }),
+    [newModuleProduct, originalModuleProduct, color, tv.shopifyValue, sideKey],
   );
 
   // Vaste configuratorprijzen (actieprijs / doorgestreepte prijs)

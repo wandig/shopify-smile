@@ -466,6 +466,7 @@ function ConfiguratorPage() {
   const { data: soloProduct } = useWandigProduct("solo");
   const { data: duoProduct } = useWandigProduct("duo");
   const { data: newModuleProduct } = useWandigProduct("wandig-nieuwe-module");
+  const { data: originalModuleProduct } = useWandigProduct("wandig-originele-module");
 
   const addItem = useCartStore((state) => state.addItem);
   const setConfigSummary = useCartStore((state) => state.setConfigSummary);

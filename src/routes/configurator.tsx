@@ -783,6 +783,19 @@ function ConfiguratorPage() {
         ...(hasRight ? [`Rechts · ${moduleVariantLabel(rightVariant)}`] : []),
       ],
       image,
+      parts: [
+        {
+          title: modelLabel,
+          subtitle: `Middenmodule · ${configDetails}`,
+          image: centerThumb ?? null,
+        },
+        ...(hasLeft
+          ? [{ title: "Zijkast links", subtitle: configDetails, image: leftThumb ?? null }]
+          : []),
+        ...(hasRight
+          ? [{ title: "Zijkast rechts", subtitle: configDetails, image: rightThumb ?? null }]
+          : []),
+      ],
     });
 
 

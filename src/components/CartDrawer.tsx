@@ -129,6 +129,37 @@ export function CartDrawer() {
                       </div>
                     ))}
                   </div>
+
+                  {configSummary.parts && configSummary.parts.length > 0 && (
+                    <div className="mt-4 border-t border-[#efeae4] pt-4">
+                      <p className="text-[11px] uppercase tracking-[0.14em] text-[#9b938c]">
+                        Onderdelen in deze samenstelling
+                      </p>
+                      <div className="mt-3 space-y-3">
+                        {configSummary.parts.map((part, index) => (
+                          <div key={`${part.title}-${index}`} className="flex items-center gap-3">
+                            <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-[#f3efea]">
+                              {part.image && (
+                                <img
+                                  src={part.image}
+                                  alt={part.title}
+                                  className="h-full w-full object-cover"
+                                />
+                              )}
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-[15px] leading-snug text-[#1c1c1c]">{part.title}</p>
+                              {part.subtitle && (
+                                <p className="mt-0.5 text-[12px] leading-snug text-[#9b938c]">
+                                  {part.subtitle}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 

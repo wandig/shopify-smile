@@ -744,8 +744,8 @@ function ConfiguratorPage() {
       compareAtPrice: selectedShopifyVariant.compareAtPrice,
       quantity: 1,
       selectedOptions: selectedShopifyVariant.selectedOptions,
-      displayTitle: modelLabel,
-      displaySubtitle: `${originalCount === 0 ? "Middenmodule" : "Middenmodule + zijkast"} · ${configDetails}`,
+      displayTitle: "Wandig Solo",
+      displaySubtitle: `Basiskast${originalCount === 0 ? "" : " incl. Zijkast A"} · ${configDetails}`,
       ...(centerThumb ? { displayImage: centerThumb } : {}),
     });
 
@@ -785,7 +785,7 @@ function ConfiguratorPage() {
       image,
       parts: [
         {
-          title: `Middenmodule — ${displayWandigColor(color)}`,
+          title: `Wandig Solo — ${displayWandigColor(color)}`,
           subtitle: `Tv-maat ${activeTvSize}`,
           image: centerThumb ?? null,
         },

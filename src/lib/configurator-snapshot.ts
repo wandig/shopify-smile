@@ -46,32 +46,29 @@ async function cropAroundFocus(
   const cabWidth = Math.max(1, focusRect.width * pixelRatio);
   const cabHeight = Math.max(1, focusRect.height * pixelRatio);
 
-  // Kast vult ~80% van de breedte van de uitsnede.
-  let cropWidth = cabWidth / 0.8;
-  let cropHeight = cropWidth * (3 / 4);
-  // De kast moet ook volledig in de hoogte passen.
-  if (cabHeight > cropHeight * 0.86) {
-    cropHeight = cabHeight / 0.86;
-    cropWidth = cropHeight * (4 / 3);
-  }
+  // Kast vult ~80% van de breedte van de uitsnede, en staat ~30% lager in beeld.
+  // Daartoe is het kader in de hoogte ruim genoeg (kast + 2x verschuiving + marge).
+  const cropHeight = Math.max((cabWidth / 0.8) * (3 / 4), cabHeight * 1.7, cabHeight / 0.86);
+  const cropWidth = cropHeight * (4 / 3);
 
+  // Uitsnede schuift omhoog ten opzichte van de kast, zodat de kast lager staat.
   let x = cabLeft + cabWidth / 2 - cropWidth / 2;
-  let y = cabTop + cabHeight / 2 - cropHeight / 2;
+  let y = cabTop + cabHeight / 2 - cropHeight / 2 - cabHeight * 0.3;
 
   // Binnen de foto houden.
-  x = Math.min(Math.max(x, 0), Math.max(0, image.width - cropWidth));
-  y = Math.min(Math.max(y, 0), Math.max(0, image.height - cropHeight));
-  cropWidth = Math.min(cropWidth, image.width);
-  cropHeight = Math.min(cropHeight, image.height);
+  const drawWidth = Math.min(cropWidth, image.width);
+  const drawHeight = Math.min(cropHeight, image.height);
+  x = Math.min(Math.max(x, 0), Math.max(0, image.width - drawWidth));
+  y = Math.min(Math.max(y, 0), Math.max(0, image.height - drawHeight));
 
   const canvas = document.createElement("canvas");
-  canvas.width = Math.round(cropWidth);
-  canvas.height = Math.round(cropHeight);
+  canvas.width = Math.round(drawWidth);
+  canvas.height = Math.round(drawHeight);
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
   ctx.fillStyle = "#f3efea";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, x, y, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, x, y, drawWidth, drawHeight, 0, 0, canvas.width, canvas.height);
   try {
     return canvas.toDataURL("image/jpeg", 0.88);
   } catch {

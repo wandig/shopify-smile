@@ -138,12 +138,12 @@ export function CartDrawer() {
                       <div className="mt-3 space-y-3">
                         {configSummary.parts.map((part, index) => (
                           <div key={`${part.title}-${index}`} className="flex items-center gap-3">
-                            <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-[#f3efea]">
+                            <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-xl bg-[#f7f7f7] p-1">
                               {part.image && (
                                 <img
                                   src={part.image}
                                   alt={part.title}
-                                  className="h-full w-full object-cover"
+                                  className="h-full w-full object-contain"
                                 />
                               )}
                             </div>

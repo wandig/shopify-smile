@@ -731,9 +731,9 @@ function ConfiguratorPage() {
     const configDetails = `${displayWandigColor(color)} · ${activeTvSize}`;
 
     const [centerThumb, leftThumb, rightThumb] = await Promise.all([
-      captureModuleThumbnail(color, activeTvSize, "center"),
-      captureModuleThumbnail(color, activeTvSize, "left"),
-      captureModuleThumbnail(color, activeTvSize, "right"),
+      captureModuleThumbnail(color, tv.shopifyValue, "center"),
+      captureModuleThumbnail(color, tv.shopifyValue, "left", leftVariant),
+      captureModuleThumbnail(color, tv.shopifyValue, "right", rightVariant),
     ]);
 
     await addItem({
@@ -785,15 +785,23 @@ function ConfiguratorPage() {
       image,
       parts: [
         {
-          title: modelLabel,
+          title: "Middenmodule",
           subtitle: `Middenmodule · ${configDetails}`,
           image: centerThumb ?? null,
         },
         ...(hasLeft
-          ? [{ title: "Zijkast links", subtitle: configDetails, image: leftThumb ?? null }]
+          ? [{
+              title: leftVariant === "nieuw" ? "Zijkast B" : "Zijkast A",
+              subtitle: `Links · ${configDetails}`,
+              image: leftThumb ?? null,
+            }]
           : []),
         ...(hasRight
-          ? [{ title: "Zijkast rechts", subtitle: configDetails, image: rightThumb ?? null }]
+          ? [{
+              title: rightVariant === "nieuw" ? "Zijkast B" : "Zijkast A",
+              subtitle: `Rechts · ${configDetails}`,
+              image: rightThumb ?? null,
+            }]
           : []),
       ],
     });

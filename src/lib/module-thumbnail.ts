@@ -23,13 +23,19 @@ export async function captureModuleThumbnail(
   color: string,
   tvSize: string,
   position: ModulePosition,
+  moduleVariant: "original" | "nieuw" | "dicht" | "open" = "dicht",
 ): Promise<string | null> {
   if (typeof document === "undefined") return null;
 
   const asset = getConfiguratorModuleAsset(color, tvSize);
   if (!asset) return null;
 
-  const positionAsset = position === "center" ? undefined : asset.positionAssets?.[position];
+  // Gebruik exact dezelfde bron als in de modulekiezer: A komt uit de
+  // volledige opstelling, B uit de losse positionAsset.
+  const positionAsset =
+    position === "center" || moduleVariant === "original" || moduleVariant === "open"
+      ? undefined
+      : asset.positionAssets?.[position];
   const source = positionAsset?.source ?? asset.source;
   const crop: ModuleCrop = positionAsset?.crop ?? (asset.crops ?? MODULE_CROPS)[position];
 

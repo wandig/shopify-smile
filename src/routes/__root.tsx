@@ -94,6 +94,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/76fe1d4d-2598-4e66-81fd-23d56c561874/id-preview-695654ae--06fa7a41-082f-4bbd-bb4c-ca3708eefbcf.lovable.app-1781174149121.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/76fe1d4d-2598-4e66-81fd-23d56c561874/id-preview-695654ae--06fa7a41-082f-4bbd-bb4c-ca3708eefbcf.lovable.app-1781174149121.png" },
     ],
+    scripts: [
+      {
+        // Meta Pixel Code
+        type: "text/javascript",
+        children: `!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1654933889573926');
+fbq('track', 'PageView');`,
+      },
+    ],
     links: [
       {
         rel: "preconnect",
@@ -122,6 +138,15 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        {/* Meta Pixel Code (noscript fallback) */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1654933889573926&ev=PageView&noscript=1"
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>

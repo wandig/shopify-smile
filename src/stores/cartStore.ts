@@ -41,8 +41,10 @@ interface CartStore {
   checkoutUrl: string | null;
   isLoading: boolean;
   isSyncing: boolean;
+  isCartOpen: boolean;
   configSummary: CartConfigSummary | null;
   setConfigSummary: (summary: CartConfigSummary | null) => void;
+  setCartOpen: (open: boolean) => void;
   addItem: (item: Omit<CartItem, "lineId">) => Promise<void>;
   updateQuantity: (variantId: string, quantity: number) => Promise<void>;
   removeItem: (variantId: string) => Promise<void>;
@@ -141,8 +143,10 @@ export const useCartStore = create<CartStore>()(
       checkoutUrl: null,
       isLoading: false,
       isSyncing: false,
+      isCartOpen: false,
       configSummary: null,
       setConfigSummary: (summary) => set({ configSummary: summary }),
+      setCartOpen: (open) => set({ isCartOpen: open }),
 
 
       addItem: async (item) => {

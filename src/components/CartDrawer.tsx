@@ -38,9 +38,10 @@ function cartItemImage(item: CartItem): { url: string; altText?: string | null }
 
 
 export function CartDrawer() {
-  const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [showCode, setShowCode] = useState(false);
+  const open = useCartStore((s) => s.isCartOpen);
+  const setOpen = useCartStore((s) => s.setCartOpen);
   const { items, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart, configSummary } =
     useCartStore();
   const totalItems = items.reduce((s, i) => s + i.quantity, 0);

@@ -1511,6 +1511,7 @@ function ProductView({ product }: { product: ProductNode }) {
       quantity: 1,
       selectedOptions: activeVariant.selectedOptions,
     });
+    useCartStore.getState().setCartOpen(true);
   };
 
   const visibleOptions = product.options.filter((o) => {

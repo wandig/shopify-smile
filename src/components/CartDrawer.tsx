@@ -169,7 +169,13 @@ export function CartDrawer() {
               </p>
 
               {items.map((item) => {
-                const options = item.selectedOptions.filter((o) => o.value !== "Default Title");
+                // Full House heeft geen "Opstelling"-variant; verberg die ook voor bestaande mandjes.
+                const isFullHouse = item.product.node.handle === "full-house";
+                const options = item.selectedOptions.filter(
+                  (o) =>
+                    o.value !== "Default Title" &&
+                    !(isFullHouse && /opstelling|position|richting|side/i.test(o.name)),
+                );
                 const isOpenRow = expanded[item.variantId];
                 const visible = isOpenRow ? options : options.slice(0, 3);
                 const image = cartItemImage(item);

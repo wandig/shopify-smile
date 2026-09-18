@@ -1509,7 +1509,10 @@ function ProductView({ product }: { product: ProductNode }) {
       price: activeVariant.price,
       compareAtPrice: activeVariant.compareAtPrice,
       quantity: 1,
-      selectedOptions: activeVariant.selectedOptions,
+      // Full House heeft geen "Opstelling"-variant; die niet meegeven aan de winkelwagen.
+      selectedOptions: activeVariant.selectedOptions.filter(
+        (o) => !(product.handle === "full-house" && /opstelling|position|richting|side/i.test(o.name)),
+      ),
     });
     useCartStore.getState().setCartOpen(true);
   };

@@ -1317,9 +1317,12 @@ function ConfiguratorPage() {
               <PaymentOptionsBadges price={total} />
             </div>
 
-            <div className="mt-3 grid min-h-[52px] grid-cols-[80px_minmax(0,1fr)] items-center gap-2 rounded-[12px] border border-[#eeeeee] px-3 lg:grid-cols-[80px_minmax(0,1fr)_auto]">
-              <strong className="text-[15px] font-[750] leading-none text-[#071426]">Kleur</strong>
-              <div className="flex min-w-0 items-center justify-end gap-2 lg:justify-start">
+            <div className="tv-size-selector mt-3" role="group" aria-label="Kleur">
+              <div className="tv-size-selector-label">
+                <span className="font-bold">Kleur</span>
+                <span className="text-muted-foreground" aria-live="polite">{displayWandigColor(color)}</span>
+              </div>
+              <div className="tv-size-selector-options">
                 {colors.map((colorName) => (
                   <button
                     key={colorName}
@@ -1328,16 +1331,11 @@ function ConfiguratorPage() {
                     aria-label={displayWandigColor(colorName)}
                     title={displayWandigColor(colorName)}
                     aria-pressed={colorName === color}
-                    className={`h-8 w-8 shrink-0 rounded-full border-2 transition-all duration-200 hover:-translate-y-px lg:h-[35px] lg:w-[35px] ${
-                      colorName === color
-                        ? "border-[#ef7027] shadow-[0_0_0_3px_rgba(239,112,39,0.12),inset_0_0_0_1px_rgba(0,0,0,0.18)]"
-                        : "border-transparent shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18)]"
-                    }`}
-                    style={wandigSwatchStyle(colorName)}
+                    className="tv-size-dot"
+                    style={{ ...wandigSwatchStyle(colorName), boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.18)" }}
                   />
                 ))}
               </div>
-              <span className="hidden whitespace-nowrap text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93] lg:inline">{displayWandigColor(color)}</span>
             </div>
 
             <div className="mb-3 mt-2">

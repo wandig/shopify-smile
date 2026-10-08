@@ -66,7 +66,7 @@ export const PRODUCTS_QUERY = `
               altText
             } }
           }
-          variants(first: 50) {
+          variants(first: 250) {
             edges { node {
               id title availableForSale
               price { amount currencyCode }
@@ -96,7 +96,7 @@ export const PRODUCT_BY_HANDLE_QUERY = `
           altText
         } }
       }
-      variants(first: 100) {
+      variants(first: 250) {
         edges { node {
           id title availableForSale
           price { amount currencyCode }

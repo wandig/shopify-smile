@@ -707,6 +707,59 @@ const GALLERY_COLOR_ORDER: Record<string, string[]> = {
   solo: ["Kristalwit", "Dofroze", "Cashmeregrijs", "Donkereiken", "Walnootbruin"],
 };
 
+const galleryImageName = (url: string) => url.split("/").pop()?.split("?")[0] ?? "";
+
+const productGalleryGroup = (
+  handle: string,
+  allImages: Array<{ node: { url: string; altText: string | null } }>,
+  color: string | undefined,
+  layout: string | undefined,
+  renderIndex: number,
+) => {
+  if (renderIndex < 0) return undefined;
+
+  if (handle === "solo") {
+    const colorOrder = GALLERY_COLOR_ORDER.solo;
+    const starts = allImages
+      .map((image, index) => (/Closed_Front/i.test(image.node.url) ? index : -1))
+      .filter((index) => index >= 0)
+      .slice(0, colorOrder.length * 4);
+    const colorIndex = color ? colorOrder.indexOf(color) : -1;
+    const start = colorIndex >= 0 ? starts[colorIndex * 4 + renderIndex] : undefined;
+    return start === undefined ? undefined : allImages.slice(start, start + 9);
+  }
+
+  if (handle === "full-house") {
+    const starts = allImages
+      .map((image, index) => (/FullHouse_Closed_Front/i.test(image.node.url) ? index : -1))
+      .filter((index) => index >= 0)
+      .slice(0, 20);
+    const colorIndex = ["Walnootbruin", "Donkereiken", "Cashmeregrijs", "Dofroze", "Kristalwit"].indexOf(color ?? "");
+    const start = colorIndex >= 0 ? starts[colorIndex * 4 + renderIndex] : undefined;
+    const nextStart = start === undefined ? undefined : starts.find((index) => index > start);
+    return start === undefined ? undefined : allImages.slice(start, nextStart ?? Math.min(start + 11, allImages.length));
+  }
+
+  if (handle === "duo") {
+    const expectedSize = ["55in", "65in", "75in", "80in"][renderIndex];
+    const side = /rechts|right/i.test(layout ?? "") ? "Right" : "Left";
+    const colorOrder = ["Kristalwit", "Dofroze", "Cashmeregrijs", "Donkereiken", "Walnootbruin"];
+    const colorIndex = colorOrder.indexOf(color ?? "");
+    const colorRanges = [[0, 86], [86, 95], [95, 167], [167, 182], [182, allImages.length]] as const;
+    const [from, to] = colorIndex >= 0 ? colorRanges[colorIndex] : [0, allImages.length];
+    const start = allImages.findIndex((image, index) => {
+      if (index < from || index >= to) return false;
+      const name = galleryImageName(image.node.url);
+      return name.includes(`Wandig_${expectedSize}_Duo_${side}_Closed`);
+    });
+    if (start < 0) return undefined;
+    const nextMain = allImages.findIndex((image, index) => index > start && /Wandig_.*Duo_.*_Closed/i.test(galleryImageName(image.node.url)));
+    return allImages.slice(start, nextMain > start ? nextMain : Math.min(start + 9, allImages.length));
+  }
+
+  return undefined;
+};
+
 // Duo close-ups: gedeelde sets per kleur. De bestandslimiet in Shopify is 250,
 // dus hergebruiken we één set van 7 close-ups voor alle varianten van die kleur.
 const DUO_DONKEREIKEN_CLOSEUP_KEYS = [
@@ -956,6 +1009,9 @@ function ProductView({ product }: { product: ProductNode }) {
   // Shopify uploads the photos per variant as one consecutive block, starting at
   // the variant's own image. So we slice from that anchor up to the next anchor.
   const images = useMemo(() => {
+    const explicitGroup = productGalleryGroup(product.handle, allImages, selectedColor, selectedLayout, sizeIndex);
+    if (explicitGroup && explicitGroup.length > 0) return explicitGroup;
+
     // Solo: de galerij is geüpload als blokken per kleur x tv-maat, elk blok start
     // bij een "Closed_Front" foto. De variant-featured images zijn losse duplicaten
     // aan het eind, dus we mappen op blokpositie in plaats van op de variantfoto.
@@ -1034,7 +1090,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
     return group.length > 0 ? group : allImages;
 
-  }, [allImages, variants, selected, colorKey, selectedColor, sizeKey, selectedSize, sizeOption, product.handle]);
+  }, [allImages, variants, selected, colorKey, selectedColor, sizeKey, selectedSize, selectedLayout, sizeOption, sizeIndex, product.handle]);
 
   const galleryItems = useMemo(() => {
     const shopifyItems = images.map(({ node }) => ({

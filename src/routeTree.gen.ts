@@ -9,50 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RetourRouteImport } from './routes/retour'
-import { Route as ProductenRouteImport } from './routes/producten'
-import { Route as KleurstalenRouteImport } from './routes/kleurstalen'
-import { Route as KlantenserviceRouteImport } from './routes/klantenservice'
-import { Route as ConfiguratorRouteImport } from './routes/configurator'
-import { Route as BezoekRouteImport } from './routes/bezoek'
-import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
-import { Route as ActieBlokkenRouteImport } from './routes/actie-blokken'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActieBlokkenRouteImport } from './routes/actie-blokken'
+import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
+import { Route as BezoekRouteImport } from './routes/bezoek'
+import { Route as ConfiguratorRouteImport } from './routes/configurator'
+import { Route as KlantenserviceRouteImport } from './routes/klantenservice'
+import { Route as KleurstalenRouteImport } from './routes/kleurstalen'
+import { Route as ProductenRouteImport } from './routes/producten'
+import { Route as RetourRouteImport } from './routes/retour'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
-const RetourRoute = RetourRouteImport.update({
-  id: '/retour',
-  path: '/retour',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProductenRoute = ProductenRouteImport.update({
-  id: '/producten',
-  path: '/producten',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KleurstalenRoute = KleurstalenRouteImport.update({
-  id: '/kleurstalen',
-  path: '/kleurstalen',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KlantenserviceRoute = KlantenserviceRouteImport.update({
-  id: '/klantenservice',
-  path: '/klantenservice',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConfiguratorRoute = ConfiguratorRouteImport.update({
-  id: '/configurator',
-  path: '/configurator',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BezoekRoute = BezoekRouteImport.update({
-  id: '/bezoek',
-  path: '/bezoek',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
-  id: '/algemene-voorwaarden',
-  path: '/algemene-voorwaarden',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActieBlokkenRoute = ActieBlokkenRouteImport.update({
@@ -60,9 +30,39 @@ const ActieBlokkenRoute = ActieBlokkenRouteImport.update({
   path: '/actie-blokken',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
+  id: '/algemene-voorwaarden',
+  path: '/algemene-voorwaarden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BezoekRoute = BezoekRouteImport.update({
+  id: '/bezoek',
+  path: '/bezoek',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguratorRoute = ConfiguratorRouteImport.update({
+  id: '/configurator',
+  path: '/configurator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KlantenserviceRoute = KlantenserviceRouteImport.update({
+  id: '/klantenservice',
+  path: '/klantenservice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KleurstalenRoute = KleurstalenRouteImport.update({
+  id: '/kleurstalen',
+  path: '/kleurstalen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductenRoute = ProductenRouteImport.update({
+  id: '/producten',
+  path: '/producten',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RetourRoute = RetourRouteImport.update({
+  id: '/retour',
+  path: '/retour',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductHandleRoute = ProductHandleRouteImport.update({
@@ -162,53 +162,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/retour': {
-      id: '/retour'
-      path: '/retour'
-      fullPath: '/retour'
-      preLoaderRoute: typeof RetourRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/producten': {
-      id: '/producten'
-      path: '/producten'
-      fullPath: '/producten'
-      preLoaderRoute: typeof ProductenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kleurstalen': {
-      id: '/kleurstalen'
-      path: '/kleurstalen'
-      fullPath: '/kleurstalen'
-      preLoaderRoute: typeof KleurstalenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/klantenservice': {
-      id: '/klantenservice'
-      path: '/klantenservice'
-      fullPath: '/klantenservice'
-      preLoaderRoute: typeof KlantenserviceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/configurator': {
-      id: '/configurator'
-      path: '/configurator'
-      fullPath: '/configurator'
-      preLoaderRoute: typeof ConfiguratorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bezoek': {
-      id: '/bezoek'
-      path: '/bezoek'
-      fullPath: '/bezoek'
-      preLoaderRoute: typeof BezoekRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/algemene-voorwaarden': {
-      id: '/algemene-voorwaarden'
-      path: '/algemene-voorwaarden'
-      fullPath: '/algemene-voorwaarden'
-      preLoaderRoute: typeof AlgemeneVoorwaardenRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/actie-blokken': {
@@ -218,11 +176,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActieBlokkenRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/algemene-voorwaarden': {
+      id: '/algemene-voorwaarden'
+      path: '/algemene-voorwaarden'
+      fullPath: '/algemene-voorwaarden'
+      preLoaderRoute: typeof AlgemeneVoorwaardenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bezoek': {
+      id: '/bezoek'
+      path: '/bezoek'
+      fullPath: '/bezoek'
+      preLoaderRoute: typeof BezoekRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configurator': {
+      id: '/configurator'
+      path: '/configurator'
+      fullPath: '/configurator'
+      preLoaderRoute: typeof ConfiguratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/klantenservice': {
+      id: '/klantenservice'
+      path: '/klantenservice'
+      fullPath: '/klantenservice'
+      preLoaderRoute: typeof KlantenserviceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kleurstalen': {
+      id: '/kleurstalen'
+      path: '/kleurstalen'
+      fullPath: '/kleurstalen'
+      preLoaderRoute: typeof KleurstalenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producten': {
+      id: '/producten'
+      path: '/producten'
+      fullPath: '/producten'
+      preLoaderRoute: typeof ProductenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/retour': {
+      id: '/retour'
+      path: '/retour'
+      fullPath: '/retour'
+      preLoaderRoute: typeof RetourRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/product/$handle': {

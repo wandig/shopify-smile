@@ -7,6 +7,6 @@
 - [x] Verplichte pakketupdate uitvoeren en preview controleren.
 
 # Productvarianten herstellen
-- [ ] Opstellingskeuze rechts herstellen bij Wandig Duo.
-- [ ] Bijbehorende variantfoto’s onder alle producten herstellen.
-- [ ] Productpagina’s visueel controleren.
+- [x] Opstellingskeuze rechts herstellen bij Wandig Duo.
+- [x] Bijbehorende variantfoto’s onder alle producten herstellen.
+- [x] Productpagina’s visueel controleren.

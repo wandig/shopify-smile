@@ -11,6 +11,8 @@ import { CalendarCheck, Check, ChevronDown, ChevronLeft, ChevronRight, Hammer, M
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { TvSizeSelector } from "@/components/TvSizeSelector";
+import { TV_INCHES, resolveTvVariantValue, tvRenderIndex } from "@/lib/tv-sizes";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
@@ -78,12 +80,20 @@ export const Route = createFileRoute("/configurator")({
   component: ConfiguratorPage,
 });
 
-const TV_OPTIONS = [
+const TV_RENDER_FAMILIES = [
   { value: '43"', note: "40–55 inch", shopifyValue: "40 - 55 inch", soloShopifyValue: "40 - 50 inch", price: 0, wallHeight: 180, centerWidth: 134, originalModuleWidth: 62, newModuleWidth: 44 },
   { value: '55"', note: "58–65 inch", shopifyValue: "58 - 65 inch", soloShopifyValue: "55 - 65 inch", price: 150, wallHeight: 180, centerWidth: 156, originalModuleWidth: 56, newModuleWidth: 38 },
   { value: '65"', note: "70–75 inch", shopifyValue: "70 - 75 inch", soloShopifyValue: "70 - 75 inch", price: 250, wallHeight: 185, centerWidth: 177, originalModuleWidth: 49, newModuleWidth: 34 },
   { value: '75"', note: "77–85 inch", shopifyValue: "77 - 85 inch", soloShopifyValue: "80 - 85 inch", price: 350, wallHeight: 190, centerWidth: 200, originalModuleWidth: 42, newModuleWidth: 29 },
 ];
+
+const TV_OPTIONS = TV_INCHES.map((inches) => ({
+  ...TV_RENDER_FAMILIES[tvRenderIndex(`${inches} inch`)],
+  inches,
+  value: `${inches}"`,
+  note: `${inches} inch`,
+}));
+
 
 
 
@@ -485,7 +495,7 @@ function ConfiguratorPage() {
   const [previewColor, setPreviewColor] = useState<string>(FULL_HOUSE_COLORS[0]);
   const [previousPreviewColor, setPreviousPreviewColor] = useState<string | null>(null);
   const [previousPreviewTvValue, setPreviousPreviewTvValue] = useState<string | null>(null);
-  const [tv, setTv] = useState(TV_OPTIONS[1]);
+  const [tv, setTv] = useState(TV_OPTIONS[3]);
   const [hasLeft, setHasLeft] = useState(false);
   const [leftVariant, setLeftVariant] = useState<LeftModuleVariant>("nieuw");
   const [leftPickerOpen, setLeftPickerOpen] = useState(false);
@@ -495,7 +505,6 @@ function ConfiguratorPage() {
   const [rightPickerOpen, setRightPickerOpen] = useState(false);
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [productionDetailsOpen, setProductionDetailsOpen] = useState(false);
-  const [tvSizeOpen, setTvSizeOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const cabinetRef = useRef<HTMLDivElement>(null);
   const benefitsScrollerRef = useRef<HTMLDivElement>(null);
@@ -560,7 +569,7 @@ function ConfiguratorPage() {
   };
 
   const selectTv = (nextTv: (typeof TV_OPTIONS)[number]) => {
-    if (nextTv.shopifyValue === tv.shopifyValue) return;
+    if (nextTv.inches === tv.inches) return;
 
     setPreviousPreviewColor(previewColor);
     setPreviousPreviewTvValue(tv.shopifyValue);
@@ -607,11 +616,16 @@ function ConfiguratorPage() {
         : "Wandig Solo";
   // De basiskast is altijd de Wandig Solo; elke zijkast is een los product.
   const activeProduct = soloProduct;
-  const activeTvSize = tv.soloShopifyValue;
+  const selectedSizeValue = (product: ShopifyProduct["node"] | null | undefined) =>
+    resolveTvVariantValue(product?.options.find((option) => /maat|size|inch/i.test(option.name))?.values ?? [], tv.inches) ?? tv.note;
+  const activeTvSize = tv.note;
+  const soloVariantSize = selectedSizeValue(soloProduct);
+  const newModuleVariantSize = selectedSizeValue(newModuleProduct);
+  const originalModuleVariantSize = selectedSizeValue(originalModuleProduct);
 
   const selectedShopifyVariant = useMemo(
-    () => findWandigVariant(soloProduct, color, null, tv.soloShopifyValue),
-    [soloProduct, color, tv.soloShopifyValue],
+    () => findWandigVariant(soloProduct, color, null, soloVariantSize),
+    [soloProduct, color, soloVariantSize],
   );
 
   const sideSelections: Array<{ side: "Links" | "Rechts"; kind: "nieuw" | "origineel" }> = [
@@ -631,10 +645,10 @@ function ConfiguratorPage() {
           ...entry,
           product,
           label: entry.kind === "nieuw" ? "Zijkast B" : "Zijkast A",
-          variant: findNewModuleVariant(product, color, entry.side, tv.shopifyValue),
+          variant: findNewModuleVariant(product, color, entry.side, entry.kind === "nieuw" ? newModuleVariantSize : originalModuleVariantSize),
         };
       }),
-    [newModuleProduct, originalModuleProduct, color, tv.shopifyValue, sideKey],
+    [newModuleProduct, originalModuleProduct, color, newModuleVariantSize, originalModuleVariantSize, sideKey],
   );
 
   // Vaste configuratorprijzen (actieprijs / doorgestreepte prijs)
@@ -1326,49 +1340,14 @@ function ConfiguratorPage() {
               <span className="hidden whitespace-nowrap text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93] lg:inline">{displayWandigColor(color)}</span>
             </div>
 
-            <div className="mb-3 mt-2 overflow-hidden rounded-[12px] border border-[#eeeeee]">
-              <button
-                type="button"
-                onClick={() => setTvSizeOpen((open) => !open)}
-                aria-expanded={tvSizeOpen}
-                className="flex min-h-[52px] w-full items-center gap-2 px-3 text-left"
-              >
-                <span className="grid min-w-0 flex-1 grid-cols-[80px_minmax(0,1fr)] items-baseline gap-2">
-                  <span className="text-[15px] font-[750] leading-none text-[#071426]">Tv-maat</span>
-                  <span className="truncate text-[13px] font-[400] leading-none tracking-[0.01em] text-[#858b93]">
-                    {tv.note}
-                  </span>
-                </span>
-                <ChevronDown
-                  className={`h-4 w-4 text-[#071426]/45 transition-transform duration-300 ease-out ${tvSizeOpen ? "rotate-180" : "rotate-0"}`}
-                />
-              </button>
-
-              <div
-                className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  tvSizeOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                }`}
-              >
-                <div className="overflow-hidden">
-                  <div className="grid grid-cols-2 gap-2 px-3 pb-3 pt-1">
-                    {TV_OPTIONS.map((option) => (
-                      <button
-                        key={option.value}
-                        type="button"
-                        onClick={() => selectTv(option)}
-                        aria-pressed={option.value === tv.value}
-                        className={`h-10 rounded-[8px] border bg-[#f8f6f4] px-2 text-[12px] font-medium text-[#071426] transition-[border-color,box-shadow,background-color,transform] duration-300 ease-out hover:bg-[#f3ece6] active:scale-[0.98] ${
-                          option.value === tv.value
-                            ? "border-[#ff5a00] bg-[#fff8f3] shadow-[0_0_0_2px_rgba(255,90,0,0.18)]"
-                            : "border-[#eeeeee] shadow-none"
-                        }`}
-                      >
-                        {option.note}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            <div className="mb-3 mt-2">
+              <TvSizeSelector
+                selected={tv.inches}
+                onChange={(inches) => {
+                  const option = TV_OPTIONS.find((candidate) => candidate.inches === inches);
+                  if (option) selectTv(option);
+                }}
+              />
             </div>
 
             <div className="pt-3">
@@ -1522,7 +1501,7 @@ function ConfiguratorPage() {
           modelLabel={hasLeft && hasRight ? "Full House" : hasLeft || hasRight ? "Duo" : "Solo"}
           configSummary={{
             colorLabel: displayWandigColor(color),
-            tvSizeLabel: tv.shopifyValue,
+            tvSizeLabel: tv.note,
             modulesLabel:
               hasLeft && hasRight
                 ? `Midden + links (${moduleVariantLabel(leftVariant)}) + rechts (${moduleVariantLabel(rightVariant)})`

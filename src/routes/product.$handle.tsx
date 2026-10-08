@@ -16,6 +16,8 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
+import { TvSizeSelector } from "@/components/TvSizeSelector";
+import { resolveTvVariantValue, tvInchesFromValue, tvRenderIndex, type TvInches } from "@/lib/tv-sizes";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 import beforeSoloAsset from "@/assets/before-solo.png.asset.json";
 import afterSoloAsset from "@/assets/after-solo.jpg.asset.json";
@@ -499,6 +501,10 @@ export const Route = createFileRoute("/product/$handle")({
     meta: [
       { title: `Wandig ${params.handle.charAt(0).toUpperCase() + params.handle.slice(1)} — Plug & play cinewall` },
       { name: "description", content: `Bekijk de Wandig ${params.handle} cinewall. Plug & play gemaakt in onze werkplaats.` },
+      { property: "og:title", content: `Wandig ${params.handle} — Plug & play cinewall` },
+      { property: "og:description", content: `Kies de kleur en tv-maat van jouw Wandig ${params.handle} cinewall.` },
+      { property: "og:type", content: "product" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   pendingComponent: ProductPagePending,
@@ -812,7 +818,7 @@ function ProductView({ product }: { product: ProductNode }) {
     // De tv-maat optie: "58 - 65 inch" is de tweede waarde (of de waarde die 58 bevat).
     const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
     const preferredSizeValue = sizeOption
-      ? sizeOption.values.find((v) => /58/.test(v)) || sizeOption.values[1]
+      ? resolveTvVariantValue(sizeOption.values, 65) || sizeOption.values[1]
       : undefined;
     // De kleur: standaard walnootbruin zodat de klant altijd de juiste foto ziet.
     const colorOption = product.options.find((o) => /kleur|color/i.test(o.name));
@@ -877,11 +883,10 @@ function ProductView({ product }: { product: ProductNode }) {
   
 
 
-  const activeVariant = useMemo(() => {
-    return variants.find((v) =>
-      v.selectedOptions.every((o) => selected[o.name] === o.value),
-    ) || variants[0];
-  }, [variants, selected]);
+  const matchedVariant = useMemo(() => variants.find((v) =>
+    v.selectedOptions.every((o) => selected[o.name] === o.value),
+  ), [variants, selected]);
+  const activeVariant = matchedVariant ?? variants[0];
 
   const productImages = product.images.edges;
   const allImages = useMemo(() => {
@@ -898,13 +903,14 @@ function ProductView({ product }: { product: ProductNode }) {
   const selectedColor = colorKey ? selected[colorKey] : undefined;
   const sizeKey = product.options.find((o) => /maat|size|inch/i.test(o.name))?.name;
   const selectedSize = sizeKey ? selected[sizeKey] : undefined;
+  const [chosenTvInches, setChosenTvInches] = useState<TvInches>(() => tvInchesFromValue(selectedSize));
   const layoutKey = product.options.find((o) => /opstelling|layout/i.test(o.name))?.name;
   const selectedLayout = layoutKey ? selected[layoutKey] : undefined;
 
 
   // Afmetingen volgen de gekozen tv-maat én het gekozen model.
   const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
-  const sizeIndex = sizeOption && selectedSize ? sizeOption.values.indexOf(selectedSize) : -1;
+  const sizeIndex = tvRenderIndex(selectedSize);
   const dimensionSize = WANDIG_SIZES[sizeIndex >= 0 ? sizeIndex : 0];
   const isSolo = product.handle === "solo";
   const isDuo = product.handle === "duo";
@@ -959,9 +965,9 @@ function ProductView({ product }: { product: ProductNode }) {
         .map((img, i) => (/Closed_Front/i.test(img.node.url) ? i : -1))
         .filter((i) => i >= 0);
       const colorPos = galleryColorOrder.indexOf(selectedColor);
-      const sizePos = sizeOption.values.indexOf(selectedSize);
+      const sizePos = sizeIndex;
       if (colorPos >= 0 && sizePos >= 0) {
-        const blockIndex = colorPos * sizeOption.values.length + sizePos;
+        const blockIndex = colorPos * 4 + sizePos;
         const start = blockStarts[blockIndex];
         if (start !== undefined) {
           const nextStart = blockStarts[blockIndex + 1] ?? allImages.length;
@@ -1501,7 +1507,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
 
   const handleAdd = async () => {
-    if (!activeVariant) return;
+    if (!matchedVariant?.availableForSale) return;
     await addItem({
       product: { node: product },
       variantId: activeVariant.id,
@@ -1714,20 +1720,24 @@ function ProductView({ product }: { product: ProductNode }) {
                     const isTvSize = /maat|size|inch/i.test(opt.name);
                     const label = isColor ? "Kleur" : isTvSize ? "Tv-maat" : "Opstelling";
                     const optionExpanded = expandedVariantOption === opt.name;
-                    const optionChoices = isTvSize
-                      ? [
-                          { label: "40 - 55 inch", value: opt.values[0] },
-                          { label: "58 - 65 inch", value: opt.values[1] },
-                          { label: "70 - 75 inch", value: opt.values[2] },
-                          { label: "77 - 85 inch", value: opt.values[3] },
-                        ].filter((choice): choice is { label: string; value: string } => Boolean(choice.value))
-                      : opt.values.map((value) => ({ label: value, value }));
-                    const selectedOptionLabel = isTvSize
-                      ? optionChoices.find((choice) => choice.value === selected[opt.name])?.label
-                        || selected[opt.name]
-                      : selected[opt.name];
+                    const optionChoices = opt.values.map((value) => ({ label: value, value }));
+                    const selectedOptionLabel = selected[opt.name];
 
-                    if (isPosition || isTvSize) {
+                    if (isTvSize) {
+                      return (
+                        <TvSizeSelector
+                          key={opt.name}
+                          selected={chosenTvInches}
+                          onChange={(inches) => {
+                            const value = resolveTvVariantValue(opt.values, inches);
+                            setChosenTvInches(inches);
+                            setSelected((current) => ({ ...current, [opt.name]: value ?? `${inches} inch` }));
+                          }}
+                        />
+                      );
+                    }
+
+                    if (isPosition) {
                       return (
                         <div key={opt.name} className="overflow-hidden rounded-[12px] border border-[#eeeeee]">
                           <button
@@ -1839,10 +1849,10 @@ function ProductView({ product }: { product: ProductNode }) {
 
               <Button
                 onClick={handleAdd}
-                disabled={isLoading || !activeVariant?.availableForSale}
+                disabled={isLoading || !matchedVariant?.availableForSale}
                 className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] px-6 text-sm font-bold text-white shadow-none transition hover:translate-y-0 hover:from-[#e36820] hover:to-[#d8601b] hover:shadow-none active:translate-y-0 active:scale-100"
               >
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : activeVariant?.availableForSale ? (
+                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : matchedVariant?.availableForSale ? (
                   <span className="relative block h-full w-full overflow-hidden">
                   <span className="absolute inset-0 flex items-center justify-center gap-1.5 font-[200] tracking-[0.03em] transition-transform duration-300 ease-out group-hover:-translate-y-full">
                     <Img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" w={64} />In winkelwagen
@@ -1851,7 +1861,7 @@ function ProductView({ product }: { product: ProductNode }) {
                     <Img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" w={64} />In winkelwagen
                   </span>
                   </span>
-                ) : "Uitverkocht"}
+                ) : "Nog niet beschikbaar"}
               </Button>
 
               <FreeColorSamples />

@@ -22,6 +22,8 @@ export const Route = createFileRoute("/producten")({
       { name: "description", content: "Ontdek alle Wandig TV cinewalls. Plug & play modellen voor elk interieur." },
       { property: "og:title", content: "Alle modellen — Wandig" },
       { property: "og:description", content: "Ontdek alle Wandig plug & play TV cinewalls." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Producten,

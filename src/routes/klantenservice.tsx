@@ -5,6 +5,10 @@ export const Route = createFileRoute("/klantenservice")({
     meta: [
       { title: "Klantenservice — Wandig" },
       { name: "description", content: "Hulp nodig? Onze klantenservice staat voor je klaar." },
+      { property: "og:title", content: "Klantenservice — Wandig" },
+      { property: "og:description", content: "Hulp nodig? Onze klantenservice staat voor je klaar." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Klantenservice,

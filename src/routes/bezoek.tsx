@@ -5,6 +5,10 @@ export const Route = createFileRoute("/bezoek")({
     meta: [
       { title: "Bezoek ons — Wandig" },
       { name: "description", content: "Kom langs in onze showroom en ervaar onze cinewalls in het echt." },
+      { property: "og:title", content: "Bezoek ons — Wandig" },
+      { property: "og:description", content: "Kom langs in onze showroom en ervaar onze cinewalls in het echt." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Bezoek,

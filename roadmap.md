@@ -3,5 +3,5 @@
 - [x] 98 inch uit website en Shopify verwijderen.
 - [x] Oude gegroepeerde Shopify-maatvarianten verwijderen.
 - [x] Losse maten koppelen aan de bestaande fotogroepen: 43/50/55, 65, 75/85.
-- [ ] Maatkeuze, productfoto’s en winkelwagen controleren.
+- [x] Maatkeuze, productfoto’s en winkelwagen controleren.
 - [x] Verplichte pakketupdate uitvoeren en preview controleren.

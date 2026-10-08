@@ -17,7 +17,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
 import { TvSizeSelector } from "@/components/TvSizeSelector";
-import { TV_INCHES, resolveTvVariantValue, tvInchesFromValue, tvRenderIndex, type TvInches } from "@/lib/tv-sizes";
+import { resolveTvVariantValue, tvInchesFromValue, tvRenderIndex, type TvInches } from "@/lib/tv-sizes";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 import beforeSoloAsset from "@/assets/before-solo.png.asset.json";
 import afterSoloAsset from "@/assets/after-solo.jpg.asset.json";
@@ -501,6 +501,10 @@ export const Route = createFileRoute("/product/$handle")({
     meta: [
       { title: `Wandig ${params.handle.charAt(0).toUpperCase() + params.handle.slice(1)} — Plug & play cinewall` },
       { name: "description", content: `Bekijk de Wandig ${params.handle} cinewall. Plug & play gemaakt in onze werkplaats.` },
+      { property: "og:title", content: `Wandig ${params.handle} — Plug & play cinewall` },
+      { property: "og:description", content: `Kies de kleur en tv-maat van jouw Wandig ${params.handle} cinewall.` },
+      { property: "og:type", content: "product" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   pendingComponent: ProductPagePending,
@@ -879,11 +883,10 @@ function ProductView({ product }: { product: ProductNode }) {
   
 
 
-  const activeVariant = useMemo(() => {
-    return variants.find((v) =>
-      v.selectedOptions.every((o) => selected[o.name] === o.value),
-    ) || variants[0];
-  }, [variants, selected]);
+  const matchedVariant = useMemo(() => variants.find((v) =>
+    v.selectedOptions.every((o) => selected[o.name] === o.value),
+  ), [variants, selected]);
+  const activeVariant = matchedVariant ?? variants[0];
 
   const productImages = product.images.edges;
   const allImages = useMemo(() => {
@@ -1504,7 +1507,7 @@ function ProductView({ product }: { product: ProductNode }) {
 
 
   const handleAdd = async () => {
-    if (!activeVariant) return;
+    if (!matchedVariant?.availableForSale) return;
     await addItem({
       product: { node: product },
       variantId: activeVariant.id,
@@ -1846,10 +1849,10 @@ function ProductView({ product }: { product: ProductNode }) {
 
               <Button
                 onClick={handleAdd}
-                disabled={isLoading || !activeVariant?.availableForSale}
+                disabled={isLoading || !matchedVariant?.availableForSale}
                 className="group mt-3 h-12 w-full translate-y-0 overflow-hidden rounded-full bg-gradient-to-b from-[#ef7027] to-[#e36820] px-6 text-sm font-bold text-white shadow-none transition hover:translate-y-0 hover:from-[#e36820] hover:to-[#d8601b] hover:shadow-none active:translate-y-0 active:scale-100"
               >
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : activeVariant?.availableForSale ? (
+                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : matchedVariant?.availableForSale ? (
                   <span className="relative block h-full w-full overflow-hidden">
                   <span className="absolute inset-0 flex items-center justify-center gap-1.5 font-[200] tracking-[0.03em] transition-transform duration-300 ease-out group-hover:-translate-y-full">
                     <Img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" w={64} />In winkelwagen
@@ -1858,7 +1861,7 @@ function ProductView({ product }: { product: ProductNode }) {
                     <Img src={basketIcon.url} alt="" className="h-5 w-5 object-contain" w={64} />In winkelwagen
                   </span>
                   </span>
-                ) : "Uitverkocht"}
+                ) : "Nog niet beschikbaar"}
               </Button>
 
               <FreeColorSamples />

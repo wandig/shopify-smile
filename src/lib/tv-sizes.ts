@@ -5,7 +5,7 @@ export type TvInches = (typeof TV_INCHES)[number];
 export function tvRenderIndex(value: string | undefined): number {
   const numbers = value?.match(/\d+/g)?.map(Number) ?? [];
   const inches = numbers[numbers.length - 1] ?? 65;
-  return inches <= 55 ? 0 : inches <= 65 ? 1 : 2;
+  return inches <= 55 ? 0 : inches <= 65 ? 1 : inches <= 75 ? 2 : 3;
 }
 
 export function tvInchesFromValue(value: string | undefined): TvInches {

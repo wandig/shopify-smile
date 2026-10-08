@@ -16,6 +16,8 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { WANDIG_SIZES, formatCm, wandigWidth } from "@/lib/wandig-dimensions";
+import { TvSizeSelector } from "@/components/TvSizeSelector";
+import { TV_INCHES, resolveTvVariantValue, tvInchesFromValue, tvRenderIndex, type TvInches } from "@/lib/tv-sizes";
 import { SpecificationsSection, UniqueSection, BeforeAfterSection } from "@/components/ProductStorySections";
 import beforeSoloAsset from "@/assets/before-solo.png.asset.json";
 import afterSoloAsset from "@/assets/after-solo.jpg.asset.json";
@@ -812,7 +814,7 @@ function ProductView({ product }: { product: ProductNode }) {
     // De tv-maat optie: "58 - 65 inch" is de tweede waarde (of de waarde die 58 bevat).
     const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
     const preferredSizeValue = sizeOption
-      ? sizeOption.values.find((v) => /58/.test(v)) || sizeOption.values[1]
+      ? resolveTvVariantValue(sizeOption.values, 65) || sizeOption.values[1]
       : undefined;
     // De kleur: standaard walnootbruin zodat de klant altijd de juiste foto ziet.
     const colorOption = product.options.find((o) => /kleur|color/i.test(o.name));
@@ -898,13 +900,14 @@ function ProductView({ product }: { product: ProductNode }) {
   const selectedColor = colorKey ? selected[colorKey] : undefined;
   const sizeKey = product.options.find((o) => /maat|size|inch/i.test(o.name))?.name;
   const selectedSize = sizeKey ? selected[sizeKey] : undefined;
+  const [chosenTvInches, setChosenTvInches] = useState<TvInches>(() => tvInchesFromValue(selectedSize));
   const layoutKey = product.options.find((o) => /opstelling|layout/i.test(o.name))?.name;
   const selectedLayout = layoutKey ? selected[layoutKey] : undefined;
 
 
   // Afmetingen volgen de gekozen tv-maat én het gekozen model.
   const sizeOption = product.options.find((o) => /maat|size|inch/i.test(o.name));
-  const sizeIndex = sizeOption && selectedSize ? sizeOption.values.indexOf(selectedSize) : -1;
+  const sizeIndex = tvRenderIndex(selectedSize);
   const dimensionSize = WANDIG_SIZES[sizeIndex >= 0 ? sizeIndex : 0];
   const isSolo = product.handle === "solo";
   const isDuo = product.handle === "duo";
@@ -959,9 +962,9 @@ function ProductView({ product }: { product: ProductNode }) {
         .map((img, i) => (/Closed_Front/i.test(img.node.url) ? i : -1))
         .filter((i) => i >= 0);
       const colorPos = galleryColorOrder.indexOf(selectedColor);
-      const sizePos = sizeOption.values.indexOf(selectedSize);
+      const sizePos = sizeIndex;
       if (colorPos >= 0 && sizePos >= 0) {
-        const blockIndex = colorPos * sizeOption.values.length + sizePos;
+        const blockIndex = colorPos * 4 + sizePos;
         const start = blockStarts[blockIndex];
         if (start !== undefined) {
           const nextStart = blockStarts[blockIndex + 1] ?? allImages.length;
@@ -1714,20 +1717,24 @@ function ProductView({ product }: { product: ProductNode }) {
                     const isTvSize = /maat|size|inch/i.test(opt.name);
                     const label = isColor ? "Kleur" : isTvSize ? "Tv-maat" : "Opstelling";
                     const optionExpanded = expandedVariantOption === opt.name;
-                    const optionChoices = isTvSize
-                      ? [
-                          { label: "40 - 55 inch", value: opt.values[0] },
-                          { label: "58 - 65 inch", value: opt.values[1] },
-                          { label: "70 - 75 inch", value: opt.values[2] },
-                          { label: "77 - 85 inch", value: opt.values[3] },
-                        ].filter((choice): choice is { label: string; value: string } => Boolean(choice.value))
-                      : opt.values.map((value) => ({ label: value, value }));
-                    const selectedOptionLabel = isTvSize
-                      ? optionChoices.find((choice) => choice.value === selected[opt.name])?.label
-                        || selected[opt.name]
-                      : selected[opt.name];
+                    const optionChoices = opt.values.map((value) => ({ label: value, value }));
+                    const selectedOptionLabel = selected[opt.name];
 
-                    if (isPosition || isTvSize) {
+                    if (isTvSize) {
+                      return (
+                        <TvSizeSelector
+                          key={opt.name}
+                          selected={chosenTvInches}
+                          onChange={(inches) => {
+                            const value = resolveTvVariantValue(opt.values, inches);
+                            setChosenTvInches(inches);
+                            setSelected((current) => ({ ...current, [opt.name]: value ?? `${inches} inch` }));
+                          }}
+                        />
+                      );
+                    }
+
+                    if (isPosition) {
                       return (
                         <div key={opt.name} className="overflow-hidden rounded-[12px] border border-[#eeeeee]">
                           <button
